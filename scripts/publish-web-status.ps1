@@ -24,6 +24,12 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Performance benchmark validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\ticket-engine-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Ticket engine validation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\feature-registry-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Feature registry validation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\model-feature-pipeline-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Model feature pipeline validation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\model-validation-policy-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Model validation policy failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\jra-free-db.mjs" audit
   if ($LASTEXITCODE -ne 0) { throw "Database audit failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\build-public-demo.mjs"
@@ -32,7 +38,7 @@ try {
   if ($DryRun) { exit 0 }
 
   Set-Location $public
-  git add -- README.md index.html data/database-status.js data/closing-odds-2026-07-11-2026-07-12.js
+  git add -- README.md index.html data/database-status.js data/model-feature-coverage.js data/closing-odds-2026-07-11-2026-07-12.js
   git diff --cached --quiet
   if ($LASTEXITCODE -eq 0) { exit 0 }
   git commit -m ("Update JRA database status {0}" -f (Get-Date -Format "yyyy-MM-dd"))

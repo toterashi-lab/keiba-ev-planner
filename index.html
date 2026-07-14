@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>競馬期待値ラボ｜先週レース検証</title>
-    <link rel="stylesheet" href="styles.css?v=dafc3e7a776e" />
+    <link rel="stylesheet" href="styles.css?v=c1a119efcbd8" />
   </head>
   <body>
     <header class="site-header">
@@ -258,6 +258,11 @@
                 <strong>まだできないこと</strong>
                 <p>先週開催前に遡った推奨の再現。発走前オッズ時系列と校正済み確率モデルが必要です。</p>
               </div>
+              <div class="feature-readiness-head">
+                <div><h3>モデル要素の充足状況</h3><p>利用可能時点とリーク検査を通した特徴量だけを候補にします。</p></div>
+                <span id="feature-readiness-status" class="decision hold">監査中</span>
+              </div>
+              <div id="feature-readiness-grid" class="feature-readiness-grid"></div>
             </section>
           </div>
 
@@ -328,12 +333,13 @@
       <p>本サービスはJRA・netkeibaの公式サービスではありません。結果と発売情報は必ず主催者発表で確認してください。実購入機能は未接続です。</p>
     </footer>
 
-    <script src="data/meet-2026-07-11-2026-07-12.js?v=dafc3e7a776e"></script>
-    <script src="data/result-links-2026-07-11-2026-07-12.js?v=dafc3e7a776e"></script>
-    <script src="data/results-2026-07-11-2026-07-12.js?v=dafc3e7a776e"></script>
-    <script src="data/database-status.js?v=dafc3e7a776e"></script>
-    <script src="data/closing-odds-2026-07-11-2026-07-12.js?v=dafc3e7a776e"></script>
-    <script src="ticket-engine.js?v=dafc3e7a776e"></script>
-    <script src="app.js?v=dafc3e7a776e"></script>
+    <script src="data/meet-2026-07-11-2026-07-12.js?v=c1a119efcbd8"></script>
+    <script src="data/result-links-2026-07-11-2026-07-12.js?v=c1a119efcbd8"></script>
+    <script src="data/results-2026-07-11-2026-07-12.js?v=c1a119efcbd8"></script>
+    <script src="data/database-status.js?v=c1a119efcbd8"></script>
+    <script src="data/model-feature-coverage.js?v=c1a119efcbd8"></script>
+    <script src="data/closing-odds-2026-07-11-2026-07-12.js?v=c1a119efcbd8"></script>
+    <script src="ticket-engine.js?v=c1a119efcbd8"></script>
+    <script src="app.js?v=c1a119efcbd8"></script>
   </body>
 </html>

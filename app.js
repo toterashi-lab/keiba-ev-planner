@@ -2,6 +2,7 @@ const meetingData = window.KEIBA_REFERENCE_MEETINGS ?? window.KEIBA_MEETINGS ?? 
 const resultData = window.KEIBA_RESULTS ?? { results: [] };
 const modelData = window.KEIBA_MODEL_OUTPUTS ?? { status: "blocked", candidates: [] };
 const databaseData = window.KEIBA_DATABASE_STATUS ?? {};
+const featureCoverageData = window.KEIBA_MODEL_FEATURE_COVERAGE ?? { groups: [] };
 const closingOddsData = window.KEIBA_CLOSING_ODDS ?? { races: [], quality: [] };
 const ticketEngine = window.KEIBA_TICKET_ENGINE;
 
@@ -88,6 +89,8 @@ const els = {
   topRecommendationComment: document.querySelector("#top-recommendation-comment"),
   ticketCoverage: document.querySelector("#ticket-coverage"),
   candidateCount: document.querySelector("#candidate-count"),
+  featureReadinessStatus: document.querySelector("#feature-readiness-status"),
+  featureReadinessGrid: document.querySelector("#feature-readiness-grid"),
 };
 
 initialize();
@@ -100,9 +103,26 @@ function initialize() {
   setEvInputMode();
   renderCoverage();
   renderDatabaseStatus();
+  renderFeatureReadiness();
   renderPerformance();
   renderAll();
   renderStrategies();
+}
+
+function renderFeatureReadiness() {
+  const groups = featureCoverageData.groups ?? [];
+  const ready = groups.filter((group) => group.status === "ready").length;
+  els.featureReadinessStatus.textContent = `${ready} / ${groups.length}群 利用可能`;
+  els.featureReadinessStatus.className = `decision ${ready === groups.length ? "buy" : "hold"}`;
+  els.featureReadinessGrid.innerHTML = groups.map((group) => `<article class="feature-readiness-card ${group.status}">
+    <header><strong>${escapeHtml(group.label)}</strong><span>${group.status === "ready" ? "生成可能" : group.status === "partial" ? "一部不足" : "未取得"}</span></header>
+    <p>${group.examples.slice(0, 4).map(escapeHtml).join("・")}</p>
+    <footer><span>${featureAvailabilityLabel(group.availableAt)}</span><strong>${Math.round(group.coverage * 100)}%</strong></footer>
+  </article>`).join("");
+}
+
+function featureAvailabilityLabel(value) {
+  return ({ entry: "出馬表", race_day: "当日発表", static: "固定情報", prior_races: "過去走のみ", pre_race: "発走前" })[value] ?? escapeHtml(value);
 }
 
 function renderCoverage() {

@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import { DatabaseSync } from "node:sqlite";
+import { auditFeatureRegistry } from "../model/feature-registry.mjs";
 
 const outDir = "public";
 const dataDir = path.join(outDir, "data");
@@ -12,6 +13,7 @@ const programmeData = JSON.parse(programmeRaw);
 const resultsData = JSON.parse(resultsRaw);
 const resultLinksData = JSON.parse(resultLinksRaw);
 const databaseExport = exportDatabaseStatus();
+const featureCoverage = exportFeatureCoverage(databaseExport.status.asOf);
 const quality = JSON.parse(fs.readFileSync("data/quality-report-2026-07-11-2026-07-12.json", "utf8"));
 const currentHash = crypto.createHash("sha256").update(programmeRaw + resultsRaw).digest("hex");
 if (quality.status !== "pass" || !quality.gates.resultValidationReady || quality.inputHash !== currentHash) {
@@ -27,12 +29,16 @@ fs.mkdirSync(stageDataDir, { recursive: true });
 for (const file of ["index.html", "styles.css", "ticket-engine.js", "app.js"]) copy(file, path.join(stageDir, file));
 fs.mkdirSync(path.join(stageDir, "docs"), { recursive: true });
 fs.mkdirSync(path.join(stageDir, "scripts"), { recursive: true });
+fs.mkdirSync(path.join(stageDir, "model"), { recursive: true });
 fs.mkdirSync(path.join(stageDir, "assets"), { recursive: true });
 copy("assets/race-hero-v1.png", path.join(stageDir, "assets", "race-hero-v1.png"));
 copy("schema.sql", path.join(stageDir, "schema.sql"));
 copy("docs/free-data-pipeline.md", path.join(stageDir, "docs", "free-data-pipeline.md"));
 copy("docs/expectancy-methodology.md", path.join(stageDir, "docs", "expectancy-methodology.md"));
 copy("docs/reference-site-analysis.md", path.join(stageDir, "docs", "reference-site-analysis.md"));
+copy("model/feature-registry.mjs", path.join(stageDir, "model", "feature-registry.mjs"));
+copy("model/validation-policy.mjs", path.join(stageDir, "model", "validation-policy.mjs"));
+copy("docs/model-feature-research.md", path.join(stageDir, "docs", "model-feature-research.md"));
 for (const file of [
   "jra-free-db.mjs",
   "jra-free-odds.mjs",
@@ -47,17 +53,23 @@ for (const file of [
   "ev-logic-check.mjs",
   "performance-benchmark-check.mjs",
   "ticket-engine-check.mjs",
+  "feature-registry-check.mjs",
+  "model-feature-pipeline.mjs",
+  "model-feature-pipeline-check.mjs",
+  "model-validation-policy-check.mjs",
 ]) copy(path.join("scripts", file), path.join(stageDir, "scripts", file));
 writeBrowserData(path.join(stageDataDir, "meet-2026-07-11-2026-07-12.js"), "KEIBA_REFERENCE_MEETINGS", programmeData);
 writeBrowserData(path.join(stageDataDir, "result-links-2026-07-11-2026-07-12.js"), "KEIBA_RESULT_LINKS", resultLinksData);
 writeBrowserData(path.join(stageDataDir, "results-2026-07-11-2026-07-12.js"), "KEIBA_RESULTS", resultsData);
 writeBrowserData(path.join(stageDataDir, "database-status.js"), "KEIBA_DATABASE_STATUS", databaseExport.status);
+writeBrowserData(path.join(stageDataDir, "model-feature-coverage.js"), "KEIBA_MODEL_FEATURE_COVERAGE", featureCoverage);
 writeBrowserData(path.join(stageDataDir, "closing-odds-2026-07-11-2026-07-12.js"), "KEIBA_CLOSING_ODDS", databaseExport.odds);
 
 const cacheVersion = crypto.createHash("sha256")
   .update(fs.readFileSync("styles.css"))
   .update(fs.readFileSync("ticket-engine.js"))
   .update(fs.readFileSync("app.js"))
+  .update(JSON.stringify(featureCoverage))
   .update(JSON.stringify(databaseExport.status))
   .digest("hex")
   .slice(0, 12);
@@ -120,6 +132,15 @@ function sameSet(left, right) {
   const expected = new Set(left);
   const actual = new Set(right);
   return expected.size === actual.size && expected.size === left.length && actual.size === right.length && [...expected].every((value) => actual.has(value));
+}
+
+function exportFeatureCoverage(generatedAt) {
+  const database = new DatabaseSync(path.join("data", "jra-free-private", "keiba.sqlite"), { readOnly: true });
+  try {
+    const report = auditFeatureRegistry(database);
+    report.generatedAt = generatedAt;
+    return report;
+  } finally { database.close(); }
 }
 
 function exportDatabaseStatus() {
