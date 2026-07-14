@@ -369,7 +369,7 @@ function renderVenueRanking() {
     return `<button type="button" class="${row.race.no === state.raceNo ? "active" : ""} ${row.expectedReturn === null ? "blocked" : ""}" data-ranking-race="${row.race.no}">
       <span class="ranking-place">${rank}</span><strong>${row.race.no}R ${escapeHtml(row.race.name)}</strong>
       <small>${row.top ? `${escapeHtml(row.top.betType)} ${escapeHtml(row.top.method ?? "1点")}・${percent(row.expectedReturn)}` : status}</small>
-      <em>${row.expectedReturn === null ? "EV未算出" : `${signedPercent(edge)}・${status}`}</em>
+      <em>${row.expectedReturn === null ? "計算準備中" : `${signedPercent(edge)}・${status}`}</em>
     </button>`;
   }).join("");
   els.venueRankingList.querySelectorAll("button").forEach((button) => {
@@ -399,7 +399,8 @@ function renderTopRecommendation() {
 
   els.topRecommendation.classList.toggle("blocked", !top);
   els.topRecommendation.classList.toggle("available", Boolean(top));
-  els.topRecommendationStatus.textContent = !top ? "算出停止" : passes ? "購入候補" : "基準未達・見送り";
+  const retrospective = top?.calculationMode === "closing_market_validation";
+  els.topRecommendationStatus.textContent = !top ? "計算準備中" : retrospective ? "検証計算済み" : passes ? "購入候補" : "基準未達・見送り";
   els.topRecommendationStatus.className = `decision ${!top ? "reject" : passes ? "buy" : "hold"}`;
   els.topTicketLabel.textContent = top ? `${top.betType}・${top.method ?? "1点"}` : "推奨買い目なし";
   els.topTicketSelection.textContent = top?.selection ?? "見送り";
@@ -438,8 +439,12 @@ function matchingAutomaticCandidates(raceNo = state.raceNo) {
 }
 
 function isRecommendationReady(candidate) {
-  return candidate.status === "ready" && candidate.predictionContext === "pre_race"
-    && candidate.oddsObservedAt && candidate.modelVersion && candidate.calibrationStatus === "pass"
+  const validatedContext = candidate.predictionContext === "pre_race"
+    ? candidate.calibrationStatus === "pass"
+    : candidate.predictionContext === "closing_final_validation"
+      && candidate.calculationMode === "closing_market_validation" && candidate.calibrationStatus === "benchmark";
+  return candidate.status === "ready" && validatedContext
+    && candidate.oddsObservedAt && candidate.modelVersion
     && ticketEngine?.SPECS?.[candidate.betType] && candidate.selection && candidateExpectedReturn(candidate) !== null;
 }
 
@@ -526,9 +531,9 @@ function renderBlockedAutomaticState() {
   els.expectedReturn.textContent = "--";
   els.edgeValue.textContent = "--";
   els.unitExpectedProfit.textContent = "--";
-  els.edgeBadge.textContent = "自動判定停止";
+  els.edgeBadge.textContent = "計算準備中";
   els.edgeBadge.className = "decision reject";
-  els.strategyGrid.innerHTML = `<article class="strategy-card blocked"><header><strong>自動計算待ち</strong><span>入力操作なし</span></header>
+  els.strategyGrid.innerHTML = `<article class="strategy-card blocked"><header><strong>計算準備中</strong><span>入力操作なし</span></header>
     <dl><div><dt>購入単位</dt><dd>1点100円固定</dd></div><div><dt>比較対象</dt><dd>全券種・全買い目</dd></div><div><dt>BOX・フォーメーション</dt><dd>構成点へ自動展開</dd></div></dl>
     <footer class="reject">必要データ未取得のため全候補を停止</footer></article>`;
   els.rationaleList.innerHTML = [

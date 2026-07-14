@@ -12,6 +12,7 @@ const resultLinksRaw = fs.readFileSync("data/result-links-2026-07-11-2026-07-12.
 const programmeData = JSON.parse(programmeRaw);
 const resultsData = JSON.parse(resultsRaw);
 const resultLinksData = JSON.parse(resultLinksRaw);
+const modelOutputs = JSON.parse(fs.readFileSync("data/model-outputs-2026-07-11-2026-07-12.json", "utf8"));
 const databaseExport = exportDatabaseStatus();
 const featureCoverage = exportFeatureCoverage(databaseExport.status.asOf);
 const quality = JSON.parse(fs.readFileSync("data/quality-report-2026-07-11-2026-07-12.json", "utf8"));
@@ -42,6 +43,10 @@ copy("docs/model-feature-research.md", path.join(stageDir, "docs", "model-featur
 for (const file of [
   "jra-free-db.mjs",
   "jra-free-odds.mjs",
+  "jra-free-exotic-odds.mjs",
+  "jra-free-exotic-odds-check.mjs",
+  "generate-market-ev.mjs",
+  "market-ev-check.mjs",
   "capture-jra-closing-odds.ps1",
   "publish-web-status.ps1",
   "run-jra-free-backfill.ps1",
@@ -64,6 +69,7 @@ writeBrowserData(path.join(stageDataDir, "results-2026-07-11-2026-07-12.js"), "K
 writeBrowserData(path.join(stageDataDir, "database-status.js"), "KEIBA_DATABASE_STATUS", databaseExport.status);
 writeBrowserData(path.join(stageDataDir, "model-feature-coverage.js"), "KEIBA_MODEL_FEATURE_COVERAGE", featureCoverage);
 writeBrowserData(path.join(stageDataDir, "closing-odds-2026-07-11-2026-07-12.js"), "KEIBA_CLOSING_ODDS", databaseExport.odds);
+writeBrowserData(path.join(stageDataDir, "model-outputs-2026-07-11-2026-07-12.js"), "KEIBA_MODEL_OUTPUTS", modelOutputs);
 
 const cacheVersion = crypto.createHash("sha256")
   .update(fs.readFileSync("styles.css"))
@@ -71,6 +77,7 @@ const cacheVersion = crypto.createHash("sha256")
   .update(fs.readFileSync("app.js"))
   .update(JSON.stringify(featureCoverage))
   .update(JSON.stringify(databaseExport.status))
+  .update(JSON.stringify(modelOutputs))
   .digest("hex")
   .slice(0, 12);
 const stagedIndexPath = path.join(stageDir, "index.html");
@@ -161,8 +168,11 @@ function exportDatabaseStatus() {
       (select min(month) from backfill_jobs where status='complete') earliestComplete,
       (select max(month) from backfill_jobs where status='complete') latestComplete`).get();
     const latestBatch = db.prepare(`select * from odds_ingestion_batches
-      where status='complete' order by id desc limit 1`).get();
+      where status='complete' and source!='JRA official exotic odds' order by id desc limit 1`).get();
+    const exoticBatch = db.prepare(`select * from odds_ingestion_batches
+      where status='complete' and source='JRA official exotic odds' order by id desc limit 1`).get();
     if (!latestBatch) throw new Error("合格済みオッズバッチがありません");
+    if (!exoticBatch) throw new Error("全券種オッズの完了バッチがありません");
     const quality = db.prepare(`select check_name,status,actual_value,details from odds_quality_checks
       where batch_id=? order by check_name`).all(latestBatch.id);
     if (quality.length < 6 || quality.some((check) => check.status !== "pass")) {
@@ -171,7 +181,7 @@ function exportDatabaseStatus() {
     const rows = db.prepare(`select r.race_id,r.race_date,r.venue_code,r.race_number,
       o.bet_type,o.selection_key,o.odds_low,o.odds_high,o.observed_at
       from odds_snapshots o join complete_races r on r.race_id=o.race_id
-      where o.batch_id=? order by r.race_date,r.venue_code,r.race_number,o.selection_key,o.bet_type`).all(latestBatch.id);
+      where o.batch_id in (?,?) order by r.race_date,r.venue_code,r.race_number,o.selection_key,o.bet_type`).all(latestBatch.id, exoticBatch.id);
     db.exec("commit");
 
     const totalMonths = Object.values(jobs).reduce((sum, count) => sum + count, 0);
@@ -194,8 +204,10 @@ function exportDatabaseStatus() {
       const key = `${row.race_date}|${venueCode}|${row.race_number}`;
       if (!raceMap.has(key)) raceMap.set(key, {
         key, raceId: row.race_id, date: row.race_date, venueCode, raceNo: row.race_number,
-        observedAt: row.observed_at, prices: {},
+        observedAt: row.observed_at, prices: {}, oddsBooks: {},
       });
+      raceMap.get(key).oddsBooks[row.bet_type] ??= {};
+      raceMap.get(key).oddsBooks[row.bet_type][row.selection_key] = { low: row.odds_low, high: row.odds_high };
       const price = raceMap.get(key).prices[row.selection_key] ?? { horseNumber: Number(row.selection_key) };
       if (row.bet_type === "win") price.win = row.odds_low;
       if (row.bet_type === "place") {
@@ -206,6 +218,7 @@ function exportDatabaseStatus() {
     }
     const odds = {
       batchId: latestBatch.id,
+      exoticBatchId: exoticBatch.id,
       snapshotKind: latestBatch.snapshot_kind,
       targetDates: latestBatch.target_dates.split(","),
       meetingCount: latestBatch.meeting_count,
