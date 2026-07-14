@@ -692,17 +692,39 @@ async function withLock(task) {
   let handle;
   try {
     handle = fs.openSync(LOCK_PATH, "wx");
-    fs.writeFileSync(handle, JSON.stringify({ pid: process.pid, startedAt: new Date().toISOString() }));
   } catch (error) {
-    if (error.code === "EEXIST") throw new Error(`Another worker owns ${LOCK_PATH}`);
-    throw error;
+    if (error.code !== "EEXIST") throw error;
+    const owner = readLockOwner();
+    if (owner?.pid && isProcessAlive(owner.pid)) {
+      throw new Error(`Another worker owns ${LOCK_PATH} (pid=${owner.pid})`);
+    }
+    fs.rmSync(LOCK_PATH, { force: true });
+    handle = fs.openSync(LOCK_PATH, "wx");
   }
+  fs.writeFileSync(handle, JSON.stringify({ pid: process.pid, startedAt: new Date().toISOString() }));
   try {
     recoverInterruptedJobs();
     return await task();
   } finally {
     fs.closeSync(handle);
     fs.rmSync(LOCK_PATH, { force: true });
+  }
+}
+
+function readLockOwner() {
+  try {
+    return JSON.parse(fs.readFileSync(LOCK_PATH, "utf8"));
+  } catch {
+    return null;
+  }
+}
+
+function isProcessAlive(pid) {
+  try {
+    process.kill(Number(pid), 0);
+    return true;
+  } catch {
+    return false;
   }
 }
 
