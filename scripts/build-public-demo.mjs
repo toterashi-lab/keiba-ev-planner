@@ -56,6 +56,7 @@ writeBrowserData(path.join(stageDataDir, "closing-odds-2026-07-11-2026-07-12.js"
 
 const cacheVersion = crypto.createHash("sha256")
   .update(fs.readFileSync("styles.css"))
+  .update(fs.readFileSync("ticket-engine.js"))
   .update(fs.readFileSync("app.js"))
   .update(JSON.stringify(databaseExport.status))
   .digest("hex")

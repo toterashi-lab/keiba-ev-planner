@@ -32,7 +32,7 @@ try {
   if ($DryRun) { exit 0 }
 
   Set-Location $public
-  git add -- README.md data/database-status.js data/closing-odds-2026-07-11-2026-07-12.js
+  git add -- README.md index.html data/database-status.js data/closing-odds-2026-07-11-2026-07-12.js
   git diff --cached --quiet
   if ($LASTEXITCODE -eq 0) { exit 0 }
   git commit -m ("Update JRA database status {0}" -f (Get-Date -Format "yyyy-MM-dd"))
