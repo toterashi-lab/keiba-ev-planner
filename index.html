@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>競馬期待値ラボ｜先週レース検証</title>
-    <link rel="stylesheet" href="styles.css?v=e00773e6a8f9" />
+    <link rel="stylesheet" href="styles.css?v=5811e2a80b43" />
   </head>
   <body>
     <header class="site-header">
@@ -95,6 +95,21 @@
           </div>
         </div>
 
+        <section id="ai-prediction" class="ai-prediction" aria-labelledby="ai-prediction-title">
+          <header>
+            <div><span>全頭の市場確率を自動比較</span><h2 id="ai-prediction-title">AI予想</h2></div>
+            <span id="ai-confidence" class="decision hold">計算準備中</span>
+          </header>
+          <div class="ai-prediction-body">
+            <div id="ai-marks" class="ai-marks"></div>
+            <div class="ai-analysis">
+              <strong id="ai-scenario">シナリオ計算中</strong>
+              <p id="ai-comment">公式オッズから各馬の勝率分布を計算しています。</p>
+              <small>先週レースの最終オッズ検証。結果・払戻は予想計算に使用していません。</small>
+            </div>
+          </div>
+        </section>
+
         <section id="top-recommendation" class="top-recommendation blocked" aria-labelledby="top-recommendation-title">
           <header>
             <div><span>このレースの最優先判断</span><h2 id="top-recommendation-title">期待値1位</h2></div>
@@ -156,7 +171,7 @@
               </div>
               <div class="table-scroll">
                 <table class="dense-table runner-table">
-                  <thead><tr><th>着順</th><th>枠</th><th>馬番</th><th>馬名</th><th>単勝</th><th>複勝</th><th>性齢</th><th>斤量</th><th>騎手</th><th>タイム</th><th>着差</th><th>通過</th><th>上り</th><th>馬体重</th><th>調教師</th><th>人気</th></tr></thead>
+                  <thead><tr><th>着順</th><th>枠</th><th>馬番</th><th>馬名</th><th>AI印</th><th>単勝</th><th>複勝</th><th>性齢</th><th>斤量</th><th>騎手</th><th>タイム</th><th>着差</th><th>通過</th><th>上り</th><th>馬体重</th><th>調教師</th><th>人気</th></tr></thead>
                   <tbody id="runner-body"></tbody>
                 </table>
               </div>
@@ -304,14 +319,14 @@
       <p>本サービスはJRA・netkeibaの公式サービスではありません。結果と発売情報は必ず主催者発表で確認してください。実購入機能は未接続です。</p>
     </footer>
 
-    <script src="data/meet-2026-07-11-2026-07-12.js?v=e00773e6a8f9"></script>
-    <script src="data/result-links-2026-07-11-2026-07-12.js?v=e00773e6a8f9"></script>
-    <script src="data/results-2026-07-11-2026-07-12.js?v=e00773e6a8f9"></script>
-    <script src="data/database-status.js?v=e00773e6a8f9"></script>
-    <script src="data/model-feature-coverage.js?v=e00773e6a8f9"></script>
-    <script src="data/closing-odds-2026-07-11-2026-07-12.js?v=e00773e6a8f9"></script>
-    <script src="data/model-outputs-2026-07-11-2026-07-12.js?v=e00773e6a8f9"></script>
-    <script src="ticket-engine.js?v=e00773e6a8f9"></script>
-    <script src="app.js?v=e00773e6a8f9"></script>
+    <script src="data/meet-2026-07-11-2026-07-12.js?v=5811e2a80b43"></script>
+    <script src="data/result-links-2026-07-11-2026-07-12.js?v=5811e2a80b43"></script>
+    <script src="data/results-2026-07-11-2026-07-12.js?v=5811e2a80b43"></script>
+    <script src="data/database-status.js?v=5811e2a80b43"></script>
+    <script src="data/model-feature-coverage.js?v=5811e2a80b43"></script>
+    <script src="data/closing-odds-2026-07-11-2026-07-12.js?v=5811e2a80b43"></script>
+    <script src="data/model-outputs-2026-07-11-2026-07-12.js?v=5811e2a80b43"></script>
+    <script src="ticket-engine.js?v=5811e2a80b43"></script>
+    <script src="app.js?v=5811e2a80b43"></script>
   </body>
 </html>

@@ -16,6 +16,7 @@ if (model.unitStakeYen !== 100) failures.push("unit stake is not 100 yen");
 if (expectedRaces.length !== 72) failures.push(`reference races ${expectedRaces.length}/72`);
 if (Object.values(model.coverageCounts ?? {}).some((count) => count !== 72)) failures.push("odds coverage is incomplete");
 if (model.evaluatedTotal !== 195898) failures.push(`evaluated total changed: ${model.evaluatedTotal}`);
+if (model.predictions?.length !== 72) failures.push(`AI predictions ${model.predictions?.length ?? 0}/72`);
 
 for (const race of expectedRaces) {
   const rows = model.candidates.filter((candidate) => candidate.date === race.date
@@ -25,6 +26,9 @@ for (const race of expectedRaces) {
   if (rows.some((row) => row.status !== "ready" || row.points < 1 || !Number.isFinite(row.conservativeExpectedReturn))) {
     failures.push(`${race.key}: invalid candidate`);
   }
+  const prediction = model.predictions?.find((row) => row.date === race.date && row.meetingName === race.meetingName && row.raceNo === race.raceNo);
+  if (!prediction || prediction.status !== "ready" || prediction.marks?.length !== 5) failures.push(`${race.key}: AI prediction missing`);
+  if (prediction?.marks?.some((row) => !(row.probability > 0 && row.probability < 1))) failures.push(`${race.key}: invalid AI probability`);
 }
 
 const source = fs.readFileSync("scripts/generate-market-ev.mjs", "utf8");
@@ -37,4 +41,5 @@ if (failures.length) {
   process.exit(1);
 }
 console.log(`OK 72レース・7券種・${model.evaluatedTotal.toLocaleString("ja-JP")}通り・1点100円`);
+console.log("OK 全72レース AI予想・各レース5頭印・信頼度・シナリオ");
 console.log(`OK 公開候補 ${model.candidates.length.toLocaleString("ja-JP")}件・結果/払戻リークなし`);

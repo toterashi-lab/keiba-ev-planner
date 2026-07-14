@@ -76,6 +76,11 @@ const els = {
   topTicketEdge: document.querySelector("#top-ticket-edge"),
   topTicketStake: document.querySelector("#top-ticket-stake"),
   topRecommendationComment: document.querySelector("#top-recommendation-comment"),
+  aiPrediction: document.querySelector("#ai-prediction"),
+  aiConfidence: document.querySelector("#ai-confidence"),
+  aiMarks: document.querySelector("#ai-marks"),
+  aiScenario: document.querySelector("#ai-scenario"),
+  aiComment: document.querySelector("#ai-comment"),
   ticketCoverage: document.querySelector("#ticket-coverage"),
   candidateCount: document.querySelector("#candidate-count"),
   featureReadinessStatus: document.querySelector("#feature-readiness-status"),
@@ -246,6 +251,7 @@ function renderAll() {
   renderRaceTabs();
   renderRaceList();
   renderRaceHeader();
+  renderAiPrediction();
   renderTopRecommendation();
   renderRunners();
   renderPayouts();
@@ -316,6 +322,7 @@ function bindRaceButtons(container) {
       renderRaceTabs();
       renderRaceList();
       renderRaceHeader();
+      renderAiPrediction();
       renderTopRecommendation();
       renderVenueRanking();
       renderRunners();
@@ -352,7 +359,7 @@ function renderVenueRanking() {
     const candidates = matchingAutomaticCandidates(race.no).filter(isRecommendationReady)
       .sort((left, right) => candidateExpectedReturn(right) - candidateExpectedReturn(left));
     const top = candidates[0] ?? null;
-    return { race, top, expectedReturn: top ? candidateExpectedReturn(top) : null };
+    return { race, top, prediction: matchingAiPrediction(race.no), expectedReturn: top ? candidateExpectedReturn(top) : null };
   }).sort((left, right) => {
     if (left.expectedReturn !== null && right.expectedReturn === null) return -1;
     if (left.expectedReturn === null && right.expectedReturn !== null) return 1;
@@ -368,7 +375,7 @@ function renderVenueRanking() {
     const status = row.expectedReturn === null ? "データ待ち" : edge >= 0.08 ? "購入候補" : "見送り";
     return `<button type="button" class="${row.race.no === state.raceNo ? "active" : ""} ${row.expectedReturn === null ? "blocked" : ""}" data-ranking-race="${row.race.no}">
       <span class="ranking-place">${rank}</span><strong>${row.race.no}R ${escapeHtml(row.race.name)}</strong>
-      <small>${row.top ? `${escapeHtml(row.top.betType)} ${escapeHtml(row.top.method ?? "1点")}・${percent(row.expectedReturn)}` : status}</small>
+      <small>${row.prediction?.marks?.[0] ? `◎ ${escapeHtml(row.prediction.marks[0].horseName)}・${percent(row.expectedReturn)}` : status}</small>
       <em>${row.expectedReturn === null ? "計算準備中" : `${signedPercent(edge)}・${status}`}</em>
     </button>`;
   }).join("");
@@ -378,6 +385,7 @@ function renderVenueRanking() {
       renderRaceTabs();
       renderRaceList();
       renderRaceHeader();
+      renderAiPrediction();
       renderTopRecommendation();
       renderVenueRanking();
       renderRunners();
@@ -386,6 +394,35 @@ function renderVenueRanking() {
       document.querySelector(".race-heading").scrollIntoView({ behavior: "smooth", block: "start" });
     });
   });
+}
+
+function renderAiPrediction() {
+  const prediction = matchingAiPrediction();
+  if (!prediction?.marks?.length) {
+    els.aiConfidence.textContent = "計算準備中";
+    els.aiConfidence.className = "decision hold";
+    els.aiMarks.innerHTML = "";
+    els.aiScenario.textContent = "シナリオ計算中";
+    els.aiComment.textContent = "公式オッズから各馬の勝率分布を計算しています。";
+    return;
+  }
+  els.aiConfidence.textContent = `信頼度 ${prediction.confidence}・${Math.round(prediction.confidenceScore * 100)}`;
+  els.aiConfidence.className = `decision ${prediction.confidence === "高" ? "buy" : "hold"}`;
+  els.aiMarks.innerHTML = prediction.marks.map((row) => `<div class="ai-mark ai-mark-${markClass(row.mark)}">
+    <span>${row.mark}</span><strong>${row.horseNumber} ${escapeHtml(row.horseName)}</strong><small>推定勝率 ${percent(row.probability)}</small>
+  </div>`).join("");
+  els.aiScenario.textContent = prediction.scenario;
+  els.aiComment.textContent = prediction.comment;
+}
+
+function matchingAiPrediction(raceNo = state.raceNo) {
+  const track = selectedTrack();
+  return (modelData.predictions ?? []).find((prediction) => prediction.date === state.date
+    && prediction.meetingName === track?.meetingName && prediction.raceNo === raceNo) ?? null;
+}
+
+function markClass(mark) {
+  return ({ "◎": "honmei", "○": "taikou", "▲": "tanana", "△": "renka", "☆": "ana" })[mark] ?? "other";
 }
 
 function renderTopRecommendation() {
@@ -457,11 +494,12 @@ function candidateExpectedReturn(candidate) {
 
 function renderRunners() {
   const runners = selectedResult()?.runners ?? [];
+  const aiMarkByHorse = new Map((matchingAiPrediction()?.marks ?? []).map((row) => [row.horseNumber, row.mark]));
   const oddsRace = selectedOddsRace();
   const prices = new Map((oddsRace?.prices ?? []).map((price) => [price.horseNumber, price]));
   els.runnerCount.textContent = `${runners.length}頭取得`;
   if (!runners.length) {
-    els.runnerBody.innerHTML = `<tr><td colspan="16" class="empty-row">出走馬結果を取得中です</td></tr>`;
+    els.runnerBody.innerHTML = `<tr><td colspan="17" class="empty-row">出走馬結果を取得中です</td></tr>`;
     return;
   }
   els.runnerBody.innerHTML = runners.map((runner) => {
@@ -473,7 +511,7 @@ function renderRunners() {
     const placeOdds = price?.placeLow ? `${price.placeLow.toFixed(1)}–${price.placeHigh.toFixed(1)}` : "--";
     return `<tr class="${winner} ${nonFinish}">
       <td>${escapeHtml(runner.finishText)}</td><td><span class="gate-badge gate-${runner.gateNumber}">${runner.gateNumber ?? "-"}</span></td>
-      <td>${runner.horseNumber}</td><td>${escapeHtml(runner.horseName)}</td><td class="market-price">${winOdds}</td><td class="market-price">${placeOdds}</td><td>${escapeHtml(runner.sexAge)}</td>
+      <td>${runner.horseNumber}</td><td>${escapeHtml(runner.horseName)}</td><td><span class="runner-ai-mark">${aiMarkByHorse.get(runner.horseNumber) ?? ""}</span></td><td class="market-price">${winOdds}</td><td class="market-price">${placeOdds}</td><td>${escapeHtml(runner.sexAge)}</td>
       <td>${runner.carriedWeight ?? "--"}</td><td>${escapeHtml(runner.jockeyName)}</td><td>${escapeHtml(runner.officialTime || "--")}</td>
       <td>${escapeHtml(runner.margin || "--")}</td><td>${runner.cornerPositions.join("-") || "--"}</td><td>${runner.finalSectional ?? "--"}</td>
       <td>${bodyWeight}</td><td>${escapeHtml(runner.trainerName)}</td><td>${runner.popularity ? `${runner.popularity}人気` : "--"}</td>

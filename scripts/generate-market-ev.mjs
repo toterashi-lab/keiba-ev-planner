@@ -34,6 +34,7 @@ export function generateMarketEv() {
     const namesByRace = group(entries, "race_id");
     const oddsByRace = group(odds, "race_id");
     const candidates = [];
+    const predictions = [];
     const evaluatedByRace = {};
     const coverageCounts = Object.fromEntries(Object.values(DB_TYPES).map((label) => [label, 0]));
 
@@ -68,6 +69,7 @@ export function generateMarketEv() {
       }
       evaluatedByRace[race.race_id] = evaluated;
       candidates.push(...raceCandidates);
+      predictions.push(makeAiPrediction(race, horseProbabilities, names, raceCandidates));
     }
 
     if (Object.values(coverageCounts).some((count) => count !== 72)) throw new Error(`券種カバレッジ不合格: ${JSON.stringify(coverageCounts)}`);
@@ -85,6 +87,7 @@ export function generateMarketEv() {
       coverageCounts,
       evaluatedByRace,
       evaluatedTotal: Object.values(evaluatedByRace).reduce((sum, count) => sum + count, 0),
+      predictions,
       candidates,
     };
     fs.writeFileSync(OUTPUT, `${JSON.stringify(result, null, 2)}\n`, "utf8");
@@ -92,6 +95,35 @@ export function generateMarketEv() {
   } finally {
     db.close();
   }
+}
+
+function makeAiPrediction(race, horseProbabilities, names, raceCandidates) {
+  const marks = ["◎", "○", "▲", "△", "☆"];
+  const ranked = Object.entries(horseProbabilities)
+    .map(([horseNumber, probability]) => ({ horseNumber: Number(horseNumber), horseName: names.get(Number(horseNumber)) ?? "", probability }))
+    .sort((left, right) => right.probability - left.probability || left.horseNumber - right.horseNumber);
+  const entropy = -ranked.reduce((sum, row) => sum + row.probability * Math.log(row.probability), 0);
+  const concentration = 1 - entropy / Math.log(ranked.length);
+  const gap = ranked[0].probability - ranked[1].probability;
+  const confidenceScore = Math.min(1, concentration * 0.55 + Math.min(1, ranked[0].probability / 0.35) * 0.25 + Math.min(1, gap / 0.12) * 0.2);
+  const confidence = confidenceScore >= 0.55 ? "高" : confidenceScore >= 0.35 ? "中" : "低";
+  const scenario = ranked[0].probability >= 0.3 && gap >= 0.08 ? "本命軸" : gap <= 0.03 ? "混戦・広め" : "バランス";
+  const topTicket = [...raceCandidates].sort(byExpectedReturn)[0] ?? null;
+  return {
+    date: race.race_date,
+    meetingName: meetingName(race),
+    raceNo: race.race_number,
+    raceId: race.race_id,
+    modelVersion: "closing-market-consistency-v1",
+    predictionContext: "closing_final_validation",
+    status: "ready",
+    confidence,
+    confidenceScore,
+    scenario,
+    marks: ranked.slice(0, marks.length).map((row, index) => ({ mark: marks[index], ...row })),
+    topTicket: topTicket ? { betType: topTicket.betType, method: topTicket.method, selection: topTicket.selection, expectedReturn: topTicket.conservativeExpectedReturn } : null,
+    comment: `${ranked.length}頭の市場確率を比較。◎${ranked[0].horseName}は推定勝率${(ranked[0].probability * 100).toFixed(1)}%、○との差は${(gap * 100).toFixed(1)}ポイント。${scenario}シナリオで評価します。`,
+  };
 }
 
 function structuredCandidates(race, dbType, betType, rows, horseProbabilities, structuralBook, names) {
