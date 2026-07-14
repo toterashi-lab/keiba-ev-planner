@@ -175,17 +175,55 @@ create table raw_source_pages (
   unique (source_id, request_key, parser_version)
 );
 
+create table odds_ingestion_batches (
+  id bigserial primary key,
+  source text not null,
+  snapshot_kind text not null,
+  target_dates date[] not null,
+  status text not null check (status in ('running', 'complete', 'failed')),
+  meeting_count integer not null default 0,
+  race_count integer not null default 0,
+  source_runner_count integer not null default 0,
+  priced_runner_count integer not null default 0,
+  started_at timestamptz not null,
+  completed_at timestamptz,
+  last_error text
+);
+
 create table odds_snapshots (
   id bigserial primary key,
   race_id text not null references races(race_id),
   bet_type text not null,
   selection_key text not null,
   odds numeric(10,2) not null,
+  odds_low numeric(10,2) not null,
+  odds_high numeric(10,2) not null,
+  snapshot_kind text not null,
+  batch_id bigint not null references odds_ingestion_batches(id),
   vote_count bigint,
   popularity integer,
   observed_at timestamptz not null,
   ingested_at timestamptz not null default now(),
   unique (race_id, bet_type, selection_key, observed_at)
+);
+
+create table odds_quality_checks (
+  batch_id bigint not null references odds_ingestion_batches(id) on delete cascade,
+  check_name text not null,
+  status text not null check (status in ('pass', 'fail')),
+  actual_value bigint,
+  details text not null,
+  checked_at timestamptz not null,
+  primary key (batch_id, check_name)
+);
+
+create table odds_market_totals (
+  batch_id bigint not null references odds_ingestion_batches(id) on delete cascade,
+  race_id text not null references races(race_id),
+  bet_type text not null,
+  vote_count bigint not null check (vote_count >= 0),
+  raw_source_page_id bigint not null references raw_source_pages(id),
+  primary key (batch_id, race_id, bet_type)
 );
 
 create index odds_snapshots_lookup_idx on odds_snapshots (race_id, bet_type, selection_key, observed_at desc);

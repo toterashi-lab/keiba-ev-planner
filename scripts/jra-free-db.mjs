@@ -169,15 +169,50 @@ function initializeSchema() {
       checked_at text not null,
       primary key(month, check_name)
     );
+    create table if not exists odds_ingestion_batches (
+      id integer primary key,
+      source text not null,
+      snapshot_kind text not null,
+      target_dates text not null,
+      status text not null check(status in ('running','complete','failed')),
+      meeting_count integer not null default 0,
+      race_count integer not null default 0,
+      source_runner_count integer not null default 0,
+      priced_runner_count integer not null default 0,
+      started_at text not null,
+      completed_at text,
+      last_error text
+    );
     create table if not exists odds_snapshots (
       id integer primary key,
       race_id text not null references races(race_id),
       bet_type text not null,
       selection_key text not null,
       odds real not null check(odds >= 1.0),
+      odds_low real,
+      odds_high real,
+      snapshot_kind text,
+      batch_id integer references odds_ingestion_batches(id),
       observed_at text not null,
       source_page_id integer references raw_pages(id),
       unique(race_id, bet_type, selection_key, observed_at)
+    );
+    create table if not exists odds_quality_checks (
+      batch_id integer not null references odds_ingestion_batches(id) on delete cascade,
+      check_name text not null,
+      status text not null check(status in ('pass','fail')),
+      actual_value integer,
+      details text not null,
+      checked_at text not null,
+      primary key(batch_id, check_name)
+    );
+    create table if not exists odds_market_totals (
+      batch_id integer not null references odds_ingestion_batches(id) on delete cascade,
+      race_id text not null references races(race_id),
+      bet_type text not null,
+      vote_count integer not null check(vote_count >= 0),
+      source_page_id integer not null references raw_pages(id),
+      primary key(batch_id, race_id,bet_type)
     );
     create table if not exists model_runs (
       id integer primary key,
@@ -247,6 +282,11 @@ function initializeSchema() {
       from complete_race_entries e join complete_race_results x
         on x.race_id=e.race_id and x.horse_id=e.horse_id;
   `);
+  addColumnIfMissing("odds_snapshots", "odds_low", "real");
+  addColumnIfMissing("odds_snapshots", "odds_high", "real");
+  addColumnIfMissing("odds_snapshots", "snapshot_kind", "text");
+  addColumnIfMissing("odds_snapshots", "batch_id", "integer references odds_ingestion_batches(id)");
+  db.exec("create index if not exists odds_batch_idx on odds_snapshots(batch_id, race_id, bet_type)");
   upsertMetadata("source", "JRA official past race result search");
   upsertMetadata("source_url", BASE_URL);
   upsertMetadata("parser_version", PARSER_VERSION);
@@ -680,13 +720,24 @@ function auditDatabase() {
   }
   const orphanRaces = db.prepare(`select count(*) count from races r where not exists
     (select 1 from race_entries e where e.race_id=r.race_id)`).get().count;
+  const failedOddsChecks = db.prepare(`select count(*) count from odds_quality_checks q
+    join odds_ingestion_batches b on b.id=q.batch_id where b.status='complete' and q.status='fail'`).get().count;
+  const incompleteOddsBatches = db.prepare(`select count(*) count from odds_ingestion_batches b
+    where b.status='complete' and (select count(*) from odds_quality_checks q
+      where q.batch_id=b.id and q.status='pass') < 6`).get().count;
+  const invalidOddsRanges = db.prepare(`select count(*) count from odds_snapshots
+    where batch_id is not null and (odds_low < 1 or odds_high < odds_low or odds <> odds_low)`).get().count;
   return {
-    pass: failedChecks === 0 && incompleteCompleteJobs === 0 && missingRaw === 0 && corruptRaw === 0 && orphanRaces === 0,
+    pass: failedChecks === 0 && incompleteCompleteJobs === 0 && missingRaw === 0 && corruptRaw === 0
+      && orphanRaces === 0 && failedOddsChecks === 0 && incompleteOddsBatches === 0 && invalidOddsRanges === 0,
     failedChecks,
     incompleteCompleteJobs,
     missingRaw,
     corruptRaw,
     orphanRaces,
+    failedOddsChecks,
+    incompleteOddsBatches,
+    invalidOddsRanges,
     ...statusReport(),
   };
 }
@@ -720,6 +771,7 @@ function statusReport() {
     (select count(*) from races) stagingRaces,
     (select count(*) from raw_pages) rawPages,
     (select count(*) from odds_snapshots) oddsSnapshots,
+    (select count(*) from odds_ingestion_batches where status='complete') completeOddsBatches,
     (select count(*) from model_runs) modelRuns,
     (select count(*) from complete_entry_quality where body_weight_available=0) missingBodyWeightRows,
     (select count(*) from complete_entry_quality where popularity_available=0) missingPopularityRows,
@@ -885,6 +937,12 @@ function markParsed(id) {
 function upsertMetadata(key, value) {
   db.prepare(`insert into metadata values(?,?,?) on conflict(key) do update set
     value=excluded.value,updated_at=excluded.updated_at`).run(key, value, new Date().toISOString());
+}
+
+function addColumnIfMissing(table, column, definition) {
+  if (!db.prepare(`pragma table_info(${table})`).all().some((row) => row.name === column)) {
+    db.exec(`alter table ${table} add column ${column} ${definition}`);
+  }
 }
 
 function cell(row, className) {

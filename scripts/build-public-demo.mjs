@@ -29,6 +29,8 @@ copy("schema.sql", path.join(stageDir, "schema.sql"));
 copy("docs/free-data-pipeline.md", path.join(stageDir, "docs", "free-data-pipeline.md"));
 for (const file of [
   "jra-free-db.mjs",
+  "jra-free-odds.mjs",
+  "capture-jra-closing-odds.ps1",
   "run-jra-free-backfill.ps1",
   "sync-jra-current.ps1",
   "fetch-jra-results.mjs",
@@ -57,7 +59,7 @@ fs.writeFileSync(path.join(stageDir, "README.md"), `# 競馬期待値ラボ
 - 払戻 ${resultsData.refundLineCount}件
 
 出典はJRA公式番組・結果ページです。JRAおよびnetkeibaの公式サービスではありません。
-無課金の長期蓄積コードは \`scripts/jra-free-db.mjs\`、検査仕様は \`docs/free-data-pipeline.md\` に収録しています。
+無課金の長期蓄積コードは \`scripts/jra-free-db.mjs\`、公式単勝・複勝オッズ収集は \`scripts/jra-free-odds.mjs\`、検査仕様は \`docs/free-data-pipeline.md\` に収録しています。
 原本HTMLとSQLite本体は個人利用のローカルDBにのみ保存し、この公開リポジトリには収録しません。
 
 期待値候補は、全馬オッズ履歴、確率校正、時系列検証、オッズ鮮度、ドローダウンの全ゲートが合格するまで生成を停止します。
