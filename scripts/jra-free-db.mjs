@@ -15,6 +15,7 @@ const PARSER_VERSION = "jra-html-v1";
 
 const command = process.argv[2] ?? "status";
 const options = parseArgs(process.argv.slice(3));
+const forceRefresh = options.refresh === true || options.refresh === "true";
 fs.mkdirSync(RAW_DIR, { recursive: true });
 
 const db = new DatabaseSync(DB_PATH);
@@ -32,6 +33,9 @@ try {
     console.log(JSON.stringify(statusReport(), null, 2));
   } else if (command === "run") {
     await withLock(() => runQueue(Number(options.limit ?? 1), Number(options.delay ?? 1500)));
+    console.log(JSON.stringify(statusReport(), null, 2));
+  } else if (command === "sync-current") {
+    await withLock(() => ingestMonth(currentMonth(), Number(options.delay ?? 1500)));
     console.log(JSON.stringify(statusReport(), null, 2));
   } else if (command === "audit") {
     const result = auditDatabase();
@@ -276,6 +280,7 @@ async function ingestMonth(month, delayMs) {
   db.prepare(`insert into backfill_jobs(month,status,updated_at) values(?, 'queued', ?)
     on conflict(month) do nothing`).run(month, startedAt);
   const previousStatus = db.prepare("select status from backfill_jobs where month=?").get(month)?.status;
+  const backup = previousStatus === "complete" ? createMonthBackup(month) : null;
   if (previousStatus !== "complete") purgeNormalizedMonth(month);
   db.prepare(`update backfill_jobs set status='running', attempts=attempts+1,
     started_at=?, completed_at=null, last_error=null, updated_at=? where month=?`)
@@ -321,11 +326,18 @@ async function ingestMonth(month, delayMs) {
     db.prepare(`update backfill_jobs set status='complete', meeting_count=?, race_count=?,
       runner_count=?, payout_count=?, completed_at=?, updated_at=? where month=?`)
       .run(meetings.length, raceCount, runnerCount, payoutCount, completedAt, completedAt, month);
+    dropMonthBackup();
   } catch (error) {
-    if (previousStatus !== "complete") purgeNormalizedMonth(month);
     const failedAt = new Date().toISOString();
-    db.prepare(`update backfill_jobs set status='failed', last_error=?, updated_at=? where month=?`)
-      .run(String(error.stack ?? error).slice(0, 4000), failedAt, month);
+    if (backup) {
+      restoreMonthBackup(month, backup);
+      db.prepare(`update backfill_jobs set last_error=?, updated_at=? where month=?`)
+        .run(`Refresh failed; previous complete snapshot restored. ${String(error.stack ?? error).slice(0, 3500)}`, failedAt, month);
+    } else {
+      purgeNormalizedMonth(month);
+      db.prepare(`update backfill_jobs set status='failed', last_error=?, updated_at=? where month=?`)
+        .run(String(error.stack ?? error).slice(0, 4000), failedAt, month);
+    }
     throw error;
   }
 }
@@ -344,7 +356,8 @@ async function loadSearchIndex(delayMs) {
 async function fetchPage(cname, pageType, delayMs) {
   const cached = db.prepare(`select id, raw_path from raw_pages
     where request_key=? and parser_version=?`).get(cname, PARSER_VERSION);
-  if (cached && fs.existsSync(path.join(PRIVATE_DIR, cached.raw_path))) {
+  const refreshable = forceRefresh && (pageType === "search-index" || pageType === "month");
+  if (!refreshable && cached && fs.existsSync(path.join(PRIVATE_DIR, cached.raw_path))) {
     const html = zlib.gunzipSync(fs.readFileSync(path.join(PRIVATE_DIR, cached.raw_path))).toString("utf8");
     return { id: cached.id, html };
   }
@@ -378,9 +391,16 @@ async function fetchPage(cname, pageType, delayMs) {
       const fetchedAt = new Date().toISOString();
       const result = db.prepare(`insert into raw_pages(
         request_key,page_type,source_url,payload_sha256,raw_path,http_status,parser_version,fetched_at
-      ) values(?,?,?,?,?,200,?,?) returning id`).get(
+      ) values(?,?,?,?,?,200,?,?) on conflict(request_key) do update set
+        page_type=excluded.page_type, source_url=excluded.source_url,
+        payload_sha256=excluded.payload_sha256, raw_path=excluded.raw_path,
+        http_status=excluded.http_status, parser_version=excluded.parser_version,
+        fetched_at=excluded.fetched_at, parsed_at=null returning id`).get(
         cname, pageType, BASE_URL, hash, path.relative(PRIVATE_DIR, absolute), PARSER_VERSION, fetchedAt,
       );
+      if (cached?.raw_path && cached.raw_path !== path.relative(PRIVATE_DIR, absolute)) {
+        fs.rmSync(path.join(PRIVATE_DIR, cached.raw_path), { force: true });
+      }
       return { id: result.id, html };
     } catch (error) {
       lastError = error;
@@ -769,7 +789,16 @@ function isProcessAlive(pid) {
 function recoverInterruptedJobs() {
   const now = new Date().toISOString();
   const interrupted = db.prepare("select month from backfill_jobs where status='running'").all();
-  for (const job of interrupted) purgeNormalizedMonth(job.month);
+  const backupExists = db.prepare(`select count(*) count from sqlite_master
+    where type='table' and name='refresh_backup_job'`).get().count === 1;
+  const backupJob = backupExists ? db.prepare("select * from refresh_backup_job limit 1").get() : null;
+  for (const job of interrupted) {
+    if (backupJob?.month === job.month && backupJob.status === "complete") {
+      restoreMonthBackup(job.month, backupJob);
+    } else {
+      purgeNormalizedMonth(job.month);
+    }
+  }
   db.prepare(`update backfill_jobs set status='failed',
     last_error='Previous worker stopped before the monthly quality gate completed.',
     updated_at=? where status='running'`).run(now);
@@ -786,13 +815,66 @@ function purgeNormalizedMonth(month) {
     }
     db.prepare("delete from races where race_date>=? and race_date<?").run(start, end);
     db.prepare("delete from meetings where race_date>=? and race_date<?").run(start, end);
-    db.prepare("delete from horses where not exists(select 1 from race_entries e where e.horse_id=horses.horse_id)").run();
-    db.prepare("delete from jockeys where not exists(select 1 from race_entries e where e.jockey_id=jockeys.jockey_id)").run();
-    db.prepare("delete from trainers where not exists(select 1 from race_entries e where e.trainer_id=trainers.trainer_id)").run();
     db.exec("commit");
   } catch (error) {
     db.exec("rollback");
     throw error;
+  }
+}
+
+function createMonthBackup(month) {
+  const start = `${month}-01`;
+  const end = `${nextMonth(month)}-01`;
+  dropMonthBackup();
+  db.exec(`
+    create table refresh_backup_job as
+      select * from backfill_jobs where month='${month}';
+    create table refresh_backup_meetings as
+      select * from meetings where race_date>='${start}' and race_date<'${end}';
+    create table refresh_backup_races as
+      select * from races where race_date>='${start}' and race_date<'${end}';
+    create table refresh_backup_entries as
+      select e.* from race_entries e join refresh_backup_races r on r.race_id=e.race_id;
+    create table refresh_backup_results as
+      select x.* from race_results x join refresh_backup_races r on r.race_id=x.race_id;
+    create table refresh_backup_payouts as
+      select p.* from payouts p join refresh_backup_races r on r.race_id=p.race_id;
+    create table refresh_backup_quality as
+      select * from quality_checks where month='${month}';
+  `);
+  return db.prepare("select * from backfill_jobs where month=?").get(month);
+}
+
+function restoreMonthBackup(month, job) {
+  purgeNormalizedMonth(month);
+  db.exec("begin immediate");
+  try {
+    db.exec(`
+      insert into meetings select * from refresh_backup_meetings;
+      insert into races select * from refresh_backup_races;
+      insert into race_entries select * from refresh_backup_entries;
+      insert into race_results select * from refresh_backup_results;
+      insert into payouts select * from refresh_backup_payouts;
+    `);
+    db.prepare("delete from quality_checks where month=?").run(month);
+    db.exec("insert into quality_checks select * from refresh_backup_quality");
+    db.prepare(`update backfill_jobs set status='complete', meeting_count=?, race_count=?,
+      runner_count=?, payout_count=?, completed_at=?, updated_at=? where month=?`).run(
+        job.meeting_count, job.race_count, job.runner_count, job.payout_count,
+        job.completed_at, new Date().toISOString(), month,
+      );
+    db.exec("commit");
+  } catch (error) {
+    db.exec("rollback");
+    throw error;
+  } finally {
+    dropMonthBackup();
+  }
+}
+
+function dropMonthBackup() {
+  for (const table of ["job", "meetings", "races", "entries", "results", "payouts", "quality"]) {
+    db.exec(`drop table if exists refresh_backup_${table}`);
   }
 }
 

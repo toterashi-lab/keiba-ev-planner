@@ -30,6 +30,7 @@ copy("docs/free-data-pipeline.md", path.join(stageDir, "docs", "free-data-pipeli
 for (const file of [
   "jra-free-db.mjs",
   "run-jra-free-backfill.ps1",
+  "sync-jra-current.ps1",
   "fetch-jra-results.mjs",
   "validate-reference-dataset.mjs",
   "generate-reference-result-seed.mjs",
