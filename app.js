@@ -3,6 +3,7 @@ const resultData = window.KEIBA_RESULTS ?? { results: [] };
 const modelData = window.KEIBA_MODEL_OUTPUTS ?? { status: "blocked", candidates: [] };
 const databaseData = window.KEIBA_DATABASE_STATUS ?? {};
 const closingOddsData = window.KEIBA_CLOSING_ODDS ?? { races: [], quality: [] };
+const ticketEngine = window.KEIBA_TICKET_ENGINE;
 
 const state = {
   date: meetingData.meetings.at(-1)?.date ?? "",
@@ -19,6 +20,9 @@ const els = {
   venueTabs: document.querySelector("#venue-tabs"),
   raceTabs: document.querySelector("#race-tabs"),
   raceList: document.querySelector("#race-list"),
+  venueRankingContext: document.querySelector("#venue-ranking-context"),
+  venueRankingStatus: document.querySelector("#venue-ranking-status"),
+  venueRankingList: document.querySelector("#venue-ranking-list"),
   raceNumber: document.querySelector("#race-number"),
   raceTitle: document.querySelector("#race-title"),
   raceMeta: document.querySelector("#race-meta"),
@@ -72,6 +76,18 @@ const els = {
   heroFavoriteRoi: document.querySelector("#hero-favorite-roi"),
   heroDbMonths: document.querySelector("#hero-db-months"),
   heroDbRaces: document.querySelector("#hero-db-races"),
+  topRecommendation: document.querySelector("#top-recommendation"),
+  topRecommendationStatus: document.querySelector("#top-recommendation-status"),
+  topTicketLabel: document.querySelector("#top-ticket-label"),
+  topTicketSelection: document.querySelector("#top-ticket-selection"),
+  topTicketMethod: document.querySelector("#top-ticket-method"),
+  topTicketPoints: document.querySelector("#top-ticket-points"),
+  topTicketReturn: document.querySelector("#top-ticket-return"),
+  topTicketEdge: document.querySelector("#top-ticket-edge"),
+  topTicketStake: document.querySelector("#top-ticket-stake"),
+  topRecommendationComment: document.querySelector("#top-recommendation-comment"),
+  ticketCoverage: document.querySelector("#ticket-coverage"),
+  candidateCount: document.querySelector("#candidate-count"),
 };
 
 initialize();
@@ -240,9 +256,11 @@ function buildBenchmarkReports() {
 function renderAll() {
   renderDateTabs();
   renderVenueTabs();
+  renderVenueRanking();
   renderRaceTabs();
   renderRaceList();
   renderRaceHeader();
+  renderTopRecommendation();
   renderRunners();
   renderPayouts();
   renderStrategies();
@@ -312,6 +330,8 @@ function bindRaceButtons(container) {
       renderRaceTabs();
       renderRaceList();
       renderRaceHeader();
+      renderTopRecommendation();
+      renderVenueRanking();
       renderRunners();
       renderPayouts();
       renderStrategies();
@@ -336,6 +356,112 @@ function renderRaceHeader() {
   els.refundCount.textContent = `${result?.refunds?.length ?? 0}件`;
   const url = result?.url || meetingData.sourceUrls?.find((item) => item.includes(state.date.replaceAll("-", "").slice(4))) || "#";
   [els.officialLink, els.resultLinkSecondary].forEach((link) => { link.href = url; });
+}
+
+function renderVenueRanking() {
+  const track = selectedTrack();
+  const meeting = selectedMeeting();
+  if (!track || !meeting) return;
+  const rows = track.races.map((race) => {
+    const candidates = matchingAutomaticCandidates(race.no).filter(isRecommendationReady)
+      .sort((left, right) => candidateExpectedReturn(right) - candidateExpectedReturn(left));
+    const top = candidates[0] ?? null;
+    return { race, top, expectedReturn: top ? candidateExpectedReturn(top) : null };
+  }).sort((left, right) => {
+    if (left.expectedReturn !== null && right.expectedReturn === null) return -1;
+    if (left.expectedReturn === null && right.expectedReturn !== null) return 1;
+    return (right.expectedReturn ?? 0) - (left.expectedReturn ?? 0) || left.race.no - right.race.no;
+  });
+  const ranked = rows.filter((row) => row.expectedReturn !== null);
+  els.venueRankingContext.textContent = `${formatDate(meeting.date)}・${track.venueName} ${track.meetingName}`;
+  els.venueRankingStatus.textContent = `算出 ${ranked.length} / ${rows.length}R`;
+  els.venueRankingStatus.className = `decision ${ranked.length ? "buy" : "reject"}`;
+  els.venueRankingList.innerHTML = rows.map((row) => {
+    const rank = row.expectedReturn === null ? "--" : `${ranked.indexOf(row) + 1}位`;
+    const edge = row.expectedReturn === null ? null : row.expectedReturn - 1;
+    const status = row.expectedReturn === null ? "データ待ち" : edge >= 0.08 ? "購入候補" : "見送り";
+    return `<button type="button" class="${row.race.no === state.raceNo ? "active" : ""} ${row.expectedReturn === null ? "blocked" : ""}" data-ranking-race="${row.race.no}">
+      <span class="ranking-place">${rank}</span><strong>${row.race.no}R ${escapeHtml(row.race.name)}</strong>
+      <small>${row.top ? `${escapeHtml(row.top.betType)} ${escapeHtml(row.top.method ?? "1点")}・${percent(row.expectedReturn)}` : status}</small>
+      <em>${row.expectedReturn === null ? "EV未算出" : `${signedPercent(edge)}・${status}`}</em>
+    </button>`;
+  }).join("");
+  els.venueRankingList.querySelectorAll("button").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.raceNo = Number(button.dataset.rankingRace);
+      renderRaceTabs();
+      renderRaceList();
+      renderRaceHeader();
+      renderTopRecommendation();
+      renderVenueRanking();
+      renderRunners();
+      renderPayouts();
+      renderStrategies();
+      document.querySelector(".race-heading").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+}
+
+function renderTopRecommendation() {
+  const runners = selectedResult()?.runners?.filter((runner) => runner.finishPosition !== null) ?? [];
+  const counts = ticketEngine?.candidateCounts(runners.length) ?? {};
+  const candidates = matchingAutomaticCandidates().filter(isRecommendationReady).sort((left, right) => candidateExpectedReturn(right) - candidateExpectedReturn(left));
+  const top = candidates[0] ?? null;
+  const expectedReturn = top ? candidateExpectedReturn(top) : null;
+  const edge = expectedReturn === null ? null : expectedReturn - 1;
+  const passes = edge !== null && edge >= 0.08;
+
+  els.topRecommendation.classList.toggle("blocked", !top);
+  els.topRecommendation.classList.toggle("available", Boolean(top));
+  els.topRecommendationStatus.textContent = !top ? "算出停止" : passes ? "購入候補" : "基準未達・見送り";
+  els.topRecommendationStatus.className = `decision ${!top ? "reject" : passes ? "buy" : "hold"}`;
+  els.topTicketLabel.textContent = top ? `${top.betType}・${top.method ?? "1点"}` : "推奨買い目なし";
+  els.topTicketSelection.textContent = top?.selection ?? "見送り";
+  els.topTicketMethod.textContent = top
+    ? `${top.points ?? 1}点を全券種候補から安全側EV順に比較`
+    : "発走前の全組み合わせオッズとモデル確率が未完成";
+  els.topTicketPoints.textContent = top ? `${top.points ?? 1}点` : "--";
+  els.topTicketReturn.textContent = expectedReturn === null ? "--" : percent(expectedReturn);
+  els.topTicketEdge.textContent = edge === null ? "--" : signedPercent(edge);
+  els.topTicketEdge.className = edge === null ? "" : edge >= 0 ? "positive" : "negative";
+  els.topTicketStake.textContent = passes ? yen(top.recommendedStake ?? 0) : "0円";
+  els.topRecommendationComment.textContent = top
+    ? top.comment ?? `${top.betType}${top.method ? ` ${top.method}` : ""}の構成点を合算し、安全側期待回収率${percent(expectedReturn)}。${passes ? "採用閾値8%を通過しました。" : "採用閾値8%を下回るため購入しません。"}`
+    : "単勝・複勝は締切後オッズのみのため事前推奨に不使用。馬連・ワイド・馬単・3連複・3連単は全組み合わせオッズ未取得、30年モデルは校正前です。結果・払戻は順位付けに使用しません。";
+
+  const coverage = modelData.oddsCoverage ?? {};
+  const methods = {
+    "単勝": "1点・複数選択", "複勝": "1点・複数選択", "馬連": "1点・BOX・フォーメーション",
+    "ワイド": "1点・BOX・フォーメーション", "馬単": "1点・BOX・フォーメーション",
+    "3連複": "1点・BOX・フォーメーション", "3連単": "1点・BOX・フォーメーション",
+  };
+  els.ticketCoverage.innerHTML = Object.keys(methods).map((betType) => {
+    const ready = coverage[betType] === "pass";
+    const closingOnly = (betType === "単勝" || betType === "複勝") && Boolean(selectedOddsRace()?.prices?.length);
+    const status = ready ? "算出可能" : closingOnly ? "締切後のみ" : "オッズ未取得";
+    return `<div class="${ready ? "ready" : "blocked"}"><strong>${betType}</strong><span>${methods[betType]}</span><small>${number(counts[betType] ?? 0)}候補・${status}</small></div>`;
+  }).join("");
+  const total = Object.values(counts).reduce((sum, count) => sum + count, 0);
+  els.candidateCount.textContent = `${runners.length}頭立て・基本組み合わせ${number(total)}候補。BOXとフォーメーションは構成点へ展開し、重複を除いて総投資ベースで比較します。`;
+}
+
+function matchingAutomaticCandidates(raceNo = state.raceNo) {
+  const track = selectedTrack();
+  return (modelData.candidates ?? []).filter((candidate) => candidate.date === state.date
+    && candidate.meetingName === track?.meetingName && candidate.raceNo === raceNo);
+}
+
+function isRecommendationReady(candidate) {
+  return candidate.status === "ready" && candidate.predictionContext === "pre_race"
+    && candidate.oddsObservedAt && candidate.modelVersion && candidate.calibrationStatus === "pass"
+    && ticketEngine?.SPECS?.[candidate.betType] && candidate.selection && candidateExpectedReturn(candidate) !== null;
+}
+
+function candidateExpectedReturn(candidate) {
+  if (candidate.conservativeExpectedReturn !== null && candidate.conservativeExpectedReturn !== undefined
+    && Number.isFinite(Number(candidate.conservativeExpectedReturn))) return Number(candidate.conservativeExpectedReturn);
+  if (Number(candidate.odds) > 1 && Number(candidate.conservativeProbability) > 0) return Number(candidate.odds) * Number(candidate.conservativeProbability);
+  return null;
 }
 
 function renderRunners() {
@@ -470,10 +596,8 @@ function setEvInputMode() {
 }
 
 function selectedAutomaticCandidate() {
-  const track = selectedTrack();
-  return (modelData.candidates ?? []).find((candidate) =>
-    candidate.date === state.date && candidate.meetingName === track?.meetingName && candidate.raceNo === state.raceNo
-    && candidate.status === "ready" && candidate.oddsObservedAt && candidate.modelVersion && candidate.calibrationStatus === "pass");
+  return matchingAutomaticCandidates().filter(isRecommendationReady)
+    .sort((left, right) => candidateExpectedReturn(right) - candidateExpectedReturn(left))[0] ?? null;
 }
 
 function applyAutomaticCandidate(candidate) {

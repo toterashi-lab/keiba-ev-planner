@@ -24,7 +24,7 @@ if (resultLinksData.raceCount !== resultsData.results.length || !sameSet(resultL
 const stageDir = fs.mkdtempSync(path.join(process.cwd(), ".public-stage-"));
 const stageDataDir = path.join(stageDir, "data");
 fs.mkdirSync(stageDataDir, { recursive: true });
-for (const file of ["index.html", "styles.css", "app.js"]) copy(file, path.join(stageDir, file));
+for (const file of ["index.html", "styles.css", "ticket-engine.js", "app.js"]) copy(file, path.join(stageDir, file));
 fs.mkdirSync(path.join(stageDir, "docs"), { recursive: true });
 fs.mkdirSync(path.join(stageDir, "scripts"), { recursive: true });
 fs.mkdirSync(path.join(stageDir, "assets"), { recursive: true });
@@ -46,6 +46,7 @@ for (const file of [
   "build-public-demo.mjs",
   "ev-logic-check.mjs",
   "performance-benchmark-check.mjs",
+  "ticket-engine-check.mjs",
 ]) copy(path.join("scripts", file), path.join(stageDir, "scripts", file));
 writeBrowserData(path.join(stageDataDir, "meet-2026-07-11-2026-07-12.js"), "KEIBA_REFERENCE_MEETINGS", programmeData);
 writeBrowserData(path.join(stageDataDir, "result-links-2026-07-11-2026-07-12.js"), "KEIBA_RESULT_LINKS", resultLinksData);
@@ -61,7 +62,7 @@ const cacheVersion = crypto.createHash("sha256")
   .slice(0, 12);
 const stagedIndexPath = path.join(stageDir, "index.html");
 const stagedIndex = fs.readFileSync(stagedIndexPath, "utf8").replace(
-  /(href|src)="(styles\.css|app\.js|data\/[^\"]+\.js)"/g,
+  /(href|src)="(styles\.css|(?:app|ticket-engine)\.js|data\/[^\"]+\.js)"/g,
   `$1="$2?v=${cacheVersion}"`,
 );
 fs.writeFileSync(stagedIndexPath, stagedIndex, "utf8");

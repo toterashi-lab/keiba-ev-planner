@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>競馬期待値ラボ｜先週レース検証</title>
-    <link rel="stylesheet" href="styles.css?v=3cab70ee2618" />
+    <link rel="stylesheet" href="styles.css?v=1c9578c1e041" />
   </head>
   <body>
     <header class="site-header">
@@ -69,6 +69,14 @@
       <section id="race-workspace" class="race-workspace">
         <div id="date-tabs" class="date-tabs" aria-label="開催日"></div>
         <div id="venue-tabs" class="venue-tabs" aria-label="競馬場"></div>
+        <section class="venue-ranking" aria-labelledby="venue-ranking-title">
+          <header>
+            <div><span id="venue-ranking-context">開催を選択中</span><h2 id="venue-ranking-title">レース期待値ランキング</h2></div>
+            <span id="venue-ranking-status" class="decision reject">算出 0 / 12R</span>
+          </header>
+          <div id="venue-ranking-list" class="venue-ranking-list"></div>
+          <p>各レースの最上位買い目を安全側期待回収率で比較。順位を選ぶと対象レースへ移動します。</p>
+        </section>
         <div id="race-tabs" class="race-tabs" aria-label="レース番号"></div>
 
         <div class="race-heading">
@@ -86,6 +94,29 @@
             <a id="official-link" href="#" target="_blank" rel="noreferrer">JRA公式結果</a>
           </div>
         </div>
+
+        <section id="top-recommendation" class="top-recommendation blocked" aria-labelledby="top-recommendation-title">
+          <header>
+            <div><span>このレースの最優先判断</span><h2 id="top-recommendation-title">期待値1位</h2></div>
+            <span id="top-recommendation-status" class="decision reject">算出停止</span>
+          </header>
+          <div class="recommendation-main">
+            <div class="recommendation-ticket">
+              <span id="top-ticket-label">推奨買い目なし</span>
+              <strong id="top-ticket-selection">見送り</strong>
+              <small id="top-ticket-method">必要データを検査中</small>
+            </div>
+            <dl class="recommendation-metrics">
+              <div><dt>点数</dt><dd id="top-ticket-points">--</dd></div>
+              <div><dt>期待回収率</dt><dd id="top-ticket-return">--</dd></div>
+              <div><dt>安全側EV</dt><dd id="top-ticket-edge">--</dd></div>
+              <div><dt>推奨額</dt><dd id="top-ticket-stake">0円</dd></div>
+            </dl>
+          </div>
+          <p id="top-recommendation-comment" class="recommendation-comment">発走前オッズと校正済み確率が揃うまで、買い目を推測で表示しません。</p>
+          <div id="ticket-coverage" class="ticket-coverage" aria-label="券種別の算出状態"></div>
+          <p id="candidate-count" class="candidate-count"></p>
+        </section>
 
         <div class="view-tabs" role="tablist" aria-label="レース情報">
           <button type="button" data-view="summary" class="active">概要</button>
@@ -297,11 +328,12 @@
       <p>本サービスはJRA・netkeibaの公式サービスではありません。結果と発売情報は必ず主催者発表で確認してください。実購入機能は未接続です。</p>
     </footer>
 
-    <script src="data/meet-2026-07-11-2026-07-12.js?v=3cab70ee2618"></script>
-    <script src="data/result-links-2026-07-11-2026-07-12.js?v=3cab70ee2618"></script>
-    <script src="data/results-2026-07-11-2026-07-12.js?v=3cab70ee2618"></script>
-    <script src="data/database-status.js?v=3cab70ee2618"></script>
-    <script src="data/closing-odds-2026-07-11-2026-07-12.js?v=3cab70ee2618"></script>
-    <script src="app.js?v=3cab70ee2618"></script>
+    <script src="data/meet-2026-07-11-2026-07-12.js?v=1c9578c1e041"></script>
+    <script src="data/result-links-2026-07-11-2026-07-12.js?v=1c9578c1e041"></script>
+    <script src="data/results-2026-07-11-2026-07-12.js?v=1c9578c1e041"></script>
+    <script src="data/database-status.js?v=1c9578c1e041"></script>
+    <script src="data/closing-odds-2026-07-11-2026-07-12.js?v=1c9578c1e041"></script>
+    <script src="ticket-engine.js?v=1c9578c1e041"></script>
+    <script src="app.js?v=1c9578c1e041"></script>
   </body>
 </html>
