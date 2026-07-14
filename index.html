@@ -24,7 +24,7 @@
         </nav>
         <div class="header-status">
           <span class="status-dot"></span>
-          先週72レース取込済み
+          <span id="header-status-text">データベース確認中</span>
         </div>
       </div>
     </header>
@@ -35,6 +35,7 @@
           <strong>初回検証バッチ</strong>
           <span>2026年7月11日・12日</span>
           <span>福島・小倉・函館</span>
+          <span id="source-db-count">長期DB読込中</span>
         </div>
         <p>JRA公式番組・結果を照合。長期DBへ同じ形式で継続蓄積します。</p>
       </section>
@@ -98,7 +99,7 @@
               </div>
               <div class="table-scroll">
                 <table class="dense-table runner-table">
-                  <thead><tr><th>着順</th><th>枠</th><th>馬番</th><th>馬名</th><th>性齢</th><th>斤量</th><th>騎手</th><th>タイム</th><th>着差</th><th>通過</th><th>上り</th><th>馬体重</th><th>調教師</th><th>人気</th></tr></thead>
+                  <thead><tr><th>着順</th><th>枠</th><th>馬番</th><th>馬名</th><th>単勝</th><th>複勝</th><th>性齢</th><th>斤量</th><th>騎手</th><th>タイム</th><th>着差</th><th>通過</th><th>上り</th><th>馬体重</th><th>調教師</th><th>人気</th></tr></thead>
                   <tbody id="runner-body"></tbody>
                 </table>
               </div>
@@ -132,6 +133,18 @@
                 <label>校正済みモデル確率（%）<input id="probability" type="number" min="0.01" max="99.99" step="0.1" placeholder="モデル学習待ち" readonly /></label>
                 <label>資金<input id="bankroll" type="number" min="1000" step="1000" value="30000" /></label>
                 <label>1点上限<input id="max-stake" type="number" min="100" step="100" value="1000" /></label>
+                <label>市場融合率 <output id="market-weight-output">50%</output>
+                  <input id="market-weight" type="range" min="0" max="100" step="5" value="50" />
+                </label>
+                <label>確率誤差幅（pt）<input id="uncertainty" type="number" min="0" max="20" step="0.5" value="2" /></label>
+              </div>
+
+              <div class="risk-policy" aria-label="Kelly配分率">
+                <strong>資金配分</strong>
+                <button type="button" data-kelly-fraction="0.125">1/8 Kelly</button>
+                <button type="button" data-kelly-fraction="0.25" class="active">1/4 Kelly</button>
+                <button type="button" data-kelly-fraction="0.5">1/2 Kelly</button>
+                <span>確率シナリオと資金リスクを分離して比較</span>
               </div>
 
               <div class="ev-metrics">
@@ -147,13 +160,15 @@
                 <ul id="rationale-list"></ul>
                 <div class="research-links">
                   <strong>ロジック参照</strong>
-                  <a href="https://doi.org/10.1145/1102351.1102430" target="_blank" rel="noreferrer">確率校正</a>
+                  <a href="https://gwern.net/doc/statistics/decision/1994-benter.pdf" target="_blank" rel="noreferrer">Benter統合モデル</a>
+                  <a href="https://icml.cc/Conferences/2005/proceedings/papers/079_GoodProbabilities_NiculescuMizilCaruana.pdf" target="_blank" rel="noreferrer">確率校正</a>
                   <a href="https://otexts.com/fpp3/tscv.html" target="_blank" rel="noreferrer">時系列検証</a>
-                  <a href="https://www.journals.uchicago.edu/doi/pdf/10.1086%2F655844" target="_blank" rel="noreferrer">人気薄バイアス</a>
+                  <a href="https://doi.org/10.1002/j.1538-7305.1956.tb03809.x" target="_blank" rel="noreferrer">Kelly基準</a>
+                  <a href="https://doi.org/10.1016/j.ijforecast.2009.12.014" target="_blank" rel="noreferrer">人気薄バイアス</a>
                   <a href="https://www.jra.go.jp/faq/pop02/1_6.html" target="_blank" rel="noreferrer">JRA過去結果</a>
                 </div>
               </section>
-              <p class="formula-note">期待回収率＝オッズ×的中確率。推奨条件は期待値差8%以上、100円単位、1点上限以内です。</p>
+              <p class="formula-note">期待回収率＝オッズ×的中確率。市場融合係数・誤差幅・採用閾値はwalk-forward検証で推定し、画面の初期値は感度分析用です。</p>
             </section>
 
             <section id="view-result" class="view-panel">
@@ -177,14 +192,14 @@
                 <div><span>勝馬</span><strong>72 / 72</strong><small>100%</small></div>
                 <div><span>払戻</span><strong id="quality-refunds">--</strong><small>取得済み</small></div>
                 <div><span>全出走馬</span><strong id="quality-runners">--</strong><small>取得済み</small></div>
-                <div><span>締切前オッズ</span><strong>予測用</strong><small class="danger-text">無料時系列の蓄積前</small></div>
+                <div><span>締切後オッズ</span><strong id="quality-odds">--</strong><small id="quality-odds-note">検査中</small></div>
                 <div><span>モデル予測</span><strong>0 / 72</strong><small class="danger-text">学習前</small></div>
               </div>
               <div class="quality-note">
                 <strong>現在できること</strong>
-                <p>開催・全出走馬・着順・騎手・調教師・走破内容・勝馬・払戻の保存と、取得漏れの検査。</p>
+                <p>開催・全出走馬・着順・騎手・調教師・走破内容・勝馬・払戻・締切後単勝複勝オッズの保存と、取得漏れの検査。</p>
                 <strong>まだできないこと</strong>
-                <p>先週開催前に遡った推奨の再現。締切前オッズと過去走特徴が必要です。</p>
+                <p>先週開催前に遡った推奨の再現。発走前オッズ時系列と校正済み確率モデルが必要です。</p>
               </div>
             </section>
           </div>
@@ -199,7 +214,19 @@
       <section id="warehouse" class="warehouse-section">
         <div class="section-title">
           <div><h2>過去データ蓄積状況</h2><p>週単位の追記バッチ。既存レコードは主キーで重複排除します。</p></div>
-          <span class="warehouse-status">長期蓄積設計</span>
+          <span id="warehouse-status" class="warehouse-status">DB読込中</span>
+        </div>
+        <div class="pipeline-overview" aria-label="長期データベース進捗">
+          <div><span>完了月</span><strong id="db-months">--</strong><small>1996年以降</small></div>
+          <div><span>レース</span><strong id="db-races">--</strong><small>品質合格分</small></div>
+          <div><span>出走馬</span><strong id="db-runners">--</strong><small>正規化済み</small></div>
+          <div><span>払戻</span><strong id="db-payouts">--</strong><small>正規化済み</small></div>
+          <div><span>原本</span><strong id="db-raw-pages">--</strong><small>gzip・SHA-256</small></div>
+        </div>
+        <div class="progress-row">
+          <div><strong>30年バックフィル</strong><span id="db-progress-label">進捗確認中</span></div>
+          <div class="progress-track" role="progressbar" aria-label="30年バックフィル進捗" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="db-progress-bar"></span></div>
+          <p id="db-updated-at">公開集計時刻を確認中</p>
         </div>
         <table class="dense-table batch-table">
           <thead><tr><th>バッチ</th><th>対象期間</th><th>競馬場</th><th>レース</th><th>結果</th><th>払戻</th><th>状態</th></tr></thead>
@@ -215,6 +242,8 @@
     <script src="data/meet-2026-07-11-2026-07-12.js"></script>
     <script src="data/result-links-2026-07-11-2026-07-12.js"></script>
     <script src="data/results-2026-07-11-2026-07-12.js"></script>
+    <script src="data/database-status.js"></script>
+    <script src="data/closing-odds-2026-07-11-2026-07-12.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

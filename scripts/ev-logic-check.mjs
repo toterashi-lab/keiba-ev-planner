@@ -43,6 +43,22 @@ for (const test of tests) {
   );
 }
 
+const normalizedMarket = normalizeInverseOdds([5, 13.2, 73.5]);
+const normalizationOk = nearlyEqual(normalizedMarket.reduce((sum, value) => sum + value, 0), 1);
+console.log(`${normalizationOk ? "OK" : "NG"} market normalization: sum=${normalizedMarket.reduce((sum, value) => sum + value, 0).toFixed(6)}`);
+if (!normalizationOk) failed += 1;
+
+const pooled = logitPool(0.28, 0.159, 0.5);
+const poolingOk = pooled > 0.159 && pooled < 0.28 && nearlyEqual(logitPool(0.28, 0.159, 0), 0.28)
+  && nearlyEqual(logitPool(0.28, 0.159, 1), 0.159);
+console.log(`${poolingOk ? "OK" : "NG"} logit pooling: probability=${pooled.toFixed(6)}`);
+if (!poolingOk) failed += 1;
+
+const conservative = Math.max(0.0001, pooled - 0.02);
+const lowerBoundOk = conservative < pooled && conservative > 0;
+console.log(`${lowerBoundOk ? "OK" : "NG"} conservative scenario: probability=${conservative.toFixed(6)}`);
+if (!lowerBoundOk) failed += 1;
+
 if (failed) process.exit(1);
 
 function enrichBet(row) {
@@ -63,4 +79,15 @@ function enrichBet(row) {
 
 function nearlyEqual(a, b) {
   return Math.abs(a - b) < 0.000001;
+}
+
+function normalizeInverseOdds(values) {
+  const inverse = values.map((odds) => 1 / odds);
+  const total = inverse.reduce((sum, value) => sum + value, 0);
+  return inverse.map((value) => value / total);
+}
+
+function logitPool(modelProbability, marketProbability, marketWeight) {
+  const logit = (value) => Math.log(value / (1 - value));
+  return 1 / (1 + Math.exp(-((1 - marketWeight) * logit(modelProbability) + marketWeight * logit(marketProbability))));
 }

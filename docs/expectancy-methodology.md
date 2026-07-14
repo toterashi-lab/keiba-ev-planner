@@ -1,0 +1,78 @@
+# 期待値ロジック設計
+
+## 目的
+
+的中率ではなく、予測時点で利用可能だった情報だけを使って期待回収率と資金配分を評価する。結果判明後の情報、締切後にしか取得できなかったオッズ、未校正の分類スコアを勝率として混入させない。
+
+## 基本式
+
+- 市場基準確率: 同一レース全馬の逆単勝オッズを合計1へ正規化する。
+- 期待回収率: `decimal_odds * probability`
+- EV差: `expected_return - 1`
+- 完全Kelly比率: `(decimal_odds * probability - 1) / (decimal_odds - 1)`。負値は0とする。
+- 実配分: 完全Kellyの1/8、1/4、1/2を比較し、100円単位と1点上限を適用する。
+
+JRAはパリミュチュエル方式であり、表示オッズは投票により変動する。単純な`1 / odds`を真の勝率とみなさず、同一市場内で正規化し、取得時刻と一緒に保存する。
+
+## 確率シナリオ
+
+1. 市場基準: 正規化した市場暗黙確率。購入候補ではなく比較基準とする。
+2. モデル単独: 独立期間で校正済みの基本能力モデル確率。
+3. 市場融合: モデル確率と市場確率をlogit空間で融合する。William Benterが示した、基本モデルと公衆確率を第2段モデルで統合する考え方を採る。
+4. 安全側下限: 市場融合確率から検証期間で推定した誤差幅を控除する。最終判断はこのシナリオを基準にする。
+
+画面の市場融合率50%・誤差幅2pt・EV差8%は感度分析用の初期値であり、本番係数ではない。自動候補ではwalk-forward検証で期間ごとに再推定した値だけを使う。
+
+## モデルと市場の統合
+
+Benterは、レース内で合計1となる基本モデル確率と市場暗黙確率の対数を説明変数にした第2段logitを提示している。実装では全出走馬を同時に正規化し、係数は学習期間外のデータで推定する。
+
+単一候補を操作する画面では感度分析として二項logit poolingを表示する。これは本番の多項logit学習結果ではないため、自動買い目には使用しない。
+
+## 確率校正
+
+分類精度やAUCだけでは期待値計算に足りない。校正用期間を学習期間と分離し、次を比較する。
+
+- Platt scaling: データが少ない初期段階の基準。
+- Isotonic regression: 校正標本が十分に増えた段階の候補。
+- 評価指標: log loss、Brier score、reliability curve、ECE、オッズ帯別実勝率。
+
+Niculescu-MizilとCaruanaは、isotonic regressionは柔軟だが標本が少ないと過学習しやすく、約1,000件以上ではPlatt scalingと同等以上になりやすいと報告している。件数だけで決定せず、時系列外部検証の成績で選択する。
+
+## 人気薄バイアス
+
+人気薄バイアスは市場・年代を問わず一定ではない。固定の「高オッズ補正」を手作業で設定せず、開催時期、競馬場、券種、オッズ帯ごとにローリング再推定する。未検証の補正は適用しない。
+
+## 時系列検証
+
+- 学習、校正、検証を日付順に分割する。
+- 各検証日の特徴量は発走時刻以前に確定した値だけを使う。
+- オッズは予測生成時刻以前の最新スナップショットだけを使う。
+- 同一馬の未来走、結果、払戻、締切後オッズを過去へ逆流させない。
+- レース単位と開催日単位の両方でブートストラップ信頼区間を計算する。
+- 回収率だけでなく、最大ドローダウン、連敗長、投票数、資金拘束率を検査する。
+
+## 自動候補の必須ゲート
+
+次がすべて合格するまで自動推奨と購入連携を停止する。
+
+1. 月次データ完全性
+2. 発走前オッズのレース・馬番網羅
+3. オッズ鮮度
+4. 確率校正
+5. walk-forward改善
+6. 市場単独モデルに対する情報利得
+7. EV帯別の再現性
+8. 最大ドローダウン上限
+9. 最低サンプル数
+10. 取消・除外・発売停止処理
+
+## 主要参考資料
+
+- William Benter, Computer Based Horse Race Handicapping and Wagering Systems: https://gwern.net/doc/statistics/decision/1994-benter.pdf
+- J. L. Kelly Jr., A New Interpretation of Information Rate: https://doi.org/10.1002/j.1538-7305.1956.tb03809.x
+- Niculescu-Mizil and Caruana, Predicting Good Probabilities With Supervised Learning: https://icml.cc/Conferences/2005/proceedings/papers/079_GoodProbabilities_NiculescuMizilCaruana.pdf
+- Lo and Bacon-Shone, Probability and Statistical Models for Racing: https://hub.hku.hk/handle/10722/53182
+- Smith and Vaughan Williams, Forecasting horse race outcomes: https://doi.org/10.1016/j.ijforecast.2009.12.014
+
+研究結果はJRA市場へ無条件に転用しない。各仮説はローカルのJRA時系列データで再検証し、再現しないものは採用しない。

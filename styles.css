@@ -107,6 +107,9 @@ main { width: min(1240px, 100%); margin: 0 auto; padding: 14px 18px 30px; }
 .runner-table th, .runner-table td { white-space: nowrap; }
 .runner-table th:nth-child(4), .runner-table td:nth-child(4) { min-width: 132px; font-weight: 800; }
 .runner-table td:nth-child(1), .runner-table td:nth-child(3) { text-align: center; font-weight: 900; }
+.runner-table .market-price { text-align: right; font-variant-numeric: tabular-nums; font-weight: 800; }
+.odds-pick { min-width: 46px; padding: 4px 6px; border: 1px solid #9bb7a7; background: var(--green-100); color: var(--green-900); font-weight: 900; cursor: pointer; }
+.odds-pick:hover, .odds-pick:focus-visible { background: var(--green-800); color: var(--white); outline: 2px solid #d9aa32; outline-offset: 1px; }
 .runner-table tr.winner-row { background: #fff6da !important; }
 .runner-table tr.non-finish { color: var(--red-700); }
 .gate-badge { display: inline-grid; place-items: center; width: 22px; height: 22px; border: 1px solid #aeb7bc; background: #f5f6f7; font-weight: 900; }
@@ -134,6 +137,8 @@ main { width: min(1240px, 100%); margin: 0 auto; padding: 14px 18px 30px; }
 .ev-input-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px 12px; padding: 14px; background: var(--soft); border: 1px solid var(--line); }
 .ev-input-grid label { color: #4f5b63; font-size: 11px; font-weight: 700; }
 .ev-input-grid input, .ev-input-grid select { width: 100%; height: 38px; margin-top: 5px; padding: 0 9px; border: 1px solid #bfc7cc; background: var(--white); color: var(--ink); }
+.ev-input-grid output { float: right; color: var(--green-800); font-weight: 900; }
+.ev-input-grid input[type="range"] { padding: 0; accent-color: var(--green-700); }
 .ev-input-grid input[readonly], .ev-input-grid select:disabled { background: #edf0f1; color: #68737a; }
 .ev-input-grid input:focus, .ev-input-grid select:focus { outline: 2px solid #90b9a3; border-color: var(--green-700); }
 .ev-mode-bar { display: flex; align-items: center; gap: 0; margin-bottom: 10px; border-bottom: 1px solid var(--line); }
@@ -147,7 +152,12 @@ main { width: min(1240px, 100%); margin: 0 auto; padding: 14px 18px 30px; }
 .ev-metrics strong { display: block; margin-top: 4px; font-size: 18px; }
 .positive { color: var(--green-700); }
 .negative { color: var(--red-700); }
-.strategy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.risk-policy { min-height: 44px; margin: 10px 0 0; display: flex; align-items: center; gap: 0; border: 1px solid var(--line); background: #f7f8f8; }
+.risk-policy strong { padding: 0 12px; font-size: 12px; }
+.risk-policy button { align-self: stretch; padding: 0 12px; border: 0; border-left: 1px solid var(--line); background: transparent; color: #4b555c; font-size: 11px; font-weight: 800; cursor: pointer; }
+.risk-policy button.active { background: var(--green-800); color: var(--white); }
+.risk-policy span { margin-left: auto; padding: 0 12px; color: var(--muted); font-size: 10px; }
+.strategy-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 .strategy-card { border: 1px solid #cfd5d9; background: var(--white); }
 .strategy-card header { padding: 9px 11px; display: flex; align-items: center; justify-content: space-between; background: #f0f3f4; border-bottom: 1px solid #d5dade; }
 .strategy-card header strong { font-size: 13px; }
@@ -189,6 +199,17 @@ main { width: min(1240px, 100%); margin: 0 auto; padding: 14px 18px 30px; }
 
 .warehouse-section { margin-top: 16px; padding: 15px 16px 18px; }
 .warehouse-status { border-color: #9ab7ca; background: var(--blue-100); color: var(--blue-700); }
+.pipeline-overview { display: grid; grid-template-columns: repeat(5, 1fr); border-block: 1px solid var(--line); background: #fafbfb; }
+.pipeline-overview > div { min-height: 78px; padding: 12px 14px; border-right: 1px solid var(--line); }
+.pipeline-overview > div:last-child { border-right: 0; }
+.pipeline-overview span, .pipeline-overview small { display: block; color: var(--muted); font-size: 10px; }
+.pipeline-overview strong { display: block; margin: 5px 0 3px; font-size: 19px; font-variant-numeric: tabular-nums; }
+.progress-row { padding: 13px 0 15px; }
+.progress-row > div:first-child { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 7px; font-size: 11px; }
+.progress-row > div:first-child span { color: var(--muted); }
+.progress-track { width: 100%; height: 12px; overflow: hidden; border: 1px solid #bdc6ca; background: #e4e8ea; }
+.progress-track span { display: block; width: 0; height: 100%; background: var(--green-700); transition: width .4s ease; }
+.progress-row p { margin: 6px 0 0; color: var(--muted); font-size: 10px; text-align: right; }
 .batch-table th:nth-child(1) { width: 14%; }
 .batch-table th:nth-child(2) { width: 18%; }
 footer { padding: 18px; background: #293137; color: #cbd2d6; }
@@ -211,6 +232,9 @@ footer p { width: min(1204px, 100%); margin: 0 auto; font-size: 11px; line-heigh
   .summary-band > div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
   .ev-input-grid { grid-template-columns: repeat(2, 1fr); }
   .strategy-grid { grid-template-columns: 1fr; }
+  .pipeline-overview { grid-template-columns: repeat(3, 1fr); }
+  .pipeline-overview > div:nth-child(3) { border-right: 0; }
+  .pipeline-overview > div:nth-child(-n+3) { border-bottom: 1px solid var(--line); }
 }
 
 @media (max-width: 560px) {
@@ -242,6 +266,10 @@ footer p { width: min(1204px, 100%); margin: 0 auto; font-size: 11px; line-heigh
   .ev-input-grid { grid-template-columns: 1fr 1fr; padding: 9px; }
   .ev-mode-bar { flex-wrap: wrap; }
   .ev-mode-bar span { width: 100%; margin: 7px 0; }
+  .risk-policy { flex-wrap: wrap; }
+  .risk-policy strong { width: 100%; padding-block: 8px; }
+  .risk-policy button { min-height: 36px; flex: 1; border-top: 1px solid var(--line); }
+  .risk-policy span { width: 100%; margin: 0; padding-block: 7px; border-top: 1px solid var(--line); }
   .ev-metrics { grid-template-columns: repeat(2, 1fr); }
   .ev-metrics div:nth-child(2) { border-right: 0; }
   .ev-metrics div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
@@ -250,5 +278,6 @@ footer p { width: min(1204px, 100%); margin: 0 auto; font-size: 11px; line-heigh
   .rationale-panel li { border-right: 0; }
   .race-list { grid-template-columns: 1fr; max-height: 360px; overflow-y: auto; }
   .warehouse-section { padding: 10px; overflow-x: auto; }
+  .pipeline-overview { min-width: 620px; }
   .batch-table { min-width: 650px; }
 }
