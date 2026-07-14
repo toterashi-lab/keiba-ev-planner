@@ -53,6 +53,19 @@ writeBrowserData(path.join(stageDataDir, "results-2026-07-11-2026-07-12.js"), "K
 writeBrowserData(path.join(stageDataDir, "database-status.js"), "KEIBA_DATABASE_STATUS", databaseExport.status);
 writeBrowserData(path.join(stageDataDir, "closing-odds-2026-07-11-2026-07-12.js"), "KEIBA_CLOSING_ODDS", databaseExport.odds);
 
+const cacheVersion = crypto.createHash("sha256")
+  .update(fs.readFileSync("styles.css"))
+  .update(fs.readFileSync("app.js"))
+  .update(JSON.stringify(databaseExport.status))
+  .digest("hex")
+  .slice(0, 12);
+const stagedIndexPath = path.join(stageDir, "index.html");
+const stagedIndex = fs.readFileSync(stagedIndexPath, "utf8").replace(
+  /(href|src)="(styles\.css|app\.js|data\/[^\"]+\.js)"/g,
+  `$1="$2?v=${cacheVersion}"`,
+);
+fs.writeFileSync(stagedIndexPath, stagedIndex, "utf8");
+
 fs.writeFileSync(path.join(stageDir, ".nojekyll"), "", "utf8");
 fs.writeFileSync(path.join(stageDir, ".gitignore"), ".DS_Store\nThumbs.db\n", "utf8");
 fs.writeFileSync(path.join(stageDir, "README.md"), `# 競馬期待値ラボ
