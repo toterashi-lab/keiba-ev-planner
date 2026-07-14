@@ -11,5 +11,4 @@ Open `index.html` in a browser.
 
 ## GitHub Pages
 
-The included workflow deploys this static site to GitHub Pages.
-After pushing to GitHub, enable Pages with "GitHub Actions" as the source if it is not enabled automatically.
+Publish from the `main` branch root with GitHub Pages.
