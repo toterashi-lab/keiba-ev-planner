@@ -223,6 +223,25 @@ function initializeSchema() {
     create index if not exists races_date_idx on races(race_date, venue_code, race_number);
     create index if not exists entries_horse_idx on race_entries(horse_id, race_id);
     create index if not exists raw_pages_type_idx on raw_pages(page_type, fetched_at);
+    create view if not exists complete_meetings as
+      select m.* from meetings m join backfill_jobs j on j.month=substr(m.race_date,1,7) and j.status='complete';
+    create view if not exists complete_races as
+      select r.* from races r join backfill_jobs j on j.month=substr(r.race_date,1,7) and j.status='complete';
+    create view if not exists complete_race_entries as
+      select e.* from race_entries e join complete_races r on r.race_id=e.race_id;
+    create view if not exists complete_race_results as
+      select x.* from race_results x join complete_races r on r.race_id=x.race_id;
+    create view if not exists complete_payouts as
+      select p.* from payouts p join complete_races r on r.race_id=p.race_id;
+    create view if not exists complete_entry_quality as
+      select e.race_id, e.horse_id,
+        case when e.body_weight is not null then 1 else 0 end body_weight_available,
+        case when x.popularity is not null then 1 else 0 end popularity_available,
+        case when x.official_time is not null and trim(x.official_time)<>'' then 1 else 0 end official_time_available,
+        case when e.jockey_id like 'NAME:%' then 0 else 1 end official_jockey_id_available,
+        case when e.trainer_id like 'NAME:%' then 0 else 1 end official_trainer_id_available
+      from complete_race_entries e join complete_race_results x
+        on x.race_id=e.race_id and x.horse_id=e.horse_id;
   `);
   upsertMetadata("source", "JRA official past race result search");
   upsertMetadata("source_url", BASE_URL);
@@ -256,6 +275,8 @@ async function ingestMonth(month, delayMs) {
   const startedAt = new Date().toISOString();
   db.prepare(`insert into backfill_jobs(month,status,updated_at) values(?, 'queued', ?)
     on conflict(month) do nothing`).run(month, startedAt);
+  const previousStatus = db.prepare("select status from backfill_jobs where month=?").get(month)?.status;
+  if (previousStatus !== "complete") purgeNormalizedMonth(month);
   db.prepare(`update backfill_jobs set status='running', attempts=attempts+1,
     started_at=?, completed_at=null, last_error=null, updated_at=? where month=?`)
     .run(startedAt, startedAt, month);
@@ -301,6 +322,7 @@ async function ingestMonth(month, delayMs) {
       runner_count=?, payout_count=?, completed_at=?, updated_at=? where month=?`)
       .run(meetings.length, raceCount, runnerCount, payoutCount, completedAt, completedAt, month);
   } catch (error) {
+    if (previousStatus !== "complete") purgeNormalizedMonth(month);
     const failedAt = new Date().toISOString();
     db.prepare(`update backfill_jobs set status='failed', last_error=?, updated_at=? where month=?`)
       .run(String(error.stack ?? error).slice(0, 4000), failedAt, month);
@@ -417,8 +439,8 @@ function parseRace(html, cname, meeting) {
       ?? "",
   );
   const fullText = stripHtml(header);
-  const distance = Number((course.match(/([\d,]+)メートル/)?.[1] ?? "").replaceAll(",", "")) || null;
-  const surface = /芝/.test(course) ? "芝" : /ダート/.test(course) ? "ダート" : /障害/.test(course) ? "障害" : null;
+  const distance = Number((course.match(/([\d,]+)\s*メートル/)?.[1] ?? "").replaceAll(",", "")) || null;
+  const surface = /障害/.test(course) ? "障害" : /芝/.test(course) ? "芝" : /ダート/.test(course) ? "ダート" : null;
   const runners = parseRunners(html);
   return {
     ...key,
@@ -434,7 +456,7 @@ function parseRace(html, cname, meeting) {
     going: stripHtml(html.match(/<li class="(?:turf|durt|dirt)">([\s\S]*?)<\/li>/)?.[1] ?? "")
       .replace(/^(?:芝|ダート|馬場)/, "")
       || (fullText.match(/(?:芝|ダート|馬場)(良|稍重|重|不良)/)?.[1] ?? null),
-    startTime: fullText.match(/発走時刻[：:]?(\d{1,2}時\d{2}分)/)?.[1] ?? null,
+    startTime: fullText.match(/発走時刻\s*[：:]?\s*(\d{1,2}時\d{2}分)/)?.[1] ?? null,
     runners,
     payouts: parsePayouts(html),
   };
@@ -467,6 +489,8 @@ function parseRunners(html) {
     const weightText = stripHtml(cell(row, "h_weight"));
     const weightMatch = weightText.match(/(\d+)(?:\(([+-]?\d+)\))?/);
     const horseId = horseHref.match(/pw01dud([^/'"]+)/)?.[1] ?? `NAME:${horseName}`;
+    const jockeyName = stripHtml(jockeyBlock);
+    const trainerName = stripHtml(trainerBlock);
     runners.push({
       horseId,
       horseName,
@@ -476,10 +500,10 @@ function parseRunners(html) {
       horseNumber,
       sexAge: stripHtml(cell(row, "age")),
       carriedWeight: numberOrNull(stripHtml(cell(row, "weight"))),
-      jockeyId: jockeyBlock.match(/pw04kmk([^/'"]+)/)?.[1] ?? null,
-      jockeyName: stripHtml(jockeyBlock),
-      trainerId: trainerBlock.match(/pw05cmk([^/'"]+)/)?.[1] ?? null,
-      trainerName: stripHtml(trainerBlock),
+      jockeyId: jockeyBlock.match(/pw04kmk([^/'"]+)/)?.[1] ?? (jockeyName ? `NAME:${jockeyName}` : null),
+      jockeyName,
+      trainerId: trainerBlock.match(/pw05cmk([^/'"]+)/)?.[1] ?? (trainerName ? `NAME:${trainerName}` : null),
+      trainerName,
       officialTime: stripHtml(cell(row, "time")),
       margin: stripHtml(cell(row, "margin")),
       cornerPositions: [...cell(row, "corner").matchAll(/<li[^>]*>([\s\S]*?)<\/li>/g)]
@@ -512,6 +536,9 @@ function parsePayouts(html) {
 
 function validateRace(race) {
   if (!race.raceName) throw new Error(`Race name missing: ${race.raceId}`);
+  if (!race.distanceM) throw new Error(`Distance missing: ${race.raceId}`);
+  if (!race.surface) throw new Error(`Surface missing: ${race.raceId}`);
+  if (!race.startTime) throw new Error(`Start time missing: ${race.raceId}`);
   if (!race.runners.length) throw new Error(`Runner rows missing: ${race.raceId}`);
   const numbers = race.runners.map((runner) => runner.horseNumber);
   if (new Set(numbers).size !== numbers.length) throw new Error(`Duplicate horse numbers: ${race.raceId}`);
@@ -582,17 +609,23 @@ function auditMonth(month, expectedMeetings, expectedRaces, expectedRunners, exp
     (select count(*) from races where race_date>=? and race_date<?) races,
     (select count(*) from race_entries e join races r on r.race_id=e.race_id where r.race_date>=? and r.race_date<?) runners,
     (select count(*) from payouts p join races r on r.race_id=p.race_id where r.race_date>=? and r.race_date<?) payouts,
+    (select count(*) from races r where r.race_date>=? and r.race_date<? and
+      (r.race_name is null or trim(r.race_name)='' or r.distance_m is null or r.surface is null)) missing_race_core,
+    (select count(*) from race_entries e join races r on r.race_id=e.race_id where r.race_date>=? and r.race_date<? and
+      (e.horse_id is null or e.horse_number is null or e.jockey_id is null or e.trainer_id is null)) missing_entry_core,
     (select count(*) from races r where r.race_date>=? and r.race_date<? and not exists
       (select 1 from race_results x where x.race_id=r.race_id and x.finish_position=1)) missing_winners,
     (select count(*) from races r where r.race_date>=? and r.race_date<? and not exists
       (select 1 from payouts p where p.race_id=r.race_id)) missing_payouts`).get(
-        start,end,start,end,start,end,start,end,start,end,start,end,
+        start,end,start,end,start,end,start,end,start,end,start,end,start,end,start,end,
       );
   const checks = [
     ["meeting_count", actual.meetings === expectedMeetings, actual.meetings, `expected=${expectedMeetings}`],
     ["race_count", actual.races === expectedRaces, actual.races, `expected=${expectedRaces}`],
     ["runner_count", actual.runners === expectedRunners, actual.runners, `expected=${expectedRunners}`],
     ["payout_count", actual.payouts === expectedPayouts, actual.payouts, `expected=${expectedPayouts}`],
+    ["race_core_complete", actual.missing_race_core === 0, actual.missing_race_core, "expected=0"],
+    ["entry_core_complete", actual.missing_entry_core === 0, actual.missing_entry_core, "expected=0"],
     ["winner_complete", actual.missing_winners === 0, actual.missing_winners, "expected=0"],
     ["payout_complete", actual.missing_payouts === 0, actual.missing_payouts, "expected=0"],
   ];
@@ -606,8 +639,9 @@ function auditMonth(month, expectedMeetings, expectedRaces, expectedRunners, exp
 
 function auditDatabase() {
   const failedChecks = db.prepare("select count(*) count from quality_checks where status='fail'").get().count;
-  const incompleteCompleteJobs = db.prepare(`select count(*) count from backfill_jobs j where status='complete'
-    and exists(select 1 from quality_checks q where q.month=j.month and q.status='fail')`).get().count;
+  const incompleteCompleteJobs = db.prepare(`select count(*) count from backfill_jobs j where status='complete' and (
+    (select count(*) from quality_checks q where q.month=j.month and q.status='pass') < 8
+    or exists(select 1 from quality_checks q where q.month=j.month and q.status='fail'))`).get().count;
   let missingRaw = 0;
   let corruptRaw = 0;
   for (const row of db.prepare("select raw_path,payload_sha256 from raw_pages").all()) {
@@ -659,13 +693,17 @@ function statusReport() {
   const jobs = Object.fromEntries(db.prepare("select status,count(*) count from backfill_jobs group by status")
     .all().map((row) => [row.status, row.count]));
   const totals = db.prepare(`select
-    (select count(*) from meetings) meetings,
-    (select count(*) from races) races,
-    (select count(*) from race_entries) runners,
-    (select count(*) from payouts) payouts,
+    (select count(*) from complete_meetings) meetings,
+    (select count(*) from complete_races) races,
+    (select count(*) from complete_race_entries) runners,
+    (select count(*) from complete_payouts) payouts,
+    (select count(*) from races) stagingRaces,
     (select count(*) from raw_pages) rawPages,
     (select count(*) from odds_snapshots) oddsSnapshots,
-    (select count(*) from model_runs) modelRuns`).get();
+    (select count(*) from model_runs) modelRuns,
+    (select count(*) from complete_entry_quality where body_weight_available=0) missingBodyWeightRows,
+    (select count(*) from complete_entry_quality where popularity_available=0) missingPopularityRows,
+    (select count(*) from complete_entry_quality where official_time_available=0) missingOfficialTimeRows`).get();
   const latestComplete = db.prepare("select max(month) month from backfill_jobs where status='complete'").get().month;
   const earliestComplete = db.prepare("select min(month) month from backfill_jobs where status='complete'").get().month;
   const latestModel = db.prepare("select id from model_runs order by created_at desc limit 1").get();
@@ -730,9 +768,32 @@ function isProcessAlive(pid) {
 
 function recoverInterruptedJobs() {
   const now = new Date().toISOString();
+  const interrupted = db.prepare("select month from backfill_jobs where status='running'").all();
+  for (const job of interrupted) purgeNormalizedMonth(job.month);
   db.prepare(`update backfill_jobs set status='failed',
     last_error='Previous worker stopped before the monthly quality gate completed.',
     updated_at=? where status='running'`).run(now);
+}
+
+function purgeNormalizedMonth(month) {
+  const start = `${month}-01`;
+  const end = `${nextMonth(month)}-01`;
+  db.exec("begin immediate");
+  try {
+    for (const table of ["payouts", "race_results", "race_entries"]) {
+      db.prepare(`delete from ${table} where race_id in
+        (select race_id from races where race_date>=? and race_date<?)`).run(start, end);
+    }
+    db.prepare("delete from races where race_date>=? and race_date<?").run(start, end);
+    db.prepare("delete from meetings where race_date>=? and race_date<?").run(start, end);
+    db.prepare("delete from horses where not exists(select 1 from race_entries e where e.horse_id=horses.horse_id)").run();
+    db.prepare("delete from jockeys where not exists(select 1 from race_entries e where e.jockey_id=jockeys.jockey_id)").run();
+    db.prepare("delete from trainers where not exists(select 1 from race_entries e where e.trainer_id=trainers.trainer_id)").run();
+    db.exec("commit");
+  } catch (error) {
+    db.exec("rollback");
+    throw error;
+  }
 }
 
 function markParsed(id) {
