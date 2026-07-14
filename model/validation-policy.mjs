@@ -1,5 +1,5 @@
 export const MODEL_VALIDATION_POLICY = {
-  version: "walk-forward-policy-v1",
+  version: "walk-forward-policy-v2",
   split: {
     strategy: "expanding-window-walk-forward",
     minimumTrainMonths: 60,
@@ -16,6 +16,8 @@ export const MODEL_VALIDATION_POLICY = {
     gate("brier_score_vs_market_delta", "lt", 0),
     gate("expected_calibration_error", "lte", 0.025),
     gate("max_calibration_bin_error", "lte", 0.075),
+    gate("favorite_longshot_adjustment_oos_delta", "lt", 0),
+    gate("stacking_weight_fold_stddev", "lte", 0.15),
   ],
   bettingGates: [
     gate("pre_race_odds_coverage", "gte", 0.995),
@@ -24,6 +26,7 @@ export const MODEL_VALIDATION_POLICY = {
     gate("maximum_drawdown", "gte", -0.25),
     gate("minimum_bets", "gte", 1000),
     gate("minimum_race_days", "gte", 180),
+    gate("late_odds_movement_coverage", "gte", 0.995),
   ],
   featureAdmission: {
     method: "group-ablation-on-each-walk-forward-fold",
@@ -36,6 +39,12 @@ export const MODEL_VALIDATION_POLICY = {
     primary: "conservative_expected_return",
     uncertainty: "block-bootstrap-by-race-day",
     calibrationBuckets: ["bet_type", "odds_band", "surface", "field_size", "season"],
+  },
+  deployment: {
+    unvalidatedProbabilityFallback: "market_baseline",
+    rejectFixedBlendWeights: true,
+    requireOneSidedUncertaintyBound: true,
+    maximumOddsAgeSeconds: 300,
   },
 };
 

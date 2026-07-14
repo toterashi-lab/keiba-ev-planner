@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
+import { EXPECTANCY_ENGINE_VERSION, normalizeMarket, selectProbability } from "../model/expectancy-engine-v2.mjs";
 
 await import(pathToFileURL(path.resolve("ticket-engine.js")).href);
 
@@ -11,6 +12,7 @@ const DB_TYPES = { win, place, quinella, wide, exacta, trio, trifecta };
 const ORDERED = new Set(["win", "place", "exacta", "trifecta"]);
 const TARGET_DATES = ["2026-07-11", "2026-07-12"];
 const OUTPUT = path.join("data", "model-outputs-2026-07-11-2026-07-12.json");
+const VALIDATION_ARTIFACT = null;
 
 export function generateMarketEv() {
   const db = new DatabaseSync(path.join("data", "jra-free-private", "keiba.sqlite"), { readOnly: true });
@@ -53,14 +55,11 @@ export function generateMarketEv() {
       let evaluated = 0;
 
       for (const [dbType, betType] of Object.entries(DB_TYPES)) {
-        const rows = byType.get(dbType);
-        const marketTarget = outcomeMultiplicity(dbType, winRows.length);
-        const inverseTotal = rows.reduce((sum, row) => sum + 1 / row.odds_low, 0);
+        const rows = normalizeMarket(byType.get(dbType), dbType, winRows.length);
         const singles = rows.map((row) => {
           const selection = row.selection_key.split("-").map(Number);
           const structural = structuralBooks[dbType].get(row.selection_key) ?? 0;
-          const market = Math.min(1, marketTarget * (1 / row.odds_low) / inverseTotal);
-          const probability = Math.min(1, 0.85 * market + 0.15 * structural);
+          const probability = selectProbability({ marketProbability: row.marketProbability, modelProbability: structural, validationArtifact: VALIDATION_ARTIFACT }).probability;
           return makeCandidate(race, betType, "1点", selection, [row], probability, names);
         });
         evaluated += singles.length;
@@ -78,11 +77,18 @@ export function generateMarketEv() {
     }
     const result = {
       status: "ready",
-      modelVersion: "closing-market-consistency-v1",
+      modelVersion: "expectancy-v2-market-baseline",
       calculationMode: "closing_market_validation",
       generatedAt: new Date().toISOString(),
       unitStakeYen: 100,
-      probabilityBlend: { officialMarket: 0.85, winMarketPlackettLuce: 0.15 },
+      logic: {
+        engineVersion: EXPECTANCY_ENGINE_VERSION,
+        formula: "hit_probability * decimal_odds",
+        probabilityMode: "market_baseline",
+        deploymentStatus: "benchmark_only",
+        fixedBlendRemoved: true,
+        validationArtifact: "insufficient",
+      },
       oddsCoverage: Object.fromEntries(Object.keys(coverageCounts).map((key) => [key, "pass"])),
       coverageCounts,
       evaluatedByRace,
@@ -114,7 +120,7 @@ function makeAiPrediction(race, horseProbabilities, names, raceCandidates) {
     meetingName: meetingName(race),
     raceNo: race.race_number,
     raceId: race.race_id,
-    modelVersion: "closing-market-consistency-v1",
+    modelVersion: "expectancy-v2-market-baseline",
     predictionContext: "closing_final_validation",
     status: "ready",
     confidence,
@@ -137,8 +143,6 @@ function structuredCandidates(race, dbType, betType, rows, horseProbabilities, s
   if (legs === 2) tickets.push({ method: "フォーメーション", groups: [[ranked[0]], ranked.slice(1, 5)] });
   if (legs === 3) tickets.push({ method: "フォーメーション", groups: [[ranked[0]], ranked.slice(1, 3), ranked.slice(1, 6)] });
   const rowMap = new Map(rows.map((row) => [row.selection_key, row]));
-  const inverseTotal = rows.reduce((sum, row) => sum + 1 / row.odds_low, 0);
-  const marketTarget = outcomeMultiplicity(dbType, ranked.length);
   return tickets.flatMap((ticket) => {
     const combinations = engine.expandTicket({ betType, ...ticket });
     const selectedRows = combinations.map((selection) => rowMap.get(engine.selectionKey(selection, ORDERED.has(dbType)))).filter(Boolean);
@@ -146,8 +150,7 @@ function structuredCandidates(race, dbType, betType, rows, horseProbabilities, s
     const probabilities = combinations.map((selection, index) => {
       const key = engine.selectionKey(selection, ORDERED.has(dbType));
       const structural = structuralBook.get(key) ?? 0;
-      const market = Math.min(1, marketTarget * (1 / selectedRows[index].odds_low) / inverseTotal);
-      return Math.min(1, 0.85 * market + 0.15 * structural);
+      return selectProbability({ marketProbability: selectedRows[index].marketProbability, modelProbability: structural, validationArtifact: VALIDATION_ARTIFACT }).probability;
     });
     const probability = probabilities.reduce((sum, value) => sum + value, 0) / probabilities.length;
     return [makeCandidate(race, betType, ticket.method, combinations.flat(), selectedRows, probability, names, combinations, probabilities)];
@@ -212,17 +215,10 @@ function makeCandidate(race, betType, method, selection, rows, probability, name
     predictionContext: "closing_final_validation",
     calculationMode: "closing_market_validation",
     oddsObservedAt: rows[0].observed_at,
-    modelVersion: "closing-market-consistency-v1",
+    modelVersion: "expectancy-v2-market-baseline",
     calibrationStatus: "benchmark",
-    comment: `JRA公式最終オッズを使った市場整合検証。${method} ${rows.length}点を各100円で計算し、払戻結果は確率算出に使用していません。`,
+    comment: `期待値v2の市場基準検証。JRA公式最終オッズで${method} ${rows.length}点を各100円計算。学習・校正ゲート未合格のため能力モデルは混合せず、払戻結果も確率算出に使用していません。`,
   };
-}
-
-function outcomeMultiplicity(type, fieldSize) {
-  const placeDepth = fieldSize >= 8 ? 3 : 2;
-  if (type === "place") return placeDepth;
-  if (type === "wide") return placeDepth === 3 ? 3 : 1;
-  return 1;
 }
 
 function normalize(values) {

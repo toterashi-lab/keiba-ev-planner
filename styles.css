@@ -232,6 +232,11 @@ main { width: min(1240px, 100%); margin: 0 auto; padding: 14px 18px 30px; }
 .automatic-policy strong { color: var(--green-900); font-size: 13px; }
 .automatic-policy span { margin-top: 3px; color: var(--red-700); font-size: 10px; font-weight: 800; }
 .automatic-policy p { margin: 0; color: #42564b; font-size: 11px; line-height: 1.6; }
+.logic-status-grid { margin-bottom: 10px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) auto; border: 1px solid var(--line); background: #fff; }
+.logic-status-grid > div { min-width: 0; padding: 9px 11px; border-right: 1px solid var(--line); }
+.logic-status-grid span { display: block; color: var(--muted); font-size: 9px; }
+.logic-status-grid strong { display: block; margin-top: 3px; overflow-wrap: anywhere; font-size: 11px; }
+.logic-status-grid a { padding: 9px 12px; display: grid; place-items: center; background: var(--blue-100); font-size: 10px; font-weight: 800; text-align: center; }
 .ev-metrics { display: grid; grid-template-columns: repeat(4, 1fr); margin: 12px 0; border: 1px solid var(--line); }
 .ev-metrics div { padding: 10px 12px; border-right: 1px solid var(--line); }
 .ev-metrics div:last-child { border-right: 0; }
@@ -438,6 +443,10 @@ footer p { width: min(1204px, 100%); margin: 0 auto; font-size: 11px; line-heigh
   .dense-table { font-size: 11px; }
   .dense-table th, .dense-table td { padding: 7px 6px; }
   .automatic-policy { align-items: flex-start; flex-direction: column; gap: 7px; }
+  .logic-status-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .logic-status-grid > div:nth-child(2) { border-right: 0; }
+  .logic-status-grid > div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+  .logic-status-grid a { border-top: 1px solid var(--line); }
   .ev-metrics { grid-template-columns: repeat(2, 1fr); }
   .ev-metrics div:nth-child(2) { border-right: 0; }
   .ev-metrics div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }

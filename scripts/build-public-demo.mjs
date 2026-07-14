@@ -36,9 +36,11 @@ copy("assets/race-hero-v1.png", path.join(stageDir, "assets", "race-hero-v1.png"
 copy("schema.sql", path.join(stageDir, "schema.sql"));
 copy("docs/free-data-pipeline.md", path.join(stageDir, "docs", "free-data-pipeline.md"));
 copy("docs/expectancy-methodology.md", path.join(stageDir, "docs", "expectancy-methodology.md"));
+copy("docs/expectancy-research-v2.md", path.join(stageDir, "docs", "expectancy-research-v2.md"));
 copy("docs/reference-site-analysis.md", path.join(stageDir, "docs", "reference-site-analysis.md"));
 copy("model/feature-registry.mjs", path.join(stageDir, "model", "feature-registry.mjs"));
 copy("model/validation-policy.mjs", path.join(stageDir, "model", "validation-policy.mjs"));
+copy("model/expectancy-engine-v2.mjs", path.join(stageDir, "model", "expectancy-engine-v2.mjs"));
 copy("docs/model-feature-research.md", path.join(stageDir, "docs", "model-feature-research.md"));
 for (const file of [
   "jra-free-db.mjs",
@@ -47,6 +49,7 @@ for (const file of [
   "jra-free-exotic-odds-check.mjs",
   "generate-market-ev.mjs",
   "market-ev-check.mjs",
+  "expectancy-engine-v2-check.mjs",
   "capture-jra-closing-odds.ps1",
   "publish-web-status.ps1",
   "run-jra-free-backfill.ps1",

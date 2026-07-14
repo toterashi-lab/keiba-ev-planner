@@ -42,6 +42,9 @@ const els = {
   edgeBadge: document.querySelector("#edge-badge"),
   strategyGrid: document.querySelector("#strategy-grid"),
   modelStatus: document.querySelector("#model-status"),
+  logicVersion: document.querySelector("#logic-version"),
+  logicProbabilityMode: document.querySelector("#logic-probability-mode"),
+  logicDeploymentStatus: document.querySelector("#logic-deployment-status"),
   rationaleList: document.querySelector("#rationale-list"),
   qualityRefunds: document.querySelector("#quality-refunds"),
   qualityRunners: document.querySelector("#quality-runners"),
@@ -536,8 +539,12 @@ function renderPayouts() {
 function renderStrategies() {
   const candidates = matchingAutomaticCandidates().filter(isRecommendationReady)
     .sort((left, right) => candidateExpectedReturn(right) - candidateExpectedReturn(left));
+  const logic = modelData.logic ?? {};
   els.modelStatus.textContent = modelData.status === "ready"
-    ? `自動モデル稼働中 ${modelData.modelVersion ?? ""}` : "30年モデル未学習・自動推奨停止中";
+    ? `期待値v2 市場基準検証 ${modelData.modelVersion ?? ""}` : "期待値モデル準備中";
+  els.logicVersion.textContent = logic.engineVersion ?? "未設定";
+  els.logicProbabilityMode.textContent = logic.probabilityMode === "market_baseline" ? "市場確率へ自動縮退" : "検証済み統合確率";
+  els.logicDeploymentStatus.textContent = logic.deploymentStatus === "benchmark_only" ? "検証専用・購入対象外" : "検証ゲート合格";
   if (!candidates.length) { renderBlockedAutomaticState(); return; }
 
   const top = candidates[0];
