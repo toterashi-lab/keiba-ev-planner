@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>競馬期待値ラボ｜先週レース検証</title>
-    <link rel="stylesheet" href="styles.css?v=c1a119efcbd8" />
+    <link rel="stylesheet" href="styles.css?v=4fd60c7f9e34" />
   </head>
   <body>
     <header class="site-header">
@@ -110,7 +110,7 @@
               <div><dt>点数</dt><dd id="top-ticket-points">--</dd></div>
               <div><dt>期待回収率</dt><dd id="top-ticket-return">--</dd></div>
               <div><dt>安全側EV</dt><dd id="top-ticket-edge">--</dd></div>
-              <div><dt>推奨額</dt><dd id="top-ticket-stake">0円</dd></div>
+              <div><dt>総投資（1点100円）</dt><dd id="top-ticket-stake">0円</dd></div>
             </dl>
           </div>
           <p id="top-recommendation-comment" class="recommendation-comment">発走前オッズと校正済み確率が揃うまで、買い目を推測で表示しません。</p>
@@ -171,44 +171,16 @@
                 <span id="edge-badge" class="decision hold">未計算</span>
               </div>
 
-              <div class="ev-mode-bar" aria-label="期待値計算モード">
-                <button type="button" class="active" data-ev-mode="auto">自動計算</button>
-                <button type="button" data-ev-mode="manual">検証入力</button>
-                <span id="model-status">30年モデル未学習・自動推奨停止中</span>
-              </div>
-
-              <div class="ev-input-grid">
-                <label>券種
-                  <select id="bet-type">
-                    <option value="単勝">単勝</option><option value="複勝">複勝</option>
-                    <option value="馬連">馬連</option><option value="ワイド">ワイド</option>
-                    <option value="馬単">馬単</option><option value="3連複">3連複</option><option value="3連単">3連単</option>
-                  </select>
-                </label>
-                <label>買い目<input id="selection" type="text" placeholder="自動候補なし" readonly /></label>
-                <label>取得オッズ<input id="odds" type="number" min="1.01" step="0.1" placeholder="自動取得待ち" readonly /></label>
-                <label>校正済みモデル確率（%）<input id="probability" type="number" min="0.01" max="99.99" step="0.1" placeholder="モデル学習待ち" readonly /></label>
-                <label>資金<input id="bankroll" type="number" min="1000" step="1000" value="30000" /></label>
-                <label>1点上限<input id="max-stake" type="number" min="100" step="100" value="1000" /></label>
-                <label>市場融合率 <output id="market-weight-output">50%</output>
-                  <input id="market-weight" type="range" min="0" max="100" step="5" value="50" />
-                </label>
-                <label>確率誤差幅（pt）<input id="uncertainty" type="number" min="0" max="20" step="0.5" value="2" /></label>
-              </div>
-
-              <div class="risk-policy" aria-label="Kelly配分率">
-                <strong>資金配分</strong>
-                <button type="button" data-kelly-fraction="0.125">1/8 Kelly</button>
-                <button type="button" data-kelly-fraction="0.25" class="active">1/4 Kelly</button>
-                <button type="button" data-kelly-fraction="0.5">1/2 Kelly</button>
-                <span>確率シナリオと資金リスクを分離して比較</span>
+              <div class="automatic-policy">
+                <div><strong>全自動計算</strong><span id="model-status">30年モデル未学習・自動推奨停止中</span></div>
+                <p>全券種・全買い目を1点100円で比較。BOX・フォーメーションは構成点へ展開し、総投資と期待払戻を自動集計します。</p>
               </div>
 
               <div class="ev-metrics">
-                <div><span>損益分岐確率</span><strong id="break-even">--</strong></div>
+                <div><span>算出候補</span><strong id="evaluated-candidates">--</strong></div>
                 <div><span>期待回収率</span><strong id="expected-return">--</strong></div>
-                <div><span>期待値差</span><strong id="edge-value">--</strong></div>
-                <div><span>完全Kelly比率</span><strong id="kelly-value">--</strong></div>
+                <div><span>安全側EV</span><strong id="edge-value">--</strong></div>
+                <div><span>買い目全体の期待利益</span><strong id="unit-expected-profit">--</strong></div>
               </div>
 
               <div id="strategy-grid" class="strategy-grid"></div>
@@ -220,12 +192,11 @@
                   <a href="https://gwern.net/doc/statistics/decision/1994-benter.pdf" target="_blank" rel="noreferrer">Benter統合モデル</a>
                   <a href="https://icml.cc/Conferences/2005/proceedings/papers/079_GoodProbabilities_NiculescuMizilCaruana.pdf" target="_blank" rel="noreferrer">確率校正</a>
                   <a href="https://otexts.com/fpp3/tscv.html" target="_blank" rel="noreferrer">時系列検証</a>
-                  <a href="https://doi.org/10.1002/j.1538-7305.1956.tb03809.x" target="_blank" rel="noreferrer">Kelly基準</a>
                   <a href="https://doi.org/10.1016/j.ijforecast.2009.12.014" target="_blank" rel="noreferrer">人気薄バイアス</a>
                   <a href="https://www.jra.go.jp/faq/pop02/1_6.html" target="_blank" rel="noreferrer">JRA過去結果</a>
                 </div>
               </section>
-              <p class="formula-note">期待回収率＝オッズ×的中確率。市場融合係数・誤差幅・採用閾値はwalk-forward検証で推定し、画面の初期値は感度分析用です。</p>
+              <p class="formula-note">1点の期待払戻＝100円×オッズ×安全側的中確率。複数点は構成点ごとの期待払戻を合算し、総投資＝点数×100円で期待回収率を計算します。</p>
             </section>
 
             <section id="view-result" class="view-panel">
@@ -333,13 +304,13 @@
       <p>本サービスはJRA・netkeibaの公式サービスではありません。結果と発売情報は必ず主催者発表で確認してください。実購入機能は未接続です。</p>
     </footer>
 
-    <script src="data/meet-2026-07-11-2026-07-12.js?v=c1a119efcbd8"></script>
-    <script src="data/result-links-2026-07-11-2026-07-12.js?v=c1a119efcbd8"></script>
-    <script src="data/results-2026-07-11-2026-07-12.js?v=c1a119efcbd8"></script>
-    <script src="data/database-status.js?v=c1a119efcbd8"></script>
-    <script src="data/model-feature-coverage.js?v=c1a119efcbd8"></script>
-    <script src="data/closing-odds-2026-07-11-2026-07-12.js?v=c1a119efcbd8"></script>
-    <script src="ticket-engine.js?v=c1a119efcbd8"></script>
-    <script src="app.js?v=c1a119efcbd8"></script>
+    <script src="data/meet-2026-07-11-2026-07-12.js?v=4fd60c7f9e34"></script>
+    <script src="data/result-links-2026-07-11-2026-07-12.js?v=4fd60c7f9e34"></script>
+    <script src="data/results-2026-07-11-2026-07-12.js?v=4fd60c7f9e34"></script>
+    <script src="data/database-status.js?v=4fd60c7f9e34"></script>
+    <script src="data/model-feature-coverage.js?v=4fd60c7f9e34"></script>
+    <script src="data/closing-odds-2026-07-11-2026-07-12.js?v=4fd60c7f9e34"></script>
+    <script src="ticket-engine.js?v=4fd60c7f9e34"></script>
+    <script src="app.js?v=4fd60c7f9e34"></script>
   </body>
 </html>

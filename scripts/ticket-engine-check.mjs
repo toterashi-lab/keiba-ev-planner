@@ -22,9 +22,10 @@ const evaluated = engine.evaluateTicket(
   { betType: "馬連", method: "BOX", horses: [1, 2, 3] },
   probabilities,
   { "1-2": 3, "1-3": 5, "2-3": 8 },
-  { unitStake: 100 },
+  { unitStake: 500 },
 );
-check("複数点投資", evaluated.investment, 300);
+check("1点100円固定・複数点投資", evaluated.investment, 300);
+check("固定購入単位", engine.UNIT_STAKE, 100);
 check("複数点オッズ完全性", evaluated.status, "ready");
 if (!(evaluated.expectedReturn > 0)) throw new Error("複数点期待回収率が計算されていません");
 console.log(`OK 複数点期待回収率: ${(evaluated.expectedReturn * 100).toFixed(2)}%`);

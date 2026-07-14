@@ -10,6 +10,7 @@
     "3連複": { legs: 3, ordered: false, finishDepth: 3 },
     "3連単": { legs: 3, ordered: true, finishDepth: 3 },
   };
+  const UNIT_STAKE = 100;
 
   function expandTicket(ticket) {
     const spec = requireSpec(ticket.betType);
@@ -42,7 +43,7 @@
 
   function evaluateTicket(ticket, horseProbabilities, oddsBySelection, options = {}) {
     const combinations = expandTicket(ticket);
-    const unitStake = Math.max(100, Number(options.unitStake) || 100);
+    const unitStake = UNIT_STAKE;
     const uncertainty = Math.max(0, Number(options.uncertainty) || 0);
     const legsOrdered = requireSpec(ticket.betType).ordered;
     const rows = combinations.map((selection) => {
@@ -155,5 +156,5 @@
   function fallingFactorial(n, k) { let value = 1; for (let index = 0; index < k; index += 1) value *= n - index; return value; }
   function requireSpec(betType) { const spec = SPECS[betType]; if (!spec) throw new Error(`未対応券種: ${betType}`); return spec; }
 
-  global.KEIBA_TICKET_ENGINE = { SPECS, expandTicket, ticketProbability, evaluateTicket, rankTickets, candidateCounts, selectionKey };
+  global.KEIBA_TICKET_ENGINE = { SPECS, UNIT_STAKE, expandTicket, ticketProbability, evaluateTicket, rankTickets, candidateCounts, selectionKey };
 })(globalThis);

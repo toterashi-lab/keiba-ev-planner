@@ -180,8 +180,7 @@ main { width: min(1240px, 100%); margin: 0 auto; padding: 14px 18px 30px; }
 .runner-table th:nth-child(4), .runner-table td:nth-child(4) { min-width: 132px; font-weight: 800; }
 .runner-table td:nth-child(1), .runner-table td:nth-child(3) { text-align: center; font-weight: 900; }
 .runner-table .market-price { text-align: right; font-variant-numeric: tabular-nums; font-weight: 800; }
-.odds-pick { min-width: 46px; padding: 4px 6px; border: 1px solid #9bb7a7; background: var(--green-100); color: var(--green-900); font-weight: 900; cursor: pointer; }
-.odds-pick:hover, .odds-pick:focus-visible { background: var(--green-800); color: var(--white); outline: 2px solid #d9aa32; outline-offset: 1px; }
+.odds-value { display: inline-block; min-width: 46px; padding: 4px 6px; border: 1px solid #b9c8c0; background: var(--green-100); color: var(--green-900); font-weight: 900; text-align: center; }
 .runner-table tr.winner-row { background: #fff6da !important; }
 .runner-table tr.non-finish { color: var(--red-700); }
 .gate-badge { display: inline-grid; place-items: center; width: 22px; height: 22px; border: 1px solid #aeb7bc; background: #f5f6f7; font-weight: 900; }
@@ -206,17 +205,12 @@ main { width: min(1240px, 100%); margin: 0 auto; padding: 14px 18px 30px; }
 .race-list .side-name small { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; }
 .race-list .side-time { color: #4b555c; font-size: 11px; }
 
-.ev-input-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px 12px; padding: 14px; background: var(--soft); border: 1px solid var(--line); }
-.ev-input-grid label { color: #4f5b63; font-size: 11px; font-weight: 700; }
-.ev-input-grid input, .ev-input-grid select { width: 100%; height: 38px; margin-top: 5px; padding: 0 9px; border: 1px solid #bfc7cc; background: var(--white); color: var(--ink); }
-.ev-input-grid output { float: right; color: var(--green-800); font-weight: 900; }
-.ev-input-grid input[type="range"] { padding: 0; accent-color: var(--green-700); }
-.ev-input-grid input[readonly], .ev-input-grid select:disabled { background: #edf0f1; color: #68737a; }
-.ev-input-grid input:focus, .ev-input-grid select:focus { outline: 2px solid #90b9a3; border-color: var(--green-700); }
-.ev-mode-bar { display: flex; align-items: center; gap: 0; margin-bottom: 10px; border-bottom: 1px solid var(--line); }
-.ev-mode-bar button { min-width: 92px; padding: 8px 12px; border: 1px solid var(--line); border-bottom: 0; background: #f3f5f5; color: #39454c; font-weight: 800; }
-.ev-mode-bar button.active { background: var(--green-800); border-color: var(--green-800); color: var(--white); }
-.ev-mode-bar span { margin-left: auto; color: var(--red-700); font-size: 11px; font-weight: 800; }
+.automatic-policy { margin-bottom: 10px; padding: 11px 13px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border: 1px solid #abc2b5; border-left: 4px solid var(--green-700); background: var(--green-100); }
+.automatic-policy div { flex: 0 0 auto; }
+.automatic-policy strong, .automatic-policy span { display: block; }
+.automatic-policy strong { color: var(--green-900); font-size: 13px; }
+.automatic-policy span { margin-top: 3px; color: var(--red-700); font-size: 10px; font-weight: 800; }
+.automatic-policy p { margin: 0; color: #42564b; font-size: 11px; line-height: 1.6; }
 .ev-metrics { display: grid; grid-template-columns: repeat(4, 1fr); margin: 12px 0; border: 1px solid var(--line); }
 .ev-metrics div { padding: 10px 12px; border-right: 1px solid var(--line); }
 .ev-metrics div:last-child { border-right: 0; }
@@ -224,11 +218,6 @@ main { width: min(1240px, 100%); margin: 0 auto; padding: 14px 18px 30px; }
 .ev-metrics strong { display: block; margin-top: 4px; font-size: 18px; }
 .positive { color: var(--green-700); }
 .negative { color: var(--red-700); }
-.risk-policy { min-height: 44px; margin: 10px 0 0; display: flex; align-items: center; gap: 0; border: 1px solid var(--line); background: #f7f8f8; }
-.risk-policy strong { padding: 0 12px; font-size: 12px; }
-.risk-policy button { align-self: stretch; padding: 0 12px; border: 0; border-left: 1px solid var(--line); background: transparent; color: #4b555c; font-size: 11px; font-weight: 800; cursor: pointer; }
-.risk-policy button.active { background: var(--green-800); color: var(--white); }
-.risk-policy span { margin-left: auto; padding: 0 12px; color: var(--muted); font-size: 10px; }
 .strategy-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 .strategy-card { border: 1px solid #cfd5d9; background: var(--white); }
 .strategy-card header { padding: 9px 11px; display: flex; align-items: center; justify-content: space-between; background: #f0f3f4; border-bottom: 1px solid #d5dade; }
@@ -355,7 +344,6 @@ footer p { width: min(1204px, 100%); margin: 0 auto; font-size: 11px; line-heigh
   .summary-band { grid-template-columns: repeat(2, 1fr); }
   .summary-band > div:nth-child(2) { border-right: 0; }
   .summary-band > div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
-  .ev-input-grid { grid-template-columns: repeat(2, 1fr); }
   .strategy-grid { grid-template-columns: 1fr; }
   .performance-cards { grid-template-columns: repeat(2, 1fr); }
   .pipeline-overview { grid-template-columns: repeat(3, 1fr); }
@@ -421,13 +409,7 @@ footer p { width: min(1204px, 100%); margin: 0 auto; font-size: 11px; line-heigh
   .judgement-table th:nth-child(2) { width: 24%; }
   .dense-table { font-size: 11px; }
   .dense-table th, .dense-table td { padding: 7px 6px; }
-  .ev-input-grid { grid-template-columns: 1fr 1fr; padding: 9px; }
-  .ev-mode-bar { flex-wrap: wrap; }
-  .ev-mode-bar span { width: 100%; margin: 7px 0; }
-  .risk-policy { flex-wrap: wrap; }
-  .risk-policy strong { width: 100%; padding-block: 8px; }
-  .risk-policy button { min-height: 36px; flex: 1; border-top: 1px solid var(--line); }
-  .risk-policy span { width: 100%; margin: 0; padding-block: 7px; border-top: 1px solid var(--line); }
+  .automatic-policy { align-items: flex-start; flex-direction: column; gap: 7px; }
   .ev-metrics { grid-template-columns: repeat(2, 1fr); }
   .ev-metrics div:nth-child(2) { border-right: 0; }
   .ev-metrics div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
