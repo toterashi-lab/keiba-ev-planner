@@ -1,14 +1,17 @@
-# Keiba EV Planner Public Demo
+# 競馬期待値ラボ
 
-Static public demo for a horse-racing expected-value planner.
+先週のJRA中央競馬72レースを使った、過去データ蓄積・期待値検証画面です。
 
-This repository intentionally contains only synthetic demo data.
-Licensed racing data, result snapshots, IPAT login flows, and purchase execution remain local/private.
+## 収録範囲
 
-## Local Preview
+- 2026年7月11日・12日
+- 福島・小倉・函館
+- 開催番組 72レース
+- 勝馬 72レース
+- 出走馬 946頭
+- 払戻 573件
 
-Open `index.html` in a browser.
+出典はJRA公式番組・結果ページです。JRAおよびnetkeibaの公式サービスではありません。
+JRA-VAN Data Lab.から取得する長期データは利用条件に従ってローカルDBにのみ保存し、この公開リポジトリには収録しません。
 
-## GitHub Pages
-
-Publish from the `main` branch root with GitHub Pages.
+GitHub Pagesは `main` ブランチ直下を公開します。

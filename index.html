@@ -3,181 +3,201 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Keiba EV Planner</title>
+    <title>競馬期待値ラボ｜先週レース検証</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="app">
-      <header class="topbar">
-        <div>
-          <p class="eyebrow">Expected Value Betting</p>
-          <h1>Keiba EV Planner</h1>
-        </div>
-        <div class="status">
-          <span class="dot"></span>
-          Public demo: synthetic data / IPAT locked
-        </div>
-      </header>
-
-      <section class="panel schedule-panel">
-        <div class="section-head">
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="brand">
+          <span class="brand-mark">EV</span>
           <div>
-            <h2>開催DB</h2>
-            <p id="schedule-note">公開デモは合成データのみを表示します。JRA実データとIPAT購入機能は含みません。</p>
-          </div>
-          <div class="actions">
-            <button id="export-schedule" type="button">開催CSV</button>
+            <strong>競馬期待値ラボ</strong>
+            <small>過去データ蓄積・予測検証</small>
           </div>
         </div>
-        <div id="meeting-tabs" class="tabs" aria-label="開催日"></div>
-        <div id="track-cards" class="track-grid" aria-label="開催場"></div>
-        <div class="table-wrap schedule-table">
-          <table>
-            <thead>
-              <tr>
-                <th>日付</th>
-                <th>場</th>
-                <th>R</th>
-                <th>発走</th>
-                <th>レース</th>
-                <th>条件</th>
-                <th>距離</th>
-                <th>勝馬</th>
-                <th>払戻</th>
-                <th>結果</th>
-              </tr>
-            </thead>
-            <tbody id="schedule-table"></tbody>
-          </table>
+        <nav class="global-nav" aria-label="主要メニュー">
+          <a href="#race-workspace" class="active">レース</a>
+          <a href="#expectancy">期待値分析</a>
+          <a href="#quality">データ品質</a>
+          <a href="#warehouse">蓄積状況</a>
+        </nav>
+        <div class="header-status">
+          <span class="status-dot"></span>
+          先週72レース取込済み
         </div>
-      </section>
+      </div>
+    </header>
 
-      <section class="panel audit-panel">
-        <div class="section-head">
-          <div>
-            <h2>ロジック監査</h2>
-            <p>期待値、損益、Kelly stake の計算が一貫しているかを固定ケースで検査します。</p>
-          </div>
-          <button id="run-audit" type="button">再検査</button>
-        </div>
-        <div id="ev-audit" class="audit-grid"></div>
-      </section>
-
-      <section class="summary-grid" aria-label="Summary">
-        <article>
-          <span>候補数</span>
-          <strong id="summary-count">0</strong>
-        </article>
-        <article>
-          <span>購入予定</span>
-          <strong id="summary-stake">0円</strong>
-        </article>
-        <article>
-          <span>期待回収</span>
-          <strong id="summary-return">0円</strong>
-        </article>
-        <article>
-          <span>期待利益</span>
-          <strong id="summary-profit">0円</strong>
-        </article>
-      </section>
-
-      <section class="panel controls">
-        <div class="field">
-          <label for="bankroll">資金</label>
-          <input id="bankroll" type="number" min="100" step="100" value="30000" />
-        </div>
-        <div class="field">
-          <label for="min-edge">最低エッジ</label>
-          <input id="min-edge" type="number" min="0" step="0.01" value="0.08" />
-        </div>
-        <div class="field">
-          <label for="max-stake">1点上限</label>
-          <input id="max-stake" type="number" min="100" step="100" value="1000" />
-        </div>
-        <div class="field">
-          <label for="kelly">Kelly係数</label>
-          <input id="kelly" type="number" min="0" max="1" step="0.05" value="0.25" />
-        </div>
-      </section>
-
-      <section class="workspace">
-        <div class="panel data-panel">
-          <div class="section-head">
-            <div>
-              <h2>データ入力</h2>
-              <p>CSV列: race, betType, selection, odds, probability</p>
-            </div>
-            <div class="actions">
-              <button id="load-sample" type="button">サンプル</button>
-              <label class="file-button">
-                CSV
-                <input id="csv-file" type="file" accept=".csv,text/csv" />
-              </label>
-            </div>
-          </div>
-          <textarea id="csv-input" spellcheck="false"></textarea>
-          <div class="actions bottom">
-            <button id="parse-csv" type="button">期待値を計算</button>
-            <button id="clear-all" type="button" class="ghost">クリア</button>
-          </div>
-        </div>
-
-        <div class="panel queue-panel">
-          <div class="section-head">
-            <div>
-              <h2>購入キュー</h2>
-              <p>エッジが閾値以上の買い目だけを表示します</p>
-            </div>
-            <div class="actions">
-              <button id="export-plan" type="button">CSV出力</button>
-              <button id="dry-run" type="button" class="danger">Dry-run送信</button>
-            </div>
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Race</th>
-                  <th>Type</th>
-                  <th>Selection</th>
-                  <th>Odds</th>
-                  <th>Prob</th>
-                  <th>EV</th>
-                  <th>Stake</th>
-                </tr>
-              </thead>
-              <tbody id="bet-table"></tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <section class="panel ipat-panel">
+    <main>
+      <section class="source-strip">
         <div>
-          <h2>IPAT実行ガード</h2>
-          <p>
-            実購入は未接続です。接続時はログイン情報を保存せず、購入前に金額・レース・買い目を再確認し、
-            1日の損失上限と二重送信防止を必須にします。
-          </p>
+          <strong>初回検証バッチ</strong>
+          <span>2026年7月11日・12日</span>
+          <span>福島・小倉・函館</span>
         </div>
-        <div class="guard-grid">
-          <label><input id="confirm-manual" type="checkbox" /> 手動確認済み</label>
-          <label><input id="confirm-limit" type="checkbox" /> 上限確認済み</label>
-          <label><input id="confirm-legal" type="checkbox" /> 利用条件確認済み</label>
+        <p>JRA公式番組・結果を照合。長期DBへ同じ形式で継続蓄積します。</p>
+      </section>
+
+      <section id="race-workspace" class="race-workspace">
+        <div id="date-tabs" class="date-tabs" aria-label="開催日"></div>
+        <div id="venue-tabs" class="venue-tabs" aria-label="競馬場"></div>
+        <div id="race-tabs" class="race-tabs" aria-label="レース番号"></div>
+
+        <div class="race-heading">
+          <div class="race-number"><strong id="race-number">11</strong><span>R</span></div>
+          <div class="race-title-block">
+            <div class="race-title-line">
+              <h1 id="race-title">レースを読み込み中</h1>
+              <span id="result-badge" class="result-badge">確定</span>
+            </div>
+            <p id="race-meta">発走・コース情報を確認中</p>
+            <p id="race-condition"></p>
+          </div>
+          <div class="race-source">
+            <span>データ出典</span>
+            <a id="official-link" href="#" target="_blank" rel="noreferrer">JRA公式結果</a>
+          </div>
+        </div>
+
+        <div class="view-tabs" role="tablist" aria-label="レース情報">
+          <button type="button" data-view="summary" class="active">概要</button>
+          <button type="button" data-view="expectancy">期待値・買い目</button>
+          <button type="button" data-view="result">結果・払戻</button>
+          <button type="button" data-view="quality">データ品質</button>
+        </div>
+
+        <div class="race-layout">
+          <div class="race-main">
+            <section id="view-summary" class="view-panel active">
+              <div class="summary-band">
+                <div>
+                  <span>勝馬</span>
+                  <strong id="winner-name">未取得</strong>
+                </div>
+                <div>
+                  <span>払戻データ</span>
+                  <strong id="refund-count">0件</strong>
+                </div>
+                <div>
+                  <span>期待値判定</span>
+                  <strong class="hold">判定保留</strong>
+                </div>
+                <div>
+                  <span>実購入</span>
+                  <strong class="locked">未接続</strong>
+                </div>
+              </div>
+
+              <div class="section-title">
+                <div>
+                  <h2>全馬結果</h2>
+                  <p>JRA公式結果から取得した出走馬・騎手・調教師・走破内容です。</p>
+                </div>
+                <span id="runner-count" class="decision buy">0頭取得</span>
+              </div>
+              <div class="table-scroll">
+                <table class="dense-table runner-table">
+                  <thead><tr><th>着順</th><th>枠</th><th>馬番</th><th>馬名</th><th>性齢</th><th>斤量</th><th>騎手</th><th>タイム</th><th>着差</th><th>通過</th><th>上り</th><th>馬体重</th><th>調教師</th><th>人気</th></tr></thead>
+                  <tbody id="runner-body"></tbody>
+                </table>
+              </div>
+            </section>
+
+            <section id="view-expectancy" class="view-panel">
+              <div id="expectancy" class="section-title">
+                <div>
+                  <h2>期待値・買い目検証</h2>
+                  <p>取得時点のオッズと、その時点のモデル確率を入力して比較します。</p>
+                </div>
+                <span id="edge-badge" class="decision hold">未計算</span>
+              </div>
+
+              <div class="ev-input-grid">
+                <label>券種
+                  <select id="bet-type">
+                    <option value="単勝">単勝</option><option value="複勝">複勝</option>
+                    <option value="馬連">馬連</option><option value="ワイド">ワイド</option>
+                    <option value="馬単">馬単</option><option value="3連複">3連複</option><option value="3連単">3連単</option>
+                  </select>
+                </label>
+                <label>買い目<input id="selection" type="text" placeholder="例：11 または 6-11" /></label>
+                <label>取得オッズ<input id="odds" type="number" min="1.01" step="0.1" placeholder="例：5.0" /></label>
+                <label>モデル確率（%）<input id="probability" type="number" min="0.01" max="99.99" step="0.1" placeholder="例：24.0" /></label>
+                <label>資金<input id="bankroll" type="number" min="1000" step="1000" value="30000" /></label>
+                <label>1点上限<input id="max-stake" type="number" min="100" step="100" value="1000" /></label>
+              </div>
+
+              <div class="ev-metrics">
+                <div><span>損益分岐確率</span><strong id="break-even">--</strong></div>
+                <div><span>期待回収率</span><strong id="expected-return">--</strong></div>
+                <div><span>期待値差</span><strong id="edge-value">--</strong></div>
+                <div><span>完全Kelly比率</span><strong id="kelly-value">--</strong></div>
+              </div>
+
+              <div id="strategy-grid" class="strategy-grid"></div>
+              <p class="formula-note">期待回収率＝オッズ×的中確率。推奨条件は期待値差8%以上、100円単位、1点上限以内です。</p>
+            </section>
+
+            <section id="view-result" class="view-panel">
+              <div class="section-title">
+                <div><h2>結果・払戻</h2><p>JRA公式結果ページから取得した確定情報です。</p></div>
+                <a id="result-link-secondary" href="#" target="_blank" rel="noreferrer">公式結果で照合</a>
+              </div>
+              <table class="dense-table payout-table">
+                <thead><tr><th>券種</th><th>的中番号</th><th>払戻</th><th>人気</th></tr></thead>
+                <tbody id="payout-body"></tbody>
+              </table>
+            </section>
+
+            <section id="view-quality" class="view-panel">
+              <div id="quality" class="section-title">
+                <div><h2>データ品質</h2><p>推奨に使えるデータと、検証専用データを分離します。</p></div>
+                <span class="batch-id">初回バッチ：2026-W28</span>
+              </div>
+              <div class="coverage-grid">
+                <div><span>番組</span><strong>72 / 72</strong><small>100%</small></div>
+                <div><span>勝馬</span><strong>72 / 72</strong><small>100%</small></div>
+                <div><span>払戻</span><strong id="quality-refunds">--</strong><small>取得済み</small></div>
+                <div><span>全出走馬</span><strong id="quality-runners">--</strong><small>取得済み</small></div>
+                <div><span>締切前オッズ</span><strong>予測用</strong><small class="danger-text">JRA-VAN取込待ち</small></div>
+                <div><span>モデル予測</span><strong>0 / 72</strong><small class="danger-text">学習前</small></div>
+              </div>
+              <div class="quality-note">
+                <strong>現在できること</strong>
+                <p>開催・全出走馬・着順・騎手・調教師・走破内容・勝馬・払戻の保存と、取得漏れの検査。</p>
+                <strong>まだできないこと</strong>
+                <p>先週開催前に遡った推奨の再現。締切前オッズと過去走特徴が必要です。</p>
+              </div>
+            </section>
+          </div>
+
+          <aside class="race-sidebar">
+            <div class="sidebar-title"><strong id="sidebar-venue">福島</strong><span>全12R</span></div>
+            <div id="race-list" class="race-list"></div>
+          </aside>
         </div>
       </section>
 
-      <section class="panel log-panel">
-        <div class="section-head">
-          <h2>監査ログ</h2>
-          <button id="clear-log" type="button" class="ghost">ログ削除</button>
+      <section id="warehouse" class="warehouse-section">
+        <div class="section-title">
+          <div><h2>過去データ蓄積状況</h2><p>週単位の追記バッチ。既存レコードは主キーで重複排除します。</p></div>
+          <span class="warehouse-status">長期蓄積設計</span>
         </div>
-        <ol id="audit-log"></ol>
+        <table class="dense-table batch-table">
+          <thead><tr><th>バッチ</th><th>対象期間</th><th>競馬場</th><th>レース</th><th>結果</th><th>払戻</th><th>状態</th></tr></thead>
+          <tbody><tr><td>2026-W28</td><td>7月11日〜12日</td><td>福島・小倉・函館</td><td>72</td><td>72</td><td id="batch-refunds">--</td><td><span class="quality complete">取込完了</span></td></tr></tbody>
+        </table>
       </section>
     </main>
 
-    <script src="data/demo-meetings.js"></script>
+    <footer>
+      <p>本サービスはJRA・netkeibaの公式サービスではありません。結果と発売情報は必ず主催者発表で確認してください。実購入機能は未接続です。</p>
+    </footer>
+
+    <script src="data/meet-2026-07-11-2026-07-12.js"></script>
+    <script src="data/result-links-2026-07-11-2026-07-12.js"></script>
+    <script src="data/results-2026-07-11-2026-07-12.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
