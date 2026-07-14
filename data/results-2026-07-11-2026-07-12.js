@@ -1,10 +1,10 @@
 window.KEIBA_RESULTS = {
   "source": "JRA official race result pages",
-  "fetchedAt": "2026-07-14T14:17:43.806Z",
-  "linkPath": "data/result-links-2026-07-11-2026-07-12.json",
+  "fetchedAt": "2026-07-14T15:26:01.142Z",
+  "linkPath": "data\\result-links-2026-07-11-2026-07-12.json",
   "raceCount": 72,
   "runnerCount": 946,
-  "refundLineCount": 573,
+  "refundLineCount": 866,
   "results": [
     {
       "date": "2026年7月11日（土曜）",
@@ -322,6 +322,20 @@ window.KEIBA_RESULTS = {
           "popularity": 3
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "3",
+          "payoutYen": 120,
+          "popularity": 1
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "11",
+          "payoutYen": 920,
+          "popularity": 10
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "3-6",
@@ -334,6 +348,20 @@ window.KEIBA_RESULTS = {
           "selection": "3-6",
           "payoutYen": 360,
           "popularity": 2
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-11",
+          "payoutYen": 4120,
+          "popularity": 39
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "3-11",
+          "payoutYen": 1460,
+          "popularity": 18
         },
         {
           "betClass": "umaren",
@@ -785,6 +813,20 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "2",
+          "payoutYen": 180,
+          "popularity": 3
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "5",
+          "payoutYen": 140,
+          "popularity": 2
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "2-4",
@@ -797,6 +839,20 @@ window.KEIBA_RESULTS = {
           "selection": "2-6",
           "payoutYen": 440,
           "popularity": 5
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "5-6",
+          "payoutYen": 220,
+          "popularity": 1
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "2-5",
+          "payoutYen": 440,
+          "popularity": 4
         },
         {
           "betClass": "umaren",
@@ -1222,6 +1278,20 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "9",
+          "payoutYen": 160,
+          "popularity": 3
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "4",
+          "payoutYen": 170,
+          "popularity": 4
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "1-6",
@@ -1234,6 +1304,20 @@ window.KEIBA_RESULTS = {
           "selection": "1-9",
           "payoutYen": 370,
           "popularity": 3
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-4",
+          "payoutYen": 360,
+          "popularity": 2
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-9",
+          "payoutYen": 590,
+          "popularity": 6
         },
         {
           "betClass": "umaren",
@@ -1685,6 +1769,20 @@ window.KEIBA_RESULTS = {
           "popularity": 3
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "5",
+          "payoutYen": 140,
+          "popularity": 2
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "4",
+          "payoutYen": 140,
+          "popularity": 1
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "3-7",
@@ -1697,6 +1795,20 @@ window.KEIBA_RESULTS = {
           "selection": "5-13",
           "payoutYen": 300,
           "popularity": 2
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-13",
+          "payoutYen": 310,
+          "popularity": 3
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-5",
+          "payoutYen": 220,
+          "popularity": 1
         },
         {
           "betClass": "umaren",
@@ -2022,6 +2134,20 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "10",
+          "payoutYen": 150,
+          "popularity": 2
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "4",
+          "payoutYen": 230,
+          "popularity": 6
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "1-8",
@@ -2034,6 +2160,20 @@ window.KEIBA_RESULTS = {
           "selection": "1-10",
           "payoutYen": 210,
           "popularity": 1
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-4",
+          "payoutYen": 420,
+          "popularity": 5
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-10",
+          "payoutYen": 1020,
+          "popularity": 13
         },
         {
           "betClass": "umaren",
@@ -2511,6 +2651,20 @@ window.KEIBA_RESULTS = {
           "popularity": 7
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "6",
+          "payoutYen": 370,
+          "popularity": 6
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "1",
+          "payoutYen": 370,
+          "popularity": 5
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "3-5",
@@ -2523,6 +2677,20 @@ window.KEIBA_RESULTS = {
           "selection": "6-9",
           "payoutYen": 1870,
           "popularity": 17
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-9",
+          "payoutYen": 2020,
+          "popularity": 19
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-6",
+          "payoutYen": 2370,
+          "popularity": 22
         },
         {
           "betClass": "umaren",
@@ -2870,6 +3038,20 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "9",
+          "payoutYen": 310,
+          "popularity": 6
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "4",
+          "payoutYen": 140,
+          "popularity": 2
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "6-7",
@@ -2882,6 +3064,20 @@ window.KEIBA_RESULTS = {
           "selection": "6-9",
           "payoutYen": 580,
           "popularity": 8
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-6",
+          "payoutYen": 210,
+          "popularity": 2
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-9",
+          "payoutYen": 1050,
+          "popularity": 12
         },
         {
           "betClass": "umaren",
@@ -3327,6 +3523,20 @@ window.KEIBA_RESULTS = {
           "popularity": 2
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "9",
+          "payoutYen": 190,
+          "popularity": 3
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "1",
+          "payoutYen": 250,
+          "popularity": 6
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "5-6",
@@ -3339,6 +3549,20 @@ window.KEIBA_RESULTS = {
           "selection": "9-12",
           "payoutYen": 440,
           "popularity": 4
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-12",
+          "payoutYen": 620,
+          "popularity": 7
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-9",
+          "payoutYen": 790,
+          "popularity": 11
         },
         {
           "betClass": "umaren",
@@ -3790,6 +4014,20 @@ window.KEIBA_RESULTS = {
           "popularity": 2
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "5",
+          "payoutYen": 200,
+          "popularity": 3
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "3",
+          "payoutYen": 460,
+          "popularity": 6
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "3-7",
@@ -3802,6 +4040,20 @@ window.KEIBA_RESULTS = {
           "selection": "5-13",
           "payoutYen": 640,
           "popularity": 7
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "3-13",
+          "payoutYen": 1820,
+          "popularity": 18
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "3-5",
+          "payoutYen": 1880,
+          "popularity": 21
         },
         {
           "betClass": "umaren",
@@ -4079,6 +4331,20 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "9",
+          "payoutYen": 230,
+          "popularity": 5
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "5",
+          "payoutYen": 260,
+          "popularity": 6
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "8-8",
@@ -4091,6 +4357,20 @@ window.KEIBA_RESULTS = {
           "selection": "8-9",
           "payoutYen": 410,
           "popularity": 4
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "5-8",
+          "payoutYen": 490,
+          "popularity": 6
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "5-9",
+          "payoutYen": 1220,
+          "popularity": 15
         },
         {
           "betClass": "umaren",
@@ -4368,6 +4648,20 @@ window.KEIBA_RESULTS = {
           "popularity": 5
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "7",
+          "payoutYen": 740,
+          "popularity": 9
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "9",
+          "payoutYen": 200,
+          "popularity": 2
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "5-7",
@@ -4380,6 +4674,20 @@ window.KEIBA_RESULTS = {
           "selection": "5-7",
           "payoutYen": 2580,
           "popularity": 31
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "5-9",
+          "payoutYen": 660,
+          "popularity": 11
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "7-9",
+          "payoutYen": 2140,
+          "popularity": 25
         },
         {
           "betClass": "umaren",
@@ -4831,6 +5139,20 @@ window.KEIBA_RESULTS = {
           "popularity": 6
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "13",
+          "payoutYen": 220,
+          "popularity": 3
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "15",
+          "payoutYen": 170,
+          "popularity": 1
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "4-7",
@@ -4843,6 +5165,20 @@ window.KEIBA_RESULTS = {
           "selection": "6-13",
           "payoutYen": 910,
           "popularity": 9
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-15",
+          "payoutYen": 790,
+          "popularity": 7
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "13-15",
+          "payoutYen": 530,
+          "popularity": 2
         },
         {
           "betClass": "umaren",
@@ -5192,6 +5528,20 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "12",
+          "payoutYen": 250,
+          "popularity": 4
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "2",
+          "payoutYen": 410,
+          "popularity": 8
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "7-8",
@@ -5204,6 +5554,20 @@ window.KEIBA_RESULTS = {
           "selection": "10-12",
           "payoutYen": 480,
           "popularity": 2
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "2-10",
+          "payoutYen": 610,
+          "popularity": 6
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "2-12",
+          "payoutYen": 2540,
+          "popularity": 28
         },
         {
           "betClass": "umaren",
@@ -5681,6 +6045,20 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "9",
+          "payoutYen": 250,
+          "popularity": 6
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "6",
+          "payoutYen": 170,
+          "popularity": 2
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "4-5",
@@ -5693,6 +6071,20 @@ window.KEIBA_RESULTS = {
           "selection": "8-9",
           "payoutYen": 740,
           "popularity": 9
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-8",
+          "payoutYen": 430,
+          "popularity": 2
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-9",
+          "payoutYen": 710,
+          "popularity": 8
         },
         {
           "betClass": "umaren",
@@ -6222,6 +6614,20 @@ window.KEIBA_RESULTS = {
           "popularity": 7
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "14",
+          "payoutYen": 320,
+          "popularity": 4
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "7",
+          "payoutYen": 280,
+          "popularity": 3
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "5-7",
@@ -6234,6 +6640,20 @@ window.KEIBA_RESULTS = {
           "selection": "10-14",
           "payoutYen": 2530,
           "popularity": 33
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "7-10",
+          "payoutYen": 1810,
+          "popularity": 25
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "7-14",
+          "payoutYen": 1580,
+          "popularity": 19
         },
         {
           "betClass": "umaren",
@@ -6711,6 +7131,20 @@ window.KEIBA_RESULTS = {
           "popularity": 3
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "3",
+          "payoutYen": 390,
+          "popularity": 6
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "2",
+          "payoutYen": 110,
+          "popularity": 1
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "1-2",
@@ -6723,6 +7157,20 @@ window.KEIBA_RESULTS = {
           "selection": "1-3",
           "payoutYen": 2400,
           "popularity": 25
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-2",
+          "payoutYen": 340,
+          "popularity": 2
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "2-3",
+          "payoutYen": 780,
+          "popularity": 8
         },
         {
           "betClass": "umaren",
@@ -7096,6 +7544,20 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "5",
+          "payoutYen": 760,
+          "popularity": 10
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "9",
+          "payoutYen": 1020,
+          "popularity": 11
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "1-5",
@@ -7108,6 +7570,20 @@ window.KEIBA_RESULTS = {
           "selection": "1-5",
           "payoutYen": 1540,
           "popularity": 16
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-9",
+          "payoutYen": 2160,
+          "popularity": 22
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "5-9",
+          "payoutYen": 8940,
+          "popularity": 62
         },
         {
           "betClass": "umaren",
@@ -7601,6 +8077,27 @@ window.KEIBA_RESULTS = {
           "popularity": 2
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "17",
+          "payoutYen": 110,
+          "popularity": 1
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "1",
+          "payoutYen": 150,
+          "popularity": 3
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "7",
+          "payoutYen": 180,
+          "popularity": 4
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "8-8",
@@ -7613,6 +8110,34 @@ window.KEIBA_RESULTS = {
           "selection": "16-17",
           "payoutYen": 190,
           "popularity": 1
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-16",
+          "payoutYen": 530,
+          "popularity": 9
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "7-16",
+          "payoutYen": 710,
+          "popularity": 13
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-17",
+          "payoutYen": 230,
+          "popularity": 2
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "7-17",
+          "payoutYen": 280,
+          "popularity": 3
         },
         {
           "betClass": "umaren",
@@ -7636,11 +8161,25 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "trio",
+          "betType": "3連複",
+          "selection": "7-16-17",
+          "payoutYen": 1240,
+          "popularity": 4
+        },
+        {
           "betClass": "tierce",
           "betType": "3連単",
           "selection": "16-17-1",
           "payoutYen": 4370,
           "popularity": 11
+        },
+        {
+          "betClass": "tierce",
+          "betType": "3連単",
+          "selection": "16-17-7",
+          "payoutYen": 6660,
+          "popularity": 27
         }
       ]
     },
@@ -7986,6 +8525,20 @@ window.KEIBA_RESULTS = {
           "popularity": 2
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "5",
+          "payoutYen": 240,
+          "popularity": 5
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "1",
+          "payoutYen": 770,
+          "popularity": 8
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "5-5",
@@ -7998,6 +8551,20 @@ window.KEIBA_RESULTS = {
           "selection": "5-6",
           "payoutYen": 620,
           "popularity": 7
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-6",
+          "payoutYen": 1890,
+          "popularity": 21
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-5",
+          "payoutYen": 2960,
+          "popularity": 26
         },
         {
           "betClass": "umaren",
@@ -8345,6 +8912,20 @@ window.KEIBA_RESULTS = {
           "popularity": 6
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "8",
+          "payoutYen": 200,
+          "popularity": 2
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "4",
+          "payoutYen": 200,
+          "popularity": 3
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "7-8",
@@ -8357,6 +8938,20 @@ window.KEIBA_RESULTS = {
           "selection": "8-10",
           "payoutYen": 1490,
           "popularity": 22
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-10",
+          "payoutYen": 1740,
+          "popularity": 23
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-8",
+          "payoutYen": 530,
+          "popularity": 5
         },
         {
           "betClass": "umaren",
@@ -8704,6 +9299,20 @@ window.KEIBA_RESULTS = {
           "popularity": 6
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "3",
+          "payoutYen": 180,
+          "popularity": 3
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "10",
+          "payoutYen": 260,
+          "popularity": 5
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "3-4",
@@ -8716,6 +9325,20 @@ window.KEIBA_RESULTS = {
           "selection": "3-4",
           "payoutYen": 870,
           "popularity": 10
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-10",
+          "payoutYen": 1500,
+          "popularity": 19
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "3-10",
+          "payoutYen": 480,
+          "popularity": 4
         },
         {
           "betClass": "umaren",
@@ -9209,6 +9832,20 @@ window.KEIBA_RESULTS = {
           "popularity": 3
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "3",
+          "payoutYen": 3710,
+          "popularity": 18
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "16",
+          "payoutYen": 200,
+          "popularity": 2
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "2-7",
@@ -9221,6 +9858,20 @@ window.KEIBA_RESULTS = {
           "selection": "3-14",
           "payoutYen": 18260,
           "popularity": 122
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "14-16",
+          "payoutYen": 580,
+          "popularity": 2
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "3-16",
+          "payoutYen": 14380,
+          "popularity": 108
         },
         {
           "betClass": "umaren",
@@ -9546,6 +10197,20 @@ window.KEIBA_RESULTS = {
           "popularity": 3
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "1",
+          "payoutYen": 370,
+          "popularity": 7
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "7",
+          "payoutYen": 250,
+          "popularity": 4
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "1-5",
@@ -9558,6 +10223,20 @@ window.KEIBA_RESULTS = {
           "selection": "1-5",
           "payoutYen": 800,
           "popularity": 10
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "5-7",
+          "payoutYen": 540,
+          "popularity": 3
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-7",
+          "payoutYen": 1050,
+          "popularity": 14
         },
         {
           "betClass": "umaren",
@@ -10003,6 +10682,20 @@ window.KEIBA_RESULTS = {
           "popularity": 4
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "2",
+          "payoutYen": 440,
+          "popularity": 7
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "16",
+          "payoutYen": 370,
+          "popularity": 6
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "1-6",
@@ -10015,6 +10708,20 @@ window.KEIBA_RESULTS = {
           "selection": "2-11",
           "payoutYen": 2030,
           "popularity": 25
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "11-16",
+          "payoutYen": 1470,
+          "popularity": 18
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "2-16",
+          "payoutYen": 1920,
+          "popularity": 23
         },
         {
           "betClass": "umaren",
@@ -10337,6 +11044,20 @@ window.KEIBA_RESULTS = {
           "popularity": 2
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "5",
+          "payoutYen": 110,
+          "popularity": 1
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "10",
+          "payoutYen": 140,
+          "popularity": 3
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "1-5",
@@ -10349,6 +11070,20 @@ window.KEIBA_RESULTS = {
           "selection": "1-5",
           "payoutYen": 130,
           "popularity": 1
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-10",
+          "payoutYen": 330,
+          "popularity": 6
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "5-10",
+          "payoutYen": 230,
+          "popularity": 2
         },
         {
           "betClass": "umaren",
@@ -10772,6 +11507,20 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "3",
+          "payoutYen": 220,
+          "popularity": 4
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "4",
+          "payoutYen": 310,
+          "popularity": 6
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "3-5",
@@ -10784,6 +11533,20 @@ window.KEIBA_RESULTS = {
           "selection": "3-7",
           "payoutYen": 670,
           "popularity": 4
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-7",
+          "payoutYen": 1200,
+          "popularity": 17
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "3-4",
+          "payoutYen": 1000,
+          "popularity": 13
         },
         {
           "betClass": "umaren",
@@ -11229,6 +11992,20 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "5",
+          "payoutYen": 440,
+          "popularity": 7
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "4",
+          "payoutYen": 860,
+          "popularity": 11
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "3-3",
@@ -11241,6 +12018,20 @@ window.KEIBA_RESULTS = {
           "selection": "5-6",
           "payoutYen": 810,
           "popularity": 7
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-6",
+          "payoutYen": 1830,
+          "popularity": 19
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-5",
+          "payoutYen": 7710,
+          "popularity": 62
         },
         {
           "betClass": "umaren",
@@ -11666,6 +12457,20 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "4",
+          "payoutYen": 210,
+          "popularity": 4
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "2",
+          "payoutYen": 190,
+          "popularity": 3
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "3-8",
@@ -11678,6 +12483,20 @@ window.KEIBA_RESULTS = {
           "selection": "4-14",
           "payoutYen": 540,
           "popularity": 3
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "2-14",
+          "payoutYen": 620,
+          "popularity": 4
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "2-4",
+          "payoutYen": 760,
+          "popularity": 7
         },
         {
           "betClass": "umaren",
@@ -12003,6 +12822,20 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "11",
+          "payoutYen": 130,
+          "popularity": 2
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "6",
+          "payoutYen": 410,
+          "popularity": 9
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "7-8",
@@ -12015,6 +12848,20 @@ window.KEIBA_RESULTS = {
           "selection": "8-11",
           "payoutYen": 170,
           "popularity": 1
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-8",
+          "payoutYen": 780,
+          "popularity": 10
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-11",
+          "payoutYen": 1440,
+          "popularity": 17
         },
         {
           "betClass": "umaren",
@@ -12357,6 +13204,20 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "4",
+          "payoutYen": 170,
+          "popularity": 3
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "3",
+          "payoutYen": 190,
+          "popularity": 4
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "4-7",
@@ -12369,6 +13230,20 @@ window.KEIBA_RESULTS = {
           "selection": "4-9",
           "payoutYen": 330,
           "popularity": 2
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "3-9",
+          "payoutYen": 400,
+          "popularity": 4
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "3-4",
+          "payoutYen": 490,
+          "popularity": 7
         },
         {
           "betClass": "umaren",
@@ -12794,6 +13669,20 @@ window.KEIBA_RESULTS = {
           "popularity": 3
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "6",
+          "payoutYen": 200,
+          "popularity": 4
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "1",
+          "payoutYen": 460,
+          "popularity": 7
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "3-4",
@@ -12806,6 +13695,20 @@ window.KEIBA_RESULTS = {
           "selection": "4-6",
           "payoutYen": 440,
           "popularity": 3
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-4",
+          "payoutYen": 1260,
+          "popularity": 16
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-6",
+          "payoutYen": 1560,
+          "popularity": 20
         },
         {
           "betClass": "umaren",
@@ -13179,6 +14082,20 @@ window.KEIBA_RESULTS = {
           "popularity": 4
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "1",
+          "payoutYen": 180,
+          "popularity": 3
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "4",
+          "payoutYen": 150,
+          "popularity": 1
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "1-6",
@@ -13191,6 +14108,20 @@ window.KEIBA_RESULTS = {
           "selection": "1-8",
           "payoutYen": 560,
           "popularity": 7
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-8",
+          "payoutYen": 550,
+          "popularity": 6
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-4",
+          "payoutYen": 470,
+          "popularity": 4
         },
         {
           "betClass": "umaren",
@@ -13512,6 +14443,20 @@ window.KEIBA_RESULTS = {
           "popularity": 7
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "8",
+          "payoutYen": 320,
+          "popularity": 5
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "9",
+          "payoutYen": 410,
+          "popularity": 6
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "4-7",
@@ -13524,6 +14469,20 @@ window.KEIBA_RESULTS = {
           "selection": "4-8",
           "payoutYen": 1360,
           "popularity": 18
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-9",
+          "payoutYen": 2270,
+          "popularity": 24
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "8-9",
+          "payoutYen": 1430,
+          "popularity": 19
         },
         {
           "betClass": "umaren",
@@ -13921,6 +14880,20 @@ window.KEIBA_RESULTS = {
           "popularity": 2
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "2",
+          "payoutYen": 150,
+          "popularity": 1
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "6",
+          "payoutYen": 620,
+          "popularity": 10
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "2-5",
@@ -13933,6 +14906,20 @@ window.KEIBA_RESULTS = {
           "selection": "2-7",
           "payoutYen": 390,
           "popularity": 3
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-7",
+          "payoutYen": 2100,
+          "popularity": 27
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "2-6",
+          "payoutYen": 1390,
+          "popularity": 17
         },
         {
           "betClass": "umaren",
@@ -14332,6 +15319,20 @@ window.KEIBA_RESULTS = {
           "popularity": 3
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "3",
+          "payoutYen": 190,
+          "popularity": 2
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "2",
+          "payoutYen": 690,
+          "popularity": 8
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "1-3",
@@ -14344,6 +15345,20 @@ window.KEIBA_RESULTS = {
           "selection": "1-3",
           "payoutYen": 500,
           "popularity": 4
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-2",
+          "payoutYen": 1860,
+          "popularity": 20
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "2-3",
+          "payoutYen": 2520,
+          "popularity": 25
         },
         {
           "betClass": "umaren",
@@ -14597,11 +15612,39 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "4",
+          "payoutYen": 140,
+          "popularity": 2
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "8",
+          "payoutYen": 370,
+          "popularity": 7
+        },
+        {
           "betClass": "wide",
           "betType": "ワイド",
           "selection": "1-4",
           "payoutYen": 190,
           "popularity": 1
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-8",
+          "payoutYen": 830,
+          "popularity": 11
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-8",
+          "payoutYen": 930,
+          "popularity": 14
         },
         {
           "betClass": "umaren",
@@ -14651,7 +15694,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002021105335",
+          "horseId": "102021105335",
           "horseName": "トーアマリシテン",
           "sexAge": "せん5",
           "carriedWeight": 60,
@@ -14677,7 +15720,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 8,
           "horseNumber": 13,
-          "horseId": "002022101614",
+          "horseId": "102022101614",
           "horseName": "ノブダブルホワイト",
           "sexAge": "牡4",
           "carriedWeight": 60,
@@ -14703,7 +15746,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 4,
           "horseNumber": 6,
-          "horseId": "002021105501",
+          "horseId": "102021105501",
           "horseName": "モスクロッサー",
           "sexAge": "せん5",
           "carriedWeight": 57,
@@ -14729,7 +15772,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 6,
           "horseNumber": 10,
-          "horseId": "002019101464",
+          "horseId": "102019101464",
           "horseName": "サラフィエル",
           "sexAge": "せん7",
           "carriedWeight": 60,
@@ -14755,7 +15798,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 7,
           "horseNumber": 12,
-          "horseId": "002021101041",
+          "horseId": "102021101041",
           "horseName": "トモジャシャトー",
           "sexAge": "牡5",
           "carriedWeight": 57,
@@ -14781,7 +15824,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 7,
           "horseNumber": 11,
-          "horseId": "002022101532",
+          "horseId": "102022101532",
           "horseName": "エポカスピーガ",
           "sexAge": "牝4",
           "carriedWeight": 58,
@@ -14807,7 +15850,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 3,
           "horseNumber": 4,
-          "horseId": "002022103503",
+          "horseId": "102022103503",
           "horseName": "アウルムレガリア",
           "sexAge": "牝4",
           "carriedWeight": 58,
@@ -14833,7 +15876,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002019110088",
+          "horseId": "102019110088",
           "horseName": "ジャスパーグレイト",
           "sexAge": "牡7",
           "carriedWeight": 60,
@@ -14859,7 +15902,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 8,
           "horseNumber": 14,
-          "horseId": "002022101203",
+          "horseId": "102022101203",
           "horseName": "ゲレル",
           "sexAge": "牝4",
           "carriedWeight": 58,
@@ -14885,7 +15928,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 5,
           "horseNumber": 7,
-          "horseId": "002022103588",
+          "horseId": "102022103588",
           "horseName": "スノーリン",
           "sexAge": "せん4",
           "carriedWeight": 60,
@@ -14911,7 +15954,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 5,
           "horseNumber": 8,
-          "horseId": "002020102956",
+          "horseId": "102020102956",
           "horseName": "ブライテストドーン",
           "sexAge": "せん6",
           "carriedWeight": 60,
@@ -14937,7 +15980,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 6,
           "horseNumber": 9,
-          "horseId": "002022101278",
+          "horseId": "102022101278",
           "horseName": "クラウンウルル",
           "sexAge": "牡4",
           "carriedWeight": 57,
@@ -14963,7 +16006,7 @@ window.KEIBA_RESULTS = {
           "finishText": "13",
           "gateNumber": 4,
           "horseNumber": 5,
-          "horseId": "002022104992",
+          "horseId": "102022104992",
           "horseName": "フェイトライン",
           "sexAge": "牡4",
           "carriedWeight": 60,
@@ -14989,7 +16032,7 @@ window.KEIBA_RESULTS = {
           "finishText": "14",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002021106353",
+          "horseId": "102021106353",
           "horseName": "シグムンド",
           "sexAge": "牡5",
           "carriedWeight": 60,
@@ -15027,6 +16070,20 @@ window.KEIBA_RESULTS = {
           "popularity": 2
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "13",
+          "payoutYen": 710,
+          "popularity": 10
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "6",
+          "payoutYen": 140,
+          "popularity": 1
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "3-8",
@@ -15039,6 +16096,20 @@ window.KEIBA_RESULTS = {
           "selection": "3-13",
           "payoutYen": 1920,
           "popularity": 26
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "3-6",
+          "payoutYen": 240,
+          "popularity": 1
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-13",
+          "payoutYen": 1830,
+          "popularity": 24
         },
         {
           "betClass": "umaren",
@@ -15088,7 +16159,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002023102418",
+          "horseId": "102023102418",
           "horseName": "ヒロイックヴァース",
           "sexAge": "牡3",
           "carriedWeight": 54,
@@ -15114,7 +16185,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 8,
           "horseNumber": 15,
-          "horseId": "002023102967",
+          "horseId": "102023102967",
           "horseName": "クリムゾンリーフ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -15140,7 +16211,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002023101443",
+          "horseId": "102023101443",
           "horseName": "フィーユレアル",
           "sexAge": "牝3",
           "carriedWeight": 52,
@@ -15166,7 +16237,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 2,
           "horseNumber": 3,
-          "horseId": "002023100377",
+          "horseId": "102023100377",
           "horseName": "ゴットタレント",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -15192,7 +16263,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 8,
           "horseNumber": 14,
-          "horseId": "002023106956",
+          "horseId": "102023106956",
           "horseName": "サングラント",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -15218,7 +16289,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 4,
           "horseNumber": 6,
-          "horseId": "002023106860",
+          "horseId": "102023106860",
           "horseName": "アーティキュレート",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -15244,7 +16315,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 3,
           "horseNumber": 4,
-          "horseId": "002023104273",
+          "horseId": "102023104273",
           "horseName": "トランセンコ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -15270,7 +16341,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 6,
           "horseNumber": 10,
-          "horseId": "002023100470",
+          "horseId": "102023100470",
           "horseName": "ペイシャオーヴァル",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -15296,7 +16367,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 7,
           "horseNumber": 13,
-          "horseId": "002023104401",
+          "horseId": "102023104401",
           "horseName": "レアリゼソンレーヴ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -15322,7 +16393,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 5,
           "horseNumber": 8,
-          "horseId": "002023106025",
+          "horseId": "102023106025",
           "horseName": "レヴェンドール",
           "sexAge": "牝3",
           "carriedWeight": 52,
@@ -15348,7 +16419,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 5,
           "horseNumber": 9,
-          "horseId": "002023102042",
+          "horseId": "102023102042",
           "horseName": "ディメンシア",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -15374,7 +16445,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 3,
           "horseNumber": 5,
-          "horseId": "002023106352",
+          "horseId": "102023106352",
           "horseName": "グラスフェザー",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -15400,7 +16471,7 @@ window.KEIBA_RESULTS = {
           "finishText": "13",
           "gateNumber": 7,
           "horseNumber": 12,
-          "horseId": "002023106770",
+          "horseId": "102023106770",
           "horseName": "ジュンヴィヴァン",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -15426,7 +16497,7 @@ window.KEIBA_RESULTS = {
           "finishText": "14",
           "gateNumber": 4,
           "horseNumber": 7,
-          "horseId": "002023106272",
+          "horseId": "102023106272",
           "horseName": "ニシノトマラナイ",
           "sexAge": "せん3",
           "carriedWeight": 54,
@@ -15452,7 +16523,7 @@ window.KEIBA_RESULTS = {
           "finishText": "15",
           "gateNumber": 6,
           "horseNumber": 11,
-          "horseId": "002023106377",
+          "horseId": "102023106377",
           "horseName": "ルストラーレ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -15490,6 +16561,20 @@ window.KEIBA_RESULTS = {
           "popularity": 4
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "15",
+          "payoutYen": 110,
+          "popularity": 1
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "1",
+          "payoutYen": 420,
+          "popularity": 7
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "2-8",
@@ -15502,6 +16587,20 @@ window.KEIBA_RESULTS = {
           "selection": "2-15",
           "payoutYen": 330,
           "popularity": 3
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-2",
+          "payoutYen": 2250,
+          "popularity": 20
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-15",
+          "payoutYen": 830,
+          "popularity": 9
         },
         {
           "betClass": "umaren",
@@ -15551,7 +16650,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 5,
           "horseNumber": 9,
-          "horseId": "002023106744",
+          "horseId": "102023106744",
           "horseName": "ヴァルカンテソーロ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -15577,7 +16676,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 7,
           "horseNumber": 13,
-          "horseId": "002023105892",
+          "horseId": "102023105892",
           "horseName": "ブライスフェアリー",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -15603,7 +16702,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 3,
           "horseNumber": 6,
-          "horseId": "002023105449",
+          "horseId": "102023105449",
           "horseName": "ミナヅキ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -15629,7 +16728,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 4,
           "horseNumber": 7,
-          "horseId": "002023106812",
+          "horseId": "102023106812",
           "horseName": "オーブレーヌ",
           "sexAge": "牝3",
           "carriedWeight": 52,
@@ -15655,7 +16754,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 8,
           "horseNumber": 15,
-          "horseId": "002023104580",
+          "horseId": "102023104580",
           "horseName": "チャンピオンホープ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -15681,7 +16780,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 1,
           "horseNumber": 2,
-          "horseId": "002023106146",
+          "horseId": "102023106146",
           "horseName": "エコロゼット",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -15707,7 +16806,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 6,
           "horseNumber": 11,
-          "horseId": "002023107104",
+          "horseId": "102023107104",
           "horseName": "ギリーカラム",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -15733,7 +16832,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 4,
           "horseNumber": 8,
-          "horseId": "002023105408",
+          "horseId": "102023105408",
           "horseName": "ソアサージュ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -15759,7 +16858,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 2,
           "horseNumber": 3,
-          "horseId": "002023105879",
+          "horseId": "102023105879",
           "horseName": "ウインベルチェーロ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -15785,7 +16884,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 8,
           "horseNumber": 16,
-          "horseId": "002023100651",
+          "horseId": "102023100651",
           "horseName": "ヴォンサクレ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -15811,7 +16910,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 2,
           "horseNumber": 4,
-          "horseId": "002023104359",
+          "horseId": "102023104359",
           "horseName": "ヤマニンリンキング",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -15837,7 +16936,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 6,
           "horseNumber": 12,
-          "horseId": "002023103781",
+          "horseId": "102023103781",
           "horseName": "レイナエヴィータ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -15863,7 +16962,7 @@ window.KEIBA_RESULTS = {
           "finishText": "13",
           "gateNumber": 3,
           "horseNumber": 5,
-          "horseId": "002023107188",
+          "horseId": "102023107188",
           "horseName": "シュタットパーク",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -15889,7 +16988,7 @@ window.KEIBA_RESULTS = {
           "finishText": "14",
           "gateNumber": 7,
           "horseNumber": 14,
-          "horseId": "002023100932",
+          "horseId": "102023100932",
           "horseName": "スティールシップ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -15915,7 +17014,7 @@ window.KEIBA_RESULTS = {
           "finishText": "15",
           "gateNumber": 5,
           "horseNumber": 10,
-          "horseId": "002023102373",
+          "horseId": "102023102373",
           "horseName": "ホウオウショパン",
           "sexAge": "せん3",
           "carriedWeight": 57,
@@ -15941,7 +17040,7 @@ window.KEIBA_RESULTS = {
           "finishText": "16",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002023102527",
+          "horseId": "102023102527",
           "horseName": "ウッケン",
           "sexAge": "牝3",
           "carriedWeight": 52,
@@ -15979,6 +17078,20 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "13",
+          "payoutYen": 290,
+          "popularity": 6
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "6",
+          "payoutYen": 150,
+          "popularity": 2
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "5-7",
@@ -15991,6 +17104,20 @@ window.KEIBA_RESULTS = {
           "selection": "9-13",
           "payoutYen": 430,
           "popularity": 4
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-9",
+          "payoutYen": 220,
+          "popularity": 1
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-13",
+          "payoutYen": 1070,
+          "popularity": 10
         },
         {
           "betClass": "umaren",
@@ -16040,7 +17167,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 6,
           "horseNumber": 6,
-          "horseId": "002024103581",
+          "horseId": "102024103581",
           "horseName": "ラヴィサンエール",
           "sexAge": "牝2",
           "carriedWeight": 52,
@@ -16064,7 +17191,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 7,
           "horseNumber": 8,
-          "horseId": "002024100337",
+          "horseId": "102024100337",
           "horseName": "サンヴァンガード",
           "sexAge": "牡2",
           "carriedWeight": 52,
@@ -16088,7 +17215,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 5,
           "horseNumber": 5,
-          "horseId": "002024102061",
+          "horseId": "102024102061",
           "horseName": "ワレモコウ",
           "sexAge": "牝2",
           "carriedWeight": 55,
@@ -16112,7 +17239,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002024104541",
+          "horseId": "102024104541",
           "horseName": "エコロテラ",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -16136,7 +17263,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 4,
           "horseNumber": 4,
-          "horseId": "002024107005",
+          "horseId": "102024107005",
           "horseName": "ヴェールネージュ",
           "sexAge": "牝2",
           "carriedWeight": 52,
@@ -16160,7 +17287,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 8,
           "horseNumber": 9,
-          "horseId": "002024102004",
+          "horseId": "102024102004",
           "horseName": "ハルガスミ",
           "sexAge": "牝2",
           "carriedWeight": 55,
@@ -16184,7 +17311,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002024102155",
+          "horseId": "102024102155",
           "horseName": "ジェントルアイズ",
           "sexAge": "牝2",
           "carriedWeight": 52,
@@ -16208,7 +17335,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 8,
           "horseNumber": 10,
-          "horseId": "002024102127",
+          "horseId": "102024102127",
           "horseName": "トム",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -16232,7 +17359,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 7,
           "horseNumber": 7,
-          "horseId": "002024101195",
+          "horseId": "102024101195",
           "horseName": "サクセスボーイ",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -16256,7 +17383,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002024103179",
+          "horseId": "102024103179",
           "horseName": "ウカテンセイ",
           "sexAge": "牝2",
           "carriedWeight": 55,
@@ -16292,6 +17419,20 @@ window.KEIBA_RESULTS = {
           "popularity": 2
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "8",
+          "payoutYen": 150,
+          "popularity": 4
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "5",
+          "payoutYen": 150,
+          "popularity": 3
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "6-7",
@@ -16304,6 +17445,20 @@ window.KEIBA_RESULTS = {
           "selection": "6-8",
           "payoutYen": 470,
           "popularity": 6
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "5-6",
+          "payoutYen": 390,
+          "popularity": 3
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "5-8",
+          "payoutYen": 390,
+          "popularity": 4
         },
         {
           "betClass": "umaren",
@@ -16353,7 +17508,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 6,
           "horseNumber": 12,
-          "horseId": "002024106301",
+          "horseId": "102024106301",
           "horseName": "リサナウト",
           "sexAge": "牝2",
           "carriedWeight": 55,
@@ -16379,7 +17534,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 2,
           "horseNumber": 4,
-          "horseId": "002024106183",
+          "horseId": "102024106183",
           "horseName": "ウィクフォード",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -16405,7 +17560,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 7,
           "horseNumber": 14,
-          "horseId": "002024104469",
+          "horseId": "102024104469",
           "horseName": "エクスマキナ",
           "sexAge": "牝2",
           "carriedWeight": 55,
@@ -16431,7 +17586,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 4,
           "horseNumber": 8,
-          "horseId": "002024101481",
+          "horseId": "102024101481",
           "horseName": "ソラニワラエバ",
           "sexAge": "牡2",
           "carriedWeight": 53,
@@ -16457,7 +17612,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 8,
           "horseNumber": 16,
-          "horseId": "002024101589",
+          "horseId": "102024101589",
           "horseName": "エイシンウルクンデ",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -16483,7 +17638,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 6,
           "horseNumber": 11,
-          "horseId": "002024106375",
+          "horseId": "102024106375",
           "horseName": "シーズアウルフ",
           "sexAge": "牝2",
           "carriedWeight": 55,
@@ -16509,7 +17664,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 1,
           "horseNumber": 2,
-          "horseId": "002024101560",
+          "horseId": "102024101560",
           "horseName": "イキフン",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -16535,7 +17690,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 4,
           "horseNumber": 7,
-          "horseId": "002024102850",
+          "horseId": "102024102850",
           "horseName": "セレスタイト",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -16561,7 +17716,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002024101798",
+          "horseId": "102024101798",
           "horseName": "ブルーリボン",
           "sexAge": "牝2",
           "carriedWeight": 55,
@@ -16587,7 +17742,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 3,
           "horseNumber": 6,
-          "horseId": "002024106974",
+          "horseId": "102024106974",
           "horseName": "ワンコール",
           "sexAge": "牝2",
           "carriedWeight": 55,
@@ -16613,7 +17768,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 5,
           "horseNumber": 9,
-          "horseId": "002024105844",
+          "horseId": "102024105844",
           "horseName": "ドーンレーサー",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -16639,7 +17794,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 3,
           "horseNumber": 5,
-          "horseId": "002024100263",
+          "horseId": "102024100263",
           "horseName": "ローグアン",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -16665,7 +17820,7 @@ window.KEIBA_RESULTS = {
           "finishText": "13",
           "gateNumber": 8,
           "horseNumber": 15,
-          "horseId": "002024102407",
+          "horseId": "102024102407",
           "horseName": "インザダーク",
           "sexAge": "牝2",
           "carriedWeight": 55,
@@ -16691,7 +17846,7 @@ window.KEIBA_RESULTS = {
           "finishText": "14",
           "gateNumber": 2,
           "horseNumber": 3,
-          "horseId": "002024100130",
+          "horseId": "102024100130",
           "horseName": "タクミオジュウ",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -16717,7 +17872,7 @@ window.KEIBA_RESULTS = {
           "finishText": "15",
           "gateNumber": 5,
           "horseNumber": 10,
-          "horseId": "002024100298",
+          "horseId": "102024100298",
           "horseName": "クラウントリオンフ",
           "sexAge": "牡2",
           "carriedWeight": 52,
@@ -16743,7 +17898,7 @@ window.KEIBA_RESULTS = {
           "finishText": "16",
           "gateNumber": 7,
           "horseNumber": 13,
-          "horseId": "002024103502",
+          "horseId": "102024103502",
           "horseName": "ハクタカ",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -16781,6 +17936,20 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "4",
+          "payoutYen": 160,
+          "popularity": 2
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "14",
+          "payoutYen": 580,
+          "popularity": 8
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "2-6",
@@ -16793,6 +17962,20 @@ window.KEIBA_RESULTS = {
           "selection": "4-12",
           "payoutYen": 350,
           "popularity": 2
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "12-14",
+          "payoutYen": 1060,
+          "popularity": 12
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-14",
+          "payoutYen": 2160,
+          "popularity": 26
         },
         {
           "betClass": "umaren",
@@ -16842,7 +18025,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 6,
           "horseNumber": 12,
-          "horseId": "002023102422",
+          "horseId": "102023102422",
           "horseName": "ミラビリオン",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -16866,7 +18049,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 3,
           "horseNumber": 6,
-          "horseId": "002023107532",
+          "horseId": "102023107532",
           "horseName": "ミスタートントン",
           "sexAge": "牡3",
           "carriedWeight": 54,
@@ -16890,7 +18073,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 5,
           "horseNumber": 10,
-          "horseId": "002023106130",
+          "horseId": "102023106130",
           "horseName": "ジェムシリカ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -16914,7 +18097,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 3,
           "horseNumber": 5,
-          "horseId": "002023106658",
+          "horseId": "102023106658",
           "horseName": "ニンジャトットリ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -16938,7 +18121,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 4,
           "horseNumber": 7,
-          "horseId": "002023100102",
+          "horseId": "102023100102",
           "horseName": "イイクニパッション",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -16962,7 +18145,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 6,
           "horseNumber": 11,
-          "horseId": "002023101037",
+          "horseId": "102023101037",
           "horseName": "ツクバヴァンガード",
           "sexAge": "牡3",
           "carriedWeight": 54,
@@ -16986,7 +18169,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 1,
           "horseNumber": 2,
-          "horseId": "002023100283",
+          "horseId": "102023100283",
           "horseName": "アドミ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -17010,7 +18193,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 7,
           "horseNumber": 13,
-          "horseId": "002023103779",
+          "horseId": "102023103779",
           "horseName": "トリエンナーレ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -17034,7 +18217,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 2,
           "horseNumber": 3,
-          "horseId": "002023102401",
+          "horseId": "102023102401",
           "horseName": "ジャメビュ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -17058,7 +18241,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 8,
           "horseNumber": 16,
-          "horseId": "002023101845",
+          "horseId": "102023101845",
           "horseName": "マッシブショット",
           "sexAge": "せん3",
           "carriedWeight": 57,
@@ -17082,7 +18265,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 8,
           "horseNumber": 15,
-          "horseId": "002023106351",
+          "horseId": "102023106351",
           "horseName": "グラスアロー",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -17106,7 +18289,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 7,
           "horseNumber": 14,
-          "horseId": "002023109078",
+          "horseId": "102023109078",
           "horseName": "ユニオンジャック",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -17130,7 +18313,7 @@ window.KEIBA_RESULTS = {
           "finishText": "13",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002023107540",
+          "horseId": "102023107540",
           "horseName": "ピコランド",
           "sexAge": "牡3",
           "carriedWeight": 56,
@@ -17154,7 +18337,7 @@ window.KEIBA_RESULTS = {
           "finishText": "14",
           "gateNumber": 4,
           "horseNumber": 8,
-          "horseId": "002023107151",
+          "horseId": "102023107151",
           "horseName": "フォワードシャッセ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -17178,7 +18361,7 @@ window.KEIBA_RESULTS = {
           "finishText": "15",
           "gateNumber": 5,
           "horseNumber": 9,
-          "horseId": "002023110048",
+          "horseId": "102023110048",
           "horseName": "オスロクィーン",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -17202,7 +18385,7 @@ window.KEIBA_RESULTS = {
           "finishText": "16",
           "gateNumber": 2,
           "horseNumber": 4,
-          "horseId": "002023100518",
+          "horseId": "102023100518",
           "horseName": "パストゥザスターズ",
           "sexAge": "牝3",
           "carriedWeight": 52,
@@ -17238,6 +18421,20 @@ window.KEIBA_RESULTS = {
           "popularity": 5
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "6",
+          "payoutYen": 190,
+          "popularity": 2
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "10",
+          "payoutYen": 860,
+          "popularity": 9
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "3-6",
@@ -17250,6 +18447,20 @@ window.KEIBA_RESULTS = {
           "selection": "6-12",
           "payoutYen": 1030,
           "popularity": 11
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "10-12",
+          "payoutYen": 5430,
+          "popularity": 45
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-10",
+          "payoutYen": 3480,
+          "popularity": 33
         },
         {
           "betClass": "umaren",
@@ -17299,7 +18510,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 2,
           "horseNumber": 4,
-          "horseId": "002023105561",
+          "horseId": "102023105561",
           "horseName": "シャインフォーミー",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -17323,7 +18534,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 6,
           "horseNumber": 12,
-          "horseId": "002023107019",
+          "horseId": "102023107019",
           "horseName": "ラルルジェンヌ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -17347,7 +18558,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 5,
           "horseNumber": 10,
-          "horseId": "002023103657",
+          "horseId": "102023103657",
           "horseName": "ノーブルクロンヌ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -17371,7 +18582,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 4,
           "horseNumber": 8,
-          "horseId": "002023103544",
+          "horseId": "102023103544",
           "horseName": "フライスカイハイ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -17395,7 +18606,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 7,
           "horseNumber": 13,
-          "horseId": "002023104025",
+          "horseId": "102023104025",
           "horseName": "スイートハイデン",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -17419,7 +18630,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 3,
           "horseNumber": 6,
-          "horseId": "002023106441",
+          "horseId": "102023106441",
           "horseName": "インザライムライト",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -17443,7 +18654,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 4,
           "horseNumber": 7,
-          "horseId": "002023100290",
+          "horseId": "102023100290",
           "horseName": "リナシタ",
           "sexAge": "牝3",
           "carriedWeight": 52,
@@ -17467,7 +18678,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 5,
           "horseNumber": 9,
-          "horseId": "002023100321",
+          "horseId": "102023100321",
           "horseName": "ウインディナナコ",
           "sexAge": "牝3",
           "carriedWeight": 52,
@@ -17491,7 +18702,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 2,
           "horseNumber": 3,
-          "horseId": "002023100815",
+          "horseId": "102023100815",
           "horseName": "マリノマーベラス",
           "sexAge": "牝3",
           "carriedWeight": 52,
@@ -17515,7 +18726,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 7,
           "horseNumber": 14,
-          "horseId": "002023104980",
+          "horseId": "102023104980",
           "horseName": "ベルオーシャン",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -17539,7 +18750,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 6,
           "horseNumber": 11,
-          "horseId": "002023106095",
+          "horseId": "102023106095",
           "horseName": "キッショウダラニ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -17563,7 +18774,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002023101040",
+          "horseId": "102023101040",
           "horseName": "コスモシグルン",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -17587,7 +18798,7 @@ window.KEIBA_RESULTS = {
           "finishText": "13",
           "gateNumber": 3,
           "horseNumber": 5,
-          "horseId": "002023100348",
+          "horseId": "102023100348",
           "horseName": "モーニングダリア",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -17611,7 +18822,7 @@ window.KEIBA_RESULTS = {
           "finishText": "14",
           "gateNumber": 8,
           "horseNumber": 15,
-          "horseId": "002023103306",
+          "horseId": "102023103306",
           "horseName": "サクラモンストール",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -17635,7 +18846,7 @@ window.KEIBA_RESULTS = {
           "finishText": "15",
           "gateNumber": 8,
           "horseNumber": 16,
-          "horseId": "002023100181",
+          "horseId": "102023100181",
           "horseName": "ダノンクラウディア",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -17659,7 +18870,7 @@ window.KEIBA_RESULTS = {
           "finishText": "16",
           "gateNumber": 1,
           "horseNumber": 2,
-          "horseId": "002023100226",
+          "horseId": "102023100226",
           "horseName": "イマジェリーナ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -17695,6 +18906,20 @@ window.KEIBA_RESULTS = {
           "popularity": 2
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "12",
+          "payoutYen": 310,
+          "popularity": 5
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "10",
+          "payoutYen": 230,
+          "popularity": 3
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "2-6",
@@ -17707,6 +18932,20 @@ window.KEIBA_RESULTS = {
           "selection": "4-12",
           "payoutYen": 990,
           "popularity": 10
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-10",
+          "payoutYen": 550,
+          "popularity": 5
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "10-12",
+          "payoutYen": 1120,
+          "popularity": 11
         },
         {
           "betClass": "umaren",
@@ -17756,7 +18995,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 8,
           "horseNumber": 12,
-          "horseId": "002023106190",
+          "horseId": "102023106190",
           "horseName": "デンプシー",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -17780,7 +19019,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 5,
           "horseNumber": 6,
-          "horseId": "002023102633",
+          "horseId": "102023102633",
           "horseName": "アイアンパイク",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -17804,7 +19043,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 7,
           "horseNumber": 9,
-          "horseId": "002022101108",
+          "horseId": "102022101108",
           "horseName": "ホウオウショコラ",
           "sexAge": "牝4",
           "carriedWeight": 53,
@@ -17828,7 +19067,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 6,
           "horseNumber": 8,
-          "horseId": "002023100831",
+          "horseId": "102023100831",
           "horseName": "ミスターマーボー",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -17852,7 +19091,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002020100084",
+          "horseId": "102020100084",
           "horseName": "レッドカメリア",
           "sexAge": "牝6",
           "carriedWeight": 56,
@@ -17876,7 +19115,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 6,
           "horseNumber": 7,
-          "horseId": "002021100958",
+          "horseId": "102021100958",
           "horseName": "ビッグフラワー",
           "sexAge": "牡5",
           "carriedWeight": 58,
@@ -17900,7 +19139,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 8,
           "horseNumber": 11,
-          "horseId": "002023103499",
+          "horseId": "102023103499",
           "horseName": "ザバルガド",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -17924,7 +19163,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002022102696",
+          "horseId": "102022102696",
           "horseName": "ラブリーガール",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -17948,7 +19187,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 7,
           "horseNumber": 10,
-          "horseId": "002022106818",
+          "horseId": "102022106818",
           "horseName": "マイネルステラート",
           "sexAge": "牡4",
           "carriedWeight": 58,
@@ -17972,7 +19211,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 5,
           "horseNumber": 5,
-          "horseId": "002023100954",
+          "horseId": "102023100954",
           "horseName": "テルケンレンスキー",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -17996,7 +19235,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 4,
           "horseNumber": 4,
-          "horseId": "002021103332",
+          "horseId": "102021103332",
           "horseName": "アイスブレイカー",
           "sexAge": "牡5",
           "carriedWeight": 58,
@@ -18020,7 +19259,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002023102897",
+          "horseId": "102023102897",
           "horseName": "プリティーミズホ",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -18056,6 +19295,20 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "6",
+          "payoutYen": 160,
+          "popularity": 3
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "9",
+          "payoutYen": 420,
+          "popularity": 9
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "5-8",
@@ -18068,6 +19321,20 @@ window.KEIBA_RESULTS = {
           "selection": "6-12",
           "payoutYen": 260,
           "popularity": 1
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "9-12",
+          "payoutYen": 1640,
+          "popularity": 22
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-9",
+          "payoutYen": 2010,
+          "popularity": 27
         },
         {
           "betClass": "umaren",
@@ -18117,7 +19384,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 5,
           "horseNumber": 7,
-          "horseId": "002022104844",
+          "horseId": "102022104844",
           "horseName": "ブルスカメンテ",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -18143,7 +19410,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 3,
           "horseNumber": 4,
-          "horseId": "002022106618",
+          "horseId": "102022106618",
           "horseName": "ジェルブロア",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -18169,7 +19436,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 7,
           "horseNumber": 11,
-          "horseId": "002021107253",
+          "horseId": "102021107253",
           "horseName": "ニシノコマチムスメ",
           "sexAge": "牝5",
           "carriedWeight": 56,
@@ -18195,7 +19462,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 4,
           "horseNumber": 6,
-          "horseId": "002022105131",
+          "horseId": "102022105131",
           "horseName": "キューティリップ",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -18221,7 +19488,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 4,
           "horseNumber": 5,
-          "horseId": "002022105181",
+          "horseId": "102022105181",
           "horseName": "ロゼフェリシア",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -18247,7 +19514,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002023101820",
+          "horseId": "102023101820",
           "horseName": "サフランルージュ",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -18273,7 +19540,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002021105168",
+          "horseId": "102021105168",
           "horseName": "クイーンズワーフ",
           "sexAge": "牝5",
           "carriedWeight": 56,
@@ -18299,7 +19566,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 6,
           "horseNumber": 9,
-          "horseId": "002023103069",
+          "horseId": "102023103069",
           "horseName": "ノーブルクラウド",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -18325,7 +19592,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 7,
           "horseNumber": 12,
-          "horseId": "002023103543",
+          "horseId": "102023103543",
           "horseName": "ルージュリリック",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -18351,7 +19618,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 6,
           "horseNumber": 10,
-          "horseId": "002023106802",
+          "horseId": "102023106802",
           "horseName": "サルワールカミーズ",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -18377,7 +19644,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 8,
           "horseNumber": 13,
-          "horseId": "002023106412",
+          "horseId": "102023106412",
           "horseName": "ユメシルベ",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -18403,7 +19670,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002022100106",
+          "horseId": "102022100106",
           "horseName": "ペプロス",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -18429,7 +19696,7 @@ window.KEIBA_RESULTS = {
           "finishText": "13",
           "gateNumber": 5,
           "horseNumber": 8,
-          "horseId": "002022106347",
+          "horseId": "102022106347",
           "horseName": "テンドリームガール",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -18455,7 +19722,7 @@ window.KEIBA_RESULTS = {
           "finishText": "14",
           "gateNumber": 8,
           "horseNumber": 14,
-          "horseId": "002022101710",
+          "horseId": "102022101710",
           "horseName": "ヒサエノオモカゲ",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -18493,6 +19760,20 @@ window.KEIBA_RESULTS = {
           "popularity": 3
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "4",
+          "payoutYen": 260,
+          "popularity": 4
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "11",
+          "payoutYen": 2730,
+          "popularity": 14
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "3-5",
@@ -18505,6 +19786,20 @@ window.KEIBA_RESULTS = {
           "selection": "4-7",
           "payoutYen": 670,
           "popularity": 4
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "7-11",
+          "payoutYen": 7400,
+          "popularity": 62
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-11",
+          "payoutYen": 11630,
+          "popularity": 73
         },
         {
           "betClass": "umaren",
@@ -18554,7 +19849,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 8,
           "horseNumber": 11,
-          "horseId": "002021105182",
+          "horseId": "102021105182",
           "horseName": "ドバイブルース",
           "sexAge": "牡5",
           "carriedWeight": 58,
@@ -18580,7 +19875,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002023105748",
+          "horseId": "102023105748",
           "horseName": "リフレックス",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -18606,7 +19901,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 7,
           "horseNumber": 8,
-          "horseId": "002018104646",
+          "horseId": "102018104646",
           "horseName": "オンザライン",
           "sexAge": "せん8",
           "carriedWeight": 58,
@@ -18632,7 +19927,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 5,
           "horseNumber": 5,
-          "horseId": "002019102102",
+          "horseId": "102019102102",
           "horseName": "ゲキザル",
           "sexAge": "牡7",
           "carriedWeight": 58,
@@ -18658,7 +19953,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 6,
           "horseNumber": 6,
-          "horseId": "002022101389",
+          "horseId": "102022101389",
           "horseName": "サトミノエンジェル",
           "sexAge": "牡4",
           "carriedWeight": 58,
@@ -18684,7 +19979,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002022101818",
+          "horseId": "102022101818",
           "horseName": "ジェイエルマスター",
           "sexAge": "牡4",
           "carriedWeight": 58,
@@ -18710,7 +20005,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002022104378",
+          "horseId": "102022104378",
           "horseName": "ダカラフェスティヴ",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -18736,7 +20031,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 8,
           "horseNumber": 10,
-          "horseId": "002020102187",
+          "horseId": "102020102187",
           "horseName": "スマートケープ",
           "sexAge": "牝6",
           "carriedWeight": 56,
@@ -18762,7 +20057,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 4,
           "horseNumber": 4,
-          "horseId": "002020104632",
+          "horseId": "102020104632",
           "horseName": "ハッスルダンク",
           "sexAge": "せん6",
           "carriedWeight": 58,
@@ -18788,7 +20083,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 7,
           "horseNumber": 9,
-          "horseId": "002022105429",
+          "horseId": "102022105429",
           "horseName": "チギリ",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -18814,7 +20109,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 6,
           "horseNumber": 7,
-          "horseId": "002021104302",
+          "horseId": "102021104302",
           "horseName": "ティンティンデオ",
           "sexAge": "牡5",
           "carriedWeight": 58,
@@ -18852,6 +20147,20 @@ window.KEIBA_RESULTS = {
           "popularity": 2
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "3",
+          "payoutYen": 130,
+          "popularity": 1
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "8",
+          "payoutYen": 450,
+          "popularity": 8
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "3-8",
@@ -18864,6 +20173,20 @@ window.KEIBA_RESULTS = {
           "selection": "3-11",
           "payoutYen": 260,
           "popularity": 1
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "8-11",
+          "payoutYen": 1360,
+          "popularity": 19
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "3-8",
+          "payoutYen": 1380,
+          "popularity": 20
         },
         {
           "betClass": "umaren",
@@ -18913,7 +20236,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 6,
           "horseNumber": 11,
-          "horseId": "002021106954",
+          "horseId": "102021106954",
           "horseName": "アスクナイスショー",
           "sexAge": "牡5",
           "carriedWeight": 55,
@@ -18939,7 +20262,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 3,
           "horseNumber": 6,
-          "horseId": "002020105749",
+          "horseId": "102020105749",
           "horseName": "マイネルモーント",
           "sexAge": "牡6",
           "carriedWeight": 56,
@@ -18965,7 +20288,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 5,
           "horseNumber": 9,
-          "horseId": "002019104756",
+          "horseId": "102019104756",
           "horseName": "オニャンコポン",
           "sexAge": "せん7",
           "carriedWeight": 54,
@@ -18991,7 +20314,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 5,
           "horseNumber": 10,
-          "horseId": "002022101648",
+          "horseId": "102022101648",
           "horseName": "センツブラッド",
           "sexAge": "牡4",
           "carriedWeight": 56,
@@ -19017,7 +20340,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002019104658",
+          "horseId": "102019104658",
           "horseName": "ボーンディスウェイ",
           "sexAge": "牡7",
           "carriedWeight": 56,
@@ -19043,7 +20366,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 8,
           "horseNumber": 15,
-          "horseId": "002022106611",
+          "horseId": "102022106611",
           "horseName": "ヤマニンブークリエ",
           "sexAge": "牡4",
           "carriedWeight": 56,
@@ -19069,7 +20392,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 2,
           "horseNumber": 4,
-          "horseId": "002022104896",
+          "horseId": "102022104896",
           "horseName": "カラマティアノス",
           "sexAge": "牡4",
           "carriedWeight": 58,
@@ -19095,7 +20418,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 3,
           "horseNumber": 5,
-          "horseId": "002021101387",
+          "horseId": "102021101387",
           "horseName": "オーロラエックス",
           "sexAge": "牝5",
           "carriedWeight": 55,
@@ -19121,7 +20444,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 1,
           "horseNumber": 2,
-          "horseId": "002020102740",
+          "horseId": "102020102740",
           "horseName": "コントラポスト",
           "sexAge": "せん6",
           "carriedWeight": 56,
@@ -19147,7 +20470,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 8,
           "horseNumber": 16,
-          "horseId": "002020100734",
+          "horseId": "102020100734",
           "horseName": "サヴォーナ",
           "sexAge": "牡6",
           "carriedWeight": 58,
@@ -19173,7 +20496,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 4,
           "horseNumber": 8,
-          "horseId": "002021105799",
+          "horseId": "102021105799",
           "horseName": "クリスマスパレード",
           "sexAge": "牝5",
           "carriedWeight": 55,
@@ -19199,7 +20522,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 7,
           "horseNumber": 13,
-          "horseId": "002019105193",
+          "horseId": "102019105193",
           "horseName": "バトルボーン",
           "sexAge": "牡7",
           "carriedWeight": 57,
@@ -19225,7 +20548,7 @@ window.KEIBA_RESULTS = {
           "finishText": "13",
           "gateNumber": 6,
           "horseNumber": 12,
-          "horseId": "002019103823",
+          "horseId": "102019103823",
           "horseName": "リカンカブール",
           "sexAge": "せん7",
           "carriedWeight": 57,
@@ -19251,7 +20574,7 @@ window.KEIBA_RESULTS = {
           "finishText": "14",
           "gateNumber": 2,
           "horseNumber": 3,
-          "horseId": "002019104998",
+          "horseId": "102019104998",
           "horseName": "ショウナンマグマ",
           "sexAge": "せん7",
           "carriedWeight": 55,
@@ -19277,7 +20600,7 @@ window.KEIBA_RESULTS = {
           "finishText": "15",
           "gateNumber": 7,
           "horseNumber": 14,
-          "horseId": "002021104846",
+          "horseId": "102021104846",
           "horseName": "オールナット",
           "sexAge": "牡5",
           "carriedWeight": 57.5,
@@ -19303,7 +20626,7 @@ window.KEIBA_RESULTS = {
           "finishText": "16",
           "gateNumber": 4,
           "horseNumber": 7,
-          "horseId": "002021104791",
+          "horseId": "102021104791",
           "horseName": "メリオーレム",
           "sexAge": "牡5",
           "carriedWeight": 55,
@@ -19341,6 +20664,20 @@ window.KEIBA_RESULTS = {
           "popularity": 2
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "6",
+          "payoutYen": 370,
+          "popularity": 6
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "9",
+          "payoutYen": 1190,
+          "popularity": 15
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "3-6",
@@ -19353,6 +20690,20 @@ window.KEIBA_RESULTS = {
           "selection": "6-11",
           "payoutYen": 1080,
           "popularity": 9
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "9-11",
+          "payoutYen": 6890,
+          "popularity": 78
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-9",
+          "payoutYen": 9380,
+          "popularity": 89
         },
         {
           "betClass": "umaren",
@@ -19402,7 +20753,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 8,
           "horseNumber": 15,
-          "horseId": "002021102259",
+          "horseId": "102021102259",
           "horseName": "クリノオリーブ",
           "sexAge": "牝5",
           "carriedWeight": 56,
@@ -19426,7 +20777,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002022110132",
+          "horseId": "102022110132",
           "horseName": "ピコテンダー",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -19450,7 +20801,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 5,
           "horseNumber": 10,
-          "horseId": "002021102406",
+          "horseId": "102021102406",
           "horseName": "レイワサンサン",
           "sexAge": "せん5",
           "carriedWeight": 58,
@@ -19474,7 +20825,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 4,
           "horseNumber": 8,
-          "horseId": "002022102716",
+          "horseId": "102022102716",
           "horseName": "サンマルノヴェル",
           "sexAge": "牡4",
           "carriedWeight": 58,
@@ -19498,7 +20849,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 8,
           "horseNumber": 16,
-          "horseId": "002019105041",
+          "horseId": "102019105041",
           "horseName": "ホウオウプレミア",
           "sexAge": "牡7",
           "carriedWeight": 58,
@@ -19522,7 +20873,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 7,
           "horseNumber": 13,
-          "horseId": "002021105753",
+          "horseId": "102021105753",
           "horseName": "フェンダー",
           "sexAge": "牡5",
           "carriedWeight": 58,
@@ -19546,7 +20897,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 5,
           "horseNumber": 9,
-          "horseId": "002021101015",
+          "horseId": "102021101015",
           "horseName": "スーパーバイザー",
           "sexAge": "牡5",
           "carriedWeight": 58,
@@ -19570,7 +20921,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 3,
           "horseNumber": 5,
-          "horseId": "002020103937",
+          "horseId": "102020103937",
           "horseName": "ラヴァグロウ",
           "sexAge": "牝6",
           "carriedWeight": 56,
@@ -19594,7 +20945,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 3,
           "horseNumber": 6,
-          "horseId": "002022106243",
+          "horseId": "102022106243",
           "horseName": "サヨノジャンボリー",
           "sexAge": "牡4",
           "carriedWeight": 58,
@@ -19618,7 +20969,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 1,
           "horseNumber": 2,
-          "horseId": "002021105976",
+          "horseId": "102021105976",
           "horseName": "ローマンレイク",
           "sexAge": "牝5",
           "carriedWeight": 56,
@@ -19642,7 +20993,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 4,
           "horseNumber": 7,
-          "horseId": "002022102785",
+          "horseId": "102022102785",
           "horseName": "ラーナローザ",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -19666,7 +21017,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 6,
           "horseNumber": 11,
-          "horseId": "002021101219",
+          "horseId": "102021101219",
           "horseName": "マフィン",
           "sexAge": "牝5",
           "carriedWeight": 56,
@@ -19690,7 +21041,7 @@ window.KEIBA_RESULTS = {
           "finishText": "13",
           "gateNumber": 2,
           "horseNumber": 3,
-          "horseId": "002022103924",
+          "horseId": "102022103924",
           "horseName": "ショウナンラリー",
           "sexAge": "牡4",
           "carriedWeight": 58,
@@ -19714,7 +21065,7 @@ window.KEIBA_RESULTS = {
           "finishText": "14",
           "gateNumber": 7,
           "horseNumber": 14,
-          "horseId": "002021102458",
+          "horseId": "102021102458",
           "horseName": "ホーリーブライト",
           "sexAge": "牝5",
           "carriedWeight": 56,
@@ -19738,7 +21089,7 @@ window.KEIBA_RESULTS = {
           "finishText": "15",
           "gateNumber": 2,
           "horseNumber": 4,
-          "horseId": "002022101959",
+          "horseId": "102022101959",
           "horseName": "ペプチドクレマチス",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -19762,7 +21113,7 @@ window.KEIBA_RESULTS = {
           "finishText": "中止",
           "gateNumber": 6,
           "horseNumber": 12,
-          "horseId": "002021106298",
+          "horseId": "102021106298",
           "horseName": "モリノレッドスター",
           "sexAge": "牝5",
           "carriedWeight": 56,
@@ -19795,6 +21146,20 @@ window.KEIBA_RESULTS = {
           "popularity": 5
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "1",
+          "payoutYen": 180,
+          "popularity": 2
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "10",
+          "payoutYen": 1180,
+          "popularity": 12
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "1-8",
@@ -19807,6 +21172,20 @@ window.KEIBA_RESULTS = {
           "selection": "1-15",
           "payoutYen": 830,
           "popularity": 8
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "10-15",
+          "payoutYen": 4500,
+          "popularity": 46
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-10",
+          "payoutYen": 2900,
+          "popularity": 33
         },
         {
           "betClass": "umaren",
@@ -19856,7 +21235,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 5,
           "horseNumber": 10,
-          "horseId": "002023102145",
+          "horseId": "102023102145",
           "horseName": "ホーリーステップ",
           "sexAge": "牝3",
           "carriedWeight": 52,
@@ -19880,7 +21259,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 1,
           "horseNumber": 2,
-          "horseId": "002023100973",
+          "horseId": "102023100973",
           "horseName": "コースタルロード",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -19904,7 +21283,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 6,
           "horseNumber": 11,
-          "horseId": "002023105692",
+          "horseId": "102023105692",
           "horseName": "ハクサンテドリガワ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -19928,7 +21307,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 2,
           "horseNumber": 4,
-          "horseId": "002023103381",
+          "horseId": "102023103381",
           "horseName": "ドゥボヌール",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -19952,7 +21331,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 8,
           "horseNumber": 16,
-          "horseId": "002023104994",
+          "horseId": "102023104994",
           "horseName": "ティグリス",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -19976,7 +21355,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 5,
           "horseNumber": 9,
-          "horseId": "002023103436",
+          "horseId": "102023103436",
           "horseName": "テンタイムトップ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -20000,7 +21379,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 8,
           "horseNumber": 15,
-          "horseId": "002023109072",
+          "horseId": "102023109072",
           "horseName": "ベルセクレト",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -20024,7 +21403,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 2,
           "horseNumber": 3,
-          "horseId": "002023102063",
+          "horseId": "102023102063",
           "horseName": "アリディプラチノ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -20048,7 +21427,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 7,
           "horseNumber": 14,
-          "horseId": "002023106792",
+          "horseId": "102023106792",
           "horseName": "ロージーキャンドル",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -20072,7 +21451,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 3,
           "horseNumber": 6,
-          "horseId": "002023103353",
+          "horseId": "102023103353",
           "horseName": "シャンデリュイーズ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -20096,7 +21475,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 7,
           "horseNumber": 13,
-          "horseId": "002023106464",
+          "horseId": "102023106464",
           "horseName": "フルフィルメント",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -20120,7 +21499,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 4,
           "horseNumber": 8,
-          "horseId": "002023104374",
+          "horseId": "102023104374",
           "horseName": "ブライトエンジェル",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -20144,7 +21523,7 @@ window.KEIBA_RESULTS = {
           "finishText": "13",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002023102232",
+          "horseId": "102023102232",
           "horseName": "リザレクティア",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -20168,7 +21547,7 @@ window.KEIBA_RESULTS = {
           "finishText": "14",
           "gateNumber": 4,
           "horseNumber": 7,
-          "horseId": "002023100490",
+          "horseId": "102023100490",
           "horseName": "ピンクパンサー",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -20192,7 +21571,7 @@ window.KEIBA_RESULTS = {
           "finishText": "15",
           "gateNumber": 8,
           "horseNumber": 17,
-          "horseId": "002023104345",
+          "horseId": "102023104345",
           "horseName": "マルモズイルバア",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -20216,7 +21595,7 @@ window.KEIBA_RESULTS = {
           "finishText": "16",
           "gateNumber": 6,
           "horseNumber": 12,
-          "horseId": "002023103978",
+          "horseId": "102023103978",
           "horseName": "ヨウリンケイジュ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -20240,7 +21619,7 @@ window.KEIBA_RESULTS = {
           "finishText": "17",
           "gateNumber": 3,
           "horseNumber": 5,
-          "horseId": "002023104381",
+          "horseId": "102023104381",
           "horseName": "ビケイムフリー",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -20276,6 +21655,20 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "2",
+          "payoutYen": 850,
+          "popularity": 10
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "11",
+          "payoutYen": 330,
+          "popularity": 6
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "1-5",
@@ -20288,6 +21681,20 @@ window.KEIBA_RESULTS = {
           "selection": "2-10",
           "payoutYen": 2950,
           "popularity": 32
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "10-11",
+          "payoutYen": 700,
+          "popularity": 5
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "2-11",
+          "payoutYen": 5960,
+          "popularity": 49
         },
         {
           "betClass": "umaren",
@@ -20337,7 +21744,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 6,
           "horseNumber": 9,
-          "horseId": "002023103810",
+          "horseId": "102023103810",
           "horseName": "キャッチアシーフ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -20361,7 +21768,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 4,
           "horseNumber": 6,
-          "horseId": "002023101500",
+          "horseId": "102023101500",
           "horseName": "クロカミジョウ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -20385,7 +21792,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 6,
           "horseNumber": 10,
-          "horseId": "002023104377",
+          "horseId": "102023104377",
           "horseName": "ナブッコ",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -20409,7 +21816,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002023104326",
+          "horseId": "102023104326",
           "horseName": "タガノプディング",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -20433,7 +21840,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 3,
           "horseNumber": 4,
-          "horseId": "002023106662",
+          "horseId": "102023106662",
           "horseName": "シュタルク",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -20457,7 +21864,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002023106339",
+          "horseId": "102023106339",
           "horseName": "ペコリズム",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -20481,7 +21888,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 7,
           "horseNumber": 12,
-          "horseId": "002023103848",
+          "horseId": "102023103848",
           "horseName": "トーアウィリアム",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -20505,7 +21912,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 8,
           "horseNumber": 13,
-          "horseId": "002023100598",
+          "horseId": "102023100598",
           "horseName": "キタノプレミアム",
           "sexAge": "牝3",
           "carriedWeight": 52,
@@ -20529,7 +21936,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002023104612",
+          "horseId": "102023104612",
           "horseName": "ゼンノトヨタマヒメ",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -20553,7 +21960,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 5,
           "horseNumber": 8,
-          "horseId": "002023101317",
+          "horseId": "102023101317",
           "horseName": "ラインメテオラ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -20577,7 +21984,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 8,
           "horseNumber": 14,
-          "horseId": "002023100197",
+          "horseId": "102023100197",
           "horseName": "ハクサンリング",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -20601,7 +22008,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 5,
           "horseNumber": 7,
-          "horseId": "002023103017",
+          "horseId": "102023103017",
           "horseName": "フチサンチャチャ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -20625,7 +22032,7 @@ window.KEIBA_RESULTS = {
           "finishText": "13",
           "gateNumber": 7,
           "horseNumber": 11,
-          "horseId": "002023100287",
+          "horseId": "102023100287",
           "horseName": "ジョーヴェスタ",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -20649,7 +22056,7 @@ window.KEIBA_RESULTS = {
           "finishText": "14",
           "gateNumber": 4,
           "horseNumber": 5,
-          "horseId": "002023105204",
+          "horseId": "102023105204",
           "horseName": "メイショウアヤカ",
           "sexAge": "牝3",
           "carriedWeight": 52,
@@ -20685,6 +22092,20 @@ window.KEIBA_RESULTS = {
           "popularity": 2
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "6",
+          "payoutYen": 240,
+          "popularity": 4
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "10",
+          "payoutYen": 530,
+          "popularity": 7
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "4-6",
@@ -20697,6 +22118,20 @@ window.KEIBA_RESULTS = {
           "selection": "6-9",
           "payoutYen": 490,
           "popularity": 4
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "9-10",
+          "payoutYen": 1380,
+          "popularity": 16
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-10",
+          "payoutYen": 1590,
+          "popularity": 20
         },
         {
           "betClass": "umaren",
@@ -20746,7 +22181,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002023107236",
+          "horseId": "102023107236",
           "horseName": "ラルヴァンダード",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -20772,7 +22207,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 3,
           "horseNumber": 5,
-          "horseId": "002023105017",
+          "horseId": "102023105017",
           "horseName": "チェファルー",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -20798,7 +22233,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 4,
           "horseNumber": 7,
-          "horseId": "002023106218",
+          "horseId": "102023106218",
           "horseName": "ブルーザー",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -20824,7 +22259,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 5,
           "horseNumber": 9,
-          "horseId": "002023105211",
+          "horseId": "102023105211",
           "horseName": "アージュドール",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -20850,7 +22285,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 2,
           "horseNumber": 3,
-          "horseId": "002023102013",
+          "horseId": "102023102013",
           "horseName": "ロイドウェバー",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -20876,7 +22311,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 8,
           "horseNumber": 15,
-          "horseId": "002023103758",
+          "horseId": "102023103758",
           "horseName": "ヴィスメンティス",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -20902,7 +22337,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 3,
           "horseNumber": 4,
-          "horseId": "002023101893",
+          "horseId": "102023101893",
           "horseName": "スーパービジー",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -20928,7 +22363,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 7,
           "horseNumber": 13,
-          "horseId": "002023101640",
+          "horseId": "102023101640",
           "horseName": "ワンダーシャッフル",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -20954,7 +22389,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 6,
           "horseNumber": 11,
-          "horseId": "002023106998",
+          "horseId": "102023106998",
           "horseName": "ジュンヴァッテッド",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -20980,7 +22415,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 7,
           "horseNumber": 12,
-          "horseId": "002023102765",
+          "horseId": "102023102765",
           "horseName": "ルクスユアン",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -21006,7 +22441,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 6,
           "horseNumber": 10,
-          "horseId": "002023105865",
+          "horseId": "102023105865",
           "horseName": "ウインビスタ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -21032,7 +22467,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 4,
           "horseNumber": 6,
-          "horseId": "002023104289",
+          "horseId": "102023104289",
           "horseName": "キービート",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -21058,7 +22493,7 @@ window.KEIBA_RESULTS = {
           "finishText": "13",
           "gateNumber": 5,
           "horseNumber": 8,
-          "horseId": "002023106139",
+          "horseId": "102023106139",
           "horseName": "レヴロード",
           "sexAge": "牡3",
           "carriedWeight": 54,
@@ -21084,7 +22519,7 @@ window.KEIBA_RESULTS = {
           "finishText": "14",
           "gateNumber": 8,
           "horseNumber": 14,
-          "horseId": "002023105829",
+          "horseId": "102023105829",
           "horseName": "ダノンワンダー",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -21110,7 +22545,7 @@ window.KEIBA_RESULTS = {
           "finishText": "15",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002023103243",
+          "horseId": "102023103243",
           "horseName": "グレイイメル",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -21148,6 +22583,20 @@ window.KEIBA_RESULTS = {
           "popularity": 2
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "5",
+          "payoutYen": 120,
+          "popularity": 1
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "7",
+          "payoutYen": 140,
+          "popularity": 3
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "2-3",
@@ -21160,6 +22609,20 @@ window.KEIBA_RESULTS = {
           "selection": "2-5",
           "payoutYen": 180,
           "popularity": 1
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "2-7",
+          "payoutYen": 400,
+          "popularity": 3
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "5-7",
+          "payoutYen": 280,
+          "popularity": 2
         },
         {
           "betClass": "umaren",
@@ -21209,7 +22672,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 5,
           "horseNumber": 7,
-          "horseId": "002023105417",
+          "horseId": "102023105417",
           "horseName": "レッドパラジウム",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -21235,7 +22698,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 8,
           "horseNumber": 12,
-          "horseId": "002023106652",
+          "horseId": "102023106652",
           "horseName": "セルヴァジオ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -21261,7 +22724,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 5,
           "horseNumber": 6,
-          "horseId": "002023102357",
+          "horseId": "102023102357",
           "horseName": "ブランチアウト",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -21287,7 +22750,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 6,
           "horseNumber": 8,
-          "horseId": "002023103248",
+          "horseId": "102023103248",
           "horseName": "ラミエルノムスコ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -21313,7 +22776,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 8,
           "horseNumber": 13,
-          "horseId": "002023103368",
+          "horseId": "102023103368",
           "horseName": "ゴリョウセイ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -21339,7 +22802,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 4,
           "horseNumber": 4,
-          "horseId": "002023105399",
+          "horseId": "102023105399",
           "horseName": "スリーロンドン",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -21365,7 +22828,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 7,
           "horseNumber": 11,
-          "horseId": "002023103795",
+          "horseId": "102023103795",
           "horseName": "タイムレスフレアー",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -21391,7 +22854,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 6,
           "horseNumber": 9,
-          "horseId": "002023104075",
+          "horseId": "102023104075",
           "horseName": "フェブリノ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -21417,7 +22880,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002023105522",
+          "horseId": "102023105522",
           "horseName": "エイシンニケ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -21443,7 +22906,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 4,
           "horseNumber": 5,
-          "horseId": "002023105884",
+          "horseId": "102023105884",
           "horseName": "ウインラブソング",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -21469,7 +22932,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002023104906",
+          "horseId": "102023104906",
           "horseName": "グランスプリント",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -21495,7 +22958,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 7,
           "horseNumber": 10,
-          "horseId": "002023103507",
+          "horseId": "102023103507",
           "horseName": "シャドウクライ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -21521,7 +22984,7 @@ window.KEIBA_RESULTS = {
           "finishText": "13",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002023100986",
+          "horseId": "102023100986",
           "horseName": "サンタカリス",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -21559,6 +23022,20 @@ window.KEIBA_RESULTS = {
           "popularity": 2
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "12",
+          "payoutYen": 190,
+          "popularity": 5
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "6",
+          "payoutYen": 140,
+          "popularity": 1
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "5-8",
@@ -21571,6 +23048,20 @@ window.KEIBA_RESULTS = {
           "selection": "7-12",
           "payoutYen": 530,
           "popularity": 8
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-7",
+          "payoutYen": 280,
+          "popularity": 1
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-12",
+          "payoutYen": 590,
+          "popularity": 9
         },
         {
           "betClass": "umaren",
@@ -21620,7 +23111,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 7,
           "horseNumber": 7,
-          "horseId": "002024106314",
+          "horseId": "102024106314",
           "horseName": "エルドボルグ",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -21646,7 +23137,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 6,
           "horseNumber": 6,
-          "horseId": "002024105746",
+          "horseId": "102024105746",
           "horseName": "シックパラソル",
           "sexAge": "牝2",
           "carriedWeight": 55,
@@ -21672,7 +23163,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002024101202",
+          "horseId": "102024101202",
           "horseName": "サイモンレガシー",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -21698,7 +23189,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002024105437",
+          "horseId": "102024105437",
           "horseName": "シュプレヒコール",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -21724,7 +23215,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 4,
           "horseNumber": 4,
-          "horseId": "002024106098",
+          "horseId": "102024106098",
           "horseName": "ロクメイカン",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -21750,7 +23241,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 5,
           "horseNumber": 5,
-          "horseId": "002024105969",
+          "horseId": "102024105969",
           "horseName": "フェーエンハフト",
           "sexAge": "牝2",
           "carriedWeight": 55,
@@ -21776,7 +23267,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 8,
           "horseNumber": 8,
-          "horseId": "002024104857",
+          "horseId": "102024104857",
           "horseName": "パーセンタイル",
           "sexAge": "牡2",
           "carriedWeight": 52,
@@ -21802,7 +23293,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002024106989",
+          "horseId": "102024106989",
           "horseName": "シュガーハウス",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -21840,11 +23331,39 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "6",
+          "payoutYen": 110,
+          "popularity": 2
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "1",
+          "payoutYen": 130,
+          "popularity": 4
+        },
+        {
           "betClass": "wide",
           "betType": "ワイド",
           "selection": "6-7",
           "payoutYen": 150,
           "popularity": 1
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-7",
+          "payoutYen": 250,
+          "popularity": 3
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-6",
+          "payoutYen": 320,
+          "popularity": 5
         },
         {
           "betClass": "umaren",
@@ -21894,7 +23413,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 4,
           "horseNumber": 4,
-          "horseId": "002024101644",
+          "horseId": "102024101644",
           "horseName": "マルモリムソウ",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -21918,7 +23437,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 6,
           "horseNumber": 6,
-          "horseId": "002024105630",
+          "horseId": "102024105630",
           "horseName": "アームズラムレイ",
           "sexAge": "牝2",
           "carriedWeight": 55,
@@ -21942,7 +23461,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 5,
           "horseNumber": 5,
-          "horseId": "002024104705",
+          "horseId": "102024104705",
           "horseName": "ビバームス",
           "sexAge": "牝2",
           "carriedWeight": 55,
@@ -21966,7 +23485,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 8,
           "horseNumber": 9,
-          "horseId": "002024104870",
+          "horseId": "102024104870",
           "horseName": "コパノキャンペーン",
           "sexAge": "牡2",
           "carriedWeight": 53,
@@ -21990,7 +23509,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002024107153",
+          "horseId": "102024107153",
           "horseName": "アンドヴェローナ",
           "sexAge": "牝2",
           "carriedWeight": 55,
@@ -22014,7 +23533,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002024106380",
+          "horseId": "102024106380",
           "horseName": "アトランタ",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -22038,7 +23557,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002024105038",
+          "horseId": "102024105038",
           "horseName": "ジョン",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -22062,7 +23581,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 7,
           "horseNumber": 7,
-          "horseId": "002024101083",
+          "horseId": "102024101083",
           "horseName": "ララララブソング",
           "sexAge": "牝2",
           "carriedWeight": 55,
@@ -22086,7 +23605,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 8,
           "horseNumber": 8,
-          "horseId": "002024102592",
+          "horseId": "102024102592",
           "horseName": "ブラックブレット",
           "sexAge": "牡2",
           "carriedWeight": 53,
@@ -22122,6 +23641,20 @@ window.KEIBA_RESULTS = {
           "popularity": 3
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "6",
+          "payoutYen": 110,
+          "popularity": 1
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "5",
+          "payoutYen": 260,
+          "popularity": 5
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "4-6",
@@ -22134,6 +23667,20 @@ window.KEIBA_RESULTS = {
           "selection": "4-6",
           "payoutYen": 210,
           "popularity": 2
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-5",
+          "payoutYen": 870,
+          "popularity": 13
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "5-6",
+          "payoutYen": 530,
+          "popularity": 6
         },
         {
           "betClass": "umaren",
@@ -22183,7 +23730,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 3,
           "horseNumber": 4,
-          "horseId": "002023103919",
+          "horseId": "102023103919",
           "horseName": "オオツカ",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -22209,7 +23756,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 3,
           "horseNumber": 5,
-          "horseId": "002023110043",
+          "horseId": "102023110043",
           "horseName": "ラブインアクション",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -22235,7 +23782,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 7,
           "horseNumber": 12,
-          "horseId": "002023104411",
+          "horseId": "102023104411",
           "horseName": "コルヴァス",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -22261,7 +23808,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 2,
           "horseNumber": 3,
-          "horseId": "002019104261",
+          "horseId": "102019104261",
           "horseName": "メイショウオグマ",
           "sexAge": "せん7",
           "carriedWeight": 58,
@@ -22287,7 +23834,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 4,
           "horseNumber": 7,
-          "horseId": "002023103884",
+          "horseId": "102023103884",
           "horseName": "キリオス",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -22313,7 +23860,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002023102469",
+          "horseId": "102023102469",
           "horseName": "タマモスカイ",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -22339,7 +23886,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 7,
           "horseNumber": 13,
-          "horseId": "002022100725",
+          "horseId": "102022100725",
           "horseName": "テーオーノーベル",
           "sexAge": "牡4",
           "carriedWeight": 58,
@@ -22365,7 +23912,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 6,
           "horseNumber": 10,
-          "horseId": "002023107059",
+          "horseId": "102023107059",
           "horseName": "ジュンプリメーロ",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -22391,7 +23938,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 6,
           "horseNumber": 11,
-          "horseId": "002023103677",
+          "horseId": "102023103677",
           "horseName": "ヴィエントデコラ",
           "sexAge": "牡3",
           "carriedWeight": 53,
@@ -22417,7 +23964,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 8,
           "horseNumber": 15,
-          "horseId": "002019103506",
+          "horseId": "102019103506",
           "horseName": "エアフォースワン",
           "sexAge": "牡7",
           "carriedWeight": 58,
@@ -22443,7 +23990,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 4,
           "horseNumber": 6,
-          "horseId": "002021103316",
+          "horseId": "102021103316",
           "horseName": "リアルペガサス",
           "sexAge": "牡5",
           "carriedWeight": 55,
@@ -22469,7 +24016,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 8,
           "horseNumber": 14,
-          "horseId": "002022104403",
+          "horseId": "102022104403",
           "horseName": "ニシノミチアキ",
           "sexAge": "牡4",
           "carriedWeight": 58,
@@ -22495,7 +24042,7 @@ window.KEIBA_RESULTS = {
           "finishText": "13",
           "gateNumber": 5,
           "horseNumber": 8,
-          "horseId": "002023103092",
+          "horseId": "102023103092",
           "horseName": "セルジュバローズ",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -22521,7 +24068,7 @@ window.KEIBA_RESULTS = {
           "finishText": "14",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002022110141",
+          "horseId": "102022110141",
           "horseName": "ジェバーダ",
           "sexAge": "牝4",
           "carriedWeight": 54,
@@ -22547,7 +24094,7 @@ window.KEIBA_RESULTS = {
           "finishText": "中止",
           "gateNumber": 5,
           "horseNumber": 9,
-          "horseId": "002022106585",
+          "horseId": "102022106585",
           "horseName": "キアヌ",
           "sexAge": "牡4",
           "carriedWeight": 58,
@@ -22585,6 +24132,20 @@ window.KEIBA_RESULTS = {
           "popularity": 2
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "5",
+          "payoutYen": 150,
+          "popularity": 1
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "12",
+          "payoutYen": 180,
+          "popularity": 4
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "3-3",
@@ -22597,6 +24158,20 @@ window.KEIBA_RESULTS = {
           "selection": "4-5",
           "payoutYen": 360,
           "popularity": 1
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-12",
+          "payoutYen": 560,
+          "popularity": 4
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "5-12",
+          "payoutYen": 590,
+          "popularity": 5
         },
         {
           "betClass": "umaren",
@@ -22646,7 +24221,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002023101180",
+          "horseId": "102023101180",
           "horseName": "ミリタリータトゥー",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -22672,7 +24247,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002023102997",
+          "horseId": "102023102997",
           "horseName": "ペイシャシス",
           "sexAge": "牝3",
           "carriedWeight": 51,
@@ -22698,7 +24273,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002021103236",
+          "horseId": "102021103236",
           "horseName": "コンバットペスカ",
           "sexAge": "牝5",
           "carriedWeight": 56,
@@ -22724,7 +24299,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 5,
           "horseNumber": 5,
-          "horseId": "002022102550",
+          "horseId": "102022102550",
           "horseName": "メイショウピリカ",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -22750,7 +24325,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 8,
           "horseNumber": 9,
-          "horseId": "002023105002",
+          "horseId": "102023105002",
           "horseName": "ミッキーマーメイド",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -22776,7 +24351,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 4,
           "horseNumber": 4,
-          "horseId": "002022103705",
+          "horseId": "102022103705",
           "horseName": "エレガンシア",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -22802,7 +24377,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 7,
           "horseNumber": 7,
-          "horseId": "002022102957",
+          "horseId": "102022102957",
           "horseName": "ヴィーナスバブル",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -22828,7 +24403,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 6,
           "horseNumber": 6,
-          "horseId": "002021105794",
+          "horseId": "102021105794",
           "horseName": "レザンクレール",
           "sexAge": "牝5",
           "carriedWeight": 56,
@@ -22854,7 +24429,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 8,
           "horseNumber": 8,
-          "horseId": "002023104231",
+          "horseId": "102023104231",
           "horseName": "タマモヒロイン",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -22892,6 +24467,20 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "2",
+          "payoutYen": 130,
+          "popularity": 2
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "3",
+          "payoutYen": 230,
+          "popularity": 5
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "1-2",
@@ -22904,6 +24493,20 @@ window.KEIBA_RESULTS = {
           "selection": "1-2",
           "payoutYen": 240,
           "popularity": 1
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-3",
+          "payoutYen": 790,
+          "popularity": 12
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "2-3",
+          "payoutYen": 670,
+          "popularity": 10
         },
         {
           "betClass": "umaren",
@@ -22953,7 +24556,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 7,
           "horseNumber": 8,
-          "horseId": "002023107036",
+          "horseId": "102023107036",
           "horseName": "ショウナンバンライ",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -22979,7 +24582,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 8,
           "horseNumber": 10,
-          "horseId": "002023106546",
+          "horseId": "102023106546",
           "horseName": "サンライズケヴィン",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -23005,7 +24608,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 6,
           "horseNumber": 6,
-          "horseId": "002023106298",
+          "horseId": "102023106298",
           "horseName": "ホウショウルクス",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -23031,7 +24634,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 7,
           "horseNumber": 7,
-          "horseId": "002021104295",
+          "horseId": "102021104295",
           "horseName": "トモジャザーン",
           "sexAge": "牡5",
           "carriedWeight": 58,
@@ -23057,7 +24660,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002021105637",
+          "horseId": "102021105637",
           "horseName": "テンエースワン",
           "sexAge": "牡5",
           "carriedWeight": 58,
@@ -23083,7 +24686,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 5,
           "horseNumber": 5,
-          "horseId": "002022105791",
+          "horseId": "102022105791",
           "horseName": "ブルックリンダンス",
           "sexAge": "牡4",
           "carriedWeight": 58,
@@ -23109,7 +24712,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002022106564",
+          "horseId": "102022106564",
           "horseName": "タガノアニマシオン",
           "sexAge": "せん4",
           "carriedWeight": 58,
@@ -23135,7 +24738,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 4,
           "horseNumber": 4,
-          "horseId": "002022102956",
+          "horseId": "102022102956",
           "horseName": "エンマ",
           "sexAge": "牡4",
           "carriedWeight": 58,
@@ -23161,7 +24764,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 8,
           "horseNumber": 9,
-          "horseId": "002020104791",
+          "horseId": "102020104791",
           "horseName": "プウスカンドゥール",
           "sexAge": "牝6",
           "carriedWeight": 56,
@@ -23187,7 +24790,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002021100711",
+          "horseId": "102021100711",
           "horseName": "ケイアイアルタイル",
           "sexAge": "牡5",
           "carriedWeight": 58,
@@ -23225,6 +24828,20 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "10",
+          "payoutYen": 120,
+          "popularity": 2
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "6",
+          "payoutYen": 160,
+          "popularity": 4
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "7-8",
@@ -23237,6 +24854,20 @@ window.KEIBA_RESULTS = {
           "selection": "8-10",
           "payoutYen": 170,
           "popularity": 1
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-8",
+          "payoutYen": 260,
+          "popularity": 2
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-10",
+          "payoutYen": 470,
+          "popularity": 5
         },
         {
           "betClass": "umaren",
@@ -23286,7 +24917,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 8,
           "horseNumber": 10,
-          "horseId": "002021103255",
+          "horseId": "102021103255",
           "horseName": "ジャスティンガルフ",
           "sexAge": "牡5",
           "carriedWeight": 55,
@@ -23312,7 +24943,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002022104719",
+          "horseId": "102022104719",
           "horseName": "ダノンカゼルタ",
           "sexAge": "せん4",
           "carriedWeight": 55,
@@ -23338,7 +24969,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 7,
           "horseNumber": 9,
-          "horseId": "002022101925",
+          "horseId": "102022101925",
           "horseName": "オデット",
           "sexAge": "牝4",
           "carriedWeight": 52,
@@ -23364,7 +24995,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 7,
           "horseNumber": 8,
-          "horseId": "002022104623",
+          "horseId": "102022104623",
           "horseName": "コリカンチャ",
           "sexAge": "せん4",
           "carriedWeight": 54,
@@ -23390,7 +25021,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002021106077",
+          "horseId": "102021106077",
           "horseName": "プリズマジコ",
           "sexAge": "牡5",
           "carriedWeight": 55,
@@ -23416,7 +25047,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 4,
           "horseNumber": 4,
-          "horseId": "002022100529",
+          "horseId": "102022100529",
           "horseName": "ハッピーダンチャン",
           "sexAge": "牡4",
           "carriedWeight": 54,
@@ -23442,7 +25073,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 6,
           "horseNumber": 6,
-          "horseId": "002020101031",
+          "horseId": "102020101031",
           "horseName": "アスクエピソード",
           "sexAge": "牡6",
           "carriedWeight": 54,
@@ -23468,7 +25099,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 5,
           "horseNumber": 5,
-          "horseId": "002023103343",
+          "horseId": "102023103343",
           "horseName": "フォーチュンライド",
           "sexAge": "牝3",
           "carriedWeight": 50,
@@ -23494,7 +25125,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 8,
           "horseNumber": 11,
-          "horseId": "002019103827",
+          "horseId": "102019103827",
           "horseName": "オウケンボルト",
           "sexAge": "牡7",
           "carriedWeight": 53,
@@ -23520,7 +25151,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 6,
           "horseNumber": 7,
-          "horseId": "002021106904",
+          "horseId": "102021106904",
           "horseName": "レイピカケ",
           "sexAge": "牝5",
           "carriedWeight": 53,
@@ -23546,7 +25177,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002021105867",
+          "horseId": "102021105867",
           "horseName": "ショウナンハウル",
           "sexAge": "せん5",
           "carriedWeight": 52,
@@ -23584,6 +25215,20 @@ window.KEIBA_RESULTS = {
           "popularity": 3
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "1",
+          "payoutYen": 200,
+          "popularity": 2
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "9",
+          "payoutYen": 770,
+          "popularity": 10
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "1-8",
@@ -23596,6 +25241,20 @@ window.KEIBA_RESULTS = {
           "selection": "1-10",
           "payoutYen": 590,
           "popularity": 5
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "9-10",
+          "payoutYen": 3350,
+          "popularity": 37
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-9",
+          "payoutYen": 3480,
+          "popularity": 38
         },
         {
           "betClass": "umaren",
@@ -23645,7 +25304,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 6,
           "horseNumber": 6,
-          "horseId": "002022104628",
+          "horseId": "102022104628",
           "horseName": "レイナデアルシーラ",
           "sexAge": "牝4",
           "carriedWeight": 55,
@@ -23671,7 +25330,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 5,
           "horseNumber": 5,
-          "horseId": "002021103987",
+          "horseId": "102021103987",
           "horseName": "スナークラファエロ",
           "sexAge": "せん5",
           "carriedWeight": 57,
@@ -23697,7 +25356,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 7,
           "horseNumber": 9,
-          "horseId": "002022102117",
+          "horseId": "102022102117",
           "horseName": "シュラザック",
           "sexAge": "牡4",
           "carriedWeight": 57,
@@ -23723,7 +25382,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002021104646",
+          "horseId": "102021104646",
           "horseName": "ジンセイ",
           "sexAge": "牡5",
           "carriedWeight": 57,
@@ -23749,7 +25408,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002020106063",
+          "horseId": "102020106063",
           "horseName": "ゴッドブルービー",
           "sexAge": "牡6",
           "carriedWeight": 57,
@@ -23775,7 +25434,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 7,
           "horseNumber": 8,
-          "horseId": "002022100154",
+          "horseId": "102022100154",
           "horseName": "メイショウズイウン",
           "sexAge": "牡4",
           "carriedWeight": 57,
@@ -23801,7 +25460,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 8,
           "horseNumber": 10,
-          "horseId": "002020102045",
+          "horseId": "102020102045",
           "horseName": "フェルヴェンテ",
           "sexAge": "牡6",
           "carriedWeight": 57,
@@ -23827,7 +25486,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 8,
           "horseNumber": 11,
-          "horseId": "002020100061",
+          "horseId": "102020100061",
           "horseName": "モックモック",
           "sexAge": "牡6",
           "carriedWeight": 58,
@@ -23853,7 +25512,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 6,
           "horseNumber": 7,
-          "horseId": "002021100838",
+          "horseId": "102021100838",
           "horseName": "モンブランミノル",
           "sexAge": "牡5",
           "carriedWeight": 57,
@@ -23879,7 +25538,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 4,
           "horseNumber": 4,
-          "horseId": "002019103419",
+          "horseId": "102019103419",
           "horseName": "サンライズアリオン",
           "sexAge": "牡7",
           "carriedWeight": 58,
@@ -23905,7 +25564,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002022104796",
+          "horseId": "102022104796",
           "horseName": "メルキオル",
           "sexAge": "牡4",
           "carriedWeight": 57,
@@ -23943,6 +25602,20 @@ window.KEIBA_RESULTS = {
           "popularity": 6
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "5",
+          "payoutYen": 360,
+          "popularity": 5
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "9",
+          "payoutYen": 310,
+          "popularity": 4
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "5-6",
@@ -23955,6 +25628,20 @@ window.KEIBA_RESULTS = {
           "selection": "5-6",
           "payoutYen": 1580,
           "popularity": 22
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-9",
+          "payoutYen": 1370,
+          "popularity": 20
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "5-9",
+          "payoutYen": 830,
+          "popularity": 8
         },
         {
           "betClass": "umaren",
@@ -24004,7 +25691,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 4,
           "horseNumber": 8,
-          "horseId": "002022103058",
+          "horseId": "102022103058",
           "horseName": "ノボリリア",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -24028,7 +25715,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 8,
           "horseNumber": 15,
-          "horseId": "002021101414",
+          "horseId": "102021101414",
           "horseName": "ベルファスト",
           "sexAge": "牝5",
           "carriedWeight": 56,
@@ -24052,7 +25739,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 8,
           "horseNumber": 17,
-          "horseId": "002022104901",
+          "horseId": "102022104901",
           "horseName": "モルティフレーバー",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -24076,7 +25763,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 8,
           "horseNumber": 16,
-          "horseId": "002023101722",
+          "horseId": "102023101722",
           "horseName": "ジューンオアシス",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -24100,7 +25787,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 2,
           "horseNumber": 4,
-          "horseId": "002023102025",
+          "horseId": "102023102025",
           "horseName": "フィラーエ",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -24124,7 +25811,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 6,
           "horseNumber": 11,
-          "horseId": "002023101865",
+          "horseId": "102023101865",
           "horseName": "ウォーターデライト",
           "sexAge": "牡3",
           "carriedWeight": 53,
@@ -24148,7 +25835,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 5,
           "horseNumber": 9,
-          "horseId": "002023104355",
+          "horseId": "102023104355",
           "horseName": "テルヴィセクス",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -24172,7 +25859,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 4,
           "horseNumber": 7,
-          "horseId": "002021106586",
+          "horseId": "102021106586",
           "horseName": "ラブカムーン",
           "sexAge": "牝5",
           "carriedWeight": 56,
@@ -24196,7 +25883,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 7,
           "horseNumber": 13,
-          "horseId": "002022104392",
+          "horseId": "102022104392",
           "horseName": "シャインベック",
           "sexAge": "せん4",
           "carriedWeight": 58,
@@ -24220,7 +25907,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 3,
           "horseNumber": 5,
-          "horseId": "002022106217",
+          "horseId": "102022106217",
           "horseName": "ウインマスカレード",
           "sexAge": "牡4",
           "carriedWeight": 58,
@@ -24244,7 +25931,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 3,
           "horseNumber": 6,
-          "horseId": "002022103150",
+          "horseId": "102022103150",
           "horseName": "ジュエルハウス",
           "sexAge": "牝4",
           "carriedWeight": 54,
@@ -24268,7 +25955,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 5,
           "horseNumber": 10,
-          "horseId": "002022106715",
+          "horseId": "102022106715",
           "horseName": "ギザキズラヴ",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -24292,7 +25979,7 @@ window.KEIBA_RESULTS = {
           "finishText": "13",
           "gateNumber": 2,
           "horseNumber": 3,
-          "horseId": "002023105833",
+          "horseId": "102023105833",
           "horseName": "セレブトーチ",
           "sexAge": "牝3",
           "carriedWeight": 50,
@@ -24316,7 +26003,7 @@ window.KEIBA_RESULTS = {
           "finishText": "14",
           "gateNumber": 6,
           "horseNumber": 12,
-          "horseId": "002021106648",
+          "horseId": "102021106648",
           "horseName": "ベネメレンティ",
           "sexAge": "牝5",
           "carriedWeight": 54,
@@ -24340,7 +26027,7 @@ window.KEIBA_RESULTS = {
           "finishText": "15",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002023101174",
+          "horseId": "102023101174",
           "horseName": "ドルチェミスト",
           "sexAge": "牝3",
           "carriedWeight": 50,
@@ -24364,7 +26051,7 @@ window.KEIBA_RESULTS = {
           "finishText": "16",
           "gateNumber": 1,
           "horseNumber": 2,
-          "horseId": "002023101065",
+          "horseId": "102023101065",
           "horseName": "リアルアルバ",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -24388,7 +26075,7 @@ window.KEIBA_RESULTS = {
           "finishText": "17",
           "gateNumber": 7,
           "horseNumber": 14,
-          "horseId": "002022104436",
+          "horseId": "102022104436",
           "horseName": "アットザラヴアスク",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -24424,6 +26111,20 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "15",
+          "payoutYen": 240,
+          "popularity": 3
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "17",
+          "payoutYen": 720,
+          "popularity": 10
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "4-8",
@@ -24436,6 +26137,20 @@ window.KEIBA_RESULTS = {
           "selection": "8-15",
           "payoutYen": 610,
           "popularity": 3
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "8-17",
+          "payoutYen": 1970,
+          "popularity": 27
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "15-17",
+          "payoutYen": 3420,
+          "popularity": 36
         },
         {
           "betClass": "umaren",
@@ -24485,7 +26200,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 4,
           "horseNumber": 4,
-          "horseId": "002023105630",
+          "horseId": "102023105630",
           "horseName": "ビタミンドロップ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -24509,7 +26224,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 5,
           "horseNumber": 6,
-          "horseId": "002023101660",
+          "horseId": "102023101660",
           "horseName": "スイーヴル",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -24533,7 +26248,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 8,
           "horseNumber": 12,
-          "horseId": "002023106556",
+          "horseId": "102023106556",
           "horseName": "サンライズロイ",
           "sexAge": "牡3",
           "carriedWeight": 56,
@@ -24557,7 +26272,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 6,
           "horseNumber": 7,
-          "horseId": "002023105310",
+          "horseId": "102023105310",
           "horseName": "マーゴットオネイロ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -24581,7 +26296,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 5,
           "horseNumber": 5,
-          "horseId": "002023104180",
+          "horseId": "102023104180",
           "horseName": "ヒューザー",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -24605,7 +26320,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002023100360",
+          "horseId": "102023100360",
           "horseName": "ニシノギャルズ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -24629,7 +26344,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002023100786",
+          "horseId": "102023100786",
           "horseName": "クリコイーコ",
           "sexAge": "牝3",
           "carriedWeight": 51,
@@ -24653,7 +26368,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002023105161",
+          "horseId": "102023105161",
           "horseName": "トリアングルレディ",
           "sexAge": "牝3",
           "carriedWeight": 54,
@@ -24677,7 +26392,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 7,
           "horseNumber": 9,
-          "horseId": "002023101742",
+          "horseId": "102023101742",
           "horseName": "ホワイトラバーズ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -24701,7 +26416,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 6,
           "horseNumber": 8,
-          "horseId": "002023102951",
+          "horseId": "102023102951",
           "horseName": "アジーザム",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -24725,7 +26440,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 8,
           "horseNumber": 11,
-          "horseId": "002023107525",
+          "horseId": "102023107525",
           "horseName": "ホウオウワイズ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -24749,7 +26464,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 7,
           "horseNumber": 10,
-          "horseId": "002023106782",
+          "horseId": "102023106782",
           "horseName": "スプリングドリーム",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -24785,6 +26500,20 @@ window.KEIBA_RESULTS = {
           "popularity": 2
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "6",
+          "payoutYen": 110,
+          "popularity": 1
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "12",
+          "payoutYen": 170,
+          "popularity": 4
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "4-5",
@@ -24797,6 +26526,20 @@ window.KEIBA_RESULTS = {
           "selection": "4-6",
           "payoutYen": 180,
           "popularity": 1
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-12",
+          "payoutYen": 460,
+          "popularity": 5
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-12",
+          "payoutYen": 330,
+          "popularity": 4
         },
         {
           "betClass": "umaren",
@@ -24846,7 +26589,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 5,
           "horseNumber": 7,
-          "horseId": "002023106380",
+          "horseId": "102023106380",
           "horseName": "ベネディクション",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -24872,7 +26615,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 7,
           "horseNumber": 11,
-          "horseId": "002023104254",
+          "horseId": "102023104254",
           "horseName": "サウンドファミリエ",
           "sexAge": "牝3",
           "carriedWeight": 51,
@@ -24898,7 +26641,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 5,
           "horseNumber": 6,
-          "horseId": "002023102987",
+          "horseId": "102023102987",
           "horseName": "プリュイドール",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -24924,7 +26667,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 4,
           "horseNumber": 4,
-          "horseId": "002023106211",
+          "horseId": "102023106211",
           "horseName": "スリールーディカ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -24950,7 +26693,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 6,
           "horseNumber": 9,
-          "horseId": "002023106910",
+          "horseId": "102023106910",
           "horseName": "エアヴァイブス",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -24976,7 +26719,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 6,
           "horseNumber": 8,
-          "horseId": "002023102074",
+          "horseId": "102023102074",
           "horseName": "アルケミラモリス",
           "sexAge": "牝3",
           "carriedWeight": 52,
@@ -25002,7 +26745,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002023102101",
+          "horseId": "102023102101",
           "horseName": "フィエスタ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -25028,7 +26771,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002023104027",
+          "horseId": "102023104027",
           "horseName": "ダンツアラーム",
           "sexAge": "牝3",
           "carriedWeight": 52,
@@ -25054,7 +26797,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 8,
           "horseNumber": 13,
-          "horseId": "002023106898",
+          "horseId": "102023106898",
           "horseName": "ヴィンテール",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -25080,7 +26823,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 8,
           "horseNumber": 12,
-          "horseId": "002023101759",
+          "horseId": "102023101759",
           "horseName": "ワンダージェム",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -25106,7 +26849,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 4,
           "horseNumber": 5,
-          "horseId": "002023104914",
+          "horseId": "102023104914",
           "horseName": "ビアーレ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -25132,7 +26875,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002023106285",
+          "horseId": "102023106285",
           "horseName": "ボーントゥラブユー",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -25158,7 +26901,7 @@ window.KEIBA_RESULTS = {
           "finishText": "13",
           "gateNumber": 7,
           "horseNumber": 10,
-          "horseId": "002023107002",
+          "horseId": "102023107002",
           "horseName": "アーミル",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -25196,6 +26939,20 @@ window.KEIBA_RESULTS = {
           "popularity": 2
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "11",
+          "payoutYen": 420,
+          "popularity": 7
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "6",
+          "payoutYen": 500,
+          "popularity": 8
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "5-7",
@@ -25208,6 +26965,20 @@ window.KEIBA_RESULTS = {
           "selection": "7-11",
           "payoutYen": 1170,
           "popularity": 14
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-7",
+          "payoutYen": 1430,
+          "popularity": 18
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-11",
+          "payoutYen": 2630,
+          "popularity": 30
         },
         {
           "betClass": "umaren",
@@ -25257,7 +27028,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 7,
           "horseNumber": 12,
-          "horseId": "002023101117",
+          "horseId": "102023101117",
           "horseName": "ビンバラ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -25283,7 +27054,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 5,
           "horseNumber": 8,
-          "horseId": "002023102520",
+          "horseId": "102023102520",
           "horseName": "ハイテイラオユエ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -25309,7 +27080,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 4,
           "horseNumber": 5,
-          "horseId": "002023107306",
+          "horseId": "102023107306",
           "horseName": "セラサイト",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -25335,7 +27106,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 6,
           "horseNumber": 9,
-          "horseId": "002023107035",
+          "horseId": "102023107035",
           "horseName": "エクラドット",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -25361,7 +27132,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002023106691",
+          "horseId": "102023106691",
           "horseName": "サクセスゴールド",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -25387,7 +27158,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 8,
           "horseNumber": 14,
-          "horseId": "002023100471",
+          "horseId": "102023100471",
           "horseName": "スリーケイ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -25413,7 +27184,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002023104194",
+          "horseId": "102023104194",
           "horseName": "コーリンクレア",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -25439,7 +27210,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 5,
           "horseNumber": 7,
-          "horseId": "002023103280",
+          "horseId": "102023103280",
           "horseName": "ロスニーニョス",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -25465,7 +27236,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 8,
           "horseNumber": 13,
-          "horseId": "002023104581",
+          "horseId": "102023104581",
           "horseName": "アドバンスジェンヌ",
           "sexAge": "牝3",
           "carriedWeight": 52,
@@ -25491,7 +27262,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 3,
           "horseNumber": 4,
-          "horseId": "002023104941",
+          "horseId": "102023104941",
           "horseName": "ジャストアダッシュ",
           "sexAge": "牡3",
           "carriedWeight": 54,
@@ -25517,7 +27288,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002023102458",
+          "horseId": "102023102458",
           "horseName": "ファントムグレース",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -25543,7 +27314,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 6,
           "horseNumber": 10,
-          "horseId": "002023102396",
+          "horseId": "102023102396",
           "horseName": "ホウオウロレンシア",
           "sexAge": "牝3",
           "carriedWeight": 54,
@@ -25569,7 +27340,7 @@ window.KEIBA_RESULTS = {
           "finishText": "13",
           "gateNumber": 4,
           "horseNumber": 6,
-          "horseId": "002023106531",
+          "horseId": "102023106531",
           "horseName": "ゴーントゥファー",
           "sexAge": "せん3",
           "carriedWeight": 56,
@@ -25595,7 +27366,7 @@ window.KEIBA_RESULTS = {
           "finishText": "14",
           "gateNumber": 7,
           "horseNumber": 11,
-          "horseId": "002023107147",
+          "horseId": "102023107147",
           "horseName": "コサージュ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -25633,6 +27404,20 @@ window.KEIBA_RESULTS = {
           "popularity": 1
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "8",
+          "payoutYen": 230,
+          "popularity": 3
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "5",
+          "payoutYen": 370,
+          "popularity": 8
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "5-7",
@@ -25645,6 +27430,20 @@ window.KEIBA_RESULTS = {
           "selection": "8-12",
           "payoutYen": 380,
           "popularity": 2
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "5-12",
+          "payoutYen": 980,
+          "popularity": 10
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "5-8",
+          "payoutYen": 2610,
+          "popularity": 27
         },
         {
           "betClass": "umaren",
@@ -25694,7 +27493,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 2,
           "horseNumber": 4,
-          "horseId": "002023106077",
+          "horseId": "102023106077",
           "horseName": "タケルフォーカス",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -25720,7 +27519,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 2,
           "horseNumber": 3,
-          "horseId": "002023105302",
+          "horseId": "102023105302",
           "horseName": "ラッキーシグネチャ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -25746,7 +27545,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 4,
           "horseNumber": 7,
-          "horseId": "002023102410",
+          "horseId": "102023102410",
           "horseName": "ブリックアブラック",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -25772,7 +27571,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 1,
           "horseNumber": 2,
-          "horseId": "002023103548",
+          "horseId": "102023103548",
           "horseName": "ダイナソーコー",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -25798,7 +27597,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002023103767",
+          "horseId": "102023103767",
           "horseName": "ミカレオス",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -25824,7 +27623,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 6,
           "horseNumber": 11,
-          "horseId": "002023103579",
+          "horseId": "102023103579",
           "horseName": "アグアフレスカ",
           "sexAge": "牝3",
           "carriedWeight": 54,
@@ -25850,7 +27649,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 3,
           "horseNumber": 5,
-          "horseId": "002023105874",
+          "horseId": "102023105874",
           "horseName": "ウインブリザード",
           "sexAge": "牡3",
           "carriedWeight": 54,
@@ -25876,7 +27675,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 6,
           "horseNumber": 12,
-          "horseId": "002023101812",
+          "horseId": "102023101812",
           "horseName": "デイズインザサン",
           "sexAge": "牝3",
           "carriedWeight": 52,
@@ -25902,7 +27701,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 8,
           "horseNumber": 15,
-          "horseId": "002023104002",
+          "horseId": "102023104002",
           "horseName": "ハルノアメ",
           "sexAge": "牡3",
           "carriedWeight": 53,
@@ -25928,7 +27727,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 4,
           "horseNumber": 8,
-          "horseId": "002023107271",
+          "horseId": "102023107271",
           "horseName": "レジーナレガリア",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -25954,7 +27753,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 3,
           "horseNumber": 6,
-          "horseId": "002023100771",
+          "horseId": "102023100771",
           "horseName": "マジックファイヤー",
           "sexAge": "牡3",
           "carriedWeight": 56,
@@ -25980,7 +27779,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 8,
           "horseNumber": 16,
-          "horseId": "002023104932",
+          "horseId": "102023104932",
           "horseName": "テンバコウクウ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -26006,7 +27805,7 @@ window.KEIBA_RESULTS = {
           "finishText": "13",
           "gateNumber": 5,
           "horseNumber": 9,
-          "horseId": "002023103433",
+          "horseId": "102023103433",
           "horseName": "レフィノス",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -26032,7 +27831,7 @@ window.KEIBA_RESULTS = {
           "finishText": "14",
           "gateNumber": 7,
           "horseNumber": 13,
-          "horseId": "002023103901",
+          "horseId": "102023103901",
           "horseName": "ヴィラジョヴィス",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -26058,7 +27857,7 @@ window.KEIBA_RESULTS = {
           "finishText": "15",
           "gateNumber": 5,
           "horseNumber": 10,
-          "horseId": "002023103493",
+          "horseId": "102023103493",
           "horseName": "モヴシエラ",
           "sexAge": "牡3",
           "carriedWeight": 54,
@@ -26084,7 +27883,7 @@ window.KEIBA_RESULTS = {
           "finishText": "16",
           "gateNumber": 7,
           "horseNumber": 14,
-          "horseId": "002023103655",
+          "horseId": "102023103655",
           "horseName": "ダディーズソード",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -26122,6 +27921,20 @@ window.KEIBA_RESULTS = {
           "popularity": 2
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "3",
+          "payoutYen": 280,
+          "popularity": 4
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "7",
+          "payoutYen": 1440,
+          "popularity": 12
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "2-2",
@@ -26134,6 +27947,20 @@ window.KEIBA_RESULTS = {
           "selection": "3-4",
           "payoutYen": 1100,
           "popularity": 9
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-7",
+          "payoutYen": 3970,
+          "popularity": 36
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "3-7",
+          "payoutYen": 12610,
+          "popularity": 74
         },
         {
           "betClass": "umaren",
@@ -26183,7 +28010,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 4,
           "horseNumber": 4,
-          "horseId": "002024106399",
+          "horseId": "102024106399",
           "horseName": "デアグランツ",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -26209,7 +28036,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 5,
           "horseNumber": 5,
-          "horseId": "002024104442",
+          "horseId": "102024104442",
           "horseName": "イッペイ",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -26235,7 +28062,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 6,
           "horseNumber": 6,
-          "horseId": "002024100715",
+          "horseId": "102024100715",
           "horseName": "アオイノリプー",
           "sexAge": "牡2",
           "carriedWeight": 54,
@@ -26261,7 +28088,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 7,
           "horseNumber": 8,
-          "horseId": "002024106829",
+          "horseId": "102024106829",
           "horseName": "ニーナラルゴ",
           "sexAge": "牝2",
           "carriedWeight": 55,
@@ -26287,7 +28114,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002024100245",
+          "horseId": "102024100245",
           "horseName": "トルネードサンダー",
           "sexAge": "牝2",
           "carriedWeight": 55,
@@ -26313,7 +28140,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 8,
           "horseNumber": 10,
-          "horseId": "002024106228",
+          "horseId": "102024106228",
           "horseName": "ブラッグス",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -26339,7 +28166,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002024107038",
+          "horseId": "102024107038",
           "horseName": "ジオ",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -26365,7 +28192,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 8,
           "horseNumber": 9,
-          "horseId": "002024106216",
+          "horseId": "102024106216",
           "horseName": "トムクリオーザ",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -26391,7 +28218,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 7,
           "horseNumber": 7,
-          "horseId": "002024105809",
+          "horseId": "102024105809",
           "horseName": "アルデシンザン",
           "sexAge": "牡2",
           "carriedWeight": 55,
@@ -26417,7 +28244,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002024102008",
+          "horseId": "102024102008",
           "horseName": "リラカリス",
           "sexAge": "牝2",
           "carriedWeight": 52,
@@ -26455,6 +28282,20 @@ window.KEIBA_RESULTS = {
           "popularity": 4
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "5",
+          "payoutYen": 180,
+          "popularity": 3
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "6",
+          "payoutYen": 1180,
+          "popularity": 9
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "4-5",
@@ -26467,6 +28308,20 @@ window.KEIBA_RESULTS = {
           "selection": "4-5",
           "payoutYen": 710,
           "popularity": 9
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-6",
+          "payoutYen": 3850,
+          "popularity": 34
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "5-6",
+          "payoutYen": 3420,
+          "popularity": 31
         },
         {
           "betClass": "umaren",
@@ -26516,7 +28371,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002023100397",
+          "horseId": "102023100397",
           "horseName": "ミルトメロディー",
           "sexAge": "牝3",
           "carriedWeight": 51,
@@ -26540,7 +28395,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 1,
           "horseNumber": 2,
-          "horseId": "002023103726",
+          "horseId": "102023103726",
           "horseName": "サトノフレイ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -26564,7 +28419,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 2,
           "horseNumber": 3,
-          "horseId": "002023105679",
+          "horseId": "102023105679",
           "horseName": "ミレニアルピンク",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -26588,7 +28443,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 7,
           "horseNumber": 14,
-          "horseId": "002023107342",
+          "horseId": "102023107342",
           "horseName": "ルージュフィーリア",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -26612,7 +28467,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 2,
           "horseNumber": 4,
-          "horseId": "002023102511",
+          "horseId": "102023102511",
           "horseName": "ビップジョワ",
           "sexAge": "牝3",
           "carriedWeight": 52,
@@ -26636,7 +28491,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 6,
           "horseNumber": 11,
-          "horseId": "002023102163",
+          "horseId": "102023102163",
           "horseName": "ソルトバーン",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -26660,7 +28515,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 3,
           "horseNumber": 5,
-          "horseId": "002023100515",
+          "horseId": "102023100515",
           "horseName": "ドラリズム",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -26684,7 +28539,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 8,
           "horseNumber": 16,
-          "horseId": "002023102456",
+          "horseId": "102023102456",
           "horseName": "ルーチェコメット",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -26708,7 +28563,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 6,
           "horseNumber": 12,
-          "horseId": "002023104867",
+          "horseId": "102023104867",
           "horseName": "マティンデ",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -26732,7 +28587,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 4,
           "horseNumber": 7,
-          "horseId": "002023104248",
+          "horseId": "102023104248",
           "horseName": "フォークスアップ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -26756,7 +28611,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 5,
           "horseNumber": 10,
-          "horseId": "002023102220",
+          "horseId": "102023102220",
           "horseName": "ネオシューマン",
           "sexAge": "せん3",
           "carriedWeight": 56,
@@ -26780,7 +28635,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 5,
           "horseNumber": 9,
-          "horseId": "002023106359",
+          "horseId": "102023106359",
           "horseName": "ワイドアルバ",
           "sexAge": "牡3",
           "carriedWeight": 57,
@@ -26804,7 +28659,7 @@ window.KEIBA_RESULTS = {
           "finishText": "13",
           "gateNumber": 4,
           "horseNumber": 8,
-          "horseId": "002023107270",
+          "horseId": "102023107270",
           "horseName": "フォルストランキル",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -26828,7 +28683,7 @@ window.KEIBA_RESULTS = {
           "finishText": "14",
           "gateNumber": 8,
           "horseNumber": 15,
-          "horseId": "002023104917",
+          "horseId": "102023104917",
           "horseName": "ノーブルマドンナ",
           "sexAge": "牝3",
           "carriedWeight": 52,
@@ -26852,7 +28707,7 @@ window.KEIBA_RESULTS = {
           "finishText": "15",
           "gateNumber": 7,
           "horseNumber": 13,
-          "horseId": "002023103936",
+          "horseId": "102023103936",
           "horseName": "ハネマン",
           "sexAge": "牝3",
           "carriedWeight": 55,
@@ -26876,7 +28731,7 @@ window.KEIBA_RESULTS = {
           "finishText": "16",
           "gateNumber": 3,
           "horseNumber": 6,
-          "horseId": "002023104093",
+          "horseId": "102023104093",
           "horseName": "ハナイロマヒナ",
           "sexAge": "牝3",
           "carriedWeight": 54,
@@ -26912,6 +28767,20 @@ window.KEIBA_RESULTS = {
           "popularity": 5
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "2",
+          "payoutYen": 200,
+          "popularity": 2
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "3",
+          "payoutYen": 540,
+          "popularity": 7
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "1-1",
@@ -26924,6 +28793,20 @@ window.KEIBA_RESULTS = {
           "selection": "1-2",
           "payoutYen": 850,
           "popularity": 8
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-3",
+          "payoutYen": 2090,
+          "popularity": 24
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "2-3",
+          "payoutYen": 1140,
+          "popularity": 13
         },
         {
           "betClass": "umaren",
@@ -26973,7 +28856,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 8,
           "horseNumber": 9,
-          "horseId": "002022102388",
+          "horseId": "102022102388",
           "horseName": "ヒミノエトワール",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -26999,7 +28882,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002022105343",
+          "horseId": "102022105343",
           "horseName": "デルマサクラサク",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -27025,7 +28908,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 4,
           "horseNumber": 4,
-          "horseId": "002023107412",
+          "horseId": "102023107412",
           "horseName": "リピース",
           "sexAge": "牝3",
           "carriedWeight": 51,
@@ -27051,7 +28934,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002021105857",
+          "horseId": "102021105857",
           "horseName": "ウィンターガーデン",
           "sexAge": "牝5",
           "carriedWeight": 56,
@@ -27077,7 +28960,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 6,
           "horseNumber": 6,
-          "horseId": "002022105267",
+          "horseId": "102022105267",
           "horseName": "サウンドルーチェ",
           "sexAge": "牝4",
           "carriedWeight": 52,
@@ -27103,7 +28986,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 5,
           "horseNumber": 5,
-          "horseId": "002023100966",
+          "horseId": "102023100966",
           "horseName": "マリブサーフ",
           "sexAge": "牝3",
           "carriedWeight": 50,
@@ -27129,7 +29012,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 7,
           "horseNumber": 7,
-          "horseId": "002021105238",
+          "horseId": "102021105238",
           "horseName": "アリストクラシア",
           "sexAge": "牝5",
           "carriedWeight": 56,
@@ -27155,7 +29038,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002022106631",
+          "horseId": "102022106631",
           "horseName": "バシリス",
           "sexAge": "牝4",
           "carriedWeight": 55,
@@ -27181,7 +29064,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 8,
           "horseNumber": 8,
-          "horseId": "002023100652",
+          "horseId": "102023100652",
           "horseName": "コイタマチャン",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -27219,6 +29102,20 @@ window.KEIBA_RESULTS = {
           "popularity": 2
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "2",
+          "payoutYen": 150,
+          "popularity": 1
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "4",
+          "payoutYen": 900,
+          "popularity": 8
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "2-8",
@@ -27231,6 +29128,20 @@ window.KEIBA_RESULTS = {
           "selection": "2-9",
           "payoutYen": 250,
           "popularity": 1
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-9",
+          "payoutYen": 2720,
+          "popularity": 27
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "2-4",
+          "payoutYen": 2590,
+          "popularity": 24
         },
         {
           "betClass": "umaren",
@@ -27280,7 +29191,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002023107258",
+          "horseId": "102023107258",
           "horseName": "シャローファースト",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -27306,7 +29217,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 7,
           "horseNumber": 9,
-          "horseId": "002022106566",
+          "horseId": "102022106566",
           "horseName": "ダイシンレアレア",
           "sexAge": "牡4",
           "carriedWeight": 58,
@@ -27332,7 +29243,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 7,
           "horseNumber": 8,
-          "horseId": "002023106516",
+          "horseId": "102023106516",
           "horseName": "ミスターエメラルド",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -27358,7 +29269,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 6,
           "horseNumber": 7,
-          "horseId": "002022101255",
+          "horseId": "102022101255",
           "horseName": "ステイアンビシャス",
           "sexAge": "牡4",
           "carriedWeight": 58,
@@ -27384,7 +29295,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 8,
           "horseNumber": 11,
-          "horseId": "002021104155",
+          "horseId": "102021104155",
           "horseName": "サトノリアン",
           "sexAge": "牡5",
           "carriedWeight": 58,
@@ -27410,7 +29321,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 5,
           "horseNumber": 5,
-          "horseId": "002021106180",
+          "horseId": "102021106180",
           "horseName": "シーリュウシー",
           "sexAge": "牡5",
           "carriedWeight": 58,
@@ -27436,7 +29347,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002019103219",
+          "horseId": "102019103219",
           "horseName": "ブレイクザアイス",
           "sexAge": "せん7",
           "carriedWeight": 58,
@@ -27462,7 +29373,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 6,
           "horseNumber": 6,
-          "horseId": "002022104062",
+          "horseId": "102022104062",
           "horseName": "カージオイド",
           "sexAge": "牡4",
           "carriedWeight": 57,
@@ -27488,7 +29399,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002022105506",
+          "horseId": "102022105506",
           "horseName": "シドニーホバート",
           "sexAge": "牡4",
           "carriedWeight": 58,
@@ -27514,7 +29425,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 4,
           "horseNumber": 4,
-          "horseId": "002022104312",
+          "horseId": "102022104312",
           "horseName": "ディースプレマシー",
           "sexAge": "牡4",
           "carriedWeight": 58,
@@ -27540,7 +29451,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 8,
           "horseNumber": 10,
-          "horseId": "002023104100",
+          "horseId": "102023104100",
           "horseName": "ハイドパーク",
           "sexAge": "牡3",
           "carriedWeight": 54,
@@ -27578,6 +29489,20 @@ window.KEIBA_RESULTS = {
           "popularity": 2
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "9",
+          "payoutYen": 140,
+          "popularity": 1
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "8",
+          "payoutYen": 260,
+          "popularity": 5
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "2-7",
@@ -27590,6 +29515,20 @@ window.KEIBA_RESULTS = {
           "selection": "2-9",
           "payoutYen": 260,
           "popularity": 1
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "2-8",
+          "payoutYen": 760,
+          "popularity": 8
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "8-9",
+          "payoutYen": 730,
+          "popularity": 7
         },
         {
           "betClass": "umaren",
@@ -27639,7 +29578,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002022106813",
+          "horseId": "102022106813",
           "horseName": "マイネルフーガ",
           "sexAge": "牡4",
           "carriedWeight": 55,
@@ -27665,7 +29604,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 4,
           "horseNumber": 5,
-          "horseId": "002023100627",
+          "horseId": "102023100627",
           "horseName": "テルヒコウ",
           "sexAge": "牡3",
           "carriedWeight": 54,
@@ -27691,7 +29630,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002021103227",
+          "horseId": "102021103227",
           "horseName": "ジャズ",
           "sexAge": "牡5",
           "carriedWeight": 56,
@@ -27717,7 +29656,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 5,
           "horseNumber": 8,
-          "horseId": "002022101411",
+          "horseId": "102022101411",
           "horseName": "サタデーサンライズ",
           "sexAge": "牝4",
           "carriedWeight": 53,
@@ -27743,7 +29682,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 7,
           "horseNumber": 12,
-          "horseId": "002021100165",
+          "horseId": "102021100165",
           "horseName": "フォルテフィオーレ",
           "sexAge": "牡5",
           "carriedWeight": 56,
@@ -27769,7 +29708,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 8,
           "horseNumber": 13,
-          "horseId": "002021103790",
+          "horseId": "102021103790",
           "horseName": "フナデ",
           "sexAge": "牡5",
           "carriedWeight": 54,
@@ -27795,7 +29734,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 6,
           "horseNumber": 9,
-          "horseId": "002021105321",
+          "horseId": "102021105321",
           "horseName": "エーデル",
           "sexAge": "牝5",
           "carriedWeight": 51,
@@ -27821,7 +29760,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 7,
           "horseNumber": 11,
-          "horseId": "002022103310",
+          "horseId": "102022103310",
           "horseName": "レイヤードレッド",
           "sexAge": "牡4",
           "carriedWeight": 55,
@@ -27847,7 +29786,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002022105018",
+          "horseId": "102022105018",
           "horseName": "バルティカ",
           "sexAge": "牡4",
           "carriedWeight": 56,
@@ -27873,7 +29812,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 5,
           "horseNumber": 7,
-          "horseId": "002020102803",
+          "horseId": "102020102803",
           "horseName": "エリム",
           "sexAge": "牝6",
           "carriedWeight": 52,
@@ -27899,7 +29838,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 8,
           "horseNumber": 14,
-          "horseId": "002022100625",
+          "horseId": "102022100625",
           "horseName": "ラブリーリディア",
           "sexAge": "牝4",
           "carriedWeight": 55,
@@ -27925,7 +29864,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 3,
           "horseNumber": 4,
-          "horseId": "002022104748",
+          "horseId": "102022104748",
           "horseName": "ウィルサヴァイブ",
           "sexAge": "牝4",
           "carriedWeight": 54,
@@ -27951,7 +29890,7 @@ window.KEIBA_RESULTS = {
           "finishText": "13",
           "gateNumber": 4,
           "horseNumber": 6,
-          "horseId": "002020100177",
+          "horseId": "102020100177",
           "horseName": "ロードマンハイム",
           "sexAge": "せん6",
           "carriedWeight": 56,
@@ -27977,7 +29916,7 @@ window.KEIBA_RESULTS = {
           "finishText": "14",
           "gateNumber": 6,
           "horseNumber": 10,
-          "horseId": "002023106718",
+          "horseId": "102023106718",
           "horseName": "コッツォリーノ",
           "sexAge": "牡3",
           "carriedWeight": 54,
@@ -28015,6 +29954,20 @@ window.KEIBA_RESULTS = {
           "popularity": 5
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "5",
+          "payoutYen": 220,
+          "popularity": 2
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "2",
+          "payoutYen": 380,
+          "popularity": 7
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "1-4",
@@ -28027,6 +29980,20 @@ window.KEIBA_RESULTS = {
           "selection": "1-5",
           "payoutYen": 1050,
           "popularity": 11
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "1-2",
+          "payoutYen": 1370,
+          "popularity": 18
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "2-5",
+          "payoutYen": 1120,
+          "popularity": 12
         },
         {
           "betClass": "umaren",
@@ -28076,7 +30043,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 5,
           "horseNumber": 6,
-          "horseId": "002023107374",
+          "horseId": "102023107374",
           "horseName": "クロナ",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -28100,7 +30067,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 5,
           "horseNumber": 5,
-          "horseId": "002022104394",
+          "horseId": "102022104394",
           "horseName": "ヒットミー",
           "sexAge": "牝4",
           "carriedWeight": 56,
@@ -28124,7 +30091,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 6,
           "horseNumber": 8,
-          "horseId": "002022100729",
+          "horseId": "102022100729",
           "horseName": "ビーマックス",
           "sexAge": "牡4",
           "carriedWeight": 58,
@@ -28148,7 +30115,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002023107523",
+          "horseId": "102023107523",
           "horseName": "デアプリームス",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -28172,7 +30139,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 7,
           "horseNumber": 9,
-          "horseId": "002023105591",
+          "horseId": "102023105591",
           "horseName": "マメタンク",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -28196,7 +30163,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002023100014",
+          "horseId": "102023100014",
           "horseName": "カネコメブライト",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -28220,7 +30187,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 8,
           "horseNumber": 11,
-          "horseId": "002022100574",
+          "horseId": "102022100574",
           "horseName": "ルイステソーロ",
           "sexAge": "せん4",
           "carriedWeight": 58,
@@ -28244,7 +30211,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 8,
           "horseNumber": 12,
-          "horseId": "002023105661",
+          "horseId": "102023105661",
           "horseName": "ストロングボンド",
           "sexAge": "せん3",
           "carriedWeight": 55,
@@ -28268,7 +30235,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 7,
           "horseNumber": 10,
-          "horseId": "002020102702",
+          "horseId": "102020102702",
           "horseName": "ストリンジェンド",
           "sexAge": "牡6",
           "carriedWeight": 58,
@@ -28292,7 +30259,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 6,
           "horseNumber": 7,
-          "horseId": "002021103748",
+          "horseId": "102021103748",
           "horseName": "サベージラヴ",
           "sexAge": "牝5",
           "carriedWeight": 56,
@@ -28316,7 +30283,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002021105821",
+          "horseId": "102021105821",
           "horseName": "サンディブロンド",
           "sexAge": "牝5",
           "carriedWeight": 56,
@@ -28340,7 +30307,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 4,
           "horseNumber": 4,
-          "horseId": "002023103625",
+          "horseId": "102023103625",
           "horseName": "エコロレバン",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -28376,6 +30343,20 @@ window.KEIBA_RESULTS = {
           "popularity": 6
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "5",
+          "payoutYen": 420,
+          "popularity": 7
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "8",
+          "payoutYen": 510,
+          "popularity": 8
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "5-5",
@@ -28388,6 +30369,20 @@ window.KEIBA_RESULTS = {
           "selection": "5-6",
           "payoutYen": 1890,
           "popularity": 23
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "6-8",
+          "payoutYen": 2960,
+          "popularity": 30
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "5-8",
+          "payoutYen": 3470,
+          "popularity": 31
         },
         {
           "betClass": "umaren",
@@ -28437,7 +30432,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 6,
           "horseNumber": 10,
-          "horseId": "002022104617",
+          "horseId": "102022104617",
           "horseName": "ヴーレヴー",
           "sexAge": "牝4",
           "carriedWeight": 55,
@@ -28463,7 +30458,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 7,
           "horseNumber": 12,
-          "horseId": "002021105228",
+          "horseId": "102021105228",
           "horseName": "レディーヴァリュー",
           "sexAge": "牝5",
           "carriedWeight": 55,
@@ -28489,7 +30484,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 3,
           "horseNumber": 4,
-          "horseId": "002020105424",
+          "horseId": "102020105424",
           "horseName": "シルトホルン",
           "sexAge": "牡6",
           "carriedWeight": 58,
@@ -28515,7 +30510,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002021105442",
+          "horseId": "102021105442",
           "horseName": "エラトー",
           "sexAge": "牝5",
           "carriedWeight": 55,
@@ -28541,7 +30536,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 4,
           "horseNumber": 5,
-          "horseId": "002020107001",
+          "horseId": "102020107001",
           "horseName": "キョウエイブリッサ",
           "sexAge": "牡6",
           "carriedWeight": 57,
@@ -28567,7 +30562,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 8,
           "horseNumber": 14,
-          "horseId": "002021103519",
+          "horseId": "102021103519",
           "horseName": "リラボニート",
           "sexAge": "牝5",
           "carriedWeight": 56,
@@ -28593,7 +30588,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002019106335",
+          "horseId": "102019106335",
           "horseName": "タシット",
           "sexAge": "牡7",
           "carriedWeight": 57,
@@ -28619,7 +30614,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002021106752",
+          "horseId": "102021106752",
           "horseName": "パレハ",
           "sexAge": "牝5",
           "carriedWeight": 55,
@@ -28645,7 +30640,7 @@ window.KEIBA_RESULTS = {
           "finishText": "9",
           "gateNumber": 7,
           "horseNumber": 11,
-          "horseId": "002019103850",
+          "horseId": "102019103850",
           "horseName": "パトリックハンサム",
           "sexAge": "牡7",
           "carriedWeight": 57,
@@ -28671,7 +30666,7 @@ window.KEIBA_RESULTS = {
           "finishText": "10",
           "gateNumber": 6,
           "horseNumber": 9,
-          "horseId": "002022104416",
+          "horseId": "102022104416",
           "horseName": "レディネス",
           "sexAge": "牡4",
           "carriedWeight": 57,
@@ -28697,7 +30692,7 @@ window.KEIBA_RESULTS = {
           "finishText": "11",
           "gateNumber": 4,
           "horseNumber": 6,
-          "horseId": "002021105926",
+          "horseId": "102021105926",
           "horseName": "レディントン",
           "sexAge": "せん5",
           "carriedWeight": 57,
@@ -28723,7 +30718,7 @@ window.KEIBA_RESULTS = {
           "finishText": "12",
           "gateNumber": 5,
           "horseNumber": 7,
-          "horseId": "002020105295",
+          "horseId": "102020105295",
           "horseName": "エエヤン",
           "sexAge": "せん6",
           "carriedWeight": 59,
@@ -28749,7 +30744,7 @@ window.KEIBA_RESULTS = {
           "finishText": "13",
           "gateNumber": 8,
           "horseNumber": 13,
-          "horseId": "002018101615",
+          "horseId": "102018101615",
           "horseName": "ウインシュクラン",
           "sexAge": "せん8",
           "carriedWeight": 57,
@@ -28775,7 +30770,7 @@ window.KEIBA_RESULTS = {
           "finishText": "14",
           "gateNumber": 5,
           "horseNumber": 8,
-          "horseId": "002022101669",
+          "horseId": "102022101669",
           "horseName": "ストレイトトーカー",
           "sexAge": "牡4",
           "carriedWeight": 57,
@@ -28813,6 +30808,20 @@ window.KEIBA_RESULTS = {
           "popularity": 9
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "12",
+          "payoutYen": 380,
+          "popularity": 8
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "4",
+          "payoutYen": 170,
+          "popularity": 1
+        },
+        {
           "betClass": "wakuren",
           "betType": "枠連",
           "selection": "6-7",
@@ -28825,6 +30834,20 @@ window.KEIBA_RESULTS = {
           "selection": "10-12",
           "payoutYen": 3350,
           "popularity": 47
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-10",
+          "payoutYen": 1180,
+          "popularity": 13
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "4-12",
+          "payoutYen": 1240,
+          "popularity": 16
         },
         {
           "betClass": "umaren",
@@ -28874,7 +30897,7 @@ window.KEIBA_RESULTS = {
           "finishText": "1",
           "gateNumber": 5,
           "horseNumber": 5,
-          "horseId": "002020102050",
+          "horseId": "102020102050",
           "horseName": "サンポーニャ",
           "sexAge": "牝6",
           "carriedWeight": 54,
@@ -28898,7 +30921,7 @@ window.KEIBA_RESULTS = {
           "finishText": "2",
           "gateNumber": 4,
           "horseNumber": 4,
-          "horseId": "002023109031",
+          "horseId": "102023109031",
           "horseName": "ココソラーレ",
           "sexAge": "牝3",
           "carriedWeight": 51,
@@ -28922,7 +30945,7 @@ window.KEIBA_RESULTS = {
           "finishText": "3",
           "gateNumber": 2,
           "horseNumber": 2,
-          "horseId": "002023104875",
+          "horseId": "102023104875",
           "horseName": "ダブルチャレンジ",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -28946,7 +30969,7 @@ window.KEIBA_RESULTS = {
           "finishText": "4",
           "gateNumber": 1,
           "horseNumber": 1,
-          "horseId": "002022102878",
+          "horseId": "102022102878",
           "horseName": "ナンナンプー",
           "sexAge": "牝4",
           "carriedWeight": 55,
@@ -28970,7 +30993,7 @@ window.KEIBA_RESULTS = {
           "finishText": "5",
           "gateNumber": 8,
           "horseNumber": 8,
-          "horseId": "002022104221",
+          "horseId": "102022104221",
           "horseName": "ペイシャアーサー",
           "sexAge": "牡4",
           "carriedWeight": 55,
@@ -28994,7 +31017,7 @@ window.KEIBA_RESULTS = {
           "finishText": "6",
           "gateNumber": 7,
           "horseNumber": 7,
-          "horseId": "002023103137",
+          "horseId": "102023103137",
           "horseName": "ハッピーラッキー",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -29018,7 +31041,7 @@ window.KEIBA_RESULTS = {
           "finishText": "7",
           "gateNumber": 3,
           "horseNumber": 3,
-          "horseId": "002023100177",
+          "horseId": "102023100177",
           "horseName": "シャルトル",
           "sexAge": "牡3",
           "carriedWeight": 55,
@@ -29042,7 +31065,7 @@ window.KEIBA_RESULTS = {
           "finishText": "8",
           "gateNumber": 6,
           "horseNumber": 6,
-          "horseId": "002023102305",
+          "horseId": "102023102305",
           "horseName": "マインセーラ",
           "sexAge": "牝3",
           "carriedWeight": 53,
@@ -29078,11 +31101,39 @@ window.KEIBA_RESULTS = {
           "popularity": 4
         },
         {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "4",
+          "payoutYen": 580,
+          "popularity": 6
+        },
+        {
+          "betClass": "place",
+          "betType": "複勝",
+          "selection": "2",
+          "payoutYen": 260,
+          "popularity": 3
+        },
+        {
           "betClass": "wide",
           "betType": "ワイド",
           "selection": "4-5",
           "payoutYen": 1620,
           "popularity": 17
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "2-5",
+          "payoutYen": 550,
+          "popularity": 6
+        },
+        {
+          "betClass": "wide",
+          "betType": "ワイド",
+          "selection": "2-4",
+          "payoutYen": 1230,
+          "popularity": 15
         },
         {
           "betClass": "umaren",

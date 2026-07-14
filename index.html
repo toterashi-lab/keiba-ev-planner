@@ -108,9 +108,15 @@
               <div id="expectancy" class="section-title">
                 <div>
                   <h2>期待値・買い目検証</h2>
-                  <p>取得時点のオッズと、その時点のモデル確率を入力して比較します。</p>
+                  <p>取得オッズと校正済みモデル確率から、期待値・買い目・根拠を自動生成します。</p>
                 </div>
                 <span id="edge-badge" class="decision hold">未計算</span>
+              </div>
+
+              <div class="ev-mode-bar" aria-label="期待値計算モード">
+                <button type="button" class="active" data-ev-mode="auto">自動計算</button>
+                <button type="button" data-ev-mode="manual">検証入力</button>
+                <span id="model-status">30年モデル未学習・自動推奨停止中</span>
               </div>
 
               <div class="ev-input-grid">
@@ -121,9 +127,9 @@
                     <option value="馬単">馬単</option><option value="3連複">3連複</option><option value="3連単">3連単</option>
                   </select>
                 </label>
-                <label>買い目<input id="selection" type="text" placeholder="例：11 または 6-11" /></label>
-                <label>取得オッズ<input id="odds" type="number" min="1.01" step="0.1" placeholder="例：5.0" /></label>
-                <label>モデル確率（%）<input id="probability" type="number" min="0.01" max="99.99" step="0.1" placeholder="例：24.0" /></label>
+                <label>買い目<input id="selection" type="text" placeholder="自動候補なし" readonly /></label>
+                <label>取得オッズ<input id="odds" type="number" min="1.01" step="0.1" placeholder="自動取得待ち" readonly /></label>
+                <label>校正済みモデル確率（%）<input id="probability" type="number" min="0.01" max="99.99" step="0.1" placeholder="モデル学習待ち" readonly /></label>
                 <label>資金<input id="bankroll" type="number" min="1000" step="1000" value="30000" /></label>
                 <label>1点上限<input id="max-stake" type="number" min="100" step="100" value="1000" /></label>
               </div>
@@ -136,6 +142,17 @@
               </div>
 
               <div id="strategy-grid" class="strategy-grid"></div>
+              <section class="rationale-panel" aria-labelledby="rationale-title">
+                <header><h3 id="rationale-title">判定根拠</h3><span>自動コメント</span></header>
+                <ul id="rationale-list"></ul>
+                <div class="research-links">
+                  <strong>ロジック参照</strong>
+                  <a href="https://doi.org/10.1145/1102351.1102430" target="_blank" rel="noreferrer">確率校正</a>
+                  <a href="https://otexts.com/fpp3/tscv.html" target="_blank" rel="noreferrer">時系列検証</a>
+                  <a href="https://www.journals.uchicago.edu/doi/pdf/10.1086%2F655844" target="_blank" rel="noreferrer">人気薄バイアス</a>
+                  <a href="https://www.jra.go.jp/faq/pop02/1_6.html" target="_blank" rel="noreferrer">JRA過去結果</a>
+                </div>
+              </section>
               <p class="formula-note">期待回収率＝オッズ×的中確率。推奨条件は期待値差8%以上、100円単位、1点上限以内です。</p>
             </section>
 
@@ -160,7 +177,7 @@
                 <div><span>勝馬</span><strong>72 / 72</strong><small>100%</small></div>
                 <div><span>払戻</span><strong id="quality-refunds">--</strong><small>取得済み</small></div>
                 <div><span>全出走馬</span><strong id="quality-runners">--</strong><small>取得済み</small></div>
-                <div><span>締切前オッズ</span><strong>予測用</strong><small class="danger-text">JRA-VAN取込待ち</small></div>
+                <div><span>締切前オッズ</span><strong>予測用</strong><small class="danger-text">無料時系列の蓄積前</small></div>
                 <div><span>モデル予測</span><strong>0 / 72</strong><small class="danger-text">学習前</small></div>
               </div>
               <div class="quality-note">

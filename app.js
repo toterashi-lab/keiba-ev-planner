@@ -1,11 +1,13 @@
 const meetingData = window.KEIBA_REFERENCE_MEETINGS ?? window.KEIBA_MEETINGS ?? { meetings: [] };
 const resultData = window.KEIBA_RESULTS ?? { results: [] };
+const modelData = window.KEIBA_MODEL_OUTPUTS ?? { status: "blocked", candidates: [] };
 
 const state = {
   date: meetingData.meetings.at(-1)?.date ?? "",
   venueCode: "",
   raceNo: 11,
   view: "summary",
+  evMode: "auto",
 };
 
 const els = {
@@ -38,6 +40,8 @@ const els = {
   kellyValue: document.querySelector("#kelly-value"),
   edgeBadge: document.querySelector("#edge-badge"),
   strategyGrid: document.querySelector("#strategy-grid"),
+  modelStatus: document.querySelector("#model-status"),
+  rationaleList: document.querySelector("#rationale-list"),
   qualityRefunds: document.querySelector("#quality-refunds"),
   qualityRunners: document.querySelector("#quality-runners"),
   batchRefunds: document.querySelector("#batch-refunds"),
@@ -50,6 +54,7 @@ function initialize() {
   state.venueCode = meeting?.tracks?.[0]?.venueCode ?? "";
   if (state.date === "2026-07-12") state.venueCode = "FUKUSHIMA";
   bindEvents();
+  setEvInputMode();
   renderCoverage();
   renderAll();
   renderStrategies();
@@ -72,6 +77,15 @@ function bindEvents() {
     });
   });
 
+  document.querySelectorAll("[data-ev-mode]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.evMode = button.dataset.evMode;
+      document.querySelectorAll("[data-ev-mode]").forEach((item) => item.classList.toggle("active", item === button));
+      setEvInputMode();
+      renderStrategies();
+    });
+  });
+
   [els.odds, els.probability, els.bankroll, els.maxStake, els.betType, els.selection].forEach((input) => {
     input.addEventListener("input", renderStrategies);
     input.addEventListener("change", renderStrategies);
@@ -86,6 +100,7 @@ function renderAll() {
   renderRaceHeader();
   renderRunners();
   renderPayouts();
+  renderStrategies();
 }
 
 function renderDateTabs() {
@@ -154,6 +169,7 @@ function bindRaceButtons(container) {
       renderRaceHeader();
       renderRunners();
       renderPayouts();
+      renderStrategies();
     });
   });
 }
@@ -213,6 +229,15 @@ function renderPayouts() {
 }
 
 function renderStrategies() {
+  const automaticCandidate = state.evMode === "auto" ? selectedAutomaticCandidate() : null;
+  if (state.evMode === "auto") {
+    applyAutomaticCandidate(automaticCandidate);
+    if (!automaticCandidate) {
+      renderBlockedAutomaticState();
+      return;
+    }
+  }
+
   const odds = Number(els.odds.value);
   const probability = Number(els.probability.value) / 100;
   const bankroll = Number(els.bankroll.value) || 0;
@@ -227,6 +252,7 @@ function renderStrategies() {
     els.edgeBadge.textContent = "入力待ち";
     els.edgeBadge.className = "decision hold";
     els.strategyGrid.innerHTML = strategyDefinitions().map((strategy) => strategyCard(strategy, null)).join("");
+    renderRationale(null, automaticCandidate);
     return;
   }
 
@@ -246,6 +272,60 @@ function renderStrategies() {
 
   const calculation = { odds, probability, bankroll, maxStake, edge, expectedReturn, fullKelly, passes };
   els.strategyGrid.innerHTML = strategyDefinitions().map((strategy) => strategyCard(strategy, calculation)).join("");
+  renderRationale(calculation, automaticCandidate);
+}
+
+function setEvInputMode() {
+  const automatic = state.evMode === "auto";
+  [els.selection, els.odds, els.probability].forEach((input) => { input.readOnly = automatic; });
+  els.betType.disabled = automatic;
+  els.modelStatus.textContent = automatic
+    ? modelData.status === "ready" ? `自動モデル稼働中 ${modelData.modelVersion ?? ""}` : "30年モデル未学習・自動推奨停止中"
+    : "検証専用・入力値は実購入に使用しません";
+}
+
+function selectedAutomaticCandidate() {
+  const track = selectedTrack();
+  return (modelData.candidates ?? []).find((candidate) =>
+    candidate.date === state.date && candidate.meetingName === track?.meetingName && candidate.raceNo === state.raceNo
+    && candidate.status === "ready" && candidate.oddsObservedAt && candidate.modelVersion && candidate.calibrationStatus === "pass");
+}
+
+function applyAutomaticCandidate(candidate) {
+  els.betType.value = candidate?.betType ?? "単勝";
+  els.selection.value = candidate?.selection ?? "";
+  els.odds.value = candidate?.odds ?? "";
+  els.probability.value = candidate ? (candidate.probability * 100).toFixed(2) : "";
+}
+
+function renderBlockedAutomaticState() {
+  els.breakEven.textContent = "--";
+  els.expectedReturn.textContent = "--";
+  els.edgeValue.textContent = "--";
+  els.kellyValue.textContent = "--";
+  els.edgeBadge.textContent = "自動判定停止";
+  els.edgeBadge.className = "decision reject";
+  els.strategyGrid.innerHTML = strategyDefinitions().map((strategy) => strategyCard(strategy, null, "未取得データがあるため生成停止")).join("");
+  els.rationaleList.innerHTML = [
+    ["取得品質", "先週72レースの結果検査は合格。予測用30年データは蓄積中です。"],
+    ["オッズ", "対象時点の全買い目オッズが未取得のためEVを計算しません。"],
+    ["モデル確率", "時系列検証と確率校正が未完了のため、勝率を推測で補完しません。"],
+    ["結論", "欠損を成功扱いせず、推奨・買い目・購入候補をすべて停止しています。"],
+  ].map(([title, body]) => `<li class="blocked"><strong>${title}</strong><br>${body}</li>`).join("");
+}
+
+function renderRationale(calculation, candidate) {
+  if (!calculation) return;
+  const probabilityGap = calculation.probability - (1 / calculation.odds);
+  const comments = [
+    ["期待値", `モデル確率${percent(calculation.probability)}は損益分岐${percent(1 / calculation.odds)}を${signedPercent(probabilityGap)}上回り、期待回収率は${percent(calculation.expectedReturn)}です。`],
+    ["確率品質", candidate ? `モデル${escapeHtml(candidate.modelVersion)}、校正検査${escapeHtml(candidate.calibrationStatus)}。校正不合格の候補は自動除外します。` : "検証入力値です。自動モデルの確率校正結果ではありません。"],
+    ["市場補正", calculation.odds >= 10 ? "高オッズ帯は人気薄の過大評価が起き得るため、通常より厳しい確率校正と標本数を要求します。" : "市場オッズを基準値として比較し、モデル差が8%未満なら見送ります。"],
+    ["資金管理", `完全Kellyは${percent(calculation.fullKelly)}。推定誤差を抑えるため実配分は1/8・1/4・1/2 Kellyに縮小します。`],
+    ["時点整合", candidate ? `オッズ観測時刻${escapeHtml(candidate.oddsObservedAt)}以前の特徴量だけで計算します。` : "検証入力モードのため、予測時点の整合性は保証されません。"],
+    ["判定", calculation.passes ? "EV差8%以上を通過。上限額と100円単位を適用して候補化します。" : "EV差8%未満のため、自動買い目には採用しません。"],
+  ];
+  els.rationaleList.innerHTML = comments.map(([title, body]) => `<li><strong>${title}</strong><br>${body}</li>`).join("");
 }
 
 function strategyDefinitions() {
@@ -256,11 +336,11 @@ function strategyDefinitions() {
   ];
 }
 
-function strategyCard(strategy, calculation) {
+function strategyCard(strategy, calculation, emptyReason = "オッズ・確率入力待ち") {
   if (!calculation) {
     return `<article class="strategy-card"><header><strong>${strategy.name}</strong><span>${strategy.note}</span></header>
       <dl><div><dt>推奨額</dt><dd>--</dd></div><div><dt>期待利益</dt><dd>--</dd></div><div><dt>資金比率</dt><dd>--</dd></div></dl>
-      <footer class="reject">オッズ・確率入力待ち</footer></article>`;
+      <footer class="reject">${emptyReason}</footer></article>`;
   }
 
   const rawStake = calculation.bankroll * calculation.fullKelly * strategy.fraction;
