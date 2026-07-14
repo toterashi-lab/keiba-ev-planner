@@ -11,6 +11,7 @@ const state = {
   view: "summary",
   evMode: "auto",
   kellyFraction: 0.25,
+  benchmark: "favorite",
 };
 
 const els = {
@@ -65,6 +66,9 @@ const els = {
   marketWeight: document.querySelector("#market-weight"),
   marketWeightOutput: document.querySelector("#market-weight-output"),
   uncertainty: document.querySelector("#uncertainty"),
+  performanceCards: document.querySelector("#performance-cards"),
+  performanceBody: document.querySelector("#performance-body"),
+  performanceRule: document.querySelector("#performance-rule"),
 };
 
 initialize();
@@ -77,6 +81,7 @@ function initialize() {
   setEvInputMode();
   renderCoverage();
   renderDatabaseStatus();
+  renderPerformance();
   renderAll();
   renderStrategies();
 }
@@ -140,6 +145,90 @@ function bindEvents() {
       renderStrategies();
     });
   });
+
+  document.querySelectorAll("[data-benchmark]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.benchmark = button.dataset.benchmark;
+      document.querySelectorAll("[data-benchmark]").forEach((item) => item.classList.toggle("active", item === button));
+      renderPerformance();
+    });
+  });
+}
+
+function renderPerformance() {
+  const reports = buildBenchmarkReports();
+  els.performanceCards.innerHTML = [reports.favorite, reports.top3, reports.all].map((report) => {
+    const roiClass = report.roi >= 1 ? "positive" : "negative";
+    return `<article class="performance-card ${state.benchmark === report.id ? "active" : ""}">
+      <header><strong>${report.name}</strong><span>${report.pointsLabel}</span></header>
+      <div class="performance-primary"><span>回収率</span><strong class="${roiClass}">${percent(report.roi)}</strong><small>${signedYen(report.net)}</small></div>
+      <dl><div><dt>対象</dt><dd>${report.trials}R</dd></div><div><dt>的中</dt><dd>${report.hits}R</dd></div><div><dt>的中率</dt><dd>${percent(report.hitRate)}</dd></div><div><dt>投資</dt><dd>${yen(report.investment)}</dd></div><div><dt>払戻</dt><dd>${yen(report.payout)}</dd></div></dl>
+    </article>`;
+  }).join("") + `<article class="performance-card blocked">
+    <header><strong>期待値モデル</strong><span>自動推奨</span></header>
+    <div class="performance-primary"><span>検証済み</span><strong>0 / 72</strong><small>学習・校正前</small></div>
+    <p>発走前オッズとwalk-forward検証が揃うまで、的中率・回収率・買い目を公開しません。</p>
+  </article>`;
+
+  const selected = reports[state.benchmark] ?? reports.favorite;
+  els.performanceRule.textContent = selected.rule;
+  const rows = selected.details.slice(0, 30);
+  els.performanceBody.innerHTML = rows.length ? rows.map((row) => `<tr>
+    <td>${formatShortDate(row.date)}</td><td>${escapeHtml(row.venueName)} ${row.raceNo}R</td><td><strong>${escapeHtml(row.winnerName)}</strong></td>
+    <td>${row.winnerOdds ? row.winnerOdds.toFixed(1) : "--"}</td><td class="selection-cell">${escapeHtml(row.selection)}</td><td>${row.points}</td>
+    <td>${yen(row.investment)}</td><td>${yen(row.payout)}</td><td class="${row.net >= 0 ? "positive" : "negative"}">${signedYen(row.net)}</td>
+    <td><span class="quality ${row.hit ? "complete" : "missing"}">${row.hit ? "的中" : "不的中"}</span></td>
+  </tr>`).join("") : `<tr><td colspan="10" class="empty-row">検証可能なレースがありません</td></tr>`;
+}
+
+function buildBenchmarkReports() {
+  const definitions = {
+    favorite: { id: "favorite", name: "単勝1番人気", count: 1, pointsLabel: "1点 / レース", rule: "各レースの単勝最低オッズ1頭を100円購入" },
+    top3: { id: "top3", name: "単勝オッズ上位3頭", count: 3, pointsLabel: "3点 / レース", rule: "各レースの単勝オッズ上位3頭を各100円購入" },
+    all: { id: "all", name: "単勝全頭", count: Infinity, pointsLabel: "発売全頭", rule: "単勝オッズを取得できた全馬を各100円購入する対照基準" },
+  };
+  const reports = Object.fromEntries(Object.values(definitions).map((definition) => [definition.id, { ...definition, details: [] }]));
+
+  for (const meeting of meetingData.meetings ?? []) {
+    for (const track of meeting.tracks ?? []) {
+      for (const race of track.races ?? []) {
+        const result = resultData.results.find((item) => item.meetingName === track.meetingName && item.raceNo === race.no);
+        const oddsRace = closingOddsData.races?.find((item) => item.date === meeting.date && item.venueCode === track.venueCode && item.raceNo === race.no);
+        const prices = (oddsRace?.prices ?? []).filter((price) => Number(price.win) > 1).sort((a, b) => a.win - b.win || a.horseNumber - b.horseNumber);
+        const winners = new Set((result?.runners ?? []).filter((runner) => runner.finishPosition === 1).map((runner) => runner.horseNumber));
+        if (!result || !prices.length || !winners.size) continue;
+        const runnerNames = new Map(result.runners.map((runner) => [runner.horseNumber, runner.horseName]));
+        const winRefunds = (result.refunds ?? []).filter((refund) => refund.betType === "単勝").map((refund) => ({
+          horseNumber: Number(String(refund.selection).match(/\d+/)?.[0]), payout: Number(refund.payoutYen) || 0,
+        }));
+        const winnerPrice = prices.find((price) => winners.has(price.horseNumber));
+
+        for (const report of Object.values(reports)) {
+          const selected = prices.slice(0, report.count);
+          const selectedNumbers = new Set(selected.map((price) => price.horseNumber));
+          const payout = winRefunds.filter((refund) => selectedNumbers.has(refund.horseNumber)).reduce((sum, refund) => sum + refund.payout, 0);
+          const investment = selected.length * 100;
+          report.details.push({
+            date: meeting.date, venueName: track.venueName, raceNo: race.no, winnerName: result.winner,
+            winnerOdds: winnerPrice?.win, selection: selected.map((price) => `${price.horseNumber} ${runnerNames.get(price.horseNumber) ?? ""}`).join(" / "),
+            points: selected.length, investment, payout, net: payout - investment, hit: payout > 0,
+          });
+        }
+      }
+    }
+  }
+
+  for (const report of Object.values(reports)) {
+    report.details.sort((a, b) => b.date.localeCompare(a.date) || b.raceNo - a.raceNo || a.venueName.localeCompare(b.venueName, "ja"));
+    report.trials = report.details.length;
+    report.hits = report.details.filter((detail) => detail.hit).length;
+    report.investment = report.details.reduce((sum, detail) => sum + detail.investment, 0);
+    report.payout = report.details.reduce((sum, detail) => sum + detail.payout, 0);
+    report.net = report.payout - report.investment;
+    report.hitRate = report.trials ? report.hits / report.trials : 0;
+    report.roi = report.investment ? report.payout / report.investment : 0;
+  }
+  return reports;
 }
 
 function renderAll() {
@@ -484,6 +573,11 @@ function formatDate(value) {
   return `${date.getMonth() + 1}月${date.getDate()}日`;
 }
 
+function formatShortDate(value) {
+  const date = new Date(`${value}T00:00:00+09:00`);
+  return `${date.getMonth() + 1}/${date.getDate()}`;
+}
+
 function roundHundred(value) {
   return Math.floor(Math.max(0, value) / 100) * 100;
 }
@@ -498,6 +592,11 @@ function signedPercent(value) {
 
 function yen(value) {
   return `${Number(value || 0).toLocaleString("ja-JP")}円`;
+}
+
+function signedYen(value) {
+  const amount = Number(value || 0);
+  return `${amount >= 0 ? "+" : "-"}${Math.abs(amount).toLocaleString("ja-JP")}円`;
 }
 
 function number(value) {

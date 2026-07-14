@@ -30,6 +30,7 @@ fs.mkdirSync(path.join(stageDir, "scripts"), { recursive: true });
 copy("schema.sql", path.join(stageDir, "schema.sql"));
 copy("docs/free-data-pipeline.md", path.join(stageDir, "docs", "free-data-pipeline.md"));
 copy("docs/expectancy-methodology.md", path.join(stageDir, "docs", "expectancy-methodology.md"));
+copy("docs/reference-site-analysis.md", path.join(stageDir, "docs", "reference-site-analysis.md"));
 for (const file of [
   "jra-free-db.mjs",
   "jra-free-odds.mjs",
@@ -42,6 +43,7 @@ for (const file of [
   "generate-reference-result-seed.mjs",
   "build-public-demo.mjs",
   "ev-logic-check.mjs",
+  "performance-benchmark-check.mjs",
 ]) copy(path.join("scripts", file), path.join(stageDir, "scripts", file));
 writeBrowserData(path.join(stageDataDir, "meet-2026-07-11-2026-07-12.js"), "KEIBA_REFERENCE_MEETINGS", programmeData);
 writeBrowserData(path.join(stageDataDir, "result-links-2026-07-11-2026-07-12.js"), "KEIBA_RESULT_LINKS", resultLinksData);

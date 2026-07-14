@@ -20,6 +20,8 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Reference dataset validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\ev-logic-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "EV logic validation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\performance-benchmark-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Performance benchmark validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\jra-free-db.mjs" audit
   if ($LASTEXITCODE -ne 0) { throw "Database audit failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\build-public-demo.mjs"

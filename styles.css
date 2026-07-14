@@ -45,7 +45,7 @@ main { width: min(1240px, 100%); margin: 0 auto; padding: 14px 18px 30px; }
 .source-strip span { color: var(--muted); }
 .source-strip p { margin: 0; color: var(--muted); font-size: 12px; }
 
-.race-workspace, .warehouse-section { background: var(--white); border: 1px solid #cbd1d5; box-shadow: 0 1px 3px rgba(20,30,35,.06); }
+.race-workspace, .performance-section, .warehouse-section { background: var(--white); border: 1px solid #cbd1d5; box-shadow: 0 1px 3px rgba(20,30,35,.06); }
 .date-tabs, .venue-tabs, .race-tabs { display: flex; align-items: stretch; overflow-x: auto; scrollbar-width: thin; }
 .date-tabs { min-height: 44px; padding-left: 10px; background: #f1f3f4; border-bottom: 1px solid var(--line); }
 .date-tabs button { min-width: 150px; padding: 8px 14px; border: 0; border-right: 1px solid var(--line); background: transparent; color: #4e5960; cursor: pointer; }
@@ -197,6 +197,37 @@ main { width: min(1240px, 100%); margin: 0 auto; padding: 14px 18px 30px; }
 .quality-note p { margin: 3px 0 9px; color: #425766; font-size: 12px; }
 .quality-note p:last-child { margin-bottom: 0; }
 
+.performance-section { margin-top: 16px; padding: 15px 16px 18px; }
+.benchmark-label { padding: 6px 9px; border: 1px solid #d5a3a6; background: var(--red-100); color: var(--red-700); font-size: 11px; font-weight: 800; white-space: nowrap; }
+.performance-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.performance-card { min-width: 0; border: 1px solid var(--line); border-top: 3px solid var(--green-700); background: #fff; }
+.performance-card.active { border-color: var(--green-700); box-shadow: 0 0 0 1px var(--green-700); }
+.performance-card.blocked { border-top-color: var(--red-700); background: #fbf7f7; }
+.performance-card header { min-height: 43px; padding: 8px 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; background: #f1f3f4; border-bottom: 1px solid var(--line); }
+.performance-card header strong { font-size: 12px; }
+.performance-card header span { color: var(--muted); font-size: 10px; text-align: right; }
+.performance-primary { min-height: 73px; padding: 9px 10px; border-bottom: 1px solid var(--line); }
+.performance-primary span, .performance-primary small { display: block; color: var(--muted); font-size: 10px; }
+.performance-primary strong { display: block; margin: 2px 0; font-size: 23px; font-variant-numeric: tabular-nums; }
+.performance-card dl { margin: 0; padding: 5px 10px; }
+.performance-card dl div { min-height: 25px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px dotted #d7dcdf; }
+.performance-card dl div:last-child { border-bottom: 0; }
+.performance-card dt { color: var(--muted); font-size: 10px; }
+.performance-card dd { margin: 0; font-size: 11px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.performance-card > p { margin: 0; padding: 10px; color: #5d4a4c; font-size: 11px; line-height: 1.6; }
+.performance-detail-head { min-height: 48px; margin-top: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); }
+.benchmark-tabs { align-self: stretch; display: flex; }
+.benchmark-tabs button { padding: 0 14px; border: 0; border-right: 1px solid var(--line); background: #f1f3f4; color: #445058; font-size: 11px; font-weight: 800; cursor: pointer; }
+.benchmark-tabs button.active { background: var(--green-800); color: #fff; }
+.performance-detail-head p { margin: 0; color: var(--muted); font-size: 11px; text-align: right; }
+.performance-table { min-width: 980px; table-layout: auto; }
+.performance-table th, .performance-table td { white-space: nowrap; }
+.performance-table .selection-cell { min-width: 190px; max-width: 320px; overflow: hidden; text-overflow: ellipsis; }
+.performance-table td:nth-child(n+4):not(:nth-child(5)) { text-align: right; font-variant-numeric: tabular-nums; }
+.audit-note { padding: 10px 12px; display: flex; align-items: center; gap: 9px 14px; background: var(--blue-100); border: 1px solid #c5d9e8; border-top: 0; color: #425766; font-size: 10px; }
+.audit-note strong { color: var(--blue-700); white-space: nowrap; }
+.audit-note a { margin-left: auto; font-weight: 800; white-space: nowrap; }
+
 .warehouse-section { margin-top: 16px; padding: 15px 16px 18px; }
 .warehouse-status { border-color: #9ab7ca; background: var(--blue-100); color: var(--blue-700); }
 .pipeline-overview { display: grid; grid-template-columns: repeat(5, 1fr); border-block: 1px solid var(--line); background: #fafbfb; }
@@ -232,6 +263,7 @@ footer p { width: min(1204px, 100%); margin: 0 auto; font-size: 11px; line-heigh
   .summary-band > div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
   .ev-input-grid { grid-template-columns: repeat(2, 1fr); }
   .strategy-grid { grid-template-columns: 1fr; }
+  .performance-cards { grid-template-columns: repeat(2, 1fr); }
   .pipeline-overview { grid-template-columns: repeat(3, 1fr); }
   .pipeline-overview > div:nth-child(3) { border-right: 0; }
   .pipeline-overview > div:nth-child(-n+3) { border-bottom: 1px solid var(--line); }
@@ -278,6 +310,14 @@ footer p { width: min(1204px, 100%); margin: 0 auto; font-size: 11px; line-heigh
   .rationale-panel li { border-right: 0; }
   .race-list { grid-template-columns: 1fr; max-height: 360px; overflow-y: auto; }
   .warehouse-section { padding: 10px; overflow-x: auto; }
+  .performance-section { padding: 10px; }
+  .performance-cards { grid-template-columns: 1fr 1fr; }
+  .performance-detail-head { align-items: stretch; flex-direction: column; }
+  .benchmark-tabs { min-height: 42px; overflow-x: auto; }
+  .benchmark-tabs button { flex: 1 0 auto; }
+  .performance-detail-head p { padding: 0 2px 8px; text-align: left; }
+  .audit-note { align-items: flex-start; flex-direction: column; }
+  .audit-note a { margin-left: 0; }
   .pipeline-overview { min-width: 620px; }
   .batch-table { min-width: 650px; }
 }

@@ -19,6 +19,7 @@
         <nav class="global-nav" aria-label="主要メニュー">
           <a href="#race-workspace" class="active">レース</a>
           <a href="#expectancy">期待値分析</a>
+          <a href="#performance">検証実績</a>
           <a href="#quality">データ品質</a>
           <a href="#warehouse">蓄積状況</a>
         </nav>
@@ -208,6 +209,36 @@
             <div class="sidebar-title"><strong id="sidebar-venue">福島</strong><span>全12R</span></div>
             <div id="race-list" class="race-list"></div>
           </aside>
+        </div>
+      </section>
+
+      <section id="performance" class="performance-section">
+        <div class="section-title">
+          <div>
+            <h2>先週72レース・市場ベンチマーク検証</h2>
+            <p>JRA公式結果と保存済み締切後単勝オッズから、同じ100円単位で機械的に再計算しています。</p>
+          </div>
+          <span class="benchmark-label">予測実績ではありません</span>
+        </div>
+        <div id="performance-cards" class="performance-cards"></div>
+        <div class="performance-detail-head">
+          <div class="benchmark-tabs" role="tablist" aria-label="比較基準">
+            <button type="button" class="active" data-benchmark="favorite">1番人気</button>
+            <button type="button" data-benchmark="top3">オッズ上位3頭</button>
+            <button type="button" data-benchmark="all">全頭購入</button>
+          </div>
+          <p id="performance-rule">各レースの単勝最低オッズ1頭を100円購入</p>
+        </div>
+        <div class="table-scroll">
+          <table class="dense-table performance-table">
+            <thead><tr><th>日付</th><th>競馬場・R</th><th>勝馬</th><th>勝馬オッズ</th><th>買い目</th><th>点数</th><th>投資</th><th>払戻</th><th>損益</th><th>判定</th></tr></thead>
+            <tbody id="performance-body"></tbody>
+          </table>
+        </div>
+        <div class="audit-note">
+          <strong>集計仕様</strong>
+          <span>同着時は選択した的中馬の単勝払戻を合算。発売対象外・オッズ欠損馬は点数から除外し、取得できないレースは集計対象外として明示します。</span>
+          <a href="docs/reference-site-analysis.md">参考サイト構造と採否</a>
         </div>
       </section>
 

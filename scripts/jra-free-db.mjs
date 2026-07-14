@@ -399,7 +399,7 @@ async function fetchPage(cname, pageType, delayMs) {
   const refreshable = forceRefresh && (pageType === "search-index" || pageType === "month");
   if (!refreshable && cached && fs.existsSync(path.join(PRIVATE_DIR, cached.raw_path))) {
     const html = zlib.gunzipSync(fs.readFileSync(path.join(PRIVATE_DIR, cached.raw_path))).toString("utf8");
-    return { id: cached.id, html };
+    if (!isJraErrorPage(html)) return { id: cached.id, html };
   }
 
   await sleep(delayMs);
@@ -419,8 +419,8 @@ async function fetchPage(cname, pageType, delayMs) {
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const bytes = await response.arrayBuffer();
       const html = new TextDecoder("shift_jis").decode(bytes);
-      if (/パラメータエラー|ご指定のページが見つかりません/.test(html)) {
-        throw new Error("JRA returned a parameter error page");
+      if (isJraErrorPage(html)) {
+        throw new Error("JRA returned an application error page with HTTP 200");
       }
       const canonicalBytes = Buffer.from(html, "utf8");
       const hash = crypto.createHash("sha256").update(canonicalBytes).digest("hex");
@@ -459,6 +459,11 @@ function parseMeetings(html) {
     meetings.push({ ...key, cname, displayName: stripHtml(match[2]) });
   }
   return uniqueBy(meetings, (meeting) => meeting.cname);
+}
+
+function isJraErrorPage(html) {
+  const title = stripHtml(html.match(/<title>([\s\S]*?)<\/title>/i)?.[1] ?? "");
+  return /ＤＢ検索エラー|DB検索エラー|パラメータエラー|ご指定のページが見つかりません/.test(`${title} ${html}`);
 }
 
 function parseMeetingKey(cname) {
