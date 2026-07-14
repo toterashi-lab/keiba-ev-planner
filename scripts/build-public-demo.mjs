@@ -27,6 +27,8 @@ fs.mkdirSync(stageDataDir, { recursive: true });
 for (const file of ["index.html", "styles.css", "app.js"]) copy(file, path.join(stageDir, file));
 fs.mkdirSync(path.join(stageDir, "docs"), { recursive: true });
 fs.mkdirSync(path.join(stageDir, "scripts"), { recursive: true });
+fs.mkdirSync(path.join(stageDir, "assets"), { recursive: true });
+copy("assets/race-hero-v1.png", path.join(stageDir, "assets", "race-hero-v1.png"));
 copy("schema.sql", path.join(stageDir, "schema.sql"));
 copy("docs/free-data-pipeline.md", path.join(stageDir, "docs", "free-data-pipeline.md"));
 copy("docs/expectancy-methodology.md", path.join(stageDir, "docs", "expectancy-methodology.md"));

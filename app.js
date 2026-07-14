@@ -69,6 +69,9 @@ const els = {
   performanceCards: document.querySelector("#performance-cards"),
   performanceBody: document.querySelector("#performance-body"),
   performanceRule: document.querySelector("#performance-rule"),
+  heroFavoriteRoi: document.querySelector("#hero-favorite-roi"),
+  heroDbMonths: document.querySelector("#hero-db-months"),
+  heroDbRaces: document.querySelector("#hero-db-races"),
 };
 
 initialize();
@@ -113,6 +116,8 @@ function renderDatabaseStatus() {
   els.dbProgressBar.style.width = `${percentValue}%`;
   els.progressTrack.setAttribute("aria-valuenow", percentValue.toFixed(1));
   els.dbUpdatedAt.textContent = `公開集計 ${formatTimestamp(databaseData.asOf)} / 完成月 ${databaseData.earliestComplete}〜${databaseData.latestComplete}`;
+  els.heroDbMonths.textContent = `${databaseData.completeMonths} / ${databaseData.totalMonths}か月`;
+  els.heroDbRaces.textContent = `${number(databaseData.races)}レース蓄積`;
 }
 
 function bindEvents() {
@@ -157,6 +162,7 @@ function bindEvents() {
 
 function renderPerformance() {
   const reports = buildBenchmarkReports();
+  els.heroFavoriteRoi.textContent = percent(reports.favorite.roi);
   els.performanceCards.innerHTML = [reports.favorite, reports.top3, reports.all].map((report) => {
     const roiClass = report.roi >= 1 ? "positive" : "negative";
     return `<article class="performance-card ${state.benchmark === report.id ? "active" : ""}">

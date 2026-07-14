@@ -31,6 +31,31 @@
     </header>
 
     <main>
+      <section class="landing-hero" aria-labelledby="hero-title">
+        <div class="hero-content">
+          <p class="hero-kicker">JRA公式結果 × 保存済みオッズ</p>
+          <h1 id="hero-title">競馬期待値ラボ</h1>
+          <p class="hero-lead">勘ではなく、確率・オッズ・損益を残す。<br />先週の全72レースから検証を始めます。</p>
+          <div class="hero-actions">
+            <a class="hero-primary" href="#race-workspace">レースを見る</a>
+            <a class="hero-secondary" href="#performance">検証実績を見る</a>
+          </div>
+          <div class="hero-state"><span class="status-dot"></span><strong>データ収集中</strong><span>自動購入は未接続</span></div>
+        </div>
+        <div class="hero-figures" aria-label="現在の主要指標">
+          <div><span>先週検証</span><strong>72R</strong><small>結果・払戻照合済み</small></div>
+          <div><span>1番人気回収率</span><strong id="hero-favorite-roi">--</strong><small>市場ベンチマーク</small></div>
+          <div><span>蓄積完了</span><strong id="hero-db-months">--</strong><small id="hero-db-races">DB集計中</small></div>
+        </div>
+      </section>
+
+      <nav class="insight-strip" aria-label="分析メニュー">
+        <a href="#race-workspace"><span>01</span><strong>レース情報</strong><small>出走馬・結果・オッズ</small></a>
+        <a href="#expectancy"><span>02</span><strong>期待値シナリオ</strong><small>市場・モデル・安全側</small></a>
+        <a href="#performance"><span>03</span><strong>検証実績</strong><small>的中率・回収率・損益</small></a>
+        <a href="#warehouse"><span>04</span><strong>過去データ</strong><small>30年バックフィル</small></a>
+      </nav>
+
       <section class="source-strip">
         <div>
           <strong>初回検証バッチ</strong>
@@ -259,10 +284,12 @@
           <div class="progress-track" role="progressbar" aria-label="30年バックフィル進捗" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="db-progress-bar"></span></div>
           <p id="db-updated-at">公開集計時刻を確認中</p>
         </div>
+        <div class="table-scroll">
         <table class="dense-table batch-table">
           <thead><tr><th>バッチ</th><th>対象期間</th><th>競馬場</th><th>レース</th><th>結果</th><th>払戻</th><th>状態</th></tr></thead>
           <tbody><tr><td>2026-W28</td><td>7月11日〜12日</td><td>福島・小倉・函館</td><td>72</td><td>72</td><td id="batch-refunds">--</td><td><span class="quality complete">取込完了</span></td></tr></tbody>
         </table>
+        </div>
       </section>
     </main>
 
