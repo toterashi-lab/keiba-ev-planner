@@ -13,7 +13,8 @@ const programmeData = JSON.parse(programmeRaw);
 const resultsData = JSON.parse(resultsRaw);
 const resultLinksData = JSON.parse(resultLinksRaw);
 const modelOutputs = JSON.parse(fs.readFileSync("data/model-outputs-2026-07-11-2026-07-12.json", "utf8"));
-const abilityArtifactPath = path.join("data", "jra-free-private", "models", "ability-softmax-v1.json");
+const abilityArtifactPath = [path.join("data", "jra-free-private", "models", "reference-asof-model.json"),
+  path.join("data", "jra-free-private", "models", "ability-softmax-v1.json")].find((candidate) => fs.existsSync(candidate));
 const abilityArtifact = fs.existsSync(abilityArtifactPath) ? JSON.parse(fs.readFileSync(abilityArtifactPath, "utf8")) : null;
 const databaseExport = exportDatabaseStatus();
 const liveExport = exportLiveEdition();
@@ -62,6 +63,7 @@ copy("schema.sql", path.join(stageDir, "schema.sql"));
 copy("docs/free-data-pipeline.md", path.join(stageDir, "docs", "free-data-pipeline.md"));
 copy("docs/expectancy-methodology.md", path.join(stageDir, "docs", "expectancy-methodology.md"));
 copy("docs/expectancy-research-v2.md", path.join(stageDir, "docs", "expectancy-research-v2.md"));
+copy("docs/expectancy-research-v3.md", path.join(stageDir, "docs", "expectancy-research-v3.md"));
 copy("docs/reference-site-analysis.md", path.join(stageDir, "docs", "reference-site-analysis.md"));
 copy("model/feature-registry.mjs", path.join(stageDir, "model", "feature-registry.mjs"));
 copy("model/validation-policy.mjs", path.join(stageDir, "model", "validation-policy.mjs"));
@@ -75,6 +77,8 @@ for (const file of [
   "jra-free-exotic-odds.mjs",
   "jra-free-exotic-odds-check.mjs",
   "generate-market-ev.mjs",
+  "train-reference-asof-model.mjs",
+  "evaluate-reference-ev.mjs",
   "market-ev-check.mjs",
   "expectancy-engine-v2-check.mjs",
   "finish-order-probabilities-check.mjs",

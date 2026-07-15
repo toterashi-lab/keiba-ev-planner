@@ -544,12 +544,13 @@ function renderTopRecommendation() {
   const top = candidates[0] ?? null;
   const expectedReturn = top ? candidateExpectedReturn(top) : null;
   const edge = expectedReturn === null ? null : expectedReturn - 1;
-  const passes = edge !== null && edge >= 0.08;
+  const passes = edge !== null && edge >= 0.08 && modelData.logic?.deploymentStatus !== "benchmark_only";
 
   els.topRecommendation.classList.toggle("blocked", !top);
   els.topRecommendation.classList.toggle("available", Boolean(top));
   const retrospective = top?.calculationMode === "closing_market_validation";
-  els.topRecommendationStatus.textContent = !top ? "計算準備中" : retrospective ? "検証計算済み" : passes ? "購入候補" : "基準未達・見送り";
+  els.topRecommendationStatus.textContent = !top ? "計算準備中" : retrospective ? "検証計算済み"
+    : modelData.logic?.deploymentStatus === "benchmark_only" ? "研究検証中・購入対象外" : passes ? "購入候補" : "基準未達・見送り";
   els.topRecommendationStatus.className = `decision ${!top ? "reject" : passes ? "buy" : "hold"}`;
   els.topTicketLabel.textContent = top ? `${top.betType}・${top.method ?? "1点"}` : "推奨買い目なし";
   els.topTicketSelection.textContent = top?.selection ?? "見送り";
@@ -601,11 +602,11 @@ function isRecommendationReady(candidate) {
 }
 
 function candidateExpectedReturn(candidate) {
+  if (candidate.conservativeExpectedReturn !== null && candidate.conservativeExpectedReturn !== undefined
+    && Number.isFinite(Number(candidate.conservativeExpectedReturn))) return Number(candidate.conservativeExpectedReturn);
   if (modelData.logic?.abilityModelStatus === "research_pass"
     && candidate.abilityExpectedReturn !== null && candidate.abilityExpectedReturn !== undefined
     && Number.isFinite(Number(candidate.abilityExpectedReturn))) return Number(candidate.abilityExpectedReturn);
-  if (candidate.conservativeExpectedReturn !== null && candidate.conservativeExpectedReturn !== undefined
-    && Number.isFinite(Number(candidate.conservativeExpectedReturn))) return Number(candidate.conservativeExpectedReturn);
   if (Number(candidate.odds) > 1 && Number(candidate.conservativeProbability) > 0) return Number(candidate.odds) * Number(candidate.conservativeProbability);
   return null;
 }

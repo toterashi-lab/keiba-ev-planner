@@ -23,11 +23,16 @@ const FEATURE_GROUP_KEYS = {
   weather_going: ["goingStarts", "goingWinRate", "weatherStarts", "weatherWinRate"],
   body_load: ["age", "sexMale", "sexFemale", "sexGelding", "carriedWeight", "bodyWeight", "bodyWeightDelta", "carriedWeightBodyRatio"],
   horse_form: ["daysSinceLastRace", "careerStarts", "priorWinRate", "priorPlaceRate", "priorAverageFinish", "priorAverageFinalSectional",
-    "classChange", "distanceChangeHundreds", "surfaceChanged"],
+    "priorWinRateSmoothed", "priorPlaceRateSmoothed", "priorAveragePopularity", "lastFinishPercentile",
+    "recent3WinRate", "recent3PlaceRate", "recent5WinRate", "recent5PlaceRate", "recent3MeanFinishPercentile", "recent5MeanFinishPercentile",
+    "recent3MeanFinalSectional", "recent5MeanPopularity", "lastPopularity", "classChange", "distanceChangeHundreds", "surfaceChanged"],
   horse_suitability: ["surfaceStarts", "surfaceWinRate", "venueStarts", "venueWinRate", "distanceBandStarts", "distanceBandWinRate",
-    "directionStarts", "directionWinRate", "classStarts", "classWinRate", "seasonStarts", "seasonWinRate"],
-  connections: ["jockeyStarts", "jockeyWinRate", "jockeyPlaceRate", "trainerStarts", "trainerWinRate", "trainerPlaceRate"],
-  field_strength: ["fieldRelativePriorWinRate"],
+    "directionStarts", "directionWinRate", "classStarts", "classWinRate", "seasonStarts", "seasonWinRate",
+    "surfaceWinRateSmoothed", "venueWinRateSmoothed", "distanceBandWinRateSmoothed", "goingWinRateSmoothed",
+    "weatherWinRateSmoothed", "directionWinRateSmoothed", "classWinRateSmoothed", "seasonWinRateSmoothed"],
+  connections: ["jockeyStarts", "jockeyWinRate", "jockeyPlaceRate", "trainerStarts", "trainerWinRate", "trainerPlaceRate",
+    "jockeyWinRateSmoothed", "jockeyPlaceRateSmoothed", "trainerWinRateSmoothed", "trainerPlaceRateSmoothed"],
+  field_strength: ["fieldRelativePriorWinRate", "fieldRelativeSmoothedWinRate"],
 };
 export const FEATURE_KEYS = Object.values(FEATURE_GROUP_KEYS).flat();
 export const MODEL_FEATURE_GROUPS = Object.entries(FEATURE_GROUP_KEYS).map(([id, keys]) => ({
@@ -151,6 +156,7 @@ try {
 
 export function loadTrainingRaces(database, options) {
   const rows = [];
+  const predictionRows = [];
   const featureTiming = {
     policy: "strictly-before-race-start; same-start races update together",
     rows: 0,
@@ -163,20 +169,23 @@ export function loadTrainingRaces(database, options) {
     completeOnly: options.completeOnly !== false,
     collect: false,
     onRow(row) {
+      const featureRow = { raceId: row.raceId, horseId: row.horseId, raceDate: row.raceDate, asOfTime: row.asOfTime,
+        target: row.target, featureValues: FEATURE_KEYS.map((key) => transform(key, row.features[key])) };
+      if (options.includePredictionRows) predictionRows.push(featureRow);
       if (Number.isInteger(row.target.finishPosition) && row.target.finishPosition > 0) {
         featureTiming.rows += 1;
         if (row.lineage.lastHistoricalRaceTime) {
           featureTiming.rowsWithPriorHistory += 1;
           if (row.lineage.lastHistoricalRaceTime >= row.asOfTime) featureTiming.violations += 1;
         }
-        rows.push({ raceId: row.raceId, horseId: row.horseId, raceDate: row.raceDate, asOfTime: row.asOfTime,
-          target: row.target, featureValues: FEATURE_KEYS.map((key) => transform(key, row.features[key])) });
+        rows.push(featureRow);
       }
     },
   });
   if (featureTiming.violations) throw new Error(`Historical feature time violations: ${featureTiming.violations}`);
   featureTiming.coverage = featureTiming.rows ? (featureTiming.rows - featureTiming.violations) / featureTiming.rows : 0;
-  return { rows, races: groupRaces(rows).filter((race) => race.winnerIndex >= 0 && race.rows.length >= 2), featureTiming };
+  return { rows, races: groupRaces(rows).filter((race) => race.winnerIndex >= 0 && race.rows.length >= 2),
+    predictionRaces: options.includePredictionRows ? groupRaces(predictionRows).filter((race) => race.rows.length >= 2) : [], featureTiming };
 }
 
 export function groupRaces(rows) {

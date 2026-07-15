@@ -15,6 +15,7 @@ const ORDERED = new Set(["win", "place", "exacta", "trifecta"]);
 const TARGET_DATES = ["2026-07-11", "2026-07-12"];
 const OUTPUT = path.join("data", "model-outputs-2026-07-11-2026-07-12.json");
 const VALIDATION_ARTIFACT = loadValidationArtifact();
+const REFERENCE_EV_AUDIT = loadReferenceEvAudit();
 
 export function generateMarketEv() {
   const db = new DatabaseSync(path.join("data", "jra-free-private", "keiba.sqlite"), { readOnly: true });
@@ -34,10 +35,11 @@ export function generateMarketEv() {
       order by e.race_id,e.horse_number`).all(...TARGET_DATES);
     const odds = db.prepare(`select race_id,bet_type,selection_key,odds_low,odds_high,observed_at from odds_snapshots
       where batch_id in (?,?) order by race_id,bet_type,selection_key`).all(baseBatch.id, exoticBatch.id);
-    const latestModel = db.prepare("select id,model_version from model_runs order by created_at desc limit 1").get();
-    const modelPredictionRows = latestModel ? db.prepare(`select p.race_id,e.horse_number,p.win_probability
-      from predictions p join complete_race_entries e on e.race_id=p.race_id and e.horse_id=p.horse_id
-      where p.model_run_id=?`).all(latestModel.id) : [];
+    const horseNumbers = new Map(entries.map((row) => [`${row.race_id}|${row.horse_id}`, row.horse_number]));
+    const modelPredictionRows = (VALIDATION_ARTIFACT?.predictions ?? []).map((row) => ({
+      race_id: row.raceId, horse_number: horseNumbers.get(`${row.raceId}|${row.horseId}`), win_probability: row.probability,
+      history_starts: row.historyStarts,
+    })).filter((row) => Number.isInteger(row.horse_number));
 
     const namesByRace = group(entries, "race_id");
     const oddsByRace = group(odds, "race_id");
@@ -62,28 +64,26 @@ export function generateMarketEv() {
       const hasCompleteModel = modelRows.length === winRows.length
         && Math.abs(modelRows.reduce((sum, row) => sum + row.win_probability, 0) - 1) <= 1e-6;
       const researchHorseProbabilities = hasCompleteModel
-        ? normalize(Object.fromEntries(modelRows.map((row) => [row.horse_number, row.win_probability])))
+        ? credibilityPoolHorseProbabilities(horseProbabilities, modelRows)
         : horseProbabilities;
       const rawResearchStructuralBooks = buildFinishOrderProbabilityBooks(researchHorseProbabilities);
-      const researchStructuralBooks = VALIDATION_ARTIFACT?.ticketProbabilityStatus === "research_pass"
-        ? calibrateFinishOrderProbabilityBooks(rawResearchStructuralBooks,
-          VALIDATION_ARTIFACT.ticketCalibrationTemperatures, winRows.length)
-        : rawResearchStructuralBooks;
+      const researchStructuralBooks = rawResearchStructuralBooks;
       const raceCandidates = [];
       let evaluated = 0;
 
       for (const [dbType, betType] of Object.entries(DB_TYPES)) {
         const rows = normalizeMarket(byType.get(dbType), dbType, winRows.length);
+        const researchBook = ticketCredibilityPool(rows, researchStructuralBooks[dbType], modelRows, dbType);
         const singles = rows.map((row) => {
           const selection = row.selection_key.split("-").map(Number);
           const structural = structuralBooks[dbType].get(row.selection_key) ?? 0;
           const probability = selectProbability({ marketProbability: row.marketProbability, modelProbability: structural, validationArtifact: VALIDATION_ARTIFACT }).probability;
-          const researchProbability = researchStructuralBooks[dbType].get(row.selection_key) ?? probability;
+          const researchProbability = researchBook.get(row.selection_key) ?? probability;
           return makeCandidate(race, betType, "1点", selection, [row], probability, names, null, null, null, researchProbability, null, ["single_point"], hasCompleteModel);
         });
         evaluated += singles.length;
         raceCandidates.push(...singles.sort(byExpectedReturn).slice(0, 12));
-        raceCandidates.push(...structuredCandidates(race, dbType, betType, rows, horseProbabilities, researchHorseProbabilities, structuralBooks[dbType], researchStructuralBooks[dbType], names, hasCompleteModel));
+        raceCandidates.push(...structuredCandidates(race, dbType, betType, rows, horseProbabilities, researchHorseProbabilities, structuralBooks[dbType], researchBook, names, hasCompleteModel));
       }
       evaluatedByRace[race.race_id] = evaluated;
       candidates.push(...raceCandidates);
@@ -104,9 +104,11 @@ export function generateMarketEv() {
         engineVersion: EXPECTANCY_ENGINE_VERSION,
         formula: "hit_probability * decimal_odds",
         probabilityMode: VALIDATION_ARTIFACT?.researchProbabilityStatus === "research_pass" ? "ability_model" : "market_baseline",
-        deploymentStatus: VALIDATION_ARTIFACT?.researchProbabilityStatus === "research_pass" ? "research_validated" : "benchmark_only",
+        deploymentStatus: VALIDATION_ARTIFACT?.deploymentStatus ?? "benchmark_only",
         abilityModelStatus: VALIDATION_ARTIFACT?.researchProbabilityStatus ?? "not_trained",
         abilityExpectedReturnAvailable: modelPredictionRows.length > 0,
+        scenarios: ["market_baseline", "ability_model", "calibration_error_lower_bound"],
+        referenceWeekExternalAudit: summarizeReferenceAudit(),
         fixedBlendRemoved: true,
         validationArtifact: VALIDATION_ARTIFACT?.modelVersion ?? "insufficient",
       },
@@ -190,6 +192,11 @@ function makeCandidate(race, betType, method, selection, rows, probability, name
     const itemProbability = researchItemProbabilities?.[index] ?? researchProbability ?? itemProbabilities?.[index] ?? probability;
     return sum + row.odds_low * itemProbability;
   }, 0) / rows.length;
+  const calibrationError = calibrationErrorForBetType(betType);
+  const conservativeAbilityExpectedReturn = rows.reduce((sum, row, index) => {
+    const itemProbability = researchItemProbabilities?.[index] ?? researchProbability ?? itemProbabilities?.[index] ?? probability;
+    return sum + row.odds_low * Math.max(0, itemProbability - calibrationError);
+  }, 0) / rows.length;
   const displayNumbers = combinations ? [...new Set(combinations.flat())] : selection;
   const display = displayOverride ?? displayNumbers.map((number) => `${number} ${names.get(number) ?? ""}`.trim()).join("・");
   const useAbility = hasCompleteModel && VALIDATION_ARTIFACT?.researchProbabilityStatus === "research_pass";
@@ -204,12 +211,17 @@ function makeCandidate(race, betType, method, selection, rows, probability, name
     points: rows.length,
     totalInvestmentYen: rows.length * 100,
     odds: rows.length === 1 ? rows[0].odds_low : null,
+    ticketKeys: rows.map((row) => row.selection_key),
     probability: rows.length === 1 ? probability : null,
-    conservativeProbability: rows.length === 1 ? probability : null,
-    conservativeExpectedReturn: expectedReturn,
+    conservativeProbability: rows.length === 1 ? Math.max(0, (researchProbability ?? probability) - calibrationError) : null,
+    marketExpectedReturn: expectedReturn,
+    conservativeExpectedReturn: useAbility ? conservativeAbilityExpectedReturn : expectedReturn,
     abilityProbability: rows.length === 1 ? (researchProbability ?? probability) : null,
     abilityExpectedReturn,
-    adoptedExpectedReturn: useAbility ? abilityExpectedReturn : expectedReturn,
+    adoptedExpectedReturn: useAbility ? conservativeAbilityExpectedReturn : expectedReturn,
+    expectancyScenarios: { marketBaseline: expectedReturn, abilityModel: abilityExpectedReturn,
+      calibrationErrorLowerBound: useAbility ? conservativeAbilityExpectedReturn : expectedReturn },
+    calibrationError,
     abilityModelStatus: useAbility ? "research_pass" : "not_available",
     status: "ready",
     predictionContext: useAbility ? "out_of_sample_ability_model_with_market_benchmark" : "closing_final_validation",
@@ -217,15 +229,72 @@ function makeCandidate(race, betType, method, selection, rows, probability, name
     oddsObservedAt: rows[0].observed_at,
     modelVersion: useAbility ? VALIDATION_ARTIFACT.modelVersion : "expectancy-v2-market-baseline",
     calibrationStatus: useAbility ? "pass" : "benchmark",
+    externalValidationStatus: REFERENCE_EV_AUDIT?.status === "evaluation_only" ? "fail" : "insufficient",
+    recommendationEligible: false,
     optimizationScenarios,
-    comment: `期待値v2の市場基準検証。JRA公式最終オッズで${method} ${rows.length}点を各100円計算。学習・校正ゲート未合格のため能力モデルは混合せず、払戻結果も確率算出に使用していません。`,
+    comment: useAbility
+      ? `対象レース前で学習を停止した能力モデルとJRA公式最終オッズで${method} ${rows.length}点を各100円計算。表示順位は券種別の校正誤差を確率から控除した保守期待値です。対象レースの結果・払戻は予測確率に使用していません。`
+      : `期待値v2の市場基準検証。JRA公式最終オッズで${method} ${rows.length}点を各100円計算。学習・校正ゲート未合格のため能力モデルは混合せず、払戻結果も確率算出に使用していません。`,
   };
 }
 
 function loadValidationArtifact() {
-  const artifactPath = path.join("data", "jra-free-private", "models", "ability-softmax-v1.json");
-  if (!fs.existsSync(artifactPath)) return null;
-  return JSON.parse(fs.readFileSync(artifactPath, "utf8"));
+  const paths = [path.join("data", "jra-free-private", "models", "reference-asof-model.json"),
+    path.join("data", "jra-free-private", "models", "ability-softmax-v1.json")];
+  const artifactPath = paths.find((candidate) => fs.existsSync(candidate));
+  if (!artifactPath) return null;
+  const artifact = JSON.parse(fs.readFileSync(artifactPath, "utf8"));
+  return artifact.targetDates && !TARGET_DATES.every((date) => artifact.targetDates.includes(date)) ? null : artifact;
+}
+
+function calibrationErrorForBetType(betType) {
+  const dbType = Object.entries(DB_TYPES).find(([, label]) => label === betType)?.[0];
+  const value = Number(VALIDATION_ARTIFACT?.ticketCalibrationErrors?.[dbType]);
+  return Number.isFinite(value) && value >= 0 ? value : 0;
+}
+
+function loadReferenceEvAudit() {
+  const auditPath = path.join("data", "jra-free-private", "models", "reference-ev-audit.json");
+  if (!fs.existsSync(auditPath)) return null;
+  const audit = JSON.parse(fs.readFileSync(auditPath, "utf8"));
+  return audit.modelVersion === VALIDATION_ARTIFACT?.modelVersion ? audit : null;
+}
+
+function summarizeReferenceAudit() {
+  const strategy = REFERENCE_EV_AUDIT?.strategies?.find((row) => row.name === "全券種・各レース各券種1位 EV>1");
+  return strategy ? { status: "fail", sampleRaces: 72, bets: strategy.bets, hits: strategy.hits, roi: strategy.roi,
+    reason: "72レース外部監査でROIゲート不合格。確率・期待値の表示は研究比較専用。" }
+    : { status: "insufficient", sampleRaces: 0, reason: "外部期待値監査未完了" };
+}
+
+function credibilityPoolHorseProbabilities(marketProbabilities, modelRows) {
+  const scores = Object.fromEntries(modelRows.map((row) => {
+    const starts = Math.max(0, Number(row.history_starts) || 0);
+    const modelCredibility = starts / (starts + 13);
+    const market = Math.max(1e-12, marketProbabilities[row.horse_number] ?? 0);
+    const model = Math.max(1e-12, Number(row.win_probability));
+    return [row.horse_number, Math.pow(model, modelCredibility) * Math.pow(market, 1 - modelCredibility)];
+  }));
+  return normalize(scores);
+}
+
+function ticketCredibilityPool(rows, modelBook, modelRows, betType) {
+  const legs = betType === "win" || betType === "place" ? 1 : betType === "quinella" || betType === "wide" || betType === "exacta" ? 2 : 3;
+  if (legs === 1) return modelBook;
+  const starts = new Map(modelRows.map((row) => [row.horse_number, Math.max(0, Number(row.history_starts) || 0)]));
+  const scored = rows.map((row) => {
+    const horses = row.selection_key.split("-").map(Number);
+    const positive = horses.map((horse) => starts.get(horse) ?? 0).filter((value) => value > 0);
+    const effectiveStarts = positive.length === horses.length
+      ? horses.length / positive.reduce((sum, value) => sum + 1 / value, 0) : 0;
+    const modelCredibility = effectiveStarts / (effectiveStarts + 13 * legs);
+    const market = Math.max(1e-15, row.marketProbability);
+    const model = Math.max(1e-15, modelBook.get(row.selection_key) ?? market);
+    return [row.selection_key, Math.pow(model, modelCredibility) * Math.pow(market, 1 - modelCredibility)];
+  });
+  const targetMass = rows.reduce((sum, row) => sum + row.marketProbability, 0);
+  const total = scored.reduce((sum, [, value]) => sum + value, 0);
+  return new Map(scored.map(([key, value]) => [key, targetMass * value / total]));
 }
 
 function normalize(values) {
