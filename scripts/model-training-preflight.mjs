@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { evaluate, fitModel, fitTemperature, loadTrainingRaces } from "./train-expectancy-model.mjs";
+import { evaluate, fitModel, fitTemperature, loadTrainingRaces, runFeatureAblation } from "./train-expectancy-model.mjs";
 
 const DATABASE = path.join("data", "jra-free-private", "keiba.sqlite");
 const OUTPUT = path.join("data", "jra-free-private", "models", "training-preflight.json");
@@ -31,7 +31,8 @@ try {
   }
 
   const fitStarted = Date.now();
-  const model = fitModel(train);
+  const ablation = runFeatureAblation(train, calibration);
+  const model = fitModel(train, ablation.selectedFeatureIndexes);
   const fitMs = Date.now() - fitStarted;
   const calibrationStarted = Date.now();
   const temperature = fitTemperature(model, calibration);
@@ -45,7 +46,7 @@ try {
   }
 
   const researchPass = metrics.logLoss < metrics.uniformLogLoss && metrics.ece <= 0.025
-    && metrics.maxCalibrationBinError <= 0.075 && metrics.maxProbabilitySumError <= 1e-6;
+    && metrics.maxCalibrationBinError <= 0.075 && metrics.maxProbabilitySumError <= 1e-6 && !ablation.fallback;
   const report = {
     status: "pass",
     checkedAt: new Date().toISOString(),
@@ -64,6 +65,14 @@ try {
       rss: Math.round(process.memoryUsage().rss / 1024 / 1024),
     },
     temperature,
+    featureAdmission: {
+      method: ablation.method,
+      selectedGroups: ablation.selectedGroups,
+      selectedFeatureIndexes: ablation.selectedFeatureIndexes,
+      fallback: ablation.fallback,
+      thresholds: ablation.thresholds,
+      groups: ablation.groups,
+    },
     metrics,
     researchSignal: researchPass ? "research_pass_candidate" : "research_gate_not_met_yet",
     projectedFullRunMinutes: Number(((elapsedMs * (105000 / races.length)) / 60000).toFixed(1)),

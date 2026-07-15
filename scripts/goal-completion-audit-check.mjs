@@ -31,10 +31,17 @@ try {
     modelVersion: "unit-model",
     researchProbabilityStatus: "research_pass",
     noTargetLeakage: true,
+    activeFeatureIndexes: [10, 11],
+    activeFeatureKeys: ["priorWinRate", "priorPlaceRate"],
+    featureAdmission: {
+      method: "group-ablation-on-each-walk-forward-fold",
+      fallback: false,
+      admittedGroups: ["horse_form"],
+    },
     dataCoverage: { minDate: "1996-01-01", maxDate: "1996-01-01", races: 1 },
     folds: [
-      { trainEnd: "2024-01-01", calibrationStart: "2024-01-09", calibrationEnd: "2024-06-30", testStart: "2024-07-08" },
-      { trainEnd: "2024-07-01", calibrationStart: "2024-07-09", calibrationEnd: "2024-12-31", testStart: "2025-01-08" },
+      { trainEnd: "2024-01-01", calibrationStart: "2024-01-09", calibrationEnd: "2024-06-30", testStart: "2024-07-08", featureAblation: [{ id: "horse_form", pass: true }] },
+      { trainEnd: "2024-07-01", calibrationStart: "2024-07-09", calibrationEnd: "2024-12-31", testStart: "2025-01-08", featureAblation: [{ id: "horse_form", pass: true }] },
     ],
     metrics: { maxProbabilitySumError: 1e-12, meanEce: 0.01, meanMaxCalibrationBinError: 0.03, meanLogLoss: 1.2, meanUniformLogLoss: 2.1 },
   };
@@ -61,7 +68,7 @@ try {
 
   const report = { readiness: { ready: true, coverage: { from: "1996-01", to: "2026-07", expectedMonths: 367 } }, checks: [], failures: [] };
   auditCompletedGoal(db, report, { artifactPath, marketOutputPath, generatorPath, pipelineFiles: [pipeline] });
-  if (report.failures.length || report.checks.length !== 14) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
+  if (report.failures.length || report.checks.length !== 15) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
   console.log(JSON.stringify({ status: "pass", checks: report.checks.length, races: predictions.length, candidates: candidates.length }, null, 2));
 } finally {
   db.close();

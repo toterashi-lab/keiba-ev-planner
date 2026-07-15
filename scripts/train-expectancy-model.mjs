@@ -4,6 +4,7 @@ import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
 import { buildFeatureRows } from "./model-feature-pipeline.mjs";
+import { MODEL_VALIDATION_POLICY } from "../model/validation-policy.mjs";
 
 const DATABASE_PATH = path.join("data", "jra-free-private", "keiba.sqlite");
 const ARTIFACT_PATH = path.join("data", "jra-free-private", "models", "ability-softmax-v1.json");
@@ -22,6 +23,14 @@ export const FEATURE_KEYS = [
   "jockeyPlaceRate", "trainerStarts", "trainerWinRate", "trainerPlaceRate",
   "fieldRelativePriorWinRate",
 ];
+export const MODEL_FEATURE_GROUPS = [
+  { id: "race_context", indexes: [0, 1, 2] },
+  { id: "body_load", indexes: [3, 4, 5, 6, 7] },
+  { id: "horse_form", indexes: [8, 9, 10, 11, 12, 13] },
+  { id: "horse_suitability", indexes: [14, 15, 16, 17, 18, 19, 20, 21] },
+  { id: "connections", indexes: [22, 23, 24, 25, 26, 27] },
+  { id: "field_strength", indexes: [28] },
+];
 const LOG_FEATURES = new Set(["careerStarts", "surfaceStarts", "venueStarts", "distanceBandStarts", "goingStarts", "jockeyStarts", "trainerStarts", "daysSinceLastRace"]);
 
 export function trainExpectancyModel() {
@@ -39,26 +48,33 @@ try {
   const { rows, races } = loadTrainingRaces(db, { from: coverage.minDate, to: coverage.maxDate });
   const foldSpecs = buildFoldSpecs(coverage.minDate, coverage.maxDate);
   const folds = [];
-  let finalModel;
+  let lastValidationModel;
 
   for (const spec of foldSpecs) {
     const train = races.filter((race) => race.date >= spec.trainStart && race.date <= spec.trainEnd);
     const calibration = races.filter((race) => race.date >= spec.calibrationStart && race.date <= spec.calibrationEnd);
     const test = races.filter((race) => race.date >= spec.testStart && race.date <= spec.testEnd);
     if (train.length < 1000 || calibration.length < 100 || test.length < 100) continue;
-    const model = fitModel(train);
+    const ablation = runFeatureAblation(train, calibration);
+    const model = fitModel(train, ablation.selectedFeatureIndexes);
     const temperature = fitTemperature(model, calibration);
     const metrics = evaluate(model, test, temperature);
-    folds.push({ ...spec, trainRaces: train.length, calibrationRaces: calibration.length, testRaces: test.length, temperature, metrics });
-    finalModel = { ...model, temperature, test, spec };
+    folds.push({ ...spec, trainRaces: train.length, calibrationRaces: calibration.length, testRaces: test.length,
+      temperature, selectedFeatureGroups: ablation.selectedGroups, selectedFeatureIndexes: ablation.selectedFeatureIndexes,
+      featureSelectionFallback: ablation.fallback, featureAblation: ablation.groups, metrics });
+    lastValidationModel = { ...model, temperature, test, spec };
   }
-  if (!finalModel || folds.length < 2) throw new Error(`有効なwalk-forward foldが不足しています: ${folds.length}`);
+  if (!lastValidationModel || folds.length < 2) throw new Error(`有効なwalk-forward foldが不足しています: ${folds.length}`);
 
   const aggregate = aggregateMetrics(folds);
+  const featureAdmission = aggregateFeatureAdmission(folds);
   const researchProbabilityPass = aggregate.maxProbabilitySumError <= 1e-6 && aggregate.meanEce <= 0.025
     && aggregate.meanMaxCalibrationBinError <= 0.075 && aggregate.meanLogLoss < aggregate.meanUniformLogLoss
-    && folds.every((fold) => fold.metrics.logLoss < fold.metrics.uniformLogLoss);
-  const versionHash = crypto.createHash("sha256").update(JSON.stringify({ folds, keys: FEATURE_KEYS })).digest("hex").slice(0, 12);
+    && folds.every((fold) => fold.metrics.logLoss < fold.metrics.uniformLogLoss && !fold.featureSelectionFallback)
+    && featureAdmission.admittedGroups.length > 0;
+  const deploymentModel = fitModel(races, featureAdmission.activeFeatureIndexes);
+  deploymentModel.temperature = median(folds.map((fold) => fold.temperature));
+  const versionHash = crypto.createHash("sha256").update(JSON.stringify({ folds, featureAdmission, keys: FEATURE_KEYS })).digest("hex").slice(0, 12);
   const modelVersion = `ability-softmax-v1-${coverage.maxDate}-${versionHash}`;
   const artifact = {
     status: "insufficient_betting_validation",
@@ -70,10 +86,13 @@ try {
     dataCoverage: { ...coverage, rows: rows.length, usableRaces: races.length },
     policy: { minimumTrainMonths: MIN_TRAIN_MONTHS, calibrationMonths: CALIBRATION_MONTHS, testMonths: TEST_MONTHS, embargoDays: EMBARGO_DAYS },
     featureKeys: FEATURE_KEYS,
-    means: finalModel.means,
-    scales: finalModel.scales,
-    weights: finalModel.weights,
-    temperature: finalModel.temperature,
+    activeFeatureKeys: featureAdmission.activeFeatureIndexes.map((index) => FEATURE_KEYS[index]),
+    activeFeatureIndexes: featureAdmission.activeFeatureIndexes,
+    featureAdmission,
+    means: deploymentModel.means,
+    scales: deploymentModel.scales,
+    weights: deploymentModel.weights,
+    temperature: deploymentModel.temperature,
     folds,
     metrics: aggregate,
     noTargetLeakage: true,
@@ -81,10 +100,10 @@ try {
     deploymentStatus: "benchmark_only",
     deploymentReasons: ["historical_source_timing_not_verified", "historical_pre_race_odds_coverage_insufficient", "roi_gate_not_passed"],
   };
-  persistRun(db, artifact, finalModel);
+  persistRun(db, artifact, lastValidationModel);
   fs.mkdirSync(path.dirname(ARTIFACT_PATH), { recursive: true });
   fs.writeFileSync(ARTIFACT_PATH, `${JSON.stringify(artifact, null, 2)}\n`, "utf8");
-  console.log(JSON.stringify({ artifact: ARTIFACT_PATH, modelVersion, researchProbabilityPass, strictProbabilityStatus: artifact.probabilityStatus, folds: folds.length, races: races.length, predictions: finalModel.test.length, metrics: aggregate }, null, 2));
+  console.log(JSON.stringify({ artifact: ARTIFACT_PATH, modelVersion, researchProbabilityPass, strictProbabilityStatus: artifact.probabilityStatus, folds: folds.length, races: races.length, predictions: lastValidationModel.test.length, metrics: aggregate }, null, 2));
 } finally {
   db.close();
 }
@@ -119,7 +138,8 @@ export function groupRaces(rows) {
   return grouped;
 }
 
-export function fitModel(races) {
+export function fitModel(races, activeFeatureIndexes = FEATURE_KEYS.map((_, index) => index)) {
+  const active = new Set(activeFeatureIndexes);
   const sums = FEATURE_KEYS.map(() => 0);
   const squares = FEATURE_KEYS.map(() => 0);
   const counts = FEATURE_KEYS.map(() => 0);
@@ -139,12 +159,89 @@ export function fitModel(races) {
       for (let runner = 0; runner < vectors.length; runner += 1) {
         const error = probabilities[runner] - (runner === race.winnerIndex ? 1 : 0);
         for (let feature = 0; feature < weights.length; feature += 1) {
+          if (!active.has(feature)) continue;
           weights[feature] -= learningRate * (error * vectors[runner][feature] / vectors.length + 0.00005 * weights[feature]);
         }
       }
     }
   }
-  return { means, scales, weights };
+  return { means, scales, weights, activeFeatureIndexes: [...activeFeatureIndexes] };
+}
+
+export function runFeatureAblation(trainRaces, calibrationRaces) {
+  const policy = MODEL_VALIDATION_POLICY.featureAdmission;
+  const allIndexes = FEATURE_KEYS.map((_, index) => index);
+  const fullModel = fitModel(trainRaces, allIndexes);
+  const fullTemperature = fitTemperature(fullModel, calibrationRaces);
+  const fullMetrics = evaluate(fullModel, calibrationRaces, fullTemperature);
+  const groups = MODEL_FEATURE_GROUPS.map((group) => {
+    const removed = new Set(group.indexes);
+    const ablatedIndexes = allIndexes.filter((index) => !removed.has(index));
+    const ablatedModel = fitModel(trainRaces, ablatedIndexes);
+    const ablatedTemperature = fitTemperature(ablatedModel, calibrationRaces);
+    const ablatedMetrics = evaluate(ablatedModel, calibrationRaces, ablatedTemperature);
+    const logLossImprovement = ablatedMetrics.logLoss - fullMetrics.logLoss;
+    const eceRegression = fullMetrics.ece - ablatedMetrics.ece;
+    const pass = logLossImprovement >= policy.minimumLogLossImprovement
+      && (!policy.rejectOnCalibrationRegression || eceRegression <= policy.maximumEceRegression)
+      && fullMetrics.maxCalibrationBinError <= 0.075;
+    return {
+      id: group.id,
+      indexes: group.indexes,
+      featureKeys: group.indexes.map((index) => FEATURE_KEYS[index]),
+      pass,
+      logLossImprovement,
+      eceRegression,
+      full: summarizeMetrics(fullMetrics),
+      ablated: summarizeMetrics(ablatedMetrics),
+    };
+  });
+  const selectedGroups = groups.filter((group) => group.pass).map((group) => group.id);
+  const selectedFeatureIndexes = MODEL_FEATURE_GROUPS
+    .filter((group) => selectedGroups.includes(group.id))
+    .flatMap((group) => group.indexes);
+  return {
+    method: policy.method,
+    selectedGroups,
+    selectedFeatureIndexes: selectedFeatureIndexes.length ? selectedFeatureIndexes : allIndexes,
+    fallback: selectedFeatureIndexes.length === 0,
+    thresholds: {
+      minimumLogLossImprovement: policy.minimumLogLossImprovement,
+      maximumEceRegression: policy.maximumEceRegression,
+    },
+    groups,
+  };
+}
+
+export function aggregateFeatureAdmission(folds) {
+  const policy = MODEL_VALIDATION_POLICY.featureAdmission;
+  const groups = MODEL_FEATURE_GROUPS.map((group) => {
+    const results = folds.map((fold) => fold.featureAblation.find((item) => item.id === group.id));
+    const passedFolds = results.filter((result) => result?.pass).length;
+    const foldPassRate = passedFolds / folds.length;
+    return {
+      id: group.id,
+      indexes: group.indexes,
+      featureKeys: group.indexes.map((index) => FEATURE_KEYS[index]),
+      passedFolds,
+      totalFolds: folds.length,
+      foldPassRate,
+      meanLogLossImprovement: mean(results.map((result) => result.logLossImprovement)),
+      meanEceRegression: mean(results.map((result) => result.eceRegression)),
+      admitted: foldPassRate >= policy.minimumFoldPassRate,
+    };
+  });
+  const admittedGroups = groups.filter((group) => group.admitted).map((group) => group.id);
+  const admittedIndexes = groups.filter((group) => group.admitted).flatMap((group) => group.indexes);
+  const fallback = admittedIndexes.length === 0;
+  return {
+    method: policy.method,
+    minimumFoldPassRate: policy.minimumFoldPassRate,
+    admittedGroups,
+    activeFeatureIndexes: fallback ? FEATURE_KEYS.map((_, index) => index) : admittedIndexes,
+    fallback,
+    groups,
+  };
 }
 
 export function fitTemperature(model, races) {
@@ -274,6 +371,8 @@ function transform(key, value) { const number = Number(value); return Number.isF
 function softmax(scores) { const max = Math.max(...scores); const values = scores.map((score) => Math.exp(Math.max(-40, Math.min(40, score - max)))); const total = values.reduce((sum, value) => sum + value, 0); return values.map((value) => value / total); }
 function dot(left, right) { return left.reduce((sum, value, index) => sum + value * right[index], 0); }
 function mean(values) { return values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : 0; }
+function median(values) { const sorted = [...values].sort((left, right) => left - right); const middle = Math.floor(sorted.length / 2); return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2; }
+function summarizeMetrics(metrics) { return { logLoss: metrics.logLoss, ece: metrics.ece, maxCalibrationBinError: metrics.maxCalibrationBinError }; }
 function aggregateMetrics(folds) { const keys = ["logLoss", "uniformLogLoss", "brier", "ece", "maxCalibrationBinError"]; const result = Object.fromEntries(keys.map((key) => [`mean${key[0].toUpperCase()}${key.slice(1)}`, mean(folds.map((fold) => fold.metrics[key]))])); result.maxProbabilitySumError = Math.max(...folds.map((fold) => fold.metrics.maxProbabilitySumError)); result.calibrationMethod = "equal-frequency-deciles"; return result; }
 function monthStart(date) { return `${date.slice(0, 7)}-01`; }
 function addMonths(date, count, endOfMonth = false) { const value = new Date(`${date}T00:00:00Z`); value.setUTCMonth(value.getUTCMonth() + count); if (endOfMonth) { value.setUTCMonth(value.getUTCMonth() + 1); value.setUTCDate(0); } return value.toISOString().slice(0, 10); }

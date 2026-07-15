@@ -32,6 +32,7 @@ export const MODEL_VALIDATION_POLICY = {
     method: "group-ablation-on-each-walk-forward-fold",
     minimumLogLossImprovement: 0.0001,
     minimumFoldPassRate: 0.6,
+    maximumEceRegression: 0.001,
     rejectOnCalibrationRegression: true,
     rejectOnLeakageOrTimestampFailure: true,
   },
@@ -54,6 +55,7 @@ export function validatePolicy(policy = MODEL_VALIDATION_POLICY) {
   if (!names.includes("no_target_leakage") || !names.includes("positive_ev_roi_ci95_lower")) throw new Error("必須品質ゲートがありません");
   if (policy.split.embargoDays < 1 || policy.split.testMonths < 1) throw new Error("時系列分割のembargo/test期間が不正です");
   if (policy.featureAdmission.minimumFoldPassRate <= 0.5) throw new Error("特徴量採用のfold合格率が緩すぎます");
+  if (policy.featureAdmission.maximumEceRegression < 0) throw new Error("特徴量採用のECE許容値が不正です");
   return true;
 }
 

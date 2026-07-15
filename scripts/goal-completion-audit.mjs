@@ -61,6 +61,16 @@ export function auditCompletedGoal(database, report, options = {}) {
   { model: artifact.dataCoverage, database: coverage });
   check(report, "walk_forward_folds", artifact.folds?.length >= 2
     && artifact.folds.every((fold) => fold.trainEnd < fold.calibrationStart && fold.calibrationEnd < fold.testStart), artifact.folds);
+  check(report, "walk_forward_feature_admission",
+    artifact.featureAdmission?.method === "group-ablation-on-each-walk-forward-fold"
+      && artifact.featureAdmission?.fallback === false
+      && artifact.featureAdmission?.admittedGroups?.length > 0
+      && artifact.activeFeatureIndexes?.length > 0
+      && artifact.activeFeatureKeys?.length === artifact.activeFeatureIndexes?.length
+      && artifact.folds.every((fold) => Array.isArray(fold.featureAblation) && fold.featureAblation.length > 0), {
+      featureAdmission: artifact.featureAdmission,
+      activeFeatureKeys: artifact.activeFeatureKeys,
+    });
   check(report, "probability_research_gate", artifact.researchProbabilityStatus === "research_pass", {
     status: artifact.researchProbabilityStatus, metrics: artifact.metrics,
   });

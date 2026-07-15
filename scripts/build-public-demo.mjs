@@ -240,6 +240,8 @@ function exportDatabaseStatus() {
         maxCalibrationBinError: preflight.metrics.maxCalibrationBinError,
         calibrationMethod: preflight.metrics.calibrationMethod,
         researchSignal: preflight.researchSignal,
+        selectedFeatureGroups: preflight.featureAdmission?.selectedGroups ?? [],
+        featureSelectionFallback: preflight.featureAdmission?.fallback ?? true,
       } : null,
     };
 

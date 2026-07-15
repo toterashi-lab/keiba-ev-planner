@@ -1,6 +1,9 @@
 import fs from "node:fs";
 
 const source = fs.readFileSync("scripts/train-expectancy-model.mjs", "utf8");
+for (const required of ["runFeatureAblation", "aggregateFeatureAdmission", "activeFeatureIndexes"]) {
+  if (!source.includes(required)) throw new Error(`特徴量選別の必須処理がありません: ${required}`);
+}
 for (const required of ["completeOnly: options.completeOnly !== false", "30年バックフィル未完了", "buildFoldSpecs", "fitTemperature", "maxProbabilitySumError", "equal-frequency-deciles", "noTargetLeakage: true", "insufficient_betting_validation", "researchProbabilityStatus", "feature_observation_time_coverage", "positive_ev_roi_ci95_lower"]) {
   if (!source.includes(required)) throw new Error(`学習パイプラインの必須処理がありません: ${required}`);
 }
