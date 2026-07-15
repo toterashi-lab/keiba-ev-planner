@@ -1,12 +1,17 @@
 {
   "version": "publication-manifest-v1",
-  "generatedAt": "2026-07-15T15:02:39.397Z",
-  "databaseRaces": 42145,
-  "completeMonths": 147,
+  "generatedAt": "2026-07-15T15:09:10.287Z",
+  "databaseRaces": 42457,
+  "completeMonths": 148,
   "expectedMonths": 367,
   "modelVersion": null,
   "modelCoverageRaces": null,
   "expectancyCandidateCount": 9491,
   "expectancyPredictionCount": 72,
-  "manifestId": "8eb207b4bab3e0d6a0f2"
+  "liveRaceCount": 0,
+  "liveCandidateCount": 0,
+  "livePredictionCount": 0,
+  "liveRacecardsSha256": "20af5f27eb48971e2f20c113f7e722a4962a9de3d0202034e4aed841a47ed50d",
+  "liveModelOutputsSha256": "e0e1171b72fe209919b3299493dddc430ac79fcc0720026046e285ed4076ceab",
+  "manifestId": "06862a133e5da5b6334d"
 }

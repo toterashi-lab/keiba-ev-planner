@@ -19,7 +19,7 @@ for (const token of ordered) {
   if (position < 0) throw new Error(`Publication workflow token is missing or out of order: ${token}`);
   previous = position;
 }
-for (const token of ["manifestId", "remoteManifestId", "manifestSha256", "remoteCommit"]) {
+for (const token of ["manifestId", "remoteManifestId", "manifestSha256", "remoteCommit", "remoteLiveRacecardsSha256", "remoteLiveModelOutputsSha256"]) {
   if (!source.includes(token)) throw new Error(`Publication verification field is missing: ${token}`);
 }
-console.log(JSON.stringify({ status: "pass", orderedSteps: ordered.length, verificationFields: 4 }, null, 2));
+console.log(JSON.stringify({ status: "pass", orderedSteps: ordered.length, verificationFields: 6 }, null, 2));

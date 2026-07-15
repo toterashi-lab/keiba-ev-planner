@@ -16,6 +16,8 @@ const publicationManifestPath = path.join(temp, "publication-manifest.json");
 const publicationReceiptPath = path.join(temp, "publication-receipt.json");
 const automationAuditPath = path.join(temp, "automation-audit.json");
 const liveOutputPath = path.join(temp, "live-market-ev.json");
+const publicLiveRacecardsPath = path.join(temp, "live-racecards.js");
+const publicLiveModelOutputsPath = path.join(temp, "live-model-outputs.js");
 const db = new DatabaseSync(":memory:");
 
 try {
@@ -104,22 +106,33 @@ try {
       liveCandidates.push(liveCandidate(betType, "フォーメーション"));
     }
   }
-  fs.writeFileSync(liveOutputPath, JSON.stringify({
+  const liveOutput = {
     status: "ready", generatedAt: "2026-01-01T00:01:00.000Z", snapshotKind: "pre_race", targetDates: ["2099-01-01"],
     modelVersion: "unit-model", abilityModelStatus: "research_pass", unitStakeYen: 100,
     predictionCoverage: { targetRaces: 1, predictedRaces: 1, oddsReadyRaces: 1 },
     coverageCounts: Object.fromEntries(betTypes.map((type) => [type, 1])),
     predictions: [{ raceId: "live-r1", status: "ready", predictionContext: "pre_race", modelVersion: "unit-model", marks: [1, 2, 3, 4, 5] }],
     candidates: liveCandidates,
-  }));
+  };
+  fs.writeFileSync(liveOutputPath, JSON.stringify(liveOutput));
+  const liveRacecardsText = `window.KEIBA_LIVE_RACECARDS = ${JSON.stringify({ results: [{ raceId: "live-r1" }] }, null, 2)};\n`;
+  const liveModelOutputsText = `window.KEIBA_LIVE_MODEL_OUTPUTS = ${JSON.stringify(liveOutput, null, 2)};\n`;
+  fs.writeFileSync(publicLiveRacecardsPath, liveRacecardsText);
+  fs.writeFileSync(publicLiveModelOutputsPath, liveModelOutputsText);
   const publicationManifest = { version: "publication-manifest-v1", generatedAt: "2026-01-01T00:00:00.000Z",
     databaseRaces: 1, modelVersion: "unit-model", modelCoverageRaces: 1,
-    expectancyCandidateCount: candidates.length, expectancyPredictionCount: predictions.length, manifestId: "unit-manifest" };
+    expectancyCandidateCount: candidates.length, expectancyPredictionCount: predictions.length,
+    liveRaceCount: 1, liveCandidateCount: liveCandidates.length, livePredictionCount: 1,
+    liveRacecardsSha256: crypto.createHash("sha256").update(liveRacecardsText).digest("hex"),
+    liveModelOutputsSha256: crypto.createHash("sha256").update(liveModelOutputsText).digest("hex"), manifestId: "unit-manifest" };
   const publicationManifestText = `${JSON.stringify(publicationManifest, null, 2)}\n`;
   fs.writeFileSync(publicationManifestPath, publicationManifestText);
   fs.writeFileSync(publicationReceiptPath, JSON.stringify({ status: "verified", publishedAt: "2026-01-01T00:01:00.000Z",
     commit: "abc", remoteCommit: "abc", manifestId: "unit-manifest", remoteManifestId: "unit-manifest",
-    manifestSha256: crypto.createHash("sha256").update(publicationManifestText).digest("hex"), databaseRaces: 1, modelVersion: "unit-model" }));
+    manifestSha256: crypto.createHash("sha256").update(publicationManifestText).digest("hex"), databaseRaces: 1, modelVersion: "unit-model",
+    liveRaceCount: 1, liveCandidateCount: liveCandidates.length, livePredictionCount: 1,
+    liveRacecardsSha256: publicationManifest.liveRacecardsSha256, remoteLiveRacecardsSha256: publicationManifest.liveRacecardsSha256,
+    liveModelOutputsSha256: publicationManifest.liveModelOutputsSha256, remoteLiveModelOutputsSha256: publicationManifest.liveModelOutputsSha256 }));
   fs.writeFileSync(generatorPath, "export const preRaceOnly = true;\n");
   fs.writeFileSync(databaseAuditPath, JSON.stringify({ pass: true, races: 1, failedChecks: 0, incompleteCompleteJobs: 0,
     missingRaw: 0, corruptRaw: 0, orphanRaces: 0 }));
@@ -139,6 +152,7 @@ try {
   const report = { readiness: { ready: true, coverage: { from: "1996-01", to: "2026-07", expectedMonths: 367 } }, checks: [], failures: [] };
   auditCompletedGoal(db, report, { artifactPath, marketOutputPath, generatorPath, databaseAuditPath,
     fieldAvailabilityAuditPath, publicationManifestPath, publicationReceiptPath, automationAuditPath, liveOutputPath,
+    publicLiveRacecardsPath, publicLiveModelOutputsPath,
     today: "2026-01-01", pipelineFiles: [pipeline] });
   if (report.failures.length || report.checks.length !== 25) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
   const liveFixture = JSON.parse(fs.readFileSync(liveOutputPath, "utf8"));

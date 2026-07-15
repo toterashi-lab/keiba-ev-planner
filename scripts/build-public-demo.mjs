@@ -17,6 +17,8 @@ const abilityArtifactPath = path.join("data", "jra-free-private", "models", "abi
 const abilityArtifact = fs.existsSync(abilityArtifactPath) ? JSON.parse(fs.readFileSync(abilityArtifactPath, "utf8")) : null;
 const databaseExport = exportDatabaseStatus();
 const liveExport = exportLiveEdition();
+const liveRacecardsText = browserDataText("KEIBA_LIVE_RACECARDS", liveExport.racecards);
+const liveModelOutputsText = browserDataText("KEIBA_LIVE_MODEL_OUTPUTS", liveExport.modelOutputs);
 const featureCoverage = exportFeatureCoverage(databaseExport.status.asOf);
 const quality = JSON.parse(fs.readFileSync("data/quality-report-2026-07-11-2026-07-12.json", "utf8"));
 const currentHash = crypto.createHash("sha256").update(programmeRaw + resultsRaw).digest("hex");
@@ -30,6 +32,11 @@ const publicationCore = {
   modelCoverageRaces: abilityArtifact?.dataCoverage?.races ?? null,
   expectancyCandidateCount: modelOutputs.candidates?.length ?? 0,
   expectancyPredictionCount: modelOutputs.predictions?.length ?? 0,
+  liveRaceCount: liveExport.racecards.results?.length ?? 0,
+  liveCandidateCount: liveExport.modelOutputs.candidates?.length ?? 0,
+  livePredictionCount: liveExport.modelOutputs.predictions?.length ?? 0,
+  liveRacecardsSha256: crypto.createHash("sha256").update(liveRacecardsText).digest("hex"),
+  liveModelOutputsSha256: crypto.createHash("sha256").update(liveModelOutputsText).digest("hex"),
 };
 const publicationManifest = {
   ...publicationCore,
@@ -127,8 +134,8 @@ writeBrowserData(path.join(stageDataDir, "database-status.js"), "KEIBA_DATABASE_
 writeBrowserData(path.join(stageDataDir, "model-feature-coverage.js"), "KEIBA_MODEL_FEATURE_COVERAGE", featureCoverage);
 writeBrowserData(path.join(stageDataDir, "closing-odds-2026-07-11-2026-07-12.js"), "KEIBA_CLOSING_ODDS", databaseExport.odds);
 writeBrowserData(path.join(stageDataDir, "model-outputs-2026-07-11-2026-07-12.js"), "KEIBA_MODEL_OUTPUTS", modelOutputs, 0);
-writeBrowserData(path.join(stageDataDir, "live-racecards.js"), "KEIBA_LIVE_RACECARDS", liveExport.racecards);
-writeBrowserData(path.join(stageDataDir, "live-model-outputs.js"), "KEIBA_LIVE_MODEL_OUTPUTS", liveExport.modelOutputs);
+fs.writeFileSync(path.join(stageDataDir, "live-racecards.js"), liveRacecardsText, "utf8");
+fs.writeFileSync(path.join(stageDataDir, "live-model-outputs.js"), liveModelOutputsText, "utf8");
 fs.writeFileSync(path.join(stageDataDir, "publication-manifest.json"), `${JSON.stringify(publicationManifest, null, 2)}\n`, "utf8");
 
 const cacheVersion = crypto.createHash("sha256")
@@ -193,7 +200,11 @@ function copy(from, to) {
 }
 
 function writeBrowserData(file, globalName, value, indentation = 2) {
-  fs.writeFileSync(file, `window.${globalName} = ${JSON.stringify(value, null, indentation)};\n`, "utf8");
+  fs.writeFileSync(file, browserDataText(globalName, value, indentation), "utf8");
+}
+
+function browserDataText(globalName, value, indentation = 2) {
+  return `window.${globalName} = ${JSON.stringify(value, null, indentation)};\n`;
 }
 
 function sameSet(left, right) {

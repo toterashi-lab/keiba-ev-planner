@@ -6,6 +6,15 @@ $lockPath = Join-Path $privateDir "web-publish.lock"
 $node = Get-Command node -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source -First 1
 if (-not $node) { $node = Join-Path $env:USERPROFILE ".cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe" }
 if (-not (Test-Path $node)) { throw "Node.js runtime was not found." }
+
+function Get-RemoteFileSha256([string]$Uri) {
+  $response = Invoke-WebRequest -UseBasicParsing -Uri $Uri -TimeoutSec 20
+  $bytes = if ($response.RawContentStream) { $response.RawContentStream.ToArray() }
+    elseif ($response.Content -is [byte[]]) { $response.Content } else { [Text.Encoding]::UTF8.GetBytes([string]$response.Content) }
+  $sha = [Security.Cryptography.SHA256]::Create()
+  try { return ([BitConverter]::ToString($sha.ComputeHash($bytes))).Replace("-", "").ToLowerInvariant() }
+  finally { $sha.Dispose() }
+}
 $lock = $null
 try { $lock = [System.IO.File]::Open($lockPath, [System.IO.FileMode]::CreateNew, [System.IO.FileAccess]::Write, [System.IO.FileShare]::None) }
 catch [System.IO.IOException] { return }
@@ -47,7 +56,11 @@ try {
     try {
       $cacheBuster = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds()
       $candidate = Invoke-RestMethod -UseBasicParsing -Uri ("{0}?id={1}&t={2}" -f $publicationUrl,$manifest.manifestId,$cacheBuster) -TimeoutSec 20
-      if ($candidate.manifestId -eq $manifest.manifestId) { $remoteManifest = $candidate; break }
+      $remoteLiveRacecardsSha256 = Get-RemoteFileSha256 ("https://toterashi-lab.github.io/keiba-ev-planner/data/live-racecards.js?t={0}" -f $cacheBuster)
+      $remoteLiveModelOutputsSha256 = Get-RemoteFileSha256 ("https://toterashi-lab.github.io/keiba-ev-planner/data/live-model-outputs.js?t={0}" -f $cacheBuster)
+      if (($candidate.manifestId -eq $manifest.manifestId) -and
+        ($remoteLiveRacecardsSha256 -eq $manifest.liveRacecardsSha256) -and
+        ($remoteLiveModelOutputsSha256 -eq $manifest.liveModelOutputsSha256)) { $remoteManifest = $candidate; break }
     } catch {
       Write-Warning ("Pages verification attempt {0} failed: {1}" -f ($attempt + 1),$_.Exception.Message)
     }
@@ -67,6 +80,13 @@ try {
     manifestSha256 = (Get-FileHash -LiteralPath $manifestPath -Algorithm SHA256).Hash.ToLowerInvariant()
     databaseRaces = [int64]$manifest.databaseRaces
     modelVersion = $manifest.modelVersion
+    liveRaceCount = [int64]$manifest.liveRaceCount
+    liveCandidateCount = [int64]$manifest.liveCandidateCount
+    livePredictionCount = [int64]$manifest.livePredictionCount
+    liveRacecardsSha256 = $manifest.liveRacecardsSha256
+    remoteLiveRacecardsSha256 = $remoteLiveRacecardsSha256
+    liveModelOutputsSha256 = $manifest.liveModelOutputsSha256
+    remoteLiveModelOutputsSha256 = $remoteLiveModelOutputsSha256
   }
   $utf8 = New-Object System.Text.UTF8Encoding($false)
   [System.IO.File]::WriteAllText($receiptPath, (($receipt | ConvertTo-Json -Depth 6) + "`n"), $utf8)

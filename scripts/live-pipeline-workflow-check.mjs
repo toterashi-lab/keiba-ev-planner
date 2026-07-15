@@ -19,7 +19,9 @@ checkOrder("scripts/publish-live-web.ps1", [
   "git push origin main",
   "git fetch origin main --quiet",
   'if ($localCommit -ne $remoteCommit)',
-  'if ($candidate.manifestId -eq $manifest.manifestId)',
+  "$remoteLiveRacecardsSha256",
+  "$remoteLiveModelOutputsSha256",
+  '($candidate.manifestId -eq $manifest.manifestId)',
   '"models\\publication-receipt.json"',
 ]);
 

@@ -14,6 +14,8 @@ const FIELD_AVAILABILITY_AUDIT = path.join(PRIVATE_DIR, "models", "field-availab
 const PUBLICATION_RECEIPT = path.join(PRIVATE_DIR, "models", "publication-receipt.json");
 const AUTOMATION_AUDIT = path.join(PRIVATE_DIR, "models", "automation-audit.json");
 const PUBLICATION_MANIFEST = path.join("public", "data", "publication-manifest.json");
+const PUBLIC_LIVE_RACECARDS = path.join("public", "data", "live-racecards.js");
+const PUBLIC_LIVE_MODEL_OUTPUTS = path.join("public", "data", "live-model-outputs.js");
 const ARTIFACT = path.join(PRIVATE_DIR, "models", "ability-softmax-v1.json");
 const LIVE_OUTPUT = path.join(PRIVATE_DIR, "models", "live-market-ev.json");
 const MARKET_OUTPUT = path.join("data", "model-outputs-2026-07-11-2026-07-12.json");
@@ -178,17 +180,30 @@ export function auditCompletedGoal(database, report, options = {}) {
 
   const publicationManifestPath = options.publicationManifestPath ?? PUBLICATION_MANIFEST;
   const publicationReceiptPath = options.publicationReceiptPath ?? PUBLICATION_RECEIPT;
+  const liveOutputPath = options.liveOutputPath ?? LIVE_OUTPUT;
+  const liveOutput = fs.existsSync(liveOutputPath) ? JSON.parse(fs.readFileSync(liveOutputPath, "utf8")) : null;
+  const publicLiveRacecardsPath = options.publicLiveRacecardsPath ?? PUBLIC_LIVE_RACECARDS;
+  const publicLiveModelOutputsPath = options.publicLiveModelOutputsPath ?? PUBLIC_LIVE_MODEL_OUTPUTS;
   const publicationManifestText = fs.existsSync(publicationManifestPath) ? fs.readFileSync(publicationManifestPath, "utf8") : null;
   const publicationManifest = publicationManifestText ? JSON.parse(publicationManifestText) : null;
   const publicationReceipt = fs.existsSync(publicationReceiptPath) ? JSON.parse(fs.readFileSync(publicationReceiptPath, "utf8")) : null;
   const manifestSha256 = publicationManifestText
     ? crypto.createHash("sha256").update(publicationManifestText).digest("hex") : null;
+  const liveRacecardsSha256 = fs.existsSync(publicLiveRacecardsPath)
+    ? crypto.createHash("sha256").update(fs.readFileSync(publicLiveRacecardsPath)).digest("hex") : null;
+  const liveModelOutputsSha256 = fs.existsSync(publicLiveModelOutputsPath)
+    ? crypto.createHash("sha256").update(fs.readFileSync(publicLiveModelOutputsPath)).digest("hex") : null;
   check(report, "verified_publication", publicationManifest?.version === "publication-manifest-v1"
     && publicationManifest.databaseRaces === coverage.races
     && publicationManifest.modelVersion === artifact.modelVersion
     && publicationManifest.modelCoverageRaces === coverage.races
     && publicationManifest.expectancyCandidateCount === market.candidates.length
     && publicationManifest.expectancyPredictionCount === market.predictions.length
+    && publicationManifest.liveRaceCount === liveOutput?.predictionCoverage?.targetRaces
+    && publicationManifest.liveCandidateCount === liveOutput?.candidates?.length
+    && publicationManifest.livePredictionCount === liveOutput?.predictions?.length
+    && publicationManifest.liveRacecardsSha256 === liveRacecardsSha256
+    && publicationManifest.liveModelOutputsSha256 === liveModelOutputsSha256
     && publicationReceipt?.status === "verified"
     && publicationReceipt.manifestId === publicationManifest.manifestId
     && publicationReceipt.remoteManifestId === publicationManifest.manifestId
@@ -196,10 +211,19 @@ export function auditCompletedGoal(database, report, options = {}) {
     && publicationReceipt.commit === publicationReceipt.remoteCommit
     && publicationReceipt.databaseRaces === coverage.races
     && publicationReceipt.modelVersion === artifact.modelVersion
+    && publicationReceipt.liveRaceCount === publicationManifest.liveRaceCount
+    && publicationReceipt.liveCandidateCount === publicationManifest.liveCandidateCount
+    && publicationReceipt.livePredictionCount === publicationManifest.livePredictionCount
+    && publicationReceipt.liveRacecardsSha256 === liveRacecardsSha256
+    && publicationReceipt.remoteLiveRacecardsSha256 === liveRacecardsSha256
+    && publicationReceipt.liveModelOutputsSha256 === liveModelOutputsSha256
+    && publicationReceipt.remoteLiveModelOutputsSha256 === liveModelOutputsSha256
     && Date.parse(publicationReceipt.publishedAt) >= Date.parse(publicationManifest.generatedAt), {
       manifest: publicationManifest,
       receipt: publicationReceipt,
       manifestSha256,
+      liveRacecardsSha256,
+      liveModelOutputsSha256,
     });
 
   const generator = fs.readFileSync(generatorPath, "utf8");
@@ -217,8 +241,6 @@ export function auditCompletedGoal(database, report, options = {}) {
     "scripts/sync-jra-live-racecards.ps1", "scripts/predict-live-racecards.mjs", "scripts/generate-live-market-ev.mjs",
     "scripts/evaluate-live-ev-ledger.mjs", "scripts/publish-live-web.ps1", "scripts/live-pipeline-workflow-check.mjs"]
   check(report, "automated_live_pipeline", pipelineFiles.every((file) => fs.existsSync(file)), { mode: "scheduled pre-race capture and publish" });
-  const liveOutputPath = options.liveOutputPath ?? LIVE_OUTPUT;
-  const liveOutput = fs.existsSync(liveOutputPath) ? JSON.parse(fs.readFileSync(liveOutputPath, "utf8")) : null;
   const liveCoverage = inspectLiveCoverage(database, artifact, liveOutput, { today: options.today });
   check(report, "live_all_race_all_ticket_coverage", liveCoverage.pass, { path: liveOutputPath, ...liveCoverage });
   const automationAuditPath = options.automationAuditPath ?? AUTOMATION_AUDIT;
