@@ -1,5 +1,5 @@
 window.KEIBA_DATABASE_STATUS = {
-  "asOf": "2026-07-15T02:27:25.047Z",
+  "asOf": "2026-07-15T02:29:53.995Z",
   "completeMonths": 69,
   "runningMonths": 1,
   "queuedMonths": 297,
@@ -9,9 +9,9 @@ window.KEIBA_DATABASE_STATUS = {
   "remainingMonths": 298,
   "medianMinutesPerMonth": 9.066833406686783,
   "estimatedHoursRemaining": 45.03193925321102,
-  "estimatedCompletionAt": "2026-07-16T23:29:20.027Z",
+  "estimatedCompletionAt": "2026-07-16T23:31:48.974Z",
   "workerHealth": "healthy",
-  "workerHeartbeatAgeSeconds": 3.388,
+  "workerHeartbeatAgeSeconds": 5.181,
   "liveEvValidation": {
     "status": "insufficient",
     "generatedAt": "2026-07-15T02:25:24.714Z",
@@ -28,7 +28,7 @@ window.KEIBA_DATABASE_STATUS = {
   "races": 19670,
   "runners": 271189,
   "payouts": 233387,
-  "rawPages": 22041,
+  "rawPages": 22123,
   "oddsSnapshots": 222945,
   "earliestComplete": "1996-01",
   "latestComplete": "2026-07",
