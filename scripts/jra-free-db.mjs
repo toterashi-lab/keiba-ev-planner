@@ -314,6 +314,11 @@ function initializeSchema() {
   addColumnIfMissing("odds_snapshots", "odds_high", "real");
   addColumnIfMissing("odds_snapshots", "snapshot_kind", "text");
   addColumnIfMissing("odds_snapshots", "batch_id", "integer references odds_ingestion_batches(id)");
+  if (db.prepare("select count(*) count from sqlite_master where type='table' and name='live_races'").get().count) {
+    addColumnIfMissing("live_races", "direction", "text");
+    addColumnIfMissing("live_races", "weather", "text");
+    addColumnIfMissing("live_races", "going", "text");
+  }
   db.exec("create index if not exists odds_batch_idx on odds_snapshots(batch_id, race_id, bet_type)");
   upsertMetadata("source", "JRA official past race result search");
   upsertMetadata("source_url", BASE_URL);

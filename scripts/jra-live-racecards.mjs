@@ -60,6 +60,7 @@ export function parseRaceCard(html, cname) {
   const courseText = stripHtml(html.match(/<div class="cell course">([\s\S]*?)<\/div>/i)?.[1] ?? "");
   const category = stripHtml(html.match(/<div class="cell category">([\s\S]*?)<\/div>/i)?.[1] ?? "");
   const raceClass = stripHtml(html.match(/<div class="cell class">([\s\S]*?)<\/div>/i)?.[1] ?? "");
+  const fullText = stripHtml(html);
   const meetingName = dateMeeting.match(/\s(\d+回.+\d+日)$/)?.[1] ?? dateMeeting;
   return {
     ...key,
@@ -68,6 +69,11 @@ export function parseRaceCard(html, cname) {
     raceClass: [category, raceClass].filter(Boolean).join(" "),
     surface: category.includes("障害") ? "障害" : courseText.includes("ダート") ? "ダート" : "芝",
     distanceM: numberOrNull(courseText.replaceAll(",", "")),
+    direction: courseText.match(/(右|左|直線)/)?.[1] ?? null,
+    weather: stripHtml(html.match(/<li class="weather">([\s\S]*?)<\/li>/i)?.[1] ?? "").replace(/^天候/, "")
+      || (fullText.match(/天候([晴曇雨雪小雨小雪]+?)(?:芝|ダート|障害|馬場)/)?.[1] ?? null),
+    going: stripHtml(html.match(/<li class="(?:turf|durt|dirt)">([\s\S]*?)<\/li>/i)?.[1] ?? "").replace(/^(?:芝|ダート|馬場)/, "")
+      || (fullText.match(/(?:芝|ダート|馬場)(良|稍重|重|不良)/)?.[1] ?? null),
     startTime: normalizeTime(startText),
     entries,
   };
@@ -157,17 +163,24 @@ function initializeSchema(db) {
     create index if not exists live_races_date_idx on live_races(race_date,venue_code,race_number);
     create index if not exists live_entries_horse_idx on live_entries(horse_id,race_id);
   `);
+  addColumnIfMissing(db, "live_races", "direction", "text");
+  addColumnIfMissing(db, "live_races", "weather", "text");
+  addColumnIfMissing(db, "live_races", "going", "text");
 }
 
 function saveRacecard(db, batchId, sourcePageId, race, observedAt) {
   db.exec("begin immediate");
   try {
-    db.prepare(`insert into live_races values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+    db.prepare(`insert into live_races(race_id,batch_id,race_date,venue_code,meeting_number,meeting_day,race_number,
+      meeting_name,race_name,race_class,surface,distance_m,start_time,source_page_id,observed_at,direction,weather,going)
+      values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
       on conflict(race_id) do update set batch_id=excluded.batch_id,meeting_name=excluded.meeting_name,race_name=excluded.race_name,
       race_class=excluded.race_class,surface=excluded.surface,distance_m=excluded.distance_m,start_time=excluded.start_time,
-      source_page_id=excluded.source_page_id,observed_at=excluded.observed_at`).run(
+      direction=coalesce(excluded.direction,live_races.direction),weather=coalesce(excluded.weather,live_races.weather),
+      going=coalesce(excluded.going,live_races.going),source_page_id=excluded.source_page_id,observed_at=excluded.observed_at`).run(
         race.raceId, batchId, race.raceDate, race.venueCode, race.meetingNumber, race.meetingDay, race.raceNumber,
         race.meetingName, race.raceName, race.raceClass, race.surface, race.distanceM, race.startTime, sourcePageId, observedAt,
+        race.direction, race.weather, race.going,
       );
     db.prepare("delete from live_entries where race_id=?").run(race.raceId);
     const insert = db.prepare(`insert into live_entries values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`);
@@ -218,6 +231,9 @@ function normalizeTime(value) { const match = value.match(/(\d+)時(\d+)分/); r
 function safeName(value) { return value.replace(/[^a-zA-Z0-9_-]+/g, "_"); }
 function sleep(ms) { return new Promise((resolve) => setTimeout(resolve, ms)); }
 function tokyoDate() { return new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(new Date()); }
+function addColumnIfMissing(db, table, column, definition) {
+  if (!db.prepare(`pragma table_info(${table})`).all().some((row) => row.name === column)) db.exec(`alter table ${table} add column ${column} ${definition}`);
+}
 function parseArgs(args) { const result = {}; for (let index = 0; index < args.length; index += 1) if (args[index].startsWith("--")) result[args[index].slice(2)] = args[index + 1]?.startsWith("--") ? true : args[++index] ?? true; return result; }
 
 async function main() {

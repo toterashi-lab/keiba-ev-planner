@@ -99,6 +99,11 @@ function initializeSchema() {
   addColumnIfMissing("odds_snapshots", "odds_high", "real");
   addColumnIfMissing("odds_snapshots", "snapshot_kind", "text");
   addColumnIfMissing("odds_snapshots", "batch_id", "integer references odds_ingestion_batches(id)");
+  if (db.prepare("select count(*) count from sqlite_master where type='table' and name='live_races'").get().count) {
+    addColumnIfMissing("live_races", "direction", "text");
+    addColumnIfMissing("live_races", "weather", "text");
+    addColumnIfMissing("live_races", "going", "text");
+  }
   db.exec("create index if not exists odds_batch_idx on odds_snapshots(batch_id, race_id, bet_type)");
   upsertMetadata("odds_source", "JRA official odds");
   upsertMetadata("odds_source_url", ODDS_URL);
@@ -156,6 +161,14 @@ async function captureWinPlace() {
         db.exec("begin immediate");
         try {
           const observedAt = page.fetchedAt;
+          if (liveMode) {
+            const conditions = parseRaceConditions(page.html);
+            db.prepare(`update live_races set direction=coalesce(?,direction),weather=coalesce(?,weather),going=coalesce(?,going),
+              observed_at=case when ? is not null or ? is not null or ? is not null then ? else observed_at end where race_id=?`).run(
+                conditions.direction, conditions.weather, conditions.going,
+                conditions.direction, conditions.weather, conditions.going, observedAt, key.raceId,
+              );
+          }
           for (const runner of parsed.runners) {
             sourceRunnerCount += 1;
             if (runner.win !== null) {
@@ -307,6 +320,18 @@ function parseWinPlace(html) {
     if (label === "複勝" && count !== null) voteCounts.place = count;
   }
   return { runners, voteCounts };
+}
+
+function parseRaceConditions(html) {
+  const fullText = stripHtml(html);
+  const course = stripHtml(html.match(/<div class="cell course">([\s\S]*?)<\/div>/i)?.[1] ?? "");
+  return {
+    direction: course.match(/(右|左|直線)/)?.[1] ?? null,
+    weather: stripHtml(html.match(/<li class="weather">([\s\S]*?)<\/li>/i)?.[1] ?? "").replace(/^天候/, "")
+      || (fullText.match(/天候([晴曇雨雪小雨小雪]+?)(?:芝|ダート|障害|馬場)/)?.[1] ?? null),
+    going: stripHtml(html.match(/<li class="(?:turf|durt|dirt)">([\s\S]*?)<\/li>/i)?.[1] ?? "").replace(/^(?:芝|ダート|馬場)/, "")
+      || (fullText.match(/(?:芝|ダート|馬場)(良|稍重|重|不良)/)?.[1] ?? null),
+  };
 }
 
 function saveOdds(batchId, raceId, betType, selectionKey, low, high, observedAt, sourcePageId) {

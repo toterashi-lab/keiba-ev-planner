@@ -171,7 +171,7 @@ function renderDatabaseStatus() {
   const preflight = databaseData.trainingPreflight;
   const selectedGroupText = preflight?.featureSelectionFallback
     ? "・特徴量選別未確定"
-    : `・特徴量${number(preflight?.selectedFeatureGroups?.length ?? 0)}群採用`;
+    : `・特徴量${number(preflight?.selectedFeatureGroups?.length ?? 0)}群/${number(preflight?.selectedFeatures ?? 0)}項目採用`;
   const preflightText = preflight
     ? ` / 学習試験 ${number(preflight.races)}R・${(preflight.totalMs / 1000).toFixed(1)}秒・ECE ${percent(preflight.ece)}・最大誤差 ${percent(preflight.maxCalibrationBinError)}${selectedGroupText}`
     : " / 学習試験 待機中";

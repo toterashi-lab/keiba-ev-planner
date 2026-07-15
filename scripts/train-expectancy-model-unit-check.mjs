@@ -1,4 +1,4 @@
-import { evaluate, fitModel, fitTemperature, runFeatureAblation } from "./train-expectancy-model.mjs";
+import { evaluate, FEATURE_KEYS, fitModel, fitTemperature, runFeatureAblation } from "./train-expectancy-model.mjs";
 
 const races = Array.from({ length: 240 }, (_, raceIndex) => {
   const winnerIndex = raceIndex % 4;
@@ -7,10 +7,10 @@ const races = Array.from({ length: 240 }, (_, raceIndex) => {
     date: "2025-01-01",
     winnerIndex,
     rows: Array.from({ length: 4 }, (_, runnerIndex) => {
-      const values = Array(29).fill(0);
-      values[10] = runnerIndex === winnerIndex ? 0.8 : 0.05;
-      values[11] = runnerIndex === winnerIndex ? 0.9 : 0.2;
-      values[28] = runnerIndex === winnerIndex ? 0.7 : -0.2;
+      const values = Array(FEATURE_KEYS.length).fill(0);
+      values[FEATURE_KEYS.indexOf("priorWinRate")] = runnerIndex === winnerIndex ? 0.8 : 0.05;
+      values[FEATURE_KEYS.indexOf("priorPlaceRate")] = runnerIndex === winnerIndex ? 0.9 : 0.2;
+      values[FEATURE_KEYS.indexOf("fieldRelativePriorWinRate")] = runnerIndex === winnerIndex ? 0.7 : -0.2;
       return { featureValues: values };
     }),
   };

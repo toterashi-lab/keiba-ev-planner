@@ -65,6 +65,7 @@ try {
       rss: Math.round(process.memoryUsage().rss / 1024 / 1024),
     },
     temperature,
+    features: { total: model.weights.length, selected: ablation.selectedFeatureIndexes.length },
     featureAdmission: {
       method: ablation.method,
       selectedGroups: ablation.selectedGroups,

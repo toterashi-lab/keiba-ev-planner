@@ -14,24 +14,28 @@ const TEST_MONTHS = 6;
 const EMBARGO_DAYS = 7;
 const FOLD_COUNT = 3;
 const EPOCHS = 6;
-export const FEATURE_KEYS = [
-  "fieldSize", "horseNumber", "gateNumber", "age", "carriedWeight", "bodyWeight",
-  "bodyWeightDelta", "carriedWeightBodyRatio", "daysSinceLastRace", "careerStarts",
-  "priorWinRate", "priorPlaceRate", "priorAverageFinish", "priorAverageFinalSectional",
-  "surfaceStarts", "surfaceWinRate", "venueStarts", "venueWinRate", "distanceBandStarts",
-  "distanceBandWinRate", "goingStarts", "goingWinRate", "jockeyStarts", "jockeyWinRate",
-  "jockeyPlaceRate", "trainerStarts", "trainerWinRate", "trainerPlaceRate",
-  "fieldRelativePriorWinRate",
-];
-export const MODEL_FEATURE_GROUPS = [
-  { id: "race_context", indexes: [0, 1, 2] },
-  { id: "body_load", indexes: [3, 4, 5, 6, 7] },
-  { id: "horse_form", indexes: [8, 9, 10, 11, 12, 13] },
-  { id: "horse_suitability", indexes: [14, 15, 16, 17, 18, 19, 20, 21] },
-  { id: "connections", indexes: [22, 23, 24, 25, 26, 27] },
-  { id: "field_strength", indexes: [28] },
-];
-const LOG_FEATURES = new Set(["careerStarts", "surfaceStarts", "venueStarts", "distanceBandStarts", "goingStarts", "jockeyStarts", "trainerStarts", "daysSinceLastRace"]);
+const FEATURE_GROUP_KEYS = {
+  race_context: ["horseNumber", "gateNumber", "horseNumberFieldRatio", "gateNumberFieldRatio",
+    "gateVenue01", "gateVenue02", "gateVenue03", "gateVenue04", "gateVenue05", "gateVenue06", "gateVenue07", "gateVenue08", "gateVenue09", "gateVenue10",
+    "gateSurfaceTurf", "gateSurfaceDirt", "gateSurfaceJump", "gateDirectionRight", "gateDirectionLeft", "gateDirectionStraight", "gateDirectionOuter"],
+  weather_going: ["goingStarts", "goingWinRate", "weatherStarts", "weatherWinRate"],
+  body_load: ["age", "sexMale", "sexFemale", "sexGelding", "carriedWeight", "bodyWeight", "bodyWeightDelta", "carriedWeightBodyRatio"],
+  horse_form: ["daysSinceLastRace", "careerStarts", "priorWinRate", "priorPlaceRate", "priorAverageFinish", "priorAverageFinalSectional",
+    "classChange", "distanceChangeHundreds", "surfaceChanged"],
+  horse_suitability: ["surfaceStarts", "surfaceWinRate", "venueStarts", "venueWinRate", "distanceBandStarts", "distanceBandWinRate",
+    "directionStarts", "directionWinRate", "classStarts", "classWinRate", "seasonStarts", "seasonWinRate"],
+  connections: ["jockeyStarts", "jockeyWinRate", "jockeyPlaceRate", "trainerStarts", "trainerWinRate", "trainerPlaceRate"],
+  field_strength: ["fieldRelativePriorWinRate"],
+};
+export const FEATURE_KEYS = Object.values(FEATURE_GROUP_KEYS).flat();
+export const MODEL_FEATURE_GROUPS = Object.entries(FEATURE_GROUP_KEYS).map(([id, keys]) => ({
+  id, keys, indexes: keys.map((key) => FEATURE_KEYS.indexOf(key)),
+}));
+const GROUPED_FEATURE_INDEXES = MODEL_FEATURE_GROUPS.flatMap((group) => group.indexes);
+if (GROUPED_FEATURE_INDEXES.some((index) => index < 0) || new Set(GROUPED_FEATURE_INDEXES).size !== FEATURE_KEYS.length
+  || GROUPED_FEATURE_INDEXES.length !== FEATURE_KEYS.length) throw new Error("Feature groups must cover every model feature exactly once");
+const LOG_FEATURES = new Set(["careerStarts", "surfaceStarts", "venueStarts", "distanceBandStarts", "goingStarts", "weatherStarts",
+  "directionStarts", "classStarts", "seasonStarts", "jockeyStarts", "trainerStarts", "daysSinceLastRace"]);
 
 export function trainExpectancyModel() {
 const db = new DatabaseSync(DATABASE_PATH);
