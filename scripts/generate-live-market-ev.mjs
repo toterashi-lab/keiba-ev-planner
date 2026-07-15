@@ -12,32 +12,34 @@ const ORDERED = new Set(["win", "place", "exacta", "trifecta"]);
 const OUTPUT = path.join("data", "jra-free-private", "models", "live-market-ev.json");
 
 export function generateLiveMarketEv(options = {}) {
-  const db = new DatabaseSync(path.join("data", "jra-free-private", "keiba.sqlite"));
+  const outputPath = options.outputPath ?? OUTPUT;
+  const db = new DatabaseSync(options.databasePath ?? path.join("data", "jra-free-private", "keiba.sqlite"));
   db.exec("PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=30000;");
   try {
     initializeLedgerSchema(db);
     const base = db.prepare(`select * from odds_ingestion_batches where status='complete' and source in (${options.allowFixture ? "'JRA official live odds','JRA official live odds fixture'" : "'JRA official live odds'"}) order by id desc limit 1`).get();
-    if (!base) return waiting("live_win_place_odds");
-    const exotic = db.prepare(`select * from odds_ingestion_batches where status='complete' and source in (${options.allowFixture ? "'JRA official live exotic odds','JRA official live exotic odds fixture'" : "'JRA official live exotic odds'"})
-      and snapshot_kind=? and target_dates=? order by id desc limit 1`).get(base.snapshot_kind, base.target_dates);
-    if (!exotic) return waiting("live_exotic_odds");
-    const odds = db.prepare(`select race_id,bet_type,selection_key,odds_low,odds_high,observed_at from live_odds_snapshots
-      where batch_id in (?,?) order by race_id,bet_type,selection_key`).all(base.id, exotic.id);
+    const exotic = base ? db.prepare(`select * from odds_ingestion_batches where status='complete' and source in (${options.allowFixture ? "'JRA official live exotic odds','JRA official live exotic odds fixture'" : "'JRA official live exotic odds'"})
+      and snapshot_kind=? and target_dates=? order by id desc limit 1`).get(base.snapshot_kind, base.target_dates) : null;
+    const racecardBatch = db.prepare("select * from live_racecard_batches where status='complete' and race_count>0 order by id desc limit 1").get();
+    const targetDates = resolveLiveTargetDates({ baseTargetDates: base?.target_dates, racecardTargetDates: racecardBatch?.target_dates,
+      today: tokyoDate(), allowFixture: options.allowFixture === true });
+    if (!targetDates.length) return waiting("live_racecards", outputPath);
+    const oddsBatchIds = [base?.id, exotic?.id].filter(Number.isInteger);
+    const odds = oddsBatchIds.length ? db.prepare(`select race_id,bet_type,selection_key,odds_low,odds_high,observed_at from live_odds_snapshots
+      where batch_id in (${oddsBatchIds.map(() => "?").join(",")}) order by race_id,bet_type,selection_key`).all(...oddsBatchIds) : [];
     const oddsRaceIds = [...new Set(odds.map((row) => row.race_id))];
-    if (!oddsRaceIds.length) return waiting("live_odds_rows");
-    const targetDates = base.target_dates.split(",").filter(Boolean);
     const datePlaceholders = targetDates.map(() => "?").join(",");
-    const targetRaces = targetDates.length
-      ? db.prepare(`select * from live_races where race_date in (${datePlaceholders}) order by race_date,venue_code,race_number`).all(...targetDates)
-      : [];
+    const targetRaces = db.prepare(`select * from live_races where race_date in (${datePlaceholders}) order by race_date,venue_code,race_number`).all(...targetDates);
     const races = targetRaces.length
       ? targetRaces
-      : db.prepare(`select * from live_races where race_id in (${oddsRaceIds.map(() => "?").join(",")}) order by race_date,venue_code,race_number`).all(...oddsRaceIds);
+      : oddsRaceIds.length
+        ? db.prepare(`select * from live_races where race_id in (${oddsRaceIds.map(() => "?").join(",")}) order by race_date,venue_code,race_number`).all(...oddsRaceIds)
+        : [];
     const raceIds = races.map((race) => race.race_id);
-    if (!raceIds.length) return waiting("live_racecards");
+    if (!raceIds.length) return waiting("live_racecards", outputPath);
     const placeholders = raceIds.map(() => "?").join(",");
     const entries = db.prepare(`select race_id,horse_id,horse_number,horse_name from live_entries where race_id in (${placeholders}) order by race_id,horse_number`).all(...raceIds);
-    const artifact = loadArtifact();
+    const artifact = options.artifact ?? loadArtifact(options.artifactPath);
     const modelRows = artifact ? db.prepare(`select p.race_id,e.horse_number,p.win_probability
       from live_predictions p join live_entries e on e.race_id=p.race_id and e.horse_id=p.horse_id
       where p.model_version=? and p.race_id in (${placeholders})`).all(artifact.modelVersion, ...raceIds) : [];
@@ -85,12 +87,13 @@ export function generateLiveMarketEv(options = {}) {
       predictions.push(aiPrediction(race, abilityHorse, names, raceCandidates, artifact, hasModel));
     }
     const result = {
-      status: candidates.length ? "ready" : "waiting",
+      status: predictions.length ? "ready" : "waiting",
+      reason: candidates.length ? null : predictions.length ? "waiting_for_complete_odds" : "ability_model_or_live_odds",
       generatedAt: new Date().toISOString(),
-      snapshotKind: base.snapshot_kind,
+      snapshotKind: base?.snapshot_kind ?? "pre_race",
       targetDates,
-      baseBatchId: base.id,
-      exoticBatchId: exotic.id,
+      baseBatchId: base?.id ?? null,
+      exoticBatchId: exotic?.id ?? null,
       modelVersion: artifact?.modelVersion ?? "market-baseline",
       abilityModelStatus: artifact?.researchProbabilityStatus ?? "not_trained",
       deploymentStatus: "benchmark_only",
@@ -108,8 +111,8 @@ export function generateLiveMarketEv(options = {}) {
       candidates,
     };
     persistCandidateLedger(db, result);
-    fs.mkdirSync(path.dirname(OUTPUT), { recursive: true });
-    fs.writeFileSync(OUTPUT, `${JSON.stringify(result, null, 2)}\n`, "utf8");
+    fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+    fs.writeFileSync(outputPath, `${JSON.stringify(result, null, 2)}\n`, "utf8");
     return result;
   } finally { db.close(); }
 }
@@ -124,6 +127,13 @@ export function resolveLiveRaceProbability({ artifact, raceEntries, trainedRows,
     ? normalize(Object.fromEntries(trainedRows.map((row) => [row.horse_number, row.win_probability])))
     : marketHorse;
   return { hasModel, marketHorse, abilityHorse };
+}
+
+export function resolveLiveTargetDates({ baseTargetDates, racecardTargetDates, today, allowFixture = false }) {
+  const parse = (value) => [...new Set(String(value ?? "").split(",").map((date) => date.trim()).filter(Boolean))];
+  const baseDates = parse(baseTargetDates).filter((date) => allowFixture || date >= today);
+  const racecardDates = parse(racecardTargetDates).filter((date) => allowFixture || date >= today);
+  return (baseDates.length ? baseDates : racecardDates).sort();
 }
 
 function structured(race, type, label, rows, marketHorse, abilityHorse, marketBook, abilityBook, names, artifact, hasModel) {
@@ -239,12 +249,13 @@ function buildStructuralBooks(horseProbabilities) {
   return books;
 }
 
-function waiting(reason) { const result = { status: "waiting", reason, generatedAt: new Date().toISOString(), candidates: [], predictions: [] }; fs.mkdirSync(path.dirname(OUTPUT), { recursive: true }); fs.writeFileSync(OUTPUT, `${JSON.stringify(result, null, 2)}\n`, "utf8"); return result; }
-function loadArtifact() { const file = path.join("data", "jra-free-private", "models", "ability-softmax-v1.json"); return fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, "utf8")) : null; }
+function waiting(reason, outputPath = OUTPUT) { const result = { status: "waiting", reason, generatedAt: new Date().toISOString(), candidates: [], predictions: [] }; fs.mkdirSync(path.dirname(outputPath), { recursive: true }); fs.writeFileSync(outputPath, `${JSON.stringify(result, null, 2)}\n`, "utf8"); return result; }
+function loadArtifact(artifactPath = path.join("data", "jra-free-private", "models", "ability-softmax-v1.json")) { return fs.existsSync(artifactPath) ? JSON.parse(fs.readFileSync(artifactPath, "utf8")) : null; }
 function normalize(values) { const total = Object.values(values).reduce((sum, value) => sum + value, 0); return Object.fromEntries(Object.entries(values).map(([key, value]) => [key, value / total])); }
 function group(rows, key) { const map = new Map(); for (const row of rows) { if (!map.has(row[key])) map.set(row[key], []); map.get(row[key]).push(row); } return map; }
 function average(values) { return values.reduce((sum, value) => sum + value, 0) / values.length; }
 function byAbilityEv(left, right) { return right.adoptedExpectedReturn - left.adoptedExpectedReturn; }
+function tokyoDate() { return new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(new Date()); }
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   const result = generateLiveMarketEv({ allowFixture: process.argv.includes("--allow-fixture") });

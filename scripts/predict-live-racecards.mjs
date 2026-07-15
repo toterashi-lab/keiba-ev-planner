@@ -3,6 +3,7 @@ import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { buildFeatureRows } from "./model-feature-pipeline.mjs";
 import { predictRace } from "./train-expectancy-model.mjs";
+import { resolveLiveTargetDates } from "./generate-live-market-ev.mjs";
 
 const databasePath = path.join("data", "jra-free-private", "keiba.sqlite");
 const artifactPath = path.join("data", "jra-free-private", "models", "ability-softmax-v1.json");
@@ -16,14 +17,16 @@ if (!fs.existsSync(artifactPath)) {
 const artifact = JSON.parse(fs.readFileSync(artifactPath, "utf8"));
 const db = new DatabaseSync(databasePath);
 try {
-  const date = requestedDate ?? db.prepare("select min(race_date) date from live_races where race_date>=?").get(tokyoDate()).date;
-  if (!date) {
+  const batch = requestedDate ? null : db.prepare("select target_dates from live_racecard_batches where status='complete' and race_count>0 order by id desc limit 1").get();
+  const dates = requestedDate ? [requestedDate] : resolveLiveTargetDates({ racecardTargetDates: batch?.target_dates, today: tokyoDate() });
+  if (!dates.length) {
     console.log(JSON.stringify({ status: "no_upcoming_racecards" }));
     process.exit(0);
   }
-  const rows = buildFeatureRows(db, { from: date, to: date, completeOnly: true, includeLive: true, emitHistorical: false });
-  const races = groupRaces(rows);
-  if (!races.length) throw new Error(`ライブ特徴量がありません: ${date}`);
+  const rows = buildFeatureRows(db, { from: dates[0], to: dates.at(-1), completeOnly: true, includeLive: true, emitHistorical: false });
+  const dateSet = new Set(dates);
+  const races = groupRaces(rows).filter((race) => dateSet.has(race.date));
+  if (!races.length) throw new Error(`ライブ特徴量がありません: ${dates.join(",")}`);
   initializeSchema(db);
   const generatedAt = new Date().toISOString();
   const predictions = [];
@@ -37,12 +40,12 @@ try {
       if (Math.abs(1 - sum) > 1e-6) throw new Error(`${race.id}の勝率合計が1ではありません: ${sum}`);
       race.rows.forEach((row, index) => {
         insert.run(race.id, row.horseId, artifact.modelVersion, row.asOfTime, probabilities[index], generatedAt);
-        predictions.push({ raceId: race.id, raceDate: date, horseId: row.horseId, horseNumber: row.features.horseNumber, probability: probabilities[index], asOfTime: row.asOfTime });
+        predictions.push({ raceId: race.id, raceDate: race.date, horseId: row.horseId, horseNumber: row.features.horseNumber, probability: probabilities[index], asOfTime: row.asOfTime });
       });
     }
     db.exec("commit");
   } catch (error) { db.exec("rollback"); throw error; }
-  const output = { status: "ready", generatedAt, raceDate: date, modelVersion: artifact.modelVersion, researchProbabilityStatus: artifact.researchProbabilityStatus, races: races.length, entries: predictions.length, predictions };
+  const output = { status: "ready", generatedAt, targetDates: dates, modelVersion: artifact.modelVersion, researchProbabilityStatus: artifact.researchProbabilityStatus, races: races.length, entries: predictions.length, predictions };
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   fs.writeFileSync(outputPath, `${JSON.stringify(output, null, 2)}\n`, "utf8");
   console.log(JSON.stringify({ ...output, predictions: undefined }, null, 2));
