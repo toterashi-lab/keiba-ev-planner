@@ -30,7 +30,8 @@ const publicationCore = {
   completeMonths: databaseExport.status.completeMonths,
   expectedMonths: databaseExport.status.totalMonths,
   modelVersion: abilityArtifact?.modelVersion ?? null,
-  modelCoverageRaces: abilityArtifact?.dataCoverage?.races ?? null,
+  modelCoverageRaces: abilityArtifact?.dataCoverage?.races
+    ?? ((abilityArtifact?.counts?.trainRaces ?? 0) + (abilityArtifact?.counts?.calibrationRaces ?? 0) || null),
   expectancyCandidateCount: modelOutputs.candidates?.length ?? 0,
   expectancyPredictionCount: modelOutputs.predictions?.length ?? 0,
   liveRaceCount: liveExport.racecards.results?.length ?? 0,
