@@ -16,13 +16,22 @@ checkOrder("scripts/publish-live-web.ps1", [
   '"scripts\\live-market-ev-check.mjs"',
   '"scripts\\build-public-demo.mjs"',
   "git push origin main",
+  "git fetch origin main --quiet",
+  'if ($localCommit -ne $remoteCommit)',
+  'if ($candidate.manifestId -eq $manifest.manifestId)',
+  '"models\\publication-receipt.json"',
 ]);
 
 const liveCheck = fs.readFileSync("scripts/live-market-ev-check.mjs", "utf8");
 for (const token of ["fixtureOutputDirectory", "fixtureOutputPath", "outputPath: fixtureOutputPath"]) {
   if (!liveCheck.includes(token)) throw new Error(`Live fixture output isolation is missing: ${token}`);
 }
-console.log(JSON.stringify({ status: "pass", workflows: 3, fixtureOutputIsolation: true }, null, 2));
+console.log(JSON.stringify({
+  status: "pass",
+  workflows: 3,
+  fixtureOutputIsolation: true,
+  verifiedLivePublication: true,
+}, null, 2));
 
 function checkOrder(file, tokens) {
   const source = fs.readFileSync(file, "utf8");

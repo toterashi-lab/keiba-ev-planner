@@ -1,6 +1,6 @@
 window.KEIBA_MODEL_FEATURE_COVERAGE = {
   "version": "feature-registry-v1",
-  "generatedAt": "2026-07-15T13:11:06.199Z",
+  "generatedAt": "2026-07-15T13:17:02.385Z",
   "groups": [
     {
       "id": "race_context",

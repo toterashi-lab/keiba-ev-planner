@@ -1,12 +1,12 @@
 {
   "version": "publication-manifest-v1",
-  "generatedAt": "2026-07-15T13:11:06.737Z",
-  "databaseRaces": 38667,
-  "completeMonths": 135,
+  "generatedAt": "2026-07-15T13:17:03.112Z",
+  "databaseRaces": 39003,
+  "completeMonths": 136,
   "expectedMonths": 367,
   "modelVersion": null,
   "modelCoverageRaces": null,
   "expectancyCandidateCount": 9491,
   "expectancyPredictionCount": 72,
-  "manifestId": "9ecc2aaa4fdcdfbd1173"
+  "manifestId": "fb675329e1bd5d4204f9"
 }
