@@ -30,8 +30,9 @@ for (const race of expectedRaces) {
       .flatMap((row) => row.optimizationScenarios ?? []));
     if (!scenarios.has("ability_probability") || !scenarios.has("component_ev")) failures.push(`${race.key}: ${betType} optimization scenarios missing`);
   }
-  if (rows.some((row) => row.status !== "ready" || row.points < 1 || !Number.isFinite(row.conservativeExpectedReturn)
-    || !Number.isFinite(row.abilityExpectedReturn))) {
+  if (rows.some((row) => row.status !== "ready" || row.points < 1 || row.totalInvestmentYen !== row.points * 100
+    || !Number.isFinite(row.conservativeExpectedReturn) || !Number.isFinite(row.abilityExpectedReturn)
+    || !Number.isFinite(row.adoptedExpectedReturn))) {
     failures.push(`${race.key}: invalid candidate`);
   }
   const prediction = model.predictions?.find((row) => row.date === race.date && row.meetingName === race.meetingName && row.raceNo === race.raceNo);

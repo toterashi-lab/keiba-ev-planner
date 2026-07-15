@@ -34,7 +34,7 @@ try {
   } else if (command === "ingest-month") {
     const month = options.month;
     if (!/^\d{4}-\d{2}$/.test(month ?? "")) throw new Error("--month YYYY-MM is required");
-    await withLock(() => ingestMonth(month, Number(options.delay ?? 1500)));
+    await withLock(() => ingestMonth(month, Number(options.delay ?? 1500)), LOCK_PATH, { waitMs: Number(options.wait ?? 0) });
     console.log(JSON.stringify(statusReport(), null, 2));
   } else if (command === "run") {
     await withLock(() => runQueue(Number(options.limit ?? 1), Number(options.delay ?? 1500)), RUN_LOCK_PATH, { recover: false });
@@ -391,6 +391,7 @@ async function ingestMonth(month, delayMs) {
     const monthPage = await fetchPage(monthCname, "month", delayMs);
     const meetings = parseMeetings(monthPage.html);
     if (!meetings.length) throw new Error(`No official meetings found: ${month}`);
+    const meetingCount = logicalMeetingCount(meetings);
 
     let raceCount = 0;
     let runnerCount = 0;
@@ -414,12 +415,12 @@ async function ingestMonth(month, delayMs) {
     }
     markParsed(monthPage.id);
 
-    const audit = auditMonth(month, meetings.length, raceCount, runnerCount, payoutCount);
+    const audit = auditMonth(month, meetingCount, raceCount, runnerCount, payoutCount, meetings.length);
     if (!audit.pass) throw new Error(`Quality gate failed: ${audit.failures.join(", ")}`);
     const completedAt = new Date().toISOString();
     db.prepare(`update backfill_jobs set status='complete', meeting_count=?, race_count=?,
       runner_count=?, payout_count=?, completed_at=?, updated_at=? where month=?`)
-      .run(meetings.length, raceCount, runnerCount, payoutCount, completedAt, completedAt, month);
+      .run(meetingCount, raceCount, runnerCount, payoutCount, completedAt, completedAt, month);
     activeIngestMonth = null;
     dropMonthBackup();
   } catch (error) {
@@ -723,7 +724,7 @@ function saveRace(race, sourcePageId) {
   }
 }
 
-function auditMonth(month, expectedMeetings, expectedRaces, expectedRunners, expectedPayouts) {
+function auditMonth(month, expectedMeetings, expectedRaces, expectedRunners, expectedPayouts, sourceMeetingPages = expectedMeetings) {
   const start = `${month}-01`;
   const end = nextMonth(month) + "-01";
   const actual = db.prepare(`select
@@ -742,7 +743,7 @@ function auditMonth(month, expectedMeetings, expectedRaces, expectedRunners, exp
         start,end,start,end,start,end,start,end,start,end,start,end,start,end,start,end,
       );
   const checks = [
-    ["meeting_count", actual.meetings === expectedMeetings, actual.meetings, `expected=${expectedMeetings}`],
+    ["meeting_count", actual.meetings === expectedMeetings, actual.meetings, `expected=${expectedMeetings};source_pages=${sourceMeetingPages}`],
     ["race_count", actual.races === expectedRaces, actual.races, `expected=${expectedRaces}`],
     ["runner_count", actual.runners === expectedRunners, actual.runners, `expected=${expectedRunners}`],
     ["payout_count", actual.payouts === expectedPayouts, actual.payouts, `expected=${expectedPayouts}`],
@@ -973,8 +974,14 @@ async function lockSelfCheck() {
     && classifyWorkerHealth(1, true, 1799) === "healthy";
   if (!workerHealthCases) throw new Error("Worker health classification failed");
   if (median([1, 2, 3]) !== 2 || median([1, 2, 3, 4]) !== 2.5) throw new Error("ETA median calculation failed");
+  const logicalMeetingCases = logicalMeetingCount([
+    { meetingId: "2020-06-03-02", raceDate: "2020-03-29" },
+    { meetingId: "2020-06-03-02", raceDate: "2020-03-31" },
+    { meetingId: "2020-07-01-08", raceDate: "2020-03-29" },
+  ]) === 2;
+  if (!logicalMeetingCases) throw new Error("Continued meeting identity was counted twice");
   console.log(JSON.stringify({ status: "pass", contentionDetected, reacquiredAfterRelease: true,
-    currentSyncPriorityYield: true, workerHealthCases, etaMedianCases: true, yieldedMs }));
+    currentSyncPriorityYield: true, workerHealthCases, etaMedianCases: true, logicalMeetingCases, yieldedMs }));
 }
 
 function isProcessAlive(pid) {
@@ -989,6 +996,10 @@ function isProcessAlive(pid) {
 function median(values) {
   const middle = Math.floor(values.length / 2);
   return values.length % 2 ? values[middle] : (values[middle - 1] + values[middle]) / 2;
+}
+
+function logicalMeetingCount(meetings) {
+  return new Set(meetings.map((meeting) => meeting.meetingId)).size;
 }
 
 function classifyWorkerHealth(activeCount, processAlive, heartbeatAgeSeconds) {

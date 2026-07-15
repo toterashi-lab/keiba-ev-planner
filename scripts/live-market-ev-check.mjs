@@ -1,11 +1,22 @@
 import fs from "node:fs";
 import { DatabaseSync } from "node:sqlite";
-import { generateLiveMarketEv } from "./generate-live-market-ev.mjs";
+import { generateLiveMarketEv, resolveLiveRaceProbability } from "./generate-live-market-ev.mjs";
 
 const model = generateLiveMarketEv({ allowFixture: true });
 const betTypes = ["単勝", "複勝", "馬連", "ワイド", "馬単", "3連複", "3連単"];
 const structuredTypes = ["馬連", "ワイド", "馬単", "3連複", "3連単"];
 const failures = [];
+const entries = [{ horse_number: 1 }, { horse_number: 2 }, { horse_number: 3 }];
+const trained = [{ horse_number: 1, win_probability: 0.5 }, { horse_number: 2, win_probability: 0.3 }, { horse_number: 3, win_probability: 0.2 }];
+const modelOnly = resolveLiveRaceProbability({ artifact: { researchProbabilityStatus: "research_pass" }, raceEntries: entries, trainedRows: trained, winRows: [] });
+const unavailable = resolveLiveRaceProbability({ artifact: null, raceEntries: entries, trainedRows: [], winRows: [] });
+const marketOnly = resolveLiveRaceProbability({ artifact: null, raceEntries: entries, trainedRows: [], winRows: [
+  { selection_key: "1", odds_low: 2 }, { selection_key: "2", odds_low: 4 }, { selection_key: "3", odds_low: 5 },
+] });
+if (!modelOnly.hasModel || !modelOnly.abilityHorse || modelOnly.marketHorse !== null) failures.push("model-only prediction path failed");
+if (unavailable.hasModel || unavailable.abilityHorse !== null) failures.push("missing probability gate failed");
+if (marketOnly.hasModel || !marketOnly.marketHorse || !marketOnly.abilityHorse) failures.push("market-only prediction path failed");
+if (Math.abs(Object.values(modelOnly.abilityHorse ?? {}).reduce((sum, value) => sum + value, 0) - 1) > 1e-9) failures.push("model-only probability sum failed");
 const database = new DatabaseSync("data/jra-free-private/keiba.sqlite", { readOnly: true });
 const persistedCandidates = model.baseBatchId ? database.prepare(`select count(*) count from live_ev_candidates
   where base_batch_id=? and exotic_batch_id=?`).get(model.baseBatchId, model.exoticBatchId).count : 0;
@@ -63,5 +74,6 @@ console.log(JSON.stringify({
   betTypes: betTypes.length,
   unitStakeYen: model.unitStakeYen,
   persistedCandidates,
+  modelOnlyPrediction: "pass",
   resultLeakage: "pass",
 }, null, 2));

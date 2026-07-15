@@ -74,11 +74,11 @@ export function generateMarketEv() {
           const structural = structuralBooks[dbType].get(row.selection_key) ?? 0;
           const probability = selectProbability({ marketProbability: row.marketProbability, modelProbability: structural, validationArtifact: VALIDATION_ARTIFACT }).probability;
           const researchProbability = researchStructuralBooks[dbType].get(row.selection_key) ?? probability;
-          return makeCandidate(race, betType, "1点", selection, [row], probability, names, null, null, null, researchProbability);
+          return makeCandidate(race, betType, "1点", selection, [row], probability, names, null, null, null, researchProbability, null, ["single_point"], hasCompleteModel);
         });
         evaluated += singles.length;
         raceCandidates.push(...singles.sort(byExpectedReturn).slice(0, 12));
-        raceCandidates.push(...structuredCandidates(race, dbType, betType, rows, horseProbabilities, researchHorseProbabilities, structuralBooks[dbType], researchStructuralBooks[dbType], names));
+        raceCandidates.push(...structuredCandidates(race, dbType, betType, rows, horseProbabilities, researchHorseProbabilities, structuralBooks[dbType], researchStructuralBooks[dbType], names, hasCompleteModel));
       }
       evaluatedByRace[race.race_id] = evaluated;
       candidates.push(...raceCandidates);
@@ -91,19 +91,19 @@ export function generateMarketEv() {
     }
     const result = {
       status: "ready",
-      modelVersion: latestModel?.model_version ?? "expectancy-v2-market-baseline",
-      calculationMode: latestModel ? "oos_ability_model_with_market_benchmark" : "closing_market_validation",
+      modelVersion: VALIDATION_ARTIFACT?.researchProbabilityStatus === "research_pass" ? VALIDATION_ARTIFACT.modelVersion : "expectancy-v2-market-baseline",
+      calculationMode: VALIDATION_ARTIFACT?.researchProbabilityStatus === "research_pass" ? "oos_ability_model_with_market_benchmark" : "closing_market_validation",
       generatedAt: new Date().toISOString(),
       unitStakeYen: 100,
       logic: {
         engineVersion: EXPECTANCY_ENGINE_VERSION,
         formula: "hit_probability * decimal_odds",
-        probabilityMode: "market_baseline",
-        deploymentStatus: "benchmark_only",
+        probabilityMode: VALIDATION_ARTIFACT?.researchProbabilityStatus === "research_pass" ? "ability_model" : "market_baseline",
+        deploymentStatus: VALIDATION_ARTIFACT?.researchProbabilityStatus === "research_pass" ? "research_validated" : "benchmark_only",
         abilityModelStatus: VALIDATION_ARTIFACT?.researchProbabilityStatus ?? "not_trained",
         abilityExpectedReturnAvailable: modelPredictionRows.length > 0,
         fixedBlendRemoved: true,
-        validationArtifact: "insufficient",
+        validationArtifact: VALIDATION_ARTIFACT?.modelVersion ?? "insufficient",
       },
       oddsCoverage: Object.fromEntries(Object.keys(coverageCounts).map((key) => [key, "pass"])),
       coverageCounts,
@@ -143,12 +143,12 @@ function makeAiPrediction(race, horseProbabilities, names, raceCandidates, abili
     confidenceScore,
     scenario,
     marks: ranked.slice(0, marks.length).map((row, index) => ({ mark: marks[index], ...row })),
-    topTicket: topTicket ? { betType: topTicket.betType, method: topTicket.method, selection: topTicket.selection, expectedReturn: topTicket.conservativeExpectedReturn } : null,
+    topTicket: topTicket ? { betType: topTicket.betType, method: topTicket.method, selection: topTicket.selection, expectedReturn: topTicket.adoptedExpectedReturn } : null,
     comment: `${ranked.length}頭の市場確率を比較。◎${ranked[0].horseName}は推定勝率${(ranked[0].probability * 100).toFixed(1)}%、○との差は${(gap * 100).toFixed(1)}ポイント。${scenario}シナリオで評価します。`,
   };
 }
 
-function structuredCandidates(race, dbType, betType, rows, marketHorseProbabilities, abilityHorseProbabilities, structuralBook, researchStructuralBook, names) {
+function structuredCandidates(race, dbType, betType, rows, marketHorseProbabilities, abilityHorseProbabilities, structuralBook, researchStructuralBook, names, hasCompleteModel) {
   if (["win", "place"].includes(dbType)) return [];
   const legs = engine.SPECS[betType].legs;
   const tickets = buildStructuredDefinitions({ legs, rows, marketHorse: marketHorseProbabilities,
@@ -172,7 +172,7 @@ function structuredCandidates(race, dbType, betType, rows, marketHorseProbabilit
     const display = ticket.method === "BOX"
       ? `${ticket.horses.join("-")} BOX`
       : ticket.groups.map((group) => group.join(",")).join(" → ");
-    return [makeCandidate(race, betType, ticket.method, combinations.flat(), selectedRows, probability, names, combinations, probabilities, display, null, researchProbabilities, ticket.optimizationScenarios)];
+    return [makeCandidate(race, betType, ticket.method, combinations.flat(), selectedRows, probability, names, combinations, probabilities, display, null, researchProbabilities, ticket.optimizationScenarios, hasCompleteModel)];
   });
 }
 
@@ -210,7 +210,7 @@ function buildStructuralBooks(horseProbabilities) {
   return books;
 }
 
-function makeCandidate(race, betType, method, selection, rows, probability, names, combinations = null, itemProbabilities = null, displayOverride = null, researchProbability = null, researchItemProbabilities = null, optimizationScenarios = ["single_point"]) {
+function makeCandidate(race, betType, method, selection, rows, probability, names, combinations = null, itemProbabilities = null, displayOverride = null, researchProbability = null, researchItemProbabilities = null, optimizationScenarios = ["single_point"], hasCompleteModel = false) {
   const expectedReturn = rows.reduce((sum, row, index) => {
     const itemProbability = itemProbabilities?.[index] ?? probability;
     return sum + row.odds_low * itemProbability;
@@ -221,6 +221,7 @@ function makeCandidate(race, betType, method, selection, rows, probability, name
   }, 0) / rows.length;
   const displayNumbers = combinations ? [...new Set(combinations.flat())] : selection;
   const display = displayOverride ?? displayNumbers.map((number) => `${number} ${names.get(number) ?? ""}`.trim()).join("・");
+  const useAbility = hasCompleteModel && VALIDATION_ARTIFACT?.researchProbabilityStatus === "research_pass";
   return {
     date: race.race_date,
     meetingName: meetingName(race),
@@ -230,19 +231,21 @@ function makeCandidate(race, betType, method, selection, rows, probability, name
     method,
     selection: display,
     points: rows.length,
+    totalInvestmentYen: rows.length * 100,
     odds: rows.length === 1 ? rows[0].odds_low : null,
     probability: rows.length === 1 ? probability : null,
     conservativeProbability: rows.length === 1 ? probability : null,
     conservativeExpectedReturn: expectedReturn,
     abilityProbability: rows.length === 1 ? (researchProbability ?? probability) : null,
     abilityExpectedReturn,
-    abilityModelStatus: VALIDATION_ARTIFACT?.researchProbabilityStatus ?? "not_trained",
+    adoptedExpectedReturn: useAbility ? abilityExpectedReturn : expectedReturn,
+    abilityModelStatus: useAbility ? "research_pass" : "not_available",
     status: "ready",
-    predictionContext: VALIDATION_ARTIFACT ? "out_of_sample_ability_model_with_market_benchmark" : "closing_final_validation",
-    calculationMode: VALIDATION_ARTIFACT ? "ability_and_market_scenarios" : "closing_market_validation",
+    predictionContext: useAbility ? "out_of_sample_ability_model_with_market_benchmark" : "closing_final_validation",
+    calculationMode: useAbility ? "ability_and_market_scenarios" : "closing_market_validation",
     oddsObservedAt: rows[0].observed_at,
-    modelVersion: VALIDATION_ARTIFACT?.modelVersion ?? "expectancy-v2-market-baseline",
-    calibrationStatus: "benchmark",
+    modelVersion: useAbility ? VALIDATION_ARTIFACT.modelVersion : "expectancy-v2-market-baseline",
+    calibrationStatus: useAbility ? "pass" : "benchmark",
     optimizationScenarios,
     comment: `期待値v2の市場基準検証。JRA公式最終オッズで${method} ${rows.length}点を各100円計算。学習・校正ゲート未合格のため能力モデルは混合せず、払戻結果も確率算出に使用していません。`,
   };
@@ -270,7 +273,7 @@ function group(rows, key) {
 }
 
 function byExpectedReturn(left, right) {
-  return right.conservativeExpectedReturn - left.conservativeExpectedReturn;
+  return right.adoptedExpectedReturn - left.adoptedExpectedReturn;
 }
 
 function meetingName(race) {

@@ -23,10 +23,19 @@ export function generateLiveMarketEv(options = {}) {
     if (!exotic) return waiting("live_exotic_odds");
     const odds = db.prepare(`select race_id,bet_type,selection_key,odds_low,odds_high,observed_at from live_odds_snapshots
       where batch_id in (?,?) order by race_id,bet_type,selection_key`).all(base.id, exotic.id);
-    const raceIds = [...new Set(odds.map((row) => row.race_id))];
-    if (!raceIds.length) return waiting("live_odds_rows");
+    const oddsRaceIds = [...new Set(odds.map((row) => row.race_id))];
+    if (!oddsRaceIds.length) return waiting("live_odds_rows");
+    const targetDates = base.target_dates.split(",").filter(Boolean);
+    const datePlaceholders = targetDates.map(() => "?").join(",");
+    const targetRaces = targetDates.length
+      ? db.prepare(`select * from live_races where race_date in (${datePlaceholders}) order by race_date,venue_code,race_number`).all(...targetDates)
+      : [];
+    const races = targetRaces.length
+      ? targetRaces
+      : db.prepare(`select * from live_races where race_id in (${oddsRaceIds.map(() => "?").join(",")}) order by race_date,venue_code,race_number`).all(...oddsRaceIds);
+    const raceIds = races.map((race) => race.race_id);
+    if (!raceIds.length) return waiting("live_racecards");
     const placeholders = raceIds.map(() => "?").join(",");
-    const races = db.prepare(`select * from live_races where race_id in (${placeholders}) order by race_date,venue_code,race_number`).all(...raceIds);
     const entries = db.prepare(`select race_id,horse_id,horse_number,horse_name from live_entries where race_id in (${placeholders}) order by race_id,horse_number`).all(...raceIds);
     const artifact = loadArtifact();
     const modelRows = artifact ? db.prepare(`select p.race_id,e.horse_number,p.win_probability
@@ -43,13 +52,17 @@ export function generateLiveMarketEv(options = {}) {
     for (const race of races) {
       const raceOdds = oddsByRace.get(race.race_id) ?? [];
       const byType = group(raceOdds, "bet_type");
-      if (Object.keys(TYPES).some((type) => !byType.get(type)?.length)) continue;
-      const names = new Map((entriesByRace.get(race.race_id) ?? []).map((row) => [row.horse_number, row.horse_name]));
-      const winRows = byType.get("win");
-      const marketHorse = normalize(Object.fromEntries(winRows.map((row) => [row.selection_key, 1 / row.odds_low])));
+      const raceEntries = entriesByRace.get(race.race_id) ?? [];
+      const names = new Map(raceEntries.map((row) => [row.horse_number, row.horse_name]));
+      const winRows = byType.get("win") ?? [];
       const trainedRows = modelByRace.get(race.race_id) ?? [];
-      const hasModel = artifact?.researchProbabilityStatus === "research_pass" && trainedRows.length === winRows.length;
-      const abilityHorse = hasModel ? normalize(Object.fromEntries(trainedRows.map((row) => [row.horse_number, row.win_probability]))) : marketHorse;
+      const { hasModel, marketHorse, abilityHorse } = resolveLiveRaceProbability({ artifact, raceEntries, trainedRows, winRows });
+      if (!abilityHorse) continue;
+      const hasCompleteOdds = Object.keys(TYPES).every((type) => byType.get(type)?.length);
+      if (!hasCompleteOdds) {
+        predictions.push(aiPrediction(race, abilityHorse, names, [], artifact, hasModel));
+        continue;
+      }
       const marketBooks = buildStructuralBooks(marketHorse);
       const abilityBooks = buildStructuralBooks(abilityHorse);
       const raceCandidates = [];
@@ -75,13 +88,19 @@ export function generateLiveMarketEv(options = {}) {
       status: candidates.length ? "ready" : "waiting",
       generatedAt: new Date().toISOString(),
       snapshotKind: base.snapshot_kind,
-      targetDates: base.target_dates.split(","),
+      targetDates,
       baseBatchId: base.id,
       exoticBatchId: exotic.id,
       modelVersion: artifact?.modelVersion ?? "market-baseline",
       abilityModelStatus: artifact?.researchProbabilityStatus ?? "not_trained",
       deploymentStatus: "benchmark_only",
       unitStakeYen: 100,
+      predictionCoverage: {
+        targetRaces: races.length,
+        predictedRaces: predictions.length,
+        oddsReadyRaces: Object.keys(evaluatedByRace).length,
+        modelOnlyRaces: predictions.filter((row) => row.topTicket === null && row.modelVersion !== "market-baseline").length,
+      },
       coverageCounts,
       evaluatedByRace,
       evaluatedTotal: Object.values(evaluatedByRace).reduce((sum, value) => sum + value, 0),
@@ -93,6 +112,18 @@ export function generateLiveMarketEv(options = {}) {
     fs.writeFileSync(OUTPUT, `${JSON.stringify(result, null, 2)}\n`, "utf8");
     return result;
   } finally { db.close(); }
+}
+
+export function resolveLiveRaceProbability({ artifact, raceEntries, trainedRows, winRows }) {
+  const marketHorse = winRows.length
+    ? normalize(Object.fromEntries(winRows.map((row) => [row.selection_key, 1 / row.odds_low])))
+    : null;
+  const hasModel = artifact?.researchProbabilityStatus === "research_pass"
+    && raceEntries.length > 1 && trainedRows.length === raceEntries.length;
+  const abilityHorse = hasModel
+    ? normalize(Object.fromEntries(trainedRows.map((row) => [row.horse_number, row.win_probability])))
+    : marketHorse;
+  return { hasModel, marketHorse, abilityHorse };
 }
 
 function structured(race, type, label, rows, marketHorse, abilityHorse, marketBook, abilityBook, names, artifact, hasModel) {
@@ -129,7 +160,7 @@ function candidate(race, betType, method, selectionKey, rows, probabilities, abi
     abilityModelStatus: artifact?.researchProbabilityStatus ?? "not_trained",
     status: "ready", predictionContext: "pre_race", calculationMode: hasModel ? "ability_and_market_scenarios" : "market_baseline",
     oddsObservedAt: rows.reduce((latest, row) => row.observed_at > latest ? row.observed_at : latest, ""), modelVersion: artifact?.modelVersion ?? "market-baseline",
-    calibrationStatus: hasModel ? "research_pass" : "benchmark",
+    calibrationStatus: hasModel ? "pass" : "benchmark",
     optimizationScenarios,
     componentSelectionKeys: rows.map((row) => row.selection_key),
     componentOdds: rows.map((row) => row.odds_low),
