@@ -915,9 +915,10 @@ function recoverInterruptedJobs() {
       purgeNormalizedMonth(job.month);
     }
   }
-  db.prepare(`update backfill_jobs set status='failed',attempts=max(attempts-1,0),
+  db.prepare(`update backfill_jobs set status='queued',attempts=max(attempts-1,0),
     last_error='Previous worker stopped before the monthly quality gate completed.',
-    updated_at=? where status='running'`).run(now);
+    updated_at=? where status='running' or (status='failed'
+      and last_error='Previous worker stopped before the monthly quality gate completed.')`).run(now);
 }
 
 function purgeNormalizedMonth(month) {
