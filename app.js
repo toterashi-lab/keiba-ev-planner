@@ -480,11 +480,12 @@ function renderSelectionRanking(track) {
       <td><strong>${index + 1}</strong></td>
       <td><button type="button" class="ranking-race-link" data-selection-race="${row.race.no}">${row.race.no}R ${escapeHtml(row.race.name)}</button></td>
       <td>${escapeHtml(row.candidate.betType)}</td><td>${escapeHtml(row.candidate.method ?? "1点")}</td>
+      <td>${escapeHtml(optimizationScenarioText(row.candidate))}</td>
       <td class="selection-cell">${escapeHtml(row.candidate.selection)}</td><td>${number(row.candidate.points ?? 1)}</td><td>${yen((row.candidate.points ?? 1) * ticketEngine.UNIT_STAKE)}</td>
       <td><strong>${percent(row.expectedReturn)}</strong></td><td class="${edge >= 0 ? "positive" : "negative"}">${signedPercent(edge)}</td>
       <td><span class="quality ${edge > 0 ? "complete" : "missing"}">${edge > 0 ? "候補" : "見送り"}</span></td>
     </tr>`;
-  }).join("") : `<tr><td colspan="10" class="empty-row">該当する計算済み買い目がありません</td></tr>`;
+  }).join("") : `<tr><td colspan="11" class="empty-row">該当する計算済み買い目がありません</td></tr>`;
   els.selectionRankingBody.querySelectorAll("button[data-selection-race]").forEach((button) => {
     button.addEventListener("click", () => {
       state.raceNo = Number(button.dataset.selectionRace);
