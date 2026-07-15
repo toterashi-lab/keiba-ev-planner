@@ -26,19 +26,11 @@ export function generateLiveMarketEv(options = {}) {
     const targetDates = resolveLiveTargetDates({ baseTargetDates: base?.target_dates, racecardTargetDates,
       today: tokyoDate(), allowFixture: options.allowFixture === true });
     if (!targetDates.length) return waiting("live_racecards", outputPath);
-    const oddsBatchIds = [base?.id, exotic?.id].filter(Number.isInteger);
-    const odds = oddsBatchIds.length ? db.prepare(`select race_id,bet_type,selection_key,odds_low,odds_high,observed_at from live_odds_snapshots
-      where batch_id in (${oddsBatchIds.map(() => "?").join(",")}) order by race_id,bet_type,selection_key`).all(...oddsBatchIds) : [];
-    const oddsRaceIds = [...new Set(odds.map((row) => row.race_id))];
     const datePlaceholders = targetDates.map(() => "?").join(",");
-    const targetRaces = db.prepare(`select * from live_races where race_date in (${datePlaceholders}) order by race_date,venue_code,race_number`).all(...targetDates);
-    const races = targetRaces.length
-      ? targetRaces
-      : oddsRaceIds.length
-        ? db.prepare(`select * from live_races where race_id in (${oddsRaceIds.map(() => "?").join(",")}) order by race_date,venue_code,race_number`).all(...oddsRaceIds)
-        : [];
+    const races = db.prepare(`select * from live_races where race_date in (${datePlaceholders}) order by race_date,venue_code,race_number`).all(...targetDates);
     const raceIds = races.map((race) => race.race_id);
     if (!raceIds.length) return waiting("live_racecards", outputPath);
+    const odds = loadLatestCompleteLiveOdds(db, raceIds, { allowFixture: options.allowFixture === true });
     const placeholders = raceIds.map(() => "?").join(",");
     const entries = db.prepare(`select race_id,horse_id,horse_number,horse_name from live_entries where race_id in (${placeholders}) order by race_id,horse_number`).all(...raceIds);
     const artifact = options.artifact ?? loadArtifact(options.artifactPath);
@@ -72,6 +64,8 @@ export function generateLiveMarketEv(options = {}) {
       const abilityBooks = artifact?.ticketProbabilityStatus === "research_pass"
         ? calibrateFinishOrderProbabilityBooks(rawAbilityBooks, artifact.ticketCalibrationTemperatures, raceEntries.length)
         : rawAbilityBooks;
+      const raceBatchIds = resolveRaceBatchIds(raceOdds);
+      if (!raceBatchIds) throw new Error(`${race.race_id}の単複・全券種バッチ対応が不正です`);
       const raceCandidates = [];
       let evaluated = 0;
       for (const [type, label] of Object.entries(TYPES)) {
@@ -81,11 +75,11 @@ export function generateLiveMarketEv(options = {}) {
           const marketStructural = marketBooks[type].get(row.selection_key) ?? row.marketProbability;
           const probability = selectProbability({ marketProbability: row.marketProbability, modelProbability: marketStructural, validationArtifact: artifact }).probability;
           const abilityProbability = abilityBooks[type].get(row.selection_key) ?? probability;
-          return candidate(race, label, "1点", row.selection_key, [row], [probability], [abilityProbability], names, artifact, hasModel);
+          return candidate(race, label, "1点", row.selection_key, [row], [probability], [abilityProbability], names, artifact, hasModel, raceBatchIds);
         });
         evaluated += singles.length;
         raceCandidates.push(...singles.sort(byAbilityEv).slice(0, 12));
-        raceCandidates.push(...structured(race, type, label, rows, marketHorse, abilityHorse, marketBooks[type], abilityBooks[type], names, artifact, hasModel));
+        raceCandidates.push(...structured(race, type, label, rows, marketHorse, abilityHorse, marketBooks[type], abilityBooks[type], names, artifact, hasModel, raceBatchIds));
       }
       evaluatedByRace[race.race_id] = evaluated;
       candidates.push(...raceCandidates);
@@ -99,6 +93,7 @@ export function generateLiveMarketEv(options = {}) {
       targetDates,
       baseBatchId: base?.id ?? null,
       exoticBatchId: exotic?.id ?? null,
+      oddsBatchIds: [...new Set(odds.map((row) => row.batch_id))].sort((left, right) => left - right),
       modelVersion: artifact?.modelVersion ?? "market-baseline",
       abilityModelStatus: artifact?.researchProbabilityStatus ?? "not_trained",
       deploymentStatus: "benchmark_only",
@@ -149,7 +144,38 @@ export function resolveStoredRacecardTargetDates(database, batch) {
     .all(batch.id).map((row) => row.race_date);
 }
 
-function structured(race, type, label, rows, marketHorse, abilityHorse, marketBook, abilityBook, names, artifact, hasModel) {
+export function loadLatestCompleteLiveOdds(database, raceIds, options = {}) {
+  if (!raceIds.length) return [];
+  const baseSources = options.allowFixture
+    ? ["JRA official live odds", "JRA official live odds fixture"] : ["JRA official live odds"];
+  const exoticSources = options.allowFixture
+    ? ["JRA official live exotic odds", "JRA official live exotic odds fixture"] : ["JRA official live exotic odds"];
+  const quote = (value) => `'${value.replaceAll("'", "''")}'`;
+  const baseSql = baseSources.map(quote).join(",");
+  const allSql = [...baseSources, ...exoticSources].map(quote).join(",");
+  const placeholders = raceIds.map(() => "?").join(",");
+  const snapshotGate = options.allowFixture ? "" : "and b.snapshot_kind='pre_race'";
+  return database.prepare(`with eligible as (
+      select s.race_id,s.bet_type,s.selection_key,s.odds_low,s.odds_high,s.observed_at,s.batch_id,
+        case when b.source in (${baseSql}) then 'base' else 'exotic' end source_group
+      from live_odds_snapshots s join odds_ingestion_batches b on b.id=s.batch_id
+      where b.status='complete' and b.source in (${allSql}) ${snapshotGate}
+        and s.race_id in (${placeholders})
+    ), latest as (
+      select race_id,source_group,max(batch_id) batch_id from eligible group by race_id,source_group
+    )
+    select e.* from eligible e join latest l
+      on l.race_id=e.race_id and l.source_group=e.source_group and l.batch_id=e.batch_id
+    order by e.race_id,e.bet_type,e.selection_key`).all(...raceIds);
+}
+
+function resolveRaceBatchIds(rows) {
+  const base = [...new Set(rows.filter((row) => row.source_group === "base").map((row) => row.batch_id))];
+  const exotic = [...new Set(rows.filter((row) => row.source_group === "exotic").map((row) => row.batch_id))];
+  return base.length === 1 && exotic.length === 1 ? { baseBatchId: base[0], exoticBatchId: exotic[0] } : null;
+}
+
+function structured(race, type, label, rows, marketHorse, abilityHorse, marketBook, abilityBook, names, artifact, hasModel, batchIds) {
   if (type === "win" || type === "place") return [];
   const definitions = buildStructuredDefinitions({ legs: engine.SPECS[label].legs, rows, marketHorse, abilityHorse, abilityBook })
     .map((definition) => ({ ...definition, method: definition.method === "formation" ? "フォーメーション" : definition.method }));
@@ -164,11 +190,11 @@ function structured(race, type, label, rows, marketHorse, abilityHorse, marketBo
     });
     const abilityProbabilities = combinations.map((selection, index) => abilityBook.get(engine.selectionKey(selection, ORDERED.has(type))) ?? marketProbabilities[index]);
     const display = definition.method === "BOX" ? `${definition.horses.join("-")} BOX` : definition.groups.map((group) => group.join(",")).join(" → ");
-    return [candidate(race, label, definition.method, display, selected, marketProbabilities, abilityProbabilities, names, artifact, hasModel, definition.optimizationScenarios)];
+    return [candidate(race, label, definition.method, display, selected, marketProbabilities, abilityProbabilities, names, artifact, hasModel, batchIds, definition.optimizationScenarios)];
   });
 }
 
-function candidate(race, betType, method, selectionKey, rows, probabilities, abilityProbabilities, names, artifact, hasModel, optimizationScenarios = ["single_point"]) {
+function candidate(race, betType, method, selectionKey, rows, probabilities, abilityProbabilities, names, artifact, hasModel, batchIds, optimizationScenarios = ["single_point"]) {
   const marketEv = average(rows.map((row, index) => row.odds_low * probabilities[index]));
   const abilityEv = average(rows.map((row, index) => row.odds_low * abilityProbabilities[index]));
   const display = method === "1点" ? selectionKey.split("-").map((number) => `${number} ${names.get(Number(number)) ?? ""}`.trim()).join("・") : selectionKey;
@@ -184,6 +210,8 @@ function candidate(race, betType, method, selectionKey, rows, probabilities, abi
     status: "ready", predictionContext: "pre_race", calculationMode: hasModel ? "ability_and_market_scenarios" : "market_baseline",
     oddsObservedAt: rows.reduce((latest, row) => row.observed_at > latest ? row.observed_at : latest, ""), modelVersion: artifact?.modelVersion ?? "market-baseline",
     calibrationStatus: hasModel ? "pass" : "benchmark",
+    baseBatchId: batchIds.baseBatchId,
+    exoticBatchId: batchIds.exoticBatchId,
     optimizationScenarios,
     componentSelectionKeys: rows.map((row) => row.selection_key),
     componentOdds: rows.map((row) => row.odds_low),
@@ -216,7 +244,8 @@ function persistCandidateLedger(db, result) {
   try {
     for (const row of result.candidates) {
       const ticketKey = row.componentSelectionKeys.join("|");
-      insert.run(row.raceId, result.snapshotKind, result.baseBatchId, result.exoticBatchId, row.modelVersion,
+      if (!Number.isInteger(row.baseBatchId) || !Number.isInteger(row.exoticBatchId)) throw new Error(`${row.raceId}の候補バッチIDがありません`);
+      insert.run(row.raceId, result.snapshotKind, row.baseBatchId, row.exoticBatchId, row.modelVersion,
         row.calibrationStatus, row.betType, row.method, row.selection, ticketKey,
         JSON.stringify(row.componentSelectionKeys), JSON.stringify(row.componentOdds),
         JSON.stringify(row.componentMarketProbabilities), JSON.stringify(row.componentAbilityProbabilities),

@@ -165,5 +165,6 @@ function candidate(raceNo, betType, method) {
 
 function liveCandidate(betType, method) {
   return { raceId: "live-r1", betType, method, status: "ready", predictionContext: "pre_race", modelVersion: "unit-model",
-    oddsObservedAt: "2026-01-01T00:00:30.000Z", points: 1, totalInvestmentYen: 100, adoptedExpectedReturn: 1.05 };
+    baseBatchId: 10, exoticBatchId: 11, oddsObservedAt: "2026-01-01T00:00:30.000Z",
+    points: 1, totalInvestmentYen: 100, adoptedExpectedReturn: 1.05 };
 }

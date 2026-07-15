@@ -796,6 +796,11 @@ function auditDatabase() {
     or not json_valid(component_odds_json) or json_array_length(component_odds_json)<>points
     or not json_valid(component_market_probabilities_json) or json_array_length(component_market_probabilities_json)<>points
     or not json_valid(component_ability_probabilities_json) or json_array_length(component_ability_probabilities_json)<>points`).get().count;
+  const orphanEvCandidateBatches = db.prepare(`select count(*) count from live_ev_candidates c where
+    not exists(select 1 from odds_ingestion_batches b where b.id=c.base_batch_id and b.status='complete'
+      and b.source in ('JRA official live odds','JRA official live odds fixture'))
+    or not exists(select 1 from odds_ingestion_batches b where b.id=c.exotic_batch_id and b.status='complete'
+      and b.source in ('JRA official live exotic odds','JRA official live exotic odds fixture'))`).get().count;
   const orphanEvEvaluations = db.prepare(`select count(*) count from live_ev_evaluations e
     where not exists(select 1 from live_ev_candidates c where c.id=e.candidate_id)`).get().count;
   const invalidEvEvaluations = db.prepare(`select count(*) count from live_ev_evaluations e join live_ev_candidates c on c.id=e.candidate_id
@@ -806,7 +811,7 @@ function auditDatabase() {
     checkedAt: new Date().toISOString(),
     pass: failedChecks === 0 && incompleteCompleteJobs === 0 && missingRaw === 0 && corruptRaw === 0
       && orphanRaces === 0 && failedOddsChecks === 0 && incompleteOddsBatches === 0 && invalidOddsRanges === 0
-      && invalidEvCandidates === 0 && orphanEvEvaluations === 0 && invalidEvEvaluations === 0,
+      && invalidEvCandidates === 0 && orphanEvCandidateBatches === 0 && orphanEvEvaluations === 0 && invalidEvEvaluations === 0,
     failedChecks,
     incompleteCompleteJobs,
     missingRaw,
@@ -816,6 +821,7 @@ function auditDatabase() {
     incompleteOddsBatches,
     invalidOddsRanges,
     invalidEvCandidates,
+    orphanEvCandidateBatches,
     orphanEvEvaluations,
     invalidEvEvaluations,
     ...statusReport(),

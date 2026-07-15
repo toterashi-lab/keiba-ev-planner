@@ -2,7 +2,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { generateLiveMarketEv, resolveLiveRaceProbability, resolveLiveTargetDates, resolveStoredRacecardTargetDates } from "./generate-live-market-ev.mjs";
+import { generateLiveMarketEv, loadLatestCompleteLiveOdds, resolveLiveRaceProbability, resolveLiveTargetDates, resolveStoredRacecardTargetDates } from "./generate-live-market-ev.mjs";
 
 const fixtureOutputDirectory = fs.mkdtempSync(path.join(os.tmpdir(), "keiba-live-check-output-"));
 const fixtureOutputPath = path.join(fixtureOutputDirectory, "live-market-ev.json");
@@ -16,11 +16,13 @@ const staleOddsFallback = resolveLiveTargetDates({ baseTargetDates: "2026-07-12"
 const currentOddsAndFutureRacecards = resolveLiveTargetDates({ baseTargetDates: "2026-07-18", racecardTargetDates: "2026-07-18,2026-07-19", today: "2026-07-18" });
 const fixtureDates = resolveLiveTargetDates({ baseTargetDates: "2026-07-12", racecardTargetDates: "", today: "2026-07-15", allowFixture: true });
 const recoveredRacecardDates = recoverEmptyBatchTargetDates();
+const rollingBatchCoverage = verifyRollingBatchAggregation();
 if (futureDates.join(",") !== "2026-07-18,2026-07-19") failures.push("multi-day racecard target path failed");
 if (staleOddsFallback.join(",") !== "2026-07-18,2026-07-19") failures.push("stale odds fallback path failed");
 if (currentOddsAndFutureRacecards.join(",") !== "2026-07-18,2026-07-19") failures.push("current odds and future racecard date merge failed");
 if (fixtureDates.join(",") !== "2026-07-12") failures.push("fixture target path failed");
 if (recoveredRacecardDates.join(",") !== "2026-07-18,2026-07-19") failures.push("empty racecard batch target-date recovery failed");
+if (rollingBatchCoverage !== "r1:3/4,r2:5/6") failures.push(`rolling batch aggregation failed: ${rollingBatchCoverage}`);
 const entries = [{ horse_number: 1 }, { horse_number: 2 }, { horse_number: 3 }];
 const trained = [{ horse_number: 1, win_probability: 0.5 }, { horse_number: 2, win_probability: 0.3 }, { horse_number: 3, win_probability: 0.2 }];
 const modelOnly = resolveLiveRaceProbability({ artifact: { researchProbabilityStatus: "research_pass" }, raceEntries: entries, trainedRows: trained, winRows: [] });
@@ -45,6 +47,9 @@ if (model.unitStakeYen !== 100) failures.push("unit stake is not 100 yen");
 if (!(model.evaluatedTotal > 0)) failures.push("no odds were evaluated");
 if (!model.predictions?.length) failures.push("no AI predictions were generated");
 if (persistedCandidates !== model.candidates.length) failures.push(`candidate ledger mismatch: ${persistedCandidates}/${model.candidates.length}`);
+if (model.candidates.some((row) => row.baseBatchId !== model.baseBatchId || row.exoticBatchId !== model.exoticBatchId)) {
+  failures.push("candidate-specific batch provenance failed");
+}
 
 const raceIds = [...new Set((model.candidates ?? []).map((row) => row.raceId))];
 for (const raceId of raceIds) {
@@ -98,6 +103,7 @@ console.log(JSON.stringify({
   noOddsMultiDayPrediction: "pass",
   noOddsIntegration: { races: noOddsFixture.predictions.length, candidates: noOddsFixture.candidates.length },
   emptyBatchTargetDateRecovery: recoveredRacecardDates,
+  rollingBatchCoverage,
   resultLeakage: "pass",
 }, null, 2));
 fs.rmSync(fixtureOutputDirectory, { recursive: true, force: true });
@@ -136,5 +142,32 @@ function recoverEmptyBatchTargetDates() {
     database.exec(`create table live_races(race_id text primary key,batch_id integer,race_date text);
       insert into live_races values('r1',7,'2026-07-19'),('r2',7,'2026-07-18'),('old',6,'2026-07-12');`);
     return resolveStoredRacecardTargetDates(database, { id: 7, target_dates: "" });
+  } finally { database.close(); }
+}
+
+function verifyRollingBatchAggregation() {
+  const database = new DatabaseSync(":memory:");
+  try {
+    database.exec(`
+      create table odds_ingestion_batches(id integer primary key,source text,snapshot_kind text,status text);
+      create table live_odds_snapshots(race_id text,bet_type text,selection_key text,odds_low real,odds_high real,observed_at text,batch_id integer,snapshot_kind text);
+      insert into odds_ingestion_batches values
+        (1,'JRA official live odds','pre_race','complete'),(2,'JRA official live exotic odds','pre_race','complete'),
+        (3,'JRA official live odds','pre_race','complete'),(4,'JRA official live exotic odds','pre_race','complete'),
+        (5,'JRA official live odds','pre_race','complete'),(6,'JRA official live exotic odds','pre_race','complete'),
+        (7,'JRA official live odds','pre_race','failed');
+      insert into live_odds_snapshots values
+        ('r1','win','1',3,3,'2026-01-01T01:00:00Z',1,'pre_race'),('r1','quinella','1-2',5,5,'2026-01-01T01:00:01Z',2,'pre_race'),
+        ('r1','win','1',2.8,2.8,'2026-01-01T01:10:00Z',3,'pre_race'),('r1','quinella','1-2',4.8,4.8,'2026-01-01T01:10:01Z',4,'pre_race'),
+        ('r2','win','1',4,4,'2026-01-01T02:00:00Z',5,'pre_race'),('r2','quinella','1-2',8,8,'2026-01-01T02:00:01Z',6,'pre_race'),
+        ('r1','win','1',1.1,1.1,'2026-01-01T01:20:00Z',7,'pre_race');
+    `);
+    const rows = loadLatestCompleteLiveOdds(database, ["r1", "r2"]);
+    const ids = new Map();
+    for (const row of rows) {
+      if (!ids.has(row.race_id)) ids.set(row.race_id, {});
+      ids.get(row.race_id)[row.source_group] = row.batch_id;
+    }
+    return [...ids].map(([raceId, value]) => `${raceId}:${value.base}/${value.exotic}`).join(",");
   } finally { database.close(); }
 }

@@ -269,6 +269,7 @@ export function inspectLiveCoverage(database, artifact, liveOutput, options = {}
   });
   const invalidCandidates = candidates.filter((row) => !raceIds.includes(row.raceId) || row.status !== "ready"
     || row.predictionContext !== "pre_race" || row.modelVersion !== artifact.modelVersion || !row.oddsObservedAt
+    || !Number.isInteger(row.baseBatchId) || !Number.isInteger(row.exoticBatchId)
     || !Number.isInteger(row.points) || row.points < 1 || row.totalInvestmentYen !== row.points * 100
     || !Number.isFinite(row.adoptedExpectedReturn));
   const predictionPass = raceIds.every((raceId) => entryCounts.get(raceId) >= 2
