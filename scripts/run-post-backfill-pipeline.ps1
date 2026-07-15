@@ -71,6 +71,10 @@ try {
     elseif ($LASTEXITCODE -ne 0) { throw "Model freshness validation failed: $LASTEXITCODE" }
   }
   if ($needsTraining) {
+    & $node --no-warnings "scripts\model-training-preflight.mjs"
+    if ($LASTEXITCODE -ne 0) { throw "Model training preflight failed: $LASTEXITCODE" }
+    & $node --no-warnings "scripts\model-training-resource-check.mjs"
+    if ($LASTEXITCODE -ne 0) { throw "Model training resource gate failed: $LASTEXITCODE" }
     & $node --no-warnings "scripts\train-expectancy-model.mjs"
     if ($LASTEXITCODE -ne 0) { throw "Model training failed: $LASTEXITCODE" }
   }

@@ -1,4 +1,4 @@
-import { evaluate, evaluateTicketProbabilities, FEATURE_KEYS, fitModel, fitTemperature, fitTicketCalibrationTemperatures, runFeatureAblation } from "./train-expectancy-model.mjs";
+import { aggregateTicketMetrics, buildTicketCalibrationUncertainty, evaluate, evaluateTicketProbabilities, FEATURE_KEYS, fitModel, fitTemperature, fitTicketCalibrationTemperatures, runFeatureAblation } from "./train-expectancy-model.mjs";
 
 const races = Array.from({ length: 240 }, (_, raceIndex) => {
   const winnerIndex = raceIndex % 4;
@@ -38,8 +38,18 @@ for (const [type, value] of Object.entries(ticketMetrics.byType)) {
   if (!value.researchPass) throw new Error(`${type}の券種別確率検証に失敗しました: ${JSON.stringify(value)}`);
   if (value.maximumMassError > 1e-12) throw new Error(`${type}の確率質量が不正です: ${value.maximumMassError}`);
 }
+const aggregateTicket = aggregateTicketMetrics([{ ticketMetrics }, { ticketMetrics }]);
+const uncertainty = buildTicketCalibrationUncertainty(aggregateTicket);
+for (const type of Object.keys(ticketMetrics.byType)) {
+  const sourceCount = ticketMetrics.byType[type].logCalibrationBins.reduce((sum, bin) => sum + bin.count, 0);
+  const aggregateCount = aggregateTicket.byType[type].logCalibrationBins.reduce((sum, bin) => sum + bin.count, 0);
+  if (aggregateCount !== sourceCount * 2) throw new Error(`${type}の対数校正帯が件数加重集計されていません`);
+  if (!uncertainty[type].length || uncertainty[type].some((bin) => !Number.isFinite(bin.downsideError90) || bin.downsideError90 < 0)) {
+    throw new Error(`${type}のWilson下方誤差が不正です`);
+  }
+}
 console.log(JSON.stringify({ status: "pass", temperature, selectedGroups: ablation.selectedGroups, metrics: {
   logLoss: metrics.logLoss, uniformLogLoss: metrics.uniformLogLoss, brier: metrics.brier,
   ece: metrics.ece, maxCalibrationBinError: metrics.maxCalibrationBinError,
   maxProbabilitySumError: metrics.maxProbabilitySumError, calibrationMethod: metrics.calibrationMethod,
-}, ticketTypes: Object.keys(ticketMetrics.byType).length, ticketCalibrationTemperatures }, null, 2));
+}, ticketTypes: Object.keys(ticketMetrics.byType).length, ticketCalibrationTemperatures, wilsonUncertainty: "pass" }, null, 2));

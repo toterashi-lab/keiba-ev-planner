@@ -418,7 +418,8 @@ function renderVenueRanking() {
   els.venueRankingList.innerHTML = rows.map((row) => {
     const rank = row.expectedReturn === null ? "--" : `${ranked.indexOf(row) + 1}位`;
     const edge = row.expectedReturn === null ? null : row.expectedReturn - 1;
-    const status = row.expectedReturn === null ? "データ待ち" : edge >= 0.08 ? "購入候補" : "見送り";
+    const purchaseEligible = row.top && isPurchaseEligible(row.top) && edge >= 0.08;
+    const status = row.expectedReturn === null ? "データ待ち" : purchaseEligible ? "購入候補" : edge >= 0.08 ? "研究上位・購入不可" : "見送り";
     return `<button type="button" class="${row.race.no === state.raceNo ? "active" : ""} ${row.expectedReturn === null ? "blocked" : ""}" data-ranking-race="${row.race.no}">
       <span class="ranking-place">${rank}</span><strong>${row.race.no}R ${escapeHtml(row.race.name)}</strong>
       <small>${row.prediction?.marks?.[0] ? `◎ ${escapeHtml(row.prediction.marks[0].horseName)}・${percent(row.expectedReturn)}` : status}</small>
@@ -487,7 +488,7 @@ function renderSelectionRanking(track) {
       <td>${escapeHtml(optimizationScenarioText(row.candidate))}</td>
       <td class="selection-cell">${escapeHtml(row.candidate.selection)}</td><td>${number(row.candidate.points ?? 1)}</td><td>${yen((row.candidate.points ?? 1) * ticketEngine.UNIT_STAKE)}</td>
       <td><strong>${percent(row.expectedReturn)}</strong></td><td class="${edge >= 0 ? "positive" : "negative"}">${signedPercent(edge)}</td>
-      <td><span class="quality ${edge > 0 ? "complete" : "missing"}">${edge > 0 ? "候補" : "見送り"}</span></td>
+      <td><span class="quality ${edge > 0 ? "complete" : "missing"}">${isPurchaseEligible(row.candidate) && edge >= 0.08 ? "購入候補" : edge > 0 ? "研究上位" : "見送り"}</span></td>
     </tr>`;
   }).join("") : `<tr><td colspan="11" class="empty-row">該当する計算済み買い目がありません</td></tr>`;
   els.selectionRankingBody.querySelectorAll("button[data-selection-race]").forEach((button) => {
@@ -544,7 +545,7 @@ function renderTopRecommendation() {
   const top = candidates[0] ?? null;
   const expectedReturn = top ? candidateExpectedReturn(top) : null;
   const edge = expectedReturn === null ? null : expectedReturn - 1;
-  const passes = edge !== null && edge >= 0.08 && modelData.logic?.deploymentStatus !== "benchmark_only";
+  const passes = edge !== null && edge >= 0.08 && isPurchaseEligible(top);
 
   els.topRecommendation.classList.toggle("blocked", !top);
   els.topRecommendation.classList.toggle("available", Boolean(top));
@@ -611,6 +612,12 @@ function candidateExpectedReturn(candidate) {
   return null;
 }
 
+function isPurchaseEligible(candidate) {
+  return candidate?.recommendationEligible === true
+    && candidate.externalValidationStatus === "pass"
+    && modelData.logic?.deploymentStatus !== "benchmark_only";
+}
+
 function renderRunners() {
   const runners = selectedResult()?.runners ?? [];
   const aiMarkByHorse = new Map((matchingAiPrediction()?.marks ?? []).map((row) => [row.horseNumber, row.mark]));
@@ -669,14 +676,14 @@ function renderStrategies() {
   const points = Math.max(1, Number(top.points) || 1);
   const investment = points * ticketEngine.UNIT_STAKE;
   const expectedProfit = investment * edge;
-  const passes = edge >= 0.08 && logic.deploymentStatus !== "benchmark_only";
+  const passes = edge >= 0.08 && isPurchaseEligible(top);
   els.evaluatedCandidates.textContent = `${number(candidates.length)}件`;
   els.expectedReturn.textContent = percent(expectedReturn);
   els.edgeValue.textContent = signedPercent(edge);
   els.edgeValue.className = edge >= 0 ? "positive" : "negative";
   els.unitExpectedProfit.textContent = signedYen(Math.round(expectedProfit));
   els.unitExpectedProfit.className = expectedProfit >= 0 ? "positive" : "negative";
-  els.edgeBadge.textContent = passes ? "安全側EV基準通過" : "最上位も基準未達";
+  els.edgeBadge.textContent = passes ? "安全側EV基準通過" : logic.deploymentStatus === "benchmark_only" ? "研究検証中・購入対象外" : "最上位も基準未達";
   els.edgeBadge.className = `decision ${passes ? "buy" : "reject"}`;
   els.strategyGrid.innerHTML = candidates.slice(0, 8).map((candidate, index) => automaticCandidateCard(candidate, index + 1)).join("");
   renderAutomaticRationale(top, candidates.length);
@@ -717,7 +724,10 @@ function renderAutomaticRationale(candidate, candidateCount) {
     ["100円固定", `${points}点を各100円、総投資${yen(investment)}として期待利益${signedYen(Math.round(investment * edge))}を計算します。`],
     ["確率品質", `モデル${escapeHtml(candidate.modelVersion)}、校正検査${escapeHtml(candidate.calibrationStatus)}。校正不合格候補は自動除外します。`],
     ["時点整合", `オッズ観測時刻${escapeHtml(candidate.oddsObservedAt)}以前の特徴量だけで計算し、結果と払戻は使用しません。`],
-    ["判定", edge >= 0.08 ? `安全側期待回収率${percent(expectedReturn)}でEV差8%以上を通過しました。` : `最上位でも安全側期待回収率${percent(expectedReturn)}のため見送ります。`],
+    ["判定", isPurchaseEligible(candidate) && edge >= 0.08
+      ? `安全側期待回収率${percent(expectedReturn)}でEV差8%以上と外部検証を通過しました。`
+      : edge >= 0.08 ? `安全側期待回収率${percent(expectedReturn)}ですが、外部ROI検証不合格のため購入対象外です。`
+        : `最上位でも安全側期待回収率${percent(expectedReturn)}のため見送ります。`],
   ];
   els.rationaleList.innerHTML = comments.map(([title, body]) => `<li><strong>${title}</strong><br>${body}</li>`).join("");
 }
@@ -729,7 +739,7 @@ function automaticCandidateCard(candidate, rank) {
   const investment = points * ticketEngine.UNIT_STAKE;
   return `<article class="strategy-card"><header><strong>${rank}位 ${escapeHtml(candidate.betType)}・${escapeHtml(candidate.method ?? "1点")}</strong><span>${points}点</span></header>
     <dl><div><dt>買い目</dt><dd>${escapeHtml(candidate.selection)}</dd></div><div><dt>探索根拠</dt><dd>${escapeHtml(optimizationScenarioText(candidate))}</dd></div><div><dt>総投資</dt><dd>${yen(investment)}</dd></div><div><dt>期待回収率</dt><dd>${percent(expectedReturn)}</dd></div><div><dt>安全側EV</dt><dd class="${edge >= 0 ? "positive" : "negative"}">${signedPercent(edge)}</dd></div><div><dt>期待利益</dt><dd>${signedYen(Math.round(investment * edge))}</dd></div></dl>
-    <footer class="${edge >= 0.08 ? "" : "reject"}">${edge >= 0.08 ? "購入候補" : "見送り"}</footer></article>`;
+    <footer class="${isPurchaseEligible(candidate) && edge >= 0.08 ? "" : "reject"}">${isPurchaseEligible(candidate) && edge >= 0.08 ? "購入候補" : edge >= 0.08 ? "研究上位・購入不可" : "見送り"}</footer></article>`;
 }
 
 function optimizationScenarioText(candidate) {

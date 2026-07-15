@@ -17,6 +17,8 @@ const PUBLICATION_MANIFEST = path.join("public", "data", "publication-manifest.j
 const PUBLIC_LIVE_RACECARDS = path.join("public", "data", "live-racecards.js");
 const PUBLIC_LIVE_MODEL_OUTPUTS = path.join("public", "data", "live-model-outputs.js");
 const ARTIFACT = path.join(PRIVATE_DIR, "models", "ability-softmax-v1.json");
+const REFERENCE_ARTIFACT = path.join(PRIVATE_DIR, "models", "reference-asof-model.json");
+const REFERENCE_EV_AUDIT = path.join(PRIVATE_DIR, "models", "reference-ev-audit.json");
 const LIVE_OUTPUT = path.join(PRIVATE_DIR, "models", "live-market-ev.json");
 const MARKET_OUTPUT = path.join("data", "model-outputs-2026-07-11-2026-07-12.json");
 const BET_TYPES = ["単勝", "複勝", "馬連", "ワイド", "馬単", "3連複", "3連単"];
@@ -144,6 +146,40 @@ export function auditCompletedGoal(database, report, options = {}) {
       temperatures: artifact.ticketCalibrationTemperatures,
       metrics: artifact.ticketMetrics,
     });
+  const uncertaintyTypes = Object.keys(artifact.ticketCalibrationUncertainty ?? {});
+  check(report, "ticket_probability_wilson_uncertainty", uncertaintyTypes.length === BET_TYPES.length
+    && Object.values(artifact.ticketCalibrationUncertainty).every((bins) => Array.isArray(bins) && bins.length > 0
+      && bins.at(-1).upper === 1 && bins.every((bin) => bin.count > 0
+        && Number.isFinite(bin.observedLower90) && Number.isFinite(bin.downsideError90) && bin.downsideError90 >= 0)), {
+      policy: "log-spaced probability bins with one-sided 90% Wilson lower bound",
+      types: uncertaintyTypes,
+    });
+
+  const referenceArtifactPath = options.referenceArtifactPath ?? REFERENCE_ARTIFACT;
+  const referenceAuditPath = options.referenceAuditPath ?? REFERENCE_EV_AUDIT;
+  const referenceArtifact = fs.existsSync(referenceArtifactPath) ? JSON.parse(fs.readFileSync(referenceArtifactPath, "utf8")) : null;
+  const referenceAudit = fs.existsSync(referenceAuditPath) ? JSON.parse(fs.readFileSync(referenceAuditPath, "utf8")) : null;
+  const targetStart = referenceArtifact?.targetDates?.[0];
+  const referenceUncertaintyTypes = Object.keys(referenceArtifact?.ticketCalibrationUncertainty ?? {});
+  check(report, "reference_asof_model_integrity", referenceArtifact?.status === "pass"
+    && referenceArtifact.researchProbabilityStatus === "research_pass"
+    && referenceArtifact.deploymentStatus === "benchmark_only"
+    && referenceArtifact.noTargetLeakage === true
+    && referenceArtifact.featureSelectionSource === artifact.modelVersion
+    && referenceArtifact.split?.trainEnd < referenceArtifact.split?.calibrationStart
+    && referenceArtifact.split?.calibrationEnd < targetStart
+    && referenceArtifact.split?.embargoDays >= 7
+    && referenceArtifact.counts?.targetRaces === 72
+    && referenceArtifact.counts?.predictions === referenceArtifact.predictions?.length
+    && referenceUncertaintyTypes.length === BET_TYPES.length
+    && Object.values(referenceArtifact.ticketCalibrationUncertainty).every((bins) => bins.length > 0
+      && bins.at(-1).upper === 1 && bins.every((bin) => Number.isFinite(bin.downsideError90))), {
+      path: referenceArtifactPath,
+      modelVersion: referenceArtifact?.modelVersion,
+      split: referenceArtifact?.split,
+      counts: referenceArtifact?.counts,
+      featureSelectionSource: referenceArtifact?.featureSelectionSource,
+    });
 
   const run = database.prepare("select id from model_runs where model_version=? order by id desc limit 1").get(artifact.modelVersion);
   const passedGates = run ? database.prepare("select gate_name from model_quality_gates where model_run_id=? and status='pass'").all(run.id).map((row) => row.gate_name) : [];
@@ -177,6 +213,21 @@ export function auditCompletedGoal(database, report, options = {}) {
   check(report, "all_ticket_expectancy_rankings", completeTicketCoverage && market.unitStakeYen === 100, {
     races: raceKeys.length, betTypes: BET_TYPES.length, unitStakeYen: market.unitStakeYen, candidates: market.candidates?.length ?? 0,
   });
+  const primaryExternalStrategy = referenceAudit?.strategies?.find((row) => row.name === "全券種・各レース各券種1位 EV>1");
+  check(report, "reference_expectancy_external_audit", referenceAudit?.status === "evaluation_only"
+    && referenceAudit.modelVersion === referenceArtifact?.modelVersion
+    && primaryExternalStrategy?.bets > 0 && Number.isFinite(primaryExternalStrategy.roi)
+    && market.modelVersion === referenceArtifact?.modelVersion
+    && market.logic?.engineVersion === "expectancy-engine-v3"
+    && market.logic?.deploymentStatus === "benchmark_only"
+    && market.logic?.referenceWeekExternalAudit?.status === "fail"
+    && market.candidates?.every((row) => row.modelVersion === referenceArtifact?.modelVersion
+      && row.recommendationEligible === false && row.externalValidationStatus === "fail"), {
+      path: referenceAuditPath,
+      auditModelVersion: referenceAudit?.modelVersion,
+      outputModelVersion: market.modelVersion,
+      primaryStrategy: primaryExternalStrategy,
+    });
 
   const publicationManifestPath = options.publicationManifestPath ?? PUBLICATION_MANIFEST;
   const publicationReceiptPath = options.publicationReceiptPath ?? PUBLICATION_RECEIPT;
@@ -195,8 +246,8 @@ export function auditCompletedGoal(database, report, options = {}) {
     ? crypto.createHash("sha256").update(fs.readFileSync(publicLiveModelOutputsPath)).digest("hex") : null;
   check(report, "verified_publication", publicationManifest?.version === "publication-manifest-v1"
     && publicationManifest.databaseRaces === coverage.races
-    && publicationManifest.modelVersion === artifact.modelVersion
-    && publicationManifest.modelCoverageRaces === coverage.races
+    && publicationManifest.modelVersion === referenceArtifact?.modelVersion
+    && publicationManifest.modelCoverageRaces === (referenceArtifact?.counts?.trainRaces + referenceArtifact?.counts?.calibrationRaces)
     && publicationManifest.expectancyCandidateCount === market.candidates.length
     && publicationManifest.expectancyPredictionCount === market.predictions.length
     && publicationManifest.liveRaceCount === liveOutput?.predictionCoverage?.targetRaces
@@ -210,7 +261,7 @@ export function auditCompletedGoal(database, report, options = {}) {
     && publicationReceipt.manifestSha256 === manifestSha256
     && publicationReceipt.commit === publicationReceipt.remoteCommit
     && publicationReceipt.databaseRaces === coverage.races
-    && publicationReceipt.modelVersion === artifact.modelVersion
+    && publicationReceipt.modelVersion === referenceArtifact?.modelVersion
     && publicationReceipt.liveRaceCount === publicationManifest.liveRaceCount
     && publicationReceipt.liveCandidateCount === publicationManifest.liveCandidateCount
     && publicationReceipt.livePredictionCount === publicationManifest.livePredictionCount

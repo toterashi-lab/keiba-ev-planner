@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
-import { normalizeMarket, selectProbability } from "../model/expectancy-engine-v2.mjs";
+import { EXPECTANCY_ENGINE_VERSION, normalizeMarket, selectProbability } from "../model/expectancy-engine-v2.mjs";
 import { buildStructuredDefinitions } from "../model/structured-ticket-search.mjs";
 import { buildFinishOrderProbabilityBooks, calibrateFinishOrderProbabilityBooks } from "../model/finish-order-probabilities.mjs";
 import { isPreRaceObservation } from "./race-time.mjs";
@@ -35,7 +35,9 @@ export function generateLiveMarketEv(options = {}) {
     const placeholders = raceIds.map(() => "?").join(",");
     const entries = db.prepare(`select race_id,horse_id,horse_number,horse_name from live_entries where race_id in (${placeholders}) order by race_id,horse_number`).all(...raceIds);
     const artifact = options.artifact ?? loadArtifact(options.artifactPath);
-    const modelRows = artifact ? db.prepare(`select p.race_id,e.horse_number,p.win_probability
+    const predictionColumns = new Set(db.prepare("pragma table_info(live_predictions)").all().map((row) => row.name));
+    const historyStartsSql = predictionColumns.has("history_starts") ? "p.history_starts" : "0";
+    const modelRows = artifact ? db.prepare(`select p.race_id,e.horse_number,p.win_probability,${historyStartsSql} history_starts
       from live_predictions p join live_entries e on e.race_id=p.race_id and e.horse_id=p.horse_id
       where p.model_version=? and p.race_id in (${placeholders})`).all(artifact.modelVersion, ...raceIds) : [];
     const oddsByRace = group(odds, "race_id");
@@ -72,15 +74,16 @@ export function generateLiveMarketEv(options = {}) {
       for (const [type, label] of Object.entries(TYPES)) {
         const rows = normalizeMarket(byType.get(type), type, winRows.length);
         coverageCounts[label] += 1;
+        const researchBook = ticketCredibilityPool(rows, abilityBooks[type], trainedRows, type);
         const singles = rows.map((row) => {
           const marketStructural = marketBooks[type].get(row.selection_key) ?? row.marketProbability;
           const probability = selectProbability({ marketProbability: row.marketProbability, modelProbability: marketStructural, validationArtifact: artifact }).probability;
-          const abilityProbability = abilityBooks[type].get(row.selection_key) ?? probability;
+          const abilityProbability = researchBook.get(row.selection_key) ?? probability;
           return candidate(race, label, "1点", row.selection_key, [row], [probability], [abilityProbability], names, artifact, hasModel, raceBatchIds);
         });
         evaluated += singles.length;
         raceCandidates.push(...singles.sort(byAbilityEv).slice(0, 12));
-        raceCandidates.push(...structured(race, type, label, rows, marketHorse, abilityHorse, marketBooks[type], abilityBooks[type], names, artifact, hasModel, raceBatchIds));
+        raceCandidates.push(...structured(race, type, label, rows, marketHorse, abilityHorse, marketBooks[type], researchBook, names, artifact, hasModel, raceBatchIds));
       }
       evaluatedByRace[race.race_id] = evaluated;
       candidates.push(...raceCandidates);
@@ -98,6 +101,7 @@ export function generateLiveMarketEv(options = {}) {
       modelVersion: artifact?.modelVersion ?? "market-baseline",
       abilityModelStatus: artifact?.researchProbabilityStatus ?? "not_trained",
       deploymentStatus: "benchmark_only",
+      engineVersion: EXPECTANCY_ENGINE_VERSION,
       unitStakeYen: 100,
       predictionCoverage: {
         targetRaces: races.length,
@@ -125,9 +129,38 @@ export function resolveLiveRaceProbability({ artifact, raceEntries, trainedRows,
   const hasModel = artifact?.researchProbabilityStatus === "research_pass"
     && raceEntries.length > 1 && trainedRows.length === raceEntries.length;
   const abilityHorse = hasModel
-    ? normalize(Object.fromEntries(trainedRows.map((row) => [row.horse_number, row.win_probability])))
+    ? credibilityPoolHorseProbabilities(marketHorse, trainedRows)
     : marketHorse;
   return { hasModel, marketHorse, abilityHorse };
+}
+
+function credibilityPoolHorseProbabilities(marketProbabilities, modelRows) {
+  if (!marketProbabilities) return normalize(Object.fromEntries(modelRows.map((row) => [row.horse_number, row.win_probability])));
+  return normalize(Object.fromEntries(modelRows.map((row) => {
+    const starts = Math.max(0, Number(row.history_starts) || 0);
+    const credibility = starts / (starts + 13);
+    const market = Math.max(1e-12, marketProbabilities[row.horse_number] ?? 0);
+    const model = Math.max(1e-12, Number(row.win_probability));
+    return [row.horse_number, Math.pow(model, credibility) * Math.pow(market, 1 - credibility)];
+  })));
+}
+
+function ticketCredibilityPool(rows, modelBook, modelRows, betType) {
+  const legs = betType === "win" || betType === "place" ? 1 : betType === "quinella" || betType === "wide" || betType === "exacta" ? 2 : 3;
+  if (legs === 1) return modelBook;
+  const starts = new Map(modelRows.map((row) => [row.horse_number, Math.max(0, Number(row.history_starts) || 0)]));
+  const scores = rows.map((row) => {
+    const horses = row.selection_key.split("-").map(Number);
+    const history = horses.map((horse) => starts.get(horse) ?? 0);
+    const effectiveStarts = history.every((value) => value > 0) ? history.length / history.reduce((sum, value) => sum + 1 / value, 0) : 0;
+    const credibility = effectiveStarts / (effectiveStarts + 13 * legs);
+    const market = Math.max(1e-15, row.marketProbability);
+    const model = Math.max(1e-15, modelBook.get(row.selection_key) ?? market);
+    return [row.selection_key, Math.pow(model, credibility) * Math.pow(market, 1 - credibility)];
+  });
+  const total = scores.reduce((sum, [, value]) => sum + value, 0);
+  const targetMass = [...modelBook.values()].reduce((sum, value) => sum + value, 0);
+  return new Map(scores.map(([key, value]) => [key, total > 0 ? value * targetMass / total : 0]));
 }
 
 export function resolveLiveTargetDates({ baseTargetDates, racecardTargetDates, today, allowFixture = false }) {
@@ -199,6 +232,9 @@ function structured(race, type, label, rows, marketHorse, abilityHorse, marketBo
 function candidate(race, betType, method, selectionKey, rows, probabilities, abilityProbabilities, names, artifact, hasModel, batchIds, optimizationScenarios = ["single_point"]) {
   const marketEv = average(rows.map((row, index) => row.odds_low * probabilities[index]));
   const abilityEv = average(rows.map((row, index) => row.odds_low * abilityProbabilities[index]));
+  const calibrationErrors = abilityProbabilities.map((probability) => calibrationDownsideError(artifact, betType, probability));
+  const conservativeAbilityProbabilities = abilityProbabilities.map((probability, index) => Math.max(0, probability - calibrationErrors[index]));
+  const conservativeAbilityEv = average(rows.map((row, index) => row.odds_low * conservativeAbilityProbabilities[index]));
   const display = method === "1点" ? selectionKey.split("-").map((number) => `${number} ${names.get(Number(number)) ?? ""}`.trim()).join("・") : selectionKey;
   return {
     date: race.race_date, meetingName: race.meeting_name, raceNo: race.race_number, raceId: race.race_id,
@@ -206,12 +242,14 @@ function candidate(race, betType, method, selectionKey, rows, probabilities, abi
     odds: rows.length === 1 ? rows[0].odds_low : null,
     probability: rows.length === 1 ? probabilities[0] : null,
     abilityProbability: rows.length === 1 ? abilityProbabilities[0] : null,
-    conservativeExpectedReturn: marketEv, abilityExpectedReturn: abilityEv,
-    adoptedExpectedReturn: hasModel ? abilityEv : marketEv,
+    conservativeExpectedReturn: hasModel ? conservativeAbilityEv : marketEv, abilityExpectedReturn: abilityEv,
+    adoptedExpectedReturn: hasModel ? conservativeAbilityEv : marketEv,
     abilityModelStatus: artifact?.researchProbabilityStatus ?? "not_trained",
     status: "ready", predictionContext: "pre_race", calculationMode: hasModel ? "ability_and_market_scenarios" : "market_baseline",
     oddsObservedAt: rows.reduce((latest, row) => row.observed_at > latest ? row.observed_at : latest, ""), modelVersion: artifact?.modelVersion ?? "market-baseline",
     calibrationStatus: hasModel ? "pass" : "benchmark",
+    calibrationError: rows.length === 1 ? calibrationErrors[0] : average(calibrationErrors),
+    recommendationEligible: false,
     baseBatchId: batchIds.baseBatchId,
     exoticBatchId: batchIds.exoticBatchId,
     optimizationScenarios,
@@ -219,7 +257,15 @@ function candidate(race, betType, method, selectionKey, rows, probabilities, abi
     componentOdds: rows.map((row) => row.odds_low),
     componentMarketProbabilities: probabilities,
     componentAbilityProbabilities: abilityProbabilities,
+    componentConservativeAbilityProbabilities: conservativeAbilityProbabilities,
   };
+}
+
+function calibrationDownsideError(artifact, betType, probability) {
+  const dbType = Object.entries(TYPES).find(([, label]) => label === betType)?.[0];
+  const bins = artifact?.ticketCalibrationUncertainty?.[dbType] ?? [];
+  const bin = bins.find((candidate) => probability <= candidate.upper) ?? bins.at(-1);
+  return Number.isFinite(Number(bin?.downsideError90)) ? Math.max(0, Number(bin.downsideError90)) : 0;
 }
 
 function initializeLedgerSchema(db) {

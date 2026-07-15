@@ -8,6 +8,8 @@ import { captureModelDataSnapshot, captureModelImplementationSnapshot } from "./
 
 const temp = fs.mkdtempSync(path.join(os.tmpdir(), "keiba-goal-audit-"));
 const artifactPath = path.join(temp, "model.json");
+const referenceArtifactPath = path.join(temp, "reference-model.json");
+const referenceAuditPath = path.join(temp, "reference-audit.json");
 const marketOutputPath = path.join(temp, "market.json");
 const generatorPath = path.join(temp, "generator.mjs");
 const databaseAuditPath = path.join(temp, "database-audit.json");
@@ -80,8 +82,20 @@ try {
         researchPass: true, meanWinnerLogLoss: 1, meanUniformWinnerLogLoss: 2, meanEce: 0.01,
         meanSupportedMaximumCalibrationBinError: 0.02, maximumMassError: 0,
       }])) },
+    ticketCalibrationUncertainty: uncertaintyFixture(),
   };
   fs.writeFileSync(artifactPath, JSON.stringify(artifact));
+  const referenceArtifact = {
+    status: "pass", researchProbabilityStatus: "research_pass", deploymentStatus: "benchmark_only", noTargetLeakage: true,
+    modelVersion: "unit-reference-model", targetDates: ["2026-01-01", "2026-01-02"],
+    split: { trainEnd: "2024-12-31", calibrationStart: "2025-01-08", calibrationEnd: "2025-12-24", embargoDays: 7 },
+    counts: { trainRaces: 1, calibrationRaces: 0, targetRaces: 72, predictions: 946 },
+    featureSelectionSource: "unit-model", ticketCalibrationUncertainty: uncertaintyFixture(),
+    predictions: Array.from({ length: 946 }, (_, index) => ({ raceId: `r${Math.floor(index / 14)}`, horseId: `h${index}`, probability: 0.1 })),
+  };
+  fs.writeFileSync(referenceArtifactPath, JSON.stringify(referenceArtifact));
+  fs.writeFileSync(referenceAuditPath, JSON.stringify({ status: "evaluation_only", modelVersion: "unit-reference-model",
+    strategies: [{ name: "全券種・各レース各券種1位 EV>1", bets: 10, hits: 1, roi: 0.5 }] }));
 
   const candidates = [];
   const predictions = [];
@@ -97,7 +111,9 @@ try {
       }
     }
   }
-  fs.writeFileSync(marketOutputPath, JSON.stringify({ status: "ready", unitStakeYen: 100, candidates, predictions }));
+  fs.writeFileSync(marketOutputPath, JSON.stringify({ status: "ready", modelVersion: "unit-reference-model", unitStakeYen: 100,
+    logic: { engineVersion: "expectancy-engine-v3", deploymentStatus: "benchmark_only", referenceWeekExternalAudit: { status: "fail" } },
+    candidates, predictions }));
   const liveCandidates = [];
   for (const betType of betTypes) {
     liveCandidates.push(liveCandidate(betType, "1点"));
@@ -120,7 +136,7 @@ try {
   fs.writeFileSync(publicLiveRacecardsPath, liveRacecardsText);
   fs.writeFileSync(publicLiveModelOutputsPath, liveModelOutputsText);
   const publicationManifest = { version: "publication-manifest-v1", generatedAt: "2026-01-01T00:00:00.000Z",
-    databaseRaces: 1, modelVersion: "unit-model", modelCoverageRaces: 1,
+    databaseRaces: 1, modelVersion: "unit-reference-model", modelCoverageRaces: 1,
     expectancyCandidateCount: candidates.length, expectancyPredictionCount: predictions.length,
     liveRaceCount: 1, liveCandidateCount: liveCandidates.length, livePredictionCount: 1,
     liveRacecardsSha256: crypto.createHash("sha256").update(liveRacecardsText).digest("hex"),
@@ -129,7 +145,7 @@ try {
   fs.writeFileSync(publicationManifestPath, publicationManifestText);
   fs.writeFileSync(publicationReceiptPath, JSON.stringify({ status: "verified", publishedAt: "2026-01-01T00:01:00.000Z",
     commit: "abc", remoteCommit: "abc", manifestId: "unit-manifest", remoteManifestId: "unit-manifest",
-    manifestSha256: crypto.createHash("sha256").update(publicationManifestText).digest("hex"), databaseRaces: 1, modelVersion: "unit-model",
+    manifestSha256: crypto.createHash("sha256").update(publicationManifestText).digest("hex"), databaseRaces: 1, modelVersion: "unit-reference-model",
     liveRaceCount: 1, liveCandidateCount: liveCandidates.length, livePredictionCount: 1,
     liveRacecardsSha256: publicationManifest.liveRacecardsSha256, remoteLiveRacecardsSha256: publicationManifest.liveRacecardsSha256,
     liveModelOutputsSha256: publicationManifest.liveModelOutputsSha256, remoteLiveModelOutputsSha256: publicationManifest.liveModelOutputsSha256 }));
@@ -150,11 +166,11 @@ try {
   fs.writeFileSync(pipeline, "ok");
 
   const report = { readiness: { ready: true, coverage: { from: "1996-01", to: "2026-07", expectedMonths: 367 } }, checks: [], failures: [] };
-  auditCompletedGoal(db, report, { artifactPath, marketOutputPath, generatorPath, databaseAuditPath,
+  auditCompletedGoal(db, report, { artifactPath, referenceArtifactPath, referenceAuditPath, marketOutputPath, generatorPath, databaseAuditPath,
     fieldAvailabilityAuditPath, publicationManifestPath, publicationReceiptPath, automationAuditPath, liveOutputPath,
     publicLiveRacecardsPath, publicLiveModelOutputsPath,
     today: "2026-01-01", pipelineFiles: [pipeline] });
-  if (report.failures.length || report.checks.length !== 25) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
+  if (report.failures.length || report.checks.length !== 28) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
   const liveFixture = JSON.parse(fs.readFileSync(liveOutputPath, "utf8"));
   if (!inspectLiveCoverage(db, artifact, liveFixture, { today: "2026-01-01" }).pass) throw new Error("valid live coverage was rejected");
   const missingPrediction = structuredClone(liveFixture);
@@ -178,7 +194,15 @@ try {
 
 function candidate(raceNo, betType, method) {
   return { date: "2026-01-01", meetingName: "検査開催", raceNo, betType, method, points: 1, totalInvestmentYen: 100,
-    adoptedExpectedReturn: 1.05, optimizationScenarios: method === "1点" ? ["single_point"] : ["ability_probability", "component_ev"] };
+    adoptedExpectedReturn: 1.05, modelVersion: "unit-reference-model", recommendationEligible: false, externalValidationStatus: "fail",
+    optimizationScenarios: method === "1点" ? ["single_point"] : ["ability_probability", "component_ev"] };
+}
+
+function uncertaintyFixture() {
+  return Object.fromEntries(["win", "place", "quinella", "wide", "exacta", "trio", "trifecta"].map((type) => [type, [
+    { index: 0, lower: 0, upper: 0.1, count: 100, predicted: 0.05, observed: 0.04, observedLower90: 0.02, downsideError90: 0.03 },
+    { index: 1, lower: 0.1, upper: 1, count: 100, predicted: 0.2, observed: 0.2, observedLower90: 0.15, downsideError90: 0.05 },
+  ]]));
 }
 
 function liveCandidate(betType, method) {

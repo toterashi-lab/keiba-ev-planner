@@ -88,6 +88,7 @@ try {
 
   const aggregate = aggregateMetrics(folds);
   const ticketMetrics = aggregateTicketMetrics(folds);
+  const ticketCalibrationUncertainty = buildTicketCalibrationUncertainty(ticketMetrics);
   const ticketResearchPass = Object.values(ticketMetrics.byType).every((metric) => metric.researchPass);
   const featureAdmission = aggregateFeatureAdmission(folds);
   const researchProbabilityPass = aggregate.maxProbabilitySumError <= 1e-6 && aggregate.meanEce <= 0.025
@@ -99,12 +100,12 @@ try {
   const ticketCalibrationTemperatures = Object.fromEntries(FINISH_ORDER_TYPES.map((type) => [type,
     median(folds.map((fold) => fold.ticketCalibrationTemperatures[type]))]));
   const versionHash = crypto.createHash("sha256").update(JSON.stringify({ folds, featureAdmission, keys: FEATURE_KEYS })).digest("hex").slice(0, 12);
-  const modelVersion = `ability-softmax-v1-${coverage.maxDate}-${versionHash}`;
+  const modelVersion = `ability-softmax-v3-${coverage.maxDate}-${versionHash}`;
   const artifact = {
     status: "insufficient_betting_validation",
     probabilityStatus: "insufficient",
     researchProbabilityStatus: researchProbabilityPass ? "research_pass" : "fail",
-    modelName: "race-conditional-ability-softmax",
+    modelName: "race-conditional-ability-softmax-recency-bayes",
     modelVersion,
     generatedAt: new Date().toISOString(),
     dataCoverage: { ...coverage, rows: rows.length, usableRaces: races.length },
@@ -125,6 +126,7 @@ try {
     ticketProbabilityStatus: ticketResearchPass ? "research_pass" : "fail",
     ticketCalibrationPolicy: "calibration-only-one-standard-error-most-regularized-temperature",
     ticketMetrics,
+    ticketCalibrationUncertainty,
     noTargetLeakage: true,
     featureTimePolicy: featureTiming,
     sourceTimingVerified: false,
@@ -590,7 +592,7 @@ function mean(values) { return values.length ? values.reduce((sum, value) => sum
 function median(values) { const sorted = [...values].sort((left, right) => left - right); const middle = Math.floor(sorted.length / 2); return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2; }
 function summarizeMetrics(metrics) { return { logLoss: metrics.logLoss, ece: metrics.ece, maxCalibrationBinError: metrics.maxCalibrationBinError }; }
 function aggregateMetrics(folds) { const keys = ["logLoss", "uniformLogLoss", "brier", "ece", "maxCalibrationBinError"]; const result = Object.fromEntries(keys.map((key) => [`mean${key[0].toUpperCase()}${key.slice(1)}`, mean(folds.map((fold) => fold.metrics[key]))])); result.maxProbabilitySumError = Math.max(...folds.map((fold) => fold.metrics.maxProbabilitySumError)); result.calibrationMethod = "equal-frequency-deciles"; return result; }
-function aggregateTicketMetrics(folds) {
+export function aggregateTicketMetrics(folds) {
   const byType = Object.fromEntries(FINISH_ORDER_TYPES.map((type) => {
     const rows = folds.map((fold) => fold.ticketMetrics.byType[type]);
     const metric = {
@@ -603,6 +605,7 @@ function aggregateTicketMetrics(folds) {
       maximumMassError: Math.max(...rows.map((row) => row.maximumMassError)),
       races: rows.reduce((sum, row) => sum + row.races, 0),
       candidateObservations: rows.reduce((sum, row) => sum + row.candidateObservations, 0),
+      logCalibrationBins: aggregateLogCalibrationBins(rows),
     };
     metric.researchPass = metric.meanWinnerLogLoss < metric.meanUniformWinnerLogLoss && metric.meanEce <= 0.025
       && metric.meanSupportedMaximumCalibrationBinError <= 0.1 && metric.maximumMassError <= 1e-8
@@ -611,6 +614,36 @@ function aggregateTicketMetrics(folds) {
   }));
   return { method: "walk-forward-Plackett-Luce-all-ticket-candidate-calibration", byType,
     skippedDeadHeatOrShortField: folds.reduce((sum, fold) => sum + fold.ticketMetrics.skippedDeadHeatOrShortField, 0) };
+}
+function aggregateLogCalibrationBins(rows) {
+  const bins = new Map();
+  for (const row of rows) for (const bin of row.logCalibrationBins ?? []) {
+    const aggregate = bins.get(bin.index) ?? { index: bin.index, lower: bin.lower, upper: bin.upper, count: 0, predictedTotal: 0, observedTotal: 0 };
+    aggregate.count += bin.count;
+    aggregate.predictedTotal += bin.predicted * bin.count;
+    aggregate.observedTotal += bin.observed * bin.count;
+    bins.set(bin.index, aggregate);
+  }
+  return [...bins.values()].sort((left, right) => left.index - right.index).map((bin) => ({
+    index: bin.index, lower: bin.lower, upper: bin.upper, count: bin.count,
+    predicted: bin.predictedTotal / bin.count, observed: bin.observedTotal / bin.count,
+    error: Math.abs(bin.observedTotal / bin.count - bin.predictedTotal / bin.count),
+  }));
+}
+export function buildTicketCalibrationUncertainty(ticketMetrics) {
+  return Object.fromEntries(Object.entries(ticketMetrics.byType).map(([type, metric]) => [type,
+    metric.logCalibrationBins.map((bin) => {
+      const observedLower90 = wilsonLower(bin.observed, bin.count, 1.645);
+      return { ...bin, observedLower90, downsideError90: Math.max(0, bin.predicted - observedLower90) };
+    })]));
+}
+function wilsonLower(rate, count, z) {
+  if (!(count > 0)) return 0;
+  const z2 = z * z;
+  const denominator = 1 + z2 / count;
+  const center = (rate + z2 / (2 * count)) / denominator;
+  const margin = z * Math.sqrt(rate * (1 - rate) / count + z2 / (4 * count * count)) / denominator;
+  return Math.max(0, center - margin);
 }
 function pairs(values) { const result = []; for (let left = 0; left < values.length; left += 1) for (let right = left + 1; right < values.length; right += 1) result.push([values[left], values[right]]); return result; }
 function unorderedKey(values) { return [...values].sort((left, right) => left - right).join("-"); }

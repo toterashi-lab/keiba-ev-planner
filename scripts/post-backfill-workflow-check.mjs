@@ -8,6 +8,8 @@ const ordered = [
   "exit 0",
   '"scripts\\jra-free-db.mjs" audit',
   '"scripts\\audit-field-availability.mjs"',
+  '"scripts\\model-training-preflight.mjs"',
+  '"scripts\\model-training-resource-check.mjs"',
   '"scripts\\train-expectancy-model.mjs"',
   '"scripts\\model-freshness.mjs"',
   '"scripts\\finish-order-probabilities-check.mjs"',

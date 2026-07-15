@@ -104,6 +104,7 @@ for (const file of [
   "train-expectancy-model-check.mjs",
   "train-expectancy-model-unit-check.mjs",
   "model-training-preflight.mjs",
+  "model-training-resource-check.mjs",
   "model-data-snapshot.mjs",
   "model-data-snapshot-check.mjs",
   "model-freshness.mjs",

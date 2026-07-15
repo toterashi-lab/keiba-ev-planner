@@ -32,15 +32,18 @@ try {
   const predictions = [];
   db.exec("begin immediate");
   try {
-    const insert = db.prepare(`insert into live_predictions(race_id,horse_id,model_version,as_of_time,win_probability,created_at)
-      values(?,?,?,?,?,?) on conflict(race_id,horse_id,model_version,as_of_time) do update set win_probability=excluded.win_probability,created_at=excluded.created_at`);
+    const insert = db.prepare(`insert into live_predictions(race_id,horse_id,model_version,as_of_time,win_probability,history_starts,created_at)
+      values(?,?,?,?,?,?,?) on conflict(race_id,horse_id,model_version,as_of_time) do update set
+      win_probability=excluded.win_probability,history_starts=excluded.history_starts,created_at=excluded.created_at`);
     for (const race of races) {
       const probabilities = predictRace(artifact, race, artifact.temperature);
       const sum = probabilities.reduce((total, value) => total + value, 0);
       if (Math.abs(1 - sum) > 1e-6) throw new Error(`${race.id}の勝率合計が1ではありません: ${sum}`);
       race.rows.forEach((row, index) => {
-        insert.run(race.id, row.horseId, artifact.modelVersion, row.asOfTime, probabilities[index], generatedAt);
-        predictions.push({ raceId: race.id, raceDate: race.date, horseId: row.horseId, horseNumber: row.features.horseNumber, probability: probabilities[index], asOfTime: row.asOfTime });
+        const historyStarts = Math.max(0, Math.round(Number(row.features.careerStarts) || 0));
+        insert.run(race.id, row.horseId, artifact.modelVersion, row.asOfTime, probabilities[index], historyStarts, generatedAt);
+        predictions.push({ raceId: race.id, raceDate: race.date, horseId: row.horseId, horseNumber: row.features.horseNumber,
+          probability: probabilities[index], historyStarts, asOfTime: row.asOfTime });
       });
     }
     db.exec("commit");
@@ -66,9 +69,11 @@ function groupRaces(rows) {
 function initializeSchema(db) {
   db.exec(`create table if not exists live_predictions(
     race_id text not null,horse_id text not null,model_version text not null,as_of_time text not null,
-    win_probability real not null check(win_probability between 0 and 1),created_at text not null,
+    win_probability real not null check(win_probability between 0 and 1),history_starts integer not null default 0 check(history_starts>=0),created_at text not null,
     primary key(race_id,horse_id,model_version,as_of_time)
   )`);
+  const columns = new Set(db.prepare("pragma table_info(live_predictions)").all().map((row) => row.name));
+  if (!columns.has("history_starts")) db.exec("alter table live_predictions add column history_starts integer not null default 0 check(history_starts>=0)");
 }
 
 function tokyoDate() { return new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(new Date()); }
