@@ -14,6 +14,7 @@ const PUBLICATION_RECEIPT = path.join(PRIVATE_DIR, "models", "publication-receip
 const AUTOMATION_AUDIT = path.join(PRIVATE_DIR, "models", "automation-audit.json");
 const PUBLICATION_MANIFEST = path.join("public", "data", "publication-manifest.json");
 const ARTIFACT = path.join(PRIVATE_DIR, "models", "ability-softmax-v1.json");
+const LIVE_OUTPUT = path.join(PRIVATE_DIR, "models", "live-market-ev.json");
 const MARKET_OUTPUT = path.join("data", "model-outputs-2026-07-11-2026-07-12.json");
 const BET_TYPES = ["単勝", "複勝", "馬連", "ワイド", "馬単", "3連複", "3連単"];
 const STRUCTURED_TYPES = ["馬連", "ワイド", "馬単", "3連複", "3連単"];
@@ -215,6 +216,10 @@ export function auditCompletedGoal(database, report, options = {}) {
     "scripts/sync-jra-live-racecards.ps1", "scripts/predict-live-racecards.mjs", "scripts/generate-live-market-ev.mjs",
     "scripts/evaluate-live-ev-ledger.mjs", "scripts/publish-live-web.ps1", "scripts/live-pipeline-workflow-check.mjs"]
   check(report, "automated_live_pipeline", pipelineFiles.every((file) => fs.existsSync(file)), { mode: "scheduled pre-race capture and publish" });
+  const liveOutputPath = options.liveOutputPath ?? LIVE_OUTPUT;
+  const liveOutput = fs.existsSync(liveOutputPath) ? JSON.parse(fs.readFileSync(liveOutputPath, "utf8")) : null;
+  const liveCoverage = inspectLiveCoverage(database, artifact, liveOutput, { today: options.today });
+  check(report, "live_all_race_all_ticket_coverage", liveCoverage.pass, { path: liveOutputPath, ...liveCoverage });
   const automationAuditPath = options.automationAuditPath ?? AUTOMATION_AUDIT;
   const automationAudit = fs.existsSync(automationAuditPath) ? JSON.parse(fs.readFileSync(automationAuditPath, "utf8")) : null;
   const automationTasks = new Map((automationAudit?.tasks ?? []).map((task) => [task.name, task]));
@@ -232,6 +237,70 @@ export function auditCompletedGoal(database, report, options = {}) {
     requiredTasks: REQUIRED_AUTOMATION_TASKS,
     tasks: automationAudit?.tasks ?? [],
   });
+}
+
+export function inspectLiveCoverage(database, artifact, liveOutput, options = {}) {
+  const today = options.today ?? new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(new Date());
+  const batch = database.prepare("select * from live_racecard_batches where status='complete' and race_count>0 order by id desc limit 1").get();
+  if (!batch || !liveOutput) return { pass: false, reason: !batch ? "missing_complete_racecard_batch" : "missing_live_output" };
+  const targetDates = [...new Set((liveOutput.targetDates ?? []).filter((date) => typeof date === "string" && date >= today))].sort();
+  if (!targetDates.length) return { pass: false, reason: "no_current_target_dates", today, outputTargetDates: liveOutput.targetDates ?? [] };
+  const placeholders = targetDates.map(() => "?").join(",");
+  const races = database.prepare(`select race_id,race_date from live_races where race_date in (${placeholders}) order by race_id`).all(...targetDates);
+  const raceIds = races.map((race) => race.race_id);
+  if (!raceIds.length) return { pass: false, reason: "no_target_races", today, targetDates };
+  const racePlaceholders = raceIds.map(() => "?").join(",");
+  const entries = database.prepare(`select race_id,horse_id from live_entries where race_id in (${racePlaceholders}) order by race_id,horse_id`).all(...raceIds);
+  const predictionRows = database.prepare(`select race_id,horse_id,win_probability from live_predictions
+    where model_version=? and race_id in (${racePlaceholders}) order by race_id,horse_id`).all(artifact.modelVersion, ...raceIds);
+  const entryCounts = countsBy(entries, "race_id");
+  const predictionCounts = countsBy(predictionRows, "race_id");
+  const probabilitySums = new Map();
+  for (const row of predictionRows) probabilitySums.set(row.race_id, (probabilitySums.get(row.race_id) ?? 0) + row.win_probability);
+  const outputPredictions = liveOutput.predictions ?? [];
+  const outputPredictionIds = new Set(outputPredictions.map((row) => row.raceId));
+  const candidates = liveOutput.candidates ?? [];
+  const candidateRaceIds = new Set(candidates.map((row) => row.raceId));
+  const racesWithCompleteTickets = raceIds.filter((raceId) => {
+    const rows = candidates.filter((row) => row.raceId === raceId);
+    return BET_TYPES.every((type) => rows.some((row) => row.betType === type && row.method === "1点"))
+      && STRUCTURED_TYPES.every((type) => rows.some((row) => row.betType === type && row.method === "BOX")
+        && rows.some((row) => row.betType === type && row.method === "フォーメーション"));
+  });
+  const invalidCandidates = candidates.filter((row) => !raceIds.includes(row.raceId) || row.status !== "ready"
+    || row.predictionContext !== "pre_race" || row.modelVersion !== artifact.modelVersion || !row.oddsObservedAt
+    || !Number.isInteger(row.points) || row.points < 1 || row.totalInvestmentYen !== row.points * 100
+    || !Number.isFinite(row.adoptedExpectedReturn));
+  const predictionPass = raceIds.every((raceId) => entryCounts.get(raceId) >= 2
+    && predictionCounts.get(raceId) === entryCounts.get(raceId)
+    && Math.abs((probabilitySums.get(raceId) ?? 0) - 1) <= 1e-6
+    && outputPredictionIds.has(raceId))
+    && outputPredictions.length === raceIds.length
+    && outputPredictions.every((row) => raceIds.includes(row.raceId) && row.status === "ready"
+      && row.predictionContext === "pre_race" && row.modelVersion === artifact.modelVersion && row.marks?.length === 5);
+  const ticketPass = racesWithCompleteTickets.length === raceIds.length && candidateRaceIds.size === raceIds.length
+    && invalidCandidates.length === 0 && liveOutput.unitStakeYen === 100
+    && liveOutput.predictionCoverage?.targetRaces === raceIds.length
+    && liveOutput.predictionCoverage?.predictedRaces === raceIds.length
+    && liveOutput.predictionCoverage?.oddsReadyRaces === raceIds.length
+    && BET_TYPES.every((type) => liveOutput.coverageCounts?.[type] === raceIds.length);
+  const timingPass = Date.parse(liveOutput.generatedAt) >= Date.parse(batch.completed_at)
+    && liveOutput.snapshotKind === "pre_race";
+  const pass = liveOutput.status === "ready" && liveOutput.abilityModelStatus === "research_pass"
+    && liveOutput.modelVersion === artifact.modelVersion && predictionPass && ticketPass && timingPass;
+  return {
+    pass, today, batchId: batch.id, batchCompletedAt: batch.completed_at, targetDates,
+    targetRaces: raceIds.length, entries: entries.length, databasePredictions: predictionRows.length,
+    outputPredictions: outputPredictions.length, candidateRaces: candidateRaceIds.size,
+    racesWithCompleteTickets: racesWithCompleteTickets.length, candidates: candidates.length,
+    invalidCandidates: invalidCandidates.length, predictionPass, ticketPass, timingPass,
+  };
+}
+
+function countsBy(rows, key) {
+  const counts = new Map();
+  for (const row of rows) counts.set(row[key], (counts.get(row[key]) ?? 0) + 1);
+  return counts;
 }
 
 function check(report, name, pass, evidence) {

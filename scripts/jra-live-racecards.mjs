@@ -127,14 +127,15 @@ async function capture(options) {
       saveRacecard(db, batch.id, page.id, race, page.fetchedAt);
       entryCount += race.entries.length;
     }
+    const capturedDates = [...new Set(selected.map((cname) => parseRaceKey(cname).raceDate))].sort();
     const distinctRaces = db.prepare("select count(distinct race_id) count from live_races where batch_id=?").get(batch.id).count;
     const storedEntries = db.prepare("select count(*) count from live_entries where batch_id=?").get(batch.id).count;
     const pass = distinctRaces === selected.length && storedEntries === entryCount && entryCount >= selected.length * 2;
-    db.prepare(`update live_racecard_batches set status=?,race_count=?,entry_count=?,completed_at=?,last_error=? where id=?`).run(
-      pass ? "complete" : "failed", distinctRaces, storedEntries, new Date().toISOString(), pass ? null : "race or entry count mismatch", batch.id,
+    db.prepare(`update live_racecard_batches set target_dates=?,status=?,race_count=?,entry_count=?,completed_at=?,last_error=? where id=?`).run(
+      capturedDates.join(","), pass ? "complete" : "failed", distinctRaces, storedEntries, new Date().toISOString(), pass ? null : "race or entry count mismatch", batch.id,
     );
     if (!pass) throw new Error(`Racecard quality gate failed: races=${distinctRaces}/${selected.length} entries=${storedEntries}/${entryCount}`);
-    const result = { status: "complete", batchId: batch.id, races: distinctRaces, entries: storedEntries, dates: [...new Set(selected.map((cname) => parseRaceKey(cname).raceDate))] };
+    const result = { status: "complete", batchId: batch.id, races: distinctRaces, entries: storedEntries, dates: capturedDates };
     console.log(JSON.stringify(result, null, 2));
     return result;
   } catch (error) {

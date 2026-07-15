@@ -27,11 +27,18 @@ const liveCheck = fs.readFileSync("scripts/live-market-ev-check.mjs", "utf8");
 for (const token of ["fixtureOutputDirectory", "fixtureOutputPath", "outputPath: fixtureOutputPath"]) {
   if (!liveCheck.includes(token)) throw new Error(`Live fixture output isolation is missing: ${token}`);
 }
+const racecardSource = fs.readFileSync("scripts/jra-live-racecards.mjs", "utf8");
+for (const token of ["capturedDates", "set target_dates=?", "dates: capturedDates"]) {
+  if (!racecardSource.includes(token)) throw new Error(`Captured race dates are not persisted: ${token}`);
+}
+const predictorSource = fs.readFileSync("scripts/predict-live-racecards.mjs", "utf8");
+if (!predictorSource.includes("resolveStoredRacecardTargetDates")) throw new Error("Prediction target-date recovery is missing");
 console.log(JSON.stringify({
   status: "pass",
   workflows: 3,
   fixtureOutputIsolation: true,
   verifiedLivePublication: true,
+  capturedTargetDatesPersisted: true,
 }, null, 2));
 
 function checkOrder(file, tokens) {

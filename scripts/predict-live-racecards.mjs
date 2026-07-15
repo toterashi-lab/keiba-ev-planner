@@ -3,7 +3,7 @@ import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { buildFeatureRows } from "./model-feature-pipeline.mjs";
 import { predictRace } from "./train-expectancy-model.mjs";
-import { resolveLiveTargetDates } from "./generate-live-market-ev.mjs";
+import { resolveLiveTargetDates, resolveStoredRacecardTargetDates } from "./generate-live-market-ev.mjs";
 
 const databasePath = path.join("data", "jra-free-private", "keiba.sqlite");
 const artifactPath = path.join("data", "jra-free-private", "models", "ability-softmax-v1.json");
@@ -17,8 +17,8 @@ if (!fs.existsSync(artifactPath)) {
 const artifact = JSON.parse(fs.readFileSync(artifactPath, "utf8"));
 const db = new DatabaseSync(databasePath);
 try {
-  const batch = requestedDate ? null : db.prepare("select target_dates from live_racecard_batches where status='complete' and race_count>0 order by id desc limit 1").get();
-  const dates = requestedDate ? [requestedDate] : resolveLiveTargetDates({ racecardTargetDates: batch?.target_dates, today: tokyoDate() });
+  const batch = requestedDate ? null : db.prepare("select * from live_racecard_batches where status='complete' and race_count>0 order by id desc limit 1").get();
+  const dates = requestedDate ? [requestedDate] : resolveLiveTargetDates({ racecardTargetDates: resolveStoredRacecardTargetDates(db, batch), today: tokyoDate() });
   if (!dates.length) {
     console.log(JSON.stringify({ status: "no_upcoming_racecards" }));
     process.exit(0);

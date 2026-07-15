@@ -22,7 +22,8 @@ export function generateLiveMarketEv(options = {}) {
     const exotic = base ? db.prepare(`select * from odds_ingestion_batches where status='complete' and source in (${options.allowFixture ? "'JRA official live exotic odds','JRA official live exotic odds fixture'" : "'JRA official live exotic odds'"})
       and snapshot_kind=? and target_dates=? order by id desc limit 1`).get(base.snapshot_kind, base.target_dates) : null;
     const racecardBatch = db.prepare("select * from live_racecard_batches where status='complete' and race_count>0 order by id desc limit 1").get();
-    const targetDates = resolveLiveTargetDates({ baseTargetDates: base?.target_dates, racecardTargetDates: racecardBatch?.target_dates,
+    const racecardTargetDates = resolveStoredRacecardTargetDates(db, racecardBatch);
+    const targetDates = resolveLiveTargetDates({ baseTargetDates: base?.target_dates, racecardTargetDates,
       today: tokyoDate(), allowFixture: options.allowFixture === true });
     if (!targetDates.length) return waiting("live_racecards", outputPath);
     const oddsBatchIds = [base?.id, exotic?.id].filter(Number.isInteger);
@@ -137,7 +138,15 @@ export function resolveLiveTargetDates({ baseTargetDates, racecardTargetDates, t
   const parse = (value) => [...new Set(String(value ?? "").split(",").map((date) => date.trim()).filter(Boolean))];
   const baseDates = parse(baseTargetDates).filter((date) => allowFixture || date >= today);
   const racecardDates = parse(racecardTargetDates).filter((date) => allowFixture || date >= today);
-  return (baseDates.length ? baseDates : racecardDates).sort();
+  return [...new Set([...baseDates, ...racecardDates])].sort();
+}
+
+export function resolveStoredRacecardTargetDates(database, batch) {
+  if (!batch) return [];
+  const stored = String(batch.target_dates ?? "").split(",").map((date) => date.trim()).filter(Boolean);
+  if (stored.length) return [...new Set(stored)].sort();
+  return database.prepare("select distinct race_date from live_races where batch_id=? order by race_date")
+    .all(batch.id).map((row) => row.race_date);
 }
 
 function structured(race, type, label, rows, marketHorse, abilityHorse, marketBook, abilityBook, names, artifact, hasModel) {

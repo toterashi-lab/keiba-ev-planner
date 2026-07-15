@@ -3,7 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import crypto from "node:crypto";
 import { DatabaseSync } from "node:sqlite";
-import { auditCompletedGoal } from "./goal-completion-audit.mjs";
+import { auditCompletedGoal, inspectLiveCoverage } from "./goal-completion-audit.mjs";
 import { captureModelDataSnapshot, captureModelImplementationSnapshot } from "./model-data-snapshot.mjs";
 
 const temp = fs.mkdtempSync(path.join(os.tmpdir(), "keiba-goal-audit-"));
@@ -15,6 +15,7 @@ const fieldAvailabilityAuditPath = path.join(temp, "field-availability-audit.jso
 const publicationManifestPath = path.join(temp, "publication-manifest.json");
 const publicationReceiptPath = path.join(temp, "publication-receipt.json");
 const automationAuditPath = path.join(temp, "automation-audit.json");
+const liveOutputPath = path.join(temp, "live-market-ev.json");
 const db = new DatabaseSync(":memory:");
 
 try {
@@ -28,11 +29,20 @@ try {
     create table live_ev_candidates(id integer primary key);
     create table live_ev_evaluations(candidate_id integer primary key);
     create table live_ev_validation_runs(id integer primary key);
+    create table live_racecard_batches(id integer primary key,target_dates text,status text,race_count integer,entry_count integer,completed_at text);
+    create table live_races(race_id text primary key,batch_id integer,race_date text);
+    create table live_entries(race_id text,horse_id text,batch_id integer);
+    create table live_predictions(race_id text,horse_id text,model_version text,win_probability real);
     insert into complete_races values('r1','1996-01-01',1);
     insert into complete_race_entries values('r1','h1');
     insert into complete_race_results values('r1','h1');
     insert into complete_payouts values('r1');
     insert into model_runs values(1,'unit-model');
+    insert into live_racecard_batches values(1,'2099-01-01','complete',1,5,'2026-01-01T00:00:00.000Z');
+    insert into live_races values('live-r1',1,'2099-01-01');
+    insert into live_entries values('live-r1','lh1',1),('live-r1','lh2',1),('live-r1','lh3',1),('live-r1','lh4',1),('live-r1','lh5',1);
+    insert into live_predictions values('live-r1','lh1','unit-model',0.30),('live-r1','lh2','unit-model',0.25),
+      ('live-r1','lh3','unit-model',0.20),('live-r1','lh4','unit-model',0.15),('live-r1','lh5','unit-model',0.10);
   `);
   const requiredGates = ["no_target_leakage", "historical_feature_time_order", "prediction_probability_sum_error", "expected_calibration_error",
     "max_calibration_bin_error", "calibration", "walk_forward", "ticket_probability_win", "ticket_probability_place",
@@ -86,6 +96,22 @@ try {
     }
   }
   fs.writeFileSync(marketOutputPath, JSON.stringify({ status: "ready", unitStakeYen: 100, candidates, predictions }));
+  const liveCandidates = [];
+  for (const betType of betTypes) {
+    liveCandidates.push(liveCandidate(betType, "1点"));
+    if (structured.has(betType)) {
+      liveCandidates.push(liveCandidate(betType, "BOX"));
+      liveCandidates.push(liveCandidate(betType, "フォーメーション"));
+    }
+  }
+  fs.writeFileSync(liveOutputPath, JSON.stringify({
+    status: "ready", generatedAt: "2026-01-01T00:01:00.000Z", snapshotKind: "pre_race", targetDates: ["2099-01-01"],
+    modelVersion: "unit-model", abilityModelStatus: "research_pass", unitStakeYen: 100,
+    predictionCoverage: { targetRaces: 1, predictedRaces: 1, oddsReadyRaces: 1 },
+    coverageCounts: Object.fromEntries(betTypes.map((type) => [type, 1])),
+    predictions: [{ raceId: "live-r1", status: "ready", predictionContext: "pre_race", modelVersion: "unit-model", marks: [1, 2, 3, 4, 5] }],
+    candidates: liveCandidates,
+  }));
   const publicationManifest = { version: "publication-manifest-v1", generatedAt: "2026-01-01T00:00:00.000Z",
     databaseRaces: 1, modelVersion: "unit-model", modelCoverageRaces: 1,
     expectancyCandidateCount: candidates.length, expectancyPredictionCount: predictions.length, manifestId: "unit-manifest" };
@@ -111,9 +137,22 @@ try {
 
   const report = { readiness: { ready: true, coverage: { from: "1996-01", to: "2026-07", expectedMonths: 367 } }, checks: [], failures: [] };
   auditCompletedGoal(db, report, { artifactPath, marketOutputPath, generatorPath, databaseAuditPath,
-    fieldAvailabilityAuditPath, publicationManifestPath, publicationReceiptPath, automationAuditPath, pipelineFiles: [pipeline] });
-  if (report.failures.length || report.checks.length !== 24) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
-  console.log(JSON.stringify({ status: "pass", checks: report.checks.length, races: predictions.length, candidates: candidates.length }, null, 2));
+    fieldAvailabilityAuditPath, publicationManifestPath, publicationReceiptPath, automationAuditPath, liveOutputPath,
+    today: "2026-01-01", pipelineFiles: [pipeline] });
+  if (report.failures.length || report.checks.length !== 25) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
+  const liveFixture = JSON.parse(fs.readFileSync(liveOutputPath, "utf8"));
+  if (!inspectLiveCoverage(db, artifact, liveFixture, { today: "2026-01-01" }).pass) throw new Error("valid live coverage was rejected");
+  const missingPrediction = structuredClone(liveFixture);
+  missingPrediction.predictions = [];
+  if (inspectLiveCoverage(db, artifact, missingPrediction, { today: "2026-01-01" }).pass) throw new Error("missing live prediction was accepted");
+  const missingFormation = structuredClone(liveFixture);
+  missingFormation.candidates = missingFormation.candidates.filter((row) => !(row.betType === "3連単" && row.method === "フォーメーション"));
+  if (inspectLiveCoverage(db, artifact, missingFormation, { today: "2026-01-01" }).pass) throw new Error("missing formation was accepted");
+  const staleOutput = structuredClone(liveFixture);
+  staleOutput.generatedAt = "2025-12-31T23:59:59.000Z";
+  if (inspectLiveCoverage(db, artifact, staleOutput, { today: "2026-01-01" }).pass) throw new Error("stale live output was accepted");
+  console.log(JSON.stringify({ status: "pass", checks: report.checks.length, races: predictions.length, candidates: candidates.length,
+    liveCoverageFailClosed: ["missing_prediction", "missing_formation", "stale_output"] }, null, 2));
 } finally {
   db.close();
   fs.rmSync(temp, { recursive: true, force: true });
@@ -122,4 +161,9 @@ try {
 function candidate(raceNo, betType, method) {
   return { date: "2026-01-01", meetingName: "検査開催", raceNo, betType, method, points: 1, totalInvestmentYen: 100,
     adoptedExpectedReturn: 1.05, optimizationScenarios: method === "1点" ? ["single_point"] : ["ability_probability", "component_ev"] };
+}
+
+function liveCandidate(betType, method) {
+  return { raceId: "live-r1", betType, method, status: "ready", predictionContext: "pre_race", modelVersion: "unit-model",
+    oddsObservedAt: "2026-01-01T00:00:30.000Z", points: 1, totalInvestmentYen: 100, adoptedExpectedReturn: 1.05 };
 }

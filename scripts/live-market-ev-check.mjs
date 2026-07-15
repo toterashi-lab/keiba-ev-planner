@@ -2,7 +2,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { generateLiveMarketEv, resolveLiveRaceProbability, resolveLiveTargetDates } from "./generate-live-market-ev.mjs";
+import { generateLiveMarketEv, resolveLiveRaceProbability, resolveLiveTargetDates, resolveStoredRacecardTargetDates } from "./generate-live-market-ev.mjs";
 
 const fixtureOutputDirectory = fs.mkdtempSync(path.join(os.tmpdir(), "keiba-live-check-output-"));
 const fixtureOutputPath = path.join(fixtureOutputDirectory, "live-market-ev.json");
@@ -13,10 +13,14 @@ const structuredTypes = ["馬連", "ワイド", "馬単", "3連複", "3連単"];
 const failures = [];
 const futureDates = resolveLiveTargetDates({ racecardTargetDates: "2026-07-18,2026-07-19", today: "2026-07-15" });
 const staleOddsFallback = resolveLiveTargetDates({ baseTargetDates: "2026-07-12", racecardTargetDates: "2026-07-18,2026-07-19", today: "2026-07-15" });
+const currentOddsAndFutureRacecards = resolveLiveTargetDates({ baseTargetDates: "2026-07-18", racecardTargetDates: "2026-07-18,2026-07-19", today: "2026-07-18" });
 const fixtureDates = resolveLiveTargetDates({ baseTargetDates: "2026-07-12", racecardTargetDates: "", today: "2026-07-15", allowFixture: true });
+const recoveredRacecardDates = recoverEmptyBatchTargetDates();
 if (futureDates.join(",") !== "2026-07-18,2026-07-19") failures.push("multi-day racecard target path failed");
 if (staleOddsFallback.join(",") !== "2026-07-18,2026-07-19") failures.push("stale odds fallback path failed");
+if (currentOddsAndFutureRacecards.join(",") !== "2026-07-18,2026-07-19") failures.push("current odds and future racecard date merge failed");
 if (fixtureDates.join(",") !== "2026-07-12") failures.push("fixture target path failed");
+if (recoveredRacecardDates.join(",") !== "2026-07-18,2026-07-19") failures.push("empty racecard batch target-date recovery failed");
 const entries = [{ horse_number: 1 }, { horse_number: 2 }, { horse_number: 3 }];
 const trained = [{ horse_number: 1, win_probability: 0.5 }, { horse_number: 2, win_probability: 0.3 }, { horse_number: 3, win_probability: 0.2 }];
 const modelOnly = resolveLiveRaceProbability({ artifact: { researchProbabilityStatus: "research_pass" }, raceEntries: entries, trainedRows: trained, winRows: [] });
@@ -93,6 +97,7 @@ console.log(JSON.stringify({
   modelOnlyPrediction: "pass",
   noOddsMultiDayPrediction: "pass",
   noOddsIntegration: { races: noOddsFixture.predictions.length, candidates: noOddsFixture.candidates.length },
+  emptyBatchTargetDateRecovery: recoveredRacecardDates,
   resultLeakage: "pass",
 }, null, 2));
 fs.rmSync(fixtureOutputDirectory, { recursive: true, force: true });
@@ -123,4 +128,13 @@ function createNoOddsModelFixture() {
   try {
     return generateLiveMarketEv({ databasePath, outputPath, artifact: { modelVersion: "fixture-model", researchProbabilityStatus: "research_pass" } });
   } finally { fs.rmSync(directory, { recursive: true, force: true }); }
+}
+
+function recoverEmptyBatchTargetDates() {
+  const database = new DatabaseSync(":memory:");
+  try {
+    database.exec(`create table live_races(race_id text primary key,batch_id integer,race_date text);
+      insert into live_races values('r1',7,'2026-07-19'),('r2',7,'2026-07-18'),('old',6,'2026-07-12');`);
+    return resolveStoredRacecardTargetDates(database, { id: 7, target_dates: "" });
+  } finally { database.close(); }
 }
