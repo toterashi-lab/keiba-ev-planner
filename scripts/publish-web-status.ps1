@@ -25,8 +25,32 @@ $logDir = Join-Path $root "data\jra-free-private\logs"
 New-Item -ItemType Directory -Force -Path $logDir | Out-Null
 $logPath = Join-Path $logDir ("web-publish-{0}.log" -f (Get-Date -Format "yyyyMMdd-HHmmss"))
 $lock = $null
-try { $lock = [System.IO.File]::Open($lockPath, [System.IO.FileMode]::CreateNew, [System.IO.FileAccess]::Write, [System.IO.FileShare]::None) }
-catch [System.IO.IOException] { return }
+$lockOwner = [ordered]@{
+  pid = $PID
+  processStartedAt = (Get-Process -Id $PID).StartTime.ToUniversalTime().ToString("o")
+  publishStartedAt = (Get-Date).ToUniversalTime().ToString("o")
+}
+for ($attempt = 0; $attempt -lt 2 -and -not $lock; $attempt++) {
+  try {
+    $lock = [System.IO.File]::Open($lockPath, [System.IO.FileMode]::CreateNew, [System.IO.FileAccess]::ReadWrite, [System.IO.FileShare]::None)
+    $payload = [System.Text.Encoding]::UTF8.GetBytes(($lockOwner | ConvertTo-Json -Compress))
+    $lock.Write($payload, 0, $payload.Length)
+    $lock.Flush($true)
+  } catch [System.IO.IOException] {
+    try { $existingPayload = Get-Content -LiteralPath $lockPath -Raw } catch { return }
+    try { $existingOwner = $existingPayload | ConvertFrom-Json } catch { $existingOwner = $null }
+    $existingProcess = if ($existingOwner.pid) { Get-Process -Id ([int]$existingOwner.pid) -ErrorAction SilentlyContinue } else { $null }
+    $ownerStartedAt = $null
+    if ($existingOwner.processStartedAt) {
+      try { $ownerStartedAt = [DateTime]::Parse($existingOwner.processStartedAt).ToUniversalTime() } catch { $ownerStartedAt = $null }
+    }
+    $sameProcess = $existingProcess -and $ownerStartedAt -and
+      ([Math]::Abs(($existingProcess.StartTime.ToUniversalTime() - $ownerStartedAt).TotalSeconds) -lt 2)
+    if ($sameProcess) { return }
+    Remove-Item -LiteralPath $lockPath -Force -ErrorAction Stop
+  }
+}
+if (-not $lock) { throw "Web publication lock could not be acquired." }
 
 Start-Transcript -Path $logPath | Out-Null
 try {

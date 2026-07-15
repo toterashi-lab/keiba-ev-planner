@@ -39,5 +39,13 @@ for (const token of ordered) {
 for (const token of ["$needsTraining", "if ($LASTEXITCODE -eq 10)", "New model is stale against the current database"]) {
   if (!source.includes(token)) throw new Error(`${file}: model freshness gate is missing: ${token}`);
 }
+for (const token of ["processStartedAt", "Get-Process -Id ([int]$existingOwner.pid)", "$sameProcess", "Remove-Item -LiteralPath $lockPath"]) {
+  if (!source.includes(token)) throw new Error(`${file}: stale post-backfill lock recovery is missing: ${token}`);
+}
 
-console.log(JSON.stringify({ status: "pass", orderedSteps: ordered.length, modelFreshnessGate: true }, null, 2));
+console.log(JSON.stringify({
+  status: "pass",
+  orderedSteps: ordered.length,
+  modelFreshnessGate: true,
+  staleLockRecovery: true,
+}, null, 2));

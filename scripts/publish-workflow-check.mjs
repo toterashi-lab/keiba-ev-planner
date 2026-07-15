@@ -22,4 +22,12 @@ for (const token of ordered) {
 for (const token of ["manifestId", "remoteManifestId", "manifestSha256", "remoteCommit", "remoteLiveRacecardsSha256", "remoteLiveModelOutputsSha256"]) {
   if (!source.includes(token)) throw new Error(`Publication verification field is missing: ${token}`);
 }
-console.log(JSON.stringify({ status: "pass", orderedSteps: ordered.length, verificationFields: 6 }, null, 2));
+for (const token of ["processStartedAt", "Get-Process -Id ([int]$existingOwner.pid)", "$sameProcess", "Remove-Item -LiteralPath $lockPath"]) {
+  if (!source.includes(token)) throw new Error(`Stale publication lock recovery is missing: ${token}`);
+}
+console.log(JSON.stringify({
+  status: "pass",
+  orderedSteps: ordered.length,
+  verificationFields: 6,
+  staleLockRecovery: true,
+}, null, 2));

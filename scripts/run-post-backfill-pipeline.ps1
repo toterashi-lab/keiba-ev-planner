@@ -11,11 +11,33 @@ if (-not (Test-Path $node)) { throw "Node.js runtime was not found." }
 
 New-Item -ItemType Directory -Force -Path $logDir | Out-Null
 $lock = $null
-try {
-  $lock = [System.IO.File]::Open($lockPath, [System.IO.FileMode]::CreateNew, [System.IO.FileAccess]::Write, [System.IO.FileShare]::None)
-} catch [System.IO.IOException] {
-  exit 0
+$lockOwner = [ordered]@{
+  pid = $PID
+  processStartedAt = (Get-Process -Id $PID).StartTime.ToUniversalTime().ToString("o")
+  pipelineStartedAt = (Get-Date).ToUniversalTime().ToString("o")
 }
+for ($attempt = 0; $attempt -lt 2 -and -not $lock; $attempt++) {
+  try {
+    $lock = [System.IO.File]::Open($lockPath, [System.IO.FileMode]::CreateNew, [System.IO.FileAccess]::ReadWrite, [System.IO.FileShare]::None)
+    $payload = [System.Text.Encoding]::UTF8.GetBytes(($lockOwner | ConvertTo-Json -Compress))
+    $lock.Write($payload, 0, $payload.Length)
+    $lock.Flush($true)
+  } catch [System.IO.IOException] {
+    $existingOwner = $null
+    try { $existingPayload = Get-Content -LiteralPath $lockPath -Raw } catch { exit 0 }
+    try { $existingOwner = $existingPayload | ConvertFrom-Json } catch { $existingOwner = $null }
+    $existingProcess = if ($existingOwner.pid) { Get-Process -Id ([int]$existingOwner.pid) -ErrorAction SilentlyContinue } else { $null }
+    $ownerStartedAt = $null
+    if ($existingOwner.processStartedAt) {
+      try { $ownerStartedAt = [DateTime]::Parse($existingOwner.processStartedAt).ToUniversalTime() } catch { $ownerStartedAt = $null }
+    }
+    $sameProcess = $existingProcess -and $ownerStartedAt -and
+      ([Math]::Abs(($existingProcess.StartTime.ToUniversalTime() - $ownerStartedAt).TotalSeconds) -lt 2)
+    if ($sameProcess) { exit 0 }
+    Remove-Item -LiteralPath $lockPath -Force -ErrorAction Stop
+  }
+}
+if (-not $lock) { throw "Post-backfill pipeline lock could not be acquired." }
 
 $logPath = Join-Path $logDir ("post-backfill-{0}.log" -f (Get-Date -Format "yyyyMMdd-HHmmss"))
 Start-Transcript -Path $logPath | Out-Null
