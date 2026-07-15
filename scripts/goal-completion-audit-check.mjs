@@ -4,6 +4,7 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { DatabaseSync } from "node:sqlite";
 import { auditCompletedGoal } from "./goal-completion-audit.mjs";
+import { captureModelDataSnapshot, captureModelImplementationSnapshot } from "./model-data-snapshot.mjs";
 
 const temp = fs.mkdtempSync(path.join(os.tmpdir(), "keiba-goal-audit-"));
 const artifactPath = path.join(temp, "model.json");
@@ -18,16 +19,18 @@ const db = new DatabaseSync(":memory:");
 
 try {
   db.exec(`
-    create table complete_races(race_id text,race_date text);
+    create table complete_races(race_id text,race_date text,source_page_id integer);
     create table complete_race_entries(race_id text,horse_id text);
+    create table complete_race_results(race_id text,horse_id text);
     create table complete_payouts(race_id text);
     create table model_runs(id integer primary key,model_version text);
     create table model_quality_gates(model_run_id integer,gate_name text,status text);
     create table live_ev_candidates(id integer primary key);
     create table live_ev_evaluations(candidate_id integer primary key);
     create table live_ev_validation_runs(id integer primary key);
-    insert into complete_races values('r1','1996-01-01');
+    insert into complete_races values('r1','1996-01-01',1);
     insert into complete_race_entries values('r1','h1');
+    insert into complete_race_results values('r1','h1');
     insert into complete_payouts values('r1');
     insert into model_runs values(1,'unit-model');
   `);
@@ -50,6 +53,8 @@ try {
       admittedGroups: ["horse_form"],
     },
     dataCoverage: { minDate: "1996-01-01", maxDate: "1996-01-01", races: 1 },
+    trainingSnapshot: captureModelDataSnapshot(db),
+    trainingImplementation: captureModelImplementationSnapshot(),
     folds: [
       { trainEnd: "2024-01-01", calibrationStart: "2024-01-09", calibrationEnd: "2024-06-30", testStart: "2024-07-08", featureAblation: [{ id: "horse_form", pass: true }] },
       { trainEnd: "2024-07-01", calibrationStart: "2024-07-09", calibrationEnd: "2024-12-31", testStart: "2025-01-08", featureAblation: [{ id: "horse_form", pass: true }] },
@@ -107,7 +112,7 @@ try {
   const report = { readiness: { ready: true, coverage: { from: "1996-01", to: "2026-07", expectedMonths: 367 } }, checks: [], failures: [] };
   auditCompletedGoal(db, report, { artifactPath, marketOutputPath, generatorPath, databaseAuditPath,
     fieldAvailabilityAuditPath, publicationManifestPath, publicationReceiptPath, automationAuditPath, pipelineFiles: [pipeline] });
-  if (report.failures.length || report.checks.length !== 22) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
+  if (report.failures.length || report.checks.length !== 24) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
   console.log(JSON.stringify({ status: "pass", checks: report.checks.length, races: predictions.length, candidates: candidates.length }, null, 2));
 } finally {
   db.close();

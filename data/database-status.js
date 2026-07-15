@@ -1,17 +1,17 @@
 window.KEIBA_DATABASE_STATUS = {
-  "asOf": "2026-07-15T14:27:08.918Z",
-  "completeMonths": 143,
+  "asOf": "2026-07-15T14:35:25.965Z",
+  "completeMonths": 144,
   "runningMonths": 1,
-  "queuedMonths": 223,
+  "queuedMonths": 222,
   "failedMonths": 0,
   "totalMonths": 367,
-  "progressPercent": 38.96457765667575,
-  "remainingMonths": 224,
+  "progressPercent": 39.23705722070845,
+  "remainingMonths": 223,
   "medianMinutesPerMonth": 9.599983468651772,
-  "estimatedHoursRemaining": 35.839938282966614,
-  "estimatedCompletionAt": "2026-07-17T02:17:32.694Z",
+  "estimatedHoursRemaining": 35.679938558489084,
+  "estimatedCompletionAt": "2026-07-17T02:16:13.741Z",
   "workerHealth": "healthy",
-  "workerHeartbeatAgeSeconds": 9.216,
+  "workerHeartbeatAgeSeconds": 13.218,
   "liveEvValidation": {
     "status": "insufficient",
     "generatedAt": "2026-07-15T14:26:13.092Z",
@@ -24,23 +24,23 @@ window.KEIBA_DATABASE_STATUS = {
     "roiCi95Lower": null,
     "maximumDrawdown": null
   },
-  "meetings": 3418,
-  "races": 40993,
-  "runners": 573661,
-  "payouts": 488791,
-  "rawPages": 45294,
+  "meetings": 3436,
+  "races": 41209,
+  "runners": 576898,
+  "payouts": 491375,
+  "rawPages": 45569,
   "oddsSnapshots": 222945,
   "earliestComplete": "1996-01",
   "latestComplete": "2026-07",
   "integrityStatus": "pass",
   "fieldAvailabilityAudit": {
-    "checkedAt": "2026-07-15T14:27:01.839Z",
+    "checkedAt": "2026-07-15T14:35:19.330Z",
     "pass": true,
-    "completeRunners": 573661,
-    "currentRunners": 573661,
+    "completeRunners": 576898,
+    "currentRunners": 576898,
     "coverageCurrent": true,
-    "rawRacePagesVerified": 4346,
-    "officiallyUnavailableCells": 11054,
+    "rawRacePagesVerified": 4359,
+    "officiallyUnavailableCells": 11071,
     "parserMissingCells": 0,
     "fields": [
       {
@@ -51,14 +51,14 @@ window.KEIBA_DATABASE_STATUS = {
       },
       {
         "field": "popularity",
-        "missingRows": 5363,
-        "officiallyUnavailableRows": 5363,
+        "missingRows": 5366,
+        "officiallyUnavailableRows": 5366,
         "parserMissingRows": 0
       },
       {
         "field": "official_time",
-        "missingRows": 4692,
-        "officiallyUnavailableRows": 4692,
+        "missingRows": 4706,
+        "officiallyUnavailableRows": 4706,
         "parserMissingRows": 0
       }
     ]

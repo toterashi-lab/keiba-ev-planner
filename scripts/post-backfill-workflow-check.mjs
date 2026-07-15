@@ -9,6 +9,7 @@ const ordered = [
   '"scripts\\jra-free-db.mjs" audit',
   '"scripts\\audit-field-availability.mjs"',
   '"scripts\\train-expectancy-model.mjs"',
+  '"scripts\\model-freshness.mjs"',
   '"scripts\\finish-order-probabilities-check.mjs"',
   '"scripts\\predict-live-racecards.mjs"',
   '"scripts\\generate-live-market-ev.mjs"',
@@ -29,7 +30,7 @@ for (const token of ordered) {
   if (position < 0) throw new Error(`${file}: token is missing or out of order: ${token}`);
   previous = position;
 }
-for (const token of ["$needsTraining", "$modelArtifact.dataCoverage.races", "$status.races"]) {
+for (const token of ["$needsTraining", "if ($LASTEXITCODE -eq 10)", "New model is stale against the current database"]) {
   if (!source.includes(token)) throw new Error(`${file}: model freshness gate is missing: ${token}`);
 }
 

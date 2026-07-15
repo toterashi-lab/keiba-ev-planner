@@ -4,6 +4,7 @@ import crypto from "node:crypto";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
 import { inspectBackfillReadiness } from "./backfill-readiness.mjs";
+import { captureModelDataSnapshot, captureModelImplementationSnapshot } from "./model-data-snapshot.mjs";
 
 const PRIVATE_DIR = path.join("data", "jra-free-private");
 const OUTPUT = path.join(PRIVATE_DIR, "models", "goal-completion-audit.json");
@@ -23,6 +24,7 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) runAudit();
 function runAudit() {
   const requireComplete = process.argv.includes("--require-complete");
   const db = new DatabaseSync(path.join(PRIVATE_DIR, "keiba.sqlite"), { readOnly: true });
+  db.exec("PRAGMA busy_timeout=30000; BEGIN");
   try {
     const readiness = inspectBackfillReadiness(db);
     const report = {
@@ -45,6 +47,7 @@ function runAudit() {
       if (report.failures.length) process.exitCode = 4;
     }
   } finally {
+    db.exec("ROLLBACK");
     db.close();
   }
 }
@@ -87,6 +90,15 @@ export function auditCompletedGoal(database, report, options = {}) {
   check(report, "model_database_coverage", artifact.dataCoverage?.races === coverage.races
     && artifact.dataCoverage?.minDate === coverage.minDate && artifact.dataCoverage?.maxDate === coverage.maxDate,
   { model: artifact.dataCoverage, database: coverage });
+  const currentTrainingSnapshot = captureModelDataSnapshot(database);
+  check(report, "model_data_snapshot_freshness", artifact.trainingSnapshot?.version === "model-data-snapshot-v1"
+    && artifact.trainingSnapshot.fingerprint === currentTrainingSnapshot.fingerprint,
+  { model: artifact.trainingSnapshot, database: currentTrainingSnapshot });
+  const currentTrainingImplementation = captureModelImplementationSnapshot();
+  check(report, "model_implementation_snapshot_freshness",
+    artifact.trainingImplementation?.version === "model-implementation-snapshot-v1"
+      && artifact.trainingImplementation.fingerprint === currentTrainingImplementation.fingerprint,
+  { model: artifact.trainingImplementation, current: currentTrainingImplementation });
   check(report, "walk_forward_folds", artifact.folds?.length >= 2
     && artifact.folds.every((fold) => fold.trainEnd < fold.calibrationStart && fold.calibrationEnd < fold.testStart), artifact.folds);
   check(report, "walk_forward_feature_admission",

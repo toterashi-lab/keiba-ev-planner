@@ -66,17 +66,16 @@ try {
   $artifact = Join-Path $privateDir "models\ability-softmax-v1.json"
   $needsTraining = $ForceModel -or -not (Test-Path $artifact)
   if (-not $needsTraining) {
-    try {
-      $modelArtifact = Get-Content -LiteralPath $artifact -Raw | ConvertFrom-Json
-      $needsTraining = [int64]$modelArtifact.dataCoverage.races -ne [int64]$status.races
-    } catch {
-      $needsTraining = $true
-    }
+    & $node --no-warnings "scripts\model-freshness.mjs"
+    if ($LASTEXITCODE -eq 10) { $needsTraining = $true }
+    elseif ($LASTEXITCODE -ne 0) { throw "Model freshness validation failed: $LASTEXITCODE" }
   }
   if ($needsTraining) {
     & $node --no-warnings "scripts\train-expectancy-model.mjs"
     if ($LASTEXITCODE -ne 0) { throw "Model training failed: $LASTEXITCODE" }
   }
+  & $node --no-warnings "scripts\model-freshness.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "New model is stale against the current database: $LASTEXITCODE" }
   & $node --no-warnings "scripts\finish-order-probabilities-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "All-ticket finish probability validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\predict-live-racecards.mjs"

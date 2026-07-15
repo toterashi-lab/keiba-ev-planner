@@ -4,6 +4,7 @@ import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
 import { buildFeatureRows } from "./model-feature-pipeline.mjs";
+import { captureModelDataSnapshot, captureModelImplementationSnapshot } from "./model-data-snapshot.mjs";
 import { MODEL_VALIDATION_POLICY } from "../model/validation-policy.mjs";
 import { buildFinishOrderProbabilityBooks, calibrateFinishOrderProbabilityBooks, FINISH_ORDER_TYPES, placeDepth, ticketOutcomeMultiplicity } from "../model/finish-order-probabilities.mjs";
 
@@ -40,7 +41,13 @@ const LOG_FEATURES = new Set(["careerStarts", "surfaceStarts", "venueStarts", "d
 
 export function trainExpectancyModel() {
 const db = new DatabaseSync(DATABASE_PATH);
+db.exec("PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=30000;");
+let transactionOpen = false;
 try {
+  db.exec("begin");
+  transactionOpen = true;
+  const trainingSnapshot = captureModelDataSnapshot(db);
+  const trainingImplementation = captureModelImplementationSnapshot();
   const coverage = db.prepare(`select min(race_date) minDate,max(race_date) maxDate,count(distinct race_id) races
     from complete_races`).get();
   const queue = db.prepare(`select status,count(*) count from backfill_jobs group by status`).all();
@@ -96,6 +103,8 @@ try {
     modelVersion,
     generatedAt: new Date().toISOString(),
     dataCoverage: { ...coverage, rows: rows.length, usableRaces: races.length },
+    trainingSnapshot,
+    trainingImplementation,
     policy: { minimumTrainMonths: MIN_TRAIN_MONTHS, calibrationMonths: CALIBRATION_MONTHS, testMonths: TEST_MONTHS, embargoDays: EMBARGO_DAYS },
     featureKeys: FEATURE_KEYS,
     activeFeatureKeys: featureAdmission.activeFeatureIndexes.map((index) => FEATURE_KEYS[index]),
@@ -117,11 +126,25 @@ try {
     deploymentStatus: "benchmark_only",
     deploymentReasons: ["historical_source_timing_not_verified", "historical_pre_race_odds_coverage_insufficient", "roi_gate_not_passed"],
   };
+  db.exec("commit");
+  transactionOpen = false;
+  db.exec("begin");
+  transactionOpen = true;
+  const finalSnapshot = captureModelDataSnapshot(db);
+  const finalImplementation = captureModelImplementationSnapshot();
+  const finalPending = db.prepare("select count(*) count from backfill_jobs where status<>'complete'").get().count;
+  db.exec("commit");
+  transactionOpen = false;
+  if (finalPending || finalSnapshot.fingerprint !== trainingSnapshot.fingerprint
+    || finalImplementation.fingerprint !== trainingImplementation.fingerprint) {
+    throw new Error(`学習中にDBまたは実装スナップショットが変更されました: pending=${finalPending}, dataBefore=${trainingSnapshot.fingerprint}, dataAfter=${finalSnapshot.fingerprint}, codeBefore=${trainingImplementation.fingerprint}, codeAfter=${finalImplementation.fingerprint}`);
+  }
   persistRun(db, artifact, lastValidationModel);
   fs.mkdirSync(path.dirname(ARTIFACT_PATH), { recursive: true });
   fs.writeFileSync(ARTIFACT_PATH, `${JSON.stringify(artifact, null, 2)}\n`, "utf8");
   console.log(JSON.stringify({ artifact: ARTIFACT_PATH, modelVersion, researchProbabilityPass, strictProbabilityStatus: artifact.probabilityStatus, folds: folds.length, races: races.length, predictions: lastValidationModel.test.length, metrics: aggregate }, null, 2));
 } finally {
+  if (transactionOpen) db.exec("rollback");
   db.close();
 }
 }
