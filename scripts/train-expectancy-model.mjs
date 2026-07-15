@@ -109,6 +109,7 @@ try {
     folds,
     metrics: aggregate,
     ticketProbabilityStatus: ticketResearchPass ? "research_pass" : "fail",
+    ticketCalibrationPolicy: "calibration-only-one-standard-error-most-regularized-temperature",
     ticketMetrics,
     noTargetLeakage: true,
     featureTimePolicy: featureTiming,
@@ -330,7 +331,7 @@ export function evaluate(model, races, temperature) {
 export function fitTicketCalibrationTemperatures(model, races, temperature) {
   const candidates = [1, 1.15, 1.3, 1.5, 1.75, 2, 2.4, 3];
   const losses = Object.fromEntries(FINISH_ORDER_TYPES.map((type) => [type,
-    candidates.map((candidate) => ({ temperature: candidate, loss: 0, winners: 0, observations: 0,
+    candidates.map((candidate) => ({ temperature: candidate, loss: 0, squaredLoss: 0, winners: 0, observations: 0,
       bins: Array.from({ length: 10 }, (_, index) => ({ index: index + 1, count: 0, predicted: 0, observed: 0 })) }))]));
   for (const race of races) {
     const winningKeys = raceWinningKeys(race);
@@ -352,7 +353,9 @@ export function fitTicketCalibrationTemperatures(model, races, temperature) {
           bin.count += 1; bin.predicted += calibrated; bin.observed += target;
           candidate.observations += 1;
           if (target) {
-            candidate.loss -= Math.log(Math.max(1e-12, calibrated));
+            const loss = -Math.log(Math.max(1e-12, calibrated));
+            candidate.loss += loss;
+            candidate.squaredLoss += loss * loss;
             candidate.winners += 1;
           }
         }
@@ -371,13 +374,18 @@ export function fitTicketCalibrationTemperatures(model, races, temperature) {
       const supported = bins.filter((bin) => bin.count >= 100);
       const supportedMaximumCalibrationBinError = supported.length ? Math.max(...supported.map((bin) => bin.error)) : Infinity;
       const supportedMaximumCalibrationUpper95 = supported.length ? Math.max(...supported.map((bin) => bin.upper95Error)) : Infinity;
-      return { ...candidate, meanLoss: candidate.loss / candidate.winners, ece, supportedMaximumCalibrationBinError,
+      const meanLoss = candidate.loss / candidate.winners;
+      const lossVariance = Math.max(0, candidate.squaredLoss / candidate.winners - meanLoss ** 2);
+      return { ...candidate, meanLoss, lossStandardError: Math.sqrt(lossVariance / candidate.winners),
+        ece, supportedMaximumCalibrationBinError,
         supportedMaximumCalibrationUpper95,
         calibrationPass: ece <= 0.025 && supportedMaximumCalibrationUpper95 <= 0.1 };
     });
     const eligible = evaluated.filter((candidate) => candidate.calibrationPass);
-    const best = (eligible.length ? eligible : evaluated)
-      .sort((left, right) => left.meanLoss - right.meanLoss || left.temperature - right.temperature)[0];
+    const pool = eligible.length ? eligible : evaluated;
+    const minimum = [...pool].sort((left, right) => left.meanLoss - right.meanLoss || left.temperature - right.temperature)[0];
+    const oneStandardErrorCandidates = pool.filter((candidate) => candidate.meanLoss <= minimum.meanLoss + minimum.lossStandardError);
+    const best = oneStandardErrorCandidates.sort((left, right) => right.temperature - left.temperature)[0];
     return [type, best.temperature];
   }));
 }

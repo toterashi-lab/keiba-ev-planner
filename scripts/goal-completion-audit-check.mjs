@@ -56,6 +56,7 @@ try {
     ],
     metrics: { maxProbabilitySumError: 1e-12, meanEce: 0.01, meanMaxCalibrationBinError: 0.03, meanLogLoss: 1.2, meanUniformLogLoss: 2.1 },
     ticketProbabilityStatus: "research_pass",
+    ticketCalibrationPolicy: "calibration-only-one-standard-error-most-regularized-temperature",
     ticketCalibrationTemperatures: { win: 1, place: 1.5, quinella: 1.5, wide: 1.5, exacta: 1.5, trio: 1.75, trifecta: 2 },
     ticketMetrics: { method: "walk-forward-Plackett-Luce-all-ticket-candidate-calibration", byType:
       Object.fromEntries(["win", "place", "quinella", "wide", "exacta", "trio", "trifecta"].map((type) => [type, {

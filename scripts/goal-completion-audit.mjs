@@ -116,6 +116,7 @@ export function auditCompletedGoal(database, report, options = {}) {
   });
   const ticketMetricTypes = Object.keys(artifact.ticketMetrics?.byType ?? {});
   check(report, "all_ticket_probability_walk_forward", artifact.ticketProbabilityStatus === "research_pass"
+    && artifact.ticketCalibrationPolicy === "calibration-only-one-standard-error-most-regularized-temperature"
     && artifact.ticketMetrics?.method === "walk-forward-Plackett-Luce-all-ticket-candidate-calibration"
     && BET_TYPES.length === ticketMetricTypes.length
     && Object.values(artifact.ticketMetrics.byType).every((metric) => metric.researchPass === true
