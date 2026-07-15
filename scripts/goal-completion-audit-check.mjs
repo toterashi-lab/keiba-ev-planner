@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import crypto from "node:crypto";
 import { DatabaseSync } from "node:sqlite";
 import { auditCompletedGoal } from "./goal-completion-audit.mjs";
 
@@ -9,6 +10,8 @@ const artifactPath = path.join(temp, "model.json");
 const marketOutputPath = path.join(temp, "market.json");
 const generatorPath = path.join(temp, "generator.mjs");
 const databaseAuditPath = path.join(temp, "database-audit.json");
+const publicationManifestPath = path.join(temp, "publication-manifest.json");
+const publicationReceiptPath = path.join(temp, "publication-receipt.json");
 const db = new DatabaseSync(":memory:");
 
 try {
@@ -67,6 +70,14 @@ try {
     }
   }
   fs.writeFileSync(marketOutputPath, JSON.stringify({ status: "ready", unitStakeYen: 100, candidates, predictions }));
+  const publicationManifest = { version: "publication-manifest-v1", generatedAt: "2026-01-01T00:00:00.000Z",
+    databaseRaces: 1, modelVersion: "unit-model", modelCoverageRaces: 1,
+    expectancyCandidateCount: candidates.length, expectancyPredictionCount: predictions.length, manifestId: "unit-manifest" };
+  const publicationManifestText = `${JSON.stringify(publicationManifest, null, 2)}\n`;
+  fs.writeFileSync(publicationManifestPath, publicationManifestText);
+  fs.writeFileSync(publicationReceiptPath, JSON.stringify({ status: "verified", publishedAt: "2026-01-01T00:01:00.000Z",
+    commit: "abc", remoteCommit: "abc", manifestId: "unit-manifest", remoteManifestId: "unit-manifest",
+    manifestSha256: crypto.createHash("sha256").update(publicationManifestText).digest("hex"), databaseRaces: 1, modelVersion: "unit-model" }));
   fs.writeFileSync(generatorPath, "export const preRaceOnly = true;\n");
   fs.writeFileSync(databaseAuditPath, JSON.stringify({ pass: true, races: 1, failedChecks: 0, incompleteCompleteJobs: 0,
     missingRaw: 0, corruptRaw: 0, orphanRaces: 0 }));
@@ -74,8 +85,9 @@ try {
   fs.writeFileSync(pipeline, "ok");
 
   const report = { readiness: { ready: true, coverage: { from: "1996-01", to: "2026-07", expectedMonths: 367 } }, checks: [], failures: [] };
-  auditCompletedGoal(db, report, { artifactPath, marketOutputPath, generatorPath, databaseAuditPath, pipelineFiles: [pipeline] });
-  if (report.failures.length || report.checks.length !== 18) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
+  auditCompletedGoal(db, report, { artifactPath, marketOutputPath, generatorPath, databaseAuditPath,
+    publicationManifestPath, publicationReceiptPath, pipelineFiles: [pipeline] });
+  if (report.failures.length || report.checks.length !== 19) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
   console.log(JSON.stringify({ status: "pass", checks: report.checks.length, races: predictions.length, candidates: candidates.length }, null, 2));
 } finally {
   db.close();

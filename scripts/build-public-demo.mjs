@@ -13,11 +13,28 @@ const programmeData = JSON.parse(programmeRaw);
 const resultsData = JSON.parse(resultsRaw);
 const resultLinksData = JSON.parse(resultLinksRaw);
 const modelOutputs = JSON.parse(fs.readFileSync("data/model-outputs-2026-07-11-2026-07-12.json", "utf8"));
+const abilityArtifactPath = path.join("data", "jra-free-private", "models", "ability-softmax-v1.json");
+const abilityArtifact = fs.existsSync(abilityArtifactPath) ? JSON.parse(fs.readFileSync(abilityArtifactPath, "utf8")) : null;
 const databaseExport = exportDatabaseStatus();
 const liveExport = exportLiveEdition();
 const featureCoverage = exportFeatureCoverage(databaseExport.status.asOf);
 const quality = JSON.parse(fs.readFileSync("data/quality-report-2026-07-11-2026-07-12.json", "utf8"));
 const currentHash = crypto.createHash("sha256").update(programmeRaw + resultsRaw).digest("hex");
+const publicationCore = {
+  version: "publication-manifest-v1",
+  generatedAt: new Date().toISOString(),
+  databaseRaces: databaseExport.status.races,
+  completeMonths: databaseExport.status.completeMonths,
+  expectedMonths: databaseExport.status.totalMonths,
+  modelVersion: abilityArtifact?.modelVersion ?? null,
+  modelCoverageRaces: abilityArtifact?.dataCoverage?.races ?? null,
+  expectancyCandidateCount: modelOutputs.candidates?.length ?? 0,
+  expectancyPredictionCount: modelOutputs.predictions?.length ?? 0,
+};
+const publicationManifest = {
+  ...publicationCore,
+  manifestId: crypto.createHash("sha256").update(JSON.stringify(publicationCore)).digest("hex").slice(0, 20),
+};
 if (quality.status !== "pass" || !quality.gates.resultValidationReady || quality.inputHash !== currentHash) {
   throw new Error("公開停止: 品質検査が未合格または検査結果が古いため、前回正常版を保持します");
 }
@@ -100,6 +117,7 @@ writeBrowserData(path.join(stageDataDir, "closing-odds-2026-07-11-2026-07-12.js"
 writeBrowserData(path.join(stageDataDir, "model-outputs-2026-07-11-2026-07-12.js"), "KEIBA_MODEL_OUTPUTS", modelOutputs, 0);
 writeBrowserData(path.join(stageDataDir, "live-racecards.js"), "KEIBA_LIVE_RACECARDS", liveExport.racecards);
 writeBrowserData(path.join(stageDataDir, "live-model-outputs.js"), "KEIBA_LIVE_MODEL_OUTPUTS", liveExport.modelOutputs);
+fs.writeFileSync(path.join(stageDataDir, "publication-manifest.json"), `${JSON.stringify(publicationManifest, null, 2)}\n`, "utf8");
 
 const cacheVersion = crypto.createHash("sha256")
   .update(fs.readFileSync("styles.css"))

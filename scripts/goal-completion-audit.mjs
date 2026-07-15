@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import crypto from "node:crypto";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
 import { inspectBackfillReadiness } from "./backfill-readiness.mjs";
@@ -7,6 +8,8 @@ import { inspectBackfillReadiness } from "./backfill-readiness.mjs";
 const PRIVATE_DIR = path.join("data", "jra-free-private");
 const OUTPUT = path.join(PRIVATE_DIR, "models", "goal-completion-audit.json");
 const DATABASE_AUDIT = path.join(PRIVATE_DIR, "models", "database-audit.json");
+const PUBLICATION_RECEIPT = path.join(PRIVATE_DIR, "models", "publication-receipt.json");
+const PUBLICATION_MANIFEST = path.join("public", "data", "publication-manifest.json");
 const ARTIFACT = path.join(PRIVATE_DIR, "models", "ability-softmax-v1.json");
 const MARKET_OUTPUT = path.join("data", "model-outputs-2026-07-11-2026-07-12.json");
 const BET_TYPES = ["単勝", "複勝", "馬連", "ワイド", "馬単", "3連複", "3連単"];
@@ -128,6 +131,32 @@ export function auditCompletedGoal(database, report, options = {}) {
   check(report, "all_ticket_expectancy_rankings", completeTicketCoverage && market.unitStakeYen === 100, {
     races: raceKeys.length, betTypes: BET_TYPES.length, unitStakeYen: market.unitStakeYen, candidates: market.candidates?.length ?? 0,
   });
+
+  const publicationManifestPath = options.publicationManifestPath ?? PUBLICATION_MANIFEST;
+  const publicationReceiptPath = options.publicationReceiptPath ?? PUBLICATION_RECEIPT;
+  const publicationManifestText = fs.existsSync(publicationManifestPath) ? fs.readFileSync(publicationManifestPath, "utf8") : null;
+  const publicationManifest = publicationManifestText ? JSON.parse(publicationManifestText) : null;
+  const publicationReceipt = fs.existsSync(publicationReceiptPath) ? JSON.parse(fs.readFileSync(publicationReceiptPath, "utf8")) : null;
+  const manifestSha256 = publicationManifestText
+    ? crypto.createHash("sha256").update(publicationManifestText).digest("hex") : null;
+  check(report, "verified_publication", publicationManifest?.version === "publication-manifest-v1"
+    && publicationManifest.databaseRaces === coverage.races
+    && publicationManifest.modelVersion === artifact.modelVersion
+    && publicationManifest.modelCoverageRaces === coverage.races
+    && publicationManifest.expectancyCandidateCount === market.candidates.length
+    && publicationManifest.expectancyPredictionCount === market.predictions.length
+    && publicationReceipt?.status === "verified"
+    && publicationReceipt.manifestId === publicationManifest.manifestId
+    && publicationReceipt.remoteManifestId === publicationManifest.manifestId
+    && publicationReceipt.manifestSha256 === manifestSha256
+    && publicationReceipt.commit === publicationReceipt.remoteCommit
+    && publicationReceipt.databaseRaces === coverage.races
+    && publicationReceipt.modelVersion === artifact.modelVersion
+    && Date.parse(publicationReceipt.publishedAt) >= Date.parse(publicationManifest.generatedAt), {
+      manifest: publicationManifest,
+      receipt: publicationReceipt,
+      manifestSha256,
+    });
 
   const generator = fs.readFileSync(generatorPath, "utf8");
   const leakageTokens = ["race_results", "payouts", "finish_position", "payout_yen"].filter((token) => generator.includes(token));

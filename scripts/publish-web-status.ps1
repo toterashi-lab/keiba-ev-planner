@@ -69,13 +69,53 @@ try {
   if ($DryRun) { return }
 
   Set-Location $public
+  $manifestPath = Join-Path $public "data\publication-manifest.json"
+  if (-not (Test-Path -LiteralPath $manifestPath)) { throw "Publication manifest is missing." }
+  $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
   git add --all
   git diff --cached --quiet
-  if ($LASTEXITCODE -eq 0) { return }
-  git commit -m ("Update JRA database status {0}" -f (Get-Date -Format "yyyy-MM-dd"))
-  if ($LASTEXITCODE -ne 0) { throw "Git commit failed: $LASTEXITCODE" }
-  git push origin main
-  if ($LASTEXITCODE -ne 0) { throw "Git push failed: $LASTEXITCODE" }
+  if ($LASTEXITCODE -ne 0) {
+    git commit -m ("Update JRA database status {0}" -f (Get-Date -Format "yyyy-MM-dd"))
+    if ($LASTEXITCODE -ne 0) { throw "Git commit failed: $LASTEXITCODE" }
+    git push origin main
+    if ($LASTEXITCODE -ne 0) { throw "Git push failed: $LASTEXITCODE" }
+  }
+
+  git fetch origin main --quiet
+  if ($LASTEXITCODE -ne 0) { throw "Git remote verification fetch failed: $LASTEXITCODE" }
+  $localCommit = (& git rev-parse HEAD).Trim()
+  $remoteCommit = (& git rev-parse origin/main).Trim()
+  if ($localCommit -ne $remoteCommit) { throw "Published branch differs from origin/main." }
+
+  $publicationUrl = "https://toterashi-lab.github.io/keiba-ev-planner/data/publication-manifest.json"
+  $remoteManifest = $null
+  for ($attempt = 0; $attempt -lt 60; $attempt++) {
+    try {
+      $cacheBuster = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds()
+      $candidate = Invoke-RestMethod -UseBasicParsing -Uri ("{0}?id={1}&t={2}" -f $publicationUrl,$manifest.manifestId,$cacheBuster) -TimeoutSec 20
+      if ($candidate.manifestId -eq $manifest.manifestId) { $remoteManifest = $candidate; break }
+    } catch {
+      Write-Warning ("Pages verification attempt {0} failed: {1}" -f ($attempt + 1),$_.Exception.Message)
+    }
+    Start-Sleep -Seconds 5
+  }
+  if (-not $remoteManifest) { throw "GitHub Pages did not serve the current publication manifest within five minutes." }
+
+  $receiptPath = Join-Path $privateDir "models\publication-receipt.json"
+  $receipt = [ordered]@{
+    status = "verified"
+    publishedAt = [DateTime]::UtcNow.ToString("o")
+    url = $publicationUrl
+    commit = $localCommit
+    remoteCommit = $remoteCommit
+    manifestId = $manifest.manifestId
+    remoteManifestId = $remoteManifest.manifestId
+    manifestSha256 = (Get-FileHash -LiteralPath $manifestPath -Algorithm SHA256).Hash.ToLowerInvariant()
+    databaseRaces = [int64]$manifest.databaseRaces
+    modelVersion = $manifest.modelVersion
+  }
+  $utf8 = New-Object System.Text.UTF8Encoding($false)
+  [System.IO.File]::WriteAllText($receiptPath, (($receipt | ConvertTo-Json -Depth 6) + "`n"), $utf8)
 } finally {
   Stop-Transcript | Out-Null
   if ($lock) { $lock.Dispose() }
