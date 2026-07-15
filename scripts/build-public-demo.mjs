@@ -14,6 +14,7 @@ const resultsData = JSON.parse(resultsRaw);
 const resultLinksData = JSON.parse(resultLinksRaw);
 const modelOutputs = JSON.parse(fs.readFileSync("data/model-outputs-2026-07-11-2026-07-12.json", "utf8"));
 const databaseExport = exportDatabaseStatus();
+const liveExport = exportLiveEdition();
 const featureCoverage = exportFeatureCoverage(databaseExport.status.asOf);
 const quality = JSON.parse(fs.readFileSync("data/quality-report-2026-07-11-2026-07-12.json", "utf8"));
 const currentHash = crypto.createHash("sha256").update(programmeRaw + resultsRaw).digest("hex");
@@ -71,6 +72,17 @@ for (const file of [
   "backfill-readiness.mjs",
   "run-post-backfill-pipeline.ps1",
   "install-post-backfill-task.ps1",
+  "jra-live-racecards.mjs",
+  "jra-live-racecards-check.mjs",
+  "sync-jra-live-racecards.ps1",
+  "install-live-racecard-task.ps1",
+  "predict-live-racecards.mjs",
+  "jra-live-odds-check.mjs",
+  "capture-jra-live-odds.ps1",
+  "install-live-odds-task.ps1",
+  "generate-live-market-ev.mjs",
+  "live-market-ev-check.mjs",
+  "publish-live-web.ps1",
 ]) copy(path.join("scripts", file), path.join(stageDir, "scripts", file));
 writeBrowserData(path.join(stageDataDir, "meet-2026-07-11-2026-07-12.js"), "KEIBA_REFERENCE_MEETINGS", programmeData);
 writeBrowserData(path.join(stageDataDir, "result-links-2026-07-11-2026-07-12.js"), "KEIBA_RESULT_LINKS", resultLinksData);
@@ -79,6 +91,8 @@ writeBrowserData(path.join(stageDataDir, "database-status.js"), "KEIBA_DATABASE_
 writeBrowserData(path.join(stageDataDir, "model-feature-coverage.js"), "KEIBA_MODEL_FEATURE_COVERAGE", featureCoverage);
 writeBrowserData(path.join(stageDataDir, "closing-odds-2026-07-11-2026-07-12.js"), "KEIBA_CLOSING_ODDS", databaseExport.odds);
 writeBrowserData(path.join(stageDataDir, "model-outputs-2026-07-11-2026-07-12.js"), "KEIBA_MODEL_OUTPUTS", modelOutputs);
+writeBrowserData(path.join(stageDataDir, "live-racecards.js"), "KEIBA_LIVE_RACECARDS", liveExport.racecards);
+writeBrowserData(path.join(stageDataDir, "live-model-outputs.js"), "KEIBA_LIVE_MODEL_OUTPUTS", liveExport.modelOutputs);
 
 const cacheVersion = crypto.createHash("sha256")
   .update(fs.readFileSync("styles.css"))
@@ -87,6 +101,7 @@ const cacheVersion = crypto.createHash("sha256")
   .update(JSON.stringify(featureCoverage))
   .update(JSON.stringify(databaseExport.status))
   .update(JSON.stringify(modelOutputs))
+  .update(JSON.stringify(liveExport))
   .digest("hex")
   .slice(0, 12);
 const stagedIndexPath = path.join(stageDir, "index.html");
@@ -177,7 +192,7 @@ function exportDatabaseStatus() {
       (select min(month) from backfill_jobs where status='complete') earliestComplete,
       (select max(month) from backfill_jobs where status='complete') latestComplete`).get();
     const latestBatch = db.prepare(`select * from odds_ingestion_batches
-      where status='complete' and source!='JRA official exotic odds' order by id desc limit 1`).get();
+      where status='complete' and source='JRA official odds' order by id desc limit 1`).get();
     const exoticBatch = db.prepare(`select * from odds_ingestion_batches
       where status='complete' and source='JRA official exotic odds' order by id desc limit 1`).get();
     if (!latestBatch) throw new Error("合格済みオッズバッチがありません");
@@ -245,4 +260,41 @@ function exportDatabaseStatus() {
   } finally {
     db.close();
   }
+}
+
+function exportLiveEdition() {
+  const databasePath = path.join("data", "jra-free-private", "keiba.sqlite");
+  const db = new DatabaseSync(databasePath, { readOnly: true });
+  try {
+    const today = new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(new Date());
+    const races = db.prepare("select * from live_races where race_date>=? order by race_date,venue_code,race_number").all(today);
+    const entries = races.length ? db.prepare(`select * from live_entries where race_id in (${races.map(() => "?").join(",")}) order by race_id,horse_number`).all(...races.map((race) => race.race_id)) : [];
+    const venueNames = { "01": ["SAPPORO", "札幌"], "02": ["HAKODATE", "函館"], "03": ["FUKUSHIMA", "福島"], "04": ["NIIGATA", "新潟"], "05": ["TOKYO", "東京"], "06": ["NAKAYAMA", "中山"], "07": ["CHUKYO", "中京"], "08": ["KYOTO", "京都"], "09": ["HANSHIN", "阪神"], "10": ["KOKURA", "小倉"] };
+    const meetings = [];
+    const results = [];
+    for (const race of races) {
+      let meeting = meetings.find((item) => item.date === race.race_date);
+      if (!meeting) { meeting = { date: race.race_date, weekday: new Intl.DateTimeFormat("ja-JP", { weekday: "short", timeZone: "Asia/Tokyo" }).format(new Date(`${race.race_date}T00:00:00+09:00`)), tracks: [] }; meetings.push(meeting); }
+      const [venueCode, venueName] = venueNames[race.venue_code] ?? [race.venue_code, race.venue_code];
+      let track = meeting.tracks.find((item) => item.venueCode === venueCode);
+      if (!track) { track = { venueCode, venueName, meetingName: race.meeting_name, races: [] }; meeting.tracks.push(track); }
+      track.races.push({ no: race.race_number, name: race.race_name, condition: race.race_class, surface: race.surface, distanceM: race.distance_m, start: race.start_time });
+      const runners = entries.filter((entry) => entry.race_id === race.race_id).map((entry) => ({
+        finishPosition: null, finishText: "出走予定", gateNumber: entry.gate_number, horseNumber: entry.horse_number, horseName: entry.horse_name,
+        sexAge: entry.sex_age, carriedWeight: entry.carried_weight, jockeyName: entry.jockey_name, officialTime: "", margin: "",
+        cornerPositions: [], finalSectional: null, bodyWeight: entry.body_weight, bodyWeightDelta: entry.body_weight_delta,
+        trainerName: entry.trainer_name, popularity: null,
+      }));
+      results.push({ status: "pre_race", meetingName: race.meeting_name, raceNo: race.race_number, raceTitle: race.race_name,
+        startTime: race.start_time, course: `${race.surface}${race.distance_m}m`, weather: null, turfGoing: null, dirtGoing: null,
+        winner: null, runners, refunds: [], url: "https://www.jra.go.jp/JRADB/accessD.html" });
+    }
+    const modelPath = path.join("data", "jra-free-private", "models", "live-market-ev.json");
+    let liveModel = { status: "waiting", candidates: [], predictions: [] };
+    if (fs.existsSync(modelPath)) {
+      const parsed = JSON.parse(fs.readFileSync(modelPath, "utf8"));
+      if (parsed.snapshotKind === "pre_race" && parsed.targetDates?.some((date) => date >= today)) liveModel = parsed;
+    }
+    return { racecards: { meetings, results, generatedAt: new Date().toISOString() }, modelOutputs: liveModel };
+  } finally { db.close(); }
 }

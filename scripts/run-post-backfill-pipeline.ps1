@@ -50,6 +50,8 @@ try {
     & $node --no-warnings "scripts\train-expectancy-model.mjs"
     if ($LASTEXITCODE -ne 0) { throw "Model training failed: $LASTEXITCODE" }
   }
+  & $node --no-warnings "scripts\predict-live-racecards.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Live ability prediction failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\generate-market-ev.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Expectancy generation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\train-expectancy-model-check.mjs"

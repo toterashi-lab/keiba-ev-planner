@@ -6,7 +6,7 @@ const results = JSON.parse(fs.readFileSync("data/results-2026-07-11-2026-07-12.j
 const db = new DatabaseSync("data/jra-free-private/keiba.sqlite", { readOnly: true });
 
 try {
-  const batch = db.prepare("select id from odds_ingestion_batches where status='complete' and source!='JRA official exotic odds' order by id desc limit 1").get();
+  const batch = db.prepare("select id from odds_ingestion_batches where status='complete' and source='JRA official odds' order by id desc limit 1").get();
   if (!batch) throw new Error("検査可能なオッズバッチがありません");
   const oddsRows = db.prepare(`select r.race_date,r.venue_code,r.race_number,o.selection_key,o.odds_low
     from odds_snapshots o join complete_races r on r.race_id=o.race_id

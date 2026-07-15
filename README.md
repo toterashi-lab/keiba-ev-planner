@@ -11,7 +11,7 @@
 - 出走馬 946頭
 - 払戻 866件
 - 締切後単勝・複勝オッズ 195898件
-- 長期DB 55 / 367か月完了
+- 長期DB 58 / 367か月完了
 
 出典はJRA公式番組・結果ページです。JRAおよびnetkeibaの公式サービスではありません。
 無課金の長期蓄積コードは `scripts/jra-free-db.mjs`、公式単勝・複勝オッズ収集は `scripts/jra-free-odds.mjs`、検査仕様は `docs/free-data-pipeline.md` に収録しています。

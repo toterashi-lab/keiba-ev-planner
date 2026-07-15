@@ -3,6 +3,8 @@ param([switch]$DryRun)
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
 $public = Join-Path $root "public"
+$privateDir = Join-Path $root "data\jra-free-private"
+$lockPath = Join-Path $privateDir "web-publish.lock"
 $node = Get-Command node -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source -First 1
 if (-not $node) {
   $node = Join-Path $env:USERPROFILE ".cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe"
@@ -13,6 +15,9 @@ Set-Location $root
 $logDir = Join-Path $root "data\jra-free-private\logs"
 New-Item -ItemType Directory -Force -Path $logDir | Out-Null
 $logPath = Join-Path $logDir ("web-publish-{0}.log" -f (Get-Date -Format "yyyyMMdd-HHmmss"))
+$lock = $null
+try { $lock = [System.IO.File]::Open($lockPath, [System.IO.FileMode]::CreateNew, [System.IO.FileAccess]::Write, [System.IO.FileShare]::None) }
+catch [System.IO.IOException] { return }
 
 Start-Transcript -Path $logPath | Out-Null
 try {
@@ -36,6 +41,12 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Model numerical unit validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\market-ev-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Market expectancy validation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\jra-live-racecards-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Live racecard validation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\jra-live-odds-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Live odds validation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\live-market-ev-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Live expectancy validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\jra-free-db.mjs" audit
   if ($LASTEXITCODE -ne 0) { throw "Database audit failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\build-public-demo.mjs"
@@ -53,4 +64,6 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Git push failed: $LASTEXITCODE" }
 } finally {
   Stop-Transcript | Out-Null
+  if ($lock) { $lock.Dispose() }
+  Remove-Item -LiteralPath $lockPath -Force -ErrorAction SilentlyContinue
 }

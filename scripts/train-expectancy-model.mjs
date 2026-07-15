@@ -182,7 +182,7 @@ export function evaluate(model, races, temperature) {
   };
 }
 
-function predictRace(model, race, temperature = model.temperature ?? 1) {
+export function predictRace(model, race, temperature = model.temperature ?? 1) {
   return softmax(race.rows.map((row) => dot(model.weights, standardizedVector(row, model.means, model.scales)) / temperature));
 }
 

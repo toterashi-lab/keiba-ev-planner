@@ -1,0 +1,186 @@
+import fs from "node:fs";
+import path from "node:path";
+import { DatabaseSync } from "node:sqlite";
+import { pathToFileURL } from "node:url";
+import { normalizeMarket, selectProbability } from "../model/expectancy-engine-v2.mjs";
+
+await import(pathToFileURL(path.resolve("ticket-engine.js")).href);
+const engine = globalThis.KEIBA_TICKET_ENGINE;
+const TYPES = { win: "単勝", place: "複勝", quinella: "馬連", wide: "ワイド", exacta: "馬単", trio: "3連複", trifecta: "3連単" };
+const ORDERED = new Set(["win", "place", "exacta", "trifecta"]);
+const OUTPUT = path.join("data", "jra-free-private", "models", "live-market-ev.json");
+
+export function generateLiveMarketEv(options = {}) {
+  const db = new DatabaseSync(path.join("data", "jra-free-private", "keiba.sqlite"), { readOnly: true });
+  try {
+    const base = db.prepare(`select * from odds_ingestion_batches where status='complete' and source in (${options.allowFixture ? "'JRA official live odds','JRA official live odds fixture'" : "'JRA official live odds'"}) order by id desc limit 1`).get();
+    if (!base) return waiting("live_win_place_odds");
+    const exotic = db.prepare(`select * from odds_ingestion_batches where status='complete' and source in (${options.allowFixture ? "'JRA official live exotic odds','JRA official live exotic odds fixture'" : "'JRA official live exotic odds'"})
+      and snapshot_kind=? and target_dates=? order by id desc limit 1`).get(base.snapshot_kind, base.target_dates);
+    if (!exotic) return waiting("live_exotic_odds");
+    const odds = db.prepare(`select race_id,bet_type,selection_key,odds_low,odds_high,observed_at from live_odds_snapshots
+      where batch_id in (?,?) order by race_id,bet_type,selection_key`).all(base.id, exotic.id);
+    const raceIds = [...new Set(odds.map((row) => row.race_id))];
+    if (!raceIds.length) return waiting("live_odds_rows");
+    const placeholders = raceIds.map(() => "?").join(",");
+    const races = db.prepare(`select * from live_races where race_id in (${placeholders}) order by race_date,venue_code,race_number`).all(...raceIds);
+    const entries = db.prepare(`select race_id,horse_id,horse_number,horse_name from live_entries where race_id in (${placeholders}) order by race_id,horse_number`).all(...raceIds);
+    const artifact = loadArtifact();
+    const modelRows = artifact ? db.prepare(`select p.race_id,e.horse_number,p.win_probability
+      from live_predictions p join live_entries e on e.race_id=p.race_id and e.horse_id=p.horse_id
+      where p.model_version=? and p.race_id in (${placeholders})`).all(artifact.modelVersion, ...raceIds) : [];
+    const oddsByRace = group(odds, "race_id");
+    const entriesByRace = group(entries, "race_id");
+    const modelByRace = group(modelRows, "race_id");
+    const candidates = [];
+    const predictions = [];
+    const coverageCounts = Object.fromEntries(Object.values(TYPES).map((label) => [label, 0]));
+    const evaluatedByRace = {};
+
+    for (const race of races) {
+      const raceOdds = oddsByRace.get(race.race_id) ?? [];
+      const byType = group(raceOdds, "bet_type");
+      if (Object.keys(TYPES).some((type) => !byType.get(type)?.length)) continue;
+      const names = new Map((entriesByRace.get(race.race_id) ?? []).map((row) => [row.horse_number, row.horse_name]));
+      const winRows = byType.get("win");
+      const marketHorse = normalize(Object.fromEntries(winRows.map((row) => [row.selection_key, 1 / row.odds_low])));
+      const trainedRows = modelByRace.get(race.race_id) ?? [];
+      const hasModel = artifact?.researchProbabilityStatus === "research_pass" && trainedRows.length === winRows.length;
+      const abilityHorse = hasModel ? normalize(Object.fromEntries(trainedRows.map((row) => [row.horse_number, row.win_probability]))) : marketHorse;
+      const marketBooks = buildStructuralBooks(marketHorse);
+      const abilityBooks = buildStructuralBooks(abilityHorse);
+      const raceCandidates = [];
+      let evaluated = 0;
+      for (const [type, label] of Object.entries(TYPES)) {
+        const rows = normalizeMarket(byType.get(type), type, winRows.length);
+        coverageCounts[label] += 1;
+        const singles = rows.map((row) => {
+          const marketStructural = marketBooks[type].get(row.selection_key) ?? row.marketProbability;
+          const probability = selectProbability({ marketProbability: row.marketProbability, modelProbability: marketStructural, validationArtifact: artifact }).probability;
+          const abilityProbability = abilityBooks[type].get(row.selection_key) ?? probability;
+          return candidate(race, label, "1点", row.selection_key, [row], [probability], [abilityProbability], names, artifact, hasModel);
+        });
+        evaluated += singles.length;
+        raceCandidates.push(...singles.sort(byAbilityEv).slice(0, 12));
+        raceCandidates.push(...structured(race, type, label, rows, marketHorse, marketBooks[type], abilityBooks[type], names, artifact, hasModel));
+      }
+      evaluatedByRace[race.race_id] = evaluated;
+      candidates.push(...raceCandidates);
+      predictions.push(aiPrediction(race, abilityHorse, names, raceCandidates, artifact, hasModel));
+    }
+    const result = {
+      status: candidates.length ? "ready" : "waiting",
+      generatedAt: new Date().toISOString(),
+      snapshotKind: base.snapshot_kind,
+      targetDates: base.target_dates.split(","),
+      baseBatchId: base.id,
+      exoticBatchId: exotic.id,
+      modelVersion: artifact?.modelVersion ?? "market-baseline",
+      abilityModelStatus: artifact?.researchProbabilityStatus ?? "not_trained",
+      deploymentStatus: "benchmark_only",
+      unitStakeYen: 100,
+      coverageCounts,
+      evaluatedByRace,
+      evaluatedTotal: Object.values(evaluatedByRace).reduce((sum, value) => sum + value, 0),
+      predictions,
+      candidates,
+    };
+    fs.mkdirSync(path.dirname(OUTPUT), { recursive: true });
+    fs.writeFileSync(OUTPUT, `${JSON.stringify(result, null, 2)}\n`, "utf8");
+    return result;
+  } finally { db.close(); }
+}
+
+function structured(race, type, label, rows, horseProbabilities, marketBook, abilityBook, names, artifact, hasModel) {
+  if (type === "win" || type === "place") return [];
+  const ranked = Object.entries(horseProbabilities).sort((left, right) => right[1] - left[1]).map(([number]) => Number(number));
+  const definitions = [
+    { method: "BOX", horses: ranked.slice(0, 3) },
+    { method: "BOX", horses: ranked.slice(0, 4) },
+    { method: "BOX", horses: ranked.slice(0, 5) },
+  ];
+  if (engine.SPECS[label].legs === 2) {
+    definitions.push({ method: "フォーメーション", groups: [[ranked[0]], ranked.slice(1, 5)] });
+    definitions.push({ method: "フォーメーション", groups: [ranked.slice(0, 2), ranked.slice(2, 6)] });
+  } else {
+    definitions.push({ method: "フォーメーション", groups: [[ranked[0]], ranked.slice(1, 3), ranked.slice(1, 6)] });
+    definitions.push({ method: "フォーメーション", groups: [ranked.slice(0, 2), ranked.slice(0, 4), ranked.slice(1, 7)] });
+  }
+  const rowMap = new Map(rows.map((row) => [row.selection_key, row]));
+  return definitions.flatMap((definition) => {
+    const combinations = engine.expandTicket({ betType: label, ...definition });
+    const selected = combinations.map((selection) => rowMap.get(engine.selectionKey(selection, ORDERED.has(type))));
+    if (selected.some((row) => !row)) return [];
+    const marketProbabilities = combinations.map((selection, index) => {
+      const key = engine.selectionKey(selection, ORDERED.has(type));
+      return selectProbability({ marketProbability: selected[index].marketProbability, modelProbability: marketBook.get(key) ?? 0, validationArtifact: artifact }).probability;
+    });
+    const abilityProbabilities = combinations.map((selection, index) => abilityBook.get(engine.selectionKey(selection, ORDERED.has(type))) ?? marketProbabilities[index]);
+    const display = definition.method === "BOX" ? `${definition.horses.join("-")} BOX` : definition.groups.map((group) => group.join(",")).join(" → ");
+    return [candidate(race, label, definition.method, display, selected, marketProbabilities, abilityProbabilities, names, artifact, hasModel)];
+  });
+}
+
+function candidate(race, betType, method, selectionKey, rows, probabilities, abilityProbabilities, names, artifact, hasModel) {
+  const marketEv = average(rows.map((row, index) => row.odds_low * probabilities[index]));
+  const abilityEv = average(rows.map((row, index) => row.odds_low * abilityProbabilities[index]));
+  const display = method === "1点" ? selectionKey.split("-").map((number) => `${number} ${names.get(Number(number)) ?? ""}`.trim()).join("・") : selectionKey;
+  return {
+    date: race.race_date, meetingName: race.meeting_name, raceNo: race.race_number, raceId: race.race_id,
+    betType, method, selection: display, points: rows.length, totalInvestmentYen: rows.length * 100,
+    odds: rows.length === 1 ? rows[0].odds_low : null,
+    probability: rows.length === 1 ? probabilities[0] : null,
+    abilityProbability: rows.length === 1 ? abilityProbabilities[0] : null,
+    conservativeExpectedReturn: marketEv, abilityExpectedReturn: abilityEv,
+    adoptedExpectedReturn: hasModel ? abilityEv : marketEv,
+    abilityModelStatus: artifact?.researchProbabilityStatus ?? "not_trained",
+    status: "ready", predictionContext: "pre_race", calculationMode: hasModel ? "ability_and_market_scenarios" : "market_baseline",
+    oddsObservedAt: rows.reduce((latest, row) => row.observed_at > latest ? row.observed_at : latest, ""), modelVersion: artifact?.modelVersion ?? "market-baseline",
+    calibrationStatus: hasModel ? "research_pass" : "benchmark",
+  };
+}
+
+function aiPrediction(race, probabilities, names, raceCandidates, artifact, hasModel) {
+  const marks = ["◎", "○", "▲", "△", "☆"];
+  const ranked = Object.entries(probabilities).map(([horseNumber, probability]) => ({ horseNumber: Number(horseNumber), horseName: names.get(Number(horseNumber)) ?? "", probability }))
+    .sort((left, right) => right.probability - left.probability || left.horseNumber - right.horseNumber);
+  const top = [...raceCandidates].sort(byAbilityEv)[0];
+  return { date: race.race_date, meetingName: race.meeting_name, raceNo: race.race_number, raceId: race.race_id, modelVersion: artifact?.modelVersion ?? "market-baseline",
+    predictionContext: "pre_race", status: "ready", confidence: ranked[0].probability >= 0.25 ? "中" : "低", confidenceScore: ranked[0].probability,
+    scenario: ranked[0].probability - ranked[1].probability >= 0.08 ? "本命軸" : "混戦", marks: ranked.slice(0, 5).map((row, index) => ({ mark: marks[index], ...row })),
+    topTicket: top ? { betType: top.betType, method: top.method, selection: top.selection, expectedReturn: top.adoptedExpectedReturn } : null,
+    comment: `${hasModel ? "30年能力モデル" : "市場基準"}で全${ranked.length}頭を比較。1位推定勝率${(ranked[0].probability * 100).toFixed(1)}%。`, };
+}
+
+function buildStructuralBooks(horseProbabilities) {
+  const horses = Object.keys(horseProbabilities).map(Number);
+  const books = Object.fromEntries(Object.keys(TYPES).map((type) => [type, new Map()]));
+  const add = (type, key, probability) => books[type].set(key, (books[type].get(key) ?? 0) + probability);
+  const placeDepth = horses.length >= 8 ? 3 : 2;
+  for (const first of horses) {
+    const p1 = horseProbabilities[first]; add("win", String(first), p1);
+    for (const second of horses) if (second !== first) {
+      const p2 = p1 * horseProbabilities[second] / (1 - p1);
+      add("exacta", `${first}-${second}`, p2); add("quinella", [first, second].sort((a, b) => a - b).join("-"), p2);
+      if (placeDepth === 2) { add("place", String(first), p2); add("place", String(second), p2); add("wide", [first, second].sort((a, b) => a - b).join("-"), p2); }
+      for (const third of horses) if (third !== first && third !== second) {
+        const p3 = p2 * horseProbabilities[third] / (1 - p1 - horseProbabilities[second]);
+        add("trifecta", `${first}-${second}-${third}`, p3); add("trio", [first, second, third].sort((a, b) => a - b).join("-"), p3);
+        if (placeDepth === 3) { for (const horse of [first, second, third]) add("place", String(horse), p3); for (const pair of [[first, second], [first, third], [second, third]]) add("wide", pair.sort((a, b) => a - b).join("-"), p3); }
+      }
+    }
+  }
+  return books;
+}
+
+function waiting(reason) { const result = { status: "waiting", reason, generatedAt: new Date().toISOString(), candidates: [], predictions: [] }; fs.mkdirSync(path.dirname(OUTPUT), { recursive: true }); fs.writeFileSync(OUTPUT, `${JSON.stringify(result, null, 2)}\n`, "utf8"); return result; }
+function loadArtifact() { const file = path.join("data", "jra-free-private", "models", "ability-softmax-v1.json"); return fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, "utf8")) : null; }
+function normalize(values) { const total = Object.values(values).reduce((sum, value) => sum + value, 0); return Object.fromEntries(Object.entries(values).map(([key, value]) => [key, value / total])); }
+function group(rows, key) { const map = new Map(); for (const row of rows) { if (!map.has(row[key])) map.set(row[key], []); map.get(row[key]).push(row); } return map; }
+function average(values) { return values.reduce((sum, value) => sum + value, 0) / values.length; }
+function byAbilityEv(left, right) { return right.adoptedExpectedReturn - left.adoptedExpectedReturn; }
+
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+  const result = generateLiveMarketEv({ allowFixture: process.argv.includes("--allow-fixture") });
+  console.log(JSON.stringify({ status: result.status, races: Object.keys(result.evaluatedByRace ?? {}).length, evaluated: result.evaluatedTotal ?? 0, candidates: result.candidates.length }, null, 2));
+}

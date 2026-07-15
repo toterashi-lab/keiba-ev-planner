@@ -80,24 +80,37 @@ function matchTables(html, className) {
 }
 
 async function capture(options) {
-  const dates = new Set(String(options.dates ?? "").split(",").map((value) => value.trim()).filter(Boolean));
+  const dates = new Set(String(options.dates ?? options.date ?? "").split(",").map((value) => value.trim()).filter(Boolean));
   if (!dates.size) throw new Error("--dates YYYY-MM-DD[,YYYY-MM-DD] が必要です");
+  const liveMode = options.live === "true" || options.live === true;
+  const snapshotKind = liveMode ? String(options["snapshot-kind"] ?? "pre_race") : "closing_final";
+  const source = liveMode ? (snapshotKind === "pre_race" ? "JRA official live exotic odds" : "JRA official live exotic odds fixture") : "JRA official exotic odds";
+  const windowMinutes = Number(options["window-minutes"] ?? 0);
   fs.mkdirSync(RAW_DIR, { recursive: true });
   const database = new DatabaseSync(DB_PATH);
   database.exec("PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=30000;");
   const startedAt = new Date().toISOString();
   database.prepare(`update odds_ingestion_batches
     set status='failed', last_error='前回の全券種取得がプロセス中断により未完了', completed_at=?
-    where source='JRA official exotic odds' and status='running'`).run(startedAt);
+    where source=? and status='running'`).run(startedAt, source);
   const batch = database.prepare(`insert into odds_ingestion_batches(source,snapshot_kind,target_dates,status,started_at)
-    values('JRA official exotic odds','closing_final',?,'running',?) returning id`).get([...dates].sort().join(","), startedAt);
+    values(?,?,?,'running',?) returning id`).get(source, snapshotKind, [...dates].sort().join(","), startedAt);
   try {
     const pages = latestMeetingPages(database).flatMap((html) => parseCnames(html).filter((cname) => {
       const key = parseRaceKey(cname);
       return key && dates.has(key.raceDate);
     }));
-    const uniquePages = [...new Set(pages)];
-    const expectedPages = Number(database.prepare(`select count(*) count from races where race_date in (${[...dates].map(() => "?").join(",")})`).get(...dates).count) * Object.keys(TYPES).length;
+    const candidateRaces = database.prepare(`select race_id,race_date${liveMode ? ",start_time" : ""} from ${liveMode ? "live_races" : "complete_races"}
+      where race_date in (${[...dates].map(() => "?").join(",")})`).all(...dates)
+      .filter((race) => !liveMode || windowMinutes <= 0 || withinWindow(race, windowMinutes));
+    const candidateRaceIds = new Set(candidateRaces.map((race) => race.race_id));
+    const uniquePages = [...new Set(pages)].filter((cname) => candidateRaceIds.has(parseRaceKey(cname)?.raceId));
+    const expectedPages = candidateRaces.length * Object.keys(TYPES).length;
+    if (liveMode && expectedPages === 0) {
+      database.prepare("delete from odds_ingestion_batches where id=?").run(batch.id);
+      console.log(JSON.stringify({ status: "no_upcoming_races", dates: [...dates], windowMinutes }));
+      return;
+    }
     if (uniquePages.length !== expectedPages) throw new Error(`全券種ページ不足: expected=${expectedPages} actual=${uniquePages.length}`);
     let priceCount = 0;
     for (let index = 0; index < uniquePages.length; index += 1) {
@@ -108,17 +121,19 @@ async function capture(options) {
       database.exec("begin immediate");
       try {
         const rawId = saveRaw(database, cname, parsed.betType, fetched);
-        const insert = database.prepare(`insert into odds_snapshots(race_id,bet_type,selection_key,odds,observed_at,source_page_id,odds_low,odds_high,snapshot_kind,batch_id)
-          values(?,?,?,?,?,?,?,?,?,?)`);
+        const insert = liveMode
+          ? database.prepare(`insert into live_odds_snapshots(race_id,bet_type,selection_key,odds,odds_low,odds_high,snapshot_kind,observed_at,source_page_id,batch_id) values(?,?,?,?,?,?,?,?,?,?)`)
+          : database.prepare(`insert into odds_snapshots(race_id,bet_type,selection_key,odds,observed_at,source_page_id,odds_low,odds_high,snapshot_kind,batch_id) values(?,?,?,?,?,?,?,?,?,?)`);
         for (const price of parsed.prices) {
-          insert.run(key.raceId, parsed.betType, price.selectionKey, price.oddsLow, fetched.fetchedAt, rawId, price.oddsLow, price.oddsHigh, "closing_final", batch.id);
+          if (liveMode) insert.run(key.raceId, parsed.betType, price.selectionKey, price.oddsLow, price.oddsLow, price.oddsHigh, snapshotKind, fetched.fetchedAt, rawId, batch.id);
+          else insert.run(key.raceId, parsed.betType, price.selectionKey, price.oddsLow, fetched.fetchedAt, rawId, price.oddsLow, price.oddsHigh, snapshotKind, batch.id);
           priceCount += 1;
         }
         database.exec("commit");
       } catch (error) { database.exec("rollback"); throw error; }
       if ((index + 1) % 20 === 0 || index + 1 === uniquePages.length) console.log(`取得 ${index + 1}/${uniquePages.length}ページ・${priceCount}オッズ`);
     }
-    const checks = auditBatch(database, batch.id, expectedPages);
+    const checks = auditBatch(database, batch.id, expectedPages, liveMode ? "live_odds_snapshots" : "odds_snapshots");
     if (!checks.pass) throw new Error(`全券種監査失敗: ${JSON.stringify(checks)}`);
     database.prepare(`update odds_ingestion_batches set status='complete',race_count=?,priced_runner_count=?,completed_at=? where id=?`).run(
       expectedPages / Object.keys(TYPES).length, priceCount, new Date().toISOString(), batch.id,
@@ -130,11 +145,11 @@ async function capture(options) {
   } finally { database.close(); }
 }
 
-function auditBatch(database, batchId, expectedPages) {
-  const rows = database.prepare("select bet_type,count(*) count,count(distinct race_id) races,min(odds_low) minOdds from odds_snapshots where batch_id=? group by bet_type").all(batchId);
+function auditBatch(database, batchId, expectedPages, table = "odds_snapshots") {
+  const rows = database.prepare(`select bet_type,count(*) count,count(distinct race_id) races,min(odds_low) minOdds from ${table} where batch_id=? group by bet_type`).all(batchId);
   const byType = Object.fromEntries(rows.map((row) => [row.bet_type, row]));
   const raceCount = expectedPages / Object.keys(TYPES).length;
-  const details = database.prepare(`select bet_type,selection_key,odds_low,odds_high,source_page_id from odds_snapshots where batch_id=?`).all(batchId);
+  const details = database.prepare(`select bet_type,selection_key,odds_low,odds_high,source_page_id from ${table} where batch_id=?`).all(batchId);
   const distinctPages = new Set(details.map((row) => row.source_page_id)).size;
   const validKey = (row) => {
     const legs = Object.values(TYPES).find((spec) => spec.betType === row.bet_type)?.legs;
@@ -156,8 +171,8 @@ function auditBatch(database, batchId, expectedPages) {
 }
 
 function latestMeetingPages(database) {
-  const rows = database.prepare(`select raw_path from raw_pages where page_type='odds-meeting' and parser_version='jra-odds-html-v1' order by id desc limit 6`).all();
-  if (rows.length !== 6) throw new Error(`保存済み開催ページ不足: ${rows.length}/6`);
+  const rows = database.prepare(`select raw_path from raw_pages where page_type='odds-meeting' and parser_version='jra-odds-html-v1' order by id desc limit 18`).all();
+  if (!rows.length) throw new Error("保存済み開催ページがありません");
   return rows.map((row) => zlib.gunzipSync(fs.readFileSync(path.join(PRIVATE_DIR, row.raw_path))).toString("utf8"));
 }
 
@@ -187,6 +202,7 @@ function uniquePrices(prices) { return [...new Map(prices.map((price) => [price.
 function stripHtml(value) { return String(value ?? "").replace(/<[^>]+>/g, " ").replace(/&nbsp;|&#160;/gi, " ").replace(/,/g, "").replace(/\s+/g, " ").trim(); }
 function numberOrNull(value) { const number = Number(String(value ?? "").match(/\d+(?:\.\d+)?/)?.[0]); return Number.isFinite(number) ? number : null; }
 function safeName(value) { return value.replace(/[^a-zA-Z0-9_-]+/g, "_"); }
+function withinWindow(race, minutes) { const start = new Date(`${race.race_date}T${race.start_time}:00+09:00`).getTime(); const now = Date.now(); return start >= now && start <= now + minutes * 60000; }
 
 async function main() {
   const command = process.argv[2] ?? "capture";

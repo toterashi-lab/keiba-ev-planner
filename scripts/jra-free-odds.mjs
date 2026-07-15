@@ -10,13 +10,16 @@ const ROOT = path.resolve(import.meta.dirname, "..");
 const PRIVATE_DIR = path.join(ROOT, "data", "jra-free-private");
 const RAW_DIR = path.join(PRIVATE_DIR, "raw", "odds");
 const DB_PATH = path.join(PRIVATE_DIR, "keiba.sqlite");
-const LOCK_PATH = path.join(PRIVATE_DIR, "worker.lock");
+const LOCK_PATH = path.join(PRIVATE_DIR, "odds.lock");
 const USER_AGENT = "keiba-ev-planner/1.0 (personal research; low-rate official JRA odds fetcher)";
 const PARSER_VERSION = "jra-odds-html-v1";
 
 const command = process.argv[2] ?? "status";
 const options = parseArgs(process.argv.slice(3));
 const delayMs = Number(options.delay ?? 1500);
+const liveMode = options.live === true || options.live === "true";
+const liveSnapshotKind = liveMode ? String(options["snapshot-kind"] ?? "pre_race") : "closing_final";
+const liveWindowMinutes = Number(options["window-minutes"] ?? 0);
 const targetDates = new Set(String(options.dates ?? options.date ?? "")
   .split(",").map((value) => value.trim()).filter(Boolean));
 
@@ -81,6 +84,16 @@ function initializeSchema() {
       source_page_id integer not null references raw_pages(id),
       primary key(batch_id, race_id, bet_type)
     );
+    create table if not exists live_odds_snapshots(
+      id integer primary key,race_id text not null,bet_type text not null,selection_key text not null,
+      odds real not null,odds_low real not null,odds_high real not null,snapshot_kind text not null,
+      observed_at text not null,source_page_id integer not null,batch_id integer not null,
+      unique(race_id,bet_type,selection_key,observed_at)
+    );
+    create table if not exists live_odds_market_totals(
+      batch_id integer not null,race_id text not null,bet_type text not null,vote_count integer not null,
+      source_page_id integer not null,primary key(batch_id,race_id,bet_type)
+    );
   `);
   addColumnIfMissing("odds_snapshots", "odds_low", "real");
   addColumnIfMissing("odds_snapshots", "odds_high", "real");
@@ -97,7 +110,8 @@ async function captureWinPlace() {
   const startedAt = new Date().toISOString();
   const batch = db.prepare(`insert into odds_ingestion_batches(
     source,snapshot_kind,target_dates,status,started_at
-  ) values('JRA official odds','closing_final',?,'running',?) returning id`).get(
+  ) values(?,?,?,'running',?) returning id`).get(
+    liveMode ? (liveSnapshotKind === "pre_race" ? "JRA official live odds" : "JRA official live odds fixture") : "JRA official odds", liveSnapshotKind,
     [...targetDates].sort().join(","), startedAt,
   );
 
@@ -125,15 +139,16 @@ async function captureWinPlace() {
         const key = parseRaceKey(raceCname);
         if (!key || !targetDates.has(key.raceDate) || seenRaceIds.has(key.raceId)) continue;
         seenRaceIds.add(key.raceId);
-        const race = db.prepare("select race_id from complete_races where race_id=?").get(key.raceId);
+        const race = db.prepare(`select race_id${liveMode ? ",race_date,start_time" : ""} from ${liveMode ? "live_races" : "complete_races"} where race_id=?`).get(key.raceId);
         if (!race) {
-          unmappedRaces += 1;
+          if (!liveMode) unmappedRaces += 1;
           continue;
         }
+        if (liveMode && liveWindowMinutes > 0 && !withinWindow(race, liveWindowMinutes)) continue;
 
         const page = await fetchPage(raceCname, "odds-win-place");
         const parsed = parseWinPlace(page.html);
-        const expectedNumbers = db.prepare(`select horse_number from complete_race_entries
+        const expectedNumbers = db.prepare(`select horse_number from ${liveMode ? "live_entries" : "complete_race_entries"}
           where race_id=? order by horse_number`).all(key.raceId).map((row) => row.horse_number);
         const sourceNumbers = parsed.runners.map((runner) => runner.horseNumber).sort((a, b) => a - b);
         if (JSON.stringify(expectedNumbers) !== JSON.stringify(sourceNumbers)) runnerSetMismatches += 1;
@@ -156,7 +171,7 @@ async function captureWinPlace() {
               (runner.placeLow < 1 || runner.placeHigh < runner.placeLow))) invalidOdds += 1;
           }
           for (const [betType, voteCount] of Object.entries(parsed.voteCounts)) {
-            db.prepare(`insert into odds_market_totals values(?,?,?,?,?)
+            db.prepare(`insert into ${liveMode ? "live_odds_market_totals" : "odds_market_totals"} values(?,?,?,?,?)
               on conflict(batch_id,race_id,bet_type) do update set
               vote_count=excluded.vote_count,source_page_id=excluded.source_page_id`).run(
                 batch.id, key.raceId, betType, voteCount, page.id,
@@ -174,8 +189,16 @@ async function captureWinPlace() {
     }
     db.prepare("update raw_pages set parsed_at=? where id=?").run(new Date().toISOString(), landing.id);
 
-    const expectedRaceCount = db.prepare(`select count(*) count from complete_races
-      where race_date in (${[...targetDates].map(() => "?").join(",")})`).get(...targetDates).count;
+    const expectedRaceRows = db.prepare(`select race_date${liveMode ? ",start_time" : ""} from ${liveMode ? "live_races" : "complete_races"}
+      where race_date in (${[...targetDates].map(() => "?").join(",")})`).all(...targetDates);
+    const expectedRaceCount = liveMode && liveWindowMinutes > 0
+      ? expectedRaceRows.filter((race) => withinWindow(race, liveWindowMinutes)).length
+      : expectedRaceRows.length;
+    if (liveMode && expectedRaceCount === 0) {
+      db.prepare("delete from odds_ingestion_batches where id=?").run(batch.id);
+      console.log(JSON.stringify({ status: "no_upcoming_races", dates: [...targetDates], windowMinutes: liveWindowMinutes }));
+      return;
+    }
     const checks = [
       ["meeting_pages_present", meetingCnames.length > 0, meetingCnames.length, "expected>0"],
       ["race_coverage", raceCount === expectedRaceCount, raceCount, `expected=${expectedRaceCount}`],
@@ -287,6 +310,11 @@ function parseWinPlace(html) {
 }
 
 function saveOdds(batchId, raceId, betType, selectionKey, low, high, observedAt, sourcePageId) {
+  if (liveMode) {
+    db.prepare(`insert into live_odds_snapshots(race_id,bet_type,selection_key,odds,odds_low,odds_high,snapshot_kind,observed_at,source_page_id,batch_id)
+      values(?,?,?,?,?,?,?,?,?,?)`).run(raceId, betType, selectionKey, low, low, high, liveSnapshotKind, observedAt, sourcePageId, batchId);
+    return;
+  }
   db.prepare(`insert into odds_snapshots(
     race_id,bet_type,selection_key,odds,observed_at,source_page_id,odds_low,odds_high,snapshot_kind,batch_id
   ) values(?,?,?,?,?,?,?,?,?,?)`).run(
@@ -310,6 +338,8 @@ function auditOdds() {
       where q.batch_id=b.id and q.status='pass') < 6`).get().count;
   const invalidRanges = db.prepare(`select count(*) count from odds_snapshots
     where batch_id is not null and (odds_low < 1 or odds_high < odds_low or odds <> odds_low)`).get().count;
+  const invalidLiveRanges = db.prepare(`select count(*) count from live_odds_snapshots
+    where odds_low < 1 or odds_high < odds_low or odds <> odds_low`).get().count;
   let missingRaw = 0;
   let corruptRaw = 0;
   for (const row of db.prepare("select raw_path,payload_sha256 from raw_pages where parser_version=?").all(PARSER_VERSION)) {
@@ -321,8 +351,8 @@ function auditOdds() {
     } catch { corruptRaw += 1; }
   }
   return {
-    pass: failedChecks === 0 && incompleteBatches === 0 && invalidRanges === 0 && missingRaw === 0 && corruptRaw === 0,
-    failedChecks, incompleteBatches, invalidRanges, missingRaw, corruptRaw, ...statusReport(),
+    pass: failedChecks === 0 && incompleteBatches === 0 && invalidRanges === 0 && invalidLiveRanges === 0 && missingRaw === 0 && corruptRaw === 0,
+    failedChecks, incompleteBatches, invalidRanges, invalidLiveRanges, missingRaw, corruptRaw, ...statusReport(),
   };
 }
 
@@ -334,7 +364,10 @@ function statusReport() {
     (select count(distinct race_id) from odds_snapshots where batch_id is not null) races,
     (select count(*) from odds_snapshots where batch_id is not null and bet_type='win') winPrices,
     (select count(*) from odds_snapshots where batch_id is not null and bet_type='place') placePrices,
-    (select count(*) from odds_market_totals) marketTotals`).get();
+    (select count(*) from odds_market_totals) marketTotals,
+    (select count(*) from live_odds_snapshots) liveSnapshots,
+    (select count(distinct race_id) from live_odds_snapshots) liveRaces,
+    (select count(*) from live_odds_market_totals) liveMarketTotals`).get();
   return { database: DB_PATH, parserVersion: PARSER_VERSION, batches, ...totals };
 }
 
@@ -417,6 +450,11 @@ function isProcessAlive(pid) {
 function safeName(value) { return value.replace(/[^a-zA-Z0-9._-]/g, "_").slice(0, 140); }
 function isoDate(value) { return `${value.slice(0, 4)}-${value.slice(4, 6)}-${value.slice(6, 8)}`; }
 function sleep(ms) { return new Promise((resolve) => setTimeout(resolve, ms)); }
+function withinWindow(race, minutes) {
+  const start = new Date(`${race.race_date}T${race.start_time}:00+09:00`).getTime();
+  const now = Date.now();
+  return start >= now && start <= now + minutes * 60000;
+}
 function atomicWrite(filePath, contents) {
   const partial = `${filePath}.${process.pid}.partial`;
   fs.writeFileSync(partial, contents);

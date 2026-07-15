@@ -18,7 +18,7 @@ export function generateMarketEv() {
   const db = new DatabaseSync(path.join("data", "jra-free-private", "keiba.sqlite"), { readOnly: true });
   try {
     const baseBatch = db.prepare(`select id from odds_ingestion_batches
-      where status='complete' and source!='JRA official exotic odds' order by id desc limit 1`).get();
+      where status='complete' and source='JRA official odds' order by id desc limit 1`).get();
     const exoticBatch = db.prepare(`select id from odds_ingestion_batches
       where status='complete' and source='JRA official exotic odds' order by id desc limit 1`).get();
     if (!baseBatch || !exoticBatch) throw new Error("単勝・複勝または全券種の完了バッチがありません");

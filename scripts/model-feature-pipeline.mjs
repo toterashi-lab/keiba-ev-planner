@@ -7,12 +7,13 @@ export function buildFeatureRows(database, options) {
   const raceTable = options.completeOnly ? "complete_races" : "races";
   const entryTable = options.completeOnly ? "complete_race_entries" : "race_entries";
   const resultTable = options.completeOnly ? "complete_race_results" : "race_results";
+  const historyOperator = options.includeLive ? "<" : "<=";
   const rows = database.prepare(`select r.race_id,r.race_date,r.venue_code,r.race_number,r.race_class,r.surface,r.distance_m,r.direction,r.weather,r.going,r.start_time,
       e.horse_id,e.horse_number,e.gate_number,e.sex_age,e.carried_weight,e.body_weight,e.body_weight_delta,e.jockey_id,e.trainer_id,
       rr.finish_position,rr.final_sectional,rr.corner_positions,rr.popularity
     from ${raceTable} r join ${entryTable} e on e.race_id=r.race_id
     left join ${resultTable} rr on rr.race_id=e.race_id and rr.horse_id=e.horse_id
-    where r.race_date <= ? order by r.race_date,r.venue_code,r.race_number,e.horse_number`).iterate(options.to);
+    where r.race_date ${historyOperator} ? order by r.race_date,r.venue_code,r.race_number,e.horse_number`).iterate(options.to);
   const histories = new Map();
   const jockeys = new Map();
   const trainers = new Map();
@@ -20,11 +21,11 @@ export function buildFeatureRows(database, options) {
 
   const processRace = (raceRows) => {
     if (!raceRows.length) return;
-    const emit = raceRows[0].race_date >= options.from && raceRows[0].race_date <= options.to;
+    const emit = options.emitHistorical !== false && raceRows[0].race_date >= options.from && raceRows[0].race_date <= options.to;
     if (emit) {
       const fieldPriorRates = raceRows.map((row) => rate(getStats(histories, row.horse_id)));
       for (let index = 0; index < raceRows.length; index += 1) {
-        const featureRow = createFeatureRow(raceRows[index], histories, jockeys, trainers, fieldPriorRates);
+        const featureRow = createFeatureRow(raceRows[index], histories, jockeys, trainers, fieldPriorRates, false, "historical");
         if (options.collect !== false) output.push(featureRow);
         options.onRow?.(featureRow);
       }
@@ -40,10 +41,30 @@ export function buildFeatureRows(database, options) {
     raceRows.push(row);
   }
   processRace(raceRows);
+  if (options.includeLive && database.prepare("select count(*) count from sqlite_master where type='table' and name='live_races'").get().count) {
+    const liveRows = database.prepare(`select r.race_id,r.race_date,r.venue_code,r.race_number,r.race_class,r.surface,r.distance_m,
+        null direction,null weather,null going,r.start_time,e.horse_id,e.horse_number,e.gate_number,e.sex_age,e.carried_weight,
+        e.body_weight,e.body_weight_delta,e.jockey_id,e.trainer_id,null finish_position,null final_sectional,null corner_positions,null popularity,
+        e.observed_at
+      from live_races r join live_entries e on e.race_id=r.race_id
+      where r.race_date between ? and ? order by r.race_date,r.venue_code,r.race_number,e.horse_number`).all(options.from, options.to);
+    for (let start = 0; start < liveRows.length;) {
+      let end = start + 1;
+      while (end < liveRows.length && liveRows[end].race_id === liveRows[start].race_id) end += 1;
+      const liveRaceRows = liveRows.slice(start, end);
+      const fieldPriorRates = liveRaceRows.map((row) => rate(getStats(histories, row.horse_id)));
+      for (const row of liveRaceRows) {
+        const featureRow = createFeatureRow(row, histories, jockeys, trainers, fieldPriorRates, true, "live");
+        if (options.collect !== false) output.push(featureRow);
+        options.onRow?.(featureRow);
+      }
+      start = end;
+    }
+  }
   return output;
 }
 
-function createFeatureRow(row, histories, jockeys, trainers, fieldPriorRates) {
+function createFeatureRow(row, histories, jockeys, trainers, fieldPriorRates, sourceTimingVerified, dataContext) {
   const horse = getStats(histories, row.horse_id);
   const surface = getStats(histories, `${row.horse_id}|surface|${row.surface}`);
   const venue = getStats(histories, `${row.horse_id}|venue|${row.venue_code}`);
@@ -58,8 +79,9 @@ function createFeatureRow(row, histories, jockeys, trainers, fieldPriorRates) {
     raceId: row.race_id,
     horseId: row.horse_id,
     raceDate: row.race_date,
-    asOfTime: `${row.race_date}T${row.start_time || "00:00"}:00+09:00`,
-    sourceTimingVerified: false,
+    asOfTime: sourceTimingVerified ? row.observed_at : `${row.race_date}T${row.start_time || "00:00"}:00+09:00`,
+    sourceTimingVerified,
+    dataContext,
     features: {
       venueCode: row.venue_code, raceNumber: row.race_number, raceClass: row.race_class, surface: row.surface,
       distanceM: row.distance_m, distanceBand: distanceBand(row.distance_m), direction: row.direction, weather: row.weather,
@@ -76,7 +98,9 @@ function createFeatureRow(row, histories, jockeys, trainers, fieldPriorRates) {
       trainerStarts: trainer.starts, trainerWinRate: rate(trainer).win, trainerPlaceRate: rate(trainer).place,
       fieldRelativePriorWinRate: horseRate.win - fieldAverage,
     },
-    target: { finishPosition: row.finish_position, won: row.finish_position === 1 ? 1 : 0, placed: row.finish_position && row.finish_position <= (racePlaceDepth(fieldPriorRates.length)) ? 1 : 0 },
+    target: dataContext === "live"
+      ? { finishPosition: null, won: null, placed: null }
+      : { finishPosition: row.finish_position, won: row.finish_position === 1 ? 1 : 0, placed: row.finish_position && row.finish_position <= (racePlaceDepth(fieldPriorRates.length)) ? 1 : 0 },
     lineage: { historyCutoffExclusive: row.race_date, lastHistoricalRaceDate: horse.lastDate, targetResultExcludedFromFeatures: true },
   };
 }

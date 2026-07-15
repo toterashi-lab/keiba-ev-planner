@@ -1,6 +1,19 @@
-const meetingData = window.KEIBA_REFERENCE_MEETINGS ?? window.KEIBA_MEETINGS ?? { meetings: [] };
-const resultData = window.KEIBA_RESULTS ?? { results: [] };
-const modelData = window.KEIBA_MODEL_OUTPUTS ?? { status: "blocked", candidates: [] };
+const historicalMeetingData = window.KEIBA_REFERENCE_MEETINGS ?? window.KEIBA_MEETINGS ?? { meetings: [] };
+const liveRacecardData = window.KEIBA_LIVE_RACECARDS ?? { meetings: [], results: [] };
+const meetingData = { ...historicalMeetingData, meetings: [...(historicalMeetingData.meetings ?? []), ...(liveRacecardData.meetings ?? [])] };
+const historicalResultData = window.KEIBA_RESULTS ?? { results: [] };
+const resultData = { ...historicalResultData, results: [...(historicalResultData.results ?? []), ...(liveRacecardData.results ?? [])] };
+const historicalModelData = window.KEIBA_MODEL_OUTPUTS ?? { status: "blocked", candidates: [], predictions: [] };
+const liveModelData = window.KEIBA_LIVE_MODEL_OUTPUTS ?? { status: "waiting", candidates: [], predictions: [] };
+const modelData = {
+  ...historicalModelData,
+  candidates: [...(historicalModelData.candidates ?? []), ...(liveModelData.candidates ?? [])],
+  predictions: [...(historicalModelData.predictions ?? []), ...(liveModelData.predictions ?? [])],
+  logic: liveModelData.status === "ready" ? {
+    ...(historicalModelData.logic ?? {}), abilityModelStatus: liveModelData.abilityModelStatus,
+    deploymentStatus: liveModelData.deploymentStatus, probabilityMode: liveModelData.abilityModelStatus === "research_pass" ? "ability_model" : "market_baseline",
+  } : historicalModelData.logic,
+};
 const databaseData = window.KEIBA_DATABASE_STATUS ?? {};
 const featureCoverageData = window.KEIBA_MODEL_FEATURE_COVERAGE ?? { groups: [] };
 const closingOddsData = window.KEIBA_CLOSING_ODDS ?? { races: [], quality: [] };
@@ -352,9 +365,10 @@ function renderRaceHeader() {
   const weather = [result?.weather, result?.turfGoing || result?.dirtGoing].filter(Boolean).join(" / ");
   els.raceMeta.textContent = `${result?.startTime || race.start}発走 / ${result?.course || `${race.surface}${race.distanceM}m`} / ${weather || track.meetingName}`;
   els.raceCondition.textContent = race.condition;
-  els.resultBadge.textContent = result ? "結果確定" : "結果未取得";
-  els.resultBadge.classList.toggle("missing", !result);
-  els.winnerName.textContent = result?.winner || "未取得";
+  const preRace = result?.status === "pre_race";
+  els.resultBadge.textContent = preRace ? "出馬表取得" : result ? "結果確定" : "結果未取得";
+  els.resultBadge.classList.toggle("missing", !result || preRace);
+  els.winnerName.textContent = preRace ? "発走前" : result?.winner || "未取得";
   els.refundCount.textContent = `${result?.refunds?.length ?? 0}件`;
   const url = result?.url || meetingData.sourceUrls?.find((item) => item.includes(state.date.replaceAll("-", "").slice(4))) || "#";
   [els.officialLink, els.resultLinkSecondary].forEach((link) => { link.href = url; });
@@ -505,7 +519,8 @@ function markClass(mark) {
 }
 
 function renderTopRecommendation() {
-  const runners = selectedResult()?.runners?.filter((runner) => runner.finishPosition !== null) ?? [];
+  const selected = selectedResult();
+  const runners = selected?.status === "pre_race" ? selected.runners ?? [] : selected?.runners?.filter((runner) => runner.finishPosition !== null) ?? [];
   const counts = ticketEngine?.candidateCounts(runners.length) ?? {};
   const candidates = matchingAutomaticCandidates().filter(isRecommendationReady).sort((left, right) => candidateExpectedReturn(right) - candidateExpectedReturn(left));
   const top = candidates[0] ?? null;
