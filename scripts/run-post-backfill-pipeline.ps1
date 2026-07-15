@@ -29,8 +29,31 @@ try {
     $failedExhausted = & $node --no-warnings "scripts\backfill-readiness.mjs"
     if ($LASTEXITCODE -eq 3) { throw "Retry limit reached. See backfill-readiness report: $failedExhausted" }
     $task = Get-ScheduledTask -TaskName "KeibaEV-JRA-Free-Backfill" -ErrorAction SilentlyContinue
-    if ($task -and $task.State -ne "Running") { Start-ScheduledTask -TaskName "KeibaEV-JRA-Free-Backfill" }
-    Write-Output "Backfill pending: $pending months. Model pipeline is waiting."
+    if ($task -and $status.workerHealth -eq "stalled") {
+      Write-Warning "Backfill heartbeat is stale. Restarting the worker safely."
+      $runLockPath = Join-Path $privateDir "backfill-run.lock"
+      if (-not (Test-Path -LiteralPath $runLockPath)) { throw "Stalled worker lock is missing." }
+      $lockOwner = Get-Content -LiteralPath $runLockPath -Raw | ConvertFrom-Json
+      $workerPid = [int]$status.workerPid
+      if ($workerPid -le 0 -or [int]$lockOwner.pid -ne $workerPid) {
+        throw "Refusing to terminate a worker whose PID does not match the run lock."
+      }
+      Stop-ScheduledTask -TaskName "KeibaEV-JRA-Free-Backfill"
+      Stop-Process -Id $workerPid -Force -ErrorAction Stop
+      for ($wait = 0; $wait -lt 10 -and (Get-Process -Id $workerPid -ErrorAction SilentlyContinue); $wait++) {
+        Start-Sleep -Seconds 1
+      }
+      if (Get-Process -Id $workerPid -ErrorAction SilentlyContinue) { throw "Stalled worker did not terminate." }
+      Start-ScheduledTask -TaskName "KeibaEV-JRA-Free-Backfill"
+    } elseif ($task -and $status.workerHealth -eq "orphaned") {
+      Write-Warning "Backfill run lock is orphaned. Restarting the scheduled worker."
+      Stop-ScheduledTask -TaskName "KeibaEV-JRA-Free-Backfill"
+      Start-Sleep -Seconds 2
+      Start-ScheduledTask -TaskName "KeibaEV-JRA-Free-Backfill"
+    } elseif ($task -and $task.State -ne "Running") {
+      Start-ScheduledTask -TaskName "KeibaEV-JRA-Free-Backfill"
+    }
+    Write-Output ("Backfill pending: {0} months. Health={1}, ETA={2}. Model pipeline is waiting." -f $pending,$status.workerHealth,$status.estimatedCompletionAt)
     exit 0
   }
 

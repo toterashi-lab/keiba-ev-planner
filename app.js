@@ -163,7 +163,9 @@ function renderDatabaseStatus() {
   els.dbRunners.textContent = number(databaseData.runners);
   els.dbPayouts.textContent = number(databaseData.payouts);
   els.dbRawPages.textContent = number(databaseData.rawPages);
-  els.dbProgressLabel.textContent = `${percentValue.toFixed(1)}%・処理中${databaseData.runningMonths}・待機${databaseData.queuedMonths}・再検査${databaseData.failedMonths}`;
+  const healthLabel = ({ healthy: "正常稼働", stalled: "自動復旧待ち", idle: "待機中" })[databaseData.workerHealth] ?? "確認中";
+  const etaLabel = databaseData.estimatedCompletionAt ? `・完了見込 ${formatTimestamp(databaseData.estimatedCompletionAt)}` : "";
+  els.dbProgressLabel.textContent = `${percentValue.toFixed(1)}%・${healthLabel}・処理中${databaseData.runningMonths}・待機${databaseData.queuedMonths}・再検査${databaseData.failedMonths}${etaLabel}`;
   els.dbProgressBar.style.width = `${percentValue}%`;
   els.progressTrack.setAttribute("aria-valuenow", percentValue.toFixed(1));
   const preflight = databaseData.trainingPreflight;

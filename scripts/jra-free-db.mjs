@@ -18,6 +18,8 @@ const PARSER_VERSION = "jra-html-v1";
 const command = process.argv[2] ?? "status";
 const options = parseArgs(process.argv.slice(3));
 const forceRefresh = options.refresh === true || options.refresh === "true";
+let activeIngestMonth = null;
+let lastHeartbeatAt = 0;
 fs.mkdirSync(RAW_DIR, { recursive: true });
 
 const db = new DatabaseSync(DB_PATH);
@@ -342,6 +344,8 @@ async function yieldToCurrentSync(requestPath = SYNC_REQUEST_PATH) {
 
 async function ingestMonth(month, delayMs) {
   const startedAt = new Date().toISOString();
+  activeIngestMonth = month;
+  lastHeartbeatAt = 0;
   db.prepare(`insert into backfill_jobs(month,status,updated_at) values(?, 'queued', ?)
     on conflict(month) do nothing`).run(month, startedAt);
   const previousStatus = db.prepare("select status from backfill_jobs where month=?").get(month)?.status;
@@ -391,6 +395,7 @@ async function ingestMonth(month, delayMs) {
     db.prepare(`update backfill_jobs set status='complete', meeting_count=?, race_count=?,
       runner_count=?, payout_count=?, completed_at=?, updated_at=? where month=?`)
       .run(meetings.length, raceCount, runnerCount, payoutCount, completedAt, completedAt, month);
+    activeIngestMonth = null;
     dropMonthBackup();
   } catch (error) {
     const failedAt = new Date().toISOString();
@@ -403,6 +408,7 @@ async function ingestMonth(month, delayMs) {
       db.prepare(`update backfill_jobs set status='failed', last_error=?, updated_at=? where month=?`)
         .run(String(error.stack ?? error).slice(0, 4000), failedAt, month);
     }
+    activeIngestMonth = null;
     throw error;
   }
 }
@@ -419,6 +425,7 @@ async function loadSearchIndex(delayMs) {
 }
 
 async function fetchPage(cname, pageType, delayMs) {
+  touchWorkerHeartbeat();
   const cached = db.prepare(`select id, raw_path from raw_pages
     where request_key=? and parser_version=?`).get(cname, PARSER_VERSION);
   const refreshable = forceRefresh && (pageType === "search-index" || pageType === "month");
@@ -813,6 +820,20 @@ function statusReport() {
   const failedJobs = db.prepare(`select month,attempts,last_error,updated_at from backfill_jobs
     where status='failed' order by updated_at desc`).all();
   const totalJobs = Object.values(jobs).reduce((sum, count) => sum + count, 0);
+  const remainingMonths = (jobs.queued ?? 0) + (jobs.running ?? 0) + (jobs.failed ?? 0);
+  const recentDurations = db.prepare(`select (julianday(completed_at)-julianday(started_at))*1440 minutes
+    from backfill_jobs where status='complete' and started_at is not null and completed_at is not null
+    and (julianday(completed_at)-julianday(started_at))*1440 between 0.5 and 60
+    order by completed_at desc limit 24`).all().map((row) => row.minutes).sort((left, right) => left - right);
+  const medianMinutesPerMonth = recentDurations.length ? median(recentDurations) : null;
+  const estimatedHoursRemaining = medianMinutesPerMonth == null ? null : remainingMonths * medianMinutesPerMonth / 60;
+  const estimatedCompletionAt = estimatedHoursRemaining == null ? null
+    : new Date(Date.now() + estimatedHoursRemaining * 60 * 60 * 1000).toISOString();
+  const runLockOwner = readLockOwner(RUN_LOCK_PATH);
+  const runProcessAlive = Boolean(runLockOwner?.pid && isProcessAlive(runLockOwner.pid));
+  const heartbeatAgeSeconds = activeJobs.length
+    ? Math.max(0, (Date.now() - new Date(activeJobs[0].updated_at).getTime()) / 1000) : null;
+  const workerHealth = classifyWorkerHealth(activeJobs.length, runProcessAlive, heartbeatAgeSeconds);
   const latestModel = db.prepare("select id from model_runs order by created_at desc limit 1").get();
   const requiredGates = ["calibration", "walk_forward", "odds_coverage", "odds_freshness", "drawdown"];
   const passedGates = latestModel ? db.prepare(`select gate_name from model_quality_gates
@@ -823,6 +844,13 @@ function statusReport() {
     parserVersion: PARSER_VERSION,
     jobs,
     progressPercent: totalJobs ? ((jobs.complete ?? 0) / totalJobs) * 100 : 0,
+    remainingMonths,
+    medianMinutesPerMonth,
+    estimatedHoursRemaining,
+    estimatedCompletionAt,
+    workerHealth,
+    workerPid: runProcessAlive ? runLockOwner.pid : null,
+    heartbeatAgeSeconds,
     activeJobs,
     failedJobs,
     ...totals,
@@ -833,6 +861,13 @@ function statusReport() {
       ? "All required model and market gates passed."
       : "Calibration, walk-forward, odds coverage/freshness, and drawdown gates have not all passed.",
   };
+}
+
+function touchWorkerHeartbeat() {
+  if (!activeIngestMonth || Date.now() - lastHeartbeatAt < 15_000) return;
+  const now = new Date().toISOString();
+  db.prepare("update backfill_jobs set updated_at=? where month=? and status='running'").run(now, activeIngestMonth);
+  lastHeartbeatAt = Date.now();
 }
 
 async function withLock(task, lockPath = LOCK_PATH, options = {}) {
@@ -890,7 +925,14 @@ async function lockSelfCheck() {
   await yieldToCurrentSync(requestPath);
   const yieldedMs = Date.now() - yieldStarted;
   if (yieldedMs < 900) throw new Error(`Current sync priority yield was too short: ${yieldedMs}ms`);
-  console.log(JSON.stringify({ status: "pass", contentionDetected, reacquiredAfterRelease: true, currentSyncPriorityYield: true, yieldedMs }));
+  const workerHealthCases = classifyWorkerHealth(0, false, null) === "idle"
+    && classifyWorkerHealth(1, false, 10) === "orphaned"
+    && classifyWorkerHealth(1, true, 1801) === "stalled"
+    && classifyWorkerHealth(1, true, 1799) === "healthy";
+  if (!workerHealthCases) throw new Error("Worker health classification failed");
+  if (median([1, 2, 3]) !== 2 || median([1, 2, 3, 4]) !== 2.5) throw new Error("ETA median calculation failed");
+  console.log(JSON.stringify({ status: "pass", contentionDetected, reacquiredAfterRelease: true,
+    currentSyncPriorityYield: true, workerHealthCases, etaMedianCases: true, yieldedMs }));
 }
 
 function isProcessAlive(pid) {
@@ -900,6 +942,17 @@ function isProcessAlive(pid) {
   } catch {
     return false;
   }
+}
+
+function median(values) {
+  const middle = Math.floor(values.length / 2);
+  return values.length % 2 ? values[middle] : (values[middle - 1] + values[middle]) / 2;
+}
+
+function classifyWorkerHealth(activeCount, processAlive, heartbeatAgeSeconds) {
+  if (!activeCount) return "idle";
+  if (!processAlive) return "orphaned";
+  return heartbeatAgeSeconds > 30 * 60 ? "stalled" : "healthy";
 }
 
 function recoverInterruptedJobs() {

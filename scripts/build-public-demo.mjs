@@ -212,6 +212,19 @@ function exportDatabaseStatus() {
     db.exec("commit");
 
     const totalMonths = Object.values(jobs).reduce((sum, count) => sum + count, 0);
+    const remainingMonths = (jobs.queued ?? 0) + (jobs.running ?? 0) + (jobs.failed ?? 0);
+    const durations = db.prepare(`select (julianday(completed_at)-julianday(started_at))*1440 minutes
+      from backfill_jobs where status='complete' and started_at is not null and completed_at is not null
+      and (julianday(completed_at)-julianday(started_at))*1440 between 0.5 and 60
+      order by completed_at desc limit 24`).all().map((row) => row.minutes).sort((left, right) => left - right);
+    const durationMiddle = Math.floor(durations.length / 2);
+    const medianMinutesPerMonth = !durations.length ? null : durations.length % 2
+      ? durations[durationMiddle] : (durations[durationMiddle - 1] + durations[durationMiddle]) / 2;
+    const estimatedHoursRemaining = medianMinutesPerMonth == null ? null : remainingMonths * medianMinutesPerMonth / 60;
+    const estimatedCompletionAt = estimatedHoursRemaining == null ? null
+      : new Date(Date.now() + estimatedHoursRemaining * 60 * 60 * 1000).toISOString();
+    const activeJob = db.prepare("select updated_at from backfill_jobs where status='running' order by updated_at desc limit 1").get();
+    const workerHeartbeatAgeSeconds = activeJob ? (Date.now() - new Date(activeJob.updated_at).getTime()) / 1000 : null;
     const preflightPath = path.join("data", "jra-free-private", "models", "training-preflight.json");
     const preflight = fs.existsSync(preflightPath) ? JSON.parse(fs.readFileSync(preflightPath, "utf8")) : null;
     const status = {
@@ -222,6 +235,12 @@ function exportDatabaseStatus() {
       failedMonths: jobs.failed ?? 0,
       totalMonths,
       progressPercent: totalMonths ? ((jobs.complete ?? 0) / totalMonths) * 100 : 0,
+      remainingMonths,
+      medianMinutesPerMonth,
+      estimatedHoursRemaining,
+      estimatedCompletionAt,
+      workerHealth: !activeJob ? "idle" : workerHeartbeatAgeSeconds <= 30 * 60 ? "healthy" : "stalled",
+      workerHeartbeatAgeSeconds,
       ...totals,
       integrityStatus: "pass",
       evStatus: "insufficient",
