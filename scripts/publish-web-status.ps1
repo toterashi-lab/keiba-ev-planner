@@ -55,6 +55,8 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Live odds validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\live-market-ev-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Live expectancy validation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\race-time-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Pre-race observation time validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\live-pipeline-workflow-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Live pipeline workflow validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\evaluate-live-ev-ledger.mjs"

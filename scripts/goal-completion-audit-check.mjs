@@ -30,7 +30,7 @@ try {
     create table live_ev_evaluations(candidate_id integer primary key);
     create table live_ev_validation_runs(id integer primary key);
     create table live_racecard_batches(id integer primary key,target_dates text,status text,race_count integer,entry_count integer,completed_at text);
-    create table live_races(race_id text primary key,batch_id integer,race_date text);
+    create table live_races(race_id text primary key,batch_id integer,race_date text,start_time text);
     create table live_entries(race_id text,horse_id text,batch_id integer);
     create table live_predictions(race_id text,horse_id text,model_version text,win_probability real);
     insert into complete_races values('r1','1996-01-01',1);
@@ -39,7 +39,7 @@ try {
     insert into complete_payouts values('r1');
     insert into model_runs values(1,'unit-model');
     insert into live_racecard_batches values(1,'2099-01-01','complete',1,5,'2026-01-01T00:00:00.000Z');
-    insert into live_races values('live-r1',1,'2099-01-01');
+    insert into live_races values('live-r1',1,'2099-01-01','12:00');
     insert into live_entries values('live-r1','lh1',1),('live-r1','lh2',1),('live-r1','lh3',1),('live-r1','lh4',1),('live-r1','lh5',1);
     insert into live_predictions values('live-r1','lh1','unit-model',0.30),('live-r1','lh2','unit-model',0.25),
       ('live-r1','lh3','unit-model',0.20),('live-r1','lh4','unit-model',0.15),('live-r1','lh5','unit-model',0.10);
@@ -128,8 +128,9 @@ try {
       field, missingRows: 0, officiallyUnavailableRows: 0, parserMissingRows: 0,
     })) }));
   const automationTasks = ["KeibaEV-JRA-Free-Backfill", "KeibaEV-PostBackfill-Model", "KeibaEV-JRA-Current-Sync",
-    "KeibaEV-JRA-Live-Racecards", "KeibaEV-JRA-Live-Odds", "KeibaEV-Web-Publish"]
-    .map((name) => ({ name, pass: true, exists: true, enabled: true, actionMatches: true, triggerCount: 1 }));
+    "KeibaEV-JRA-Live-Racecards", "KeibaEV-JRA-Live-Odds", "KeibaEV-JRA-Live-Odds-Offset", "KeibaEV-Web-Publish"]
+    .map((name) => ({ name, pass: true, exists: true, enabled: true, actionMatches: true,
+      triggerCount: name.startsWith("KeibaEV-JRA-Live-Odds") ? 48 : 1 }));
   fs.writeFileSync(automationAuditPath, JSON.stringify({ version: "automation-audit-v1", checkedAt: new Date().toISOString(),
     pass: true, requiredTaskCount: automationTasks.length, tasks: automationTasks }));
   const pipeline = path.join(temp, "pipeline");
@@ -151,8 +152,11 @@ try {
   const staleOutput = structuredClone(liveFixture);
   staleOutput.generatedAt = "2025-12-31T23:59:59.000Z";
   if (inspectLiveCoverage(db, artifact, staleOutput, { today: "2026-01-01" }).pass) throw new Error("stale live output was accepted");
+  const postStartOdds = structuredClone(liveFixture);
+  postStartOdds.candidates[0].oddsObservedAt = "2099-01-01T03:00:00Z";
+  if (inspectLiveCoverage(db, artifact, postStartOdds, { today: "2026-01-01" }).pass) throw new Error("post-start odds were accepted");
   console.log(JSON.stringify({ status: "pass", checks: report.checks.length, races: predictions.length, candidates: candidates.length,
-    liveCoverageFailClosed: ["missing_prediction", "missing_formation", "stale_output"] }, null, 2));
+    liveCoverageFailClosed: ["missing_prediction", "missing_formation", "stale_output", "post_start_odds"] }, null, 2));
 } finally {
   db.close();
   fs.rmSync(temp, { recursive: true, force: true });

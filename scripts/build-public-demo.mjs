@@ -94,6 +94,8 @@ for (const file of [
   "model-data-snapshot.mjs",
   "model-data-snapshot-check.mjs",
   "model-freshness.mjs",
+  "race-time.mjs",
+  "race-time-check.mjs",
   "audit-field-availability.mjs",
   "backfill-readiness.mjs",
   "goal-completion-audit.mjs",

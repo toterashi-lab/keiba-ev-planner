@@ -2,7 +2,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { generateLiveMarketEv, loadLatestCompleteLiveOdds, resolveLiveRaceProbability, resolveLiveTargetDates, resolveStoredRacecardTargetDates } from "./generate-live-market-ev.mjs";
+import { generateLiveMarketEv, loadLatestCompleteLiveOdds, persistCandidateLedger, resolveLiveRaceProbability, resolveLiveTargetDates, resolveStoredRacecardTargetDates } from "./generate-live-market-ev.mjs";
 
 const fixtureOutputDirectory = fs.mkdtempSync(path.join(os.tmpdir(), "keiba-live-check-output-"));
 const fixtureOutputPath = path.join(fixtureOutputDirectory, "live-market-ev.json");
@@ -37,10 +37,10 @@ if (Math.abs(Object.values(modelOnly.abilityHorse ?? {}).reduce((sum, value) => 
 if (noOddsFixture.status !== "ready" || noOddsFixture.predictions.length !== 2 || noOddsFixture.candidates.length !== 0
   || noOddsFixture.predictionCoverage?.targetRaces !== 2 || noOddsFixture.predictionCoverage?.modelOnlyRaces !== 2
   || noOddsFixture.reason !== "waiting_for_complete_odds") failures.push("no-odds multi-day integration failed");
-const database = new DatabaseSync("data/jra-free-private/keiba.sqlite", { readOnly: true });
-const persistedCandidates = model.baseBatchId ? database.prepare(`select count(*) count from live_ev_candidates
-  where base_batch_id=? and exotic_batch_id=?`).get(model.baseBatchId, model.exoticBatchId).count : 0;
-database.close();
+const ledgerDatabase = new DatabaseSync(":memory:");
+persistCandidateLedger(ledgerDatabase, model);
+const persistedCandidates = ledgerDatabase.prepare("select count(*) count from live_ev_candidates").get().count;
+ledgerDatabase.close();
 
 if (model.status !== "ready") failures.push(`status is ${model.status}: ${model.reason ?? "unknown"}`);
 if (model.unitStakeYen !== 100) failures.push("unit stake is not 100 yen");
@@ -117,12 +117,12 @@ function createNoOddsModelFixture() {
     fixture.exec(`
       create table odds_ingestion_batches(id integer primary key,status text,source text,snapshot_kind text,target_dates text);
       create table live_racecard_batches(id integer primary key,status text,race_count integer,target_dates text);
-      create table live_races(race_id text primary key,race_date text,venue_code text,race_number integer,meeting_name text);
+      create table live_races(race_id text primary key,batch_id integer,race_date text,venue_code text,race_number integer,meeting_name text,start_time text);
       create table live_entries(race_id text,horse_id text,horse_number integer,horse_name text);
       create table live_predictions(race_id text,horse_id text,model_version text,win_probability real);
       create table live_odds_snapshots(batch_id integer,race_id text,bet_type text,selection_key text,odds_low real,odds_high real,observed_at text);
       insert into live_racecard_batches values(1,'complete',2,'2099-01-03,2099-01-04');
-      insert into live_races values('r1','2099-01-03','05',1,'検査開催1日'),('r2','2099-01-04','05',1,'検査開催2日');
+      insert into live_races values('r1',1,'2099-01-03','05',1,'検査開催1日','12:00'),('r2',1,'2099-01-04','05',1,'検査開催2日','12:00');
       insert into live_entries values
         ('r1','h1',1,'馬1'),('r1','h2',2,'馬2'),('r1','h3',3,'馬3'),
         ('r2','h4',1,'馬4'),('r2','h5',2,'馬5'),('r2','h6',3,'馬6');
@@ -151,16 +151,21 @@ function verifyRollingBatchAggregation() {
     database.exec(`
       create table odds_ingestion_batches(id integer primary key,source text,snapshot_kind text,status text);
       create table live_odds_snapshots(race_id text,bet_type text,selection_key text,odds_low real,odds_high real,observed_at text,batch_id integer,snapshot_kind text);
+      create table live_races(race_id text primary key,race_date text,start_time text);
+      insert into live_races values('r1','2026-01-01','12:00'),('r2','2026-01-01','13:00');
       insert into odds_ingestion_batches values
         (1,'JRA official live odds','pre_race','complete'),(2,'JRA official live exotic odds','pre_race','complete'),
         (3,'JRA official live odds','pre_race','complete'),(4,'JRA official live exotic odds','pre_race','complete'),
         (5,'JRA official live odds','pre_race','complete'),(6,'JRA official live exotic odds','pre_race','complete'),
-        (7,'JRA official live odds','pre_race','failed');
+        (7,'JRA official live odds','pre_race','failed'),(8,'JRA official live odds','pre_race','complete'),
+        (9,'JRA official live exotic odds','pre_race','complete');
       insert into live_odds_snapshots values
         ('r1','win','1',3,3,'2026-01-01T01:00:00Z',1,'pre_race'),('r1','quinella','1-2',5,5,'2026-01-01T01:00:01Z',2,'pre_race'),
         ('r1','win','1',2.8,2.8,'2026-01-01T01:10:00Z',3,'pre_race'),('r1','quinella','1-2',4.8,4.8,'2026-01-01T01:10:01Z',4,'pre_race'),
         ('r2','win','1',4,4,'2026-01-01T02:00:00Z',5,'pre_race'),('r2','quinella','1-2',8,8,'2026-01-01T02:00:01Z',6,'pre_race'),
-        ('r1','win','1',1.1,1.1,'2026-01-01T01:20:00Z',7,'pre_race');
+        ('r1','win','1',1.1,1.1,'2026-01-01T01:20:00Z',7,'pre_race'),
+        ('r1','win','1',1.0,1.0,'2026-01-01T03:01:00Z',8,'pre_race'),
+        ('r1','quinella','1-2',1.0,1.0,'2026-01-01T03:01:00Z',9,'pre_race');
     `);
     const rows = loadLatestCompleteLiveOdds(database, ["r1", "r2"]);
     const ids = new Map();

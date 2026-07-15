@@ -33,12 +33,17 @@ for (const token of ["capturedDates", "set target_dates=?", "dates: capturedDate
 }
 const predictorSource = fs.readFileSync("scripts/predict-live-racecards.mjs", "utf8");
 if (!predictorSource.includes("resolveStoredRacecardTargetDates")) throw new Error("Prediction target-date recovery is missing");
+const liveTaskInstaller = fs.readFileSync("scripts/install-live-odds-task.ps1", "utf8");
+for (const token of ["-WindowMinutes 7", "KeibaEV-JRA-Live-Odds-Offset", "$index -lt 48", "OffsetMinutes = 5", "AddMinutes(10)"]) {
+  if (!liveTaskInstaller.includes(token)) throw new Error(`Five-minute odds capture schedule is missing: ${token}`);
+}
 console.log(JSON.stringify({
   status: "pass",
   workflows: 3,
   fixtureOutputIsolation: true,
   verifiedLivePublication: true,
   capturedTargetDatesPersisted: true,
+  fiveMinuteOddsCadence: true,
 }, null, 2));
 
 function checkOrder(file, tokens) {

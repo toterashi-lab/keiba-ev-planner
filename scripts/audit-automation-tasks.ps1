@@ -10,7 +10,8 @@ $specs = @(
   @{ Name = "KeibaEV-PostBackfill-Model"; Script = "scripts\run-post-backfill-pipeline.ps1" },
   @{ Name = "KeibaEV-JRA-Current-Sync"; Script = "scripts\sync-jra-current.ps1" },
   @{ Name = "KeibaEV-JRA-Live-Racecards"; Script = "scripts\sync-jra-live-racecards.ps1" },
-  @{ Name = "KeibaEV-JRA-Live-Odds"; Script = "scripts\capture-jra-live-odds.ps1" },
+  @{ Name = "KeibaEV-JRA-Live-Odds"; Script = "scripts\capture-jra-live-odds.ps1"; MinTriggers = 48; RequiredArgument = "-WindowMinutes 7" },
+  @{ Name = "KeibaEV-JRA-Live-Odds-Offset"; Script = "scripts\capture-jra-live-odds.ps1"; MinTriggers = 48; RequiredArgument = "-WindowMinutes 7" },
   @{ Name = "KeibaEV-Web-Publish"; Script = "scripts\publish-web-status.ps1" }
 )
 
@@ -26,16 +27,21 @@ $tasks = foreach ($spec in $specs) {
   $enabled = $task.State -ne "Disabled" -and $task.Settings.Enabled
   $actionMatches = $arguments.IndexOf($expectedScript, [StringComparison]::OrdinalIgnoreCase) -ge 0
   $triggerCount = @($task.Triggers).Count
+  $minimumTriggers = if ($spec.MinTriggers) { [int]$spec.MinTriggers } else { 1 }
+  $argumentMatches = -not $spec.RequiredArgument -or $arguments.IndexOf([string]$spec.RequiredArgument, [StringComparison]::OrdinalIgnoreCase) -ge 0
   [ordered]@{
     name = $spec.Name
-    pass = [bool]($enabled -and $actionMatches -and $triggerCount -gt 0)
+    pass = [bool]($enabled -and $actionMatches -and $argumentMatches -and $triggerCount -ge $minimumTriggers)
     exists = $true
     enabled = [bool]$enabled
     state = [string]$task.State
     actionExecute = [string]$task.Actions.Execute
     actionArguments = $arguments
     actionMatches = [bool]$actionMatches
+    requiredArgument = [string]$spec.RequiredArgument
+    argumentMatches = [bool]$argumentMatches
     triggerCount = $triggerCount
+    minimumTriggers = $minimumTriggers
     expectedScript = $expectedScript
     lastRunTime = if ($info.LastRunTime.Year -gt 2000) { $info.LastRunTime.ToUniversalTime().ToString("o") } else { $null }
     lastTaskResult = [int64]$info.LastTaskResult

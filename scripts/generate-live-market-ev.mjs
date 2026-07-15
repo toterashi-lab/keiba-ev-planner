@@ -5,6 +5,7 @@ import { pathToFileURL } from "node:url";
 import { normalizeMarket, selectProbability } from "../model/expectancy-engine-v2.mjs";
 import { buildStructuredDefinitions } from "../model/structured-ticket-search.mjs";
 import { buildFinishOrderProbabilityBooks, calibrateFinishOrderProbabilityBooks } from "../model/finish-order-probabilities.mjs";
+import { isPreRaceObservation } from "./race-time.mjs";
 
 await import(pathToFileURL(path.resolve("ticket-engine.js")).href);
 const engine = globalThis.KEIBA_TICKET_ENGINE;
@@ -110,7 +111,7 @@ export function generateLiveMarketEv(options = {}) {
       predictions,
       candidates,
     };
-    persistCandidateLedger(db, result);
+    if (!options.allowFixture) persistCandidateLedger(db, result);
     fs.mkdirSync(path.dirname(outputPath), { recursive: true });
     fs.writeFileSync(outputPath, `${JSON.stringify(result, null, 2)}\n`, "utf8");
     return result;
@@ -155,18 +156,19 @@ export function loadLatestCompleteLiveOdds(database, raceIds, options = {}) {
   const allSql = [...baseSources, ...exoticSources].map(quote).join(",");
   const placeholders = raceIds.map(() => "?").join(",");
   const snapshotGate = options.allowFixture ? "" : "and b.snapshot_kind='pre_race'";
-  return database.prepare(`with eligible as (
-      select s.race_id,s.bet_type,s.selection_key,s.odds_low,s.odds_high,s.observed_at,s.batch_id,
-        case when b.source in (${baseSql}) then 'base' else 'exotic' end source_group
-      from live_odds_snapshots s join odds_ingestion_batches b on b.id=s.batch_id
-      where b.status='complete' and b.source in (${allSql}) ${snapshotGate}
-        and s.race_id in (${placeholders})
-    ), latest as (
-      select race_id,source_group,max(batch_id) batch_id from eligible group by race_id,source_group
-    )
-    select e.* from eligible e join latest l
-      on l.race_id=e.race_id and l.source_group=e.source_group and l.batch_id=e.batch_id
-    order by e.race_id,e.bet_type,e.selection_key`).all(...raceIds);
+  const eligible = database.prepare(`select s.race_id,s.bet_type,s.selection_key,s.odds_low,s.odds_high,s.observed_at,s.batch_id,
+      case when b.source in (${baseSql}) then 'base' else 'exotic' end source_group,r.race_date,r.start_time
+    from live_odds_snapshots s join odds_ingestion_batches b on b.id=s.batch_id join live_races r on r.race_id=s.race_id
+    where b.status='complete' and b.source in (${allSql}) ${snapshotGate}
+      and s.race_id in (${placeholders})
+    order by s.race_id,s.bet_type,s.selection_key`).all(...raceIds)
+    .filter((row) => options.allowFixture || isPreRaceObservation(row.race_date, row.start_time, row.observed_at));
+  const latest = new Map();
+  for (const row of eligible) {
+    const key = `${row.race_id}|${row.source_group}`;
+    latest.set(key, Math.max(latest.get(key) ?? 0, row.batch_id));
+  }
+  return eligible.filter((row) => row.batch_id === latest.get(`${row.race_id}|${row.source_group}`));
 }
 
 function resolveRaceBatchIds(rows) {
@@ -233,8 +235,9 @@ function initializeLedgerSchema(db) {
   create index if not exists live_ev_candidates_evaluation_idx on live_ev_candidates(snapshot_kind,race_id,model_version,odds_observed_at);`);
 }
 
-function persistCandidateLedger(db, result) {
+export function persistCandidateLedger(db, result) {
   if (result.status !== "ready" || !result.candidates.length) return;
+  initializeLedgerSchema(db);
   const insert = db.prepare(`insert into live_ev_candidates(
     race_id,snapshot_kind,base_batch_id,exotic_batch_id,model_version,calibration_status,bet_type,method,selection_display,ticket_key,
     component_selection_keys_json,component_odds_json,component_market_probabilities_json,component_ability_probabilities_json,

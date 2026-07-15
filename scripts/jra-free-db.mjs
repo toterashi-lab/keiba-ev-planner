@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import zlib from "node:zlib";
 import { DatabaseSync } from "node:sqlite";
+import { isPreRaceObservation } from "./race-time.mjs";
 
 const BASE_URL = "https://www.jra.go.jp/JRADB/accessS.html";
 const ROOT = path.resolve(import.meta.dirname, "..");
@@ -801,6 +802,9 @@ function auditDatabase() {
       and b.source in ('JRA official live odds','JRA official live odds fixture'))
     or not exists(select 1 from odds_ingestion_batches b where b.id=c.exotic_batch_id and b.status='complete'
       and b.source in ('JRA official live exotic odds','JRA official live exotic odds fixture'))`).get().count;
+  const postStartEvCandidates = db.prepare(`select c.odds_observed_at,r.race_date,r.start_time from live_ev_candidates c
+    left join live_races r on r.race_id=c.race_id where c.snapshot_kind='pre_race'`).all()
+    .filter((row) => !isPreRaceObservation(row.race_date, row.start_time, row.odds_observed_at)).length;
   const orphanEvEvaluations = db.prepare(`select count(*) count from live_ev_evaluations e
     where not exists(select 1 from live_ev_candidates c where c.id=e.candidate_id)`).get().count;
   const invalidEvEvaluations = db.prepare(`select count(*) count from live_ev_evaluations e join live_ev_candidates c on c.id=e.candidate_id
@@ -811,7 +815,8 @@ function auditDatabase() {
     checkedAt: new Date().toISOString(),
     pass: failedChecks === 0 && incompleteCompleteJobs === 0 && missingRaw === 0 && corruptRaw === 0
       && orphanRaces === 0 && failedOddsChecks === 0 && incompleteOddsBatches === 0 && invalidOddsRanges === 0
-      && invalidEvCandidates === 0 && orphanEvCandidateBatches === 0 && orphanEvEvaluations === 0 && invalidEvEvaluations === 0,
+      && invalidEvCandidates === 0 && orphanEvCandidateBatches === 0 && postStartEvCandidates === 0
+      && orphanEvEvaluations === 0 && invalidEvEvaluations === 0,
     failedChecks,
     incompleteCompleteJobs,
     missingRaw,
@@ -822,6 +827,7 @@ function auditDatabase() {
     invalidOddsRanges,
     invalidEvCandidates,
     orphanEvCandidateBatches,
+    postStartEvCandidates,
     orphanEvEvaluations,
     invalidEvEvaluations,
     ...statusReport(),

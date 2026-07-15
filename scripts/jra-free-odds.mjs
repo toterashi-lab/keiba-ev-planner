@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import zlib from "node:zlib";
 import { DatabaseSync } from "node:sqlite";
+import { isPreRaceObservation } from "./race-time.mjs";
 
 const ODDS_URL = "https://www.jra.go.jp/JRADB/accessO.html";
 const LANDING_CNAME = "pw15oli00/6D";
@@ -220,6 +221,12 @@ async function captureWinPlace() {
       ["priced_runners_present", pricedRunnerCount > 0, pricedRunnerCount, "expected>0"],
       ["odds_domain", invalidOdds === 0, invalidOdds, "expected=0"],
     ];
+    if (liveMode) {
+      const timingRows = db.prepare(`select s.observed_at,r.race_date,r.start_time from live_odds_snapshots s
+        join live_races r on r.race_id=s.race_id where s.batch_id=?`).all(batch.id);
+      const invalidTiming = timingRows.filter((row) => !isPreRaceObservation(row.race_date, row.start_time, row.observed_at)).length;
+      checks.push(["pre_race_observation_time", invalidTiming === 0, invalidTiming, "expected=0"]);
+    }
     saveChecks(batch.id, checks);
     if (!checks.every((check) => check[1])) {
       throw new Error(`Odds quality gate failed: ${checks.filter((check) => !check[1]).map((check) => check[0]).join(", ")}`);

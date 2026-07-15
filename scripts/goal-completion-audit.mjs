@@ -5,6 +5,7 @@ import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
 import { inspectBackfillReadiness } from "./backfill-readiness.mjs";
 import { captureModelDataSnapshot, captureModelImplementationSnapshot } from "./model-data-snapshot.mjs";
+import { isPreRaceObservation } from "./race-time.mjs";
 
 const PRIVATE_DIR = path.join("data", "jra-free-private");
 const OUTPUT = path.join(PRIVATE_DIR, "models", "goal-completion-audit.json");
@@ -19,7 +20,7 @@ const MARKET_OUTPUT = path.join("data", "model-outputs-2026-07-11-2026-07-12.jso
 const BET_TYPES = ["単勝", "複勝", "馬連", "ワイド", "馬単", "3連複", "3連単"];
 const STRUCTURED_TYPES = ["馬連", "ワイド", "馬単", "3連複", "3連単"];
 const REQUIRED_AUTOMATION_TASKS = ["KeibaEV-JRA-Free-Backfill", "KeibaEV-PostBackfill-Model", "KeibaEV-JRA-Current-Sync",
-  "KeibaEV-JRA-Live-Racecards", "KeibaEV-JRA-Live-Odds", "KeibaEV-Web-Publish"];
+  "KeibaEV-JRA-Live-Racecards", "KeibaEV-JRA-Live-Odds", "KeibaEV-JRA-Live-Odds-Offset", "KeibaEV-Web-Publish"];
 if (import.meta.url === pathToFileURL(process.argv[1]).href) runAudit();
 
 function runAudit() {
@@ -246,8 +247,9 @@ export function inspectLiveCoverage(database, artifact, liveOutput, options = {}
   const targetDates = [...new Set((liveOutput.targetDates ?? []).filter((date) => typeof date === "string" && date >= today))].sort();
   if (!targetDates.length) return { pass: false, reason: "no_current_target_dates", today, outputTargetDates: liveOutput.targetDates ?? [] };
   const placeholders = targetDates.map(() => "?").join(",");
-  const races = database.prepare(`select race_id,race_date from live_races where race_date in (${placeholders}) order by race_id`).all(...targetDates);
+  const races = database.prepare(`select race_id,race_date,start_time from live_races where race_date in (${placeholders}) order by race_id`).all(...targetDates);
   const raceIds = races.map((race) => race.race_id);
+  const raceById = new Map(races.map((race) => [race.race_id, race]));
   if (!raceIds.length) return { pass: false, reason: "no_target_races", today, targetDates };
   const racePlaceholders = raceIds.map(() => "?").join(",");
   const entries = database.prepare(`select race_id,horse_id from live_entries where race_id in (${racePlaceholders}) order by race_id,horse_id`).all(...raceIds);
@@ -270,6 +272,7 @@ export function inspectLiveCoverage(database, artifact, liveOutput, options = {}
   const invalidCandidates = candidates.filter((row) => !raceIds.includes(row.raceId) || row.status !== "ready"
     || row.predictionContext !== "pre_race" || row.modelVersion !== artifact.modelVersion || !row.oddsObservedAt
     || !Number.isInteger(row.baseBatchId) || !Number.isInteger(row.exoticBatchId)
+    || !isPreRaceObservation(raceById.get(row.raceId)?.race_date, raceById.get(row.raceId)?.start_time, row.oddsObservedAt)
     || !Number.isInteger(row.points) || row.points < 1 || row.totalInvestmentYen !== row.points * 100
     || !Number.isFinite(row.adoptedExpectedReturn));
   const predictionPass = raceIds.every((raceId) => entryCounts.get(raceId) >= 2

@@ -4,6 +4,7 @@ import path from "node:path";
 import zlib from "node:zlib";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
+import { isPreRaceObservation } from "./race-time.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const PRIVATE_DIR = path.join(ROOT, "data", "jra-free-private");
@@ -164,6 +165,12 @@ function auditBatch(database, batchId, expectedPages, table = "odds_snapshots") 
     ["exotic_selection_shape", details.every(validKey), details.length, "selection leg count and distinct positive horse numbers"],
     ["exotic_prices_present", Object.values(TYPES).every(({ betType }) => byType[betType]?.count > 0), details.length, "all five exotic bet types contain prices"],
   ];
+  if (table === "live_odds_snapshots") {
+    const timingRows = database.prepare(`select s.observed_at,r.race_date,r.start_time from live_odds_snapshots s
+      join live_races r on r.race_id=s.race_id where s.batch_id=?`).all(batchId);
+    const invalidTiming = timingRows.filter((row) => !isPreRaceObservation(row.race_date, row.start_time, row.observed_at)).length;
+    checks.push(["pre_race_observation_time", invalidTiming === 0, invalidTiming, "expected=0"]);
+  }
   const now = new Date().toISOString();
   const insert = database.prepare(`insert or replace into odds_quality_checks(batch_id,check_name,status,actual_value,details,checked_at) values(?,?,?,?,?,?)`);
   for (const [name, pass, value, checkDetails] of checks) insert.run(batchId, name, pass ? "pass" : "fail", value, checkDetails, now);
