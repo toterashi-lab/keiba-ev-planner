@@ -173,7 +173,8 @@ export function auditCompletedGoal(database, report, options = {}) {
     && ["latest-within-five-minutes", "race-day-block-bootstrap-2000", "positive_ev_roi_ci95_lower"].every((token) => ledgerEvaluator.includes(token));
   check(report, "immutable_pre_race_expectancy_ledger", ledgerImplementation, { ledgerTables });
   const pipelineFiles = options.pipelineFiles ?? ["scripts/jra-live-racecards.mjs", "scripts/jra-free-odds.mjs", "scripts/jra-free-exotic-odds.mjs",
-    "scripts/predict-live-racecards.mjs", "scripts/generate-live-market-ev.mjs", "scripts/evaluate-live-ev-ledger.mjs", "scripts/publish-live-web.ps1"]
+    "scripts/sync-jra-live-racecards.ps1", "scripts/predict-live-racecards.mjs", "scripts/generate-live-market-ev.mjs",
+    "scripts/evaluate-live-ev-ledger.mjs", "scripts/publish-live-web.ps1", "scripts/live-pipeline-workflow-check.mjs"]
   check(report, "automated_live_pipeline", pipelineFiles.every((file) => fs.existsSync(file)), { mode: "scheduled pre-race capture and publish" });
   const automationAuditPath = options.automationAuditPath ?? AUTOMATION_AUDIT;
   const automationAudit = fs.existsSync(automationAuditPath) ? JSON.parse(fs.readFileSync(automationAuditPath, "utf8")) : null;

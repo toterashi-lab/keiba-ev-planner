@@ -15,4 +15,8 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Live racecard capture failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\predict-live-racecards.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Live ability prediction failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\generate-live-market-ev.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Live AI output generation failed: $LASTEXITCODE" }
+  & (Join-Path $PSScriptRoot "publish-live-web.ps1")
+  if ($LASTEXITCODE -ne 0) { throw "Live racecard publication failed: $LASTEXITCODE" }
 } finally { Stop-Transcript | Out-Null }

@@ -4,7 +4,9 @@ import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { generateLiveMarketEv, resolveLiveRaceProbability, resolveLiveTargetDates } from "./generate-live-market-ev.mjs";
 
-const model = generateLiveMarketEv({ allowFixture: true });
+const fixtureOutputDirectory = fs.mkdtempSync(path.join(os.tmpdir(), "keiba-live-check-output-"));
+const fixtureOutputPath = path.join(fixtureOutputDirectory, "live-market-ev.json");
+const model = generateLiveMarketEv({ allowFixture: true, outputPath: fixtureOutputPath });
 const noOddsFixture = createNoOddsModelFixture();
 const betTypes = ["単勝", "複勝", "馬連", "ワイド", "馬単", "3連複", "3連単"];
 const structuredTypes = ["馬連", "ワイド", "馬単", "3連複", "3連単"];
@@ -74,6 +76,7 @@ for (const forbidden of ["race_results", "payouts", "finish_position", "payout_y
 }
 
 if (failures.length) {
+  fs.rmSync(fixtureOutputDirectory, { recursive: true, force: true });
   for (const failure of failures) console.error(`NG ${failure}`);
   process.exit(1);
 }
@@ -92,6 +95,7 @@ console.log(JSON.stringify({
   noOddsIntegration: { races: noOddsFixture.predictions.length, candidates: noOddsFixture.candidates.length },
   resultLeakage: "pass",
 }, null, 2));
+fs.rmSync(fixtureOutputDirectory, { recursive: true, force: true });
 
 function createNoOddsModelFixture() {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), "keiba-live-no-odds-"));

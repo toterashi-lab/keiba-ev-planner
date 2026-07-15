@@ -106,6 +106,7 @@ for (const file of [
   "install-live-odds-task.ps1",
   "generate-live-market-ev.mjs",
   "live-market-ev-check.mjs",
+  "live-pipeline-workflow-check.mjs",
   "evaluate-live-ev-ledger.mjs",
   "live-ev-ledger-check.mjs",
   "publish-live-web.ps1",
