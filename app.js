@@ -558,13 +558,19 @@ function isRecommendationReady(candidate) {
   const validatedContext = candidate.predictionContext === "pre_race"
     ? candidate.calibrationStatus === "pass"
     : candidate.predictionContext === "closing_final_validation"
-      && candidate.calculationMode === "closing_market_validation" && candidate.calibrationStatus === "benchmark";
+      && candidate.calculationMode === "closing_market_validation" && candidate.calibrationStatus === "benchmark"
+      || candidate.predictionContext === "out_of_sample_ability_model_with_market_benchmark"
+        && candidate.calculationMode === "ability_and_market_scenarios"
+        && candidate.abilityModelStatus === "pass";
   return candidate.status === "ready" && validatedContext
     && candidate.oddsObservedAt && candidate.modelVersion
     && ticketEngine?.SPECS?.[candidate.betType] && candidate.selection && candidateExpectedReturn(candidate) !== null;
 }
 
 function candidateExpectedReturn(candidate) {
+  if (modelData.logic?.abilityModelStatus === "pass"
+    && candidate.abilityExpectedReturn !== null && candidate.abilityExpectedReturn !== undefined
+    && Number.isFinite(Number(candidate.abilityExpectedReturn))) return Number(candidate.abilityExpectedReturn);
   if (candidate.conservativeExpectedReturn !== null && candidate.conservativeExpectedReturn !== undefined
     && Number.isFinite(Number(candidate.conservativeExpectedReturn))) return Number(candidate.conservativeExpectedReturn);
   if (Number(candidate.odds) > 1 && Number(candidate.conservativeProbability) > 0) return Number(candidate.odds) * Number(candidate.conservativeProbability);
@@ -617,7 +623,7 @@ function renderStrategies() {
     .sort((left, right) => candidateExpectedReturn(right) - candidateExpectedReturn(left));
   const logic = modelData.logic ?? {};
   els.modelStatus.textContent = modelData.status === "ready"
-    ? `期待値v2 市場基準検証 ${modelData.modelVersion ?? ""}` : "期待値モデル準備中";
+    ? `${logic.abilityModelStatus === "pass" ? "30年能力モデルEV" : "期待値v2 市場基準検証"} ${modelData.modelVersion ?? ""}` : "期待値モデル準備中";
   els.logicVersion.textContent = logic.engineVersion ?? "未設定";
   els.logicProbabilityMode.textContent = logic.probabilityMode === "market_baseline" ? "市場確率へ自動縮退" : "検証済み統合確率";
   els.logicDeploymentStatus.textContent = logic.deploymentStatus === "benchmark_only" ? "検証専用・購入対象外" : "検証ゲート合格";
@@ -629,7 +635,7 @@ function renderStrategies() {
   const points = Math.max(1, Number(top.points) || 1);
   const investment = points * ticketEngine.UNIT_STAKE;
   const expectedProfit = investment * edge;
-  const passes = edge >= 0.08;
+  const passes = edge >= 0.08 && logic.deploymentStatus !== "benchmark_only";
   els.evaluatedCandidates.textContent = `${number(candidates.length)}件`;
   els.expectedReturn.textContent = percent(expectedReturn);
   els.edgeValue.textContent = signedPercent(edge);

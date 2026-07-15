@@ -27,7 +27,8 @@ for (const race of expectedRaces) {
     if (!rows.some((row) => row.betType === betType && row.method === "BOX")) failures.push(`${race.key}: ${betType} BOX missing`);
     if (!rows.some((row) => row.betType === betType && row.method === "フォーメーション")) failures.push(`${race.key}: ${betType} formation missing`);
   }
-  if (rows.some((row) => row.status !== "ready" || row.points < 1 || !Number.isFinite(row.conservativeExpectedReturn))) {
+  if (rows.some((row) => row.status !== "ready" || row.points < 1 || !Number.isFinite(row.conservativeExpectedReturn)
+    || !Number.isFinite(row.abilityExpectedReturn))) {
     failures.push(`${race.key}: invalid candidate`);
   }
   const prediction = model.predictions?.find((row) => row.date === race.date && row.meetingName === race.meetingName && row.raceNo === race.raceNo);

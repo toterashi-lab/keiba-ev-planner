@@ -4,29 +4,42 @@ import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
 
 export function buildFeatureRows(database, options) {
+  const raceTable = options.completeOnly ? "complete_races" : "races";
+  const entryTable = options.completeOnly ? "complete_race_entries" : "race_entries";
+  const resultTable = options.completeOnly ? "complete_race_results" : "race_results";
   const rows = database.prepare(`select r.race_id,r.race_date,r.venue_code,r.race_number,r.race_class,r.surface,r.distance_m,r.direction,r.weather,r.going,r.start_time,
       e.horse_id,e.horse_number,e.gate_number,e.sex_age,e.carried_weight,e.body_weight,e.body_weight_delta,e.jockey_id,e.trainer_id,
       rr.finish_position,rr.final_sectional,rr.corner_positions,rr.popularity
-    from races r join race_entries e on e.race_id=r.race_id
-    left join race_results rr on rr.race_id=e.race_id and rr.horse_id=e.horse_id
-    where r.race_date <= ? order by r.race_date,r.venue_code,r.race_number,e.horse_number`).all(options.to);
+    from ${raceTable} r join ${entryTable} e on e.race_id=r.race_id
+    left join ${resultTable} rr on rr.race_id=e.race_id and rr.horse_id=e.horse_id
+    where r.race_date <= ? order by r.race_date,r.venue_code,r.race_number,e.horse_number`).iterate(options.to);
   const histories = new Map();
   const jockeys = new Map();
   const trainers = new Map();
   const output = [];
 
-  for (let start = 0; start < rows.length;) {
-    let end = start + 1;
-    while (end < rows.length && rows[end].race_id === rows[start].race_id) end += 1;
-    const raceRows = rows.slice(start, end);
+  const processRace = (raceRows) => {
+    if (!raceRows.length) return;
     const emit = raceRows[0].race_date >= options.from && raceRows[0].race_date <= options.to;
     if (emit) {
       const fieldPriorRates = raceRows.map((row) => rate(getStats(histories, row.horse_id)));
-      for (let index = 0; index < raceRows.length; index += 1) output.push(createFeatureRow(raceRows[index], histories, jockeys, trainers, fieldPriorRates));
+      for (let index = 0; index < raceRows.length; index += 1) {
+        const featureRow = createFeatureRow(raceRows[index], histories, jockeys, trainers, fieldPriorRates);
+        if (options.collect !== false) output.push(featureRow);
+        options.onRow?.(featureRow);
+      }
     }
     for (const row of raceRows) updateHistories(row, raceRows.length, histories, jockeys, trainers);
-    start = end;
+  };
+  let raceRows = [];
+  for (const row of rows) {
+    if (raceRows.length && raceRows[0].race_id !== row.race_id) {
+      processRace(raceRows);
+      raceRows = [];
+    }
+    raceRows.push(row);
   }
+  processRace(raceRows);
   return output;
 }
 
@@ -44,6 +57,7 @@ function createFeatureRow(row, histories, jockeys, trainers, fieldPriorRates) {
   return {
     raceId: row.race_id,
     horseId: row.horse_id,
+    raceDate: row.race_date,
     asOfTime: `${row.race_date}T${row.start_time || "00:00"}:00+09:00`,
     sourceTimingVerified: false,
     features: {

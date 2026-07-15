@@ -30,17 +30,21 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Model feature pipeline validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\model-validation-policy-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Model validation policy failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\train-expectancy-model-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Model training pipeline validation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\market-ev-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Market expectancy validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\jra-free-db.mjs" audit
   if ($LASTEXITCODE -ne 0) { throw "Database audit failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\build-public-demo.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Public build failed: $LASTEXITCODE" }
 
-  if ($DryRun) { exit 0 }
+  if ($DryRun) { return }
 
   Set-Location $public
-  git add -- README.md index.html data/database-status.js data/model-feature-coverage.js data/closing-odds-2026-07-11-2026-07-12.js
+  git add --all
   git diff --cached --quiet
-  if ($LASTEXITCODE -eq 0) { exit 0 }
+  if ($LASTEXITCODE -eq 0) { return }
   git commit -m ("Update JRA database status {0}" -f (Get-Date -Format "yyyy-MM-dd"))
   if ($LASTEXITCODE -ne 0) { throw "Git commit failed: $LASTEXITCODE" }
   git push origin main

@@ -134,8 +134,25 @@ function auditBatch(database, batchId, expectedPages) {
   const rows = database.prepare("select bet_type,count(*) count,count(distinct race_id) races,min(odds_low) minOdds from odds_snapshots where batch_id=? group by bet_type").all(batchId);
   const byType = Object.fromEntries(rows.map((row) => [row.bet_type, row]));
   const raceCount = expectedPages / Object.keys(TYPES).length;
-  const pass = Object.values(TYPES).every(({ betType }) => byType[betType]?.races === raceCount && byType[betType]?.count > 0 && byType[betType]?.minOdds >= 1);
-  return { pass, expectedPages, raceCount, byType };
+  const details = database.prepare(`select bet_type,selection_key,odds_low,odds_high,source_page_id from odds_snapshots where batch_id=?`).all(batchId);
+  const distinctPages = new Set(details.map((row) => row.source_page_id)).size;
+  const validKey = (row) => {
+    const legs = Object.values(TYPES).find((spec) => spec.betType === row.bet_type)?.legs;
+    const parts = row.selection_key.split("-").map(Number);
+    return parts.length === legs && parts.every((value) => Number.isInteger(value) && value > 0) && new Set(parts).size === parts.length;
+  };
+  const checks = [
+    ["exotic_page_coverage", distinctPages === expectedPages, distinctPages, `expected=${expectedPages}`],
+    ["exotic_race_coverage", Object.values(TYPES).every(({ betType }) => byType[betType]?.races === raceCount), raceCount, JSON.stringify(byType)],
+    ["exotic_bet_type_coverage", rows.length === Object.keys(TYPES).length, rows.length, `expected=${Object.keys(TYPES).length}`],
+    ["exotic_odds_domain", details.every((row) => row.odds_low >= 1 && row.odds_high >= row.odds_low), details.length, "odds_low>=1 and odds_high>=odds_low"],
+    ["exotic_selection_shape", details.every(validKey), details.length, "selection leg count and distinct positive horse numbers"],
+    ["exotic_prices_present", Object.values(TYPES).every(({ betType }) => byType[betType]?.count > 0), details.length, "all five exotic bet types contain prices"],
+  ];
+  const now = new Date().toISOString();
+  const insert = database.prepare(`insert or replace into odds_quality_checks(batch_id,check_name,status,actual_value,details,checked_at) values(?,?,?,?,?,?)`);
+  for (const [name, pass, value, checkDetails] of checks) insert.run(batchId, name, pass ? "pass" : "fail", value, checkDetails, now);
+  return { pass: checks.every((check) => check[1]), expectedPages, raceCount, byType, checks: checks.map(([name, pass, value]) => ({ name, pass, value })) };
 }
 
 function latestMeetingPages(database) {
@@ -175,7 +192,18 @@ async function main() {
   const command = process.argv[2] ?? "capture";
   const args = process.argv.slice(3);
   const options = Object.fromEntries(args.flatMap((value, index) => value.startsWith("--") ? [[value.slice(2), args[index + 1]]] : []));
-  if (command !== "capture") throw new Error("Commands: capture");
+  if (command === "audit") {
+    const database = new DatabaseSync(DB_PATH);
+    try {
+      const batch = database.prepare("select id,race_count from odds_ingestion_batches where source='JRA official exotic odds' and status='complete' order by id desc limit 1").get();
+      if (!batch) throw new Error("Completed exotic odds batch was not found");
+      const result = auditBatch(database, batch.id, batch.race_count * Object.keys(TYPES).length);
+      console.log(JSON.stringify({ batchId: batch.id, ...result }, null, 2));
+      if (!result.pass) process.exitCode = 2;
+    } finally { database.close(); }
+    return;
+  }
+  if (command !== "capture") throw new Error("Commands: capture, audit");
   let handle;
   try { handle = fs.openSync(LOCK_PATH, "wx"); fs.writeFileSync(handle, JSON.stringify({ pid: process.pid, startedAt: new Date().toISOString() })); await capture(options); }
   finally { if (handle !== undefined) fs.closeSync(handle); fs.rmSync(LOCK_PATH, { force: true }); }

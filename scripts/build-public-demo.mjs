@@ -65,6 +65,11 @@ for (const file of [
   "model-feature-pipeline.mjs",
   "model-feature-pipeline-check.mjs",
   "model-validation-policy-check.mjs",
+  "train-expectancy-model.mjs",
+  "train-expectancy-model-check.mjs",
+  "backfill-readiness.mjs",
+  "run-post-backfill-pipeline.ps1",
+  "install-post-backfill-task.ps1",
 ]) copy(path.join("scripts", file), path.join(stageDir, "scripts", file));
 writeBrowserData(path.join(stageDataDir, "meet-2026-07-11-2026-07-12.js"), "KEIBA_REFERENCE_MEETINGS", programmeData);
 writeBrowserData(path.join(stageDataDir, "result-links-2026-07-11-2026-07-12.js"), "KEIBA_RESULT_LINKS", resultLinksData);

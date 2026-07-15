@@ -305,7 +305,7 @@ function seedBackfillJobs(from, to) {
 async function runQueue(limit, delayMs) {
   seedBackfillJobs(options.from ?? "1996-01", options.to ?? currentMonth());
   const jobs = db.prepare(`select month from backfill_jobs
-    where status in ('queued','failed') and attempts < 5 order by month desc limit ?`).all(limit);
+    where status in ('queued','failed') and attempts < 12 order by month desc limit ?`).all(limit);
   for (const job of jobs) {
     try {
       await ingestMonth(job.month, delayMs);
