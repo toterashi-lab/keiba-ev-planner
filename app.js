@@ -179,7 +179,11 @@ function renderDatabaseStatus() {
   const validationText = validation
     ? ` / ROI検証 ${number(validation.bets)}/1,000点・${number(validation.raceDays)}/180日`
     : " / ROI検証 蓄積待ち";
-  els.dbUpdatedAt.textContent = `公開集計 ${formatTimestamp(databaseData.asOf)} / 完成月 ${databaseData.earliestComplete}〜${databaseData.latestComplete}${preflightText}${validationText}`;
+  const fieldAudit = databaseData.fieldAvailabilityAudit;
+  const fieldAuditText = fieldAudit
+    ? ` / 原本照合 ${number(fieldAudit.rawRacePagesVerified)}頁・公式空欄/計不${number(fieldAudit.officiallyUnavailableCells)}セル・パーサー欠落${number(fieldAudit.parserMissingCells)}セル`
+    : " / 原本照合 未実施";
+  els.dbUpdatedAt.textContent = `公開集計 ${formatTimestamp(databaseData.asOf)} / 完成月 ${databaseData.earliestComplete}〜${databaseData.latestComplete}${fieldAuditText}${preflightText}${validationText}`;
   els.heroDbMonths.textContent = `${databaseData.completeMonths} / ${databaseData.totalMonths}か月`;
   els.heroDbRaces.textContent = `${number(databaseData.races)}レース蓄積`;
 }

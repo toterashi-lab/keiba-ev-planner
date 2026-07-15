@@ -61,12 +61,16 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Goal completion audit unit check failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\publish-workflow-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Publication workflow validation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\post-backfill-workflow-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Post-backfill workflow validation failed: $LASTEXITCODE" }
   & "scripts\audit-automation-tasks.ps1"
   if ($LASTEXITCODE -ne 0) { throw "Automation task audit failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\jra-free-db.mjs" lock-self-check
   if ($LASTEXITCODE -ne 0) { throw "Database worker lock validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\jra-free-db.mjs" audit
   if ($LASTEXITCODE -ne 0) { throw "Database audit failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\audit-field-availability.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Source field availability audit failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\build-public-demo.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Public build failed: $LASTEXITCODE" }
 

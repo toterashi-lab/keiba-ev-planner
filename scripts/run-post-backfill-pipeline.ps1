@@ -21,6 +21,8 @@ $logPath = Join-Path $logDir ("post-backfill-{0}.log" -f (Get-Date -Format "yyyy
 Start-Transcript -Path $logPath | Out-Null
 try {
   Set-Location $root
+  & $node --no-warnings "scripts\post-backfill-workflow-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Post-backfill workflow validation failed: $LASTEXITCODE" }
   $statusJson = & $node --no-warnings "scripts\jra-free-db.mjs" status
   if ($LASTEXITCODE -ne 0) { throw "Database status failed: $LASTEXITCODE" }
   $status = $statusJson | ConvertFrom-Json
@@ -59,6 +61,8 @@ try {
 
   & $node --no-warnings "scripts\jra-free-db.mjs" audit
   if ($LASTEXITCODE -ne 0) { throw "Full database audit failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\audit-field-availability.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Source field availability audit failed: $LASTEXITCODE" }
   $artifact = Join-Path $privateDir "models\ability-softmax-v1.json"
   $needsTraining = $ForceModel -or -not (Test-Path $artifact)
   if (-not $needsTraining) {

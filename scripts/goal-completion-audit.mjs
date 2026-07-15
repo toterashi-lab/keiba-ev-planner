@@ -8,6 +8,7 @@ import { inspectBackfillReadiness } from "./backfill-readiness.mjs";
 const PRIVATE_DIR = path.join("data", "jra-free-private");
 const OUTPUT = path.join(PRIVATE_DIR, "models", "goal-completion-audit.json");
 const DATABASE_AUDIT = path.join(PRIVATE_DIR, "models", "database-audit.json");
+const FIELD_AVAILABILITY_AUDIT = path.join(PRIVATE_DIR, "models", "field-availability-audit.json");
 const PUBLICATION_RECEIPT = path.join(PRIVATE_DIR, "models", "publication-receipt.json");
 const AUTOMATION_AUDIT = path.join(PRIVATE_DIR, "models", "automation-audit.json");
 const PUBLICATION_MANIFEST = path.join("public", "data", "publication-manifest.json");
@@ -64,6 +65,16 @@ export function auditCompletedGoal(database, report, options = {}) {
     && databaseAudit.corruptRaw === 0
     && databaseAudit.orphanRaces === 0,
   databaseAudit ?? { path: databaseAuditPath, status: "missing" });
+  const fieldAvailabilityAuditPath = options.fieldAvailabilityAuditPath ?? FIELD_AVAILABILITY_AUDIT;
+  const fieldAvailabilityAudit = fs.existsSync(fieldAvailabilityAuditPath)
+    ? JSON.parse(fs.readFileSync(fieldAvailabilityAuditPath, "utf8")) : null;
+  check(report, "source_field_availability_audit", fieldAvailabilityAudit?.version === "field-availability-audit-v1"
+    && fieldAvailabilityAudit.pass === true
+    && fieldAvailabilityAudit.completeRunners === coverage.runners
+    && fieldAvailabilityAudit.fields?.length === 3
+    && fieldAvailabilityAudit.fields.every((field) => field.parserMissingRows === 0
+      && field.missingRows === field.officiallyUnavailableRows),
+  fieldAvailabilityAudit ?? { path: fieldAvailabilityAuditPath, status: "missing" });
 
   const artifactPath = options.artifactPath ?? ARTIFACT;
   const marketOutputPath = options.marketOutputPath ?? MARKET_OUTPUT;

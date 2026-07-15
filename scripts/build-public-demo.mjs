@@ -89,10 +89,12 @@ for (const file of [
   "train-expectancy-model-check.mjs",
   "train-expectancy-model-unit-check.mjs",
   "model-training-preflight.mjs",
+  "audit-field-availability.mjs",
   "backfill-readiness.mjs",
   "goal-completion-audit.mjs",
   "goal-completion-audit-check.mjs",
   "publish-workflow-check.mjs",
+  "post-backfill-workflow-check.mjs",
   "audit-automation-tasks.ps1",
   "run-post-backfill-pipeline.ps1",
   "install-post-backfill-task.ps1",
@@ -254,6 +256,8 @@ function exportDatabaseStatus() {
     const preflight = fs.existsSync(preflightPath) ? JSON.parse(fs.readFileSync(preflightPath, "utf8")) : null;
     const liveValidationPath = path.join("data", "jra-free-private", "models", "live-ev-validation.json");
     const liveValidation = fs.existsSync(liveValidationPath) ? JSON.parse(fs.readFileSync(liveValidationPath, "utf8")) : null;
+    const fieldAuditPath = path.join("data", "jra-free-private", "models", "field-availability-audit.json");
+    const fieldAudit = fs.existsSync(fieldAuditPath) ? JSON.parse(fs.readFileSync(fieldAuditPath, "utf8")) : null;
     const status = {
       asOf: new Date().toISOString(),
       completeMonths: jobs.complete ?? 0,
@@ -281,7 +285,23 @@ function exportDatabaseStatus() {
         maximumDrawdown: liveValidation.metrics?.maximumDrawdown ?? null,
       } : null,
       ...totals,
-      integrityStatus: "pass",
+      integrityStatus: fieldAudit?.pass === true && fieldAudit.completeRunners === totals.runners ? "pass" : "fail",
+      fieldAvailabilityAudit: fieldAudit ? {
+        checkedAt: fieldAudit.checkedAt,
+        pass: fieldAudit.pass,
+        completeRunners: fieldAudit.completeRunners,
+        currentRunners: totals.runners,
+        coverageCurrent: fieldAudit.completeRunners === totals.runners,
+        rawRacePagesVerified: fieldAudit.rawRacePagesVerified,
+        officiallyUnavailableCells: fieldAudit.fields.reduce((sum, field) => sum + field.officiallyUnavailableRows, 0),
+        parserMissingCells: fieldAudit.fields.reduce((sum, field) => sum + field.parserMissingRows, 0),
+        fields: fieldAudit.fields.map((field) => ({
+          field: field.field,
+          missingRows: field.missingRows,
+          officiallyUnavailableRows: field.officiallyUnavailableRows,
+          parserMissingRows: field.parserMissingRows,
+        })),
+      } : null,
       evStatus: "insufficient",
       trainingPreflight: preflight?.status === "pass" ? {
         checkedAt: preflight.checkedAt,

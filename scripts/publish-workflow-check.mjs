@@ -5,6 +5,7 @@ const ordered = [
   '"scripts\\goal-completion-audit-check.mjs"',
   '"scripts\\audit-automation-tasks.ps1"',
   '"scripts\\jra-free-db.mjs" audit',
+  '"scripts\\audit-field-availability.mjs"',
   '"scripts\\build-public-demo.mjs"',
   "if ($DryRun) { return }",
   "git push origin main",

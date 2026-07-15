@@ -19,6 +19,8 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Live expectancy generation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\live-market-ev-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Live expectancy validation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\audit-field-availability.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Source field availability audit failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\build-public-demo.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Public build failed: $LASTEXITCODE" }
   Set-Location $public
