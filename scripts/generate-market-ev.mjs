@@ -3,6 +3,7 @@ import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
 import { EXPECTANCY_ENGINE_VERSION, normalizeMarket, selectProbability } from "../model/expectancy-engine-v2.mjs";
+import { buildStructuredDefinitions } from "../model/structured-ticket-search.mjs";
 
 await import(pathToFileURL(path.resolve("ticket-engine.js")).href);
 
@@ -77,7 +78,7 @@ export function generateMarketEv() {
         });
         evaluated += singles.length;
         raceCandidates.push(...singles.sort(byExpectedReturn).slice(0, 12));
-        raceCandidates.push(...structuredCandidates(race, dbType, betType, rows, horseProbabilities, structuralBooks[dbType], researchStructuralBooks[dbType], names));
+        raceCandidates.push(...structuredCandidates(race, dbType, betType, rows, horseProbabilities, researchHorseProbabilities, structuralBooks[dbType], researchStructuralBooks[dbType], names));
       }
       evaluatedByRace[race.race_id] = evaluated;
       candidates.push(...raceCandidates);
@@ -147,16 +148,12 @@ function makeAiPrediction(race, horseProbabilities, names, raceCandidates, abili
   };
 }
 
-function structuredCandidates(race, dbType, betType, rows, horseProbabilities, structuralBook, researchStructuralBook, names) {
+function structuredCandidates(race, dbType, betType, rows, marketHorseProbabilities, abilityHorseProbabilities, structuralBook, researchStructuralBook, names) {
   if (["win", "place"].includes(dbType)) return [];
-  const ranked = Object.entries(horseProbabilities).sort((a, b) => b[1] - a[1]).map(([number]) => Number(number));
-  const tickets = [
-    { method: "BOX", horses: ranked.slice(0, 3) },
-    { method: "BOX", horses: ranked.slice(0, 4) },
-  ];
   const legs = engine.SPECS[betType].legs;
-  if (legs === 2) tickets.push({ method: "フォーメーション", groups: [[ranked[0]], ranked.slice(1, 5)] });
-  if (legs === 3) tickets.push({ method: "フォーメーション", groups: [[ranked[0]], ranked.slice(1, 3), ranked.slice(1, 6)] });
+  const tickets = buildStructuredDefinitions({ legs, rows, marketHorse: marketHorseProbabilities,
+    abilityHorse: abilityHorseProbabilities, abilityBook: researchStructuralBook })
+    .map((definition) => ({ ...definition, method: definition.method === "formation" ? "フォーメーション" : definition.method }));
   const rowMap = new Map(rows.map((row) => [row.selection_key, row]));
   return tickets.flatMap((ticket) => {
     const combinations = engine.expandTicket({ betType, ...ticket });
@@ -175,7 +172,7 @@ function structuredCandidates(race, dbType, betType, rows, horseProbabilities, s
     const display = ticket.method === "BOX"
       ? `${ticket.horses.join("-")} BOX`
       : ticket.groups.map((group) => group.join(",")).join(" → ");
-    return [makeCandidate(race, betType, ticket.method, combinations.flat(), selectedRows, probability, names, combinations, probabilities, display, null, researchProbabilities)];
+    return [makeCandidate(race, betType, ticket.method, combinations.flat(), selectedRows, probability, names, combinations, probabilities, display, null, researchProbabilities, ticket.optimizationScenarios)];
   });
 }
 
@@ -213,7 +210,7 @@ function buildStructuralBooks(horseProbabilities) {
   return books;
 }
 
-function makeCandidate(race, betType, method, selection, rows, probability, names, combinations = null, itemProbabilities = null, displayOverride = null, researchProbability = null, researchItemProbabilities = null) {
+function makeCandidate(race, betType, method, selection, rows, probability, names, combinations = null, itemProbabilities = null, displayOverride = null, researchProbability = null, researchItemProbabilities = null, optimizationScenarios = ["single_point"]) {
   const expectedReturn = rows.reduce((sum, row, index) => {
     const itemProbability = itemProbabilities?.[index] ?? probability;
     return sum + row.odds_low * itemProbability;
@@ -246,6 +243,7 @@ function makeCandidate(race, betType, method, selection, rows, probability, name
     oddsObservedAt: rows[0].observed_at,
     modelVersion: VALIDATION_ARTIFACT?.modelVersion ?? "expectancy-v2-market-baseline",
     calibrationStatus: "benchmark",
+    optimizationScenarios,
     comment: `期待値v2の市場基準検証。JRA公式最終オッズで${method} ${rows.length}点を各100円計算。学習・校正ゲート未合格のため能力モデルは混合せず、払戻結果も確率算出に使用していません。`,
   };
 }

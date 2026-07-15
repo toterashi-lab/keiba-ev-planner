@@ -26,6 +26,9 @@ for (const race of expectedRaces) {
   for (const betType of ["馬連", "ワイド", "馬単", "3連複", "3連単"]) {
     if (!rows.some((row) => row.betType === betType && row.method === "BOX")) failures.push(`${race.key}: ${betType} BOX missing`);
     if (!rows.some((row) => row.betType === betType && row.method === "フォーメーション")) failures.push(`${race.key}: ${betType} formation missing`);
+    const scenarios = new Set(rows.filter((row) => row.betType === betType && row.method !== "1点")
+      .flatMap((row) => row.optimizationScenarios ?? []));
+    if (!scenarios.has("ability_probability") || !scenarios.has("component_ev")) failures.push(`${race.key}: ${betType} optimization scenarios missing`);
   }
   if (rows.some((row) => row.status !== "ready" || row.points < 1 || !Number.isFinite(row.conservativeExpectedReturn)
     || !Number.isFinite(row.abilityExpectedReturn))) {

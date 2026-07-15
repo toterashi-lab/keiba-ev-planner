@@ -707,6 +707,7 @@ function renderAutomaticRationale(candidate, candidateCount) {
   const investment = points * ticketEngine.UNIT_STAKE;
   const comments = [
     ["全自動比較", `${candidateCount}候補を安全側期待回収率で比較し、${escapeHtml(candidate.betType)} ${escapeHtml(candidate.method ?? "1点")}を最上位としました。`],
+    ["買い目探索", `${escapeHtml(optimizationScenarioText(candidate))}から生成した候補です。同一買い目の重複は統合しています。`],
     ["100円固定", `${points}点を各100円、総投資${yen(investment)}として期待利益${signedYen(Math.round(investment * edge))}を計算します。`],
     ["確率品質", `モデル${escapeHtml(candidate.modelVersion)}、校正検査${escapeHtml(candidate.calibrationStatus)}。校正不合格候補は自動除外します。`],
     ["時点整合", `オッズ観測時刻${escapeHtml(candidate.oddsObservedAt)}以前の特徴量だけで計算し、結果と払戻は使用しません。`],
@@ -721,8 +722,19 @@ function automaticCandidateCard(candidate, rank) {
   const points = Math.max(1, Number(candidate.points) || 1);
   const investment = points * ticketEngine.UNIT_STAKE;
   return `<article class="strategy-card"><header><strong>${rank}位 ${escapeHtml(candidate.betType)}・${escapeHtml(candidate.method ?? "1点")}</strong><span>${points}点</span></header>
-    <dl><div><dt>買い目</dt><dd>${escapeHtml(candidate.selection)}</dd></div><div><dt>総投資</dt><dd>${yen(investment)}</dd></div><div><dt>期待回収率</dt><dd>${percent(expectedReturn)}</dd></div><div><dt>安全側EV</dt><dd class="${edge >= 0 ? "positive" : "negative"}">${signedPercent(edge)}</dd></div><div><dt>期待利益</dt><dd>${signedYen(Math.round(investment * edge))}</dd></div></dl>
+    <dl><div><dt>買い目</dt><dd>${escapeHtml(candidate.selection)}</dd></div><div><dt>探索根拠</dt><dd>${escapeHtml(optimizationScenarioText(candidate))}</dd></div><div><dt>総投資</dt><dd>${yen(investment)}</dd></div><div><dt>期待回収率</dt><dd>${percent(expectedReturn)}</dd></div><div><dt>安全側EV</dt><dd class="${edge >= 0 ? "positive" : "negative"}">${signedPercent(edge)}</dd></div><div><dt>期待利益</dt><dd>${signedYen(Math.round(investment * edge))}</dd></div></dl>
     <footer class="${edge >= 0.08 ? "" : "reject"}">${edge >= 0.08 ? "購入候補" : "見送り"}</footer></article>`;
+}
+
+function optimizationScenarioText(candidate) {
+  const labels = {
+    single_point: "1点全通り",
+    ability_probability: "能力確率上位",
+    market_probability: "市場確率上位",
+    component_ev: "構成点EV上位",
+  };
+  const scenarios = candidate.optimizationScenarios?.length ? candidate.optimizationScenarios : ["single_point"];
+  return scenarios.map((scenario) => labels[scenario] ?? scenario).join("・");
 }
 
 function selectedMeeting() {

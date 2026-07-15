@@ -107,6 +107,11 @@ export function auditCompletedGoal(database, report, options = {}) {
     if (!BET_TYPES.every((type) => rows.some((row) => row.betType === type))) completeTicketCoverage = false;
     if (!STRUCTURED_TYPES.every((type) => rows.some((row) => row.betType === type && row.method === "BOX")
       && rows.some((row) => row.betType === type && row.method === "フォーメーション"))) completeTicketCoverage = false;
+    if (!STRUCTURED_TYPES.every((type) => {
+      const scenarios = new Set(rows.filter((row) => row.betType === type && row.method !== "1点")
+        .flatMap((row) => row.optimizationScenarios ?? []));
+      return scenarios.has("ability_probability") && scenarios.has("component_ev");
+    })) completeTicketCoverage = false;
     if (rows.some((row) => row.points < 1 || row.totalInvestmentYen !== row.points * 100 || !Number.isFinite(row.adoptedExpectedReturn))) completeTicketCoverage = false;
   }
   check(report, "all_ticket_expectancy_rankings", completeTicketCoverage && market.unitStakeYen === 100, {

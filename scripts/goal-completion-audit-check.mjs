@@ -80,5 +80,6 @@ try {
 }
 
 function candidate(raceNo, betType, method) {
-  return { date: "2026-01-01", meetingName: "検査開催", raceNo, betType, method, points: 1, totalInvestmentYen: 100, adoptedExpectedReturn: 1.05 };
+  return { date: "2026-01-01", meetingName: "検査開催", raceNo, betType, method, points: 1, totalInvestmentYen: 100,
+    adoptedExpectedReturn: 1.05, optimizationScenarios: method === "1点" ? ["single_point"] : ["ability_probability", "component_ev"] };
 }

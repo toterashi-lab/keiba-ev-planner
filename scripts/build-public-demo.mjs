@@ -42,6 +42,7 @@ copy("docs/reference-site-analysis.md", path.join(stageDir, "docs", "reference-s
 copy("model/feature-registry.mjs", path.join(stageDir, "model", "feature-registry.mjs"));
 copy("model/validation-policy.mjs", path.join(stageDir, "model", "validation-policy.mjs"));
 copy("model/expectancy-engine-v2.mjs", path.join(stageDir, "model", "expectancy-engine-v2.mjs"));
+copy("model/structured-ticket-search.mjs", path.join(stageDir, "model", "structured-ticket-search.mjs"));
 copy("docs/model-feature-research.md", path.join(stageDir, "docs", "model-feature-research.md"));
 for (const file of [
   "jra-free-db.mjs",
@@ -62,6 +63,7 @@ for (const file of [
   "ev-logic-check.mjs",
   "performance-benchmark-check.mjs",
   "ticket-engine-check.mjs",
+  "structured-ticket-search-check.mjs",
   "feature-registry-check.mjs",
   "model-feature-pipeline.mjs",
   "model-feature-pipeline-check.mjs",
@@ -95,7 +97,7 @@ writeBrowserData(path.join(stageDataDir, "results-2026-07-11-2026-07-12.js"), "K
 writeBrowserData(path.join(stageDataDir, "database-status.js"), "KEIBA_DATABASE_STATUS", databaseExport.status);
 writeBrowserData(path.join(stageDataDir, "model-feature-coverage.js"), "KEIBA_MODEL_FEATURE_COVERAGE", featureCoverage);
 writeBrowserData(path.join(stageDataDir, "closing-odds-2026-07-11-2026-07-12.js"), "KEIBA_CLOSING_ODDS", databaseExport.odds);
-writeBrowserData(path.join(stageDataDir, "model-outputs-2026-07-11-2026-07-12.js"), "KEIBA_MODEL_OUTPUTS", modelOutputs);
+writeBrowserData(path.join(stageDataDir, "model-outputs-2026-07-11-2026-07-12.js"), "KEIBA_MODEL_OUTPUTS", modelOutputs, 0);
 writeBrowserData(path.join(stageDataDir, "live-racecards.js"), "KEIBA_LIVE_RACECARDS", liveExport.racecards);
 writeBrowserData(path.join(stageDataDir, "live-model-outputs.js"), "KEIBA_LIVE_MODEL_OUTPUTS", liveExport.modelOutputs);
 
@@ -160,8 +162,8 @@ function copy(from, to) {
   fs.copyFileSync(from, to);
 }
 
-function writeBrowserData(file, globalName, value) {
-  fs.writeFileSync(file, `window.${globalName} = ${JSON.stringify(value, null, 2)};\n`, "utf8");
+function writeBrowserData(file, globalName, value, indentation = 2) {
+  fs.writeFileSync(file, `window.${globalName} = ${JSON.stringify(value, null, indentation)};\n`, "utf8");
 }
 
 function sameSet(left, right) {

@@ -26,6 +26,9 @@ for (const raceId of raceIds) {
   for (const betType of structuredTypes) {
     if (!rows.some((row) => row.betType === betType && row.method === "BOX")) failures.push(`${raceId}: ${betType} BOX missing`);
     if (!rows.some((row) => row.betType === betType && row.method === "フォーメーション")) failures.push(`${raceId}: ${betType} formation missing`);
+    const scenarios = new Set(rows.filter((row) => row.betType === betType && row.method !== "1点")
+      .flatMap((row) => row.optimizationScenarios ?? []));
+    if (!scenarios.has("ability_probability") || !scenarios.has("component_ev")) failures.push(`${raceId}: ${betType} optimization scenarios missing`);
   }
   if (rows.some((row) => row.status !== "ready"
     || !Number.isInteger(row.points) || row.points < 1

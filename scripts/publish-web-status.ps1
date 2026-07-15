@@ -29,6 +29,8 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Performance benchmark validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\ticket-engine-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Ticket engine validation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\structured-ticket-search-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Structured ticket search validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\feature-registry-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Feature registry validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\model-feature-pipeline-check.mjs"

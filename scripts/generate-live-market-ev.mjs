@@ -3,6 +3,7 @@ import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
 import { normalizeMarket, selectProbability } from "../model/expectancy-engine-v2.mjs";
+import { buildStructuredDefinitions } from "../model/structured-ticket-search.mjs";
 
 await import(pathToFileURL(path.resolve("ticket-engine.js")).href);
 const engine = globalThis.KEIBA_TICKET_ENGINE;
@@ -64,7 +65,7 @@ export function generateLiveMarketEv(options = {}) {
         });
         evaluated += singles.length;
         raceCandidates.push(...singles.sort(byAbilityEv).slice(0, 12));
-        raceCandidates.push(...structured(race, type, label, rows, marketHorse, marketBooks[type], abilityBooks[type], names, artifact, hasModel));
+        raceCandidates.push(...structured(race, type, label, rows, marketHorse, abilityHorse, marketBooks[type], abilityBooks[type], names, artifact, hasModel));
       }
       evaluatedByRace[race.race_id] = evaluated;
       candidates.push(...raceCandidates);
@@ -94,21 +95,10 @@ export function generateLiveMarketEv(options = {}) {
   } finally { db.close(); }
 }
 
-function structured(race, type, label, rows, horseProbabilities, marketBook, abilityBook, names, artifact, hasModel) {
+function structured(race, type, label, rows, marketHorse, abilityHorse, marketBook, abilityBook, names, artifact, hasModel) {
   if (type === "win" || type === "place") return [];
-  const ranked = Object.entries(horseProbabilities).sort((left, right) => right[1] - left[1]).map(([number]) => Number(number));
-  const definitions = [
-    { method: "BOX", horses: ranked.slice(0, 3) },
-    { method: "BOX", horses: ranked.slice(0, 4) },
-    { method: "BOX", horses: ranked.slice(0, 5) },
-  ];
-  if (engine.SPECS[label].legs === 2) {
-    definitions.push({ method: "フォーメーション", groups: [[ranked[0]], ranked.slice(1, 5)] });
-    definitions.push({ method: "フォーメーション", groups: [ranked.slice(0, 2), ranked.slice(2, 6)] });
-  } else {
-    definitions.push({ method: "フォーメーション", groups: [[ranked[0]], ranked.slice(1, 3), ranked.slice(1, 6)] });
-    definitions.push({ method: "フォーメーション", groups: [ranked.slice(0, 2), ranked.slice(0, 4), ranked.slice(1, 7)] });
-  }
+  const definitions = buildStructuredDefinitions({ legs: engine.SPECS[label].legs, rows, marketHorse, abilityHorse, abilityBook })
+    .map((definition) => ({ ...definition, method: definition.method === "formation" ? "フォーメーション" : definition.method }));
   const rowMap = new Map(rows.map((row) => [row.selection_key, row]));
   return definitions.flatMap((definition) => {
     const combinations = engine.expandTicket({ betType: label, ...definition });
@@ -120,11 +110,11 @@ function structured(race, type, label, rows, horseProbabilities, marketBook, abi
     });
     const abilityProbabilities = combinations.map((selection, index) => abilityBook.get(engine.selectionKey(selection, ORDERED.has(type))) ?? marketProbabilities[index]);
     const display = definition.method === "BOX" ? `${definition.horses.join("-")} BOX` : definition.groups.map((group) => group.join(",")).join(" → ");
-    return [candidate(race, label, definition.method, display, selected, marketProbabilities, abilityProbabilities, names, artifact, hasModel)];
+    return [candidate(race, label, definition.method, display, selected, marketProbabilities, abilityProbabilities, names, artifact, hasModel, definition.optimizationScenarios)];
   });
 }
 
-function candidate(race, betType, method, selectionKey, rows, probabilities, abilityProbabilities, names, artifact, hasModel) {
+function candidate(race, betType, method, selectionKey, rows, probabilities, abilityProbabilities, names, artifact, hasModel, optimizationScenarios = ["single_point"]) {
   const marketEv = average(rows.map((row, index) => row.odds_low * probabilities[index]));
   const abilityEv = average(rows.map((row, index) => row.odds_low * abilityProbabilities[index]));
   const display = method === "1点" ? selectionKey.split("-").map((number) => `${number} ${names.get(Number(number)) ?? ""}`.trim()).join("・") : selectionKey;
@@ -140,6 +130,7 @@ function candidate(race, betType, method, selectionKey, rows, probabilities, abi
     status: "ready", predictionContext: "pre_race", calculationMode: hasModel ? "ability_and_market_scenarios" : "market_baseline",
     oddsObservedAt: rows.reduce((latest, row) => row.observed_at > latest ? row.observed_at : latest, ""), modelVersion: artifact?.modelVersion ?? "market-baseline",
     calibrationStatus: hasModel ? "research_pass" : "benchmark",
+    optimizationScenarios,
     componentSelectionKeys: rows.map((row) => row.selection_key),
     componentOdds: rows.map((row) => row.odds_low),
     componentMarketProbabilities: probabilities,
