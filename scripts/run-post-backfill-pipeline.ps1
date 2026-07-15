@@ -60,8 +60,12 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Model numerical unit check failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\market-ev-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Expectancy output check failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\live-market-ev-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Live expectancy capability check failed: $LASTEXITCODE" }
   & (Join-Path $PSScriptRoot "publish-web-status.ps1")
   if ($LASTEXITCODE -ne 0) { throw "Web publish failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\goal-completion-audit.mjs" --require-complete
+  if ($LASTEXITCODE -ne 0) { throw "Goal completion audit failed: $LASTEXITCODE" }
 } finally {
   Stop-Transcript | Out-Null
   if ($lock) { $lock.Dispose() }

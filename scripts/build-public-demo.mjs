@@ -70,6 +70,8 @@ for (const file of [
   "train-expectancy-model-check.mjs",
   "train-expectancy-model-unit-check.mjs",
   "backfill-readiness.mjs",
+  "goal-completion-audit.mjs",
+  "goal-completion-audit-check.mjs",
   "run-post-backfill-pipeline.ps1",
   "install-post-backfill-task.ps1",
   "jra-live-racecards.mjs",

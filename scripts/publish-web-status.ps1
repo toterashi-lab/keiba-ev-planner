@@ -47,6 +47,10 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Live odds validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\live-market-ev-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Live expectancy validation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\goal-completion-audit.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Goal completion audit failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\goal-completion-audit-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Goal completion audit unit check failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\jra-free-db.mjs" audit
   if ($LASTEXITCODE -ne 0) { throw "Database audit failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\build-public-demo.mjs"

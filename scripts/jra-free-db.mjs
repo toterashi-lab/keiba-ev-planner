@@ -783,6 +783,11 @@ function statusReport() {
     (select count(*) from complete_entry_quality where official_time_available=0) missingOfficialTimeRows`).get();
   const latestComplete = db.prepare("select max(month) month from backfill_jobs where status='complete'").get().month;
   const earliestComplete = db.prepare("select min(month) month from backfill_jobs where status='complete'").get().month;
+  const activeJobs = db.prepare(`select month,attempts,started_at,updated_at from backfill_jobs
+    where status='running' order by started_at`).all();
+  const failedJobs = db.prepare(`select month,attempts,last_error,updated_at from backfill_jobs
+    where status='failed' order by updated_at desc`).all();
+  const totalJobs = Object.values(jobs).reduce((sum, count) => sum + count, 0);
   const latestModel = db.prepare("select id from model_runs order by created_at desc limit 1").get();
   const requiredGates = ["calibration", "walk_forward", "odds_coverage", "odds_freshness", "drawdown"];
   const passedGates = latestModel ? db.prepare(`select gate_name from model_quality_gates
@@ -792,6 +797,9 @@ function statusReport() {
     database: DB_PATH,
     parserVersion: PARSER_VERSION,
     jobs,
+    progressPercent: totalJobs ? ((jobs.complete ?? 0) / totalJobs) * 100 : 0,
+    activeJobs,
+    failedJobs,
     ...totals,
     earliestComplete,
     latestComplete,
