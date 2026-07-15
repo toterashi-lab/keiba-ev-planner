@@ -78,18 +78,26 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "New model is stale against the current database: $LASTEXITCODE" }
   & $node --no-warnings "scripts\finish-order-probabilities-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "All-ticket finish probability validation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\train-reference-asof-model.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Reference as-of model training failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\generate-market-ev.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Reference expectancy generation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\evaluate-reference-ev.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Reference expectancy external audit failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\generate-market-ev.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Audited reference expectancy generation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\predict-live-racecards.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Live ability prediction failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\generate-live-market-ev.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Live expectancy generation failed: $LASTEXITCODE" }
-  & $node --no-warnings "scripts\generate-market-ev.mjs"
-  if ($LASTEXITCODE -ne 0) { throw "Expectancy generation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\train-expectancy-model-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Model pipeline check failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\train-expectancy-model-unit-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Model numerical unit check failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\market-ev-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Expectancy output check failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\reference-asof-model-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Reference as-of model audit failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\live-market-ev-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Live expectancy capability check failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\evaluate-live-ev-ledger.mjs"

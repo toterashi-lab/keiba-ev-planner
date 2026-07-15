@@ -6,6 +6,7 @@ import { evaluate, evaluateTicketProbabilities, FEATURE_KEYS, fitModel, fitTempe
 
 const DATABASE = path.join("data", "jra-free-private", "keiba.sqlite");
 const PREFLIGHT = path.join("data", "jra-free-private", "models", "training-preflight.json");
+const FULL_MODEL = path.join("data", "jra-free-private", "models", "ability-softmax-v1.json");
 const OUTPUT = path.join("data", "jra-free-private", "models", "reference-asof-model.json");
 const TARGET_DATES = ["2026-07-11", "2026-07-12"];
 const TRAIN_END = "2025-06-30";
@@ -13,7 +14,10 @@ const CALIBRATION_START = "2025-07-08";
 const CALIBRATION_END = "2026-07-03";
 
 const preflight = JSON.parse(fs.readFileSync(PREFLIGHT, "utf8"));
-if (preflight.researchSignal !== "research_pass_candidate" || preflight.featureAdmission.fallback) {
+const fullModel = fs.existsSync(FULL_MODEL) ? JSON.parse(fs.readFileSync(FULL_MODEL, "utf8")) : null;
+const fullModelSelectionReady = fullModel?.researchProbabilityStatus === "research_pass"
+  && !fullModel?.featureAdmission?.fallback && Array.isArray(fullModel?.featureAdmission?.activeFeatureIndexes);
+if (!fullModelSelectionReady && (preflight.researchSignal !== "research_pass_candidate" || preflight.featureAdmission.fallback)) {
   throw new Error("実DBプリフライトが研究合格していません");
 }
 
@@ -30,7 +34,10 @@ try {
     throw new Error(`as-of分割不足: train=${train.length}, calibration=${calibration.length}, target=${target.length}, evaluation=${targetEvaluation.length}`);
   }
 
-  const activeFeatureIndexes = preflight.featureAdmission.selectedFeatureIndexes;
+  const activeFeatureIndexes = fullModelSelectionReady
+    ? fullModel.featureAdmission.activeFeatureIndexes : preflight.featureAdmission.selectedFeatureIndexes;
+  const activeFeatureGroups = fullModelSelectionReady
+    ? fullModel.featureAdmission.admittedGroups : preflight.featureAdmission.selectedGroups;
   const model = fitModel(train, activeFeatureIndexes);
   const temperature = fitTemperature(model, calibration);
   const ticketCalibrationTemperatures = fitTicketCalibrationTemperatures(model, calibration, temperature);
@@ -51,6 +58,11 @@ try {
 
   const ticketCalibrationErrors = Object.fromEntries(Object.entries(ticketCalibrationMetrics.byType)
     .map(([type, metric]) => [type, metric.supportedMaximumCalibrationBinError]));
+  const ticketCalibrationUncertainty = Object.fromEntries(Object.entries(ticketCalibrationMetrics.byType)
+    .map(([type, metric]) => [type, metric.logCalibrationBins.map((bin) => ({ ...bin,
+      observedLower90: wilsonLower(bin.observed, bin.count, 1.645),
+      downsideError90: Math.max(0, bin.predicted - wilsonLower(bin.observed, bin.count, 1.645)),
+    }))]));
   const versionHash = crypto.createHash("sha256").update(JSON.stringify({
     activeFeatureIndexes, trainEnd: TRAIN_END, calibrationEnd: CALIBRATION_END, temperature,
     ticketCalibrationTemperatures, calibrationMetrics, predictions,
@@ -67,11 +79,13 @@ try {
     split: { trainStart: coverage.minDate, trainEnd: TRAIN_END, calibrationStart: CALIBRATION_START, calibrationEnd: CALIBRATION_END, embargoDays: 7 },
     counts: { trainRaces: train.length, calibrationRaces: calibration.length, targetRaces: target.length, predictions: predictions.length },
     activeFeatureIndexes,
-    activeFeatureGroups: preflight.featureAdmission.selectedGroups,
+    activeFeatureGroups,
+    featureSelectionSource: fullModelSelectionReady ? fullModel.modelVersion : "training-preflight",
     temperature,
     ticketCalibrationTemperatures,
     calibrationMetrics,
     ticketCalibrationErrors,
+    ticketCalibrationUncertainty,
     targetAudit: { evaluationOnlyAfterPrediction: true, metrics: targetMetrics, ticketMetrics: targetTicketMetrics },
     noTargetLeakage: true,
     featureTimePolicy: featureTiming,
@@ -84,4 +98,13 @@ try {
 } finally {
   db.exec("commit");
   db.close();
+}
+
+function wilsonLower(rate, count, z) {
+  if (!(count > 0)) return 0;
+  const z2 = z * z;
+  const denominator = 1 + z2 / count;
+  const center = (rate + z2 / (2 * count)) / denominator;
+  const margin = z * Math.sqrt(rate * (1 - rate) / count + z2 / (4 * count * count)) / denominator;
+  return Math.max(0, center - margin);
 }

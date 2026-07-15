@@ -60,9 +60,11 @@ export function generateMarketEv() {
       const winRows = byType.get("win");
       const horseProbabilities = normalize(Object.fromEntries(winRows.map((row) => [row.selection_key, 1 / row.odds_low])));
       const structuralBooks = buildFinishOrderProbabilityBooks(horseProbabilities);
-      const modelRows = modelPredictionsByRace.get(race.race_id) ?? [];
+      const pricedHorseNumbers = new Set(winRows.map((row) => Number(row.selection_key)));
+      const modelRows = (modelPredictionsByRace.get(race.race_id) ?? []).filter((row) => pricedHorseNumbers.has(row.horse_number));
       const hasCompleteModel = modelRows.length === winRows.length
-        && Math.abs(modelRows.reduce((sum, row) => sum + row.win_probability, 0) - 1) <= 1e-6;
+        && modelRows.every((row) => Number.isFinite(row.win_probability) && row.win_probability > 0)
+        && modelRows.reduce((sum, row) => sum + row.win_probability, 0) > 0;
       const researchHorseProbabilities = hasCompleteModel
         ? credibilityPoolHorseProbabilities(horseProbabilities, modelRows)
         : horseProbabilities;
@@ -192,10 +194,12 @@ function makeCandidate(race, betType, method, selection, rows, probability, name
     const itemProbability = researchItemProbabilities?.[index] ?? researchProbability ?? itemProbabilities?.[index] ?? probability;
     return sum + row.odds_low * itemProbability;
   }, 0) / rows.length;
-  const calibrationError = calibrationErrorForBetType(betType);
+  const itemCalibrationErrors = rows.map((row, index) => calibrationErrorForBetType(betType,
+    researchItemProbabilities?.[index] ?? researchProbability ?? itemProbabilities?.[index] ?? probability));
+  const calibrationError = Math.max(...itemCalibrationErrors, 0);
   const conservativeAbilityExpectedReturn = rows.reduce((sum, row, index) => {
     const itemProbability = researchItemProbabilities?.[index] ?? researchProbability ?? itemProbabilities?.[index] ?? probability;
-    return sum + row.odds_low * Math.max(0, itemProbability - calibrationError);
+    return sum + row.odds_low * Math.max(0, itemProbability - itemCalibrationErrors[index]);
   }, 0) / rows.length;
   const displayNumbers = combinations ? [...new Set(combinations.flat())] : selection;
   const display = displayOverride ?? displayNumbers.map((number) => `${number} ${names.get(number) ?? ""}`.trim()).join("・");
@@ -213,7 +217,7 @@ function makeCandidate(race, betType, method, selection, rows, probability, name
     odds: rows.length === 1 ? rows[0].odds_low : null,
     ticketKeys: rows.map((row) => row.selection_key),
     probability: rows.length === 1 ? probability : null,
-    conservativeProbability: rows.length === 1 ? Math.max(0, (researchProbability ?? probability) - calibrationError) : null,
+    conservativeProbability: rows.length === 1 ? Math.max(0, (researchProbability ?? probability) - itemCalibrationErrors[0]) : null,
     marketExpectedReturn: expectedReturn,
     conservativeExpectedReturn: useAbility ? conservativeAbilityExpectedReturn : expectedReturn,
     abilityProbability: rows.length === 1 ? (researchProbability ?? probability) : null,
@@ -247,8 +251,11 @@ function loadValidationArtifact() {
   return artifact.targetDates && !TARGET_DATES.every((date) => artifact.targetDates.includes(date)) ? null : artifact;
 }
 
-function calibrationErrorForBetType(betType) {
+function calibrationErrorForBetType(betType, probability) {
   const dbType = Object.entries(DB_TYPES).find(([, label]) => label === betType)?.[0];
+  const bins = VALIDATION_ARTIFACT?.ticketCalibrationUncertainty?.[dbType] ?? [];
+  const bin = bins.find((candidate) => probability <= candidate.upper) ?? bins.at(-1);
+  if (bin && Number.isFinite(Number(bin.downsideError90))) return Math.max(0, Number(bin.downsideError90));
   const value = Number(VALIDATION_ARTIFACT?.ticketCalibrationErrors?.[dbType]);
   return Number.isFinite(value) && value >= 0 ? value : 0;
 }

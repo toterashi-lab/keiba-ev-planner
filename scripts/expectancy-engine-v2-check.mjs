@@ -37,8 +37,8 @@ if (failures.length) {
   failures.forEach((failure) => console.error(`NG ${failure}`));
   process.exit(1);
 }
-console.log("OK 期待値v2: 払戻率・市場正規化・人気薄補正・自動スタッキング");
-console.log("OK 期待値v2: 不確実性控除・オッズ下落・検証未合格時の市場縮退");
+console.log("OK 期待値v3: 払戻率・市場正規化・人気薄補正・自動スタッキング");
+console.log("OK 期待値v3: 不確実性控除・オッズ下落・検証未合格時の市場縮退");
 
 function assert(value, name) { if (!value) failures.push(name); }
 function sum(values) { return values.reduce((total, value) => total + value, 0); }

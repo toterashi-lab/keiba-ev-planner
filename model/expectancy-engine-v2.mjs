@@ -1,4 +1,4 @@
-export const EXPECTANCY_ENGINE_VERSION = "expectancy-engine-v2";
+export const EXPECTANCY_ENGINE_VERSION = "expectancy-engine-v3";
 
 export const JRA_RETURN_RATES = Object.freeze({
   win: 0.8,

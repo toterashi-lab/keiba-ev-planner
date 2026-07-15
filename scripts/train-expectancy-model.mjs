@@ -423,10 +423,12 @@ export function fitTicketCalibrationTemperatures(model, races, temperature) {
 }
 
 export function evaluateTicketProbabilities(model, races, temperature, ticketCalibrationTemperatures = {}) {
+  const logThresholds = [0.00001, 0.00003, 0.0001, 0.0003, 0.001, 0.003, 0.01, 0.03, 0.1, 1];
   const accumulators = Object.fromEntries(FINISH_ORDER_TYPES.map((type) => [type, {
     races: 0, candidateObservations: 0, winnerObservations: 0, winnerLogLoss: 0, uniformWinnerLogLoss: 0,
     brier: 0, maximumMassError: 0,
     bins: Array.from({ length: 10 }, (_, index) => ({ index: index + 1, count: 0, predicted: 0, observed: 0 })),
+    logBins: logThresholds.map((upper, index) => ({ index: index + 1, lower: index ? logThresholds[index - 1] : 0, upper, count: 0, predicted: 0, observed: 0 })),
   }]));
   let skippedDeadHeatOrShortField = 0;
 
@@ -456,6 +458,8 @@ export function evaluateTicketProbabilities(model, races, temperature, ticketCal
         accumulator.candidateObservations += 1;
         const bin = accumulator.bins[Math.min(9, Math.floor(probability * 10))];
         bin.count += 1; bin.predicted += probability; bin.observed += target;
+        const logBin = accumulator.logBins.find((candidate) => probability <= candidate.upper) ?? accumulator.logBins.at(-1);
+        logBin.count += 1; logBin.predicted += probability; logBin.observed += target;
       }
       accumulator.maximumMassError = Math.max(accumulator.maximumMassError,
         Math.abs(mass - ticketOutcomeMultiplicity(type, race.rows.length)));
@@ -474,6 +478,11 @@ export function evaluateTicketProbabilities(model, races, temperature, ticketCal
     const maximumCalibrationBinError = Math.max(...bins.map((bin) => bin.error));
     const supportedBins = bins.filter((bin) => bin.count >= 100);
     const supportedMaximumCalibrationBinError = supportedBins.length ? Math.max(...supportedBins.map((bin) => bin.error)) : Infinity;
+    const logCalibrationBins = value.logBins.filter((bin) => bin.count).map((bin) => ({
+      index: bin.index, lower: bin.lower, upper: bin.upper, count: bin.count,
+      predicted: bin.predicted / bin.count, observed: bin.observed / bin.count,
+      error: Math.abs(bin.observed / bin.count - bin.predicted / bin.count),
+    }));
     return [type, {
       races: value.races,
       candidateObservations: value.candidateObservations,
@@ -488,6 +497,8 @@ export function evaluateTicketProbabilities(model, races, temperature, ticketCal
       maximumMassError: value.maximumMassError,
       calibrationMethod: "equal-width-deciles-all-ticket-candidates",
       calibrationBins: bins,
+      logCalibrationMethod: "log-spaced-all-ticket-candidates",
+      logCalibrationBins,
       researchPass: winnerLogLoss < uniformWinnerLogLoss && ece <= 0.025
         && supportedMaximumCalibrationBinError <= 0.1 && value.maximumMassError <= 1e-8,
     }];

@@ -80,6 +80,7 @@ for (const file of [
   "generate-market-ev.mjs",
   "train-reference-asof-model.mjs",
   "evaluate-reference-ev.mjs",
+  "reference-asof-model-check.mjs",
   "market-ev-check.mjs",
   "expectancy-engine-v2-check.mjs",
   "finish-order-probabilities-check.mjs",
