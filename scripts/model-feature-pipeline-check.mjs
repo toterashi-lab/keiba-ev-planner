@@ -25,4 +25,36 @@ if ("finishPosition" in h1.features || "popularity" in h1.features) throw new Er
 console.log(JSON.stringify({ rows: rows.length, careerStarts: h1.features.careerStarts, priorWinRate: h1.features.priorWinRate,
   daysSinceLastRace: h1.features.daysSinceLastRace, venue05: h1.features.venue05, weatherRain: h1.features.weatherRain,
   goingYielding: h1.features.goingYielding, raceClassLevel: h1.features.raceClassLevel, leakage: "pass" }, null, 2));
+
+database.exec(`
+  insert into races values
+    ('late','2026-03-01','01',1,'late','test','芝',1600,'右','晴','良','11時00分'),
+    ('early','2026-03-01','10',1,'early','test','芝',1600,'右','晴','良','9時50分'),
+    ('same-a','2026-04-01','03',1,'same-a','test','芝',1600,'右','晴','良','12時00分'),
+    ('same-b','2026-04-01','04',1,'same-b','test','芝',1600,'右','晴','良','12時00分');
+  insert into race_entries values
+    ('late','h3',1,1,'牡3',56,470,0,'j3','t3'),('late','h4',2,2,'牝3',54,450,0,'j4','t4'),
+    ('early','h3',1,1,'牡3',56,470,0,'j3','t3'),('early','h4',2,2,'牝3',54,450,0,'j4','t4'),
+    ('same-a','h5',1,1,'牡3',56,470,0,'j5','t5'),('same-a','h6',2,2,'牝3',54,450,0,'j6','t6'),
+    ('same-b','h5',1,1,'牡3',56,470,0,'j5','t5'),('same-b','h6',2,2,'牝3',54,450,0,'j6','t6');
+  insert into race_results values
+    ('late','h3',1,34.0,'1-1',1),('late','h4',2,35.0,'2-2',2),
+    ('early','h3',2,35.0,'2-2',2),('early','h4',1,34.0,'1-1',1),
+    ('same-a','h5',1,34.0,'1-1',1),('same-a','h6',2,35.0,'2-2',2),
+    ('same-b','h5',2,35.0,'2-2',2),('same-b','h6',1,34.0,'1-1',1);
+`);
+const chronologyRows = buildFeatureRows(database, { from: "2026-03-01", to: "2026-04-01" });
+const earlyH3 = chronologyRows.find((row) => row.raceId === "early" && row.horseId === "h3");
+const lateH3 = chronologyRows.find((row) => row.raceId === "late" && row.horseId === "h3");
+if (earlyH3.features.careerStarts !== 0 || lateH3.features.careerStarts !== 1 || lateH3.features.priorWinRate !== 0) {
+  throw new Error(`同日他場の発走時刻順が守られていません: ${JSON.stringify({ early: earlyH3.features, late: lateH3.features })}`);
+}
+if (earlyH3.lineage.historyCutoffExclusive !== "2026-03-01T09:50:00+09:00"
+  || lateH3.lineage.lastHistoricalRaceTime !== "2026-03-01T09:50:00+09:00") {
+  throw new Error(`発走時刻の正規化が不正です: ${JSON.stringify({ early: earlyH3.lineage, late: lateH3.lineage })}`);
+}
+const sameTimeRows = chronologyRows.filter((row) => ["same-a", "same-b"].includes(row.raceId) && row.horseId === "h5");
+if (sameTimeRows.length !== 2 || sameTimeRows.some((row) => row.features.careerStarts !== 0)) {
+  throw new Error(`同時刻レース間で結果が混入しています: ${JSON.stringify(sameTimeRows.map((row) => row.features.careerStarts))}`);
+}
 database.close();

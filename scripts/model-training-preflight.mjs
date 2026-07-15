@@ -15,7 +15,7 @@ try {
   if (!coverage.minDate || coverage.races < 5000) throw new Error(`実DBプリフライトに必要なレース数が不足しています: ${coverage.races}`);
 
   const featureStarted = Date.now();
-  const { rows, races } = loadTrainingRaces(db, { from: coverage.minDate, to: coverage.maxDate });
+  const { rows, races, featureTiming } = loadTrainingRaces(db, { from: coverage.minDate, to: coverage.maxDate });
   const featureMs = Date.now() - featureStarted;
   if (races.length < 5000 || rows.length < 50000) throw new Error(`有効な学習行が不足しています: races=${races.length}, rows=${rows.length}`);
 
@@ -53,6 +53,7 @@ try {
     readOnly: true,
     coverage,
     usable: { races: races.length, rows: rows.length },
+    featureTiming,
     split: {
       train: train.length, trainEnd: trainCutDate,
       calibration: calibration.length, calibrationStart, calibrationEnd: calibrationCutDate,

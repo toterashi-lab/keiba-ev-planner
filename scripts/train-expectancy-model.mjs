@@ -49,7 +49,7 @@ try {
     throw new Error("学習・校正・テスト期間が不足しています");
   }
 
-  const { rows, races } = loadTrainingRaces(db, { from: coverage.minDate, to: coverage.maxDate });
+  const { rows, races, featureTiming } = loadTrainingRaces(db, { from: coverage.minDate, to: coverage.maxDate });
   const foldSpecs = buildFoldSpecs(coverage.minDate, coverage.maxDate);
   const folds = [];
   let lastValidationModel;
@@ -100,6 +100,7 @@ try {
     folds,
     metrics: aggregate,
     noTargetLeakage: true,
+    featureTimePolicy: featureTiming,
     sourceTimingVerified: false,
     deploymentStatus: "benchmark_only",
     deploymentReasons: ["historical_source_timing_not_verified", "historical_pre_race_odds_coverage_insufficient", "roi_gate_not_passed"],
@@ -115,6 +116,12 @@ try {
 
 export function loadTrainingRaces(database, options) {
   const rows = [];
+  const featureTiming = {
+    policy: "strictly-before-race-start; same-start races update together",
+    rows: 0,
+    rowsWithPriorHistory: 0,
+    violations: 0,
+  };
   buildFeatureRows(database, {
     from: options.from,
     to: options.to,
@@ -122,12 +129,19 @@ export function loadTrainingRaces(database, options) {
     collect: false,
     onRow(row) {
       if (Number.isInteger(row.target.finishPosition) && row.target.finishPosition > 0) {
+        featureTiming.rows += 1;
+        if (row.lineage.lastHistoricalRaceTime) {
+          featureTiming.rowsWithPriorHistory += 1;
+          if (row.lineage.lastHistoricalRaceTime >= row.asOfTime) featureTiming.violations += 1;
+        }
         rows.push({ raceId: row.raceId, horseId: row.horseId, raceDate: row.raceDate, asOfTime: row.asOfTime,
           target: row.target, featureValues: FEATURE_KEYS.map((key) => transform(key, row.features[key])) });
       }
     },
   });
-  return { rows, races: groupRaces(rows).filter((race) => race.winnerIndex >= 0 && race.rows.length >= 2) };
+  if (featureTiming.violations) throw new Error(`Historical feature time violations: ${featureTiming.violations}`);
+  featureTiming.coverage = featureTiming.rows ? (featureTiming.rows - featureTiming.violations) / featureTiming.rows : 0;
+  return { rows, races: groupRaces(rows).filter((race) => race.winnerIndex >= 0 && race.rows.length >= 2), featureTiming };
 }
 
 export function groupRaces(rows) {
@@ -323,6 +337,8 @@ function persistRun(database, artifact, finalModel) {
       values(?,?,?,?,?,?,?)`);
     const researchStatus = artifact.researchProbabilityStatus === "research_pass" ? "pass" : "fail";
     gate.run(run.id, "no_target_leakage", "pass", 1, 1, JSON.stringify({ targetResultExcludedFromFeatures: true }), now);
+    gate.run(run.id, "historical_feature_time_order", artifact.featureTimePolicy.violations === 0 ? "pass" : "fail",
+      artifact.featureTimePolicy.coverage, 1, JSON.stringify(artifact.featureTimePolicy), now);
     gate.run(run.id, "feature_observation_time_coverage", "insufficient", 0, 0.995, JSON.stringify({ reason: "historical result pages do not prove pre-race observation timestamps" }), now);
     gate.run(run.id, "prediction_probability_sum_error", artifact.metrics.maxProbabilitySumError <= 1e-6 ? "pass" : "fail", artifact.metrics.maxProbabilitySumError, 1e-6, JSON.stringify({ folds: artifact.folds.length }), now);
     gate.run(run.id, "log_loss_vs_market_delta", "insufficient", null, 0, JSON.stringify({ reason: "historical full-field closing win odds coverage is insufficient" }), now);

@@ -75,6 +75,10 @@ export function auditCompletedGoal(database, report, options = {}) {
     status: artifact.researchProbabilityStatus, metrics: artifact.metrics,
   });
   check(report, "target_leakage_prevention", artifact.noTargetLeakage === true, { noTargetLeakage: artifact.noTargetLeakage });
+  check(report, "historical_feature_time_order", artifact.featureTimePolicy?.violations === 0
+    && artifact.featureTimePolicy?.coverage === 1
+    && artifact.featureTimePolicy?.policy === "strictly-before-race-start; same-start races update together",
+  artifact.featureTimePolicy);
   check(report, "probability_sum", artifact.metrics?.maxProbabilitySumError <= 1e-6, { value: artifact.metrics?.maxProbabilitySumError, threshold: 1e-6 });
   check(report, "calibration", artifact.metrics?.meanEce <= 0.025 && artifact.metrics?.meanMaxCalibrationBinError <= 0.075, {
     meanEce: artifact.metrics?.meanEce, meanMaxCalibrationBinError: artifact.metrics?.meanMaxCalibrationBinError,
@@ -85,7 +89,7 @@ export function auditCompletedGoal(database, report, options = {}) {
 
   const run = database.prepare("select id from model_runs where model_version=? order by id desc limit 1").get(artifact.modelVersion);
   const passedGates = run ? database.prepare("select gate_name from model_quality_gates where model_run_id=? and status='pass'").all(run.id).map((row) => row.gate_name) : [];
-  const requiredGates = ["no_target_leakage", "prediction_probability_sum_error", "expected_calibration_error", "max_calibration_bin_error", "calibration", "walk_forward"];
+  const requiredGates = ["no_target_leakage", "historical_feature_time_order", "prediction_probability_sum_error", "expected_calibration_error", "max_calibration_bin_error", "calibration", "walk_forward"];
   check(report, "persisted_model_quality_gates", requiredGates.every((gate) => passedGates.includes(gate)), { requiredGates, passedGates });
 
   if (!fs.existsSync(marketOutputPath)) {

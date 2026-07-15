@@ -25,7 +25,7 @@ try {
     insert into complete_payouts values('r1');
     insert into model_runs values(1,'unit-model');
   `);
-  const requiredGates = ["no_target_leakage", "prediction_probability_sum_error", "expected_calibration_error",
+  const requiredGates = ["no_target_leakage", "historical_feature_time_order", "prediction_probability_sum_error", "expected_calibration_error",
     "max_calibration_bin_error", "calibration", "walk_forward"];
   const insertGate = db.prepare("insert into model_quality_gates values(1,?,'pass')");
   for (const gate of requiredGates) insertGate.run(gate);
@@ -34,6 +34,7 @@ try {
     modelVersion: "unit-model",
     researchProbabilityStatus: "research_pass",
     noTargetLeakage: true,
+    featureTimePolicy: { policy: "strictly-before-race-start; same-start races update together", rows: 1, rowsWithPriorHistory: 1, violations: 0, coverage: 1 },
     activeFeatureIndexes: [10, 11],
     activeFeatureKeys: ["priorWinRate", "priorPlaceRate"],
     featureAdmission: {
@@ -71,7 +72,7 @@ try {
 
   const report = { readiness: { ready: true, coverage: { from: "1996-01", to: "2026-07", expectedMonths: 367 } }, checks: [], failures: [] };
   auditCompletedGoal(db, report, { artifactPath, marketOutputPath, generatorPath, pipelineFiles: [pipeline] });
-  if (report.failures.length || report.checks.length !== 16) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
+  if (report.failures.length || report.checks.length !== 17) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
   console.log(JSON.stringify({ status: "pass", checks: report.checks.length, races: predictions.length, candidates: candidates.length }, null, 2));
 } finally {
   db.close();

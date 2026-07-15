@@ -13,13 +13,17 @@ export function buildFeatureRows(database, options) {
       rr.finish_position,rr.final_sectional,rr.corner_positions,rr.popularity
     from ${raceTable} r join ${entryTable} e on e.race_id=r.race_id
     left join ${resultTable} rr on rr.race_id=e.race_id and rr.horse_id=e.horse_id
-    where r.race_date ${historyOperator} ? order by r.race_date,r.venue_code,r.race_number,e.horse_number`).iterate(options.to);
+    where r.race_date ${historyOperator} ? order by r.race_date,
+      cast(r.start_time as integer),
+      case when instr(r.start_time,'時')>0 then cast(substr(r.start_time,instr(r.start_time,'時')+1) as integer)
+           else cast(substr(r.start_time,instr(r.start_time,':')+1) as integer) end,
+      r.venue_code,r.race_number,e.horse_number`).iterate(options.to);
   const histories = new Map();
   const jockeys = new Map();
   const trainers = new Map();
   const output = [];
 
-  const processRace = (raceRows) => {
+  const emitRace = (raceRows) => {
     if (!raceRows.length) return;
     const emit = options.emitHistorical !== false && raceRows[0].race_date >= options.from && raceRows[0].race_date <= options.to;
     if (emit) {
@@ -30,17 +34,34 @@ export function buildFeatureRows(database, options) {
         options.onRow?.(featureRow);
       }
     }
+  };
+  const updateRace = (raceRows) => {
     for (const row of raceRows) updateHistories(row, raceRows.length, histories, jockeys, trainers);
+  };
+  let timeBucket = [];
+  let timeBucketKey = null;
+  const queueRace = (completedRaceRows) => {
+    if (!completedRaceRows.length) return;
+    const key = raceStartKey(completedRaceRows[0]);
+    if (timeBucket.length && key !== timeBucketKey) {
+      for (const queuedRace of timeBucket) emitRace(queuedRace);
+      for (const queuedRace of timeBucket) updateRace(queuedRace);
+      timeBucket = [];
+    }
+    timeBucketKey = key;
+    timeBucket.push(completedRaceRows);
   };
   let raceRows = [];
   for (const row of rows) {
     if (raceRows.length && raceRows[0].race_id !== row.race_id) {
-      processRace(raceRows);
+      queueRace(raceRows);
       raceRows = [];
     }
     raceRows.push(row);
   }
-  processRace(raceRows);
+  queueRace(raceRows);
+  for (const queuedRace of timeBucket) emitRace(queuedRace);
+  for (const queuedRace of timeBucket) updateRace(queuedRace);
   if (options.includeLive && database.prepare("select count(*) count from sqlite_master where type='table' and name='live_races'").get().count) {
     const liveRows = database.prepare(`select r.race_id,r.race_date,r.venue_code,r.race_number,r.race_name,r.race_class,r.surface,r.distance_m,
         r.direction,r.weather,r.going,r.start_time,e.horse_id,e.horse_number,e.gate_number,e.sex_age,e.carried_weight,
@@ -149,7 +170,8 @@ function createFeatureRow(row, histories, jockeys, trainers, fieldPriorRates, so
     target: dataContext === "live"
       ? { finishPosition: null, won: null, placed: null }
       : { finishPosition: row.finish_position, won: row.finish_position === 1 ? 1 : 0, placed: row.finish_position && row.finish_position <= (racePlaceDepth(fieldPriorRates.length)) ? 1 : 0 },
-    lineage: { historyCutoffExclusive: row.race_date, lastHistoricalRaceDate: horse.lastDate, targetResultExcludedFromFeatures: true },
+    lineage: { historyCutoffExclusive: raceStartKey(row), lastHistoricalRaceDate: horse.lastDate,
+      lastHistoricalRaceTime: horse.lastAsOfTime, targetResultExcludedFromFeatures: true },
   };
 }
 
@@ -169,7 +191,7 @@ function updateHistories(row, fieldSize, histories, jockeys, trainers) {
 
 function getStats(map, key) {
   const safeKey = key || "unknown";
-  if (!map.has(safeKey)) map.set(safeKey, { starts: 0, wins: 0, places: 0, finishSum: 0, finishCount: 0, sectionalSum: 0, sectionalCount: 0, popularitySum: 0, popularityCount: 0, lastDate: null, lastClassLevel: null, lastDistanceM: null, lastSurface: null });
+  if (!map.has(safeKey)) map.set(safeKey, { starts: 0, wins: 0, places: 0, finishSum: 0, finishCount: 0, sectionalSum: 0, sectionalCount: 0, popularitySum: 0, popularityCount: 0, lastDate: null, lastAsOfTime: null, lastClassLevel: null, lastDistanceM: null, lastSurface: null });
   return map.get(safeKey);
 }
 
@@ -181,6 +203,7 @@ function update(stats, row, fieldSize) {
   if (Number.isFinite(row.final_sectional)) { stats.sectionalSum += row.final_sectional; stats.sectionalCount += 1; }
   if (row.popularity) { stats.popularitySum += row.popularity; stats.popularityCount += 1; }
   stats.lastDate = row.race_date;
+  stats.lastAsOfTime = raceStartKey(row);
   stats.lastClassLevel = raceClassLevel(`${row.race_name ?? ""} ${row.race_class ?? ""}`);
   stats.lastDistanceM = row.distance_m;
   stats.lastSurface = row.surface;
@@ -192,6 +215,12 @@ function average(values) { return values.length ? values.reduce((sum, value) => 
 function distanceBand(distance) { return Math.round((Number(distance) || 0) / 200) * 200; }
 function racePlaceDepth(fieldSize) { return fieldSize >= 8 ? 3 : 2; }
 function dateDiffDays(left, right) { return Math.round((new Date(`${right}T00:00:00Z`) - new Date(`${left}T00:00:00Z`)) / 86400000); }
+function raceStartKey(row) {
+  const match = String(row.start_time ?? "").match(/(\d{1,2})(?::|時)(\d{1,2})/);
+  const hour = String(Number(match?.[1] ?? 0)).padStart(2, "0");
+  const minute = String(Number(match?.[2] ?? 0)).padStart(2, "0");
+  return `${row.race_date}T${hour}:${minute}:00+09:00`;
+}
 function clean(value) { const result = String(value ?? "").trim(); return result || null; }
 function indicator(value, predicate) { return value == null || value === "" ? null : (predicate(String(value)) ? 1 : 0); }
 function parseStartHour(value) { const match = String(value ?? "").match(/(\d{1,2})(?::|時)/); return match ? Number(match[1]) : null; }
