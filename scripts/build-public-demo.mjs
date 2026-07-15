@@ -69,6 +69,7 @@ for (const file of [
   "train-expectancy-model.mjs",
   "train-expectancy-model-check.mjs",
   "train-expectancy-model-unit-check.mjs",
+  "model-training-preflight.mjs",
   "backfill-readiness.mjs",
   "goal-completion-audit.mjs",
   "goal-completion-audit-check.mjs",
@@ -211,6 +212,8 @@ function exportDatabaseStatus() {
     db.exec("commit");
 
     const totalMonths = Object.values(jobs).reduce((sum, count) => sum + count, 0);
+    const preflightPath = path.join("data", "jra-free-private", "models", "training-preflight.json");
+    const preflight = fs.existsSync(preflightPath) ? JSON.parse(fs.readFileSync(preflightPath, "utf8")) : null;
     const status = {
       asOf: new Date().toISOString(),
       completeMonths: jobs.complete ?? 0,
@@ -222,6 +225,22 @@ function exportDatabaseStatus() {
       ...totals,
       integrityStatus: "pass",
       evStatus: "insufficient",
+      trainingPreflight: preflight?.status === "pass" ? {
+        checkedAt: preflight.checkedAt,
+        races: preflight.usable.races,
+        rows: preflight.usable.rows,
+        totalMs: preflight.timingMs.total,
+        heapUsedMb: preflight.memoryMb.heapUsed,
+        rssMb: preflight.memoryMb.rss,
+        projectedFullRunMinutes: preflight.projectedFullRunMinutes,
+        projectedFullRssMb: preflight.projectedFullRssMb,
+        logLoss: preflight.metrics.logLoss,
+        uniformLogLoss: preflight.metrics.uniformLogLoss,
+        ece: preflight.metrics.ece,
+        maxCalibrationBinError: preflight.metrics.maxCalibrationBinError,
+        calibrationMethod: preflight.metrics.calibrationMethod,
+        researchSignal: preflight.researchSignal,
+      } : null,
     };
 
     const raceMap = new Map();

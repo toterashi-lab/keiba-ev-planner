@@ -39,6 +39,8 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Model training pipeline validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\train-expectancy-model-unit-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Model numerical unit validation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\model-training-preflight.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Real database model preflight failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\market-ev-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Market expectancy validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\jra-live-racecards-check.mjs"

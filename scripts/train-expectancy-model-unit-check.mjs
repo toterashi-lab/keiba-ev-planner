@@ -25,4 +25,9 @@ const metrics = evaluate(model, test, temperature);
 if (!(metrics.logLoss < metrics.uniformLogLoss)) throw new Error(`一様予測を改善できません: ${JSON.stringify(metrics)}`);
 if (metrics.maxProbabilitySumError > 1e-12) throw new Error(`確率合計が1ではありません: ${metrics.maxProbabilitySumError}`);
 if (metrics.ece > 0.025) throw new Error(`校正誤差が閾値を超えています: ${metrics.ece}`);
-console.log(JSON.stringify({ status: "pass", temperature, metrics }, null, 2));
+if (metrics.maxCalibrationBinError > 0.075) throw new Error(`最大校正bin誤差が閾値を超えています: ${metrics.maxCalibrationBinError}`);
+console.log(JSON.stringify({ status: "pass", temperature, metrics: {
+  logLoss: metrics.logLoss, uniformLogLoss: metrics.uniformLogLoss, brier: metrics.brier,
+  ece: metrics.ece, maxCalibrationBinError: metrics.maxCalibrationBinError,
+  maxProbabilitySumError: metrics.maxProbabilitySumError, calibrationMethod: metrics.calibrationMethod,
+} }, null, 2));

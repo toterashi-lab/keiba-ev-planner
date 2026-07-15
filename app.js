@@ -166,7 +166,11 @@ function renderDatabaseStatus() {
   els.dbProgressLabel.textContent = `${percentValue.toFixed(1)}%・処理中${databaseData.runningMonths}・待機${databaseData.queuedMonths}・再検査${databaseData.failedMonths}`;
   els.dbProgressBar.style.width = `${percentValue}%`;
   els.progressTrack.setAttribute("aria-valuenow", percentValue.toFixed(1));
-  els.dbUpdatedAt.textContent = `公開集計 ${formatTimestamp(databaseData.asOf)} / 完成月 ${databaseData.earliestComplete}〜${databaseData.latestComplete}`;
+  const preflight = databaseData.trainingPreflight;
+  const preflightText = preflight
+    ? ` / 学習試験 ${number(preflight.races)}R・${(preflight.totalMs / 1000).toFixed(1)}秒・ECE ${percent(preflight.ece)}・最大誤差 ${percent(preflight.maxCalibrationBinError)}`
+    : " / 学習試験 待機中";
+  els.dbUpdatedAt.textContent = `公開集計 ${formatTimestamp(databaseData.asOf)} / 完成月 ${databaseData.earliestComplete}〜${databaseData.latestComplete}${preflightText}`;
   els.heroDbMonths.textContent = `${databaseData.completeMonths} / ${databaseData.totalMonths}か月`;
   els.heroDbRaces.textContent = `${number(databaseData.races)}レース蓄積`;
 }

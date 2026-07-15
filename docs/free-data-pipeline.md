@@ -49,6 +49,8 @@ DBと原本は`data/jra-free-private/`に保存し、Git管理・公開配信か
 
 `KeibaEV-PostBackfill-Model`は毎時、未完了月・失敗月・品質検査を確認する。バックフィルが停止していれば再開し、全月完了後だけ全原本ハッシュ監査、特徴量生成、expanding-window walk-forward学習、温度校正、全券種期待値生成、テスト、GitHub Pages公開を順番に実行する。学習済みモデルのレース数とDBの完了レース数が異なる場合は自動再学習する。多重起動は専用ロックとタスクスケジューラの `IgnoreNew` で防止する。
 
+公開前には `model-training-preflight.mjs` を読み取り専用で実行し、現在の完了済み実DBを時系列の学習・校正・テストへ分割して、特徴量生成時間、学習時間、メモリ、log loss、Brier、ECE、最大校正誤差、確率合計を監査する。これにより30年完了後の初回学習でのみ性能・メモリ問題が判明することを防ぐ。
+
 `KeibaEV-JRA-Live-Racecards`はJRA公式出馬表を履歴テーブルと分離した `live_races` / `live_entries` へ保存する。`KeibaEV-JRA-Live-Odds`は毎日9時から16時50分まで10分間隔で開催有無を確認し、発走20分以内のレースだけを対象に全7券種を取得する。出馬表・単複・全組合せの品質ゲートが合格した新規バッチだけ、ライブ期待値を再生成してGitHub Pagesへ公開する。
 
 ## オッズ蓄積

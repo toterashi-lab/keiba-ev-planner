@@ -13,7 +13,7 @@ const TEST_MONTHS = 6;
 const EMBARGO_DAYS = 7;
 const FOLD_COUNT = 3;
 const EPOCHS = 6;
-const FEATURE_KEYS = [
+export const FEATURE_KEYS = [
   "fieldSize", "horseNumber", "gateNumber", "age", "carriedWeight", "bodyWeight",
   "bodyWeightDelta", "carriedWeightBodyRatio", "daysSinceLastRace", "careerStarts",
   "priorWinRate", "priorPlaceRate", "priorAverageFinish", "priorAverageFinalSectional",
@@ -36,20 +36,7 @@ try {
     throw new Error("学習・校正・テスト期間が不足しています");
   }
 
-  const rows = [];
-  buildFeatureRows(db, {
-    from: coverage.minDate,
-    to: coverage.maxDate,
-    completeOnly: true,
-    collect: false,
-    onRow(row) {
-      if (Number.isInteger(row.target.finishPosition) && row.target.finishPosition > 0) {
-        rows.push({ raceId: row.raceId, horseId: row.horseId, raceDate: row.raceDate, asOfTime: row.asOfTime,
-          target: row.target, featureValues: FEATURE_KEYS.map((key) => transform(key, row.features[key])) });
-      }
-    },
-  });
-  const races = groupRaces(rows).filter((race) => race.winnerIndex >= 0 && race.rows.length >= 2);
+  const { rows, races } = loadTrainingRaces(db, { from: coverage.minDate, to: coverage.maxDate });
   const foldSpecs = buildFoldSpecs(coverage.minDate, coverage.maxDate);
   const folds = [];
   let finalModel;
@@ -103,7 +90,24 @@ try {
 }
 }
 
-function groupRaces(rows) {
+export function loadTrainingRaces(database, options) {
+  const rows = [];
+  buildFeatureRows(database, {
+    from: options.from,
+    to: options.to,
+    completeOnly: options.completeOnly !== false,
+    collect: false,
+    onRow(row) {
+      if (Number.isInteger(row.target.finishPosition) && row.target.finishPosition > 0) {
+        rows.push({ raceId: row.raceId, horseId: row.horseId, raceDate: row.raceDate, asOfTime: row.asOfTime,
+          target: row.target, featureValues: FEATURE_KEYS.map((key) => transform(key, row.features[key])) });
+      }
+    },
+  });
+  return { rows, races: groupRaces(rows).filter((race) => race.winnerIndex >= 0 && race.rows.length >= 2) };
+}
+
+export function groupRaces(rows) {
   const grouped = [];
   for (let start = 0; start < rows.length;) {
     let end = start + 1;
@@ -146,8 +150,11 @@ export function fitModel(races) {
 export function fitTemperature(model, races) {
   let best = { temperature: 1, loss: Infinity };
   for (let temperature = 0.5; temperature <= 2.5 + 1e-9; temperature += 0.02) {
-    const metrics = evaluate(model, races, temperature);
-    if (metrics.logLoss < best.loss) best = { temperature, loss: metrics.logLoss };
+    const loss = mean(races.map((race) => {
+      const probabilities = predictRace(model, race, temperature);
+      return -Math.log(Math.max(1e-12, probabilities[race.winnerIndex]));
+    }));
+    if (loss < best.loss) best = { temperature, loss };
   }
   return round(best.temperature, 4);
 }
@@ -157,7 +164,7 @@ export function evaluate(model, races, temperature) {
   let uniformLogLoss = 0;
   let brier = 0;
   let maxProbabilitySumError = 0;
-  const bins = Array.from({ length: 10 }, () => ({ count: 0, confidence: 0, wins: 0 }));
+  const calibrationRows = [];
   for (const race of races) {
     const probabilities = predictRace(model, race, temperature);
     logLoss -= Math.log(Math.max(1e-12, probabilities[race.winnerIndex]));
@@ -166,19 +173,31 @@ export function evaluate(model, races, temperature) {
     for (let index = 0; index < probabilities.length; index += 1) {
       const target = index === race.winnerIndex ? 1 : 0;
       brier += (probabilities[index] - target) ** 2 / probabilities.length;
-      const bin = bins[Math.min(9, Math.floor(probabilities[index] * 10))];
-      bin.count += 1; bin.confidence += probabilities[index]; bin.wins += target;
+      calibrationRows.push({ probability: probabilities[index], target });
     }
   }
-  const entries = bins.reduce((sum, bin) => sum + bin.count, 0);
-  const errors = bins.filter((bin) => bin.count).map((bin) => ({ count: bin.count, error: Math.abs(bin.wins / bin.count - bin.confidence / bin.count) }));
+  calibrationRows.sort((left, right) => left.probability - right.probability);
+  const bins = [];
+  for (let index = 0; index < 10; index += 1) {
+    const start = Math.floor(index * calibrationRows.length / 10);
+    const end = Math.floor((index + 1) * calibrationRows.length / 10);
+    const rows = calibrationRows.slice(start, end);
+    if (!rows.length) continue;
+    const predicted = mean(rows.map((row) => row.probability));
+    const observed = mean(rows.map((row) => row.target));
+    bins.push({ index: index + 1, count: rows.length, predicted, observed, error: Math.abs(observed - predicted),
+      minProbability: rows[0].probability, maxProbability: rows.at(-1).probability });
+  }
+  const entries = calibrationRows.length;
   return {
     logLoss: logLoss / races.length,
     uniformLogLoss: uniformLogLoss / races.length,
     brier: brier / races.length,
-    ece: errors.reduce((sum, bin) => sum + bin.count * bin.error, 0) / entries,
-    maxCalibrationBinError: Math.max(...errors.map((bin) => bin.error)),
+    ece: bins.reduce((sum, bin) => sum + bin.count * bin.error, 0) / entries,
+    maxCalibrationBinError: Math.max(...bins.map((bin) => bin.error)),
     maxProbabilitySumError,
+    calibrationMethod: "equal-frequency-deciles",
+    calibrationBins: bins,
   };
 }
 
@@ -235,7 +254,7 @@ function persistRun(database, artifact, finalModel) {
   }
 }
 
-function buildFoldSpecs(minDate, maxDate) {
+export function buildFoldSpecs(minDate, maxDate) {
   const specs = [];
   for (let offset = FOLD_COUNT - 1; offset >= 0; offset -= 1) {
     const testEnd = addMonths(monthStart(maxDate), -offset * TEST_MONTHS, true);
@@ -255,7 +274,7 @@ function transform(key, value) { const number = Number(value); return Number.isF
 function softmax(scores) { const max = Math.max(...scores); const values = scores.map((score) => Math.exp(Math.max(-40, Math.min(40, score - max)))); const total = values.reduce((sum, value) => sum + value, 0); return values.map((value) => value / total); }
 function dot(left, right) { return left.reduce((sum, value, index) => sum + value * right[index], 0); }
 function mean(values) { return values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : 0; }
-function aggregateMetrics(folds) { const keys = ["logLoss", "uniformLogLoss", "brier", "ece", "maxCalibrationBinError"]; const result = Object.fromEntries(keys.map((key) => [`mean${key[0].toUpperCase()}${key.slice(1)}`, mean(folds.map((fold) => fold.metrics[key]))])); result.maxProbabilitySumError = Math.max(...folds.map((fold) => fold.metrics.maxProbabilitySumError)); return result; }
+function aggregateMetrics(folds) { const keys = ["logLoss", "uniformLogLoss", "brier", "ece", "maxCalibrationBinError"]; const result = Object.fromEntries(keys.map((key) => [`mean${key[0].toUpperCase()}${key.slice(1)}`, mean(folds.map((fold) => fold.metrics[key]))])); result.maxProbabilitySumError = Math.max(...folds.map((fold) => fold.metrics.maxProbabilitySumError)); result.calibrationMethod = "equal-frequency-deciles"; return result; }
 function monthStart(date) { return `${date.slice(0, 7)}-01`; }
 function addMonths(date, count, endOfMonth = false) { const value = new Date(`${date}T00:00:00Z`); value.setUTCMonth(value.getUTCMonth() + count); if (endOfMonth) { value.setUTCMonth(value.getUTCMonth() + 1); value.setUTCDate(0); } return value.toISOString().slice(0, 10); }
 function addDays(date, count) { const value = new Date(`${date}T00:00:00Z`); value.setUTCDate(value.getUTCDate() + count); return value.toISOString().slice(0, 10); }
