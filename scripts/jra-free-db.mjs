@@ -9,6 +9,7 @@ const ROOT = path.resolve(import.meta.dirname, "..");
 const PRIVATE_DIR = path.join(ROOT, "data", "jra-free-private");
 const RAW_DIR = path.join(PRIVATE_DIR, "raw");
 const DB_PATH = path.join(PRIVATE_DIR, "keiba.sqlite");
+const AUDIT_REPORT_PATH = path.join(PRIVATE_DIR, "models", "database-audit.json");
 const LOCK_PATH = path.join(PRIVATE_DIR, "worker.lock");
 const RUN_LOCK_PATH = path.join(PRIVATE_DIR, "backfill-run.lock");
 const SYNC_REQUEST_PATH = path.join(PRIVATE_DIR, "current-sync.request");
@@ -48,6 +49,8 @@ try {
     console.log(JSON.stringify(statusReport(), null, 2));
   } else if (command === "audit") {
     const result = auditDatabase();
+    fs.mkdirSync(path.dirname(AUDIT_REPORT_PATH), { recursive: true });
+    fs.writeFileSync(AUDIT_REPORT_PATH, `${JSON.stringify(result, null, 2)}\n`, "utf8");
     console.log(JSON.stringify(result, null, 2));
     if (!result.pass) process.exitCode = 2;
   } else if (command === "lock-self-check") {
@@ -799,6 +802,7 @@ function auditDatabase() {
     or abs(e.roi-cast(e.payout_yen as real)/c.total_investment_yen)>0.000000001
     or (e.timing_valid=1 and (e.odds_age_seconds is null or e.odds_age_seconds<0))`).get().count;
   return {
+    checkedAt: new Date().toISOString(),
     pass: failedChecks === 0 && incompleteCompleteJobs === 0 && missingRaw === 0 && corruptRaw === 0
       && orphanRaces === 0 && failedOddsChecks === 0 && incompleteOddsBatches === 0 && invalidOddsRanges === 0
       && invalidEvCandidates === 0 && orphanEvEvaluations === 0 && invalidEvEvaluations === 0,

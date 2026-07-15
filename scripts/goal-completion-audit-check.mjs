@@ -8,6 +8,7 @@ const temp = fs.mkdtempSync(path.join(os.tmpdir(), "keiba-goal-audit-"));
 const artifactPath = path.join(temp, "model.json");
 const marketOutputPath = path.join(temp, "market.json");
 const generatorPath = path.join(temp, "generator.mjs");
+const databaseAuditPath = path.join(temp, "database-audit.json");
 const db = new DatabaseSync(":memory:");
 
 try {
@@ -67,12 +68,14 @@ try {
   }
   fs.writeFileSync(marketOutputPath, JSON.stringify({ status: "ready", unitStakeYen: 100, candidates, predictions }));
   fs.writeFileSync(generatorPath, "export const preRaceOnly = true;\n");
+  fs.writeFileSync(databaseAuditPath, JSON.stringify({ pass: true, races: 1, failedChecks: 0, incompleteCompleteJobs: 0,
+    missingRaw: 0, corruptRaw: 0, orphanRaces: 0 }));
   const pipeline = path.join(temp, "pipeline");
   fs.writeFileSync(pipeline, "ok");
 
   const report = { readiness: { ready: true, coverage: { from: "1996-01", to: "2026-07", expectedMonths: 367 } }, checks: [], failures: [] };
-  auditCompletedGoal(db, report, { artifactPath, marketOutputPath, generatorPath, pipelineFiles: [pipeline] });
-  if (report.failures.length || report.checks.length !== 17) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
+  auditCompletedGoal(db, report, { artifactPath, marketOutputPath, generatorPath, databaseAuditPath, pipelineFiles: [pipeline] });
+  if (report.failures.length || report.checks.length !== 18) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
   console.log(JSON.stringify({ status: "pass", checks: report.checks.length, races: predictions.length, candidates: candidates.length }, null, 2));
 } finally {
   db.close();

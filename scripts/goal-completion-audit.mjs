@@ -6,6 +6,7 @@ import { inspectBackfillReadiness } from "./backfill-readiness.mjs";
 
 const PRIVATE_DIR = path.join("data", "jra-free-private");
 const OUTPUT = path.join(PRIVATE_DIR, "models", "goal-completion-audit.json");
+const DATABASE_AUDIT = path.join(PRIVATE_DIR, "models", "database-audit.json");
 const ARTIFACT = path.join(PRIVATE_DIR, "models", "ability-softmax-v1.json");
 const MARKET_OUTPUT = path.join("data", "model-outputs-2026-07-11-2026-07-12.json");
 const BET_TYPES = ["単勝", "複勝", "馬連", "ワイド", "馬単", "3連複", "3連単"];
@@ -47,6 +48,16 @@ export function auditCompletedGoal(database, report, options = {}) {
     (select count(*) from complete_race_entries) runners,(select count(*) from complete_payouts) payouts
     from complete_races`).get();
   check(report, "normalized_database_nonempty", coverage.races > 0 && coverage.runners > 0 && coverage.payouts > 0, coverage);
+  const databaseAuditPath = options.databaseAuditPath ?? DATABASE_AUDIT;
+  const databaseAudit = fs.existsSync(databaseAuditPath) ? JSON.parse(fs.readFileSync(databaseAuditPath, "utf8")) : null;
+  check(report, "raw_archive_hash_audit", databaseAudit?.pass === true
+    && databaseAudit.races === coverage.races
+    && databaseAudit.failedChecks === 0
+    && databaseAudit.incompleteCompleteJobs === 0
+    && databaseAudit.missingRaw === 0
+    && databaseAudit.corruptRaw === 0
+    && databaseAudit.orphanRaces === 0,
+  databaseAudit ?? { path: databaseAuditPath, status: "missing" });
 
   const artifactPath = options.artifactPath ?? ARTIFACT;
   const marketOutputPath = options.marketOutputPath ?? MARKET_OUTPUT;
