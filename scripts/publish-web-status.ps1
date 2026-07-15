@@ -32,6 +32,8 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Model validation policy failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\train-expectancy-model-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Model training pipeline validation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\train-expectancy-model-unit-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Model numerical unit validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\market-ev-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Market expectancy validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\jra-free-db.mjs" audit

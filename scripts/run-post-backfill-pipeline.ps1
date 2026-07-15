@@ -37,7 +37,16 @@ try {
   & $node --no-warnings "scripts\jra-free-db.mjs" audit
   if ($LASTEXITCODE -ne 0) { throw "Full database audit failed: $LASTEXITCODE" }
   $artifact = Join-Path $privateDir "models\ability-softmax-v1.json"
-  if ($ForceModel -or -not (Test-Path $artifact)) {
+  $needsTraining = $ForceModel -or -not (Test-Path $artifact)
+  if (-not $needsTraining) {
+    try {
+      $modelArtifact = Get-Content -LiteralPath $artifact -Raw | ConvertFrom-Json
+      $needsTraining = [int64]$modelArtifact.dataCoverage.races -ne [int64]$status.races
+    } catch {
+      $needsTraining = $true
+    }
+  }
+  if ($needsTraining) {
     & $node --no-warnings "scripts\train-expectancy-model.mjs"
     if ($LASTEXITCODE -ne 0) { throw "Model training failed: $LASTEXITCODE" }
   }
@@ -45,6 +54,8 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Expectancy generation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\train-expectancy-model-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Model pipeline check failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\train-expectancy-model-unit-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Model numerical unit check failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\market-ev-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Expectancy output check failed: $LASTEXITCODE" }
   & (Join-Path $PSScriptRoot "publish-web-status.ps1")

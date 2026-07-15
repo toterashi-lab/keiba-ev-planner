@@ -67,6 +67,7 @@ for (const file of [
   "model-validation-policy-check.mjs",
   "train-expectancy-model.mjs",
   "train-expectancy-model-check.mjs",
+  "train-expectancy-model-unit-check.mjs",
   "backfill-readiness.mjs",
   "run-post-backfill-pipeline.ps1",
   "install-post-backfill-task.ps1",

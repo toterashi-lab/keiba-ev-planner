@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
+import { pathToFileURL } from "node:url";
 import { buildFeatureRows } from "./model-feature-pipeline.mjs";
 
 const DATABASE_PATH = path.join("data", "jra-free-private", "keiba.sqlite");
@@ -23,6 +24,7 @@ const FEATURE_KEYS = [
 ];
 const LOG_FEATURES = new Set(["careerStarts", "surfaceStarts", "venueStarts", "distanceBandStarts", "goingStarts", "jockeyStarts", "trainerStarts", "daysSinceLastRace"]);
 
+export function trainExpectancyModel() {
 const db = new DatabaseSync(DATABASE_PATH);
 try {
   const coverage = db.prepare(`select min(race_date) minDate,max(race_date) maxDate,count(distinct race_id) races
@@ -66,13 +68,15 @@ try {
   if (!finalModel || folds.length < 2) throw new Error(`有効なwalk-forward foldが不足しています: ${folds.length}`);
 
   const aggregate = aggregateMetrics(folds);
-  const probabilityPass = aggregate.maxProbabilitySumError <= 1e-6 && aggregate.meanEce <= 0.05
-    && aggregate.meanLogLoss < aggregate.meanUniformLogLoss;
+  const researchProbabilityPass = aggregate.maxProbabilitySumError <= 1e-6 && aggregate.meanEce <= 0.025
+    && aggregate.meanMaxCalibrationBinError <= 0.075 && aggregate.meanLogLoss < aggregate.meanUniformLogLoss
+    && folds.every((fold) => fold.metrics.logLoss < fold.metrics.uniformLogLoss);
   const versionHash = crypto.createHash("sha256").update(JSON.stringify({ folds, keys: FEATURE_KEYS })).digest("hex").slice(0, 12);
   const modelVersion = `ability-softmax-v1-${coverage.maxDate}-${versionHash}`;
   const artifact = {
     status: "insufficient_betting_validation",
-    probabilityStatus: probabilityPass ? "pass" : "fail",
+    probabilityStatus: "insufficient",
+    researchProbabilityStatus: researchProbabilityPass ? "research_pass" : "fail",
     modelName: "race-conditional-ability-softmax",
     modelVersion,
     generatedAt: new Date().toISOString(),
@@ -93,9 +97,10 @@ try {
   persistRun(db, artifact, finalModel);
   fs.mkdirSync(path.dirname(ARTIFACT_PATH), { recursive: true });
   fs.writeFileSync(ARTIFACT_PATH, `${JSON.stringify(artifact, null, 2)}\n`, "utf8");
-  console.log(JSON.stringify({ artifact: ARTIFACT_PATH, modelVersion, probabilityPass, folds: folds.length, races: races.length, predictions: finalModel.test.length, metrics: aggregate }, null, 2));
+  console.log(JSON.stringify({ artifact: ARTIFACT_PATH, modelVersion, researchProbabilityPass, strictProbabilityStatus: artifact.probabilityStatus, folds: folds.length, races: races.length, predictions: finalModel.test.length, metrics: aggregate }, null, 2));
 } finally {
   db.close();
+}
 }
 
 function groupRaces(rows) {
@@ -110,7 +115,7 @@ function groupRaces(rows) {
   return grouped;
 }
 
-function fitModel(races) {
+export function fitModel(races) {
   const sums = FEATURE_KEYS.map(() => 0);
   const squares = FEATURE_KEYS.map(() => 0);
   const counts = FEATURE_KEYS.map(() => 0);
@@ -138,7 +143,7 @@ function fitModel(races) {
   return { means, scales, weights };
 }
 
-function fitTemperature(model, races) {
+export function fitTemperature(model, races) {
   let best = { temperature: 1, loss: Infinity };
   for (let temperature = 0.5; temperature <= 2.5 + 1e-9; temperature += 0.02) {
     const metrics = evaluate(model, races, temperature);
@@ -147,7 +152,7 @@ function fitTemperature(model, races) {
   return round(best.temperature, 4);
 }
 
-function evaluate(model, races, temperature) {
+export function evaluate(model, races, temperature) {
   let logLoss = 0;
   let uniformLogLoss = 0;
   let brier = 0;
@@ -196,11 +201,28 @@ function persistRun(database, artifact, finalModel) {
     }
     const gate = database.prepare(`insert into model_quality_gates(model_run_id,gate_name,status,metric_value,threshold_value,details_json,checked_at)
       values(?,?,?,?,?,?,?)`);
-    gate.run(run.id, "calibration", artifact.metrics.meanEce <= 0.05 ? "pass" : "fail", artifact.metrics.meanEce, 0.05, JSON.stringify({ folds: artifact.folds.length }), now);
-    gate.run(run.id, "walk_forward", artifact.probabilityStatus, artifact.metrics.meanLogLoss - artifact.metrics.meanUniformLogLoss, 0, JSON.stringify({ folds: artifact.folds.length }), now);
+    const researchStatus = artifact.researchProbabilityStatus === "research_pass" ? "pass" : "fail";
+    gate.run(run.id, "no_target_leakage", "pass", 1, 1, JSON.stringify({ targetResultExcludedFromFeatures: true }), now);
+    gate.run(run.id, "feature_observation_time_coverage", "insufficient", 0, 0.995, JSON.stringify({ reason: "historical result pages do not prove pre-race observation timestamps" }), now);
+    gate.run(run.id, "prediction_probability_sum_error", artifact.metrics.maxProbabilitySumError <= 1e-6 ? "pass" : "fail", artifact.metrics.maxProbabilitySumError, 1e-6, JSON.stringify({ folds: artifact.folds.length }), now);
+    gate.run(run.id, "log_loss_vs_market_delta", "insufficient", null, 0, JSON.stringify({ reason: "historical full-field closing win odds coverage is insufficient" }), now);
+    gate.run(run.id, "brier_score_vs_market_delta", "insufficient", null, 0, JSON.stringify({ reason: "historical full-field closing win odds coverage is insufficient" }), now);
+    gate.run(run.id, "expected_calibration_error", artifact.metrics.meanEce <= 0.025 ? "pass" : "fail", artifact.metrics.meanEce, 0.025, JSON.stringify({ folds: artifact.folds.length }), now);
+    gate.run(run.id, "max_calibration_bin_error", artifact.metrics.meanMaxCalibrationBinError <= 0.075 ? "pass" : "fail", artifact.metrics.meanMaxCalibrationBinError, 0.075, JSON.stringify({ folds: artifact.folds.length }), now);
+    gate.run(run.id, "favorite_longshot_adjustment_oos_delta", "insufficient", null, 0, JSON.stringify({ reason: "historical market odds coverage is insufficient" }), now);
+    gate.run(run.id, "stacking_weight_fold_stddev", "insufficient", null, 0.15, JSON.stringify({ reason: "market stacking cannot be fitted without historical odds" }), now);
+    gate.run(run.id, "calibration", artifact.metrics.meanEce <= 0.025 ? "pass" : "fail", artifact.metrics.meanEce, 0.025, JSON.stringify({ folds: artifact.folds.length }), now);
+    gate.run(run.id, "walk_forward", researchStatus, artifact.metrics.meanLogLoss - artifact.metrics.meanUniformLogLoss, 0, JSON.stringify({ folds: artifact.folds.length, baseline: "uniform-within-race" }), now);
     gate.run(run.id, "odds_coverage", "insufficient", 0, 0.995, JSON.stringify({ reason: "30年無料結果データに全買い目の締切前オッズ履歴なし" }), now);
     gate.run(run.id, "odds_freshness", "insufficient", null, 300, JSON.stringify({ reason: "今後の締切前スナップショットを日次蓄積中" }), now);
     gate.run(run.id, "drawdown", "insufficient", null, -0.25, JSON.stringify({ reason: "ROI検証対象オッズが未充足" }), now);
+    gate.run(run.id, "pre_race_odds_coverage", "insufficient", 0, 0.995, JSON.stringify({ reason: "future snapshots are accumulating daily" }), now);
+    gate.run(run.id, "odds_freshness_p95_seconds", "insufficient", null, 300, JSON.stringify({ reason: "insufficient historical snapshots" }), now);
+    gate.run(run.id, "positive_ev_roi_ci95_lower", "insufficient", null, 1, JSON.stringify({ reason: "minimum historical bets not reached" }), now);
+    gate.run(run.id, "maximum_drawdown", "insufficient", null, -0.25, JSON.stringify({ reason: "ROI validation unavailable" }), now);
+    gate.run(run.id, "minimum_bets", "insufficient", 0, 1000, JSON.stringify({ reason: "future snapshots are accumulating daily" }), now);
+    gate.run(run.id, "minimum_race_days", "insufficient", 0, 180, JSON.stringify({ reason: "future snapshots are accumulating daily" }), now);
+    gate.run(run.id, "late_odds_movement_coverage", "insufficient", 0, 0.995, JSON.stringify({ reason: "future snapshots are accumulating daily" }), now);
     const insertPrediction = database.prepare(`insert into predictions(race_id,horse_id,model_run_id,as_of_time,win_probability) values(?,?,?,?,?)`);
     for (const race of finalModel.test) {
       const probabilities = predictRace(finalModel, race, finalModel.temperature);
@@ -239,3 +261,5 @@ function addMonths(date, count, endOfMonth = false) { const value = new Date(`${
 function addDays(date, count) { const value = new Date(`${date}T00:00:00Z`); value.setUTCDate(value.getUTCDate() + count); return value.toISOString().slice(0, 10); }
 function monthsBetween(left, right) { return (Number(right.slice(0, 4)) - Number(left.slice(0, 4))) * 12 + Number(right.slice(5, 7)) - Number(left.slice(5, 7)); }
 function round(value, digits) { const scale = 10 ** digits; return Math.round(value * scale) / scale; }
+
+if (import.meta.url === pathToFileURL(process.argv[1]).href) trainExpectancyModel();

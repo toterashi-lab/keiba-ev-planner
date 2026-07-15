@@ -561,14 +561,14 @@ function isRecommendationReady(candidate) {
       && candidate.calculationMode === "closing_market_validation" && candidate.calibrationStatus === "benchmark"
       || candidate.predictionContext === "out_of_sample_ability_model_with_market_benchmark"
         && candidate.calculationMode === "ability_and_market_scenarios"
-        && candidate.abilityModelStatus === "pass";
+        && candidate.abilityModelStatus === "research_pass";
   return candidate.status === "ready" && validatedContext
     && candidate.oddsObservedAt && candidate.modelVersion
     && ticketEngine?.SPECS?.[candidate.betType] && candidate.selection && candidateExpectedReturn(candidate) !== null;
 }
 
 function candidateExpectedReturn(candidate) {
-  if (modelData.logic?.abilityModelStatus === "pass"
+  if (modelData.logic?.abilityModelStatus === "research_pass"
     && candidate.abilityExpectedReturn !== null && candidate.abilityExpectedReturn !== undefined
     && Number.isFinite(Number(candidate.abilityExpectedReturn))) return Number(candidate.abilityExpectedReturn);
   if (candidate.conservativeExpectedReturn !== null && candidate.conservativeExpectedReturn !== undefined
@@ -623,7 +623,7 @@ function renderStrategies() {
     .sort((left, right) => candidateExpectedReturn(right) - candidateExpectedReturn(left));
   const logic = modelData.logic ?? {};
   els.modelStatus.textContent = modelData.status === "ready"
-    ? `${logic.abilityModelStatus === "pass" ? "30年能力モデルEV" : "期待値v2 市場基準検証"} ${modelData.modelVersion ?? ""}` : "期待値モデル準備中";
+    ? `${logic.abilityModelStatus === "research_pass" ? "30年能力モデルEV（研究）" : "期待値v2 市場基準検証"} ${modelData.modelVersion ?? ""}` : "期待値モデル準備中";
   els.logicVersion.textContent = logic.engineVersion ?? "未設定";
   els.logicProbabilityMode.textContent = logic.probabilityMode === "market_baseline" ? "市場確率へ自動縮退" : "検証済み統合確率";
   els.logicDeploymentStatus.textContent = logic.deploymentStatus === "benchmark_only" ? "検証専用・購入対象外" : "検証ゲート合格";
