@@ -10,6 +10,8 @@ const PRIVATE_DIR = path.join(ROOT, "data", "jra-free-private");
 const RAW_DIR = path.join(PRIVATE_DIR, "raw");
 const DB_PATH = path.join(PRIVATE_DIR, "keiba.sqlite");
 const LOCK_PATH = path.join(PRIVATE_DIR, "worker.lock");
+const RUN_LOCK_PATH = path.join(PRIVATE_DIR, "backfill-run.lock");
+const SYNC_REQUEST_PATH = path.join(PRIVATE_DIR, "current-sync.request");
 const USER_AGENT = "keiba-ev-planner/1.0 (personal research; low-rate official JRA archive fetcher)";
 const PARSER_VERSION = "jra-html-v1";
 
@@ -32,19 +34,26 @@ try {
     await withLock(() => ingestMonth(month, Number(options.delay ?? 1500)));
     console.log(JSON.stringify(statusReport(), null, 2));
   } else if (command === "run") {
-    await withLock(() => runQueue(Number(options.limit ?? 1), Number(options.delay ?? 1500)));
+    await withLock(() => runQueue(Number(options.limit ?? 1), Number(options.delay ?? 1500)), RUN_LOCK_PATH, { recover: false });
     console.log(JSON.stringify(statusReport(), null, 2));
   } else if (command === "sync-current") {
-    await withLock(() => ingestMonth(currentMonth(), Number(options.delay ?? 1500)));
+    fs.writeFileSync(SYNC_REQUEST_PATH, JSON.stringify({ pid: process.pid, requestedAt: new Date().toISOString() }));
+    try {
+      await withLock(() => ingestMonth(currentMonth(), Number(options.delay ?? 1500)), LOCK_PATH, { waitMs: 30 * 60 * 1000 });
+    } finally {
+      fs.rmSync(SYNC_REQUEST_PATH, { force: true });
+    }
     console.log(JSON.stringify(statusReport(), null, 2));
   } else if (command === "audit") {
     const result = auditDatabase();
     console.log(JSON.stringify(result, null, 2));
     if (!result.pass) process.exitCode = 2;
+  } else if (command === "lock-self-check") {
+    await lockSelfCheck();
   } else if (command === "status") {
     console.log(JSON.stringify(statusReport(), null, 2));
   } else {
-    throw new Error("Commands: init, ingest-month, run, audit, status");
+    throw new Error("Commands: init, ingest-month, run, sync-current, audit, lock-self-check, status");
   }
 } finally {
   db.close();
@@ -304,15 +313,31 @@ function seedBackfillJobs(from, to) {
 
 async function runQueue(limit, delayMs) {
   seedBackfillJobs(options.from ?? "1996-01", options.to ?? currentMonth());
+  // Recover an interrupted month before taking the queue snapshot so it is retried first.
+  await withLock(async () => {}, LOCK_PATH, { waitMs: 30 * 60 * 1000 });
   const jobs = db.prepare(`select month from backfill_jobs
     where status in ('queued','failed') and attempts < 12 order by month desc limit ?`).all(limit);
   for (const job of jobs) {
     try {
-      await ingestMonth(job.month, delayMs);
+      await withLock(() => ingestMonth(job.month, delayMs));
     } catch (error) {
       console.error(`${job.month}: ${error.message}`);
     }
+    await yieldToCurrentSync();
   }
+}
+
+async function yieldToCurrentSync(requestPath = SYNC_REQUEST_PATH) {
+  while (fs.existsSync(requestPath)) {
+    let requestedAt = 0;
+    try { requestedAt = new Date(JSON.parse(fs.readFileSync(requestPath, "utf8")).requestedAt).getTime(); } catch {}
+    if (!requestedAt || Date.now() - requestedAt > 35 * 60 * 1000) {
+      fs.rmSync(requestPath, { force: true });
+      break;
+    }
+    await sleep(1000);
+  }
+  await sleep(1000);
 }
 
 async function ingestMonth(month, delayMs) {
@@ -810,36 +835,62 @@ function statusReport() {
   };
 }
 
-async function withLock(task) {
+async function withLock(task, lockPath = LOCK_PATH, options = {}) {
   fs.mkdirSync(PRIVATE_DIR, { recursive: true });
   let handle;
-  try {
-    handle = fs.openSync(LOCK_PATH, "wx");
-  } catch (error) {
-    if (error.code !== "EEXIST") throw error;
-    const owner = readLockOwner();
-    if (owner?.pid && isProcessAlive(owner.pid)) {
-      throw new Error(`Another worker owns ${LOCK_PATH} (pid=${owner.pid})`);
+  const deadline = Date.now() + Number(options.waitMs ?? 0);
+  while (!handle) {
+    try {
+      handle = fs.openSync(lockPath, "wx");
+    } catch (error) {
+      if (error.code !== "EEXIST") throw error;
+      const owner = readLockOwner(lockPath);
+      if (owner?.pid && isProcessAlive(owner.pid)) {
+        if (Date.now() >= deadline) throw new Error(`Another worker owns ${lockPath} (pid=${owner.pid})`);
+        await sleep(1000);
+        continue;
+      }
+      fs.rmSync(lockPath, { force: true });
     }
-    fs.rmSync(LOCK_PATH, { force: true });
-    handle = fs.openSync(LOCK_PATH, "wx");
   }
-  fs.writeFileSync(handle, JSON.stringify({ pid: process.pid, startedAt: new Date().toISOString() }));
+  fs.writeFileSync(handle, JSON.stringify({ pid: process.pid, startedAt: new Date().toISOString(), lockPath }));
   try {
-    recoverInterruptedJobs();
+    if (options.recover !== false) recoverInterruptedJobs();
     return await task();
   } finally {
     fs.closeSync(handle);
-    fs.rmSync(LOCK_PATH, { force: true });
+    fs.rmSync(lockPath, { force: true });
   }
 }
 
-function readLockOwner() {
+function readLockOwner(lockPath = LOCK_PATH) {
   try {
-    return JSON.parse(fs.readFileSync(LOCK_PATH, "utf8"));
+    return JSON.parse(fs.readFileSync(lockPath, "utf8"));
   } catch {
     return null;
   }
+}
+
+async function lockSelfCheck() {
+  const testPath = path.join(PRIVATE_DIR, `lock-self-check-${process.pid}.lock`);
+  const requestPath = path.join(PRIVATE_DIR, `sync-request-self-check-${process.pid}.json`);
+  let contentionDetected = false;
+  await withLock(async () => {
+    try {
+      await withLock(async () => {}, testPath, { recover: false, waitMs: 25 });
+    } catch (error) {
+      contentionDetected = String(error.message).includes("Another worker owns");
+    }
+  }, testPath, { recover: false });
+  if (!contentionDetected) throw new Error("Lock contention was not detected");
+  await withLock(async () => {}, testPath, { recover: false });
+  fs.writeFileSync(requestPath, JSON.stringify({ requestedAt: new Date().toISOString() }));
+  setTimeout(() => fs.rmSync(requestPath, { force: true }), 50);
+  const yieldStarted = Date.now();
+  await yieldToCurrentSync(requestPath);
+  const yieldedMs = Date.now() - yieldStarted;
+  if (yieldedMs < 900) throw new Error(`Current sync priority yield was too short: ${yieldedMs}ms`);
+  console.log(JSON.stringify({ status: "pass", contentionDetected, reacquiredAfterRelease: true, currentSyncPriorityYield: true, yieldedMs }));
 }
 
 function isProcessAlive(pid) {
@@ -864,7 +915,7 @@ function recoverInterruptedJobs() {
       purgeNormalizedMonth(job.month);
     }
   }
-  db.prepare(`update backfill_jobs set status='failed',
+  db.prepare(`update backfill_jobs set status='failed',attempts=max(attempts-1,0),
     last_error='Previous worker stopped before the monthly quality gate completed.',
     updated_at=? where status='running'`).run(now);
 }
