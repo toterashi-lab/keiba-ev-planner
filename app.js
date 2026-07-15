@@ -12,6 +12,8 @@ const state = {
   raceNo: 11,
   view: "summary",
   benchmark: "favorite",
+  rankingBetType: "",
+  rankingMethod: "",
 };
 
 const els = {
@@ -22,6 +24,10 @@ const els = {
   venueRankingContext: document.querySelector("#venue-ranking-context"),
   venueRankingStatus: document.querySelector("#venue-ranking-status"),
   venueRankingList: document.querySelector("#venue-ranking-list"),
+  rankingBetTabs: document.querySelector("#ranking-bet-tabs"),
+  rankingMethodTabs: document.querySelector("#ranking-method-tabs"),
+  selectionRankingCount: document.querySelector("#selection-ranking-count"),
+  selectionRankingBody: document.querySelector("#selection-ranking-body"),
   raceNumber: document.querySelector("#race-number"),
   raceTitle: document.querySelector("#race-title"),
   raceMeta: document.querySelector("#race-meta"),
@@ -358,8 +364,12 @@ function renderVenueRanking() {
   const track = selectedTrack();
   const meeting = selectedMeeting();
   if (!track || !meeting) return;
+  renderRankingBetTabs();
+  renderRankingMethodTabs();
   const rows = track.races.map((race) => {
     const candidates = matchingAutomaticCandidates(race.no).filter(isRecommendationReady)
+      .filter((candidate) => !state.rankingBetType || candidate.betType === state.rankingBetType)
+      .filter((candidate) => !state.rankingMethod || (candidate.method ?? "1点") === state.rankingMethod)
       .sort((left, right) => candidateExpectedReturn(right) - candidateExpectedReturn(left));
     const top = candidates[0] ?? null;
     return { race, top, prediction: matchingAiPrediction(race.no), expectedReturn: top ? candidateExpectedReturn(top) : null };
@@ -369,7 +379,9 @@ function renderVenueRanking() {
     return (right.expectedReturn ?? 0) - (left.expectedReturn ?? 0) || left.race.no - right.race.no;
   });
   const ranked = rows.filter((row) => row.expectedReturn !== null);
-  els.venueRankingContext.textContent = `${formatDate(meeting.date)}・${track.venueName} ${track.meetingName}`;
+  const betLabel = state.rankingBetType || "全券種";
+  const methodLabel = state.rankingMethod || "全方式";
+  els.venueRankingContext.textContent = `${formatDate(meeting.date)}・${track.venueName} ${track.meetingName}・${betLabel}・${methodLabel}`;
   els.venueRankingStatus.textContent = `算出 ${ranked.length} / ${rows.length}R`;
   els.venueRankingStatus.className = `decision ${ranked.length ? "buy" : "reject"}`;
   els.venueRankingList.innerHTML = rows.map((row) => {
@@ -385,6 +397,70 @@ function renderVenueRanking() {
   els.venueRankingList.querySelectorAll("button").forEach((button) => {
     button.addEventListener("click", () => {
       state.raceNo = Number(button.dataset.rankingRace);
+      renderRaceTabs();
+      renderRaceList();
+      renderRaceHeader();
+      renderAiPrediction();
+      renderTopRecommendation();
+      renderVenueRanking();
+      renderRunners();
+      renderPayouts();
+      renderStrategies();
+      document.querySelector(".race-heading").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+  renderSelectionRanking(track);
+}
+
+function renderRankingBetTabs() {
+  const betTypes = ["", ...Object.keys(ticketEngine?.SPECS ?? {})];
+  els.rankingBetTabs.innerHTML = betTypes.map((betType) => `<button type="button" class="${state.rankingBetType === betType ? "active" : ""}" data-ranking-bet="${escapeHtml(betType)}">
+    ${betType || "総合"}
+  </button>`).join("");
+  els.rankingBetTabs.querySelectorAll("button").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.rankingBetType = button.dataset.rankingBet;
+      renderVenueRanking();
+    });
+  });
+}
+
+function renderRankingMethodTabs() {
+  const methods = ["", "1点", "BOX", "フォーメーション"];
+  els.rankingMethodTabs.innerHTML = methods.map((method) => `<button type="button" class="${state.rankingMethod === method ? "active" : ""}" data-ranking-method="${escapeHtml(method)}">
+    ${method || "全方式"}
+  </button>`).join("");
+  els.rankingMethodTabs.querySelectorAll("button").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.rankingMethod = button.dataset.rankingMethod;
+      renderVenueRanking();
+    });
+  });
+}
+
+function renderSelectionRanking(track) {
+  const rows = track.races.flatMap((race) => matchingAutomaticCandidates(race.no)
+    .filter(isRecommendationReady)
+    .filter((candidate) => !state.rankingBetType || candidate.betType === state.rankingBetType)
+    .filter((candidate) => !state.rankingMethod || (candidate.method ?? "1点") === state.rankingMethod)
+    .map((candidate) => ({ race, candidate, expectedReturn: candidateExpectedReturn(candidate) })))
+    .sort((left, right) => right.expectedReturn - left.expectedReturn || left.race.no - right.race.no || left.candidate.points - right.candidate.points);
+  const visibleRows = rows.slice(0, 50);
+  els.selectionRankingCount.textContent = `上位${visibleRows.length} / ${number(rows.length)}件`;
+  els.selectionRankingBody.innerHTML = visibleRows.length ? visibleRows.map((row, index) => {
+    const edge = row.expectedReturn - 1;
+    return `<tr>
+      <td><strong>${index + 1}</strong></td>
+      <td><button type="button" class="ranking-race-link" data-selection-race="${row.race.no}">${row.race.no}R ${escapeHtml(row.race.name)}</button></td>
+      <td>${escapeHtml(row.candidate.betType)}</td><td>${escapeHtml(row.candidate.method ?? "1点")}</td>
+      <td class="selection-cell">${escapeHtml(row.candidate.selection)}</td><td>${number(row.candidate.points ?? 1)}</td><td>${yen((row.candidate.points ?? 1) * ticketEngine.UNIT_STAKE)}</td>
+      <td><strong>${percent(row.expectedReturn)}</strong></td><td class="${edge >= 0 ? "positive" : "negative"}">${signedPercent(edge)}</td>
+      <td><span class="quality ${edge > 0 ? "complete" : "missing"}">${edge > 0 ? "候補" : "見送り"}</span></td>
+    </tr>`;
+  }).join("") : `<tr><td colspan="10" class="empty-row">該当する計算済み買い目がありません</td></tr>`;
+  els.selectionRankingBody.querySelectorAll("button[data-selection-race]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.raceNo = Number(button.dataset.selectionRace);
       renderRaceTabs();
       renderRaceList();
       renderRaceHeader();

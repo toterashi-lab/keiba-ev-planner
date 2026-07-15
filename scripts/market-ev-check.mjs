@@ -23,6 +23,10 @@ for (const race of expectedRaces) {
     && candidate.meetingName === race.meetingName && candidate.raceNo === race.raceNo);
   if (!rows.length) failures.push(`${race.key}: no candidates`);
   for (const betType of betTypes) if (!rows.some((row) => row.betType === betType)) failures.push(`${race.key}: ${betType} missing`);
+  for (const betType of ["馬連", "ワイド", "馬単", "3連複", "3連単"]) {
+    if (!rows.some((row) => row.betType === betType && row.method === "BOX")) failures.push(`${race.key}: ${betType} BOX missing`);
+    if (!rows.some((row) => row.betType === betType && row.method === "フォーメーション")) failures.push(`${race.key}: ${betType} formation missing`);
+  }
   if (rows.some((row) => row.status !== "ready" || row.points < 1 || !Number.isFinite(row.conservativeExpectedReturn))) {
     failures.push(`${race.key}: invalid candidate`);
   }
@@ -42,4 +46,5 @@ if (failures.length) {
 }
 console.log(`OK 72レース・7券種・${model.evaluatedTotal.toLocaleString("ja-JP")}通り・1点100円`);
 console.log("OK 全72レース AI予想・各レース5頭印・信頼度・シナリオ");
+console.log("OK 全72レース 馬連・ワイド・馬単・3連複・3連単のBOX／フォーメーション");
 console.log(`OK 公開候補 ${model.candidates.length.toLocaleString("ja-JP")}件・結果/払戻リークなし`);

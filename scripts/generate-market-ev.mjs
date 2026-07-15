@@ -153,7 +153,10 @@ function structuredCandidates(race, dbType, betType, rows, horseProbabilities, s
       return selectProbability({ marketProbability: selectedRows[index].marketProbability, modelProbability: structural, validationArtifact: VALIDATION_ARTIFACT }).probability;
     });
     const probability = probabilities.reduce((sum, value) => sum + value, 0) / probabilities.length;
-    return [makeCandidate(race, betType, ticket.method, combinations.flat(), selectedRows, probability, names, combinations, probabilities)];
+    const display = ticket.method === "BOX"
+      ? `${ticket.horses.join("-")} BOX`
+      : ticket.groups.map((group) => group.join(",")).join(" → ");
+    return [makeCandidate(race, betType, ticket.method, combinations.flat(), selectedRows, probability, names, combinations, probabilities, display)];
   });
 }
 
@@ -191,13 +194,13 @@ function buildStructuralBooks(horseProbabilities) {
   return books;
 }
 
-function makeCandidate(race, betType, method, selection, rows, probability, names, combinations = null, itemProbabilities = null) {
+function makeCandidate(race, betType, method, selection, rows, probability, names, combinations = null, itemProbabilities = null, displayOverride = null) {
   const expectedReturn = rows.reduce((sum, row, index) => {
     const itemProbability = itemProbabilities?.[index] ?? probability;
     return sum + row.odds_low * itemProbability;
   }, 0) / rows.length;
   const displayNumbers = combinations ? [...new Set(combinations.flat())] : selection;
-  const display = displayNumbers.map((number) => `${number} ${names.get(number) ?? ""}`.trim()).join("・");
+  const display = displayOverride ?? displayNumbers.map((number) => `${number} ${names.get(number) ?? ""}`.trim()).join("・");
   return {
     date: race.race_date,
     meetingName: meetingName(race),

@@ -21,6 +21,7 @@
 }
 
 * { box-sizing: border-box; }
+html { overflow-x: clip; }
 body { margin: 0; min-width: 320px; background: #eef1f2; }
 button, input, select { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
@@ -87,6 +88,14 @@ main { width: min(1240px, 100%); margin: 0 auto; padding: 14px 18px 30px; }
 .venue-ranking > header { min-height: 54px; padding: 9px 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); }
 .venue-ranking > header span:first-child { display: block; margin-bottom: 2px; color: var(--muted); font-size: 10px; }
 .venue-ranking h2 { margin: 0; font-size: 16px; }
+.ranking-bet-tabs { min-height: 40px; padding: 6px 9px; display: flex; gap: 5px; overflow-x: auto; background: #fff; border-bottom: 1px solid var(--line); scrollbar-width: none; }
+.ranking-bet-tabs::-webkit-scrollbar { display: none; }
+.ranking-bet-tabs button { min-width: 66px; padding: 7px 10px; border: 1px solid #bfc7cc; background: #fff; color: #4c575e; font-size: 11px; font-weight: 800; white-space: nowrap; cursor: pointer; }
+.ranking-bet-tabs button.active { border-color: var(--green-800); background: var(--green-800); color: #fff; }
+.ranking-method-tabs { min-height: 36px; padding: 5px 9px; display: flex; gap: 5px; overflow-x: auto; background: #f4f6f7; border-bottom: 1px solid var(--line); scrollbar-width: none; }
+.ranking-method-tabs::-webkit-scrollbar { display: none; }
+.ranking-method-tabs button { min-width: 90px; padding: 6px 10px; border: 1px solid #c3cbd0; background: #fff; color: #526069; font-size: 10px; font-weight: 800; white-space: nowrap; cursor: pointer; }
+.ranking-method-tabs button.active { border-color: var(--blue-700); background: var(--blue-700); color: #fff; }
 .venue-ranking-list { padding: 8px 10px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
 .venue-ranking-list button { min-width: 0; min-height: 76px; padding: 7px 8px; display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto auto; gap: 2px 7px; border: 1px solid #b9c4be; border-top: 3px solid var(--green-700); background: #fff; color: var(--ink); text-align: left; cursor: pointer; }
 .venue-ranking-list button:hover, .venue-ranking-list button.active { background: var(--green-100); border-color: var(--green-700); }
@@ -98,6 +107,16 @@ main { width: min(1240px, 100%); margin: 0 auto; padding: 14px 18px 30px; }
 .venue-ranking-list em { grid-column: 1 / -1; color: var(--green-800); font-size: 9px; font-style: normal; font-weight: 800; }
 .venue-ranking-list button.blocked em { color: var(--red-700); }
 .venue-ranking > p { margin: 0; padding: 0 12px 8px; color: var(--muted); font-size: 9px; }
+.selection-ranking-head { min-height: 39px; padding: 8px 11px; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #e9edef; border-top: 1px solid #cfd6da; }
+.selection-ranking-head strong { font-size: 13px; }
+.selection-ranking-head span { color: var(--muted); font-size: 10px; }
+.table-scroll.selection-ranking-scroll { width: calc(100% - 20px); margin: 0 10px 10px; max-height: 440px; overflow: auto; background: #fff; }
+.selection-ranking-table { min-width: 980px; table-layout: auto; }
+.selection-ranking-table th { position: sticky; top: 0; z-index: 1; white-space: nowrap; }
+.selection-ranking-table td { white-space: nowrap; }
+.selection-ranking-table .selection-cell { min-width: 210px; white-space: normal; line-height: 1.45; }
+.ranking-race-link { padding: 0; border: 0; background: none; color: var(--blue-700); font-weight: 800; cursor: pointer; text-align: left; }
+.ranking-race-link:hover { text-decoration: underline; }
 .race-tabs { background: #fbfbfc; border-bottom: 1px solid var(--line); }
 .race-tabs button { min-width: 66px; padding: 9px 5px 8px; border: 0; border-right: 1px solid var(--line); background: transparent; color: #536069; cursor: pointer; }
 .race-tabs button strong { display: block; font-size: 14px; }
