@@ -25,6 +25,8 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Reference dataset validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\ev-logic-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "EV logic validation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\finish-order-probabilities-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "All-ticket finish probability validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\performance-benchmark-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Performance benchmark validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\ticket-engine-check.mjs"

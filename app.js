@@ -173,7 +173,7 @@ function renderDatabaseStatus() {
     ? "・特徴量選別未確定"
     : `・特徴量${number(preflight?.selectedFeatureGroups?.length ?? 0)}群/${number(preflight?.selectedFeatures ?? 0)}項目採用`;
   const preflightText = preflight
-    ? ` / 学習試験 ${number(preflight.races)}R・${(preflight.totalMs / 1000).toFixed(1)}秒・ECE ${percent(preflight.ece)}・最大誤差 ${percent(preflight.maxCalibrationBinError)}${selectedGroupText}`
+    ? ` / 学習試験 ${number(preflight.races)}R・${(preflight.totalMs / 1000).toFixed(1)}秒・ECE ${percent(preflight.ece)}・最大誤差 ${percent(preflight.maxCalibrationBinError)}・券種確率${number(preflight.ticketTypesPassed)}/${number(preflight.ticketTypesTotal)}合格${selectedGroupText}`
     : " / 学習試験 待機中";
   const validation = databaseData.liveEvValidation;
   const validationText = validation

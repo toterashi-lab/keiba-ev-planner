@@ -4,6 +4,7 @@ import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
 import { EXPECTANCY_ENGINE_VERSION, normalizeMarket, selectProbability } from "../model/expectancy-engine-v2.mjs";
 import { buildStructuredDefinitions } from "../model/structured-ticket-search.mjs";
+import { buildFinishOrderProbabilityBooks, calibrateFinishOrderProbabilityBooks } from "../model/finish-order-probabilities.mjs";
 
 await import(pathToFileURL(path.resolve("ticket-engine.js")).href);
 
@@ -56,14 +57,18 @@ export function generateMarketEv() {
       const names = new Map((namesByRace.get(race.race_id) ?? []).map((row) => [row.horse_number, row.name]));
       const winRows = byType.get("win");
       const horseProbabilities = normalize(Object.fromEntries(winRows.map((row) => [row.selection_key, 1 / row.odds_low])));
-      const structuralBooks = buildStructuralBooks(horseProbabilities);
+      const structuralBooks = buildFinishOrderProbabilityBooks(horseProbabilities);
       const modelRows = modelPredictionsByRace.get(race.race_id) ?? [];
       const hasCompleteModel = modelRows.length === winRows.length
         && Math.abs(modelRows.reduce((sum, row) => sum + row.win_probability, 0) - 1) <= 1e-6;
       const researchHorseProbabilities = hasCompleteModel
         ? normalize(Object.fromEntries(modelRows.map((row) => [row.horse_number, row.win_probability])))
         : horseProbabilities;
-      const researchStructuralBooks = buildStructuralBooks(researchHorseProbabilities);
+      const rawResearchStructuralBooks = buildFinishOrderProbabilityBooks(researchHorseProbabilities);
+      const researchStructuralBooks = VALIDATION_ARTIFACT?.ticketProbabilityStatus === "research_pass"
+        ? calibrateFinishOrderProbabilityBooks(rawResearchStructuralBooks,
+          VALIDATION_ARTIFACT.ticketCalibrationTemperatures, winRows.length)
+        : rawResearchStructuralBooks;
       const raceCandidates = [];
       let evaluated = 0;
 
@@ -174,40 +179,6 @@ function structuredCandidates(race, dbType, betType, rows, marketHorseProbabilit
       : ticket.groups.map((group) => group.join(",")).join(" → ");
     return [makeCandidate(race, betType, ticket.method, combinations.flat(), selectedRows, probability, names, combinations, probabilities, display, null, researchProbabilities, ticket.optimizationScenarios, hasCompleteModel)];
   });
-}
-
-function buildStructuralBooks(horseProbabilities) {
-  const horses = Object.keys(horseProbabilities).map(Number);
-  const books = Object.fromEntries(Object.keys(DB_TYPES).map((type) => [type, new Map()]));
-  const add = (type, key, probability) => books[type].set(key, (books[type].get(key) ?? 0) + probability);
-  const placeDepth = horses.length >= 8 ? 3 : 2;
-  for (const first of horses) {
-    const p1 = horseProbabilities[first];
-    add("win", String(first), p1);
-    for (const second of horses) {
-      if (second === first) continue;
-      const p2 = p1 * horseProbabilities[second] / (1 - horseProbabilities[first]);
-      add("exacta", `${first}-${second}`, p2);
-      add("quinella", [first, second].sort((a, b) => a - b).join("-"), p2);
-      if (placeDepth === 2) {
-        add("place", String(first), p2);
-        add("place", String(second), p2);
-        add("wide", [first, second].sort((a, b) => a - b).join("-"), p2);
-      }
-      for (const third of horses) {
-        if (third === first || third === second) continue;
-        const denominator = 1 - horseProbabilities[first] - horseProbabilities[second];
-        const p3 = p2 * horseProbabilities[third] / denominator;
-        add("trifecta", `${first}-${second}-${third}`, p3);
-        add("trio", [first, second, third].sort((a, b) => a - b).join("-"), p3);
-        if (placeDepth === 3) {
-          for (const horse of [first, second, third]) add("place", String(horse), p3);
-          for (const pair of [[first, second], [first, third], [second, third]]) add("wide", pair.sort((a, b) => a - b).join("-"), p3);
-        }
-      }
-    }
-  }
-  return books;
 }
 
 function makeCandidate(race, betType, method, selection, rows, probability, names, combinations = null, itemProbabilities = null, displayOverride = null, researchProbability = null, researchItemProbabilities = null, optimizationScenarios = ["single_point"], hasCompleteModel = false) {

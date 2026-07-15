@@ -9,6 +9,7 @@ const ordered = [
   '"scripts\\jra-free-db.mjs" audit',
   '"scripts\\audit-field-availability.mjs"',
   '"scripts\\train-expectancy-model.mjs"',
+  '"scripts\\finish-order-probabilities-check.mjs"',
   '"scripts\\predict-live-racecards.mjs"',
   '"scripts\\generate-live-market-ev.mjs"',
   '"scripts\\generate-market-ev.mjs"',

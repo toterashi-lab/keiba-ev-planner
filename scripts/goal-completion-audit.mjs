@@ -114,10 +114,25 @@ export function auditCompletedGoal(database, report, options = {}) {
   check(report, "uniform_baseline_improvement", artifact.metrics?.meanLogLoss < artifact.metrics?.meanUniformLogLoss, {
     logLoss: artifact.metrics?.meanLogLoss, uniformLogLoss: artifact.metrics?.meanUniformLogLoss,
   });
+  const ticketMetricTypes = Object.keys(artifact.ticketMetrics?.byType ?? {});
+  check(report, "all_ticket_probability_walk_forward", artifact.ticketProbabilityStatus === "research_pass"
+    && artifact.ticketMetrics?.method === "walk-forward-Plackett-Luce-all-ticket-candidate-calibration"
+    && BET_TYPES.length === ticketMetricTypes.length
+    && Object.values(artifact.ticketMetrics.byType).every((metric) => metric.researchPass === true
+      && metric.meanWinnerLogLoss < metric.meanUniformWinnerLogLoss && metric.meanEce <= 0.025
+      && metric.meanSupportedMaximumCalibrationBinError <= 0.1 && metric.maximumMassError <= 1e-8)
+    && Object.values(artifact.ticketCalibrationTemperatures ?? {}).length === BET_TYPES.length
+    && Object.values(artifact.ticketCalibrationTemperatures).every((temperature) => temperature >= 1), {
+      status: artifact.ticketProbabilityStatus,
+      temperatures: artifact.ticketCalibrationTemperatures,
+      metrics: artifact.ticketMetrics,
+    });
 
   const run = database.prepare("select id from model_runs where model_version=? order by id desc limit 1").get(artifact.modelVersion);
   const passedGates = run ? database.prepare("select gate_name from model_quality_gates where model_run_id=? and status='pass'").all(run.id).map((row) => row.gate_name) : [];
-  const requiredGates = ["no_target_leakage", "historical_feature_time_order", "prediction_probability_sum_error", "expected_calibration_error", "max_calibration_bin_error", "calibration", "walk_forward"];
+  const requiredGates = ["no_target_leakage", "historical_feature_time_order", "prediction_probability_sum_error", "expected_calibration_error", "max_calibration_bin_error", "calibration", "walk_forward",
+    "ticket_probability_win", "ticket_probability_place", "ticket_probability_quinella", "ticket_probability_wide",
+    "ticket_probability_exacta", "ticket_probability_trio", "ticket_probability_trifecta"];
   check(report, "persisted_model_quality_gates", requiredGates.every((gate) => passedGates.includes(gate)), { requiredGates, passedGates });
 
   if (!fs.existsSync(marketOutputPath)) {

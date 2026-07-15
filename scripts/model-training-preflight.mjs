@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { evaluate, fitModel, fitTemperature, loadTrainingRaces, runFeatureAblation } from "./train-expectancy-model.mjs";
+import { evaluate, evaluateTicketProbabilities, fitModel, fitTemperature, fitTicketCalibrationTemperatures, loadTrainingRaces, runFeatureAblation } from "./train-expectancy-model.mjs";
 
 const DATABASE = path.join("data", "jra-free-private", "keiba.sqlite");
 const OUTPUT = path.join("data", "jra-free-private", "models", "training-preflight.json");
@@ -38,6 +38,8 @@ try {
   const temperature = fitTemperature(model, calibration);
   const calibrationMs = Date.now() - calibrationStarted;
   const metrics = evaluate(model, test, temperature);
+  const ticketCalibrationTemperatures = fitTicketCalibrationTemperatures(model, calibration, temperature);
+  const ticketMetrics = evaluateTicketProbabilities(model, test, temperature, ticketCalibrationTemperatures);
   const elapsedMs = Date.now() - started;
   const finiteMetrics = ["logLoss", "uniformLogLoss", "brier", "ece", "maxCalibrationBinError", "maxProbabilitySumError"]
     .every((key) => Number.isFinite(metrics[key]));
@@ -45,8 +47,13 @@ try {
     throw new Error(`数値健全性検査に失敗しました: ${JSON.stringify(metrics)}`);
   }
 
+  const ticketResearchPass = Object.values(ticketMetrics.byType).every((value) => value.researchPass);
   const researchPass = metrics.logLoss < metrics.uniformLogLoss && metrics.ece <= 0.025
-    && metrics.maxCalibrationBinError <= 0.075 && metrics.maxProbabilitySumError <= 1e-6 && !ablation.fallback;
+    && metrics.maxCalibrationBinError <= 0.075 && metrics.maxProbabilitySumError <= 1e-6
+    && ticketResearchPass && !ablation.fallback;
+  const fullScale = 105000 / races.length;
+  const projectedFullRunMinutes = ((featureMs * fullScale) + ((elapsedMs - featureMs) * fullScale * 3)
+    + (fitMs * fullScale * 0.2)) / 60000;
   const report = {
     status: "pass",
     checkedAt: new Date().toISOString(),
@@ -66,6 +73,7 @@ try {
       rss: Math.round(process.memoryUsage().rss / 1024 / 1024),
     },
     temperature,
+    ticketCalibrationTemperatures,
     features: { total: model.weights.length, selected: ablation.selectedFeatureIndexes.length },
     featureAdmission: {
       method: ablation.method,
@@ -76,9 +84,13 @@ try {
       groups: ablation.groups,
     },
     metrics,
+    ticketMetrics,
+    ticketResearchPass,
     researchSignal: researchPass ? "research_pass_candidate" : "research_gate_not_met_yet",
-    projectedFullRunMinutes: Number(((elapsedMs * (105000 / races.length)) / 60000).toFixed(1)),
-    projectedFullRssMb: Math.round((process.memoryUsage().rss / 1024 / 1024) * (105000 / races.length)),
+    projectedFullRunMinutes: Number(projectedFullRunMinutes.toFixed(1)),
+    projectedFullFoldCount: 3,
+    projectionMethod: "feature-build-once-plus-three-walk-forward-folds-plus-deployment-fit",
+    projectedFullRssMb: Math.round((process.memoryUsage().rss / 1024 / 1024) * fullScale),
   };
   fs.mkdirSync(path.dirname(OUTPUT), { recursive: true });
   fs.writeFileSync(OUTPUT, `${JSON.stringify(report, null, 2)}\n`, "utf8");

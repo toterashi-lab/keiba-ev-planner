@@ -5,6 +5,7 @@ import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
 import { buildFeatureRows } from "./model-feature-pipeline.mjs";
 import { MODEL_VALIDATION_POLICY } from "../model/validation-policy.mjs";
+import { buildFinishOrderProbabilityBooks, calibrateFinishOrderProbabilityBooks, FINISH_ORDER_TYPES, placeDepth, ticketOutcomeMultiplicity } from "../model/finish-order-probabilities.mjs";
 
 const DATABASE_PATH = path.join("data", "jra-free-private", "keiba.sqlite");
 const ARTIFACT_PATH = path.join("data", "jra-free-private", "models", "ability-softmax-v1.json");
@@ -63,21 +64,28 @@ try {
     const model = fitModel(train, ablation.selectedFeatureIndexes);
     const temperature = fitTemperature(model, calibration);
     const metrics = evaluate(model, test, temperature);
+    const ticketCalibrationTemperatures = fitTicketCalibrationTemperatures(model, calibration, temperature);
+    const ticketMetrics = evaluateTicketProbabilities(model, test, temperature, ticketCalibrationTemperatures);
     folds.push({ ...spec, trainRaces: train.length, calibrationRaces: calibration.length, testRaces: test.length,
       temperature, selectedFeatureGroups: ablation.selectedGroups, selectedFeatureIndexes: ablation.selectedFeatureIndexes,
-      featureSelectionFallback: ablation.fallback, featureAblation: ablation.groups, metrics });
+      featureSelectionFallback: ablation.fallback, featureAblation: ablation.groups, metrics,
+      ticketCalibrationTemperatures, ticketMetrics });
     lastValidationModel = { ...model, temperature, test, spec };
   }
   if (!lastValidationModel || folds.length < 2) throw new Error(`有効なwalk-forward foldが不足しています: ${folds.length}`);
 
   const aggregate = aggregateMetrics(folds);
+  const ticketMetrics = aggregateTicketMetrics(folds);
+  const ticketResearchPass = Object.values(ticketMetrics.byType).every((metric) => metric.researchPass);
   const featureAdmission = aggregateFeatureAdmission(folds);
   const researchProbabilityPass = aggregate.maxProbabilitySumError <= 1e-6 && aggregate.meanEce <= 0.025
     && aggregate.meanMaxCalibrationBinError <= 0.075 && aggregate.meanLogLoss < aggregate.meanUniformLogLoss
     && folds.every((fold) => fold.metrics.logLoss < fold.metrics.uniformLogLoss && !fold.featureSelectionFallback)
-    && featureAdmission.admittedGroups.length > 0;
+    && featureAdmission.admittedGroups.length > 0 && ticketResearchPass;
   const deploymentModel = fitModel(races, featureAdmission.activeFeatureIndexes);
   deploymentModel.temperature = median(folds.map((fold) => fold.temperature));
+  const ticketCalibrationTemperatures = Object.fromEntries(FINISH_ORDER_TYPES.map((type) => [type,
+    median(folds.map((fold) => fold.ticketCalibrationTemperatures[type]))]));
   const versionHash = crypto.createHash("sha256").update(JSON.stringify({ folds, featureAdmission, keys: FEATURE_KEYS })).digest("hex").slice(0, 12);
   const modelVersion = `ability-softmax-v1-${coverage.maxDate}-${versionHash}`;
   const artifact = {
@@ -97,8 +105,11 @@ try {
     scales: deploymentModel.scales,
     weights: deploymentModel.weights,
     temperature: deploymentModel.temperature,
+    ticketCalibrationTemperatures,
     folds,
     metrics: aggregate,
+    ticketProbabilityStatus: ticketResearchPass ? "research_pass" : "fail",
+    ticketMetrics,
     noTargetLeakage: true,
     featureTimePolicy: featureTiming,
     sourceTimingVerified: false,
@@ -316,6 +327,134 @@ export function evaluate(model, races, temperature) {
   };
 }
 
+export function fitTicketCalibrationTemperatures(model, races, temperature) {
+  const candidates = [1, 1.15, 1.3, 1.5, 1.75, 2, 2.4, 3];
+  const losses = Object.fromEntries(FINISH_ORDER_TYPES.map((type) => [type,
+    candidates.map((candidate) => ({ temperature: candidate, loss: 0, winners: 0, observations: 0,
+      bins: Array.from({ length: 10 }, (_, index) => ({ index: index + 1, count: 0, predicted: 0, observed: 0 })) }))]));
+  for (const race of races) {
+    const winningKeys = raceWinningKeys(race);
+    if (!winningKeys) continue;
+    const probabilities = predictRace(model, race, temperature);
+    const books = buildFinishOrderProbabilityBooks(Object.fromEntries(probabilities.map((probability, index) => [index + 1, probability])));
+    for (const type of FINISH_ORDER_TYPES) {
+      const book = books[type];
+      const targetMass = ticketOutcomeMultiplicity(type, race.rows.length);
+      const winners = new Set(winningKeys[type]);
+      for (const candidate of losses[type]) {
+        const exponent = 1 / candidate.temperature;
+        let poweredTotal = 0;
+        for (const probability of book.values()) poweredTotal += Math.pow(Math.max(1e-15, probability), exponent);
+        for (const [key, probability] of book) {
+          const calibrated = targetMass * Math.pow(Math.max(1e-15, probability), exponent) / poweredTotal;
+          const target = winners.has(key) ? 1 : 0;
+          const bin = candidate.bins[Math.min(9, Math.floor(calibrated * 10))];
+          bin.count += 1; bin.predicted += calibrated; bin.observed += target;
+          candidate.observations += 1;
+          if (target) {
+            candidate.loss -= Math.log(Math.max(1e-12, calibrated));
+            candidate.winners += 1;
+          }
+        }
+      }
+    }
+  }
+  return Object.fromEntries(FINISH_ORDER_TYPES.map((type) => {
+    const evaluated = losses[type].map((candidate) => {
+      const bins = candidate.bins.filter((bin) => bin.count).map((bin) => {
+        const observed = bin.observed / bin.count;
+        const error = Math.abs(observed - bin.predicted / bin.count);
+        const standardError = Math.sqrt(Math.max(0, observed * (1 - observed) / bin.count));
+        return { count: bin.count, error, upper95Error: error + 1.645 * standardError };
+      });
+      const ece = bins.reduce((sum, bin) => sum + bin.count * bin.error, 0) / candidate.observations;
+      const supported = bins.filter((bin) => bin.count >= 100);
+      const supportedMaximumCalibrationBinError = supported.length ? Math.max(...supported.map((bin) => bin.error)) : Infinity;
+      const supportedMaximumCalibrationUpper95 = supported.length ? Math.max(...supported.map((bin) => bin.upper95Error)) : Infinity;
+      return { ...candidate, meanLoss: candidate.loss / candidate.winners, ece, supportedMaximumCalibrationBinError,
+        supportedMaximumCalibrationUpper95,
+        calibrationPass: ece <= 0.025 && supportedMaximumCalibrationUpper95 <= 0.1 };
+    });
+    const eligible = evaluated.filter((candidate) => candidate.calibrationPass);
+    const best = (eligible.length ? eligible : evaluated)
+      .sort((left, right) => left.meanLoss - right.meanLoss || left.temperature - right.temperature)[0];
+    return [type, best.temperature];
+  }));
+}
+
+export function evaluateTicketProbabilities(model, races, temperature, ticketCalibrationTemperatures = {}) {
+  const accumulators = Object.fromEntries(FINISH_ORDER_TYPES.map((type) => [type, {
+    races: 0, candidateObservations: 0, winnerObservations: 0, winnerLogLoss: 0, uniformWinnerLogLoss: 0,
+    brier: 0, maximumMassError: 0,
+    bins: Array.from({ length: 10 }, (_, index) => ({ index: index + 1, count: 0, predicted: 0, observed: 0 })),
+  }]));
+  let skippedDeadHeatOrShortField = 0;
+
+  for (const race of races) {
+    const winningKeys = raceWinningKeys(race);
+    if (!winningKeys) { skippedDeadHeatOrShortField += 1; continue; }
+    const probabilities = predictRace(model, race, temperature);
+    const rawBooks = buildFinishOrderProbabilityBooks(Object.fromEntries(probabilities.map((probability, index) => [index + 1, probability])));
+    const books = calibrateFinishOrderProbabilityBooks(rawBooks, ticketCalibrationTemperatures, race.rows.length);
+
+    for (const type of FINISH_ORDER_TYPES) {
+      const accumulator = accumulators[type];
+      const book = books[type];
+      const winners = new Set(winningKeys[type]);
+      const uniformProbability = ticketOutcomeMultiplicity(type, race.rows.length) / book.size;
+      accumulator.races += 1;
+      accumulator.winnerObservations += winners.size;
+      for (const key of winners) {
+        accumulator.winnerLogLoss -= Math.log(Math.max(1e-12, book.get(key) ?? 0));
+        accumulator.uniformWinnerLogLoss -= Math.log(Math.max(1e-12, uniformProbability));
+      }
+      let mass = 0;
+      for (const [key, probability] of book) {
+        const target = winners.has(key) ? 1 : 0;
+        mass += probability;
+        accumulator.brier += (probability - target) ** 2;
+        accumulator.candidateObservations += 1;
+        const bin = accumulator.bins[Math.min(9, Math.floor(probability * 10))];
+        bin.count += 1; bin.predicted += probability; bin.observed += target;
+      }
+      accumulator.maximumMassError = Math.max(accumulator.maximumMassError,
+        Math.abs(mass - ticketOutcomeMultiplicity(type, race.rows.length)));
+    }
+  }
+
+  const byType = Object.fromEntries(FINISH_ORDER_TYPES.map((type) => {
+    const value = accumulators[type];
+    const bins = value.bins.filter((bin) => bin.count).map((bin) => ({
+      index: bin.index, count: bin.count, predicted: bin.predicted / bin.count, observed: bin.observed / bin.count,
+      error: Math.abs(bin.observed / bin.count - bin.predicted / bin.count),
+    }));
+    const winnerLogLoss = value.winnerLogLoss / value.winnerObservations;
+    const uniformWinnerLogLoss = value.uniformWinnerLogLoss / value.winnerObservations;
+    const ece = bins.reduce((sum, bin) => sum + bin.count * bin.error, 0) / value.candidateObservations;
+    const maximumCalibrationBinError = Math.max(...bins.map((bin) => bin.error));
+    const supportedBins = bins.filter((bin) => bin.count >= 100);
+    const supportedMaximumCalibrationBinError = supportedBins.length ? Math.max(...supportedBins.map((bin) => bin.error)) : Infinity;
+    return [type, {
+      races: value.races,
+      candidateObservations: value.candidateObservations,
+      winnerObservations: value.winnerObservations,
+      winnerLogLoss,
+      uniformWinnerLogLoss,
+      brier: value.brier / value.candidateObservations,
+      ece,
+      maximumCalibrationBinError,
+      supportedMaximumCalibrationBinError,
+      minimumSupportedBinCount: 100,
+      maximumMassError: value.maximumMassError,
+      calibrationMethod: "equal-width-deciles-all-ticket-candidates",
+      calibrationBins: bins,
+      researchPass: winnerLogLoss < uniformWinnerLogLoss && ece <= 0.025
+        && supportedMaximumCalibrationBinError <= 0.1 && value.maximumMassError <= 1e-8,
+    }];
+  }));
+  return { byType, skippedDeadHeatOrShortField };
+}
+
 export function predictRace(model, race, temperature = model.temperature ?? 1) {
   return softmax(race.rows.map((row) => dot(model.weights, standardizedVector(row, model.means, model.scales)) / temperature));
 }
@@ -349,6 +488,12 @@ function persistRun(database, artifact, finalModel) {
     gate.run(run.id, "stacking_weight_fold_stddev", "insufficient", null, 0.15, JSON.stringify({ reason: "market stacking cannot be fitted without historical odds" }), now);
     gate.run(run.id, "calibration", artifact.metrics.meanEce <= 0.025 ? "pass" : "fail", artifact.metrics.meanEce, 0.025, JSON.stringify({ folds: artifact.folds.length }), now);
     gate.run(run.id, "walk_forward", researchStatus, artifact.metrics.meanLogLoss - artifact.metrics.meanUniformLogLoss, 0, JSON.stringify({ folds: artifact.folds.length, baseline: "uniform-within-race" }), now);
+    for (const type of FINISH_ORDER_TYPES) {
+      const metric = artifact.ticketMetrics.byType[type];
+      gate.run(run.id, `ticket_probability_${type}`, metric.researchPass ? "pass" : "fail",
+        metric.meanWinnerLogLoss - metric.meanUniformWinnerLogLoss, 0,
+        JSON.stringify({ ...metric, temperature: artifact.ticketCalibrationTemperatures[type] }), now);
+    }
     gate.run(run.id, "odds_coverage", "insufficient", 0, 0.995, JSON.stringify({ reason: "30年無料結果データに全買い目の締切前オッズ履歴なし" }), now);
     gate.run(run.id, "odds_freshness", "insufficient", null, 300, JSON.stringify({ reason: "今後の締切前スナップショットを日次蓄積中" }), now);
     gate.run(run.id, "drawdown", "insufficient", null, -0.25, JSON.stringify({ reason: "ROI検証対象オッズが未充足" }), now);
@@ -394,6 +539,41 @@ function mean(values) { return values.length ? values.reduce((sum, value) => sum
 function median(values) { const sorted = [...values].sort((left, right) => left - right); const middle = Math.floor(sorted.length / 2); return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2; }
 function summarizeMetrics(metrics) { return { logLoss: metrics.logLoss, ece: metrics.ece, maxCalibrationBinError: metrics.maxCalibrationBinError }; }
 function aggregateMetrics(folds) { const keys = ["logLoss", "uniformLogLoss", "brier", "ece", "maxCalibrationBinError"]; const result = Object.fromEntries(keys.map((key) => [`mean${key[0].toUpperCase()}${key.slice(1)}`, mean(folds.map((fold) => fold.metrics[key]))])); result.maxProbabilitySumError = Math.max(...folds.map((fold) => fold.metrics.maxProbabilitySumError)); result.calibrationMethod = "equal-frequency-deciles"; return result; }
+function aggregateTicketMetrics(folds) {
+  const byType = Object.fromEntries(FINISH_ORDER_TYPES.map((type) => {
+    const rows = folds.map((fold) => fold.ticketMetrics.byType[type]);
+    const metric = {
+      meanWinnerLogLoss: mean(rows.map((row) => row.winnerLogLoss)),
+      meanUniformWinnerLogLoss: mean(rows.map((row) => row.uniformWinnerLogLoss)),
+      meanBrier: mean(rows.map((row) => row.brier)),
+      meanEce: mean(rows.map((row) => row.ece)),
+      meanMaximumCalibrationBinError: mean(rows.map((row) => row.maximumCalibrationBinError)),
+      meanSupportedMaximumCalibrationBinError: mean(rows.map((row) => row.supportedMaximumCalibrationBinError)),
+      maximumMassError: Math.max(...rows.map((row) => row.maximumMassError)),
+      races: rows.reduce((sum, row) => sum + row.races, 0),
+      candidateObservations: rows.reduce((sum, row) => sum + row.candidateObservations, 0),
+    };
+    metric.researchPass = metric.meanWinnerLogLoss < metric.meanUniformWinnerLogLoss && metric.meanEce <= 0.025
+      && metric.meanSupportedMaximumCalibrationBinError <= 0.1 && metric.maximumMassError <= 1e-8
+      && rows.every((row) => row.researchPass);
+    return [type, metric];
+  }));
+  return { method: "walk-forward-Plackett-Luce-all-ticket-candidate-calibration", byType,
+    skippedDeadHeatOrShortField: folds.reduce((sum, fold) => sum + fold.ticketMetrics.skippedDeadHeatOrShortField, 0) };
+}
+function pairs(values) { const result = []; for (let left = 0; left < values.length; left += 1) for (let right = left + 1; right < values.length; right += 1) result.push([values[left], values[right]]); return result; }
+function unorderedKey(values) { return [...values].sort((left, right) => left - right).join("-"); }
+function raceWinningKeys(race) {
+  if (race.rows.length < 3) return null;
+  const ordered = race.rows.map((row, index) => ({ index, finishPosition: row.target.finishPosition }))
+    .sort((left, right) => left.finishPosition - right.finishPosition || left.index - right.index);
+  if (ordered.length < 3 || ordered[0].finishPosition !== 1 || ordered[1].finishPosition !== 2 || ordered[2].finishPosition !== 3) return null;
+  const top = ordered.slice(0, 3).map((row) => row.index + 1);
+  const depth = placeDepth(race.rows.length);
+  return { win: [String(top[0])], place: top.slice(0, depth).map(String), quinella: [unorderedKey(top.slice(0, 2))],
+    wide: pairs(top.slice(0, depth)).map(unorderedKey), exacta: [`${top[0]}-${top[1]}`], trio: [unorderedKey(top)],
+    trifecta: [`${top[0]}-${top[1]}-${top[2]}`] };
+}
 function monthStart(date) { return `${date.slice(0, 7)}-01`; }
 function addMonths(date, count, endOfMonth = false) { const value = new Date(`${date}T00:00:00Z`); value.setUTCMonth(value.getUTCMonth() + count); if (endOfMonth) { value.setUTCMonth(value.getUTCMonth() + 1); value.setUTCDate(0); } return value.toISOString().slice(0, 10); }
 function addDays(date, count) { const value = new Date(`${date}T00:00:00Z`); value.setUTCDate(value.getUTCDate() + count); return value.toISOString().slice(0, 10); }

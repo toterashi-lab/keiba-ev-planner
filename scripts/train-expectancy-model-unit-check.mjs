@@ -1,4 +1,4 @@
-import { evaluate, FEATURE_KEYS, fitModel, fitTemperature, runFeatureAblation } from "./train-expectancy-model.mjs";
+import { evaluate, evaluateTicketProbabilities, FEATURE_KEYS, fitModel, fitTemperature, fitTicketCalibrationTemperatures, runFeatureAblation } from "./train-expectancy-model.mjs";
 
 const races = Array.from({ length: 240 }, (_, raceIndex) => {
   const winnerIndex = raceIndex % 4;
@@ -11,7 +11,8 @@ const races = Array.from({ length: 240 }, (_, raceIndex) => {
       values[FEATURE_KEYS.indexOf("priorWinRate")] = runnerIndex === winnerIndex ? 0.8 : 0.05;
       values[FEATURE_KEYS.indexOf("priorPlaceRate")] = runnerIndex === winnerIndex ? 0.9 : 0.2;
       values[FEATURE_KEYS.indexOf("fieldRelativePriorWinRate")] = runnerIndex === winnerIndex ? 0.7 : -0.2;
-      return { featureValues: values };
+      const finishOrder = [winnerIndex, ...[0, 1, 2, 3].filter((index) => index !== winnerIndex)];
+      return { featureValues: values, target: { finishPosition: finishOrder.indexOf(runnerIndex) + 1 } };
     }),
   };
 });
@@ -27,12 +28,18 @@ if (!ablation.selectedGroups.some((group) => group === "horse_form" || group ===
 const model = fitModel(train, ablation.selectedFeatureIndexes);
 const temperature = fitTemperature(model, calibration);
 const metrics = evaluate(model, test, temperature);
+const ticketCalibrationTemperatures = fitTicketCalibrationTemperatures(model, calibration, temperature);
+const ticketMetrics = evaluateTicketProbabilities(model, test, temperature, ticketCalibrationTemperatures);
 if (!(metrics.logLoss < metrics.uniformLogLoss)) throw new Error(`一様予測を改善できません: ${JSON.stringify(metrics)}`);
 if (metrics.maxProbabilitySumError > 1e-12) throw new Error(`確率合計が1ではありません: ${metrics.maxProbabilitySumError}`);
 if (metrics.ece > 0.025) throw new Error(`校正誤差が閾値を超えています: ${metrics.ece}`);
 if (metrics.maxCalibrationBinError > 0.075) throw new Error(`最大校正bin誤差が閾値を超えています: ${metrics.maxCalibrationBinError}`);
+for (const [type, value] of Object.entries(ticketMetrics.byType)) {
+  if (!value.researchPass) throw new Error(`${type}の券種別確率検証に失敗しました: ${JSON.stringify(value)}`);
+  if (value.maximumMassError > 1e-12) throw new Error(`${type}の確率質量が不正です: ${value.maximumMassError}`);
+}
 console.log(JSON.stringify({ status: "pass", temperature, selectedGroups: ablation.selectedGroups, metrics: {
   logLoss: metrics.logLoss, uniformLogLoss: metrics.uniformLogLoss, brier: metrics.brier,
   ece: metrics.ece, maxCalibrationBinError: metrics.maxCalibrationBinError,
   maxProbabilitySumError: metrics.maxProbabilitySumError, calibrationMethod: metrics.calibrationMethod,
-} }, null, 2));
+}, ticketTypes: Object.keys(ticketMetrics.byType).length, ticketCalibrationTemperatures }, null, 2));

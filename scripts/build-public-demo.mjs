@@ -59,7 +59,8 @@ copy("docs/reference-site-analysis.md", path.join(stageDir, "docs", "reference-s
 copy("model/feature-registry.mjs", path.join(stageDir, "model", "feature-registry.mjs"));
 copy("model/validation-policy.mjs", path.join(stageDir, "model", "validation-policy.mjs"));
 copy("model/expectancy-engine-v2.mjs", path.join(stageDir, "model", "expectancy-engine-v2.mjs"));
-copy("model/structured-ticket-search.mjs", path.join(stageDir, "model", "structured-ticket-search.mjs"));
+  copy("model/structured-ticket-search.mjs", path.join(stageDir, "model", "structured-ticket-search.mjs"));
+  copy("model/finish-order-probabilities.mjs", path.join(stageDir, "model", "finish-order-probabilities.mjs"));
 copy("docs/model-feature-research.md", path.join(stageDir, "docs", "model-feature-research.md"));
 for (const file of [
   "jra-free-db.mjs",
@@ -69,6 +70,7 @@ for (const file of [
   "generate-market-ev.mjs",
   "market-ev-check.mjs",
   "expectancy-engine-v2-check.mjs",
+  "finish-order-probabilities-check.mjs",
   "capture-jra-closing-odds.ps1",
   "publish-web-status.ps1",
   "run-jra-free-backfill.ps1",
@@ -318,6 +320,18 @@ function exportDatabaseStatus() {
         maxCalibrationBinError: preflight.metrics.maxCalibrationBinError,
         calibrationMethod: preflight.metrics.calibrationMethod,
         researchSignal: preflight.researchSignal,
+        ticketResearchPass: preflight.ticketResearchPass,
+        ticketCalibrationTemperatures: preflight.ticketCalibrationTemperatures,
+        ticketTypesPassed: Object.values(preflight.ticketMetrics?.byType ?? {}).filter((metric) => metric.researchPass).length,
+        ticketTypesTotal: Object.keys(preflight.ticketMetrics?.byType ?? {}).length,
+        ticketMetrics: Object.fromEntries(Object.entries(preflight.ticketMetrics?.byType ?? {}).map(([type, metric]) => [type, {
+          researchPass: metric.researchPass,
+          winnerLogLoss: metric.winnerLogLoss,
+          uniformWinnerLogLoss: metric.uniformWinnerLogLoss,
+          ece: metric.ece,
+          supportedMaximumCalibrationBinError: metric.supportedMaximumCalibrationBinError,
+          maximumMassError: metric.maximumMassError,
+        }])),
         totalFeatures: preflight.features?.total ?? null,
         selectedFeatures: preflight.features?.selected ?? null,
         selectedFeatureGroups: preflight.featureAdmission?.selectedGroups ?? [],

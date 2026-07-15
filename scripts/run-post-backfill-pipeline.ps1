@@ -77,6 +77,8 @@ try {
     & $node --no-warnings "scripts\train-expectancy-model.mjs"
     if ($LASTEXITCODE -ne 0) { throw "Model training failed: $LASTEXITCODE" }
   }
+  & $node --no-warnings "scripts\finish-order-probabilities-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "All-ticket finish probability validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\predict-live-racecards.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Live ability prediction failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\generate-live-market-ev.mjs"

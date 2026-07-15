@@ -4,6 +4,7 @@ import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
 import { normalizeMarket, selectProbability } from "../model/expectancy-engine-v2.mjs";
 import { buildStructuredDefinitions } from "../model/structured-ticket-search.mjs";
+import { buildFinishOrderProbabilityBooks, calibrateFinishOrderProbabilityBooks } from "../model/finish-order-probabilities.mjs";
 
 await import(pathToFileURL(path.resolve("ticket-engine.js")).href);
 const engine = globalThis.KEIBA_TICKET_ENGINE;
@@ -65,8 +66,11 @@ export function generateLiveMarketEv(options = {}) {
         predictions.push(aiPrediction(race, abilityHorse, names, [], artifact, hasModel));
         continue;
       }
-      const marketBooks = buildStructuralBooks(marketHorse);
-      const abilityBooks = buildStructuralBooks(abilityHorse);
+      const marketBooks = buildFinishOrderProbabilityBooks(marketHorse);
+      const rawAbilityBooks = buildFinishOrderProbabilityBooks(abilityHorse);
+      const abilityBooks = artifact?.ticketProbabilityStatus === "research_pass"
+        ? calibrateFinishOrderProbabilityBooks(rawAbilityBooks, artifact.ticketCalibrationTemperatures, raceEntries.length)
+        : rawAbilityBooks;
       const raceCandidates = [];
       let evaluated = 0;
       for (const [type, label] of Object.entries(TYPES)) {
@@ -226,27 +230,6 @@ function aiPrediction(race, probabilities, names, raceCandidates, artifact, hasM
     scenario: ranked[0].probability - ranked[1].probability >= 0.08 ? "本命軸" : "混戦", marks: ranked.slice(0, 5).map((row, index) => ({ mark: marks[index], ...row })),
     topTicket: top ? { betType: top.betType, method: top.method, selection: top.selection, expectedReturn: top.adoptedExpectedReturn } : null,
     comment: `${hasModel ? "30年能力モデル" : "市場基準"}で全${ranked.length}頭を比較。1位推定勝率${(ranked[0].probability * 100).toFixed(1)}%。`, };
-}
-
-function buildStructuralBooks(horseProbabilities) {
-  const horses = Object.keys(horseProbabilities).map(Number);
-  const books = Object.fromEntries(Object.keys(TYPES).map((type) => [type, new Map()]));
-  const add = (type, key, probability) => books[type].set(key, (books[type].get(key) ?? 0) + probability);
-  const placeDepth = horses.length >= 8 ? 3 : 2;
-  for (const first of horses) {
-    const p1 = horseProbabilities[first]; add("win", String(first), p1);
-    for (const second of horses) if (second !== first) {
-      const p2 = p1 * horseProbabilities[second] / (1 - p1);
-      add("exacta", `${first}-${second}`, p2); add("quinella", [first, second].sort((a, b) => a - b).join("-"), p2);
-      if (placeDepth === 2) { add("place", String(first), p2); add("place", String(second), p2); add("wide", [first, second].sort((a, b) => a - b).join("-"), p2); }
-      for (const third of horses) if (third !== first && third !== second) {
-        const p3 = p2 * horseProbabilities[third] / (1 - p1 - horseProbabilities[second]);
-        add("trifecta", `${first}-${second}-${third}`, p3); add("trio", [first, second, third].sort((a, b) => a - b).join("-"), p3);
-        if (placeDepth === 3) { for (const horse of [first, second, third]) add("place", String(horse), p3); for (const pair of [[first, second], [first, third], [second, third]]) add("wide", pair.sort((a, b) => a - b).join("-"), p3); }
-      }
-    }
-  }
-  return books;
 }
 
 function waiting(reason, outputPath = OUTPUT) { const result = { status: "waiting", reason, generatedAt: new Date().toISOString(), candidates: [], predictions: [] }; fs.mkdirSync(path.dirname(outputPath), { recursive: true }); fs.writeFileSync(outputPath, `${JSON.stringify(result, null, 2)}\n`, "utf8"); return result; }

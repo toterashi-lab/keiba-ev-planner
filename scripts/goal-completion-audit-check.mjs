@@ -32,7 +32,8 @@ try {
     insert into model_runs values(1,'unit-model');
   `);
   const requiredGates = ["no_target_leakage", "historical_feature_time_order", "prediction_probability_sum_error", "expected_calibration_error",
-    "max_calibration_bin_error", "calibration", "walk_forward"];
+    "max_calibration_bin_error", "calibration", "walk_forward", "ticket_probability_win", "ticket_probability_place",
+    "ticket_probability_quinella", "ticket_probability_wide", "ticket_probability_exacta", "ticket_probability_trio", "ticket_probability_trifecta"];
   const insertGate = db.prepare("insert into model_quality_gates values(1,?,'pass')");
   for (const gate of requiredGates) insertGate.run(gate);
 
@@ -54,6 +55,13 @@ try {
       { trainEnd: "2024-07-01", calibrationStart: "2024-07-09", calibrationEnd: "2024-12-31", testStart: "2025-01-08", featureAblation: [{ id: "horse_form", pass: true }] },
     ],
     metrics: { maxProbabilitySumError: 1e-12, meanEce: 0.01, meanMaxCalibrationBinError: 0.03, meanLogLoss: 1.2, meanUniformLogLoss: 2.1 },
+    ticketProbabilityStatus: "research_pass",
+    ticketCalibrationTemperatures: { win: 1, place: 1.5, quinella: 1.5, wide: 1.5, exacta: 1.5, trio: 1.75, trifecta: 2 },
+    ticketMetrics: { method: "walk-forward-Plackett-Luce-all-ticket-candidate-calibration", byType:
+      Object.fromEntries(["win", "place", "quinella", "wide", "exacta", "trio", "trifecta"].map((type) => [type, {
+        researchPass: true, meanWinnerLogLoss: 1, meanUniformWinnerLogLoss: 2, meanEce: 0.01,
+        meanSupportedMaximumCalibrationBinError: 0.02, maximumMassError: 0,
+      }])) },
   };
   fs.writeFileSync(artifactPath, JSON.stringify(artifact));
 
@@ -98,7 +106,7 @@ try {
   const report = { readiness: { ready: true, coverage: { from: "1996-01", to: "2026-07", expectedMonths: 367 } }, checks: [], failures: [] };
   auditCompletedGoal(db, report, { artifactPath, marketOutputPath, generatorPath, databaseAuditPath,
     fieldAvailabilityAuditPath, publicationManifestPath, publicationReceiptPath, automationAuditPath, pipelineFiles: [pipeline] });
-  if (report.failures.length || report.checks.length !== 21) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
+  if (report.failures.length || report.checks.length !== 22) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
   console.log(JSON.stringify({ status: "pass", checks: report.checks.length, races: predictions.length, candidates: candidates.length }, null, 2));
 } finally {
   db.close();
