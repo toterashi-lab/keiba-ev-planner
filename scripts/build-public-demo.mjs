@@ -92,6 +92,7 @@ for (const file of [
   "backfill-readiness.mjs",
   "goal-completion-audit.mjs",
   "goal-completion-audit-check.mjs",
+  "publish-workflow-check.mjs",
   "run-post-backfill-pipeline.ps1",
   "install-post-backfill-task.ps1",
   "jra-live-racecards.mjs",

@@ -55,10 +55,10 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Live expectancy ledger evaluation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\live-ev-ledger-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Live expectancy ledger unit check failed: $LASTEXITCODE" }
-  & $node --no-warnings "scripts\goal-completion-audit.mjs"
-  if ($LASTEXITCODE -ne 0) { throw "Goal completion audit failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\goal-completion-audit-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Goal completion audit unit check failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\publish-workflow-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Publication workflow validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\jra-free-db.mjs" lock-self-check
   if ($LASTEXITCODE -ne 0) { throw "Database worker lock validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\jra-free-db.mjs" audit
@@ -116,6 +116,10 @@ try {
   }
   $utf8 = New-Object System.Text.UTF8Encoding($false)
   [System.IO.File]::WriteAllText($receiptPath, (($receipt | ConvertTo-Json -Depth 6) + "`n"), $utf8)
+
+  Set-Location $root
+  & $node --no-warnings "scripts\goal-completion-audit.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Goal completion audit failed after publication verification: $LASTEXITCODE" }
 } finally {
   Stop-Transcript | Out-Null
   if ($lock) { $lock.Dispose() }
