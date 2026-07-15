@@ -85,6 +85,8 @@ for (const file of [
   "install-live-odds-task.ps1",
   "generate-live-market-ev.mjs",
   "live-market-ev-check.mjs",
+  "evaluate-live-ev-ledger.mjs",
+  "live-ev-ledger-check.mjs",
   "publish-live-web.ps1",
 ]) copy(path.join("scripts", file), path.join(stageDir, "scripts", file));
 writeBrowserData(path.join(stageDataDir, "meet-2026-07-11-2026-07-12.js"), "KEIBA_REFERENCE_MEETINGS", programmeData);
@@ -227,6 +229,8 @@ function exportDatabaseStatus() {
     const workerHeartbeatAgeSeconds = activeJob ? (Date.now() - new Date(activeJob.updated_at).getTime()) / 1000 : null;
     const preflightPath = path.join("data", "jra-free-private", "models", "training-preflight.json");
     const preflight = fs.existsSync(preflightPath) ? JSON.parse(fs.readFileSync(preflightPath, "utf8")) : null;
+    const liveValidationPath = path.join("data", "jra-free-private", "models", "live-ev-validation.json");
+    const liveValidation = fs.existsSync(liveValidationPath) ? JSON.parse(fs.readFileSync(liveValidationPath, "utf8")) : null;
     const status = {
       asOf: new Date().toISOString(),
       completeMonths: jobs.complete ?? 0,
@@ -241,6 +245,18 @@ function exportDatabaseStatus() {
       estimatedCompletionAt,
       workerHealth: !activeJob ? "idle" : workerHeartbeatAgeSeconds <= 30 * 60 ? "healthy" : "stalled",
       workerHeartbeatAgeSeconds,
+      liveEvValidation: liveValidation ? {
+        status: liveValidation.status,
+        generatedAt: liveValidation.generatedAt,
+        storedCandidates: liveValidation.storedCandidates,
+        evaluatedCandidates: liveValidation.evaluatedCandidates,
+        decisions: liveValidation.metrics?.decisions ?? 0,
+        bets: liveValidation.metrics?.bets ?? 0,
+        raceDays: liveValidation.metrics?.raceDays ?? 0,
+        roi: liveValidation.metrics?.roi ?? null,
+        roiCi95Lower: liveValidation.metrics?.roiCi95Lower ?? null,
+        maximumDrawdown: liveValidation.metrics?.maximumDrawdown ?? null,
+      } : null,
       ...totals,
       integrityStatus: "pass",
       evStatus: "insufficient",

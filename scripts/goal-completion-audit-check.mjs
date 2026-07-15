@@ -17,6 +17,9 @@ try {
     create table complete_payouts(race_id text);
     create table model_runs(id integer primary key,model_version text);
     create table model_quality_gates(model_run_id integer,gate_name text,status text);
+    create table live_ev_candidates(id integer primary key);
+    create table live_ev_evaluations(candidate_id integer primary key);
+    create table live_ev_validation_runs(id integer primary key);
     insert into complete_races values('r1','1996-01-01');
     insert into complete_race_entries values('r1','h1');
     insert into complete_payouts values('r1');
@@ -68,7 +71,7 @@ try {
 
   const report = { readiness: { ready: true, coverage: { from: "1996-01", to: "2026-07", expectedMonths: 367 } }, checks: [], failures: [] };
   auditCompletedGoal(db, report, { artifactPath, marketOutputPath, generatorPath, pipelineFiles: [pipeline] });
-  if (report.failures.length || report.checks.length !== 15) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
+  if (report.failures.length || report.checks.length !== 16) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
   console.log(JSON.stringify({ status: "pass", checks: report.checks.length, races: predictions.length, candidates: candidates.length }, null, 2));
 } finally {
   db.close();

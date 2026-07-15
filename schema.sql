@@ -304,6 +304,47 @@ create table bet_candidates (
   created_at timestamptz not null default now()
 );
 
+create table live_ev_candidates (
+  id bigserial primary key,
+  race_id text not null,
+  snapshot_kind text not null,
+  base_batch_id bigint not null,
+  exotic_batch_id bigint not null,
+  model_version text not null,
+  calibration_status text not null,
+  bet_type text not null,
+  method text not null,
+  selection_display text not null,
+  ticket_key text not null,
+  component_selection_keys jsonb not null,
+  component_odds jsonb not null,
+  component_market_probabilities jsonb not null,
+  component_ability_probabilities jsonb not null,
+  points integer not null check (points > 0),
+  total_investment_yen integer not null check (total_investment_yen = points * 100),
+  expected_return numeric(10,6) not null,
+  odds_observed_at timestamptz not null,
+  generated_at timestamptz not null,
+  unique (race_id, base_batch_id, exotic_batch_id, model_version, bet_type, method, ticket_key)
+);
+
+create table live_ev_evaluations (
+  candidate_id bigint primary key references live_ev_candidates(id) on delete cascade,
+  timing_valid boolean not null,
+  odds_age_seconds numeric,
+  payout_yen integer not null,
+  profit_yen integer not null,
+  roi numeric not null,
+  evaluated_at timestamptz not null
+);
+
+create table live_ev_validation_runs (
+  id bigserial primary key,
+  model_version text not null,
+  generated_at timestamptz not null,
+  metrics jsonb not null
+);
+
 create table bet_orders (
   id bigserial primary key,
   candidate_id bigint not null references bet_candidates(id),

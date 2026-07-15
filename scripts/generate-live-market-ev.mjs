@@ -11,8 +11,10 @@ const ORDERED = new Set(["win", "place", "exacta", "trifecta"]);
 const OUTPUT = path.join("data", "jra-free-private", "models", "live-market-ev.json");
 
 export function generateLiveMarketEv(options = {}) {
-  const db = new DatabaseSync(path.join("data", "jra-free-private", "keiba.sqlite"), { readOnly: true });
+  const db = new DatabaseSync(path.join("data", "jra-free-private", "keiba.sqlite"));
+  db.exec("PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=30000;");
   try {
+    initializeLedgerSchema(db);
     const base = db.prepare(`select * from odds_ingestion_batches where status='complete' and source in (${options.allowFixture ? "'JRA official live odds','JRA official live odds fixture'" : "'JRA official live odds'"}) order by id desc limit 1`).get();
     if (!base) return waiting("live_win_place_odds");
     const exotic = db.prepare(`select * from odds_ingestion_batches where status='complete' and source in (${options.allowFixture ? "'JRA official live exotic odds','JRA official live exotic odds fixture'" : "'JRA official live exotic odds'"})
@@ -85,6 +87,7 @@ export function generateLiveMarketEv(options = {}) {
       predictions,
       candidates,
     };
+    persistCandidateLedger(db, result);
     fs.mkdirSync(path.dirname(OUTPUT), { recursive: true });
     fs.writeFileSync(OUTPUT, `${JSON.stringify(result, null, 2)}\n`, "utf8");
     return result;
@@ -137,7 +140,48 @@ function candidate(race, betType, method, selectionKey, rows, probabilities, abi
     status: "ready", predictionContext: "pre_race", calculationMode: hasModel ? "ability_and_market_scenarios" : "market_baseline",
     oddsObservedAt: rows.reduce((latest, row) => row.observed_at > latest ? row.observed_at : latest, ""), modelVersion: artifact?.modelVersion ?? "market-baseline",
     calibrationStatus: hasModel ? "research_pass" : "benchmark",
+    componentSelectionKeys: rows.map((row) => row.selection_key),
+    componentOdds: rows.map((row) => row.odds_low),
+    componentMarketProbabilities: probabilities,
+    componentAbilityProbabilities: abilityProbabilities,
   };
+}
+
+function initializeLedgerSchema(db) {
+  db.exec(`create table if not exists live_ev_candidates(
+    id integer primary key,race_id text not null,snapshot_kind text not null,base_batch_id integer not null,exotic_batch_id integer not null,
+    model_version text not null,calibration_status text not null,bet_type text not null,method text not null,selection_display text not null,
+    ticket_key text not null,component_selection_keys_json text not null,component_odds_json text not null,
+    component_market_probabilities_json text not null,component_ability_probabilities_json text not null,
+    points integer not null check(points>0),total_investment_yen integer not null check(total_investment_yen=points*100),
+    expected_return real not null,odds_observed_at text not null,generated_at text not null,
+    unique(race_id,base_batch_id,exotic_batch_id,model_version,bet_type,method,ticket_key)
+  );
+  create index if not exists live_ev_candidates_evaluation_idx on live_ev_candidates(snapshot_kind,race_id,model_version,odds_observed_at);`);
+}
+
+function persistCandidateLedger(db, result) {
+  if (result.status !== "ready" || !result.candidates.length) return;
+  const insert = db.prepare(`insert into live_ev_candidates(
+    race_id,snapshot_kind,base_batch_id,exotic_batch_id,model_version,calibration_status,bet_type,method,selection_display,ticket_key,
+    component_selection_keys_json,component_odds_json,component_market_probabilities_json,component_ability_probabilities_json,
+    points,total_investment_yen,expected_return,odds_observed_at,generated_at
+  ) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) on conflict do nothing`);
+  db.exec("begin immediate");
+  try {
+    for (const row of result.candidates) {
+      const ticketKey = row.componentSelectionKeys.join("|");
+      insert.run(row.raceId, result.snapshotKind, result.baseBatchId, result.exoticBatchId, row.modelVersion,
+        row.calibrationStatus, row.betType, row.method, row.selection, ticketKey,
+        JSON.stringify(row.componentSelectionKeys), JSON.stringify(row.componentOdds),
+        JSON.stringify(row.componentMarketProbabilities), JSON.stringify(row.componentAbilityProbabilities),
+        row.points, row.totalInvestmentYen, row.adoptedExpectedReturn, row.oddsObservedAt, result.generatedAt);
+    }
+    db.exec("commit");
+  } catch (error) {
+    db.exec("rollback");
+    throw error;
+  }
 }
 
 function aiPrediction(race, probabilities, names, raceCandidates, artifact, hasModel) {

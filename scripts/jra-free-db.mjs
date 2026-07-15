@@ -270,6 +270,23 @@ function initializeSchema() {
       rationale_json text not null,
       created_at text not null
     );
+    create table if not exists live_ev_candidates(
+      id integer primary key,race_id text not null,snapshot_kind text not null,base_batch_id integer not null,exotic_batch_id integer not null,
+      model_version text not null,calibration_status text not null,bet_type text not null,method text not null,selection_display text not null,
+      ticket_key text not null,component_selection_keys_json text not null,component_odds_json text not null,
+      component_market_probabilities_json text not null,component_ability_probabilities_json text not null,
+      points integer not null check(points>0),total_investment_yen integer not null check(total_investment_yen=points*100),
+      expected_return real not null,odds_observed_at text not null,generated_at text not null,
+      unique(race_id,base_batch_id,exotic_batch_id,model_version,bet_type,method,ticket_key)
+    );
+    create table if not exists live_ev_evaluations(
+      candidate_id integer primary key references live_ev_candidates(id) on delete cascade,
+      timing_valid integer not null check(timing_valid in(0,1)),odds_age_seconds real,payout_yen integer not null,
+      profit_yen integer not null,roi real not null,evaluated_at text not null
+    );
+    create table if not exists live_ev_validation_runs(
+      id integer primary key,model_version text not null,generated_at text not null,metrics_json text not null
+    );
     create index if not exists races_date_idx on races(race_date, venue_code, race_number);
     create index if not exists entries_horse_idx on race_entries(horse_id, race_id);
     create index if not exists raw_pages_type_idx on raw_pages(page_type, fetched_at);
@@ -764,9 +781,22 @@ function auditDatabase() {
       where q.batch_id=b.id and q.status='pass') < 6`).get().count;
   const invalidOddsRanges = db.prepare(`select count(*) count from odds_snapshots
     where batch_id is not null and (odds_low < 1 or odds_high < odds_low or odds <> odds_low)`).get().count;
+  const invalidEvCandidates = db.prepare(`select count(*) count from live_ev_candidates where
+    points<1 or total_investment_yen<>points*100 or expected_return<0 or trim(odds_observed_at)=''
+    or not json_valid(component_selection_keys_json) or json_array_length(component_selection_keys_json)<>points
+    or not json_valid(component_odds_json) or json_array_length(component_odds_json)<>points
+    or not json_valid(component_market_probabilities_json) or json_array_length(component_market_probabilities_json)<>points
+    or not json_valid(component_ability_probabilities_json) or json_array_length(component_ability_probabilities_json)<>points`).get().count;
+  const orphanEvEvaluations = db.prepare(`select count(*) count from live_ev_evaluations e
+    where not exists(select 1 from live_ev_candidates c where c.id=e.candidate_id)`).get().count;
+  const invalidEvEvaluations = db.prepare(`select count(*) count from live_ev_evaluations e join live_ev_candidates c on c.id=e.candidate_id
+    where e.payout_yen<0 or e.profit_yen<>e.payout_yen-c.total_investment_yen
+    or abs(e.roi-cast(e.payout_yen as real)/c.total_investment_yen)>0.000000001
+    or (e.timing_valid=1 and (e.odds_age_seconds is null or e.odds_age_seconds<0))`).get().count;
   return {
     pass: failedChecks === 0 && incompleteCompleteJobs === 0 && missingRaw === 0 && corruptRaw === 0
-      && orphanRaces === 0 && failedOddsChecks === 0 && incompleteOddsBatches === 0 && invalidOddsRanges === 0,
+      && orphanRaces === 0 && failedOddsChecks === 0 && incompleteOddsBatches === 0 && invalidOddsRanges === 0
+      && invalidEvCandidates === 0 && orphanEvEvaluations === 0 && invalidEvEvaluations === 0,
     failedChecks,
     incompleteCompleteJobs,
     missingRaw,
@@ -775,6 +805,9 @@ function auditDatabase() {
     failedOddsChecks,
     incompleteOddsBatches,
     invalidOddsRanges,
+    invalidEvCandidates,
+    orphanEvEvaluations,
+    invalidEvEvaluations,
     ...statusReport(),
   };
 }

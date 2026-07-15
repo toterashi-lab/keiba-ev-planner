@@ -20,6 +20,8 @@ try {
   if ($LASTEXITCODE -ne 0) { $exitCode = $LASTEXITCODE }
   & $node --no-warnings "scripts\jra-free-db.mjs" audit
   if ($LASTEXITCODE -ne 0) { $exitCode = $LASTEXITCODE }
+  & $node --no-warnings "scripts\evaluate-live-ev-ledger.mjs"
+  if ($LASTEXITCODE -ne 0) { $exitCode = $LASTEXITCODE }
 } catch {
   Write-Error $_
   $exitCode = 1

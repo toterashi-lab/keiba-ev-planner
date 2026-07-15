@@ -112,8 +112,16 @@ export function auditCompletedGoal(database, report, options = {}) {
   const generator = fs.readFileSync(generatorPath, "utf8");
   const leakageTokens = ["race_results", "payouts", "finish_position", "payout_yen"].filter((token) => generator.includes(token));
   check(report, "expectancy_result_leakage", leakageTokens.length === 0, { leakageTokens });
+  const ledgerTables = database.prepare(`select name from sqlite_master where type='table'
+    and name in ('live_ev_candidates','live_ev_evaluations','live_ev_validation_runs') order by name`).all().map((row) => row.name);
+  const liveGenerator = fs.readFileSync(options.liveGeneratorPath ?? "scripts/generate-live-market-ev.mjs", "utf8");
+  const ledgerEvaluator = fs.readFileSync(options.ledgerEvaluatorPath ?? "scripts/evaluate-live-ev-ledger.mjs", "utf8");
+  const ledgerImplementation = ledgerTables.length === 3
+    && ["persistCandidateLedger", "componentSelectionKeys", "oddsObservedAt"].every((token) => liveGenerator.includes(token))
+    && ["latest-within-five-minutes", "race-day-block-bootstrap-2000", "positive_ev_roi_ci95_lower"].every((token) => ledgerEvaluator.includes(token));
+  check(report, "immutable_pre_race_expectancy_ledger", ledgerImplementation, { ledgerTables });
   const pipelineFiles = options.pipelineFiles ?? ["scripts/jra-live-racecards.mjs", "scripts/jra-free-odds.mjs", "scripts/jra-free-exotic-odds.mjs",
-    "scripts/predict-live-racecards.mjs", "scripts/generate-live-market-ev.mjs", "scripts/publish-live-web.ps1"]
+    "scripts/predict-live-racecards.mjs", "scripts/generate-live-market-ev.mjs", "scripts/evaluate-live-ev-ledger.mjs", "scripts/publish-live-web.ps1"]
   check(report, "automated_live_pipeline", pipelineFiles.every((file) => fs.existsSync(file)), { mode: "scheduled pre-race capture and publish" });
 }
 

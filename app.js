@@ -175,7 +175,11 @@ function renderDatabaseStatus() {
   const preflightText = preflight
     ? ` / 学習試験 ${number(preflight.races)}R・${(preflight.totalMs / 1000).toFixed(1)}秒・ECE ${percent(preflight.ece)}・最大誤差 ${percent(preflight.maxCalibrationBinError)}${selectedGroupText}`
     : " / 学習試験 待機中";
-  els.dbUpdatedAt.textContent = `公開集計 ${formatTimestamp(databaseData.asOf)} / 完成月 ${databaseData.earliestComplete}〜${databaseData.latestComplete}${preflightText}`;
+  const validation = databaseData.liveEvValidation;
+  const validationText = validation
+    ? ` / ROI検証 ${number(validation.bets)}/1,000点・${number(validation.raceDays)}/180日`
+    : " / ROI検証 蓄積待ち";
+  els.dbUpdatedAt.textContent = `公開集計 ${formatTimestamp(databaseData.asOf)} / 完成月 ${databaseData.earliestComplete}〜${databaseData.latestComplete}${preflightText}${validationText}`;
   els.heroDbMonths.textContent = `${databaseData.completeMonths} / ${databaseData.totalMonths}か月`;
   els.heroDbRaces.textContent = `${number(databaseData.races)}レース蓄積`;
 }

@@ -1,15 +1,21 @@
 import fs from "node:fs";
+import { DatabaseSync } from "node:sqlite";
 import { generateLiveMarketEv } from "./generate-live-market-ev.mjs";
 
 const model = generateLiveMarketEv({ allowFixture: true });
 const betTypes = ["単勝", "複勝", "馬連", "ワイド", "馬単", "3連複", "3連単"];
 const structuredTypes = ["馬連", "ワイド", "馬単", "3連複", "3連単"];
 const failures = [];
+const database = new DatabaseSync("data/jra-free-private/keiba.sqlite", { readOnly: true });
+const persistedCandidates = model.baseBatchId ? database.prepare(`select count(*) count from live_ev_candidates
+  where base_batch_id=? and exotic_batch_id=?`).get(model.baseBatchId, model.exoticBatchId).count : 0;
+database.close();
 
 if (model.status !== "ready") failures.push(`status is ${model.status}: ${model.reason ?? "unknown"}`);
 if (model.unitStakeYen !== 100) failures.push("unit stake is not 100 yen");
 if (!(model.evaluatedTotal > 0)) failures.push("no odds were evaluated");
 if (!model.predictions?.length) failures.push("no AI predictions were generated");
+if (persistedCandidates !== model.candidates.length) failures.push(`candidate ledger mismatch: ${persistedCandidates}/${model.candidates.length}`);
 
 const raceIds = [...new Set((model.candidates ?? []).map((row) => row.raceId))];
 for (const raceId of raceIds) {
@@ -53,5 +59,6 @@ console.log(JSON.stringify({
   candidates: model.candidates.length,
   betTypes: betTypes.length,
   unitStakeYen: model.unitStakeYen,
+  persistedCandidates,
   resultLeakage: "pass",
 }, null, 2));

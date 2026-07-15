@@ -85,6 +85,10 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Expectancy output check failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\live-market-ev-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Live expectancy capability check failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\evaluate-live-ev-ledger.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Live expectancy ledger evaluation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\live-ev-ledger-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Live expectancy ledger unit check failed: $LASTEXITCODE" }
   & (Join-Path $PSScriptRoot "publish-web-status.ps1")
   if ($LASTEXITCODE -ne 0) { throw "Web publish failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\goal-completion-audit.mjs" --require-complete
