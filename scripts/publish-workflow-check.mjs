@@ -3,6 +3,7 @@ import fs from "node:fs";
 const source = fs.readFileSync("scripts/publish-web-status.ps1", "utf8");
 const ordered = [
   '"scripts\\goal-completion-audit-check.mjs"',
+  '"scripts\\audit-automation-tasks.ps1"',
   '"scripts\\jra-free-db.mjs" audit',
   '"scripts\\build-public-demo.mjs"',
   "if ($DryRun) { return }",

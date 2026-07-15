@@ -9,11 +9,14 @@ const PRIVATE_DIR = path.join("data", "jra-free-private");
 const OUTPUT = path.join(PRIVATE_DIR, "models", "goal-completion-audit.json");
 const DATABASE_AUDIT = path.join(PRIVATE_DIR, "models", "database-audit.json");
 const PUBLICATION_RECEIPT = path.join(PRIVATE_DIR, "models", "publication-receipt.json");
+const AUTOMATION_AUDIT = path.join(PRIVATE_DIR, "models", "automation-audit.json");
 const PUBLICATION_MANIFEST = path.join("public", "data", "publication-manifest.json");
 const ARTIFACT = path.join(PRIVATE_DIR, "models", "ability-softmax-v1.json");
 const MARKET_OUTPUT = path.join("data", "model-outputs-2026-07-11-2026-07-12.json");
 const BET_TYPES = ["単勝", "複勝", "馬連", "ワイド", "馬単", "3連複", "3連単"];
 const STRUCTURED_TYPES = ["馬連", "ワイド", "馬単", "3連複", "3連単"];
+const REQUIRED_AUTOMATION_TASKS = ["KeibaEV-JRA-Free-Backfill", "KeibaEV-PostBackfill-Model", "KeibaEV-JRA-Current-Sync",
+  "KeibaEV-JRA-Live-Racecards", "KeibaEV-JRA-Live-Odds", "KeibaEV-Web-Publish"];
 if (import.meta.url === pathToFileURL(process.argv[1]).href) runAudit();
 
 function runAudit() {
@@ -172,6 +175,23 @@ export function auditCompletedGoal(database, report, options = {}) {
   const pipelineFiles = options.pipelineFiles ?? ["scripts/jra-live-racecards.mjs", "scripts/jra-free-odds.mjs", "scripts/jra-free-exotic-odds.mjs",
     "scripts/predict-live-racecards.mjs", "scripts/generate-live-market-ev.mjs", "scripts/evaluate-live-ev-ledger.mjs", "scripts/publish-live-web.ps1"]
   check(report, "automated_live_pipeline", pipelineFiles.every((file) => fs.existsSync(file)), { mode: "scheduled pre-race capture and publish" });
+  const automationAuditPath = options.automationAuditPath ?? AUTOMATION_AUDIT;
+  const automationAudit = fs.existsSync(automationAuditPath) ? JSON.parse(fs.readFileSync(automationAuditPath, "utf8")) : null;
+  const automationTasks = new Map((automationAudit?.tasks ?? []).map((task) => [task.name, task]));
+  const automationAgeMs = Date.now() - Date.parse(automationAudit?.checkedAt ?? "");
+  const automationPass = automationAudit?.version === "automation-audit-v1" && automationAudit.pass === true
+    && Number.isFinite(automationAgeMs) && automationAgeMs >= 0 && automationAgeMs <= 30 * 60 * 1000
+    && REQUIRED_AUTOMATION_TASKS.every((name) => {
+      const task = automationTasks.get(name);
+      return task?.pass === true && task.exists === true && task.enabled === true && task.actionMatches === true && task.triggerCount > 0;
+    });
+  check(report, "automation_task_health", automationPass, {
+    path: automationAuditPath,
+    checkedAt: automationAudit?.checkedAt,
+    ageSeconds: Number.isFinite(automationAgeMs) ? Math.round(automationAgeMs / 1000) : null,
+    requiredTasks: REQUIRED_AUTOMATION_TASKS,
+    tasks: automationAudit?.tasks ?? [],
+  });
 }
 
 function check(report, name, pass, evidence) {

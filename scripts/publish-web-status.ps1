@@ -59,6 +59,8 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Goal completion audit unit check failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\publish-workflow-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Publication workflow validation failed: $LASTEXITCODE" }
+  & "scripts\audit-automation-tasks.ps1"
+  if ($LASTEXITCODE -ne 0) { throw "Automation task audit failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\jra-free-db.mjs" lock-self-check
   if ($LASTEXITCODE -ne 0) { throw "Database worker lock validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\jra-free-db.mjs" audit

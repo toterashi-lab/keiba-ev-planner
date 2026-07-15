@@ -12,6 +12,7 @@ const generatorPath = path.join(temp, "generator.mjs");
 const databaseAuditPath = path.join(temp, "database-audit.json");
 const publicationManifestPath = path.join(temp, "publication-manifest.json");
 const publicationReceiptPath = path.join(temp, "publication-receipt.json");
+const automationAuditPath = path.join(temp, "automation-audit.json");
 const db = new DatabaseSync(":memory:");
 
 try {
@@ -81,13 +82,18 @@ try {
   fs.writeFileSync(generatorPath, "export const preRaceOnly = true;\n");
   fs.writeFileSync(databaseAuditPath, JSON.stringify({ pass: true, races: 1, failedChecks: 0, incompleteCompleteJobs: 0,
     missingRaw: 0, corruptRaw: 0, orphanRaces: 0 }));
+  const automationTasks = ["KeibaEV-JRA-Free-Backfill", "KeibaEV-PostBackfill-Model", "KeibaEV-JRA-Current-Sync",
+    "KeibaEV-JRA-Live-Racecards", "KeibaEV-JRA-Live-Odds", "KeibaEV-Web-Publish"]
+    .map((name) => ({ name, pass: true, exists: true, enabled: true, actionMatches: true, triggerCount: 1 }));
+  fs.writeFileSync(automationAuditPath, JSON.stringify({ version: "automation-audit-v1", checkedAt: new Date().toISOString(),
+    pass: true, requiredTaskCount: automationTasks.length, tasks: automationTasks }));
   const pipeline = path.join(temp, "pipeline");
   fs.writeFileSync(pipeline, "ok");
 
   const report = { readiness: { ready: true, coverage: { from: "1996-01", to: "2026-07", expectedMonths: 367 } }, checks: [], failures: [] };
   auditCompletedGoal(db, report, { artifactPath, marketOutputPath, generatorPath, databaseAuditPath,
-    publicationManifestPath, publicationReceiptPath, pipelineFiles: [pipeline] });
-  if (report.failures.length || report.checks.length !== 19) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
+    publicationManifestPath, publicationReceiptPath, automationAuditPath, pipelineFiles: [pipeline] });
+  if (report.failures.length || report.checks.length !== 20) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
   console.log(JSON.stringify({ status: "pass", checks: report.checks.length, races: predictions.length, candidates: candidates.length }, null, 2));
 } finally {
   db.close();
