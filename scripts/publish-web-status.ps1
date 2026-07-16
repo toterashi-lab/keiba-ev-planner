@@ -111,6 +111,8 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Horse-racing EV agent contract validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\expectancy-agent-ensemble-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Expectancy agent ensemble validation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\reference-market-benchmark-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Reference market benchmark validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\publish-workflow-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Publication workflow validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\post-backfill-workflow-check.mjs"

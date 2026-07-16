@@ -91,6 +91,8 @@ for (const file of [
   "horse-racing-ev-agent.mjs",
   "horse-racing-ev-agent-check.mjs",
   "expectancy-agent-ensemble-check.mjs",
+  "audit-reference-market-benchmark.mjs",
+  "reference-market-benchmark-check.mjs",
   "jra-free-odds.mjs",
   "jra-free-exotic-odds.mjs",
   "jra-free-exotic-odds-check.mjs",

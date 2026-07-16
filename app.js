@@ -250,9 +250,9 @@ function renderPerformance() {
       <dl><div><dt>対象</dt><dd>${report.trials}R</dd></div><div><dt>的中</dt><dd>${report.hits}R</dd></div><div><dt>的中率</dt><dd>${percent(report.hitRate)}</dd></div><div><dt>投資</dt><dd>${yen(report.investment)}</dd></div><div><dt>払戻</dt><dd>${yen(report.payout)}</dd></div></dl>
     </article>`;
   }).join("") + `<article class="performance-card blocked">
-    <header><strong>購入判定</strong><span>外部監査</span></header>
-    <div class="performance-primary"><span>現在の状態</span><strong>購入不可</strong><small>回収率ゲート不合格</small></div>
-    <p>AI推奨だけに限定しても回収率100%を下回るため、研究表示のまま固定します。</p>
+    <header><strong>新・選別運用</strong><span>市場ガードレール</span></header>
+    <div class="performance-primary"><span>現在の状態</span><strong>全レース見送り</strong><small>能力モデルをEVから除外</small></div>
+    <p>市場より確率性能が悪いモデルでは買いません。予想印だけを研究表示し、資金を減らす強制購入を停止します。</p>
   </article>`;
 
   const selected = reports[state.benchmark] ?? reports.ai_all;
@@ -270,12 +270,12 @@ function buildAiRecommendationReports() {
   const audit = modelData.logic?.referenceWeekExternalAudit ?? {};
   const recommendations = audit.evaluationScope === "ai_prediction_top_ticket_only" ? (audit.recommendations ?? []) : [];
   const definitions = [
-    { id: "ai_all", name: "AI推奨すべて", strategy: "AI推奨・全レース", filter: () => true,
-      rule: "各レースでAIが最上位に保存した1買い目だけを購入" },
-    { id: "ai_ev1", name: "AI推奨 EV>100%", strategy: "AI推奨・期待回収率>1", filter: (row) => row.expectedReturn > 1,
-      rule: "AI最上位買い目のうち、推定期待回収率100%超だけを購入" },
-    { id: "ai_ev11", name: "AI推奨 EV>110%", strategy: "AI推奨・期待回収率>1.1", filter: (row) => row.expectedReturn > 1.1,
-      rule: "AI最上位買い目のうち、推定期待回収率110%超だけを購入" },
+    { id: "ai_all", name: "旧・強制購入", strategy: "AI推奨・全レース", filter: () => true,
+      rule: "改善前の比較用。各レースでAI最上位の1買い目を強制購入した結果" },
+    { id: "ai_ev1", name: "旧・EV100%超", strategy: "AI推奨・期待回収率>1", filter: (row) => row.expectedReturn > 1,
+      rule: "改善前の推定EV100%超を後から抽出した診断値。新運用には使用しない" },
+    { id: "ai_ev11", name: "旧・EV110%超", strategy: "AI推奨・期待回収率>1.1", filter: (row) => row.expectedReturn > 1.1,
+      rule: "改善前の推定EV110%超を後から抽出した診断値。新運用には使用しない" },
   ];
   return Object.fromEntries(definitions.map((definition) => {
     const strategy = (audit.strategies ?? []).find((row) => row.name === definition.strategy);
@@ -432,6 +432,7 @@ function renderVenueRanking() {
   const track = selectedTrack();
   const meeting = selectedMeeting();
   if (!track || !meeting) return;
+  const marketGuardrail = modelData.logic?.marketBenchmark?.abilityMaySetExpectedReturn === false;
   renderRankingBetTabs();
   renderRankingMethodTabs();
   const rows = track.races.map((race) => {
@@ -439,7 +440,7 @@ function renderVenueRanking() {
       .filter((candidate) => !state.rankingBetType || candidate.betType === state.rankingBetType)
       .filter((candidate) => !state.rankingMethod || (candidate.method ?? "1点") === state.rankingMethod)
       .sort((left, right) => candidateExpectedReturn(right) - candidateExpectedReturn(left));
-    const top = candidates[0] ?? null;
+    const top = marketGuardrail ? null : candidates[0] ?? null;
     return { race, top, prediction: matchingAiPrediction(race.no), expectedReturn: top ? candidateExpectedReturn(top) : null };
   }).sort((left, right) => {
     if (left.expectedReturn !== null && right.expectedReturn === null) return -1;
@@ -450,7 +451,7 @@ function renderVenueRanking() {
   const betLabel = state.rankingBetType || "全券種";
   const methodLabel = state.rankingMethod || "全方式";
   els.venueRankingContext.textContent = `${formatDate(meeting.date)}・${track.venueName} ${track.meetingName}・${betLabel}・${methodLabel}`;
-  els.venueRankingStatus.textContent = `算出 ${ranked.length} / ${rows.length}R`;
+  els.venueRankingStatus.textContent = marketGuardrail ? `推奨 0 / ${rows.length}R` : `算出 ${ranked.length} / ${rows.length}R`;
   els.venueRankingStatus.className = `decision ${ranked.length ? "buy" : "reject"}`;
   els.venueRankingList.innerHTML = rows.map((row) => {
     const rank = row.expectedReturn === null ? "--" : `${ranked.indexOf(row) + 1}位`;
@@ -459,8 +460,8 @@ function renderVenueRanking() {
     const status = row.expectedReturn === null ? "データ待ち" : purchaseEligible ? "購入候補" : edge >= 0.08 ? "研究上位・購入不可" : "見送り";
     return `<button type="button" class="${row.race.no === state.raceNo ? "active" : ""} ${row.expectedReturn === null ? "blocked" : ""}" data-ranking-race="${row.race.no}">
       <span class="ranking-place">${rank}</span><strong>${row.race.no}R ${escapeHtml(row.race.name)}</strong>
-      <small>${row.prediction?.marks?.[0] ? `◎ ${escapeHtml(row.prediction.marks[0].horseName)}・${percent(row.expectedReturn)}` : status}</small>
-      <em>${row.expectedReturn === null ? "計算準備中" : `${signedPercent(edge)}・${status}`}</em>
+      <small>${row.prediction?.marks?.[0] ? `◎ ${escapeHtml(row.prediction.marks[0].horseName)}・${marketGuardrail ? "予想のみ" : percent(row.expectedReturn)}` : status}</small>
+      <em>${marketGuardrail ? "市場ゲート不合格・見送り" : row.expectedReturn === null ? "計算準備中" : `${signedPercent(edge)}・${status}`}</em>
     </button>`;
   }).join("");
   els.venueRankingList.querySelectorAll("button").forEach((button) => {
@@ -596,7 +597,8 @@ function renderTopRecommendation() {
   const runners = selected?.status === "pre_race" ? selected.runners ?? [] : selected?.runners?.filter((runner) => runner.finishPosition !== null) ?? [];
   const counts = ticketEngine?.candidateCounts(runners.length) ?? {};
   const candidates = matchingAutomaticCandidates().filter(isRecommendationReady).sort((left, right) => candidateExpectedReturn(right) - candidateExpectedReturn(left));
-  const top = candidates[0] ?? null;
+  const marketGuardrail = modelData.logic?.marketBenchmark?.abilityMaySetExpectedReturn === false;
+  const top = marketGuardrail ? null : candidates[0] ?? null;
   const expectedReturn = top ? candidateExpectedReturn(top) : null;
   const edge = expectedReturn === null ? null : expectedReturn - 1;
   const passes = edge !== null && edge >= 0.08 && isPurchaseEligible(top);
@@ -604,12 +606,14 @@ function renderTopRecommendation() {
   els.topRecommendation.classList.toggle("blocked", !top);
   els.topRecommendation.classList.toggle("available", Boolean(top));
   const retrospective = top?.calculationMode === "closing_market_validation";
-  els.topRecommendationStatus.textContent = !top ? "計算準備中" : retrospective ? "検証計算済み"
+  els.topRecommendationStatus.textContent = marketGuardrail ? "全レース見送り・市場ガードレール作動" : !top ? "計算準備中" : retrospective ? "検証計算済み"
     : modelData.logic?.deploymentStatus === "benchmark_only" ? "研究検証中・購入対象外" : passes ? "購入候補" : "基準未達・見送り";
   els.topRecommendationStatus.className = `decision ${!top ? "reject" : passes ? "buy" : "hold"}`;
   els.topTicketLabel.textContent = top ? `${top.betType}・${top.method ?? "1点"}` : "推奨買い目なし";
   els.topTicketSelection.textContent = top?.selection ?? "見送り";
-  els.topTicketMethod.textContent = top
+  els.topTicketMethod.textContent = marketGuardrail
+    ? "能力モデルが市場確率を上回るまで、期待値買い目を表示しません"
+    : top
     ? `${top.points ?? 1}点を全券種候補から安全側EV順に比較`
     : "発走前の全組み合わせオッズとモデル確率が未完成";
   els.topTicketPoints.textContent = top ? `${top.points ?? 1}点` : "--";
@@ -617,7 +621,9 @@ function renderTopRecommendation() {
   els.topTicketEdge.textContent = edge === null ? "--" : signedPercent(edge);
   els.topTicketEdge.className = edge === null ? "" : edge >= 0 ? "positive" : "negative";
   els.topTicketStake.textContent = top ? yen((Math.max(1, Number(top.points) || 1)) * ticketEngine.UNIT_STAKE) : "0円";
-  els.topRecommendationComment.textContent = top
+  els.topRecommendationComment.textContent = marketGuardrail
+    ? `外部72レースの勝者確率対数損失は市場${Number(modelData.logic.marketBenchmark.logLoss?.market).toFixed(3)}、統合${Number(modelData.logic.marketBenchmark.logLoss?.pooled).toFixed(3)}。市場より悪い統合確率をEVへ使わず、全レース見送ります。`
+    : top
     ? top.comment ?? `${top.betType}${top.method ? ` ${top.method}` : ""}の構成点を合算し、安全側期待回収率${percent(expectedReturn)}。${passes ? "採用閾値8%を通過しました。" : "採用閾値8%を下回るため購入しません。"}`
     : "単勝・複勝は締切後オッズのみのため事前推奨に不使用。馬連・ワイド・馬単・3連複・3連単は全組み合わせオッズ未取得、30年モデルは校正前です。結果・払戻は順位付けに使用しません。";
 

@@ -48,3 +48,12 @@ Purchase eligibility requires at minimum:
 - enough bets and race days;
 - ROI 95% lower confidence bound above one;
 - acceptable maximum drawdown.
+
+## Market Guardrail
+
+The ability model may produce forecast marks while remaining barred from EV ranking.
+
+1. Compare market, raw ability, and pooled probability by winner log loss on an untouched chronological period.
+2. Do not tune blend weights or thresholds on that period.
+3. If pooled probability does not beat market probability by the predeclared margin, use market baseline for EV and abstain.
+4. Re-enable ability-driven EV only after the same rule passes across multiple walk-forward folds.

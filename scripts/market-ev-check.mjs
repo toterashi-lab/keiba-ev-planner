@@ -17,6 +17,10 @@ if (expectedRaces.length !== 72) failures.push(`reference races ${expectedRaces.
 if (Object.values(model.coverageCounts ?? {}).some((count) => count !== 72)) failures.push("odds coverage is incomplete");
 if (model.evaluatedTotal !== 195898) failures.push(`evaluated total changed: ${model.evaluatedTotal}`);
 if (model.predictions?.length !== 72) failures.push(`AI predictions ${model.predictions?.length ?? 0}/72`);
+if (model.logic?.marketBenchmark?.status === "fail"
+  && model.candidates.some((row) => row.calculationMode !== "closing_market_validation")) {
+  failures.push("failed ability model still controls EV");
+}
 
 for (const race of expectedRaces) {
   const rows = model.candidates.filter((candidate) => candidate.date === race.date

@@ -17,6 +17,7 @@ const TARGET_DATES = ["2026-07-11", "2026-07-12"];
 const OUTPUT = path.join("data", "model-outputs-2026-07-11-2026-07-12.json");
 const VALIDATION_ARTIFACT = loadValidationArtifact();
 const REFERENCE_EV_AUDIT = loadReferenceEvAudit();
+const MARKET_BENCHMARK = loadMarketBenchmark();
 const PAYOUT_PATTERNS = loadPayoutPatterns();
 
 export function generateMarketEv() {
@@ -115,6 +116,7 @@ export function generateMarketEv() {
         abilityExpectedReturnAvailable: modelPredictionRows.length > 0,
         scenarios: ["market_baseline", "ability_model", "calibration_error_lower_bound"],
         referenceWeekExternalAudit: summarizeReferenceAudit(),
+        marketBenchmark: summarizeMarketBenchmark(),
         fixedBlendRemoved: true,
         validationArtifact: VALIDATION_ARTIFACT?.modelVersion ?? "insufficient",
       },
@@ -406,7 +408,9 @@ function makeCandidate(race, betType, method, selection, rows, probability, name
   }, 0) / rows.length;
   const displayNumbers = combinations ? [...new Set(combinations.flat())] : selection;
   const display = displayOverride ?? displayNumbers.map((number) => `${number} ${names.get(number) ?? ""}`.trim()).join("・");
-  const useAbility = hasCompleteModel && VALIDATION_ARTIFACT?.researchProbabilityStatus === "research_pass";
+  const useAbility = hasCompleteModel
+    && VALIDATION_ARTIFACT?.researchProbabilityStatus === "research_pass"
+    && MARKET_BENCHMARK?.abilityMaySetExpectedReturn === true;
   const payoutPrior = payoutVolatilityPrior(race, betType);
   const externalValidationStatus = REFERENCE_EV_AUDIT?.status === "evaluation_only" ? "fail" : "insufficient";
   const deploymentStatus = VALIDATION_ARTIFACT?.deploymentStatus ?? "benchmark_only";
@@ -503,6 +507,29 @@ function loadReferenceEvAudit() {
   if (!fs.existsSync(auditPath)) return null;
   const audit = JSON.parse(fs.readFileSync(auditPath, "utf8"));
   return audit.modelVersion === VALIDATION_ARTIFACT?.modelVersion ? audit : null;
+}
+
+function loadMarketBenchmark() {
+  const benchmarkPath = path.join("data", "jra-free-private", "models", "reference-market-benchmark.json");
+  if (!fs.existsSync(benchmarkPath)) return null;
+  const benchmark = JSON.parse(fs.readFileSync(benchmarkPath, "utf8"));
+  return benchmark.modelVersion === VALIDATION_ARTIFACT?.modelVersion ? benchmark : null;
+}
+
+function summarizeMarketBenchmark() {
+  return MARKET_BENCHMARK ? {
+    status: MARKET_BENCHMARK.status,
+    races: MARKET_BENCHMARK.races,
+    metric: MARKET_BENCHMARK.metric,
+    logLoss: MARKET_BENCHMARK.logLoss,
+    pooledImprovement: MARKET_BENCHMARK.pooledImprovement,
+    abilityMaySetExpectedReturn: MARKET_BENCHMARK.abilityMaySetExpectedReturn,
+    reason: MARKET_BENCHMARK.reason,
+  } : {
+    status: "missing",
+    abilityMaySetExpectedReturn: false,
+    reason: "市場比較監査がないため能力モデルをEV順位から除外",
+  };
 }
 
 function loadPayoutPatterns() {

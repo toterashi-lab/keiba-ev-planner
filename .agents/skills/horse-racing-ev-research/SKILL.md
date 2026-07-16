@@ -25,11 +25,12 @@ Follow the returned `phase` and `nextAction`. Do not skip ahead to training or p
 4. Keep the final target period untouched. Discover conditions on older data and confirm them on a later holdout.
 5. Select models primarily by log loss, Brier score, ECE, and calibration-bin downside error. Accuracy is secondary.
 6. Compare the ability model with the parimutuel market. Correct favorite-longshot bias only with parameters fitted before the target period.
-7. Derive place and exotic probabilities from a coherent finish-order model, then calibrate each ticket type on historical folds.
-8. Treat high-payout patterns as volatility priors. Never add their lift directly to hit probability or EV.
-9. Compute conservative EV from a lower probability bound and an odds downside scenario.
-10. Permit abstention. A race can have an AI forecast without having a purchase recommendation.
-11. Evaluate purchased cases using only the AI recommendation stored before the result. Exclude candidate rankings and retrospective alternatives.
+7. Require the pooled ability probability to beat the market probability on an untouched chronological benchmark before it may control EV ranking.
+8. Derive place and exotic probabilities from a coherent finish-order model, then calibrate each ticket type on historical folds.
+9. Treat high-payout patterns as volatility priors. Never add their lift directly to hit probability or EV.
+10. Compute conservative EV from a lower probability bound and an odds downside scenario.
+11. Permit abstention. A race can have an AI forecast without having a purchase recommendation.
+12. Evaluate purchased cases using only the AI recommendation stored before the result. Exclude candidate rankings and retrospective alternatives.
 
 ## Acceptance Rules
 
@@ -38,6 +39,7 @@ Follow the returned `phase` and `nextAction`. Do not skip ahead to training or p
 - Require positive ROI confidence-interval lower bounds across multiple walk-forward folds before purchase eligibility.
 - Report sample size, race days, bet count, maximum drawdown, and calibration by ticket type.
 - Reject changes that improve target ROI while weakening pre-target walk-forward evidence.
+- Fail closed to the market baseline when the ability or pooled probability has worse external log loss than the market.
 - Keep IPAT purchase disabled until the deployment gates pass.
 
 ## Project Commands

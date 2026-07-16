@@ -133,6 +133,12 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Reference as-of model training failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\generate-market-ev.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Reference expectancy generation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\audit-reference-market-benchmark.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Reference market probability benchmark failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\reference-market-benchmark-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Reference market probability benchmark check failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\generate-market-ev.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Guardrailed reference expectancy generation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\evaluate-reference-ev.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Reference expectancy external audit failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\generate-market-ev.mjs"
