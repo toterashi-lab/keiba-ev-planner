@@ -1,6 +1,6 @@
 window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
   "status": "research_only",
-  "generatedAt": "2026-07-16T13:01:14.917Z",
+  "generatedAt": "2026-07-16T14:41:51.798Z",
   "source": "JRA official completed race results and payouts",
   "leakagePolicy": {
     "discovery": "race_date < 2020-01-01",
@@ -16,8 +16,8 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
     "acceptedOnlyWhenBothPeriodsLiftAboveOne": true
   },
   "coverage": {
-    "totalRows": 965152,
-    "discoveryRows": 695962,
+    "totalRows": 993292,
+    "discoveryRows": 724102,
     "validationRows": 269190,
     "earliestDate": "1996-01-05",
     "latestDate": "2026-07-05",
@@ -26,63 +26,63 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "枠連",
       "複勝",
       "馬連",
-      "3連複",
       "ワイド",
+      "3連複",
       "馬単",
       "3連単"
     ]
   },
   "thresholds": {
-    "単勝": 2120,
+    "単勝": 2130,
     "枠連": 4690,
     "複勝": 690,
-    "馬連": 12330,
-    "3連複": 47270,
+    "馬連": 12350,
     "ワイド": 4270,
-    "馬単": 24600,
+    "3連複": 47210,
+    "馬単": 24590,
     "3連単": 303680
   },
   "baselines": {
     "単勝": {
-      "discoveryCount": 59593,
+      "discoveryCount": 62476,
       "validationCount": 22565,
-      "discoveryRate": 0.10058228315406172,
-      "validationRate": 0.09173498781298471
+      "discoveryRate": 0.10067866060567258,
+      "validationRate": 0.09089297584755152
     },
     "枠連": {
-      "discoveryCount": 58301,
+      "discoveryCount": 61183,
       "validationCount": 21360,
-      "discoveryRate": 0.10034133205262345,
+      "discoveryRate": 0.10033832927447167,
       "validationRate": 0.09667602996254682
     },
     "複勝": {
-      "discoveryCount": 178192,
+      "discoveryCount": 186816,
       "validationCount": 67139,
-      "discoveryRate": 0.10066669659692916,
+      "discoveryRate": 0.10074083590270641,
       "validationRate": 0.09014134854555475
     },
     "馬連": {
-      "discoveryCount": 59386,
+      "discoveryCount": 62204,
       "validationCount": 22570,
-      "discoveryRate": 0.10002357457986731,
-      "validationRate": 0.09339831634913602
-    },
-    "3連複": {
-      "discoveryCount": 59408,
-      "validationCount": 22585,
-      "discoveryRate": 0.10002019929975761,
-      "validationRate": 0.08642904582687624
+      "discoveryRate": 0.100090026364864,
+      "validationRate": 0.09322108994240141
     },
     "ワイド": {
-      "discoveryCount": 177355,
+      "discoveryCount": 185809,
       "validationCount": 67697,
-      "discoveryRate": 0.10010994897239998,
+      "discoveryRate": 0.10018890365913384,
       "validationRate": 0.09247086281519122
     },
+    "3連複": {
+      "discoveryCount": 60658,
+      "validationCount": 22585,
+      "discoveryRate": 0.10001978304592964,
+      "validationRate": 0.08647332300199247
+    },
     "馬単": {
-      "discoveryCount": 59441,
+      "discoveryCount": 60670,
       "validationCount": 22608,
-      "discoveryRate": 0.10001514106424858,
+      "discoveryRate": 0.10001648261084556,
       "validationRate": 0.0916932059447983
     },
     "3連単": {
@@ -99,26 +99,26 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "field=large",
         "class=open_graded"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 2937,
-        "highPayoutCount": 477,
-        "observedRate": 0.16241062308478038,
-        "posteriorRate": 0.15333433216464323,
-        "lift": 1.5330336595821483,
-        "averagePayoutYen": 34639.417773238,
+        "count": 2975,
+        "highPayoutCount": 484,
+        "observedRate": 0.1626890756302521,
+        "posteriorRate": 0.15367191122963017,
+        "lift": 1.5364151625790188,
+        "averagePayoutYen": 34840.92100840336,
         "medianPayoutYen": 9710
       },
       "validation": {
         "count": 1312,
         "highPayoutCount": 211,
         "observedRate": 0.16082317073170732,
-        "posteriorRate": 0.1402949905703301,
-        "lift": 1.623238914974849,
+        "posteriorRate": 0.14030720833388313,
+        "lift": 1.622549052852407,
         "averagePayoutYen": 34062.33993902439,
         "medianPayoutYen": 10740
       },
-      "robustLift": 1.5330336595821483,
+      "robustLift": 1.5364151625790188,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -155,26 +155,26 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "distance=sprint",
         "raceBand=late"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 4483,
-        "highPayoutCount": 704,
-        "observedRate": 0.1570376979701093,
-        "posteriorRate": 0.15131649601643163,
-        "lift": 1.5128593731646196,
-        "averagePayoutYen": 32021.929511487844,
-        "medianPayoutYen": 9330
+        "count": 4609,
+        "highPayoutCount": 720,
+        "observedRate": 0.15621609893686267,
+        "posteriorRate": 0.1507163616212497,
+        "lift": 1.5068655123160977,
+        "averagePayoutYen": 31821.855066174874,
+        "medianPayoutYen": 9150
       },
       "validation": {
         "count": 1781,
-        "highPayoutCount": 275,
-        "observedRate": 0.154407636159461,
-        "posteriorRate": 0.13950658610847794,
-        "lift": 1.6141169299487572,
+        "highPayoutCount": 276,
+        "observedRate": 0.15496911847276812,
+        "posteriorRate": 0.13995469596711801,
+        "lift": 1.6184725081502103,
         "averagePayoutYen": 29142.223469960696,
         "medianPayoutYen": 9710
       },
-      "robustLift": 1.5128593731646196,
+      "robustLift": 1.5068655123160977,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -211,26 +211,26 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "field=large",
         "raceBand=late"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 14526,
-        "highPayoutCount": 2097,
-        "observedRate": 0.14436183395291202,
-        "posteriorRate": 0.14288633699253817,
-        "lift": 1.4285748078176888,
-        "averagePayoutYen": 30895.84744595897,
-        "medianPayoutYen": 8930
+        "count": 14828,
+        "highPayoutCount": 2143,
+        "observedRate": 0.1445238737523604,
+        "posteriorRate": 0.14307214845530825,
+        "lift": 1.4304385002475832,
+        "averagePayoutYen": 30888.881845157808,
+        "medianPayoutYen": 8910
       },
       "validation": {
         "count": 5192,
-        "highPayoutCount": 765,
-        "observedRate": 0.14734206471494607,
-        "posteriorRate": 0.14199130760952883,
-        "lift": 1.6428656159637338,
+        "highPayoutCount": 766,
+        "observedRate": 0.1475346687211094,
+        "posteriorRate": 0.14217088220326707,
+        "lift": 1.6441010622431065,
         "averagePayoutYen": 30657.36710323575,
         "medianPayoutYen": 9480
       },
-      "robustLift": 1.4285748078176888,
+      "robustLift": 1.4304385002475832,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -239,26 +239,26 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "field=large",
         "class=open_graded"
       ],
-      "highPayoutThresholdYen": 12330,
+      "highPayoutThresholdYen": 12350,
       "discovery": {
-        "count": 2936,
-        "highPayoutCount": 440,
-        "observedRate": 0.14986376021798364,
-        "posteriorRate": 0.14261111387949174,
-        "lift": 1.4257750183244944,
-        "averagePayoutYen": 7531.774523160763,
-        "medianPayoutYen": 2810
+        "count": 3050,
+        "highPayoutCount": 456,
+        "observedRate": 0.14950819672131146,
+        "posteriorRate": 0.14254789103730478,
+        "lift": 1.4241967578034864,
+        "averagePayoutYen": 7537.354098360655,
+        "medianPayoutYen": 2820
       },
       "validation": {
         "count": 1310,
         "highPayoutCount": 194,
         "observedRate": 0.1480916030534351,
-        "posteriorRate": 0.1329829603174409,
-        "lift": 1.4238260978959396,
+        "posteriorRate": 0.13293400274651973,
+        "lift": 1.4260078146335315,
         "averagePayoutYen": 7617.9312977099235,
         "medianPayoutYen": 2870
       },
-      "robustLift": 1.4238260978959396,
+      "robustLift": 1.4241967578034864,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -269,13 +269,13 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 13419,
-        "highPayoutCount": 1912,
-        "observedRate": 0.14248453685073403,
-        "posteriorRate": 0.14096235178433797,
-        "lift": 1.4080753534616313,
-        "averagePayoutYen": 2456.472166331321,
-        "medianPayoutYen": 1180
+        "count": 14157,
+        "highPayoutCount": 2003,
+        "observedRate": 0.1414847778484142,
+        "posteriorRate": 0.14007603546630054,
+        "lift": 1.3981192562289342,
+        "averagePayoutYen": 2443.875114784206,
+        "medianPayoutYen": 1170
       },
       "validation": {
         "count": 5329,
@@ -286,7 +286,7 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "averagePayoutYen": 2451.8690185775945,
         "medianPayoutYen": 1190
       },
-      "robustLift": 1.4080753534616313,
+      "robustLift": 1.3981192562289342,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -323,14 +323,14 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "field=large",
         "class=open_graded"
       ],
-      "highPayoutThresholdYen": 24600,
+      "highPayoutThresholdYen": 24590,
       "discovery": {
-        "count": 2934,
-        "highPayoutCount": 430,
-        "observedRate": 0.1465576005453306,
-        "posteriorRate": 0.13978088833201058,
-        "lift": 1.3975972722191827,
-        "averagePayoutYen": 15167.368779822767,
+        "count": 2972,
+        "highPayoutCount": 436,
+        "observedRate": 0.14670255720053835,
+        "posteriorRate": 0.13997933217322084,
+        "lift": 1.3995626372691674,
+        "averagePayoutYen": 15187.35195154778,
         "medianPayoutYen": 5360
       },
       "validation": {
@@ -351,26 +351,26 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "distance=sprint",
         "class=conditions"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 7367,
-        "highPayoutCount": 1030,
-        "observedRate": 0.1398126781593593,
-        "posteriorRate": 0.13728360234522421,
-        "lift": 1.3725587761906899,
-        "averagePayoutYen": 29304.88258449844,
-        "medianPayoutYen": 7970
+        "count": 7558,
+        "highPayoutCount": 1057,
+        "observedRate": 0.1398518126488489,
+        "posteriorRate": 0.13738022977450545,
+        "lift": 1.373530571561225,
+        "averagePayoutYen": 29222.140777983594,
+        "medianPayoutYen": 7870
       },
       "validation": {
         "count": 2500,
-        "highPayoutCount": 333,
-        "observedRate": 0.1332,
-        "posteriorRate": 0.12540484097114604,
-        "lift": 1.450957137978142,
+        "highPayoutCount": 334,
+        "observedRate": 0.1336,
+        "posteriorRate": 0.1257455538336654,
+        "lift": 1.4541542925413893,
         "averagePayoutYen": 27495.308,
         "medianPayoutYen": 8340
       },
-      "robustLift": 1.3725587761906899,
+      "robustLift": 1.373530571561225,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -381,12 +381,12 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 8796,
-        "highPayoutCount": 1226,
-        "observedRate": 0.13938153706230105,
-        "posteriorRate": 0.13726925284920397,
-        "lift": 1.3711849247575651,
-        "averagePayoutYen": 2469.7885402455663,
+        "count": 9138,
+        "highPayoutCount": 1261,
+        "observedRate": 0.13799518494200044,
+        "posteriorRate": 0.13603387132491876,
+        "lift": 1.3577738288038155,
+        "averagePayoutYen": 2458.977894506457,
         "medianPayoutYen": 1240
       },
       "validation": {
@@ -398,7 +398,7 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "averagePayoutYen": 2661.0384321710358,
         "medianPayoutYen": 1280
       },
-      "robustLift": 1.3711849247575651,
+      "robustLift": 1.3577738288038155,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -486,59 +486,31 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "馬連",
-      "conditions": [
-        "field=large",
-        "raceBand=late"
-      ],
-      "highPayoutThresholdYen": 12330,
-      "discovery": {
-        "count": 14558,
-        "highPayoutCount": 1950,
-        "observedRate": 0.1339469707377387,
-        "posteriorRate": 0.13282054637335194,
-        "lift": 1.327892418674727,
-        "averagePayoutYen": 7125.587992856162,
-        "medianPayoutYen": 2620
-      },
-      "validation": {
-        "count": 5186,
-        "highPayoutCount": 729,
-        "observedRate": 0.14057076745082916,
-        "posteriorRate": 0.13642264477217164,
-        "lift": 1.4606542184572646,
-        "averagePayoutYen": 7289.20362514462,
-        "medianPayoutYen": 2750
-      },
-      "robustLift": 1.327892418674727,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
       "betType": "3連複",
       "conditions": [
         "surface=芝",
         "field=large"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 21972,
-        "highPayoutCount": 2926,
-        "observedRate": 0.1331694884398325,
-        "posteriorRate": 0.13243191970674076,
-        "lift": 1.3240517478859062,
-        "averagePayoutYen": 29261.92654287275,
-        "medianPayoutYen": 7600
+        "count": 22476,
+        "highPayoutCount": 2994,
+        "observedRate": 0.13320875600640683,
+        "posteriorRate": 0.1324865029388477,
+        "lift": 1.3246029825720493,
+        "averagePayoutYen": 29183.00142374088,
+        "medianPayoutYen": 7590
       },
       "validation": {
         "count": 7060,
-        "highPayoutCount": 877,
-        "observedRate": 0.12422096317280454,
-        "posteriorRate": 0.12172149773987277,
-        "lift": 1.4083401774872062,
+        "highPayoutCount": 878,
+        "observedRate": 0.12436260623229461,
+        "posteriorRate": 0.12185670125674553,
+        "lift": 1.4091825898021495,
         "averagePayoutYen": 28286.706798866857,
         "medianPayoutYen": 7370
       },
-      "robustLift": 1.3240517478859062,
+      "robustLift": 1.3246029825720493,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -547,26 +519,82 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "field=large",
         "weather=雨"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 2386,
-        "highPayoutCount": 334,
-        "observedRate": 0.1399832355406538,
-        "posteriorRate": 0.13305963258831557,
-        "lift": 1.3303276090216511,
-        "averagePayoutYen": 29272.569153394805,
-        "medianPayoutYen": 8270
+        "count": 2418,
+        "highPayoutCount": 342,
+        "observedRate": 0.141439205955335,
+        "posteriorRate": 0.13434197790368912,
+        "lift": 1.3431540622518503,
+        "averagePayoutYen": 29776.20347394541,
+        "medianPayoutYen": 8290
       },
       "validation": {
         "count": 805,
         "highPayoutCount": 106,
         "observedRate": 0.13167701863354037,
-        "posteriorRate": 0.11434063058501005,
-        "lift": 1.3229421832799446,
+        "posteriorRate": 0.11435759501992049,
+        "lift": 1.3224609746671299,
         "averagePayoutYen": 28850.63354037267,
         "medianPayoutYen": 7640
       },
-      "robustLift": 1.3229421832799446,
+      "robustLift": 1.3224609746671299,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "3連複",
+      "conditions": [
+        "field=large",
+        "going=重"
+      ],
+      "highPayoutThresholdYen": 47210,
+      "discovery": {
+        "count": 3570,
+        "highPayoutCount": 486,
+        "observedRate": 0.1361344537815126,
+        "posteriorRate": 0.1316977620449545,
+        "lift": 1.316717133694223,
+        "averagePayoutYen": 28274.680672268907,
+        "medianPayoutYen": 6770
+      },
+      "validation": {
+        "count": 1398,
+        "highPayoutCount": 179,
+        "observedRate": 0.12804005722460657,
+        "posteriorRate": 0.1170899164915681,
+        "lift": 1.3540582508766337,
+        "averagePayoutYen": 28814.334763948496,
+        "medianPayoutYen": 7380
+      },
+      "robustLift": 1.316717133694223,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "馬連",
+      "conditions": [
+        "field=large",
+        "raceBand=late"
+      ],
+      "highPayoutThresholdYen": 12350,
+      "discovery": {
+        "count": 15300,
+        "highPayoutCount": 2028,
+        "observedRate": 0.13254901960784313,
+        "posteriorRate": 0.1315218362773691,
+        "lift": 1.3140353844840134,
+        "averagePayoutYen": 7086.830718954248,
+        "medianPayoutYen": 2590
+      },
+      "validation": {
+        "count": 5186,
+        "highPayoutCount": 727,
+        "observedRate": 0.1401851137678365,
+        "posteriorRate": 0.13605531920000014,
+        "lift": 1.4594907577680623,
+        "averagePayoutYen": 7289.20362514462,
+        "medianPayoutYen": 2750
+      },
+      "robustLift": 1.3140353844840134,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -577,12 +605,12 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 43524,
-        "highPayoutCount": 5779,
-        "observedRate": 0.13277731826118924,
-        "posteriorRate": 0.1324063005289433,
-        "lift": 1.322608810493424,
-        "averagePayoutYen": 2366.854608951383,
+        "count": 45746,
+        "highPayoutCount": 6037,
+        "observedRate": 0.13196782232326323,
+        "posteriorRate": 0.13162423673030246,
+        "lift": 1.3137606254093668,
+        "averagePayoutYen": 2357.890088750929,
         "medianPayoutYen": 1150
       },
       "validation": {
@@ -594,35 +622,35 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "averagePayoutYen": 2513.6325061077537,
         "medianPayoutYen": 1200
       },
-      "robustLift": 1.322608810493424,
+      "robustLift": 1.3137606254093668,
       "usePolicy": "volatility_prior_only"
     },
     {
       "betType": "3連複",
       "conditions": [
         "field=large",
-        "going=重"
+        "class=conditions"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 3536,
-        "highPayoutCount": 482,
-        "observedRate": 0.13631221719457012,
-        "posteriorRate": 0.13181617929878067,
-        "lift": 1.3178955873076341,
-        "averagePayoutYen": 28217.06730769231,
-        "medianPayoutYen": 6780
+        "count": 22003,
+        "highPayoutCount": 2901,
+        "observedRate": 0.13184565741035315,
+        "posteriorRate": 0.13113851004412588,
+        "lift": 1.311125719837908,
+        "averagePayoutYen": 29367.074944325774,
+        "medianPayoutYen": 7890
       },
       "validation": {
-        "count": 1398,
-        "highPayoutCount": 179,
-        "observedRate": 0.12804005722460657,
-        "posteriorRate": 0.11707825232530986,
-        "lift": 1.354616971704469,
-        "averagePayoutYen": 28814.334763948496,
-        "medianPayoutYen": 7380
+        "count": 6762,
+        "highPayoutCount": 878,
+        "observedRate": 0.12984324164448388,
+        "posteriorRate": 0.12685715526039607,
+        "lift": 1.4670091405816925,
+        "averagePayoutYen": 28797.326234841763,
+        "medianPayoutYen": 8100
       },
-      "robustLift": 1.3178955873076341,
+      "robustLift": 1.311125719837908,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -631,15 +659,15 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "distance=sprint",
         "raceBand=late"
       ],
-      "highPayoutThresholdYen": 24600,
+      "highPayoutThresholdYen": 24590,
       "discovery": {
-        "count": 4479,
-        "highPayoutCount": 605,
-        "observedRate": 0.13507479348068765,
-        "posteriorRate": 0.1315540410789565,
-        "lift": 1.3153412541251897,
-        "averagePayoutYen": 14213.098906005805,
-        "medianPayoutYen": 5190
+        "count": 4606,
+        "highPayoutCount": 619,
+        "observedRate": 0.13438992618323925,
+        "posteriorRate": 0.1310239407178658,
+        "lift": 1.3100234811062819,
+        "averagePayoutYen": 14083.484585323491,
+        "medianPayoutYen": 5080
       },
       "validation": {
         "count": 1776,
@@ -650,63 +678,7 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "averagePayoutYen": 14495.033783783783,
         "medianPayoutYen": 5220
       },
-      "robustLift": 1.3153412541251897,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "馬単",
-      "conditions": [
-        "field=large",
-        "raceBand=late"
-      ],
-      "highPayoutThresholdYen": 24600,
-      "discovery": {
-        "count": 14529,
-        "highPayoutCount": 1922,
-        "observedRate": 0.13228714983825451,
-        "posteriorRate": 0.13121349195103627,
-        "lift": 1.3119362783955504,
-        "averagePayoutYen": 14164.253561841833,
-        "medianPayoutYen": 5030
-      },
-      "validation": {
-        "count": 5196,
-        "highPayoutCount": 704,
-        "observedRate": 0.1354888375673595,
-        "posteriorRate": 0.1316444176566712,
-        "lift": 1.4357052553700063,
-        "averagePayoutYen": 14442.167051578137,
-        "medianPayoutYen": 5210
-      },
-      "robustLift": 1.3119362783955504,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "3連複",
-      "conditions": [
-        "field=large",
-        "class=conditions"
-      ],
-      "highPayoutThresholdYen": 47270,
-      "discovery": {
-        "count": 21596,
-        "highPayoutCount": 2849,
-        "observedRate": 0.13192257825523246,
-        "posteriorRate": 0.13120067431435004,
-        "lift": 1.3117417804892135,
-        "averagePayoutYen": 29439.373958140397,
-        "medianPayoutYen": 7900
-      },
-      "validation": {
-        "count": 6762,
-        "highPayoutCount": 877,
-        "observedRate": 0.12969535640343094,
-        "posteriorRate": 0.1267164035959017,
-        "lift": 1.4661321594331147,
-        "averagePayoutYen": 28797.326234841763,
-        "medianPayoutYen": 8100
-      },
-      "robustLift": 1.3117417804892135,
+      "robustLift": 1.3100234811062819,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -738,6 +710,34 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
+      "betType": "馬単",
+      "conditions": [
+        "field=large",
+        "raceBand=late"
+      ],
+      "highPayoutThresholdYen": 24590,
+      "discovery": {
+        "count": 14833,
+        "highPayoutCount": 1953,
+        "observedRate": 0.1316658801321378,
+        "posteriorRate": 0.1306338121245303,
+        "lift": 1.3061228381007337,
+        "averagePayoutYen": 14096.134969325154,
+        "medianPayoutYen": 5000
+      },
+      "validation": {
+        "count": 5196,
+        "highPayoutCount": 704,
+        "observedRate": 0.1354888375673595,
+        "posteriorRate": 0.1316444176566712,
+        "lift": 1.4357052553700063,
+        "averagePayoutYen": 14442.167051578137,
+        "medianPayoutYen": 5210
+      },
+      "robustLift": 1.3061228381007337,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
       "betType": "ワイド",
       "conditions": [
         "distance=sprint",
@@ -745,13 +745,13 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 22065,
-        "highPayoutCount": 2903,
-        "observedRate": 0.13156582823476093,
-        "posteriorRate": 0.1308688222683891,
-        "lift": 1.3072509137375472,
-        "averagePayoutYen": 2341.0151824155905,
-        "medianPayoutYen": 1090
+        "count": 23370,
+        "highPayoutCount": 3069,
+        "observedRate": 0.1313222079589217,
+        "posteriorRate": 0.13067006501171205,
+        "lift": 1.304236898891341,
+        "averagePayoutYen": 2335.2434745400087,
+        "medianPayoutYen": 1080
       },
       "validation": {
         "count": 7488,
@@ -762,35 +762,7 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "averagePayoutYen": 2340.571581196581,
         "medianPayoutYen": 1090
       },
-      "robustLift": 1.3072509137375472,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "3連複",
-      "conditions": [
-        "distance=sprint",
-        "class=open_graded"
-      ],
-      "highPayoutThresholdYen": 47270,
-      "discovery": {
-        "count": 678,
-        "highPayoutCount": 104,
-        "observedRate": 0.15339233038348082,
-        "posteriorRate": 0.13073862449055926,
-        "lift": 1.3071222153711115,
-        "averagePayoutYen": 30942.418879056047,
-        "medianPayoutYen": 8870
-      },
-      "validation": {
-        "count": 315,
-        "highPayoutCount": 59,
-        "observedRate": 0.1873015873015873,
-        "posteriorRate": 0.1254165925318259,
-        "lift": 1.4510931057025043,
-        "averagePayoutYen": 34665.90476190476,
-        "medianPayoutYen": 11490
-      },
-      "robustLift": 1.3071222153711115,
+      "robustLift": 1.304236898891341,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -799,54 +771,26 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "distance=sprint",
         "raceBand=late"
       ],
-      "highPayoutThresholdYen": 12330,
+      "highPayoutThresholdYen": 12350,
       "discovery": {
-        "count": 4488,
-        "highPayoutCount": 598,
-        "observedRate": 0.13324420677361853,
-        "posteriorRate": 0.1299141514213981,
-        "lift": 1.2988353192443007,
-        "averagePayoutYen": 7194.086452762924,
-        "medianPayoutYen": 2670
+        "count": 4736,
+        "highPayoutCount": 632,
+        "observedRate": 0.13344594594594594,
+        "posteriorRate": 0.13026069770481896,
+        "lift": 1.3014353421186249,
+        "averagePayoutYen": 7145.523648648648,
+        "medianPayoutYen": 2640
       },
       "validation": {
         "count": 1771,
         "highPayoutCount": 247,
         "observedRate": 0.13946922642574816,
-        "posteriorRate": 0.12932591729395335,
-        "lift": 1.3846707558465499,
+        "posteriorRate": 0.1292868978296789,
+        "lift": 1.3868846406919453,
         "averagePayoutYen": 7359.288537549407,
         "medianPayoutYen": 2790
       },
-      "robustLift": 1.2988353192443007,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "3連複",
-      "conditions": [
-        "distance=sprint",
-        "field=large"
-      ],
-      "highPayoutThresholdYen": 47270,
-      "discovery": {
-        "count": 12178,
-        "highPayoutCount": 1596,
-        "observedRate": 0.13105600262768927,
-        "posteriorRate": 0.12983200028789074,
-        "lift": 1.2980578042919915,
-        "averagePayoutYen": 28096.478896370503,
-        "medianPayoutYen": 7120
-      },
-      "validation": {
-        "count": 3985,
-        "highPayoutCount": 525,
-        "observedRate": 0.13174404015056462,
-        "posteriorRate": 0.12669220131849235,
-        "lift": 1.4658521346199538,
-        "averagePayoutYen": 27837.124215809286,
-        "medianPayoutYen": 7730
-      },
-      "robustLift": 1.2980578042919915,
+      "robustLift": 1.3014353421186249,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -906,115 +850,31 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "ワイド",
-      "conditions": [
-        "surface=芝",
-        "going=不良"
-      ],
-      "highPayoutThresholdYen": 4270,
-      "discovery": {
-        "count": 1493,
-        "highPayoutCount": 208,
-        "observedRate": 0.13931681178834562,
-        "posteriorRate": 0.12948066958665327,
-        "lift": 1.293384632753641,
-        "averagePayoutYen": 2454.675150703282,
-        "medianPayoutYen": 1070
-      },
-      "validation": {
-        "count": 492,
-        "highPayoutCount": 75,
-        "observedRate": 0.1524390243902439,
-        "posteriorRate": 0.12221313649959235,
-        "lift": 1.3216394092033392,
-        "averagePayoutYen": 2819.918699186992,
-        "medianPayoutYen": 1090
-      },
-      "robustLift": 1.293384632753641,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
       "betType": "3連複",
       "conditions": [
-        "surface=芝",
-        "distance=sprint"
+        "distance=sprint",
+        "class=open_graded"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 6749,
-        "highPayoutCount": 887,
-        "observedRate": 0.1314268780560083,
-        "posteriorRate": 0.12926060141397142,
-        "lift": 1.2923449695054214,
-        "averagePayoutYen": 27359.77329974811,
-        "medianPayoutYen": 7140
+        "count": 696,
+        "highPayoutCount": 105,
+        "observedRate": 0.15086206896551724,
+        "posteriorRate": 0.12960693271150905,
+        "lift": 1.295812975838918,
+        "averagePayoutYen": 30340.258620689656,
+        "medianPayoutYen": 8640
       },
       "validation": {
-        "count": 2155,
-        "highPayoutCount": 279,
-        "observedRate": 0.1294663573085847,
-        "posteriorRate": 0.12136140222728367,
-        "lift": 1.4041738059954927,
-        "averagePayoutYen": 29020.032482598606,
-        "medianPayoutYen": 6950
+        "count": 315,
+        "highPayoutCount": 59,
+        "observedRate": 0.1873015873015873,
+        "posteriorRate": 0.12544375644294017,
+        "lift": 1.4506642290137246,
+        "averagePayoutYen": 34665.90476190476,
+        "medianPayoutYen": 11490
       },
-      "robustLift": 1.2923449695054214,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "ワイド",
-      "conditions": [
-        "field=large",
-        "going=重"
-      ],
-      "highPayoutThresholdYen": 4270,
-      "discovery": {
-        "count": 10598,
-        "highPayoutCount": 1385,
-        "observedRate": 0.1306850349122476,
-        "posteriorRate": 0.12930753058985403,
-        "lift": 1.2916551443403865,
-        "averagePayoutYen": 2295.9218720513304,
-        "medianPayoutYen": 990
-      },
-      "validation": {
-        "count": 4189,
-        "highPayoutCount": 522,
-        "observedRate": 0.12461207925519217,
-        "posteriorRate": 0.1211847795708244,
-        "lift": 1.3105185339626355,
-        "averagePayoutYen": 2379.188350441633,
-        "medianPayoutYen": 1030
-      },
-      "robustLift": 1.2916551443403865,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "3連複",
-      "conditions": [
-        "venue=10",
-        "field=large"
-      ],
-      "highPayoutThresholdYen": 47270,
-      "discovery": {
-        "count": 3684,
-        "highPayoutCount": 489,
-        "observedRate": 0.13273615635179153,
-        "posteriorRate": 0.1288265056524567,
-        "lift": 1.288004888556235,
-        "averagePayoutYen": 27426.129207383277,
-        "medianPayoutYen": 7410
-      },
-      "validation": {
-        "count": 1341,
-        "highPayoutCount": 185,
-        "observedRate": 0.13795674869500374,
-        "posteriorRate": 0.1239622612240294,
-        "lift": 1.434266224254459,
-        "averagePayoutYen": 32706.935123042505,
-        "medianPayoutYen": 8280
-      },
-      "robustLift": 1.288004888556235,
+      "robustLift": 1.295812975838918,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -1025,12 +885,12 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 7151,
-        "highPayoutCount": 935,
-        "observedRate": 0.13075094392392672,
-        "posteriorRate": 0.128748526269272,
-        "lift": 1.2860712405793713,
-        "averagePayoutYen": 2361.549433645644,
+        "count": 7466,
+        "highPayoutCount": 982,
+        "observedRate": 0.1315296008572194,
+        "posteriorRate": 0.12956244687792706,
+        "lift": 1.2931816014149522,
+        "averagePayoutYen": 2376.225555853201,
         "medianPayoutYen": 1070
       },
       "validation": {
@@ -1042,7 +902,63 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "averagePayoutYen": 2482.5767634854774,
         "medianPayoutYen": 1050
       },
-      "robustLift": 1.2860712405793713,
+      "robustLift": 1.2931816014149522,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "3連複",
+      "conditions": [
+        "distance=sprint",
+        "field=large"
+      ],
+      "highPayoutThresholdYen": 47210,
+      "discovery": {
+        "count": 12511,
+        "highPayoutCount": 1631,
+        "observedRate": 0.1303652785548717,
+        "posteriorRate": 0.12919913085258358,
+        "lift": 1.2917357638463847,
+        "averagePayoutYen": 27916.37998561266,
+        "medianPayoutYen": 7070
+      },
+      "validation": {
+        "count": 3985,
+        "highPayoutCount": 526,
+        "observedRate": 0.13199498117942285,
+        "posteriorRate": 0.12692010289877284,
+        "lift": 1.4677370834453582,
+        "averagePayoutYen": 27837.124215809286,
+        "medianPayoutYen": 7730
+      },
+      "robustLift": 1.2917357638463847,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "3連複",
+      "conditions": [
+        "venue=03",
+        "raceBand=late"
+      ],
+      "highPayoutThresholdYen": 47210,
+      "discovery": {
+        "count": 1549,
+        "highPayoutCount": 213,
+        "observedRate": 0.13750806972240154,
+        "posteriorRate": 0.12836012275400918,
+        "lift": 1.2833473423459187,
+        "averagePayoutYen": 27951.4590058102,
+        "medianPayoutYen": 8160
+      },
+      "validation": {
+        "count": 490,
+        "highPayoutCount": 73,
+        "observedRate": 0.1489795918367347,
+        "posteriorRate": 0.1174107691929255,
+        "lift": 1.3577686749729763,
+        "averagePayoutYen": 24709.755102040817,
+        "medianPayoutYen": 8880
+      },
+      "robustLift": 1.2833473423459187,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -1051,26 +967,26 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "field=large",
         "going=不良"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 2033,
-        "highPayoutCount": 279,
-        "observedRate": 0.13723561239547466,
-        "posteriorRate": 0.1298894984800153,
-        "lift": 1.2986326700943704,
-        "averagePayoutYen": 30452.89719626168,
+        "count": 2054,
+        "highPayoutCount": 283,
+        "observedRate": 0.13777994157740994,
+        "posteriorRate": 0.13038758477798154,
+        "lift": 1.303617952441537,
+        "averagePayoutYen": 30421.197663096398,
         "medianPayoutYen": 7250
       },
       "validation": {
         "count": 630,
         "highPayoutCount": 82,
         "observedRate": 0.13015873015873017,
-        "posteriorRate": 0.11080931231277709,
-        "lift": 1.282084179602495,
+        "posteriorRate": 0.11082890398318251,
+        "lift": 1.2816542736611252,
         "averagePayoutYen": 25161.777777777777,
         "medianPayoutYen": 7500
       },
-      "robustLift": 1.282084179602495,
+      "robustLift": 1.2816542736611252,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -1102,31 +1018,31 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "複勝",
+      "betType": "3連複",
       "conditions": [
-        "field=large",
-        "class=maiden_debut"
+        "surface=芝",
+        "distance=sprint"
       ],
-      "highPayoutThresholdYen": 690,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 9132,
-        "highPayoutCount": 1189,
-        "observedRate": 0.13020148926850636,
-        "posteriorRate": 0.12866832934992367,
-        "lift": 1.2781618320616344,
-        "averagePayoutYen": 387.0784056066579,
-        "medianPayoutYen": 220
+        "count": 7021,
+        "highPayoutCount": 912,
+        "observedRate": 0.129896026207093,
+        "posteriorRate": 0.12790983799002326,
+        "lift": 1.2788453853302837,
+        "averagePayoutYen": 27074.58196838057,
+        "medianPayoutYen": 7050
       },
       "validation": {
-        "count": 3502,
-        "highPayoutCount": 424,
-        "observedRate": 0.12107367218732153,
-        "posteriorRate": 0.11720906403617624,
-        "lift": 1.3002807915275671,
-        "averagePayoutYen": 372.4500285551114,
-        "medianPayoutYen": 210
+        "count": 2155,
+        "highPayoutCount": 280,
+        "observedRate": 0.12993039443155452,
+        "posteriorRate": 0.12174638851261628,
+        "lift": 1.407906904535299,
+        "averagePayoutYen": 29020.032482598606,
+        "medianPayoutYen": 6950
       },
-      "robustLift": 1.2781618320616344,
+      "robustLift": 1.2788453853302837,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -1135,26 +1051,54 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "venue=03",
         "field=large"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 3763,
-        "highPayoutCount": 494,
-        "observedRate": 0.13127823545043849,
-        "posteriorRate": 0.12761203369689864,
-        "lift": 1.2758626216535431,
-        "averagePayoutYen": 26903.74701036407,
-        "medianPayoutYen": 7580
+        "count": 3914,
+        "highPayoutCount": 514,
+        "observedRate": 0.1313234542667348,
+        "posteriorRate": 0.12777750147778996,
+        "lift": 1.2775222819580985,
+        "averagePayoutYen": 26855.477772100152,
+        "medianPayoutYen": 7520
       },
       "validation": {
         "count": 1198,
         "highPayoutCount": 150,
         "observedRate": 0.12520868113522537,
-        "posteriorRate": 0.11378947168047003,
-        "lift": 1.316565173106258,
+        "posteriorRate": 0.11380250971790119,
+        "lift": 1.3160418238498712,
         "averagePayoutYen": 27102.9632721202,
         "medianPayoutYen": 7270
       },
-      "robustLift": 1.2758626216535431,
+      "robustLift": 1.2775222819580985,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "ワイド",
+      "conditions": [
+        "field=large",
+        "going=重"
+      ],
+      "highPayoutThresholdYen": 4270,
+      "discovery": {
+        "count": 10826,
+        "highPayoutCount": 1399,
+        "observedRate": 0.12922593755773137,
+        "posteriorRate": 0.1279440624959886,
+        "lift": 1.2770282718262327,
+        "averagePayoutYen": 2281.9536301496396,
+        "medianPayoutYen": 980
+      },
+      "validation": {
+        "count": 4189,
+        "highPayoutCount": 522,
+        "observedRate": 0.12461207925519217,
+        "posteriorRate": 0.1211847795708244,
+        "lift": 1.3105185339626355,
+        "averagePayoutYen": 2379.188350441633,
+        "medianPayoutYen": 1030
+      },
+      "robustLift": 1.2770282718262327,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -1186,31 +1130,59 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
+      "betType": "3連複",
+      "conditions": [
+        "venue=10",
+        "field=large"
+      ],
+      "highPayoutThresholdYen": 47210,
+      "discovery": {
+        "count": 3821,
+        "highPayoutCount": 501,
+        "observedRate": 0.1311175085056268,
+        "posteriorRate": 0.12751906769797844,
+        "lift": 1.274938455319594,
+        "averagePayoutYen": 27262.138183721538,
+        "medianPayoutYen": 7380
+      },
+      "validation": {
+        "count": 1341,
+        "highPayoutCount": 185,
+        "observedRate": 0.13795674869500374,
+        "posteriorRate": 0.12397428652960144,
+        "lift": 1.4336708967081662,
+        "averagePayoutYen": 32706.935123042505,
+        "medianPayoutYen": 8280
+      },
+      "robustLift": 1.274938455319594,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
       "betType": "ワイド",
       "conditions": [
-        "field=large",
-        "class=maiden_debut"
+        "surface=芝",
+        "going=不良"
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 9060,
-        "highPayoutCount": 1170,
-        "observedRate": 0.1291390728476821,
-        "posteriorRate": 0.12762081323077407,
-        "lift": 1.274806495665668,
-        "averagePayoutYen": 2234.0706401766006,
-        "medianPayoutYen": 980
+        "count": 1568,
+        "highPayoutCount": 214,
+        "observedRate": 0.1364795918367347,
+        "posteriorRate": 0.1277052474997906,
+        "lift": 1.2746446246609686,
+        "averagePayoutYen": 2418.7755102040815,
+        "medianPayoutYen": 1070
       },
       "validation": {
-        "count": 3506,
-        "highPayoutCount": 429,
-        "observedRate": 0.12236166571591557,
-        "posteriorRate": 0.1186309114846719,
-        "lift": 1.2829004496450214,
-        "averagePayoutYen": 2222.2960638904733,
-        "medianPayoutYen": 1010
+        "count": 492,
+        "highPayoutCount": 75,
+        "observedRate": 0.1524390243902439,
+        "posteriorRate": 0.12221313649959235,
+        "lift": 1.3216394092033392,
+        "averagePayoutYen": 2819.918699186992,
+        "medianPayoutYen": 1090
       },
-      "robustLift": 1.274806495665668,
+      "robustLift": 1.2746446246609686,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -1297,62 +1269,6 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "3連複",
-      "conditions": [
-        "surface=芝",
-        "class=open_graded"
-      ],
-      "highPayoutThresholdYen": 47270,
-      "discovery": {
-        "count": 3135,
-        "highPayoutCount": 411,
-        "observedRate": 0.13110047846889952,
-        "posteriorRate": 0.12682533690505607,
-        "lift": 1.2679972424866326,
-        "averagePayoutYen": 28681.454545454544,
-        "medianPayoutYen": 6980
-      },
-      "validation": {
-        "count": 1245,
-        "highPayoutCount": 161,
-        "observedRate": 0.12931726907630522,
-        "posteriorRate": 0.11702837989308774,
-        "lift": 1.3540399384658743,
-        "averagePayoutYen": 28269.26907630522,
-        "medianPayoutYen": 7580
-      },
-      "robustLift": 1.2679972424866326,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "ワイド",
-      "conditions": [
-        "distance=sprint",
-        "field=large"
-      ],
-      "highPayoutThresholdYen": 4270,
-      "discovery": {
-        "count": 36502,
-        "highPayoutCount": 4635,
-        "observedRate": 0.1269793435976111,
-        "posteriorRate": 0.12661626329620562,
-        "lift": 1.2647720291128441,
-        "averagePayoutYen": 2282.319598926086,
-        "medianPayoutYen": 1000
-      },
-      "validation": {
-        "count": 11935,
-        "highPayoutCount": 1508,
-        "observedRate": 0.12635106828655215,
-        "posteriorRate": 0.12498877614858027,
-        "lift": 1.351655779381859,
-        "averagePayoutYen": 2362.4759111855888,
-        "medianPayoutYen": 1060
-      },
-      "robustLift": 1.2647720291128441,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
       "betType": "3連単",
       "conditions": [
         "field=large",
@@ -1383,57 +1299,29 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
     {
       "betType": "3連複",
       "conditions": [
-        "venue=03",
-        "raceBand=late"
+        "surface=芝",
+        "class=open_graded"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 1485,
-        "highPayoutCount": 201,
-        "observedRate": 0.13535353535353536,
-        "posteriorRate": 0.12645345070522862,
-        "lift": 1.2642791315207373,
-        "averagePayoutYen": 27638.76767676768,
-        "medianPayoutYen": 8100
+        "count": 3194,
+        "highPayoutCount": 417,
+        "observedRate": 0.13055729492798998,
+        "posteriorRate": 0.12642390133269216,
+        "lift": 1.2639889578108523,
+        "averagePayoutYen": 28697.798998121478,
+        "medianPayoutYen": 6890
       },
       "validation": {
-        "count": 490,
-        "highPayoutCount": 73,
-        "observedRate": 0.1489795918367347,
-        "posteriorRate": 0.11738840698327083,
-        "lift": 1.3582055182977313,
-        "averagePayoutYen": 24709.755102040817,
-        "medianPayoutYen": 8880
+        "count": 1245,
+        "highPayoutCount": 161,
+        "observedRate": 0.12931726907630522,
+        "posteriorRate": 0.11704106676274856,
+        "lift": 1.3534933399061322,
+        "averagePayoutYen": 28269.26907630522,
+        "medianPayoutYen": 7580
       },
-      "robustLift": 1.2642791315207373,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "3連複",
-      "conditions": [
-        "field=large",
-        "class=maiden_debut"
-      ],
-      "highPayoutThresholdYen": 47270,
-      "discovery": {
-        "count": 3021,
-        "highPayoutCount": 397,
-        "observedRate": 0.13141343925852367,
-        "posteriorRate": 0.12695543869635864,
-        "lift": 1.2692979976562224,
-        "averagePayoutYen": 28044.028467394903,
-        "medianPayoutYen": 6810
-      },
-      "validation": {
-        "count": 1170,
-        "highPayoutCount": 139,
-        "observedRate": 0.1188034188034188,
-        "posteriorRate": 0.1091104927625378,
-        "lift": 1.2624285240993423,
-        "averagePayoutYen": 26194.846153846152,
-        "medianPayoutYen": 7260
-      },
-      "robustLift": 1.2624285240993423,
+      "robustLift": 1.2639889578108523,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -1444,12 +1332,12 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 65842,
-        "highPayoutCount": 8319,
-        "observedRate": 0.126347923817624,
-        "posteriorRate": 0.1261501759742878,
-        "lift": 1.260116274847638,
-        "averagePayoutYen": 2287.946903192491,
+        "count": 69197,
+        "highPayoutCount": 8775,
+        "observedRate": 0.12681185600531816,
+        "posteriorRate": 0.1266208653432654,
+        "lift": 1.2638212488486678,
+        "averagePayoutYen": 2289.6056187406966,
         "medianPayoutYen": 1040
       },
       "validation": {
@@ -1461,7 +1349,119 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "averagePayoutYen": 2369.367022785289,
         "medianPayoutYen": 1030
       },
-      "robustLift": 1.260116274847638,
+      "robustLift": 1.2638212488486678,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "複勝",
+      "conditions": [
+        "field=large",
+        "class=maiden_debut"
+      ],
+      "highPayoutThresholdYen": 690,
+      "discovery": {
+        "count": 9678,
+        "highPayoutCount": 1242,
+        "observedRate": 0.12833230006199628,
+        "posteriorRate": 0.12697685379753912,
+        "lift": 1.2604308139766773,
+        "averagePayoutYen": 385.0733622649308,
+        "medianPayoutYen": 210
+      },
+      "validation": {
+        "count": 3502,
+        "highPayoutCount": 424,
+        "observedRate": 0.12107367218732153,
+        "posteriorRate": 0.11720906403617624,
+        "lift": 1.3002807915275671,
+        "averagePayoutYen": 372.4500285551114,
+        "medianPayoutYen": 210
+      },
+      "robustLift": 1.2604308139766773,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "3連複",
+      "conditions": [
+        "field=large",
+        "class=maiden_debut"
+      ],
+      "highPayoutThresholdYen": 47210,
+      "discovery": {
+        "count": 3094,
+        "highPayoutCount": 403,
+        "observedRate": 0.13025210084033614,
+        "posteriorRate": 0.12604615790844875,
+        "lift": 1.2602122707121617,
+        "averagePayoutYen": 27671.1861667744,
+        "medianPayoutYen": 6750
+      },
+      "validation": {
+        "count": 1170,
+        "highPayoutCount": 139,
+        "observedRate": 0.1188034188034188,
+        "posteriorRate": 0.10912374940179415,
+        "lift": 1.261935422549678,
+        "averagePayoutYen": 26194.846153846152,
+        "medianPayoutYen": 7260
+      },
+      "robustLift": 1.2602122707121617,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "ワイド",
+      "conditions": [
+        "field=large",
+        "class=maiden_debut"
+      ],
+      "highPayoutThresholdYen": 4270,
+      "discovery": {
+        "count": 9606,
+        "highPayoutCount": 1224,
+        "observedRate": 0.127420362273579,
+        "posteriorRate": 0.1260730706342338,
+        "lift": 1.258353630289877,
+        "averagePayoutYen": 2205.4809494066208,
+        "medianPayoutYen": 970
+      },
+      "validation": {
+        "count": 3506,
+        "highPayoutCount": 429,
+        "observedRate": 0.12236166571591557,
+        "posteriorRate": 0.1186309114846719,
+        "lift": 1.2829004496450214,
+        "averagePayoutYen": 2222.2960638904733,
+        "medianPayoutYen": 1010
+      },
+      "robustLift": 1.258353630289877,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "ワイド",
+      "conditions": [
+        "field=large",
+        "going=不良"
+      ],
+      "highPayoutThresholdYen": 4270,
+      "discovery": {
+        "count": 6346,
+        "highPayoutCount": 813,
+        "observedRate": 0.12811219665931295,
+        "posteriorRate": 0.12607280920677283,
+        "lift": 1.2583510209444162,
+        "averagePayoutYen": 2355.6586826347307,
+        "medianPayoutYen": 1010
+      },
+      "validation": {
+        "count": 1888,
+        "highPayoutCount": 235,
+        "observedRate": 0.12447033898305085,
+        "posteriorRate": 0.11777028115895964,
+        "lift": 1.2735934063287684,
+        "averagePayoutYen": 2280.169491525424,
+        "medianPayoutYen": 1050
+      },
+      "robustLift": 1.2583510209444162,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -1470,26 +1470,26 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "surface=芝",
         "going=不良"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 503,
-        "highPayoutCount": 84,
-        "observedRate": 0.16699801192842942,
-        "posteriorRate": 0.13360927183437568,
-        "lift": 1.3358228914736772,
-        "averagePayoutYen": 31311.153081510933,
+        "count": 505,
+        "highPayoutCount": 85,
+        "observedRate": 0.16831683168316833,
+        "posteriorRate": 0.13433820052036302,
+        "lift": 1.3431162958899259,
+        "averagePayoutYen": 31393.445544554455,
         "medianPayoutYen": 8090
       },
       "validation": {
         "count": 164,
         "highPayoutCount": 29,
         "observedRate": 0.17682926829268292,
-        "posteriorRate": 0.10875681161662366,
-        "lift": 1.2583363680130355,
+        "posteriorRate": 0.10879015286294613,
+        "lift": 1.2580776254017607,
         "averagePayoutYen": 39548.04878048781,
         "medianPayoutYen": 7770
       },
-      "robustLift": 1.2583363680130355,
+      "robustLift": 1.2580776254017607,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -1521,31 +1521,59 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
+      "betType": "3連複",
+      "conditions": [
+        "raceBand=late",
+        "going=重"
+      ],
+      "highPayoutThresholdYen": 47210,
+      "discovery": {
+        "count": 1241,
+        "highPayoutCount": 169,
+        "observedRate": 0.1361804995970991,
+        "posteriorRate": 0.12579545750888274,
+        "lift": 1.2577057625801564,
+        "averagePayoutYen": 27429.129734085414,
+        "medianPayoutYen": 7620
+      },
+      "validation": {
+        "count": 617,
+        "highPayoutCount": 80,
+        "observedRate": 0.12965964343598055,
+        "posteriorRate": 0.11032825559623656,
+        "lift": 1.2758646454895048,
+        "averagePayoutYen": 28062.090761750405,
+        "medianPayoutYen": 7710
+      },
+      "robustLift": 1.2577057625801564,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
       "betType": "ワイド",
       "conditions": [
-        "field=large",
-        "going=不良"
+        "distance=sprint",
+        "field=large"
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 6097,
-        "highPayoutCount": 780,
-        "observedRate": 0.1279317697228145,
-        "posteriorRate": 0.12582309754224646,
-        "lift": 1.256849082771339,
-        "averagePayoutYen": 2357.992455305888,
-        "medianPayoutYen": 1000
+        "count": 38787,
+        "highPayoutCount": 4889,
+        "observedRate": 0.12604738701111198,
+        "posteriorRate": 0.12571828981163152,
+        "lift": 1.2548125113670736,
+        "averagePayoutYen": 2271.802923659989,
+        "medianPayoutYen": 990
       },
       "validation": {
-        "count": 1888,
-        "highPayoutCount": 235,
-        "observedRate": 0.12447033898305085,
-        "posteriorRate": 0.11777028115895964,
-        "lift": 1.2735934063287684,
-        "averagePayoutYen": 2280.169491525424,
-        "medianPayoutYen": 1050
+        "count": 11935,
+        "highPayoutCount": 1508,
+        "observedRate": 0.12635106828655215,
+        "posteriorRate": 0.12498877614858027,
+        "lift": 1.351655779381859,
+        "averagePayoutYen": 2362.4759111855888,
+        "medianPayoutYen": 1060
       },
-      "robustLift": 1.256849082771339,
+      "robustLift": 1.2548125113670736,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -1556,12 +1584,12 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 64720,
-        "highPayoutCount": 8154,
-        "observedRate": 0.12598887515451174,
-        "posteriorRate": 0.1257904779896688,
-        "lift": 1.2565232455002935,
-        "averagePayoutYen": 2299.220179233622,
+        "count": 68097,
+        "highPayoutCount": 8555,
+        "observedRate": 0.12562961657635432,
+        "posteriorRate": 0.1254441805301918,
+        "lift": 1.2520765868142678,
+        "averagePayoutYen": 2294.6220832048402,
         "medianPayoutYen": 1080
       },
       "validation": {
@@ -1573,63 +1601,35 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "averagePayoutYen": 2396.4135583185316,
         "medianPayoutYen": 1110
       },
-      "robustLift": 1.2565232455002935,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "3連複",
-      "conditions": [
-        "raceBand=late",
-        "going=重"
-      ],
-      "highPayoutThresholdYen": 47270,
-      "discovery": {
-        "count": 1233,
-        "highPayoutCount": 167,
-        "observedRate": 0.1354420113544201,
-        "posteriorRate": 0.12522221560870098,
-        "lift": 1.2519692670618827,
-        "averagePayoutYen": 26820,
-        "medianPayoutYen": 7550
-      },
-      "validation": {
-        "count": 617,
-        "highPayoutCount": 80,
-        "observedRate": 0.12965964343598055,
-        "posteriorRate": 0.11030843591176197,
-        "lift": 1.2762889472680041,
-        "averagePayoutYen": 28062.090761750405,
-        "medianPayoutYen": 7710
-      },
-      "robustLift": 1.2519692670618827,
+      "robustLift": 1.2520765868142678,
       "usePolicy": "volatility_prior_only"
     },
     {
       "betType": "ワイド",
       "conditions": [
-        "distance=sprint",
-        "class=open_graded"
+        "venue=03",
+        "field=large"
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 2024,
-        "highPayoutCount": 265,
-        "observedRate": 0.1309288537549407,
-        "posteriorRate": 0.12482368244302693,
-        "lift": 1.2468659081770228,
-        "averagePayoutYen": 2366.2005928853755,
-        "medianPayoutYen": 1140
+        "count": 11731,
+        "highPayoutCount": 1478,
+        "observedRate": 0.1259909641121814,
+        "posteriorRate": 0.12493618280022623,
+        "lift": 1.2470061876841017,
+        "averagePayoutYen": 2230.7015599693123,
+        "medianPayoutYen": 1030
       },
       "validation": {
-        "count": 941,
-        "highPayoutCount": 148,
-        "observedRate": 0.15727948990435706,
-        "posteriorRate": 0.13479211062289773,
-        "lift": 1.4576711681850332,
-        "averagePayoutYen": 2603.5494155154092,
-        "medianPayoutYen": 1310
+        "count": 3591,
+        "highPayoutCount": 426,
+        "observedRate": 0.11862990810359231,
+        "posteriorRate": 0.11543276250491216,
+        "lift": 1.2483149717723703,
+        "averagePayoutYen": 2291.1389585073794,
+        "medianPayoutYen": 1060
       },
-      "robustLift": 1.2468659081770228,
+      "robustLift": 1.2470061876841017,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -1638,26 +1638,26 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "field=large",
         "weather=雨"
       ],
-      "highPayoutThresholdYen": 12330,
+      "highPayoutThresholdYen": 12350,
       "discovery": {
-        "count": 2388,
-        "highPayoutCount": 310,
-        "observedRate": 0.12981574539363483,
-        "posteriorRate": 0.12465782108377203,
-        "lift": 1.2462844045254016,
-        "averagePayoutYen": 6985.0544388609715,
-        "medianPayoutYen": 2480
+        "count": 2493,
+        "highPayoutCount": 323,
+        "observedRate": 0.12956277577216205,
+        "posteriorRate": 0.12463916243983696,
+        "lift": 1.2452705525871535,
+        "averagePayoutYen": 7088.812675491376,
+        "medianPayoutYen": 2460
       },
       "validation": {
         "count": 801,
         "highPayoutCount": 106,
         "observedRate": 0.132334581772784,
-        "posteriorRate": 0.11737060582211224,
-        "lift": 1.256667254935993,
+        "posteriorRate": 0.11730249421306742,
+        "lift": 1.2583257102608991,
         "averagePayoutYen": 7052.259675405743,
         "medianPayoutYen": 2500
       },
-      "robustLift": 1.2462844045254016,
+      "robustLift": 1.2452705525871535,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -1689,90 +1689,6 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "ワイド",
-      "conditions": [
-        "venue=03",
-        "field=large"
-      ],
-      "highPayoutThresholdYen": 4270,
-      "discovery": {
-        "count": 11278,
-        "highPayoutCount": 1417,
-        "observedRate": 0.1256428444759709,
-        "posteriorRate": 0.12455892125031415,
-        "lift": 1.2442212040748784,
-        "averagePayoutYen": 2236.5011526866465,
-        "medianPayoutYen": 1030
-      },
-      "validation": {
-        "count": 3591,
-        "highPayoutCount": 426,
-        "observedRate": 0.11862990810359231,
-        "posteriorRate": 0.11543276250491216,
-        "lift": 1.2483149717723703,
-        "averagePayoutYen": 2291.1389585073794,
-        "medianPayoutYen": 1060
-      },
-      "robustLift": 1.2442212040748784,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "3連複",
-      "conditions": [
-        "venue=10",
-        "class=conditions"
-      ],
-      "highPayoutThresholdYen": 47270,
-      "discovery": {
-        "count": 2396,
-        "highPayoutCount": 310,
-        "observedRate": 0.1293823038397329,
-        "posteriorRate": 0.12431287971335593,
-        "lift": 1.2428777445323207,
-        "averagePayoutYen": 25411.844741235393,
-        "medianPayoutYen": 7390
-      },
-      "validation": {
-        "count": 909,
-        "highPayoutCount": 110,
-        "observedRate": 0.12101210121012101,
-        "posteriorRate": 0.10873990270648554,
-        "lift": 1.258140728804291,
-        "averagePayoutYen": 25466.105610561055,
-        "medianPayoutYen": 7470
-      },
-      "robustLift": 1.2428777445323207,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "3連複",
-      "conditions": [
-        "raceBand=late",
-        "class=open_graded"
-      ],
-      "highPayoutThresholdYen": 47270,
-      "discovery": {
-        "count": 3961,
-        "highPayoutCount": 504,
-        "observedRate": 0.1272405958091391,
-        "posteriorRate": 0.12418966591568681,
-        "lift": 1.2416458553886103,
-        "averagePayoutYen": 27996.29891441555,
-        "medianPayoutYen": 7070
-      },
-      "validation": {
-        "count": 1704,
-        "highPayoutCount": 220,
-        "observedRate": 0.12910798122065728,
-        "posteriorRate": 0.1194258270932115,
-        "lift": 1.3817788447234538,
-        "averagePayoutYen": 28374.771126760563,
-        "medianPayoutYen": 8150
-      },
-      "robustLift": 1.2416458553886103,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
       "betType": "3連単",
       "conditions": [
         "venue=03",
@@ -1801,59 +1717,87 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
+      "betType": "馬連",
+      "conditions": [
+        "distance=sprint",
+        "class=conditions"
+      ],
+      "highPayoutThresholdYen": 12350,
+      "discovery": {
+        "count": 7821,
+        "highPayoutCount": 983,
+        "observedRate": 0.12568725226953076,
+        "posteriorRate": 0.12414914231251437,
+        "lift": 1.2403747588190883,
+        "averagePayoutYen": 6797.451732515024,
+        "medianPayoutYen": 2450
+      },
+      "validation": {
+        "count": 2495,
+        "highPayoutCount": 305,
+        "observedRate": 0.12224448897795591,
+        "posteriorRate": 0.11739918029088506,
+        "lift": 1.259362879831405,
+        "averagePayoutYen": 6760.112224448898,
+        "medianPayoutYen": 2470
+      },
+      "robustLift": 1.2403747588190883,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
       "betType": "3連複",
       "conditions": [
         "venue=08",
         "field=large"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 6460,
-        "highPayoutCount": 823,
-        "observedRate": 0.12739938080495355,
-        "posteriorRate": 0.12543248558187914,
-        "lift": 1.2540715421488178,
-        "averagePayoutYen": 28805.970588235294,
-        "medianPayoutYen": 6440
+        "count": 6519,
+        "highPayoutCount": 834,
+        "observedRate": 0.12793373216751036,
+        "posteriorRate": 0.1259452758972738,
+        "lift": 1.259203650136284,
+        "averagePayoutYen": 28827.169811320753,
+        "medianPayoutYen": 6460
       },
       "validation": {
         "count": 1425,
         "highPayoutCount": 163,
         "observedRate": 0.1143859649122807,
-        "posteriorRate": 0.10712442748750033,
-        "lift": 1.2394493825846284,
+        "posteriorRate": 0.10713592805246558,
+        "lift": 1.238947739408569,
         "averagePayoutYen": 25700.63859649123,
         "medianPayoutYen": 7000
       },
-      "robustLift": 1.2394493825846284,
+      "robustLift": 1.238947739408569,
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "馬単",
+      "betType": "3連複",
       "conditions": [
-        "field=large",
-        "class=conditions"
+        "raceBand=late",
+        "class=open_graded"
       ],
-      "highPayoutThresholdYen": 24600,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 21600,
-        "highPayoutCount": 2685,
-        "observedRate": 0.12430555555555556,
-        "posteriorRate": 0.12375599866661195,
-        "lift": 1.2373726352804173,
-        "averagePayoutYen": 13816.525925925926,
-        "medianPayoutYen": 4750
+        "count": 4029,
+        "highPayoutCount": 511,
+        "observedRate": 0.12683047902705386,
+        "posteriorRate": 0.12387058766239012,
+        "lift": 1.2384608713409033,
+        "averagePayoutYen": 28029.659965251925,
+        "medianPayoutYen": 6990
       },
       "validation": {
-        "count": 6776,
-        "highPayoutCount": 847,
-        "observedRate": 0.125,
-        "posteriorRate": 0.12271118787416152,
-        "lift": 1.3382800460487427,
-        "averagePayoutYen": 13701.15997638725,
-        "medianPayoutYen": 4810
+        "count": 1704,
+        "highPayoutCount": 220,
+        "observedRate": 0.12910798122065728,
+        "posteriorRate": 0.11943587182440844,
+        "lift": 1.3811874885582514,
+        "averagePayoutYen": 28374.771126760563,
+        "medianPayoutYen": 8150
       },
-      "robustLift": 1.2373726352804173,
+      "robustLift": 1.2384608713409033,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -1864,12 +1808,12 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 20054,
-        "highPayoutCount": 2495,
-        "observedRate": 0.12441408197865762,
-        "posteriorRate": 0.123822855623538,
-        "lift": 1.236868631884685,
-        "averagePayoutYen": 2227.4758152986933,
+        "count": 21292,
+        "highPayoutCount": 2648,
+        "observedRate": 0.12436595904565095,
+        "posteriorRate": 0.12381123585855208,
+        "lift": 1.2357779288591375,
+        "averagePayoutYen": 2227.419218485816,
         "medianPayoutYen": 1000
       },
       "validation": {
@@ -1881,146 +1825,63 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "averagePayoutYen": 2316.5143299767624,
         "medianPayoutYen": 1000
       },
-      "robustLift": 1.236868631884685,
+      "robustLift": 1.2357779288591375,
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "3連複",
+      "betType": "馬単",
       "conditions": [
-        "class=open_graded"
+        "field=large",
+        "class=conditions"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 24590,
       "discovery": {
-        "count": 4005,
-        "highPayoutCount": 507,
-        "observedRate": 0.12659176029962546,
-        "posteriorRate": 0.12364264143171562,
-        "lift": 1.2361767152769036,
-        "averagePayoutYen": 27884.34956304619,
-        "medianPayoutYen": 6930
+        "count": 22009,
+        "highPayoutCount": 2728,
+        "observedRate": 0.12394929347085283,
+        "posteriorRate": 0.12341766588055546,
+        "lift": 1.233973267793886,
+        "averagePayoutYen": 13766.8262983325,
+        "medianPayoutYen": 4730
       },
       "validation": {
-        "count": 1731,
-        "highPayoutCount": 224,
-        "observedRate": 0.1294049682264587,
-        "posteriorRate": 0.11977343026151419,
-        "lift": 1.3858006774878575,
-        "averagePayoutYen": 28159.39919121895,
-        "medianPayoutYen": 8120
+        "count": 6776,
+        "highPayoutCount": 847,
+        "observedRate": 0.125,
+        "posteriorRate": 0.12271118787416152,
+        "lift": 1.3382800460487427,
+        "averagePayoutYen": 13701.15997638725,
+        "medianPayoutYen": 4810
       },
-      "robustLift": 1.2361767152769036,
+      "robustLift": 1.233973267793886,
       "usePolicy": "volatility_prior_only"
     },
     {
       "betType": "ワイド",
       "conditions": [
-        "venue=10",
-        "field=large"
+        "raceBand=late",
+        "going=不良"
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 11043,
-        "highPayoutCount": 1378,
-        "observedRate": 0.1247849316308974,
-        "posteriorRate": 0.12371610278837392,
-        "lift": 1.235802275980403,
-        "averagePayoutYen": 2267.938965860726,
-        "medianPayoutYen": 1020
+        "count": 1895,
+        "highPayoutCount": 246,
+        "observedRate": 0.12981530343007916,
+        "posteriorRate": 0.1236302512858317,
+        "lift": 1.2339714955505534,
+        "averagePayoutYen": 2288.833773087071,
+        "medianPayoutYen": 1090
       },
       "validation": {
-        "count": 4019,
-        "highPayoutCount": 549,
-        "observedRate": 0.1366011445633242,
-        "posteriorRate": 0.13171839597424112,
-        "lift": 1.424431350202588,
-        "averagePayoutYen": 2605.260014929087,
-        "medianPayoutYen": 1120
+        "count": 632,
+        "highPayoutCount": 88,
+        "observedRate": 0.13924050632911392,
+        "posteriorRate": 0.11858253657914808,
+        "lift": 1.2823773129071225,
+        "averagePayoutYen": 2351.4398734177216,
+        "medianPayoutYen": 1330
       },
-      "robustLift": 1.235802275980403,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "馬連",
-      "conditions": [
-        "distance=sprint",
-        "class=conditions"
-      ],
-      "highPayoutThresholdYen": 12330,
-      "discovery": {
-        "count": 7384,
-        "highPayoutCount": 924,
-        "observedRate": 0.12513542795232935,
-        "posteriorRate": 0.12354284465879423,
-        "lift": 1.2351372681661874,
-        "averagePayoutYen": 6812.0977789815815,
-        "medianPayoutYen": 2460
-      },
-      "validation": {
-        "count": 2495,
-        "highPayoutCount": 306,
-        "observedRate": 0.12264529058116233,
-        "posteriorRate": 0.11776265715344508,
-        "lift": 1.2608648823307664,
-        "averagePayoutYen": 6760.112224448898,
-        "medianPayoutYen": 2470
-      },
-      "robustLift": 1.2351372681661874,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "3連複",
-      "conditions": [
-        "venue=03",
-        "class=conditions"
-      ],
-      "highPayoutThresholdYen": 47270,
-      "discovery": {
-        "count": 2447,
-        "highPayoutCount": 314,
-        "observedRate": 0.128320392317123,
-        "posteriorRate": 0.12351886652523882,
-        "lift": 1.234939216178288,
-        "averagePayoutYen": 26321.0257458112,
-        "medianPayoutYen": 7410
-      },
-      "validation": {
-        "count": 688,
-        "highPayoutCount": 90,
-        "observedRate": 0.1308139534883721,
-        "posteriorRate": 0.11213343679582333,
-        "lift": 1.297404544074626,
-        "averagePayoutYen": 24494.6511627907,
-        "medianPayoutYen": 8580
-      },
-      "robustLift": 1.234939216178288,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "馬連",
-      "conditions": [
-        "field=large",
-        "class=conditions"
-      ],
-      "highPayoutThresholdYen": 12330,
-      "discovery": {
-        "count": 21651,
-        "highPayoutCount": 2683,
-        "observedRate": 0.12392037319292411,
-        "posteriorRate": 0.12338096642544055,
-        "lift": 1.2335188673638404,
-        "averagePayoutYen": 6900.024941111265,
-        "medianPayoutYen": 2440
-      },
-      "validation": {
-        "count": 6761,
-        "highPayoutCount": 859,
-        "observedRate": 0.12705221121135926,
-        "posteriorRate": 0.12473476906411898,
-        "lift": 1.3355141071049172,
-        "averagePayoutYen": 6929.587339151013,
-        "medianPayoutYen": 2540
-      },
-      "robustLift": 1.2335188673638404,
+      "robustLift": 1.2339714955505534,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -2029,82 +1890,81 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "distance=mile",
         "class=open_graded"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 1300,
-        "highPayoutCount": 180,
-        "observedRate": 0.13846153846153847,
-        "posteriorRate": 0.1277833886943771,
-        "lift": 1.2775758255731329,
-        "averagePayoutYen": 33022.123076923075,
-        "medianPayoutYen": 7100
+        "count": 1316,
+        "highPayoutCount": 181,
+        "observedRate": 0.13753799392097266,
+        "posteriorRate": 0.12720809004568548,
+        "lift": 1.2718292938834992,
+        "averagePayoutYen": 32718.647416413372,
+        "medianPayoutYen": 6990
       },
       "validation": {
         "count": 562,
         "highPayoutCount": 70,
         "observedRate": 0.12455516014234876,
-        "posteriorRate": 0.10660501215954625,
-        "lift": 1.2334396514463895,
+        "posteriorRate": 0.10662585828719043,
+        "lift": 1.2330491599673303,
         "averagePayoutYen": 29295.195729537365,
         "medianPayoutYen": 8120
       },
-      "robustLift": 1.2334396514463895,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "ワイド",
-      "conditions": [
-        "field=large",
-        "weather=小雨"
-      ],
-      "highPayoutThresholdYen": 4270,
-      "discovery": {
-        "count": 5231,
-        "highPayoutCount": 657,
-        "observedRate": 0.12559740011470083,
-        "posteriorRate": 0.12337375230957948,
-        "lift": 1.23238253116674,
-        "averagePayoutYen": 2246.7539667367614,
-        "medianPayoutYen": 1000
-      },
-      "validation": {
-        "count": 1985,
-        "highPayoutCount": 244,
-        "observedRate": 0.12292191435768261,
-        "posteriorRate": 0.11679494221633627,
-        "lift": 1.263045879108517,
-        "averagePayoutYen": 2165.9798488664987,
-        "medianPayoutYen": 1010
-      },
-      "robustLift": 1.23238253116674,
+      "robustLift": 1.2330491599673303,
       "usePolicy": "volatility_prior_only"
     },
     {
       "betType": "3連複",
       "conditions": [
-        "going=良",
         "class=open_graded"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 3212,
-        "highPayoutCount": 407,
-        "observedRate": 0.1267123287671233,
-        "posteriorRate": 0.123116944948782,
-        "lift": 1.2309208121032045,
-        "averagePayoutYen": 28007.758405977584,
-        "medianPayoutYen": 6710
+        "count": 4074,
+        "highPayoutCount": 514,
+        "observedRate": 0.12616593028964163,
+        "posteriorRate": 0.12330780313138716,
+        "lift": 1.2328341391698834,
+        "averagePayoutYen": 27913.676975945018,
+        "medianPayoutYen": 6890
       },
       "validation": {
-        "count": 1305,
-        "highPayoutCount": 170,
-        "observedRate": 0.13026819923371646,
-        "posteriorRate": 0.11812438942572749,
-        "lift": 1.3667209708914219,
-        "averagePayoutYen": 27229.946360153255,
-        "medianPayoutYen": 7660
+        "count": 1731,
+        "highPayoutCount": 224,
+        "observedRate": 0.1294049682264587,
+        "posteriorRate": 0.11978335342940215,
+        "lift": 1.3852058562227587,
+        "averagePayoutYen": 28159.39919121895,
+        "medianPayoutYen": 8120
       },
-      "robustLift": 1.2309208121032045,
+      "robustLift": 1.2328341391698834,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "ワイド",
+      "conditions": [
+        "distance=sprint",
+        "class=open_graded"
+      ],
+      "highPayoutThresholdYen": 4270,
+      "discovery": {
+        "count": 2108,
+        "highPayoutCount": 272,
+        "observedRate": 0.12903225806451613,
+        "posteriorRate": 0.12350247386103026,
+        "lift": 1.232696130513761,
+        "averagePayoutYen": 2341.0199240986717,
+        "medianPayoutYen": 1140
+      },
+      "validation": {
+        "count": 941,
+        "highPayoutCount": 148,
+        "observedRate": 0.15727948990435706,
+        "posteriorRate": 0.13479211062289773,
+        "lift": 1.4576711681850332,
+        "averagePayoutYen": 2603.5494155154092,
+        "medianPayoutYen": 1310
+      },
+      "robustLift": 1.232696130513761,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -2113,15 +1973,15 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "surface=芝",
         "field=large"
       ],
-      "highPayoutThresholdYen": 24600,
+      "highPayoutThresholdYen": 24590,
       "discovery": {
-        "count": 21976,
-        "highPayoutCount": 2716,
-        "observedRate": 0.12358937022206043,
-        "posteriorRate": 0.12306493906976883,
-        "lift": 1.230463085491359,
-        "averagePayoutYen": 13660.244812522753,
-        "medianPayoutYen": 4560
+        "count": 22474,
+        "highPayoutCount": 2778,
+        "observedRate": 0.1236095043160986,
+        "posteriorRate": 0.1230960320930366,
+        "lift": 1.2307574599677868,
+        "averagePayoutYen": 13649.329892320015,
+        "medianPayoutYen": 4550
       },
       "validation": {
         "count": 7066,
@@ -2132,7 +1992,7 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "averagePayoutYen": 14042.431361449193,
         "medianPayoutYen": 4470
       },
-      "robustLift": 1.230463085491359,
+      "robustLift": 1.2307574599677868,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -2169,15 +2029,15 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "venue=03",
         "field=large"
       ],
-      "highPayoutThresholdYen": 24600,
+      "highPayoutThresholdYen": 24590,
       "discovery": {
-        "count": 3763,
-        "highPayoutCount": 478,
-        "observedRate": 0.12702630879617327,
-        "posteriorRate": 0.12385821499697966,
-        "lift": 1.2383946438411215,
-        "averagePayoutYen": 13970.794578793515,
-        "medianPayoutYen": 4550
+        "count": 3898,
+        "highPayoutCount": 494,
+        "observedRate": 0.1267316572601334,
+        "posteriorRate": 0.12369446141551223,
+        "lift": 1.2367407669873314,
+        "averagePayoutYen": 13882.896357106209,
+        "medianPayoutYen": 4530
       },
       "validation": {
         "count": 1202,
@@ -2192,31 +2052,115 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
+      "betType": "3連複",
+      "conditions": [
+        "going=良",
+        "class=open_graded"
+      ],
+      "highPayoutThresholdYen": 47210,
+      "discovery": {
+        "count": 3269,
+        "highPayoutCount": 413,
+        "observedRate": 0.12633832976445397,
+        "posteriorRate": 0.12284688021304453,
+        "lift": 1.2282258216520283,
+        "averagePayoutYen": 28050.917711838483,
+        "medianPayoutYen": 6670
+      },
+      "validation": {
+        "count": 1305,
+        "highPayoutCount": 170,
+        "observedRate": 0.13026819923371646,
+        "posteriorRate": 0.11813665457118905,
+        "lift": 1.3661630022991833,
+        "averagePayoutYen": 27229.946360153255,
+        "medianPayoutYen": 7660
+      },
+      "robustLift": 1.2282258216520283,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "3連複",
+      "conditions": [
+        "venue=03",
+        "class=conditions"
+      ],
+      "highPayoutThresholdYen": 47210,
+      "discovery": {
+        "count": 2505,
+        "highPayoutCount": 319,
+        "observedRate": 0.12734530938123753,
+        "posteriorRate": 0.12279863278634437,
+        "lift": 1.2277434428142537,
+        "averagePayoutYen": 26119.35728542914,
+        "medianPayoutYen": 7410
+      },
+      "validation": {
+        "count": 688,
+        "highPayoutCount": 90,
+        "observedRate": 0.1308139534883721,
+        "posteriorRate": 0.11215207197053555,
+        "lift": 1.2969557324396035,
+        "averagePayoutYen": 24494.6511627907,
+        "medianPayoutYen": 8580
+      },
+      "robustLift": 1.2277434428142537,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
       "betType": "ワイド",
       "conditions": [
-        "raceBand=late",
-        "going=不良"
+        "venue=10",
+        "field=large"
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 1832,
-        "highPayoutCount": 236,
-        "observedRate": 0.12882096069868995,
-        "posteriorRate": 0.12266508339888506,
-        "lift": 1.225303625244115,
-        "averagePayoutYen": 2264.759825327511,
-        "medianPayoutYen": 1080
+        "count": 11721,
+        "highPayoutCount": 1452,
+        "observedRate": 0.12388021499872025,
+        "posteriorRate": 0.12291092806067973,
+        "lift": 1.2267918259576085,
+        "averagePayoutYen": 2256.9848988994113,
+        "medianPayoutYen": 1020
       },
       "validation": {
-        "count": 632,
-        "highPayoutCount": 88,
-        "observedRate": 0.13924050632911392,
-        "posteriorRate": 0.11858253657914808,
-        "lift": 1.2823773129071225,
-        "averagePayoutYen": 2351.4398734177216,
-        "medianPayoutYen": 1330
+        "count": 4019,
+        "highPayoutCount": 549,
+        "observedRate": 0.1366011445633242,
+        "posteriorRate": 0.13171839597424112,
+        "lift": 1.424431350202588,
+        "averagePayoutYen": 2605.260014929087,
+        "medianPayoutYen": 1120
       },
-      "robustLift": 1.225303625244115,
+      "robustLift": 1.2267918259576085,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "3連複",
+      "conditions": [
+        "venue=10",
+        "class=conditions"
+      ],
+      "highPayoutThresholdYen": 47210,
+      "discovery": {
+        "count": 2475,
+        "highPayoutCount": 315,
+        "observedRate": 0.12727272727272726,
+        "posteriorRate": 0.12269240051192096,
+        "lift": 1.2266813301882482,
+        "averagePayoutYen": 25449.753535353535,
+        "medianPayoutYen": 7310
+      },
+      "validation": {
+        "count": 909,
+        "highPayoutCount": 110,
+        "observedRate": 0.12101210121012101,
+        "posteriorRate": 0.10875561497586674,
+        "lift": 1.2576782202918333,
+        "averagePayoutYen": 25466.105610561055,
+        "medianPayoutYen": 7470
+      },
+      "robustLift": 1.2266813301882482,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -2225,54 +2169,110 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "surface=芝",
         "field=large"
       ],
-      "highPayoutThresholdYen": 12330,
+      "highPayoutThresholdYen": 12350,
       "discovery": {
-        "count": 21996,
-        "highPayoutCount": 2705,
-        "observedRate": 0.12297690489179851,
-        "posteriorRate": 0.12246674018891952,
-        "lift": 1.2243787597406017,
-        "averagePayoutYen": 6737.309056192035,
+        "count": 23115,
+        "highPayoutCount": 2847,
+        "observedRate": 0.12316677482154445,
+        "posteriorRate": 0.122678171212468,
+        "lift": 1.2256782785255957,
+        "averagePayoutYen": 6742.508760545101,
         "medianPayoutYen": 2350
       },
       "validation": {
         "count": 7053,
         "highPayoutCount": 892,
         "observedRate": 0.1264710052459946,
-        "posteriorRate": 0.12428163089826134,
-        "lift": 1.3306624332892594,
+        "posteriorRate": 0.12426989871192913,
+        "lift": 1.3330663564297722,
         "averagePayoutYen": 7052.044520062384,
         "medianPayoutYen": 2370
       },
-      "robustLift": 1.2243787597406017,
+      "robustLift": 1.2256782785255957,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "ワイド",
+      "conditions": [
+        "field=large",
+        "weather=小雨"
+      ],
+      "highPayoutThresholdYen": 4270,
+      "discovery": {
+        "count": 5408,
+        "highPayoutCount": 675,
+        "observedRate": 0.12481508875739646,
+        "posteriorRate": 0.12273094986959493,
+        "lift": 1.2249954374903076,
+        "averagePayoutYen": 2239.0625,
+        "medianPayoutYen": 1000
+      },
+      "validation": {
+        "count": 1985,
+        "highPayoutCount": 244,
+        "observedRate": 0.12292191435768261,
+        "posteriorRate": 0.11679494221633627,
+        "lift": 1.263045879108517,
+        "averagePayoutYen": 2165.9798488664987,
+        "medianPayoutYen": 1010
+      },
+      "robustLift": 1.2249954374903076,
       "usePolicy": "volatility_prior_only"
     },
     {
       "betType": "馬連",
       "conditions": [
-        "surface=芝",
-        "class=open_graded"
+        "field=large",
+        "class=conditions"
       ],
-      "highPayoutThresholdYen": 12330,
+      "highPayoutThresholdYen": 12350,
       "discovery": {
-        "count": 3128,
-        "highPayoutCount": 394,
-        "observedRate": 0.12595907928388747,
-        "posteriorRate": 0.12238472637539516,
-        "lift": 1.2235588149039085,
-        "averagePayoutYen": 6193.858695652174,
-        "medianPayoutYen": 2270
+        "count": 22778,
+        "highPayoutCount": 2804,
+        "observedRate": 0.12310123803670209,
+        "posteriorRate": 0.12260696851887756,
+        "lift": 1.224966892025098,
+        "averagePayoutYen": 6864.488980595312,
+        "medianPayoutYen": 2420
       },
       "validation": {
-        "count": 1247,
-        "highPayoutCount": 153,
-        "observedRate": 0.1226944667201283,
-        "posteriorRate": 0.11430976426706813,
-        "lift": 1.2238953413224514,
-        "averagePayoutYen": 6638.420208500401,
-        "medianPayoutYen": 2430
+        "count": 6761,
+        "highPayoutCount": 856,
+        "observedRate": 0.12660848986836268,
+        "posteriorRate": 0.12430939883916826,
+        "lift": 1.3334900816540056,
+        "averagePayoutYen": 6929.587339151013,
+        "medianPayoutYen": 2540
       },
-      "robustLift": 1.2235588149039085,
+      "robustLift": 1.224966892025098,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "ワイド",
+      "conditions": [
+        "venue=03",
+        "raceBand=late"
+      ],
+      "highPayoutThresholdYen": 4270,
+      "discovery": {
+        "count": 4636,
+        "highPayoutCount": 580,
+        "observedRate": 0.12510785159620363,
+        "posteriorRate": 0.12268194155560103,
+        "lift": 1.2245062783898084,
+        "averagePayoutYen": 2229.3226919758413,
+        "medianPayoutYen": 1080
+      },
+      "validation": {
+        "count": 1468,
+        "highPayoutCount": 181,
+        "observedRate": 0.12329700272479564,
+        "posteriorRate": 0.11546515823556688,
+        "lift": 1.2486653062417206,
+        "averagePayoutYen": 2177.302452316076,
+        "medianPayoutYen": 1150
+      },
+      "robustLift": 1.2245062783898084,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -2304,59 +2304,59 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
+      "betType": "馬連",
+      "conditions": [
+        "surface=芝",
+        "class=open_graded"
+      ],
+      "highPayoutThresholdYen": 12350,
+      "discovery": {
+        "count": 3263,
+        "highPayoutCount": 410,
+        "observedRate": 0.1256512411890898,
+        "posteriorRate": 0.12225485335701089,
+        "lift": 1.2214489075199977,
+        "averagePayoutYen": 6204.79619981612,
+        "medianPayoutYen": 2290
+      },
+      "validation": {
+        "count": 1247,
+        "highPayoutCount": 153,
+        "observedRate": 0.1226944667201283,
+        "posteriorRate": 0.11425904119702388,
+        "lift": 1.2256780227266297,
+        "averagePayoutYen": 6638.420208500401,
+        "medianPayoutYen": 2430
+      },
+      "robustLift": 1.2214489075199977,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
       "betType": "3連複",
       "conditions": [
         "field=large",
         "weather=晴"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 28723,
-        "highPayoutCount": 3523,
-        "observedRate": 0.12265431883856143,
-        "posteriorRate": 0.12226705333640894,
-        "lift": 1.2224236123543222,
-        "averagePayoutYen": 28749.91505065627,
+        "count": 29194,
+        "highPayoutCount": 3577,
+        "observedRate": 0.12252517640611084,
+        "posteriorRate": 0.12214622117340085,
+        "lift": 1.2212206170984257,
+        "averagePayoutYen": 28631.411591422897,
         "medianPayoutYen": 6600
       },
       "validation": {
         "count": 9557,
-        "highPayoutCount": 1048,
-        "observedRate": 0.10965784241916919,
-        "posteriorRate": 0.10850298527527474,
-        "lift": 1.2553995504313935,
+        "highPayoutCount": 1049,
+        "observedRate": 0.10976247776498901,
+        "posteriorRate": 0.10860461981714191,
+        "lift": 1.255932073000589,
         "averagePayoutYen": 25387.523281364443,
         "medianPayoutYen": 6550
       },
-      "robustLift": 1.2224236123543222,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "馬連",
-      "conditions": [
-        "field=large",
-        "going=重"
-      ],
-      "highPayoutThresholdYen": 12330,
-      "discovery": {
-        "count": 3543,
-        "highPayoutCount": 444,
-        "observedRate": 0.12531752751905165,
-        "posteriorRate": 0.12218941065791086,
-        "lift": 1.2216061180691404,
-        "averagePayoutYen": 6911.532599491956,
-        "medianPayoutYen": 2150
-      },
-      "validation": {
-        "count": 1399,
-        "highPayoutCount": 185,
-        "observedRate": 0.1322373123659757,
-        "posteriorRate": 0.12201114174542814,
-        "lift": 1.3063526893711164,
-        "averagePayoutYen": 6875.039313795568,
-        "medianPayoutYen": 2340
-      },
-      "robustLift": 1.2216061180691404,
+      "robustLift": 1.2212206170984257,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -2388,31 +2388,31 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "ワイド",
+      "betType": "馬連",
       "conditions": [
-        "venue=05",
+        "distance=mile",
         "class=open_graded"
       ],
-      "highPayoutThresholdYen": 4270,
+      "highPayoutThresholdYen": 12350,
       "discovery": {
-        "count": 2252,
-        "highPayoutCount": 286,
-        "observedRate": 0.1269982238010657,
-        "posteriorRate": 0.12211299944992732,
-        "lift": 1.2197888491941347,
-        "averagePayoutYen": 2364.347246891652,
-        "medianPayoutYen": 1050
+        "count": 1352,
+        "highPayoutCount": 177,
+        "observedRate": 0.1309171597633136,
+        "posteriorRate": 0.12259449955854859,
+        "lift": 1.2248423145743585,
+        "averagePayoutYen": 6864.2307692307695,
+        "medianPayoutYen": 2360
       },
       "validation": {
-        "count": 1028,
-        "highPayoutCount": 129,
-        "observedRate": 0.1254863813229572,
-        "posteriorRate": 0.11468287395785054,
-        "lift": 1.2402055141093622,
-        "averagePayoutYen": 2449.795719844358,
-        "medianPayoutYen": 1010
+        "count": 563,
+        "highPayoutCount": 74,
+        "observedRate": 0.13143872113676733,
+        "posteriorRate": 0.11346241295503359,
+        "lift": 1.2171324431535686,
+        "averagePayoutYen": 6982.6998223801065,
+        "medianPayoutYen": 2420
       },
-      "robustLift": 1.2197888491941347,
+      "robustLift": 1.2171324431535686,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -2420,54 +2420,26 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "conditions": [
         "field=large"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 45258,
-        "highPayoutCount": 5523,
-        "observedRate": 0.12203367360466658,
-        "posteriorRate": 0.1217931312480851,
-        "lift": 1.2176853485671895,
-        "averagePayoutYen": 27844.421759688896,
-        "medianPayoutYen": 6700
+        "count": 46136,
+        "highPayoutCount": 5627,
+        "observedRate": 0.12196549332408531,
+        "posteriorRate": 0.12173020609664131,
+        "lift": 1.2170612891725843,
+        "averagePayoutYen": 27773.16607421536,
+        "medianPayoutYen": 6690
       },
       "validation": {
         "count": 15641,
-        "highPayoutCount": 1792,
-        "observedRate": 0.11457067962406496,
-        "posteriorRate": 0.11369893581026194,
-        "lift": 1.3155176563907613,
+        "highPayoutCount": 1793,
+        "observedRate": 0.11463461415510517,
+        "posteriorRate": 0.11376226141509177,
+        "lift": 1.3155763820070905,
         "averagePayoutYen": 26132.868103062465,
         "medianPayoutYen": 6760
       },
-      "robustLift": 1.2176853485671895,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "ワイド",
-      "conditions": [
-        "distance=sprint",
-        "going=重"
-      ],
-      "highPayoutThresholdYen": 4270,
-      "discovery": {
-        "count": 3625,
-        "highPayoutCount": 454,
-        "observedRate": 0.12524137931034482,
-        "posteriorRate": 0.12219514532998788,
-        "lift": 1.2206094058011827,
-        "averagePayoutYen": 2131.445517241379,
-        "medianPayoutYen": 900
-      },
-      "validation": {
-        "count": 1412,
-        "highPayoutCount": 169,
-        "observedRate": 0.11968838526912182,
-        "posteriorRate": 0.11257083232614834,
-        "lift": 1.2173654370580294,
-        "averagePayoutYen": 2177.096317280453,
-        "medianPayoutYen": 980
-      },
-      "robustLift": 1.2173654370580294,
+      "robustLift": 1.2170612891725843,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -2499,59 +2471,31 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "複勝",
+      "betType": "ワイド",
       "conditions": [
-        "distance=sprint",
-        "raceBand=late"
+        "venue=08",
+        "field=large"
       ],
-      "highPayoutThresholdYen": 690,
+      "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 13443,
-        "highPayoutCount": 1657,
-        "observedRate": 0.12326117682065016,
-        "posteriorRate": 0.12245093224546114,
-        "lift": 1.2163996275327913,
-        "averagePayoutYen": 395.37454437253587,
-        "medianPayoutYen": 240
+        "count": 20174,
+        "highPayoutCount": 2467,
+        "observedRate": 0.12228611083572916,
+        "posteriorRate": 0.1217516906176631,
+        "lift": 1.215221308658002,
+        "averagePayoutYen": 2250.2220680083274,
+        "medianPayoutYen": 950
       },
       "validation": {
-        "count": 5312,
-        "highPayoutCount": 596,
-        "observedRate": 0.11219879518072289,
-        "posteriorRate": 0.1103012171838915,
-        "lift": 1.223647293540861,
-        "averagePayoutYen": 382.98381024096386,
-        "medianPayoutYen": 250
+        "count": 4271,
+        "highPayoutCount": 509,
+        "observedRate": 0.11917583704050573,
+        "posteriorRate": 0.11637716021957568,
+        "lift": 1.2585278938314082,
+        "averagePayoutYen": 2249.20159213299,
+        "medianPayoutYen": 980
       },
-      "robustLift": 1.2163996275327913,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "馬連",
-      "conditions": [
-        "distance=mile",
-        "class=open_graded"
-      ],
-      "highPayoutThresholdYen": 12330,
-      "discovery": {
-        "count": 1303,
-        "highPayoutCount": 172,
-        "observedRate": 0.13200306983883345,
-        "posteriorRate": 0.12313465739874302,
-        "lift": 1.2310563576231908,
-        "averagePayoutYen": 6908.6185725249425,
-        "medianPayoutYen": 2350
-      },
-      "validation": {
-        "count": 563,
-        "highPayoutCount": 74,
-        "observedRate": 0.13143872113676733,
-        "posteriorRate": 0.11354577438811667,
-        "lift": 1.2157154307114768,
-        "averagePayoutYen": 6982.6998223801065,
-        "medianPayoutYen": 2420
-      },
-      "robustLift": 1.2157154307114768,
+      "robustLift": 1.215221308658002,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -2588,26 +2532,54 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "field=large",
         "going=良"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 32844,
-        "highPayoutCount": 3992,
-        "observedRate": 0.12154426988186579,
-        "posteriorRate": 0.12122151210562256,
-        "lift": 1.2119703115400244,
-        "averagePayoutYen": 27718.735233223724,
+        "count": 33565,
+        "highPayoutCount": 4081,
+        "observedRate": 0.12158498435870699,
+        "posteriorRate": 0.12126845417651444,
+        "lift": 1.2124446832765803,
+        "averagePayoutYen": 27629.429465216745,
         "medianPayoutYen": 6670
       },
       "validation": {
         "count": 10872,
-        "highPayoutCount": 1233,
-        "observedRate": 0.11341059602649006,
-        "posteriorRate": 0.11222428094560657,
-        "lift": 1.2984556276416621,
+        "highPayoutCount": 1234,
+        "observedRate": 0.11350257542310523,
+        "posteriorRate": 0.11231416298812841,
+        "lift": 1.298830195128971,
         "averagePayoutYen": 25991.545253863136,
         "medianPayoutYen": 6770
       },
-      "robustLift": 1.2119703115400244,
+      "robustLift": 1.2124446832765803,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "複勝",
+      "conditions": [
+        "distance=sprint",
+        "raceBand=late"
+      ],
+      "highPayoutThresholdYen": 690,
+      "discovery": {
+        "count": 14191,
+        "highPayoutCount": 1744,
+        "observedRate": 0.1228947924741033,
+        "posteriorRate": 0.122140794905136,
+        "lift": 1.2124258629648186,
+        "averagePayoutYen": 394.403495172997,
+        "medianPayoutYen": 240
+      },
+      "validation": {
+        "count": 5312,
+        "highPayoutCount": 596,
+        "observedRate": 0.11219879518072289,
+        "posteriorRate": 0.1103012171838915,
+        "lift": 1.223647293540861,
+        "averagePayoutYen": 382.98381024096386,
+        "medianPayoutYen": 250
+      },
+      "robustLift": 1.2124258629648186,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -2618,12 +2590,12 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       ],
       "highPayoutThresholdYen": 690,
       "discovery": {
-        "count": 8798,
-        "highPayoutCount": 1083,
-        "observedRate": 0.12309615821777677,
-        "posteriorRate": 0.12189001379850126,
-        "lift": 1.21082759163689,
-        "averagePayoutYen": 397.9688565583087,
+        "count": 9140,
+        "highPayoutCount": 1127,
+        "observedRate": 0.12330415754923414,
+        "posteriorRate": 0.1221338607833354,
+        "lift": 1.2123570316737293,
+        "averagePayoutYen": 397.19365426695845,
         "medianPayoutYen": 250
       },
       "validation": {
@@ -2635,119 +2607,91 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "averagePayoutYen": 388.6409994900561,
         "medianPayoutYen": 250
       },
-      "robustLift": 1.21082759163689,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "ワイド",
-      "conditions": [
-        "venue=03",
-        "raceBand=late"
-      ],
-      "highPayoutThresholdYen": 4270,
-      "discovery": {
-        "count": 4444,
-        "highPayoutCount": 549,
-        "observedRate": 0.12353735373537354,
-        "posteriorRate": 0.12116807736371359,
-        "lift": 1.2103500062428287,
-        "averagePayoutYen": 2213.9311431143115,
-        "medianPayoutYen": 1090
-      },
-      "validation": {
-        "count": 1468,
-        "highPayoutCount": 181,
-        "observedRate": 0.12329700272479564,
-        "posteriorRate": 0.11546515823556688,
-        "lift": 1.2486653062417206,
-        "averagePayoutYen": 2177.302452316076,
-        "medianPayoutYen": 1150
-      },
-      "robustLift": 1.2103500062428287,
+      "robustLift": 1.2123570316737293,
       "usePolicy": "volatility_prior_only"
     },
     {
       "betType": "馬連",
       "conditions": [
-        "raceBand=late",
+        "field=large",
         "going=重"
       ],
-      "highPayoutThresholdYen": 12330,
+      "highPayoutThresholdYen": 12350,
       "discovery": {
-        "count": 1235,
-        "highPayoutCount": 160,
-        "observedRate": 0.12955465587044535,
-        "posteriorRate": 0.12104425780399634,
-        "lift": 1.2101572885434557,
-        "averagePayoutYen": 6716.931174089069,
-        "medianPayoutYen": 2350
+        "count": 3619,
+        "highPayoutCount": 449,
+        "observedRate": 0.12406742193976236,
+        "posteriorRate": 0.12115683738345036,
+        "lift": 1.2104786239319218,
+        "averagePayoutYen": 6844.819010776458,
+        "medianPayoutYen": 2140
       },
       "validation": {
-        "count": 615,
-        "highPayoutCount": 82,
-        "observedRate": 0.13333333333333333,
-        "posteriorRate": 0.11542525396822245,
-        "lift": 1.235838701168302,
-        "averagePayoutYen": 6894.715447154472,
-        "medianPayoutYen": 2520
+        "count": 1399,
+        "highPayoutCount": 185,
+        "observedRate": 0.1322373123659757,
+        "posteriorRate": 0.12196447865782029,
+        "lift": 1.3083356859824162,
+        "averagePayoutYen": 6875.039313795568,
+        "medianPayoutYen": 2340
       },
-      "robustLift": 1.2101572885434557,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "3連複",
-      "conditions": [
-        "weather=晴",
-        "class=open_graded"
-      ],
-      "highPayoutThresholdYen": 47270,
-      "discovery": {
-        "count": 2550,
-        "highPayoutCount": 319,
-        "observedRate": 0.12509803921568627,
-        "posteriorRate": 0.12098691791799304,
-        "lift": 1.209624843431863,
-        "averagePayoutYen": 28660.4431372549,
-        "medianPayoutYen": 6900
-      },
-      "validation": {
-        "count": 1056,
-        "highPayoutCount": 132,
-        "observedRate": 0.125,
-        "posteriorRate": 0.11260573452020445,
-        "lift": 1.302869115849804,
-        "averagePayoutYen": 27131.19318181818,
-        "medianPayoutYen": 7610
-      },
-      "robustLift": 1.209624843431863,
+      "robustLift": 1.2104786239319218,
       "usePolicy": "volatility_prior_only"
     },
     {
       "betType": "ワイド",
       "conditions": [
-        "venue=08",
-        "field=large"
+        "distance=sprint",
+        "going=重"
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 19365,
-        "highPayoutCount": 2355,
-        "observedRate": 0.12161115414407436,
-        "posteriorRate": 0.1210699710287541,
-        "lift": 1.2093700203776223,
-        "averagePayoutYen": 2247.8404337722695,
-        "medianPayoutYen": 950
+        "count": 3724,
+        "highPayoutCount": 462,
+        "observedRate": 0.12406015037593984,
+        "posteriorRate": 0.12123448196722701,
+        "lift": 1.2100589739927206,
+        "averagePayoutYen": 2117.3711063372716,
+        "medianPayoutYen": 900
       },
       "validation": {
-        "count": 4271,
-        "highPayoutCount": 509,
-        "observedRate": 0.11917583704050573,
-        "posteriorRate": 0.11637716021957568,
-        "lift": 1.2585278938314082,
-        "averagePayoutYen": 2249.20159213299,
+        "count": 1412,
+        "highPayoutCount": 169,
+        "observedRate": 0.11968838526912182,
+        "posteriorRate": 0.11257083232614834,
+        "lift": 1.2173654370580294,
+        "averagePayoutYen": 2177.096317280453,
         "medianPayoutYen": 980
       },
-      "robustLift": 1.2093700203776223,
+      "robustLift": 1.2100589739927206,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "複勝",
+      "conditions": [
+        "field=large",
+        "weather=雨"
+      ],
+      "highPayoutThresholdYen": 690,
+      "discovery": {
+        "count": 7459,
+        "highPayoutCount": 919,
+        "observedRate": 0.12320686419091031,
+        "posteriorRate": 0.12179550420295931,
+        "lift": 1.208998348202978,
+        "averagePayoutYen": 395.2594181525674,
+        "medianPayoutYen": 230
+      },
+      "validation": {
+        "count": 2405,
+        "highPayoutCount": 277,
+        "observedRate": 0.11517671517671518,
+        "posteriorRate": 0.11086770198718669,
+        "lift": 1.2299316992263263,
+        "averagePayoutYen": 386.08316008316007,
+        "medianPayoutYen": 220
+      },
+      "robustLift": 1.208998348202978,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -2756,15 +2700,15 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "distance=mile",
         "class=open_graded"
       ],
-      "highPayoutThresholdYen": 24600,
+      "highPayoutThresholdYen": 24590,
       "discovery": {
-        "count": 1303,
-        "highPayoutCount": 171,
-        "observedRate": 0.13123561013046814,
-        "posteriorRate": 0.12257768748315269,
-        "lift": 1.225591307264269,
-        "averagePayoutYen": 13796.983883346124,
-        "medianPayoutYen": 4530
+        "count": 1318,
+        "highPayoutCount": 172,
+        "observedRate": 0.13050075872534142,
+        "posteriorRate": 0.12211674439242177,
+        "lift": 1.2209661968174406,
+        "averagePayoutYen": 13721.60091047041,
+        "medianPayoutYen": 4520
       },
       "validation": {
         "count": 564,
@@ -2779,31 +2723,31 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "馬単",
+      "betType": "馬連",
       "conditions": [
-        "field=large",
+        "raceBand=late",
         "going=重"
       ],
-      "highPayoutThresholdYen": 24600,
+      "highPayoutThresholdYen": 12350,
       "discovery": {
-        "count": 3534,
-        "highPayoutCount": 437,
-        "observedRate": 0.12365591397849462,
-        "posteriorRate": 0.1207257239792078,
-        "lift": 1.2070744758701584,
-        "averagePayoutYen": 14337.382569326543,
-        "medianPayoutYen": 4210
+        "count": 1263,
+        "highPayoutCount": 163,
+        "observedRate": 0.1290577988915281,
+        "posteriorRate": 0.12084232171436869,
+        "lift": 1.2073362961645664,
+        "averagePayoutYen": 6702.414885193983,
+        "medianPayoutYen": 2380
       },
       "validation": {
-        "count": 1401,
-        "highPayoutCount": 176,
-        "observedRate": 0.1256245538900785,
-        "posteriorRate": 0.11669994895970498,
-        "lift": 1.2727218746169853,
-        "averagePayoutYen": 13733.433261955746,
-        "medianPayoutYen": 4410
+        "count": 615,
+        "highPayoutCount": 82,
+        "observedRate": 0.13333333333333333,
+        "posteriorRate": 0.11534578024322933,
+        "lift": 1.2373356749475695,
+        "averagePayoutYen": 6894.715447154472,
+        "medianPayoutYen": 2520
       },
-      "robustLift": 1.2070744758701584,
+      "robustLift": 1.2073362961645664,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -2840,15 +2784,15 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "distance=sprint",
         "class=conditions"
       ],
-      "highPayoutThresholdYen": 24600,
+      "highPayoutThresholdYen": 24590,
       "discovery": {
-        "count": 7366,
-        "highPayoutCount": 913,
-        "observedRate": 0.12394786858539235,
-        "posteriorRate": 0.12242659172795885,
-        "lift": 1.2240805784527506,
-        "averagePayoutYen": 13568.692641868043,
-        "medianPayoutYen": 4820
+        "count": 7558,
+        "highPayoutCount": 938,
+        "observedRate": 0.12410690658904472,
+        "posteriorRate": 0.12261209249260645,
+        "lift": 1.2259188614908427,
+        "averagePayoutYen": 13545.222281026727,
+        "medianPayoutYen": 4770
       },
       "validation": {
         "count": 2500,
@@ -2860,6 +2804,62 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "medianPayoutYen": 4710
       },
       "robustLift": 1.2063656536420646,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "3連複",
+      "conditions": [
+        "weather=晴",
+        "class=open_graded"
+      ],
+      "highPayoutThresholdYen": 47210,
+      "discovery": {
+        "count": 2584,
+        "highPayoutCount": 322,
+        "observedRate": 0.12461300309597523,
+        "posteriorRate": 0.12062577546140235,
+        "lift": 1.2060191672882388,
+        "averagePayoutYen": 28677.1439628483,
+        "medianPayoutYen": 6830
+      },
+      "validation": {
+        "count": 1056,
+        "highPayoutCount": 132,
+        "observedRate": 0.125,
+        "posteriorRate": 0.11261996240423923,
+        "lift": 1.302366539119172,
+        "averagePayoutYen": 27131.19318181818,
+        "medianPayoutYen": 7610
+      },
+      "robustLift": 1.2060191672882388,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "3連複",
+      "conditions": [
+        "venue=06",
+        "field=large"
+      ],
+      "highPayoutThresholdYen": 47210,
+      "discovery": {
+        "count": 6916,
+        "highPayoutCount": 844,
+        "observedRate": 0.12203585887796414,
+        "posteriorRate": 0.12055149562068027,
+        "lift": 1.2052765158001029,
+        "averagePayoutYen": 28239.47946790052,
+        "medianPayoutYen": 5950
+      },
+      "validation": {
+        "count": 2671,
+        "highPayoutCount": 305,
+        "observedRate": 0.1141894421564957,
+        "posteriorRate": 0.10981919315704705,
+        "lift": 1.2699777150291387,
+        "averagePayoutYen": 24576.91875701984,
+        "medianPayoutYen": 6220
+      },
+      "robustLift": 1.2052765158001029,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -2890,34 +2890,6 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "3連複",
-      "conditions": [
-        "distance=sprint",
-        "going=重"
-      ],
-      "highPayoutThresholdYen": 47270,
-      "discovery": {
-        "count": 1213,
-        "highPayoutCount": 157,
-        "observedRate": 0.12943116240725475,
-        "posteriorRate": 0.1208465263571972,
-        "lift": 1.2082212113477568,
-        "averagePayoutYen": 24470.527617477328,
-        "medianPayoutYen": 5730
-      },
-      "validation": {
-        "count": 472,
-        "highPayoutCount": 58,
-        "observedRate": 0.1228813559322034,
-        "posteriorRate": 0.10413016760641781,
-        "lift": 1.204805243540444,
-        "averagePayoutYen": 22860.741525423728,
-        "medianPayoutYen": 6990
-      },
-      "robustLift": 1.204805243540444,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
       "betType": "複勝",
       "conditions": [
         "going=不良",
@@ -2925,12 +2897,12 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       ],
       "highPayoutThresholdYen": 690,
       "discovery": {
-        "count": 2499,
-        "highPayoutCount": 321,
-        "observedRate": 0.12845138055222088,
-        "posteriorRate": 0.12381905578474976,
-        "lift": 1.2299902546770056,
-        "averagePayoutYen": 410.5202080832333,
+        "count": 2559,
+        "highPayoutCount": 334,
+        "observedRate": 0.1305197342711997,
+        "posteriorRate": 0.12565231054310336,
+        "lift": 1.247282786738597,
+        "averagePayoutYen": 413.56389214536927,
         "medianPayoutYen": 240
       },
       "validation": {
@@ -2951,15 +2923,15 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "field=large",
         "weather=雨"
       ],
-      "highPayoutThresholdYen": 24600,
+      "highPayoutThresholdYen": 24590,
       "discovery": {
-        "count": 2391,
-        "highPayoutCount": 319,
-        "observedRate": 0.13341698034295274,
-        "posteriorRate": 0.12764011433141623,
-        "lift": 1.2762079118542828,
-        "averagePayoutYen": 13932.333751568382,
-        "medianPayoutYen": 4940
+        "count": 2424,
+        "highPayoutCount": 325,
+        "observedRate": 0.13407590759075907,
+        "posteriorRate": 0.1282517925121145,
+        "lift": 1.2823065675197736,
+        "averagePayoutYen": 13958.28795379538,
+        "medianPayoutYen": 4950
       },
       "validation": {
         "count": 803,
@@ -2974,59 +2946,59 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "ワイド",
+      "betType": "3連複",
       "conditions": [
-        "venue=05",
-        "field=large"
+        "distance=sprint",
+        "going=重"
       ],
-      "highPayoutThresholdYen": 4270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 20558,
-        "highPayoutCount": 2485,
-        "observedRate": 0.12087751726821676,
-        "posteriorRate": 0.12038441326271251,
-        "lift": 1.2025219720759437,
-        "averagePayoutYen": 2207.1772545967506,
-        "medianPayoutYen": 950
+        "count": 1236,
+        "highPayoutCount": 159,
+        "observedRate": 0.12864077669902912,
+        "posteriorRate": 0.12039740295101661,
+        "lift": 1.2037358938854072,
+        "averagePayoutYen": 24284.05339805825,
+        "medianPayoutYen": 5720
       },
       "validation": {
-        "count": 7847,
-        "highPayoutCount": 893,
-        "observedRate": 0.11380145278450363,
-        "posteriorRate": 0.11252371287978861,
-        "lift": 1.2168558771282827,
-        "averagePayoutYen": 2202.441697463999,
-        "medianPayoutYen": 880
+        "count": 472,
+        "highPayoutCount": 58,
+        "observedRate": 0.1228813559322034,
+        "posteriorRate": 0.10415294393106608,
+        "lift": 1.204451735116809,
+        "averagePayoutYen": 22860.741525423728,
+        "medianPayoutYen": 6990
       },
-      "robustLift": 1.2025219720759437,
+      "robustLift": 1.2037358938854072,
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "3連複",
+      "betType": "馬単",
       "conditions": [
-        "venue=06",
-        "field=large"
+        "field=large",
+        "going=重"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 24590,
       "discovery": {
-        "count": 6859,
-        "highPayoutCount": 835,
-        "observedRate": 0.12173786266219566,
-        "posteriorRate": 0.12026227743577644,
-        "lift": 1.2023799020371266,
-        "averagePayoutYen": 28324.21927394664,
-        "medianPayoutYen": 5950
+        "count": 3568,
+        "highPayoutCount": 439,
+        "observedRate": 0.12303811659192825,
+        "posteriorRate": 0.12020851556180501,
+        "lift": 1.2018870532522594,
+        "averagePayoutYen": 14268.315582959642,
+        "medianPayoutYen": 4210
       },
       "validation": {
-        "count": 2671,
-        "highPayoutCount": 305,
-        "observedRate": 0.1141894421564957,
-        "posteriorRate": 0.10981221157787391,
-        "lift": 1.2705475402081363,
-        "averagePayoutYen": 24576.91875701984,
-        "medianPayoutYen": 6220
+        "count": 1401,
+        "highPayoutCount": 176,
+        "observedRate": 0.1256245538900785,
+        "posteriorRate": 0.11669994895970498,
+        "lift": 1.2727218746169853,
+        "averagePayoutYen": 13733.433261955746,
+        "medianPayoutYen": 4410
       },
-      "robustLift": 1.2023799020371266,
+      "robustLift": 1.2018870532522594,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -3037,13 +3009,13 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 2495,
-        "highPayoutCount": 333,
-        "observedRate": 0.13346693386773548,
-        "posteriorRate": 0.127898155087212,
-        "lift": 1.277576868233877,
-        "averagePayoutYen": 2515.755511022044,
-        "medianPayoutYen": 1050
+        "count": 2555,
+        "highPayoutCount": 348,
+        "observedRate": 0.13620352250489237,
+        "posteriorRate": 0.13030914953504646,
+        "lift": 1.3006345490952647,
+        "averagePayoutYen": 2542.5479452054797,
+        "medianPayoutYen": 1060
       },
       "validation": {
         "count": 907,
@@ -3060,29 +3032,29 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
     {
       "betType": "3連複",
       "conditions": [
-        "venue=10",
-        "raceBand=late"
+        "distance=mile",
+        "field=large"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 1590,
-        "highPayoutCount": 201,
-        "observedRate": 0.12641509433962264,
-        "posteriorRate": 0.12010052614826737,
-        "lift": 1.200762715822327,
-        "averagePayoutYen": 25598.081761006288,
-        "medianPayoutYen": 7320
+        "count": 12153,
+        "highPayoutCount": 1469,
+        "observedRate": 0.12087550399078417,
+        "posteriorRate": 0.12005136264308582,
+        "lift": 1.2002761752438271,
+        "averagePayoutYen": 28973.671521435037,
+        "medianPayoutYen": 6750
       },
       "validation": {
-        "count": 648,
-        "highPayoutCount": 76,
-        "observedRate": 0.11728395061728394,
-        "posteriorRate": 0.10384540323470219,
-        "lift": 1.2015104672416748,
-        "averagePayoutYen": 26166.6512345679,
-        "medianPayoutYen": 7750
+        "count": 4607,
+        "highPayoutCount": 504,
+        "observedRate": 0.109398741046234,
+        "posteriorRate": 0.10715423174094306,
+        "lift": 1.2391594080231434,
+        "averagePayoutYen": 26173.911439114392,
+        "medianPayoutYen": 6590
       },
-      "robustLift": 1.200762715822327,
+      "robustLift": 1.2002761752438271,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -3091,15 +3063,15 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "surface=芝",
         "class=open_graded"
       ],
-      "highPayoutThresholdYen": 24600,
+      "highPayoutThresholdYen": 24590,
       "discovery": {
-        "count": 3141,
-        "highPayoutCount": 387,
-        "observedRate": 0.12320916905444126,
-        "posteriorRate": 0.12002405123101464,
-        "lift": 1.2000588106346075,
-        "averagePayoutYen": 12639.643425660617,
-        "medianPayoutYen": 4400
+        "count": 3199,
+        "highPayoutCount": 394,
+        "observedRate": 0.12316348859018443,
+        "posteriorRate": 0.12003466918232569,
+        "lift": 1.200148875954466,
+        "averagePayoutYen": 12634.673335417318,
+        "medianPayoutYen": 4360
       },
       "validation": {
         "count": 1249,
@@ -3110,35 +3082,35 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "averagePayoutYen": 13010.208166533226,
         "medianPayoutYen": 4620
       },
-      "robustLift": 1.2000588106346075,
+      "robustLift": 1.200148875954466,
       "usePolicy": "volatility_prior_only"
     },
     {
       "betType": "複勝",
       "conditions": [
         "field=large",
-        "weather=雨"
+        "going=不良"
       ],
       "highPayoutThresholdYen": 690,
       "discovery": {
-        "count": 7144,
-        "highPayoutCount": 873,
-        "observedRate": 0.12220044792833147,
-        "posteriorRate": 0.12079190846395402,
-        "lift": 1.199919263742273,
-        "averagePayoutYen": 394.2609182530795,
+        "count": 6344,
+        "highPayoutCount": 776,
+        "observedRate": 0.1223203026481715,
+        "posteriorRate": 0.12074377819277515,
+        "lift": 1.1985584307577832,
+        "averagePayoutYen": 402.8814627994956,
         "medianPayoutYen": 230
       },
       "validation": {
-        "count": 2405,
-        "highPayoutCount": 277,
-        "observedRate": 0.11517671517671518,
-        "posteriorRate": 0.11086770198718669,
-        "lift": 1.2299316992263263,
-        "averagePayoutYen": 386.08316008316007,
+        "count": 1886,
+        "highPayoutCount": 225,
+        "observedRate": 0.11930010604453871,
+        "posteriorRate": 0.113189720986076,
+        "lift": 1.2556914536160206,
+        "averagePayoutYen": 374.9893955461294,
         "medianPayoutYen": 220
       },
-      "robustLift": 1.199919263742273,
+      "robustLift": 1.1985584307577832,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -3149,13 +3121,13 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 5226,
-        "highPayoutCount": 671,
-        "observedRate": 0.1283964791427478,
-        "posteriorRate": 0.12592647126898357,
-        "lift": 1.2578816847034966,
-        "averagePayoutYen": 2278.4825870646764,
-        "medianPayoutYen": 1000
+        "count": 5460,
+        "highPayoutCount": 687,
+        "observedRate": 0.12582417582417582,
+        "posteriorRate": 0.12367356574321592,
+        "lift": 1.2344038234411907,
+        "averagePayoutYen": 2246.2948717948716,
+        "medianPayoutYen": 990
       },
       "validation": {
         "count": 1677,
@@ -3170,59 +3142,59 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
+      "betType": "ワイド",
+      "conditions": [
+        "venue=05",
+        "field=large"
+      ],
+      "highPayoutThresholdYen": 4270,
+      "discovery": {
+        "count": 21630,
+        "highPayoutCount": 2604,
+        "observedRate": 0.1203883495145631,
+        "posteriorRate": 0.11993196799952856,
+        "lift": 1.1970583928891492,
+        "averagePayoutYen": 2199.3892741562645,
+        "medianPayoutYen": 950
+      },
+      "validation": {
+        "count": 7847,
+        "highPayoutCount": 893,
+        "observedRate": 0.11380145278450363,
+        "posteriorRate": 0.11252371287978861,
+        "lift": 1.2168558771282827,
+        "averagePayoutYen": 2202.441697463999,
+        "medianPayoutYen": 880
+      },
+      "robustLift": 1.1970583928891492,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
       "betType": "馬連",
       "conditions": [
         "raceBand=late",
         "class=open_graded"
       ],
-      "highPayoutThresholdYen": 12330,
+      "highPayoutThresholdYen": 12350,
       "discovery": {
-        "count": 3949,
-        "highPayoutCount": 483,
-        "observedRate": 0.12230944542922259,
-        "posteriorRate": 0.11980485216676413,
-        "lift": 1.1977661533292012,
-        "averagePayoutYen": 6382.972904532793,
-        "medianPayoutYen": 2260
+        "count": 4114,
+        "highPayoutCount": 502,
+        "observedRate": 0.12202236266407389,
+        "posteriorRate": 0.11964564655015866,
+        "lift": 1.1953803080639367,
+        "averagePayoutYen": 6382.824501701507,
+        "medianPayoutYen": 2270
       },
       "validation": {
         "count": 1702,
         "highPayoutCount": 212,
         "observedRate": 0.1245593419506463,
-        "posteriorRate": 0.11748372305838693,
-        "lift": 1.2578783820814958,
+        "posteriorRate": 0.11744348091335183,
+        "lift": 1.259838100862334,
         "averagePayoutYen": 6670.793184488836,
         "medianPayoutYen": 2500
       },
-      "robustLift": 1.1977661533292012,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "3連複",
-      "conditions": [
-        "distance=mile",
-        "field=large"
-      ],
-      "highPayoutThresholdYen": 47270,
-      "discovery": {
-        "count": 12055,
-        "highPayoutCount": 1453,
-        "observedRate": 0.12053090004147657,
-        "posteriorRate": 0.11971406608123288,
-        "lift": 1.1968988956166076,
-        "averagePayoutYen": 28926.663625051846,
-        "medianPayoutYen": 6730
-      },
-      "validation": {
-        "count": 4607,
-        "highPayoutCount": 504,
-        "observedRate": 0.109398741046234,
-        "posteriorRate": 0.10714989679135269,
-        "lift": 1.239744067127408,
-        "averagePayoutYen": 26173.911439114392,
-        "medianPayoutYen": 6590
-      },
-      "robustLift": 1.1968988956166076,
+      "robustLift": 1.1953803080639367,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -3231,54 +3203,54 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "distance=sprint",
         "field=large"
       ],
-      "highPayoutThresholdYen": 12330,
+      "highPayoutThresholdYen": 12350,
       "discovery": {
-        "count": 12209,
-        "highPayoutCount": 1471,
-        "observedRate": 0.12048488819723155,
-        "posteriorRate": 0.11967989513651221,
-        "lift": 1.1965168775382011,
-        "averagePayoutYen": 6618.643623556392,
-        "medianPayoutYen": 2250
+        "count": 12974,
+        "highPayoutCount": 1562,
+        "observedRate": 0.12039463542469554,
+        "posteriorRate": 0.11964116173240552,
+        "lift": 1.1953355002252735,
+        "averagePayoutYen": 6581.3866193926315,
+        "medianPayoutYen": 2240
       },
       "validation": {
         "count": 3974,
-        "highPayoutCount": 478,
-        "observedRate": 0.12028183190739809,
-        "posteriorRate": 0.11727741577437818,
-        "lift": 1.2556694848328822,
+        "highPayoutCount": 477,
+        "observedRate": 0.12003019627579266,
+        "posteriorRate": 0.1170340958809121,
+        "lift": 1.2554465513460962,
         "averagePayoutYen": 6807.108706592853,
         "medianPayoutYen": 2380
       },
-      "robustLift": 1.1965168775382011,
+      "robustLift": 1.1953355002252735,
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "複勝",
+      "betType": "3連複",
       "conditions": [
-        "field=large",
-        "going=不良"
+        "venue=05",
+        "field=large"
       ],
-      "highPayoutThresholdYen": 690,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 6095,
-        "highPayoutCount": 744,
-        "observedRate": 0.12206726825266612,
-        "posteriorRate": 0.12044478366921373,
-        "lift": 1.1964710052171106,
-        "averagePayoutYen": 402.64315012305167,
-        "medianPayoutYen": 230
+        "count": 6859,
+        "highPayoutCount": 830,
+        "observedRate": 0.12100889342469748,
+        "posteriorRate": 0.11958280901249692,
+        "lift": 1.1955915656963967,
+        "averagePayoutYen": 27978.031783058756,
+        "medianPayoutYen": 6550
       },
       "validation": {
-        "count": 1886,
-        "highPayoutCount": 225,
-        "observedRate": 0.11930010604453871,
-        "posteriorRate": 0.113189720986076,
-        "lift": 1.2556914536160206,
-        "averagePayoutYen": 374.9893955461294,
-        "medianPayoutYen": 220
+        "count": 2618,
+        "highPayoutCount": 279,
+        "observedRate": 0.10656990068754775,
+        "posteriorRate": 0.10334722947434132,
+        "lift": 1.1951342435627235,
+        "averagePayoutYen": 25602.039724980903,
+        "medianPayoutYen": 5470
       },
-      "robustLift": 1.1964710052171106,
+      "robustLift": 1.1951342435627235,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -3287,26 +3259,26 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "going=良",
         "class=open_graded"
       ],
-      "highPayoutThresholdYen": 12330,
+      "highPayoutThresholdYen": 12350,
       "discovery": {
-        "count": 3207,
-        "highPayoutCount": 396,
-        "observedRate": 0.1234798877455566,
-        "posteriorRate": 0.1203161012381801,
-        "lift": 1.2028774390792194,
-        "averagePayoutYen": 6303.161833489242,
-        "medianPayoutYen": 2180
+        "count": 3347,
+        "highPayoutCount": 410,
+        "observedRate": 0.12249775918733194,
+        "posteriorRate": 0.11958539464061138,
+        "lift": 1.1947783309066158,
+        "averagePayoutYen": 6288.264117119808,
+        "medianPayoutYen": 2200
       },
       "validation": {
         "count": 1305,
         "highPayoutCount": 155,
         "observedRate": 0.11877394636015326,
-        "posteriorRate": 0.11174468596928977,
-        "lift": 1.1964314811797296,
+        "posteriorRate": 0.11169559278182865,
+        "lift": 1.1981794339761753,
         "averagePayoutYen": 6476.72030651341,
         "medianPayoutYen": 2420
       },
-      "robustLift": 1.1964314811797296,
+      "robustLift": 1.1947783309066158,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -3315,15 +3287,15 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "going=良",
         "class=open_graded"
       ],
-      "highPayoutThresholdYen": 24600,
+      "highPayoutThresholdYen": 24590,
       "discovery": {
-        "count": 3215,
-        "highPayoutCount": 395,
-        "observedRate": 0.12286158631415241,
-        "posteriorRate": 0.11978669462506711,
-        "lift": 1.197685603903888,
-        "averagePayoutYen": 12673.760497667185,
-        "medianPayoutYen": 4220
+        "count": 3272,
+        "highPayoutCount": 401,
+        "observedRate": 0.12255501222493888,
+        "posteriorRate": 0.11956740225488408,
+        "lift": 1.1954769767310178,
+        "averagePayoutYen": 12665.458435207824,
+        "medianPayoutYen": 4180
       },
       "validation": {
         "count": 1306,
@@ -3338,141 +3310,59 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "3連複",
-      "conditions": [
-        "venue=05",
-        "field=large"
-      ],
-      "highPayoutThresholdYen": 47270,
-      "discovery": {
-        "count": 6859,
-        "highPayoutCount": 829,
-        "observedRate": 0.12086309957719785,
-        "posteriorRate": 0.11944694926618818,
-        "lift": 1.1942282669144577,
-        "averagePayoutYen": 27978.031783058756,
-        "medianPayoutYen": 6550
-      },
-      "validation": {
-        "count": 2618,
-        "highPayoutCount": 279,
-        "observedRate": 0.10656990068754775,
-        "posteriorRate": 0.10334012922175695,
-        "lift": 1.1956643537261171,
-        "averagePayoutYen": 25602.039724980903,
-        "medianPayoutYen": 5470
-      },
-      "robustLift": 1.1942282669144577,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
       "betType": "ワイド",
       "conditions": [
-        "venue=03",
-        "class=conditions"
-      ],
-      "highPayoutThresholdYen": 4270,
-      "discovery": {
-        "count": 7326,
-        "highPayoutCount": 885,
-        "observedRate": 0.1208026208026208,
-        "posteriorRate": 0.11948057430184002,
-        "lift": 1.1934935091694079,
-        "averagePayoutYen": 2163.3224133224135,
-        "medianPayoutYen": 1040
-      },
-      "validation": {
-        "count": 2062,
-        "highPayoutCount": 258,
-        "observedRate": 0.1251212415130941,
-        "posteriorRate": 0.11874919258688355,
-        "lift": 1.2841795671811909,
-        "averagePayoutYen": 2202.051406401552,
-        "medianPayoutYen": 1110
-      },
-      "robustLift": 1.1934935091694079,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "馬単",
-      "conditions": [
-        "distance=sprint",
-        "field=large"
-      ],
-      "highPayoutThresholdYen": 24600,
-      "discovery": {
-        "count": 12186,
-        "highPayoutCount": 1464,
-        "observedRate": 0.12013786312161497,
-        "posteriorRate": 0.1193447556780801,
-        "lift": 1.193266883475317,
-        "averagePayoutYen": 13325.032824552765,
-        "medianPayoutYen": 4350
-      },
-      "validation": {
-        "count": 3980,
-        "highPayoutCount": 450,
-        "observedRate": 0.11306532663316583,
-        "posteriorRate": 0.11068004530633908,
-        "lift": 1.2070692061194954,
-        "averagePayoutYen": 13320.062814070352,
-        "medianPayoutYen": 4600
-      },
-      "robustLift": 1.193266883475317,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "馬連",
-      "conditions": [
-        "class=open_graded"
-      ],
-      "highPayoutThresholdYen": 12330,
-      "discovery": {
-        "count": 3991,
-        "highPayoutCount": 486,
-        "observedRate": 0.12177399148083187,
-        "posteriorRate": 0.11935243537963341,
-        "lift": 1.1932430517600858,
-        "averagePayoutYen": 6346.391881733901,
-        "medianPayoutYen": 2240
-      },
-      "validation": {
-        "count": 1730,
-        "highPayoutCount": 215,
-        "observedRate": 0.12427745664739884,
-        "posteriorRate": 0.11735388258949239,
-        "lift": 1.2564882021085595,
-        "averagePayoutYen": 6619.225433526011,
-        "medianPayoutYen": 2490
-      },
-      "robustLift": 1.1932430517600858,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "ワイド",
-      "conditions": [
+        "distance=mile",
         "field=large"
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 135661,
-        "highPayoutCount": 16204,
-        "observedRate": 0.1194447925343319,
-        "posteriorRate": 0.11937379260203876,
-        "lift": 1.1924268649357694,
-        "averagePayoutYen": 2212.0584397874113,
-        "medianPayoutYen": 960
-      },
-      "validation": {
-        "count": 46877,
-        "highPayoutCount": 5513,
-        "observedRate": 0.11760564882565011,
-        "posteriorRate": 0.11734038523772285,
-        "lift": 1.2689444184405947,
-        "averagePayoutYen": 2259.286643769866,
+        "count": 37539,
+        "highPayoutCount": 4503,
+        "observedRate": 0.11995524654359466,
+        "posteriorRate": 0.11969542973867786,
+        "lift": 1.1946974701500856,
+        "averagePayoutYen": 2245.5832600761873,
         "medianPayoutYen": 970
       },
-      "robustLift": 1.1924268649357694,
+      "validation": {
+        "count": 13804,
+        "highPayoutCount": 1652,
+        "observedRate": 0.11967545638945233,
+        "posteriorRate": 0.11872451282211938,
+        "lift": 1.2839126748432932,
+        "averagePayoutYen": 2272.353665604173,
+        "medianPayoutYen": 950
+      },
+      "robustLift": 1.1946974701500856,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "単勝",
+      "conditions": [
+        "field=large",
+        "going=不良"
+      ],
+      "highPayoutThresholdYen": 2130,
+      "discovery": {
+        "count": 2114,
+        "highPayoutCount": 264,
+        "observedRate": 0.12488174077578051,
+        "posteriorRate": 0.12025223041424495,
+        "lift": 1.1944162714404398,
+        "averagePayoutYen": 1163.8457899716177,
+        "medianPayoutYen": 530
+      },
+      "validation": {
+        "count": 629,
+        "highPayoutCount": 88,
+        "observedRate": 0.13990461049284578,
+        "posteriorRate": 0.11819883784213972,
+        "lift": 1.3004177356937507,
+        "averagePayoutYen": 1155.7074721780605,
+        "medianPayoutYen": 500
+      },
+      "robustLift": 1.1944162714404398,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -3504,48 +3394,20 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "3連複",
-      "conditions": [
-        "venue=03",
-        "distance=sprint"
-      ],
-      "highPayoutThresholdYen": 47270,
-      "discovery": {
-        "count": 1748,
-        "highPayoutCount": 245,
-        "observedRate": 0.14016018306636155,
-        "posteriorRate": 0.13123225073393185,
-        "lift": 1.3120574809157561,
-        "averagePayoutYen": 27990.320366132724,
-        "medianPayoutYen": 7070
-      },
-      "validation": {
-        "count": 560,
-        "highPayoutCount": 66,
-        "observedRate": 0.11785714285714285,
-        "posteriorRate": 0.10303256878626238,
-        "lift": 1.1921058227652335,
-        "averagePayoutYen": 22992.303571428572,
-        "medianPayoutYen": 6450
-      },
-      "robustLift": 1.1921058227652335,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
       "betType": "馬単",
       "conditions": [
         "raceBand=late",
         "going=重"
       ],
-      "highPayoutThresholdYen": 24600,
+      "highPayoutThresholdYen": 24590,
       "discovery": {
-        "count": 1232,
-        "highPayoutCount": 158,
-        "observedRate": 0.12824675324675325,
-        "posteriorRate": 0.12009674972986392,
-        "lift": 1.2007856855664998,
-        "averagePayoutYen": 13134.163961038961,
-        "medianPayoutYen": 4530
+        "count": 1240,
+        "highPayoutCount": 159,
+        "observedRate": 0.1282258064516129,
+        "posteriorRate": 0.12011967891116251,
+        "lift": 1.2009988331476977,
+        "averagePayoutYen": 13121.443548387097,
+        "medianPayoutYen": 4540
       },
       "validation": {
         "count": 615,
@@ -3557,6 +3419,62 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "medianPayoutYen": 4850
       },
       "robustLift": 1.1917945656194637,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "3連複",
+      "conditions": [
+        "venue=03",
+        "distance=sprint"
+      ],
+      "highPayoutThresholdYen": 47210,
+      "discovery": {
+        "count": 1827,
+        "highPayoutCount": 250,
+        "observedRate": 0.13683634373289547,
+        "posteriorRate": 0.12892560873354741,
+        "lift": 1.2890010836590604,
+        "averagePayoutYen": 27368.85604816639,
+        "medianPayoutYen": 6980
+      },
+      "validation": {
+        "count": 560,
+        "highPayoutCount": 66,
+        "observedRate": 0.11785714285714285,
+        "posteriorRate": 0.10305345424622286,
+        "lift": 1.1917369504101094,
+        "averagePayoutYen": 22992.303571428572,
+        "medianPayoutYen": 6450
+      },
+      "robustLift": 1.1917369504101094,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "ワイド",
+      "conditions": [
+        "venue=03",
+        "class=conditions"
+      ],
+      "highPayoutThresholdYen": 4270,
+      "discovery": {
+        "count": 7500,
+        "highPayoutCount": 905,
+        "observedRate": 0.12066666666666667,
+        "posteriorRate": 0.11938680647869586,
+        "lift": 1.1916170565642457,
+        "averagePayoutYen": 2161.6946666666668,
+        "medianPayoutYen": 1040
+      },
+      "validation": {
+        "count": 2062,
+        "highPayoutCount": 258,
+        "observedRate": 0.1251212415130941,
+        "posteriorRate": 0.11874919258688355,
+        "lift": 1.2841795671811909,
+        "averagePayoutYen": 2202.051406401552,
+        "medianPayoutYen": 1110
+      },
+      "robustLift": 1.1916170565642457,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -3585,6 +3503,89 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "medianPayoutYen": 34830
       },
       "robustLift": 1.1911341393206678,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "馬連",
+      "conditions": [
+        "class=open_graded"
+      ],
+      "highPayoutThresholdYen": 12350,
+      "discovery": {
+        "count": 4158,
+        "highPayoutCount": 505,
+        "observedRate": 0.12145262145262145,
+        "posteriorRate": 0.11915951334959898,
+        "lift": 1.1905233486023858,
+        "averagePayoutYen": 6348.258778258778,
+        "medianPayoutYen": 2260
+      },
+      "validation": {
+        "count": 1730,
+        "highPayoutCount": 215,
+        "observedRate": 0.12427745664739884,
+        "posteriorRate": 0.11731414572699585,
+        "lift": 1.2584506982216237,
+        "averagePayoutYen": 6619.225433526011,
+        "medianPayoutYen": 2490
+      },
+      "robustLift": 1.1905233486023858,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "馬単",
+      "conditions": [
+        "distance=sprint",
+        "field=large"
+      ],
+      "highPayoutThresholdYen": 24590,
+      "discovery": {
+        "count": 12518,
+        "highPayoutCount": 1500,
+        "observedRate": 0.11982744847419716,
+        "posteriorRate": 0.11906654181175472,
+        "lift": 1.190469197712452,
+        "averagePayoutYen": 13267.332640996965,
+        "medianPayoutYen": 4330
+      },
+      "validation": {
+        "count": 3980,
+        "highPayoutCount": 450,
+        "observedRate": 0.11306532663316583,
+        "posteriorRate": 0.11068004530633908,
+        "lift": 1.2070692061194954,
+        "averagePayoutYen": 13320.062814070352,
+        "medianPayoutYen": 4600
+      },
+      "robustLift": 1.190469197712452,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "馬連",
+      "conditions": [
+        "field=large",
+        "weather=小雨"
+      ],
+      "highPayoutThresholdYen": 12350,
+      "discovery": {
+        "count": 1800,
+        "highPayoutCount": 224,
+        "observedRate": 0.12444444444444444,
+        "posteriorRate": 0.11915000573149218,
+        "lift": 1.19042835793796,
+        "averagePayoutYen": 6522.783333333334,
+        "medianPayoutYen": 2270
+      },
+      "validation": {
+        "count": 662,
+        "highPayoutCount": 83,
+        "observedRate": 0.12537764350453173,
+        "posteriorRate": 0.11154091649845156,
+        "lift": 1.1965201926663744,
+        "averagePayoutYen": 6341.027190332326,
+        "medianPayoutYen": 2390
+      },
+      "robustLift": 1.19042835793796,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -3618,46 +3619,18 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
     {
       "betType": "ワイド",
       "conditions": [
-        "distance=mile",
-        "field=large"
-      ],
-      "highPayoutThresholdYen": 4270,
-      "discovery": {
-        "count": 36129,
-        "highPayoutCount": 4314,
-        "observedRate": 0.11940546375487836,
-        "posteriorRate": 0.11914207252412569,
-        "lift": 1.190112209096948,
-        "averagePayoutYen": 2244.7737274765423,
-        "medianPayoutYen": 970
-      },
-      "validation": {
-        "count": 13804,
-        "highPayoutCount": 1652,
-        "observedRate": 0.11967545638945233,
-        "posteriorRate": 0.11872451282211938,
-        "lift": 1.2839126748432932,
-        "averagePayoutYen": 2272.353665604173,
-        "medianPayoutYen": 950
-      },
-      "robustLift": 1.190112209096948,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "ワイド",
-      "conditions": [
         "venue=10",
         "going=重"
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 1151,
-        "highPayoutCount": 148,
-        "observedRate": 0.12858384013900956,
-        "posteriorRate": 0.11996061446771654,
-        "lift": 1.198288638632603,
-        "averagePayoutYen": 2261.5204170286706,
-        "medianPayoutYen": 950
+        "count": 1172,
+        "highPayoutCount": 150,
+        "observedRate": 0.12798634812286688,
+        "posteriorRate": 0.11967371520907114,
+        "lift": 1.194480734276015,
+        "averagePayoutYen": 2289.726962457338,
+        "medianPayoutYen": 940
       },
       "validation": {
         "count": 884,
@@ -3669,34 +3642,6 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "medianPayoutYen": 1020
       },
       "robustLift": 1.1895281999667584,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "3連複",
-      "conditions": [
-        "field=large",
-        "raceBand=middle"
-      ],
-      "highPayoutThresholdYen": 47270,
-      "discovery": {
-        "count": 15244,
-        "highPayoutCount": 1823,
-        "observedRate": 0.11958803463657833,
-        "posteriorRate": 0.1189665967765421,
-        "lift": 1.1894257121004397,
-        "averagePayoutYen": 27363.93203883495,
-        "medianPayoutYen": 6730
-      },
-      "validation": {
-        "count": 4817,
-        "highPayoutCount": 514,
-        "observedRate": 0.10670541831015155,
-        "posteriorRate": 0.10479866896999025,
-        "lift": 1.2125399276061628,
-        "averagePayoutYen": 27027.288768943326,
-        "medianPayoutYen": 6490
-      },
-      "robustLift": 1.1894257121004397,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -3730,29 +3675,56 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
     {
       "betType": "ワイド",
       "conditions": [
-        "field=large",
-        "weather=晴"
+        "field=large"
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 86095,
-        "highPayoutCount": 10256,
-        "observedRate": 0.11912422324176782,
-        "posteriorRate": 0.11901443471893527,
-        "lift": 1.1888372328683057,
-        "averagePayoutYen": 2227.6341250943724,
+        "count": 142401,
+        "highPayoutCount": 16971,
+        "observedRate": 0.11917753386563297,
+        "posteriorRate": 0.11911109405693147,
+        "lift": 1.1888651308350011,
+        "averagePayoutYen": 2206.513648078314,
         "medianPayoutYen": 960
       },
       "validation": {
-        "count": 28641,
-        "highPayoutCount": 3292,
-        "observedRate": 0.11494012080583778,
-        "posteriorRate": 0.11455459426264011,
-        "lift": 1.2388182696162855,
-        "averagePayoutYen": 2221.8763311336893,
-        "medianPayoutYen": 950
+        "count": 46877,
+        "highPayoutCount": 5513,
+        "observedRate": 0.11760564882565011,
+        "posteriorRate": 0.11734038523772285,
+        "lift": 1.2689444184405947,
+        "averagePayoutYen": 2259.286643769866,
+        "medianPayoutYen": 970
       },
-      "robustLift": 1.1888372328683057,
+      "robustLift": 1.1888651308350011,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "ワイド",
+      "conditions": [
+        "venue=05",
+        "class=open_graded"
+      ],
+      "highPayoutThresholdYen": 4270,
+      "discovery": {
+        "count": 2348,
+        "highPayoutCount": 289,
+        "observedRate": 0.12308347529812606,
+        "posteriorRate": 0.11906406314240411,
+        "lift": 1.1883957084457974,
+        "averagePayoutYen": 2331.5289608177172,
+        "medianPayoutYen": 1060
+      },
+      "validation": {
+        "count": 1028,
+        "highPayoutCount": 129,
+        "observedRate": 0.1254863813229572,
+        "posteriorRate": 0.11468287395785054,
+        "lift": 1.2402055141093622,
+        "averagePayoutYen": 2449.795719844358,
+        "medianPayoutYen": 1010
+      },
+      "robustLift": 1.1883957084457974,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -3763,13 +3735,13 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 2302,
-        "highPayoutCount": 292,
-        "observedRate": 0.1268462206776716,
-        "posteriorRate": 0.12207529424917915,
-        "lift": 1.2194122112961514,
-        "averagePayoutYen": 2227.0590790616857,
-        "medianPayoutYen": 990
+        "count": 2398,
+        "highPayoutCount": 308,
+        "observedRate": 0.12844036697247707,
+        "posteriorRate": 0.12356606343325291,
+        "lift": 1.2333308272705892,
+        "averagePayoutYen": 2241.930775646372,
+        "medianPayoutYen": 980
       },
       "validation": {
         "count": 877,
@@ -3812,6 +3784,34 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
+      "betType": "3連複",
+      "conditions": [
+        "field=large",
+        "raceBand=middle"
+      ],
+      "highPayoutThresholdYen": 47210,
+      "discovery": {
+        "count": 15545,
+        "highPayoutCount": 1855,
+        "observedRate": 0.11933097458990029,
+        "posteriorRate": 0.1187291923666541,
+        "lift": 1.1870570876176865,
+        "averagePayoutYen": 27224.301061434544,
+        "medianPayoutYen": 6720
+      },
+      "validation": {
+        "count": 4817,
+        "highPayoutCount": 514,
+        "observedRate": 0.10670541831015155,
+        "posteriorRate": 0.10480283270660075,
+        "lift": 1.2119672179613814,
+        "averagePayoutYen": 27027.288768943326,
+        "medianPayoutYen": 6490
+      },
+      "robustLift": 1.1870570876176865,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
       "betType": "3連単",
       "conditions": [
         "going=不良"
@@ -3836,6 +3836,34 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "medianPayoutYen": 31000
       },
       "robustLift": 1.1858864781941705,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "3連複",
+      "conditions": [
+        "raceBand=late",
+        "going=不良"
+      ],
+      "highPayoutThresholdYen": 47210,
+      "discovery": {
+        "count": 622,
+        "highPayoutCount": 83,
+        "observedRate": 0.13344051446945338,
+        "posteriorRate": 0.11854714039479931,
+        "lift": 1.1852369279821555,
+        "averagePayoutYen": 28607.379421221864,
+        "medianPayoutYen": 7990
+      },
+      "validation": {
+        "count": 211,
+        "highPayoutCount": 30,
+        "observedRate": 0.14218009478672985,
+        "posteriorRate": 0.10300514979043071,
+        "lift": 1.191178345118729,
+        "averagePayoutYen": 28423.6018957346,
+        "medianPayoutYen": 10180
+      },
+      "robustLift": 1.1852369279821555,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -3864,34 +3892,6 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "medianPayoutYen": 36870
       },
       "robustLift": 1.184992784992785,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "ワイド",
-      "conditions": [
-        "field=large",
-        "going=良"
-      ],
-      "highPayoutThresholdYen": 4270,
-      "discovery": {
-        "count": 98448,
-        "highPayoutCount": 11688,
-        "observedRate": 0.11872257435397367,
-        "posteriorRate": 0.11862852179413631,
-        "lift": 1.1849823420331764,
-        "averagePayoutYen": 2199.9794815537134,
-        "medianPayoutYen": 960
-      },
-      "validation": {
-        "count": 32583,
-        "highPayoutCount": 3803,
-        "observedRate": 0.11671730657091121,
-        "posteriorRate": 0.1163508578849438,
-        "lift": 1.2582434546704537,
-        "averagePayoutYen": 2246.1584261731577,
-        "medianPayoutYen": 970
-      },
-      "robustLift": 1.1849823420331764,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -3930,12 +3930,12 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 3319,
-        "highPayoutCount": 410,
-        "observedRate": 0.12353118409159386,
-        "posteriorRate": 0.12046477467562189,
-        "lift": 1.2033247036099646,
-        "averagePayoutYen": 2171.367881892136,
+        "count": 3451,
+        "highPayoutCount": 429,
+        "observedRate": 0.12431179368299043,
+        "posteriorRate": 0.12125903615023208,
+        "lift": 1.2103040528598235,
+        "averagePayoutYen": 2203.3265720081135,
         "medianPayoutYen": 1120
       },
       "validation": {
@@ -3951,59 +3951,87 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "単勝",
+      "betType": "3連複",
       "conditions": [
-        "field=large",
-        "class=maiden_debut"
+        "venue=10",
+        "raceBand=late"
       ],
-      "highPayoutThresholdYen": 2120,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 3047,
-        "highPayoutCount": 372,
-        "observedRate": 0.12208729898260584,
-        "posteriorRate": 0.1190558617358418,
-        "lift": 1.1836663277317352,
-        "averagePayoutYen": 1105.595667870036,
-        "medianPayoutYen": 500
+        "count": 1654,
+        "highPayoutCount": 205,
+        "observedRate": 0.12394195888754535,
+        "posteriorRate": 0.11838899327899946,
+        "lift": 1.1836557696254408,
+        "averagePayoutYen": 25493.88754534462,
+        "medianPayoutYen": 7120
       },
       "validation": {
-        "count": 1166,
-        "highPayoutCount": 150,
-        "observedRate": 0.12864493996569468,
-        "posteriorRate": 0.11756752335323671,
-        "lift": 1.2815995963602833,
-        "averagePayoutYen": 1226.114922813036,
-        "medianPayoutYen": 510
+        "count": 648,
+        "highPayoutCount": 76,
+        "observedRate": 0.11728395061728394,
+        "posteriorRate": 0.10386468771863784,
+        "lift": 1.2011182652972021,
+        "averagePayoutYen": 26166.6512345679,
+        "medianPayoutYen": 7750
       },
-      "robustLift": 1.1836663277317352,
+      "robustLift": 1.1836557696254408,
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "3連複",
+      "betType": "ワイド",
       "conditions": [
-        "venue=05",
-        "class=open_graded"
+        "field=large",
+        "going=良"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 754,
-        "highPayoutCount": 110,
-        "observedRate": 0.14588859416445624,
-        "posteriorRate": 0.12759976048634675,
-        "lift": 1.2757399143340435,
-        "averagePayoutYen": 32883.183023872676,
-        "medianPayoutYen": 7610
+        "count": 104012,
+        "highPayoutCount": 12342,
+        "observedRate": 0.11865938545552436,
+        "posteriorRate": 0.11857102009175566,
+        "lift": 1.1834745741420836,
+        "averagePayoutYen": 2195.4291812483175,
+        "medianPayoutYen": 960
       },
       "validation": {
-        "count": 343,
-        "highPayoutCount": 43,
-        "observedRate": 0.12536443148688048,
-        "posteriorRate": 0.10227108293409029,
-        "lift": 1.183295291017638,
-        "averagePayoutYen": 28516.00583090379,
-        "medianPayoutYen": 7660
+        "count": 32583,
+        "highPayoutCount": 3803,
+        "observedRate": 0.11671730657091121,
+        "posteriorRate": 0.1163508578849438,
+        "lift": 1.2582434546704537,
+        "averagePayoutYen": 2246.1584261731577,
+        "medianPayoutYen": 970
       },
-      "robustLift": 1.183295291017638,
+      "robustLift": 1.1834745741420836,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "ワイド",
+      "conditions": [
+        "field=large",
+        "weather=晴"
+      ],
+      "highPayoutThresholdYen": 4270,
+      "discovery": {
+        "count": 90090,
+        "highPayoutCount": 10690,
+        "observedRate": 0.11865911865911866,
+        "posteriorRate": 0.11855717465315782,
+        "lift": 1.1833363808083692,
+        "averagePayoutYen": 2218.2546342546343,
+        "medianPayoutYen": 960
+      },
+      "validation": {
+        "count": 28641,
+        "highPayoutCount": 3292,
+        "observedRate": 0.11494012080583778,
+        "posteriorRate": 0.11455459426264011,
+        "lift": 1.2388182696162855,
+        "averagePayoutYen": 2221.8763311336893,
+        "medianPayoutYen": 950
+      },
+      "robustLift": 1.1833363808083692,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -4012,15 +4040,15 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "raceBand=late",
         "class=open_graded"
       ],
-      "highPayoutThresholdYen": 24600,
+      "highPayoutThresholdYen": 24590,
       "discovery": {
-        "count": 3963,
-        "highPayoutCount": 478,
-        "observedRate": 0.12061569518041887,
-        "posteriorRate": 0.11830776843650556,
-        "lift": 1.1828985809309214,
-        "averagePayoutYen": 12847.76684330053,
-        "medianPayoutYen": 4370
+        "count": 4030,
+        "highPayoutCount": 486,
+        "observedRate": 0.1205955334987593,
+        "posteriorRate": 0.11832411507845977,
+        "lift": 1.1830461538909285,
+        "averagePayoutYen": 12833.7841191067,
+        "medianPayoutYen": 4350
       },
       "validation": {
         "count": 1704,
@@ -4031,63 +4059,35 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "averagePayoutYen": 13071.420187793427,
         "medianPayoutYen": 4690
       },
-      "robustLift": 1.1828985809309214,
+      "robustLift": 1.1830461538909285,
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "ワイド",
+      "betType": "3連複",
       "conditions": [
-        "field=large",
-        "raceBand=middle"
+        "venue=05",
+        "class=open_graded"
       ],
-      "highPayoutThresholdYen": 4270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 45693,
-        "highPayoutCount": 5420,
-        "observedRate": 0.11861773138117436,
-        "posteriorRate": 0.11841740035256858,
-        "lift": 1.1828734463266573,
-        "averagePayoutYen": 2201.4750618256626,
-        "medianPayoutYen": 970
+        "count": 754,
+        "highPayoutCount": 110,
+        "observedRate": 0.14588859416445624,
+        "posteriorRate": 0.12759959451592093,
+        "lift": 1.2757435642239545,
+        "averagePayoutYen": 32883.183023872676,
+        "medianPayoutYen": 7610
       },
       "validation": {
-        "count": 14442,
-        "highPayoutCount": 1600,
-        "observedRate": 0.1107879795042238,
-        "posteriorRate": 0.11017503891096209,
-        "lift": 1.1914568065743452,
-        "averagePayoutYen": 2252.7980889073538,
-        "medianPayoutYen": 970
+        "count": 343,
+        "highPayoutCount": 43,
+        "observedRate": 0.12536443148688048,
+        "posteriorRate": 0.1022973446037915,
+        "lift": 1.1829931018313524,
+        "averagePayoutYen": 28516.00583090379,
+        "medianPayoutYen": 7660
       },
-      "robustLift": 1.1828734463266573,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "馬連",
-      "conditions": [
-        "field=large",
-        "weather=小雨"
-      ],
-      "highPayoutThresholdYen": 12330,
-      "discovery": {
-        "count": 1741,
-        "highPayoutCount": 215,
-        "observedRate": 0.1234922458357266,
-        "posteriorRate": 0.11825604073624883,
-        "lift": 1.182281689421359,
-        "averagePayoutYen": 6514.417001723147,
-        "medianPayoutYen": 2270
-      },
-      "validation": {
-        "count": 662,
-        "highPayoutCount": 83,
-        "observedRate": 0.12537764350453173,
-        "posteriorRate": 0.11161717570961104,
-        "lift": 1.1950662503633402,
-        "averagePayoutYen": 6341.027190332326,
-        "medianPayoutYen": 2390
-      },
-      "robustLift": 1.182281689421359,
+      "robustLift": 1.1829931018313524,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -4096,14 +4096,14 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "distance=mile",
         "field=large"
       ],
-      "highPayoutThresholdYen": 24600,
+      "highPayoutThresholdYen": 24590,
       "discovery": {
-        "count": 12069,
-        "highPayoutCount": 1435,
-        "observedRate": 0.11889966028668489,
-        "posteriorRate": 0.11814842632923257,
-        "lift": 1.1813054010825759,
-        "averagePayoutYen": 13495.211699395144,
+        "count": 12168,
+        "highPayoutCount": 1448,
+        "observedRate": 0.11900065746219593,
+        "posteriorRate": 0.11825136101242681,
+        "lift": 1.1823187331285323,
+        "averagePayoutYen": 13485.044378698225,
         "medianPayoutYen": 4140
       },
       "validation": {
@@ -4115,35 +4115,35 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "averagePayoutYen": 12930.573041024529,
         "medianPayoutYen": 4050
       },
-      "robustLift": 1.1813054010825759,
+      "robustLift": 1.1823187331285323,
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "複勝",
+      "betType": "ワイド",
       "conditions": [
         "field=large",
-        "raceBand=late"
+        "raceBand=middle"
       ],
-      "highPayoutThresholdYen": 690,
+      "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 43610,
-        "highPayoutCount": 5189,
-        "observedRate": 0.11898647099289154,
-        "posteriorRate": 0.11877881088865257,
-        "lift": 1.179921611655189,
-        "averagePayoutYen": 389.6514560880532,
-        "medianPayoutYen": 240
+        "count": 48039,
+        "highPayoutCount": 5698,
+        "observedRate": 0.11861196111492746,
+        "posteriorRate": 0.11842218529078817,
+        "lift": 1.1819890323751643,
+        "averagePayoutYen": 2194.0644060034556,
+        "medianPayoutYen": 970
       },
       "validation": {
-        "count": 15532,
-        "highPayoutCount": 1771,
-        "observedRate": 0.11402266288951841,
-        "posteriorRate": 0.11327786141921016,
-        "lift": 1.256669256084658,
-        "averagePayoutYen": 383.801184651043,
-        "medianPayoutYen": 240
+        "count": 14442,
+        "highPayoutCount": 1600,
+        "observedRate": 0.1107879795042238,
+        "posteriorRate": 0.11017503891096209,
+        "lift": 1.1914568065743452,
+        "averagePayoutYen": 2252.7980889073538,
+        "medianPayoutYen": 970
       },
-      "robustLift": 1.179921611655189,
+      "robustLift": 1.1819890323751643,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -4152,15 +4152,15 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "distance=sprint",
         "class=open_graded"
       ],
-      "highPayoutThresholdYen": 24600,
+      "highPayoutThresholdYen": 24590,
       "discovery": {
-        "count": 678,
-        "highPayoutCount": 89,
-        "observedRate": 0.13126843657817108,
-        "posteriorRate": 0.11800303101199007,
-        "lift": 1.1798516680208078,
-        "averagePayoutYen": 13458.097345132743,
-        "medianPayoutYen": 4500
+        "count": 696,
+        "highPayoutCount": 91,
+        "observedRate": 0.1307471264367816,
+        "posteriorRate": 0.1178998673122264,
+        "lift": 1.178804375384439,
+        "averagePayoutYen": 13360,
+        "medianPayoutYen": 4450
       },
       "validation": {
         "count": 311,
@@ -4171,63 +4171,7 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "averagePayoutYen": 16829.581993569132,
         "medianPayoutYen": 5560
       },
-      "robustLift": 1.1798516680208078,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "3連複",
-      "conditions": [
-        "weather=曇",
-        "class=open_graded"
-      ],
-      "highPayoutThresholdYen": 47270,
-      "discovery": {
-        "count": 1085,
-        "highPayoutCount": 137,
-        "observedRate": 0.12626728110599078,
-        "posteriorRate": 0.11798744457405604,
-        "lift": 1.1796361674950389,
-        "averagePayoutYen": 25000.7465437788,
-        "medianPayoutYen": 6890
-      },
-      "validation": {
-        "count": 529,
-        "highPayoutCount": 74,
-        "observedRate": 0.13988657844990549,
-        "posteriorRate": 0.1139111009848767,
-        "lift": 1.3179724465898772,
-        "averagePayoutYen": 30496.843100189035,
-        "medianPayoutYen": 8860
-      },
-      "robustLift": 1.1796361674950389,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "馬単",
-      "conditions": [
-        "field=large",
-        "weather=晴"
-      ],
-      "highPayoutThresholdYen": 24600,
-      "discovery": {
-        "count": 28739,
-        "highPayoutCount": 3397,
-        "observedRate": 0.11820174675528028,
-        "posteriorRate": 0.11789074764978708,
-        "lift": 1.1787290043820007,
-        "averagePayoutYen": 13621.810431817392,
-        "medianPayoutYen": 4120
-      },
-      "validation": {
-        "count": 9558,
-        "highPayoutCount": 1051,
-        "observedRate": 0.10996024272860432,
-        "posteriorRate": 0.10905215778210371,
-        "lift": 1.1893155731489633,
-        "averagePayoutYen": 12764.961288972589,
-        "medianPayoutYen": 4040
-      },
-      "robustLift": 1.1787290043820007,
+      "robustLift": 1.178804375384439,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -4266,13 +4210,13 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 12683,
-        "highPayoutCount": 1649,
-        "observedRate": 0.1300165575967831,
-        "posteriorRate": 0.1288822706884776,
-        "lift": 1.2874072158803123,
-        "averagePayoutYen": 2390.966648269337,
-        "medianPayoutYen": 1050
+        "count": 13202,
+        "highPayoutCount": 1704,
+        "observedRate": 0.1290713528253295,
+        "posteriorRate": 0.12801740270249357,
+        "lift": 1.277760291080126,
+        "averagePayoutYen": 2383.322223905469,
+        "medianPayoutYen": 1040
       },
       "validation": {
         "count": 5018,
@@ -4287,19 +4231,47 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
+      "betType": "単勝",
+      "conditions": [
+        "field=large",
+        "class=maiden_debut"
+      ],
+      "highPayoutThresholdYen": 2130,
+      "discovery": {
+        "count": 3229,
+        "highPayoutCount": 392,
+        "observedRate": 0.12139981418395789,
+        "posteriorRate": 0.11862143478220336,
+        "lift": 1.1782182447460947,
+        "averagePayoutYen": 1113.2610715391763,
+        "medianPayoutYen": 500
+      },
+      "validation": {
+        "count": 1166,
+        "highPayoutCount": 149,
+        "observedRate": 0.12778730703259006,
+        "posteriorRate": 0.11671457858569972,
+        "lift": 1.284087989169339,
+        "averagePayoutYen": 1226.114922813036,
+        "medianPayoutYen": 510
+      },
+      "robustLift": 1.1782182447460947,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
       "betType": "馬単",
       "conditions": [
         "class=open_graded"
       ],
-      "highPayoutThresholdYen": 24600,
+      "highPayoutThresholdYen": 24590,
       "discovery": {
-        "count": 4007,
-        "highPayoutCount": 481,
-        "observedRate": 0.120039930122286,
-        "posteriorRate": 0.11781840925940189,
-        "lift": 1.1780057299895892,
-        "averagePayoutYen": 12771.060643873221,
-        "medianPayoutYen": 4320
+        "count": 4075,
+        "highPayoutCount": 489,
+        "observedRate": 0.12,
+        "posteriorRate": 0.11781600902850771,
+        "lift": 1.1779659307448191,
+        "averagePayoutYen": 12757.818404907975,
+        "medianPayoutYen": 4300
       },
       "validation": {
         "count": 1732,
@@ -4310,7 +4282,7 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "averagePayoutYen": 12955.098152424942,
         "medianPayoutYen": 4680
       },
-      "robustLift": 1.1780057299895892,
+      "robustLift": 1.1779659307448191,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -4342,143 +4314,31 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "馬連",
-      "conditions": [
-        "venue=10",
-        "field=large"
-      ],
-      "highPayoutThresholdYen": 12330,
-      "discovery": {
-        "count": 3704,
-        "highPayoutCount": 445,
-        "observedRate": 0.12014038876889849,
-        "posteriorRate": 0.11774780858466546,
-        "lift": 1.1772005657590814,
-        "averagePayoutYen": 6570.847732181425,
-        "medianPayoutYen": 2300
-      },
-      "validation": {
-        "count": 1341,
-        "highPayoutCount": 176,
-        "observedRate": 0.13124533929903057,
-        "posteriorRate": 0.12096640856847801,
-        "lift": 1.295166907680526,
-        "averagePayoutYen": 7348.337061894109,
-        "medianPayoutYen": 2510
-      },
-      "robustLift": 1.1772005657590814,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "馬連",
-      "conditions": [
-        "venue=03",
-        "class=conditions"
-      ],
-      "highPayoutThresholdYen": 12330,
-      "discovery": {
-        "count": 2442,
-        "highPayoutCount": 296,
-        "observedRate": 0.12121212121212122,
-        "posteriorRate": 0.11761107657713583,
-        "lift": 1.1758335679477758,
-        "averagePayoutYen": 6320.655200655201,
-        "medianPayoutYen": 2310
-      },
-      "validation": {
-        "count": 690,
-        "highPayoutCount": 89,
-        "observedRate": 0.1289855072463768,
-        "posteriorRate": 0.11403290602904877,
-        "lift": 1.2209310669239235,
-        "averagePayoutYen": 6596.724637681159,
-        "medianPayoutYen": 2650
-      },
-      "robustLift": 1.1758335679477758,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "単勝",
+      "betType": "複勝",
       "conditions": [
         "field=large",
-        "going=不良"
+        "raceBand=late"
       ],
-      "highPayoutThresholdYen": 2120,
+      "highPayoutThresholdYen": 690,
       "discovery": {
-        "count": 2031,
-        "highPayoutCount": 249,
-        "observedRate": 0.12259970457902511,
-        "posteriorRate": 0.11825015471237886,
-        "lift": 1.175655900863329,
-        "averagePayoutYen": 1132.9443623830625,
-        "medianPayoutYen": 520
+        "count": 45831,
+        "highPayoutCount": 5443,
+        "observedRate": 0.11876240972267679,
+        "posteriorRate": 0.11856792251303347,
+        "lift": 1.1769598837510553,
+        "averagePayoutYen": 388.9391459928869,
+        "medianPayoutYen": 240
       },
       "validation": {
-        "count": 629,
-        "highPayoutCount": 88,
-        "observedRate": 0.13990461049284578,
-        "posteriorRate": 0.11857173950973637,
-        "lift": 1.2925465227232857,
-        "averagePayoutYen": 1155.7074721780605,
-        "medianPayoutYen": 500
+        "count": 15532,
+        "highPayoutCount": 1771,
+        "observedRate": 0.11402266288951841,
+        "posteriorRate": 0.11327786141921016,
+        "lift": 1.256669256084658,
+        "averagePayoutYen": 383.801184651043,
+        "medianPayoutYen": 240
       },
-      "robustLift": 1.175655900863329,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "馬連",
-      "conditions": [
-        "field=large",
-        "weather=晴"
-      ],
-      "highPayoutThresholdYen": 12330,
-      "discovery": {
-        "count": 28820,
-        "highPayoutCount": 3397,
-        "observedRate": 0.11786953504510757,
-        "posteriorRate": 0.11756520420497728,
-        "lift": 1.1753749523428922,
-        "averagePayoutYen": 6746.5281054823035,
-        "medianPayoutYen": 2150
-      },
-      "validation": {
-        "count": 9543,
-        "highPayoutCount": 1081,
-        "observedRate": 0.11327674735408153,
-        "posteriorRate": 0.11228708136757623,
-        "lift": 1.2022388171092009,
-        "averagePayoutYen": 6450.436969506444,
-        "medianPayoutYen": 2150
-      },
-      "robustLift": 1.1753749523428922,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "馬連",
-      "conditions": [
-        "weather=晴",
-        "class=open_graded"
-      ],
-      "highPayoutThresholdYen": 12330,
-      "discovery": {
-        "count": 2548,
-        "highPayoutCount": 312,
-        "observedRate": 0.12244897959183673,
-        "posteriorRate": 0.1187702714205819,
-        "lift": 1.187422784273178,
-        "averagePayoutYen": 6237.649136577708,
-        "medianPayoutYen": 2210
-      },
-      "validation": {
-        "count": 1055,
-        "highPayoutCount": 124,
-        "observedRate": 0.11753554502369669,
-        "posteriorRate": 0.10977437824731062,
-        "lift": 1.1753357291469644,
-        "averagePayoutYen": 6091.563981042654,
-        "medianPayoutYen": 2350
-      },
-      "robustLift": 1.1753357291469644,
+      "robustLift": 1.1769598837510553,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -4487,26 +4347,82 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "distance=mile",
         "field=large"
       ],
-      "highPayoutThresholdYen": 12330,
+      "highPayoutThresholdYen": 12350,
       "discovery": {
-        "count": 12115,
-        "highPayoutCount": 1432,
-        "observedRate": 0.11820057779612052,
-        "posteriorRate": 0.11748012582559918,
-        "lift": 1.1745243690705442,
-        "averagePayoutYen": 6705.702022286422,
+        "count": 12583,
+        "highPayoutCount": 1491,
+        "observedRate": 0.11849320511801636,
+        "posteriorRate": 0.1177898810045427,
+        "lift": 1.1768393443634073,
+        "averagePayoutYen": 6683.688309624096,
         "medianPayoutYen": 2120
       },
       "validation": {
         "count": 4600,
-        "highPayoutCount": 547,
-        "observedRate": 0.11891304347826087,
-        "posteriorRate": 0.11641159964207215,
-        "lift": 1.2463993377237041,
+        "highPayoutCount": 546,
+        "observedRate": 0.11869565217391305,
+        "posteriorRate": 0.11619814607278446,
+        "lift": 1.2464791620070084,
         "averagePayoutYen": 6561.210869565218,
         "medianPayoutYen": 2170
       },
-      "robustLift": 1.1745243690705442,
+      "robustLift": 1.1768393443634073,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "馬連",
+      "conditions": [
+        "surface=芝",
+        "distance=sprint"
+      ],
+      "highPayoutThresholdYen": 12350,
+      "discovery": {
+        "count": 7109,
+        "highPayoutCount": 846,
+        "observedRate": 0.11900407933605289,
+        "posteriorRate": 0.1177612055700397,
+        "lift": 1.1765528479406921,
+        "averagePayoutYen": 6379.94935996624,
+        "medianPayoutYen": 2300
+      },
+      "validation": {
+        "count": 2149,
+        "highPayoutCount": 264,
+        "observedRate": 0.12284783620288506,
+        "posteriorRate": 0.11725577386606294,
+        "lift": 1.2578245323940307,
+        "averagePayoutYen": 6895.579339227547,
+        "medianPayoutYen": 2270
+      },
+      "robustLift": 1.1765528479406921,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "馬単",
+      "conditions": [
+        "field=large",
+        "weather=晴"
+      ],
+      "highPayoutThresholdYen": 24590,
+      "discovery": {
+        "count": 29205,
+        "highPayoutCount": 3445,
+        "observedRate": 0.11795925355247389,
+        "posteriorRate": 0.11765723754605026,
+        "lift": 1.1763784775739732,
+        "averagePayoutYen": 13592.87724704674,
+        "medianPayoutYen": 4120
+      },
+      "validation": {
+        "count": 9558,
+        "highPayoutCount": 1051,
+        "observedRate": 0.10996024272860432,
+        "posteriorRate": 0.10905215778210371,
+        "lift": 1.1893155731489633,
+        "averagePayoutYen": 12764.961288972589,
+        "medianPayoutYen": 4040
+      },
+      "robustLift": 1.1763784775739732,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -4538,31 +4454,115 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "3連複",
+      "betType": "馬連",
+      "conditions": [
+        "venue=10",
+        "field=large"
+      ],
+      "highPayoutThresholdYen": 12350,
+      "discovery": {
+        "count": 3930,
+        "highPayoutCount": 470,
+        "observedRate": 0.11959287531806616,
+        "posteriorRate": 0.11739165083124878,
+        "lift": 1.1728606245273046,
+        "averagePayoutYen": 6538.684478371501,
+        "medianPayoutYen": 2320
+      },
+      "validation": {
+        "count": 1341,
+        "highPayoutCount": 175,
+        "observedRate": 0.13049962714392244,
+        "posteriorRate": 0.12037509232547568,
+        "lift": 1.2912860426739479,
+        "averagePayoutYen": 7348.337061894109,
+        "medianPayoutYen": 2510
+      },
+      "robustLift": 1.1728606245273046,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "馬連",
+      "conditions": [
+        "weather=曇",
+        "class=open_graded"
+      ],
+      "highPayoutThresholdYen": 12350,
+      "discovery": {
+        "count": 1136,
+        "highPayoutCount": 142,
+        "observedRate": 0.125,
+        "posteriorRate": 0.1173869273731247,
+        "lift": 1.1728134324313924,
+        "averagePayoutYen": 6521.091549295775,
+        "medianPayoutYen": 2230
+      },
+      "validation": {
+        "count": 528,
+        "highPayoutCount": 68,
+        "observedRate": 0.12878787878787878,
+        "posteriorRate": 0.11148885697587618,
+        "lift": 1.1959617404684058,
+        "averagePayoutYen": 7466.420454545455,
+        "medianPayoutYen": 2730
+      },
+      "robustLift": 1.1728134324313924,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "複勝",
       "conditions": [
         "raceBand=late",
         "going=不良"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 690,
       "discovery": {
-        "count": 617,
-        "highPayoutCount": 81,
-        "observedRate": 0.1312803889789303,
-        "posteriorRate": 0.11728746611448417,
-        "lift": 1.1726377965212513,
-        "averagePayoutYen": 28306.41815235008,
-        "medianPayoutYen": 7990
+        "count": 1907,
+        "highPayoutCount": 234,
+        "observedRate": 0.12270582066072365,
+        "posteriorRate": 0.11814309013350777,
+        "lift": 1.1727428016143138,
+        "averagePayoutYen": 384.7456738332459,
+        "medianPayoutYen": 230
       },
       "validation": {
-        "count": 211,
-        "highPayoutCount": 30,
-        "observedRate": 0.14218009478672985,
-        "posteriorRate": 0.10297401253648118,
-        "lift": 1.1914283161559567,
-        "averagePayoutYen": 28423.6018957346,
-        "medianPayoutYen": 10180
+        "count": 631,
+        "highPayoutCount": 77,
+        "observedRate": 0.12202852614896989,
+        "posteriorRate": 0.10793163065674392,
+        "lift": 1.1973598398319778,
+        "averagePayoutYen": 372.06022187004754,
+        "medianPayoutYen": 250
       },
-      "robustLift": 1.1726377965212513,
+      "robustLift": 1.1727428016143138,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "馬連",
+      "conditions": [
+        "weather=晴",
+        "class=open_graded"
+      ],
+      "highPayoutThresholdYen": 12350,
+      "discovery": {
+        "count": 2645,
+        "highPayoutCount": 319,
+        "observedRate": 0.12060491493383743,
+        "posteriorRate": 0.11734340641730748,
+        "lift": 1.172378614324156,
+        "averagePayoutYen": 6211.111531190926,
+        "medianPayoutYen": 2230
+      },
+      "validation": {
+        "count": 1055,
+        "highPayoutCount": 124,
+        "observedRate": 0.11753554502369669,
+        "posteriorRate": 0.10971739226443776,
+        "lift": 1.1769589084640495,
+        "averagePayoutYen": 6091.563981042654,
+        "medianPayoutYen": 2350
+      },
+      "robustLift": 1.172378614324156,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -4594,115 +4594,171 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
+      "betType": "馬連",
+      "conditions": [
+        "raceBand=late",
+        "weather=雨"
+      ],
+      "highPayoutThresholdYen": 12350,
+      "discovery": {
+        "count": 1152,
+        "highPayoutCount": 145,
+        "observedRate": 0.12586805555555555,
+        "posteriorRate": 0.11806598860922034,
+        "lift": 1.179597936949557,
+        "averagePayoutYen": 6742.395833333333,
+        "medianPayoutYen": 2580
+      },
+      "validation": {
+        "count": 357,
+        "highPayoutCount": 47,
+        "observedRate": 0.13165266106442577,
+        "posteriorRate": 0.10923050755099266,
+        "lift": 1.171736005430563,
+        "averagePayoutYen": 7410.756302521008,
+        "medianPayoutYen": 2550
+      },
+      "robustLift": 1.171736005430563,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "複勝",
+      "conditions": [
+        "surface=芝",
+        "field=large"
+      ],
+      "highPayoutThresholdYen": 690,
+      "discovery": {
+        "count": 69252,
+        "highPayoutCount": 8183,
+        "observedRate": 0.11816265234217062,
+        "posteriorRate": 0.11803776835003087,
+        "lift": 1.1716973290159067,
+        "averagePayoutYen": 387.005429446081,
+        "medianPayoutYen": 230
+      },
+      "validation": {
+        "count": 21128,
+        "highPayoutCount": 2326,
+        "observedRate": 0.1100908746686861,
+        "posteriorRate": 0.10962967793012657,
+        "lift": 1.2161974465549847,
+        "averagePayoutYen": 377.4233244982961,
+        "medianPayoutYen": 220
+      },
+      "robustLift": 1.1716973290159067,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "単勝",
+      "conditions": [
+        "going=不良",
+        "class=conditions"
+      ],
+      "highPayoutThresholdYen": 2130,
+      "discovery": {
+        "count": 1173,
+        "highPayoutCount": 147,
+        "observedRate": 0.12531969309462915,
+        "posteriorRate": 0.1179553677841221,
+        "lift": 1.1716024733991752,
+        "averagePayoutYen": 1148.4484228473998,
+        "medianPayoutYen": 540
+      },
+      "validation": {
+        "count": 361,
+        "highPayoutCount": 50,
+        "observedRate": 0.13850415512465375,
+        "posteriorRate": 0.11085538667105198,
+        "lift": 1.2196254511127684,
+        "averagePayoutYen": 1110.8033240997229,
+        "medianPayoutYen": 550
+      },
+      "robustLift": 1.1716024733991752,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
       "betType": "3連複",
       "conditions": [
         "distance=middle",
         "field=large"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 18133,
-        "highPayoutCount": 2134,
-        "observedRate": 0.11768598687475873,
-        "posteriorRate": 0.11721194116083715,
-        "lift": 1.17188269950909,
-        "averagePayoutYen": 27575.342745271053,
+        "count": 18551,
+        "highPayoutCount": 2181,
+        "observedRate": 0.11756778610317503,
+        "posteriorRate": 0.11710723277113877,
+        "lift": 1.1708406997579917,
+        "averagePayoutYen": 27484.425098377447,
         "medianPayoutYen": 6410
       },
       "validation": {
         "count": 6288,
         "highPayoutCount": 698,
         "observedRate": 0.11100508905852417,
-        "posteriorRate": 0.10919483248577462,
-        "lift": 1.2634043502516494,
+        "posteriorRate": 0.10919809391588041,
+        "lift": 1.2627951618485198,
         "averagePayoutYen": 25668.91062340967,
         "medianPayoutYen": 6410
       },
-      "robustLift": 1.17188269950909,
+      "robustLift": 1.1708406997579917,
       "usePolicy": "volatility_prior_only"
     },
     {
       "betType": "馬連",
+      "conditions": [
+        "field=large",
+        "weather=晴"
+      ],
+      "highPayoutThresholdYen": 12350,
+      "discovery": {
+        "count": 30152,
+        "highPayoutCount": 3538,
+        "observedRate": 0.11733881666224463,
+        "posteriorRate": 0.11705745181986271,
+        "lift": 1.1695216403794957,
+        "averagePayoutYen": 6710.0109445476255,
+        "medianPayoutYen": 2140
+      },
+      "validation": {
+        "count": 9543,
+        "highPayoutCount": 1077,
+        "observedRate": 0.11285759195221629,
+        "posteriorRate": 0.11187997062343927,
+        "lift": 1.2001572894348975,
+        "averagePayoutYen": 6450.436969506444,
+        "medianPayoutYen": 2150
+      },
+      "robustLift": 1.1695216403794957,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "3連複",
       "conditions": [
         "distance=mile",
         "raceBand=late"
       ],
-      "highPayoutThresholdYen": 12330,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 5110,
-        "highPayoutCount": 607,
-        "observedRate": 0.1187866927592955,
-        "posteriorRate": 0.11711440058644093,
-        "lift": 1.17086797865764,
-        "averagePayoutYen": 6389.909980430529,
-        "medianPayoutYen": 2230
+        "count": 5143,
+        "highPayoutCount": 610,
+        "observedRate": 0.11860781644954307,
+        "posteriorRate": 0.11696081721122893,
+        "lift": 1.1693768337561767,
+        "averagePayoutYen": 27744.141551623565,
+        "medianPayoutYen": 7000
       },
       "validation": {
-        "count": 2037,
-        "highPayoutCount": 238,
-        "observedRate": 0.11683848797250859,
-        "posteriorRate": 0.11221882466478834,
-        "lift": 1.2015080041196742,
-        "averagePayoutYen": 6363.151693667158,
-        "medianPayoutYen": 2190
+        "count": 2043,
+        "highPayoutCount": 222,
+        "observedRate": 0.10866372980910426,
+        "posteriorRate": 0.1043006926861959,
+        "lift": 1.2061603401524499,
+        "averagePayoutYen": 25569.579050416054,
+        "medianPayoutYen": 6600
       },
-      "robustLift": 1.17086797865764,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "馬連",
-      "conditions": [
-        "raceBand=late",
-        "weather=雨"
-      ],
-      "highPayoutThresholdYen": 12330,
-      "discovery": {
-        "count": 1108,
-        "highPayoutCount": 139,
-        "observedRate": 0.12545126353790614,
-        "posteriorRate": 0.11754464383702343,
-        "lift": 1.1751693971221335,
-        "averagePayoutYen": 6619.016245487364,
-        "medianPayoutYen": 2600
-      },
-      "validation": {
-        "count": 357,
-        "highPayoutCount": 47,
-        "observedRate": 0.13165266106442577,
-        "posteriorRate": 0.10933390685480515,
-        "lift": 1.1706196763344177,
-        "averagePayoutYen": 7410.756302521008,
-        "medianPayoutYen": 2550
-      },
-      "robustLift": 1.1706196763344177,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "複勝",
-      "conditions": [
-        "distance=sprint",
-        "field=large"
-      ],
-      "highPayoutThresholdYen": 690,
-      "discovery": {
-        "count": 36575,
-        "highPayoutCount": 4313,
-        "observedRate": 0.11792207792207793,
-        "posteriorRate": 0.11768936880103747,
-        "lift": 1.1690993424793439,
-        "averagePayoutYen": 387.6161312371839,
-        "medianPayoutYen": 220
-      },
-      "validation": {
-        "count": 11915,
-        "highPayoutCount": 1307,
-        "observedRate": 0.10969366344943349,
-        "posteriorRate": 0.10890621621206421,
-        "lift": 1.2081715879480797,
-        "averagePayoutYen": 380.68233319345364,
-        "medianPayoutYen": 220
-      },
-      "robustLift": 1.1690993424793439,
+      "robustLift": 1.1693768337561767,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -4734,6 +4790,34 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
+      "betType": "ワイド",
+      "conditions": [
+        "venue=09",
+        "field=large"
+      ],
+      "highPayoutThresholdYen": 4270,
+      "discovery": {
+        "count": 18543,
+        "highPayoutCount": 2180,
+        "observedRate": 0.11756457962573477,
+        "posteriorRate": 0.11710835749774547,
+        "lift": 1.1688755263374833,
+        "averagePayoutYen": 2217.7366121986734,
+        "medianPayoutYen": 940
+      },
+      "validation": {
+        "count": 6087,
+        "highPayoutCount": 723,
+        "observedRate": 0.11877772301626417,
+        "posteriorRate": 0.11678084581867247,
+        "lift": 1.2628934376017045,
+        "averagePayoutYen": 2221.3799901429275,
+        "medianPayoutYen": 940
+      },
+      "robustLift": 1.1688755263374833,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
       "betType": "3連単",
       "conditions": [
         "weather=曇",
@@ -4762,31 +4846,31 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "馬単",
+      "betType": "複勝",
       "conditions": [
-        "distance=mile",
-        "raceBand=late"
+        "venue=10",
+        "field=large"
       ],
-      "highPayoutThresholdYen": 24600,
+      "highPayoutThresholdYen": 690,
       "discovery": {
-        "count": 5099,
-        "highPayoutCount": 604,
-        "observedRate": 0.11845459894096881,
-        "posteriorRate": 0.11680792472443728,
-        "lift": 1.1679024143894494,
-        "averagePayoutYen": 12564.238085899196,
-        "medianPayoutYen": 4350
+        "count": 11763,
+        "highPayoutCount": 1393,
+        "observedRate": 0.11842217121482615,
+        "posteriorRate": 0.11770124911941231,
+        "lift": 1.1683568839262555,
+        "averagePayoutYen": 386.93445549604695,
+        "medianPayoutYen": 230
       },
       "validation": {
-        "count": 2041,
-        "highPayoutCount": 230,
-        "observedRate": 0.11268985791278785,
-        "posteriorRate": 0.10855828530987766,
-        "lift": 1.1839294328440493,
-        "averagePayoutYen": 12530.161685448309,
-        "medianPayoutYen": 4060
+        "count": 4015,
+        "highPayoutCount": 477,
+        "observedRate": 0.11880448318804483,
+        "posteriorRate": 0.11563027115676133,
+        "lift": 1.2827661558482812,
+        "averagePayoutYen": 394.7098381070984,
+        "medianPayoutYen": 230
       },
-      "robustLift": 1.1679024143894494,
+      "robustLift": 1.1683568839262555,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -4797,12 +4881,12 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       ],
       "highPayoutThresholdYen": 690,
       "discovery": {
-        "count": 10618,
-        "highPayoutCount": 1284,
-        "observedRate": 0.12092672819740063,
-        "posteriorRate": 0.12001559168002021,
-        "lift": 1.1922075099033427,
-        "averagePayoutYen": 395.2034281408928,
+        "count": 10846,
+        "highPayoutCount": 1301,
+        "observedRate": 0.11995205605753273,
+        "posteriorRate": 0.11910544843569126,
+        "lift": 1.1822956139724814,
+        "averagePayoutYen": 393.2961460446247,
         "medianPayoutYen": 220
       },
       "validation": {
@@ -4815,34 +4899,6 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "medianPayoutYen": 220
       },
       "robustLift": 1.1677993681856587,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "ワイド",
-      "conditions": [
-        "raceBand=late",
-        "going=重"
-      ],
-      "highPayoutThresholdYen": 4270,
-      "discovery": {
-        "count": 3692,
-        "highPayoutCount": 440,
-        "observedRate": 0.11917659804983749,
-        "posteriorRate": 0.1169024271197996,
-        "lift": 1.1677403526799246,
-        "averagePayoutYen": 2156.560130010834,
-        "medianPayoutYen": 1060
-      },
-      "validation": {
-        "count": 1846,
-        "highPayoutCount": 224,
-        "observedRate": 0.12134344528710726,
-        "posteriorRate": 0.1151898684601857,
-        "lift": 1.2456882628033852,
-        "averagePayoutYen": 2276.5059588299023,
-        "medianPayoutYen": 1100
-      },
-      "robustLift": 1.1677403526799246,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -4876,222 +4932,28 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
     {
       "betType": "3連複",
       "conditions": [
-        "distance=mile",
-        "raceBand=late"
-      ],
-      "highPayoutThresholdYen": 47270,
-      "discovery": {
-        "count": 5088,
-        "highPayoutCount": 602,
-        "observedRate": 0.11831761006289308,
-        "posteriorRate": 0.1166804043754257,
-        "lift": 1.1665684051052323,
-        "averagePayoutYen": 27864.97641509434,
-        "medianPayoutYen": 7030
-      },
-      "validation": {
-        "count": 2043,
-        "highPayoutCount": 222,
-        "observedRate": 0.10866372980910426,
-        "posteriorRate": 0.10429198698916167,
-        "lift": 1.206677523642529,
-        "averagePayoutYen": 25569.579050416054,
-        "medianPayoutYen": 6600
-      },
-      "robustLift": 1.1665684051052323,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "3連複",
-      "conditions": [
         "going=不良"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 2483,
-        "highPayoutCount": 298,
-        "observedRate": 0.12001610954490535,
-        "posteriorRate": 0.11666446518601367,
-        "lift": 1.1664090454006564,
-        "averagePayoutYen": 26992.118405155055,
-        "medianPayoutYen": 5800
+        "count": 2510,
+        "highPayoutCount": 303,
+        "observedRate": 0.12071713147410358,
+        "posteriorRate": 0.11727903372855975,
+        "lift": 1.1725583695248025,
+        "averagePayoutYen": 26966.585657370517,
+        "medianPayoutYen": 5810
       },
       "validation": {
         "count": 850,
         "highPayoutCount": 93,
         "observedRate": 0.10941176470588235,
-        "posteriorRate": 0.10089964660254676,
-        "lift": 1.1674275197328476,
+        "posteriorRate": 0.10091604555629351,
+        "lift": 1.1670194003527337,
         "averagePayoutYen": 21784.882352941175,
         "medianPayoutYen": 5970
       },
-      "robustLift": 1.1664090454006564,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "馬単",
-      "conditions": [
-        "venue=03",
-        "class=conditions"
-      ],
-      "highPayoutThresholdYen": 24600,
-      "discovery": {
-        "count": 2449,
-        "highPayoutCount": 294,
-        "observedRate": 0.12004899959167006,
-        "posteriorRate": 0.11665227891899772,
-        "lift": 1.166346191963691,
-        "averagePayoutYen": 12643.115557370355,
-        "medianPayoutYen": 4470
-      },
-      "validation": {
-        "count": 692,
-        "highPayoutCount": 94,
-        "observedRate": 0.13583815028901733,
-        "posteriorRate": 0.11732097564798587,
-        "lift": 1.2794947503375131,
-        "averagePayoutYen": 12772.182080924855,
-        "medianPayoutYen": 5010
-      },
-      "robustLift": 1.166346191963691,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "馬連",
-      "conditions": [
-        "field=large"
-      ],
-      "highPayoutThresholdYen": 12330,
-      "discovery": {
-        "count": 45375,
-        "highPayoutCount": 5301,
-        "observedRate": 0.11682644628099173,
-        "posteriorRate": 0.11664330871476694,
-        "lift": 1.1661581702584427,
-        "averagePayoutYen": 6619.252231404958,
-        "medianPayoutYen": 2160
-      },
-      "validation": {
-        "count": 15627,
-        "highPayoutCount": 1827,
-        "observedRate": 0.11691303513150317,
-        "posteriorRate": 0.11618398698918386,
-        "lift": 1.2439623274885578,
-        "averagePayoutYen": 6591.846803609138,
-        "medianPayoutYen": 2210
-      },
-      "robustLift": 1.1661581702584427,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "複勝",
-      "conditions": [
-        "surface=芝",
-        "field=large"
-      ],
-      "highPayoutThresholdYen": 690,
-      "discovery": {
-        "count": 65899,
-        "highPayoutCount": 7744,
-        "observedRate": 0.11751316408443224,
-        "posteriorRate": 0.11738630624404682,
-        "lift": 1.1660887881725492,
-        "averagePayoutYen": 386.51754958345344,
-        "medianPayoutYen": 230
-      },
-      "validation": {
-        "count": 21128,
-        "highPayoutCount": 2326,
-        "observedRate": 0.1100908746686861,
-        "posteriorRate": 0.10962967793012657,
-        "lift": 1.2161974465549847,
-        "averagePayoutYen": 377.4233244982961,
-        "medianPayoutYen": 220
-      },
-      "robustLift": 1.1660887881725492,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "馬単",
-      "conditions": [
-        "field=large"
-      ],
-      "highPayoutThresholdYen": 24600,
-      "discovery": {
-        "count": 45284,
-        "highPayoutCount": 5288,
-        "observedRate": 0.11677413656037453,
-        "posteriorRate": 0.11659111415630186,
-        "lift": 1.1657346369326727,
-        "averagePayoutYen": 13408.55158554898,
-        "medianPayoutYen": 4180
-      },
-      "validation": {
-        "count": 15652,
-        "highPayoutCount": 1769,
-        "observedRate": 0.11302070023000256,
-        "posteriorRate": 0.11236048804930653,
-        "lift": 1.2253960028069089,
-        "averagePayoutYen": 13074.723358037312,
-        "medianPayoutYen": 4160
-      },
-      "robustLift": 1.1657346369326727,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "単勝",
-      "conditions": [
-        "going=不良",
-        "class=conditions"
-      ],
-      "highPayoutThresholdYen": 2120,
-      "discovery": {
-        "count": 1123,
-        "highPayoutCount": 140,
-        "observedRate": 0.1246660730186999,
-        "posteriorRate": 0.11724654440975407,
-        "lift": 1.1656778980664788,
-        "averagePayoutYen": 1120.5164737310774,
-        "medianPayoutYen": 540
-      },
-      "validation": {
-        "count": 361,
-        "highPayoutCount": 50,
-        "observedRate": 0.13850415512465375,
-        "posteriorRate": 0.11134435993785408,
-        "lift": 1.2137611024143369,
-        "averagePayoutYen": 1110.8033240997229,
-        "medianPayoutYen": 550
-      },
-      "robustLift": 1.1656778980664788,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "ワイド",
-      "conditions": [
-        "venue=09",
-        "field=large"
-      ],
-      "highPayoutThresholdYen": 4270,
-      "discovery": {
-        "count": 17643,
-        "highPayoutCount": 2067,
-        "observedRate": 0.11715694609760245,
-        "posteriorRate": 0.11668715066340737,
-        "lift": 1.1655899524589477,
-        "averagePayoutYen": 2223.4886357195487,
-        "medianPayoutYen": 940
-      },
-      "validation": {
-        "count": 6087,
-        "highPayoutCount": 723,
-        "observedRate": 0.11877772301626417,
-        "posteriorRate": 0.11678084581867247,
-        "lift": 1.2628934376017045,
-        "averagePayoutYen": 2221.3799901429275,
-        "medianPayoutYen": 940
-      },
-      "robustLift": 1.1655899524589477,
+      "robustLift": 1.1670194003527337,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -5099,54 +4961,82 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "conditions": [
         "venue=03"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 4451,
-        "highPayoutCount": 527,
-        "observedRate": 0.11840035946978207,
-        "posteriorRate": 0.1165441526257077,
-        "lift": 1.1652061627714647,
-        "averagePayoutYen": 24272.772410694226,
+        "count": 4643,
+        "highPayoutCount": 550,
+        "observedRate": 0.11845789360327375,
+        "posteriorRate": 0.11666534931420666,
+        "lift": 1.1664227391958377,
+        "averagePayoutYen": 24220.941201809175,
         "medianPayoutYen": 6610
       },
       "validation": {
         "count": 1467,
         "highPayoutCount": 156,
         "observedRate": 0.10633946830265849,
-        "posteriorRate": 0.10127835430271384,
-        "lift": 1.171809237667414,
+        "posteriorRate": 0.10128960930401436,
+        "lift": 1.171339388700033,
         "averagePayoutYen": 23554.512610770278,
         "medianPayoutYen": 6000
       },
-      "robustLift": 1.1652061627714647,
+      "robustLift": 1.1664227391958377,
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "複勝",
+      "betType": "馬連",
       "conditions": [
-        "venue=08",
-        "field=large"
+        "distance=mile",
+        "raceBand=late"
       ],
-      "highPayoutThresholdYen": 690,
+      "highPayoutThresholdYen": 12350,
       "discovery": {
-        "count": 19482,
-        "highPayoutCount": 2293,
-        "observedRate": 0.11769838825582589,
-        "posteriorRate": 0.1172722124060887,
-        "lift": 1.1649554060132543,
-        "averagePayoutYen": 385.6405913150601,
-        "medianPayoutYen": 220
+        "count": 5308,
+        "highPayoutCount": 628,
+        "observedRate": 0.11831198191409194,
+        "posteriorRate": 0.11674328739366943,
+        "lift": 1.166382821881756,
+        "averagePayoutYen": 6386.060663149962,
+        "medianPayoutYen": 2210
       },
       "validation": {
-        "count": 4267,
-        "highPayoutCount": 474,
-        "observedRate": 0.11108507147879072,
-        "posteriorRate": 0.10888833108302443,
-        "lift": 1.2079731759060106,
-        "averagePayoutYen": 368.5048043121631,
-        "medianPayoutYen": 220
+        "count": 2037,
+        "highPayoutCount": 238,
+        "observedRate": 0.11683848797250859,
+        "posteriorRate": 0.11218389632290135,
+        "lift": 1.2034175570379675,
+        "averagePayoutYen": 6363.151693667158,
+        "medianPayoutYen": 2190
       },
-      "robustLift": 1.1649554060132543,
+      "robustLift": 1.166382821881756,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "馬連",
+      "conditions": [
+        "field=large",
+        "going=不良"
+      ],
+      "highPayoutThresholdYen": 12350,
+      "discovery": {
+        "count": 2116,
+        "highPayoutCount": 259,
+        "observedRate": 0.1224007561436673,
+        "posteriorRate": 0.11813647292906422,
+        "lift": 1.18030214617403,
+        "averagePayoutYen": 6715.349716446125,
+        "medianPayoutYen": 2280
+      },
+      "validation": {
+        "count": 628,
+        "highPayoutCount": 76,
+        "observedRate": 0.12101910828025478,
+        "posteriorRate": 0.10869729164113538,
+        "lift": 1.1660160990211148,
+        "averagePayoutYen": 6874.490445859873,
+        "medianPayoutYen": 2530
+      },
+      "robustLift": 1.1660160990211148,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -5157,13 +5047,13 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 36939,
-        "highPayoutCount": 4316,
-        "observedRate": 0.11684127886515606,
-        "posteriorRate": 0.11661783099137797,
-        "lift": 1.1648975170642546,
-        "averagePayoutYen": 2137.632583448388,
-        "medianPayoutYen": 960
+        "count": 39186,
+        "highPayoutCount": 4584,
+        "observedRate": 0.11698055427958964,
+        "posteriorRate": 0.11676899792948564,
+        "lift": 1.1654883291942306,
+        "averagePayoutYen": 2138.8421885367225,
+        "medianPayoutYen": 950
       },
       "validation": {
         "count": 13775,
@@ -5174,91 +5064,118 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "averagePayoutYen": 2308.7709618874774,
         "medianPayoutYen": 1000
       },
-      "robustLift": 1.1648975170642546,
+      "robustLift": 1.1654883291942306,
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "馬連",
+      "betType": "枠連",
       "conditions": [
-        "field=large",
-        "going=不良"
+        "going=不良",
+        "weather=雨"
       ],
-      "highPayoutThresholdYen": 12330,
+      "highPayoutThresholdYen": 4690,
       "discovery": {
-        "count": 2033,
-        "highPayoutCount": 248,
-        "observedRate": 0.1219872110181997,
-        "posteriorRate": 0.1176517123134361,
-        "lift": 1.176239829536316,
-        "averagePayoutYen": 6671.121495327103,
-        "medianPayoutYen": 2270
+        "count": 844,
+        "highPayoutCount": 107,
+        "observedRate": 0.12677725118483413,
+        "posteriorRate": 0.11694134273603857,
+        "lift": 1.1654703001497064,
+        "averagePayoutYen": 2585.5924170616113,
+        "medianPayoutYen": 1320
       },
       "validation": {
-        "count": 628,
-        "highPayoutCount": 76,
-        "observedRate": 0.12101910828025478,
-        "posteriorRate": 0.10877584944553902,
-        "lift": 1.1646446498983944,
-        "averagePayoutYen": 6874.490445859873,
-        "medianPayoutYen": 2530
+        "count": 291,
+        "highPayoutCount": 43,
+        "observedRate": 0.14776632302405499,
+        "posteriorRate": 0.11547157393334186,
+        "lift": 1.1944178301289017,
+        "averagePayoutYen": 2637.6975945017184,
+        "medianPayoutYen": 1400
       },
-      "robustLift": 1.1646446498983944,
+      "robustLift": 1.1654703001497064,
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "馬連",
+      "betType": "3連複",
       "conditions": [
-        "field=large",
-        "going=稍重"
+        "weather=曇",
+        "class=open_graded"
       ],
-      "highPayoutThresholdYen": 12330,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 6848,
-        "highPayoutCount": 817,
-        "observedRate": 0.11930490654205607,
-        "posteriorRate": 0.11799289429639816,
-        "lift": 1.1796508452333165,
-        "averagePayoutYen": 6649.401285046729,
-        "medianPayoutYen": 2180
+        "count": 1113,
+        "highPayoutCount": 138,
+        "observedRate": 0.12398921832884097,
+        "posteriorRate": 0.11655913919588644,
+        "lift": 1.1653608480870414,
+        "averagePayoutYen": 24633.629829290207,
+        "medianPayoutYen": 6830
       },
       "validation": {
-        "count": 2743,
-        "highPayoutCount": 306,
-        "observedRate": 0.11155668975574189,
-        "posteriorRate": 0.10875706388361642,
-        "lift": 1.1644435160594035,
-        "averagePayoutYen": 6368.7057965730955,
-        "medianPayoutYen": 2020
+        "count": 529,
+        "highPayoutCount": 74,
+        "observedRate": 0.13988657844990549,
+        "posteriorRate": 0.11393261564722666,
+        "lift": 1.3175464026587886,
+        "averagePayoutYen": 30496.843100189035,
+        "medianPayoutYen": 8860
       },
-      "robustLift": 1.1644435160594035,
+      "robustLift": 1.1653608480870414,
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "馬連",
+      "betType": "馬単",
       "conditions": [
-        "surface=芝",
-        "distance=sprint"
+        "field=large"
       ],
-      "highPayoutThresholdYen": 12330,
+      "highPayoutThresholdYen": 24590,
       "discovery": {
-        "count": 6695,
-        "highPayoutCount": 788,
-        "observedRate": 0.11769977595220314,
-        "posteriorRate": 0.11647140893536256,
-        "lift": 1.1644395776153942,
-        "averagePayoutYen": 6384.492905153099,
-        "medianPayoutYen": 2310
+        "count": 46149,
+        "highPayoutCount": 5384,
+        "observedRate": 0.11666558321957139,
+        "posteriorRate": 0.11648713244239796,
+        "lift": 1.1646793548583196,
+        "averagePayoutYen": 13381.566447810354,
+        "medianPayoutYen": 4170
       },
       "validation": {
-        "count": 2149,
-        "highPayoutCount": 264,
-        "observedRate": 0.12284783620288506,
-        "posteriorRate": 0.11728922543396302,
-        "lift": 1.2557959288636362,
-        "averagePayoutYen": 6895.579339227547,
-        "medianPayoutYen": 2270
+        "count": 15652,
+        "highPayoutCount": 1769,
+        "observedRate": 0.11302070023000256,
+        "posteriorRate": 0.11236048804930653,
+        "lift": 1.2253960028069089,
+        "averagePayoutYen": 13074.723358037312,
+        "medianPayoutYen": 4160
       },
-      "robustLift": 1.1644395776153942,
+      "robustLift": 1.1646793548583196,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "複勝",
+      "conditions": [
+        "distance=sprint",
+        "field=large"
+      ],
+      "highPayoutThresholdYen": 690,
+      "discovery": {
+        "count": 38859,
+        "highPayoutCount": 4567,
+        "observedRate": 0.11752747111351296,
+        "posteriorRate": 0.11731422083770811,
+        "lift": 1.1645150627001741,
+        "averagePayoutYen": 386.91551506729456,
+        "medianPayoutYen": 220
+      },
+      "validation": {
+        "count": 11915,
+        "highPayoutCount": 1307,
+        "observedRate": 0.10969366344943349,
+        "posteriorRate": 0.10890621621206421,
+        "lift": 1.2081715879480797,
+        "averagePayoutYen": 380.68233319345364,
+        "medianPayoutYen": 220
+      },
+      "robustLift": 1.1645150627001741,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -5267,15 +5184,15 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "weather=曇",
         "class=open_graded"
       ],
-      "highPayoutThresholdYen": 24600,
+      "highPayoutThresholdYen": 24590,
       "discovery": {
-        "count": 1085,
-        "highPayoutCount": 136,
-        "observedRate": 0.12534562211981568,
-        "posteriorRate": 0.11735493408966834,
-        "lift": 1.1733716799367495,
-        "averagePayoutYen": 13044.267281105991,
-        "medianPayoutYen": 4290
+        "count": 1112,
+        "highPayoutCount": 140,
+        "observedRate": 0.12589928057553956,
+        "posteriorRate": 0.1178711174351258,
+        "lift": 1.1785169239929272,
+        "averagePayoutYen": 12952.634892086331,
+        "medianPayoutYen": 4260
       },
       "validation": {
         "count": 529,
@@ -5287,6 +5204,61 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
         "medianPayoutYen": 5080
       },
       "robustLift": 1.164217433924159,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "馬単",
+      "conditions": [
+        "distance=mile",
+        "raceBand=late"
+      ],
+      "highPayoutThresholdYen": 24590,
+      "discovery": {
+        "count": 5154,
+        "highPayoutCount": 608,
+        "observedRate": 0.11796662786185487,
+        "posteriorRate": 0.11637924324468037,
+        "lift": 1.1636006406814037,
+        "averagePayoutYen": 12522.041133100505,
+        "medianPayoutYen": 4320
+      },
+      "validation": {
+        "count": 2041,
+        "highPayoutCount": 230,
+        "observedRate": 0.11268985791278785,
+        "posteriorRate": 0.10855828530987766,
+        "lift": 1.1839294328440493,
+        "averagePayoutYen": 12530.161685448309,
+        "medianPayoutYen": 4060
+      },
+      "robustLift": 1.1636006406814037,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "馬連",
+      "conditions": [
+        "field=large"
+      ],
+      "highPayoutThresholdYen": 12350,
+      "discovery": {
+        "count": 47623,
+        "highPayoutCount": 5554,
+        "observedRate": 0.11662432018142495,
+        "posteriorRate": 0.11645252817119531,
+        "lift": 1.1634778449021896,
+        "averagePayoutYen": 6593.982949415198,
+        "medianPayoutYen": 2150
+      },
+      "validation": {
+        "count": 15627,
+        "highPayoutCount": 1823,
+        "observedRate": 0.1166570678953094,
+        "posteriorRate": 0.11593046102630375,
+        "lift": 1.2436076546405304,
+        "averagePayoutYen": 6591.846803609138,
+        "medianPayoutYen": 2210
+      },
+      "robustLift": 1.1634778449021896,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -5320,169 +5292,197 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
     {
       "betType": "複勝",
       "conditions": [
-        "venue=10",
+        "venue=08",
         "field=large"
       ],
       "highPayoutThresholdYen": 690,
       "discovery": {
-        "count": 11085,
-        "highPayoutCount": 1305,
-        "observedRate": 0.11772665764546685,
-        "posteriorRate": 0.11699036239089035,
-        "lift": 1.162155572257639,
-        "averagePayoutYen": 387.4506089309878,
-        "medianPayoutYen": 230
+        "count": 20290,
+        "highPayoutCount": 2384,
+        "observedRate": 0.11749630359783145,
+        "posteriorRate": 0.1170933341967943,
+        "lift": 1.1623224400270098,
+        "averagePayoutYen": 385.5120749137506,
+        "medianPayoutYen": 220
       },
       "validation": {
-        "count": 4015,
-        "highPayoutCount": 477,
-        "observedRate": 0.11880448318804483,
-        "posteriorRate": 0.11563027115676133,
-        "lift": 1.2827661558482812,
-        "averagePayoutYen": 394.7098381070984,
-        "medianPayoutYen": 230
+        "count": 4267,
+        "highPayoutCount": 474,
+        "observedRate": 0.11108507147879072,
+        "posteriorRate": 0.10888833108302443,
+        "lift": 1.2079731759060106,
+        "averagePayoutYen": 368.5048043121631,
+        "medianPayoutYen": 220
       },
-      "robustLift": 1.162155572257639,
+      "robustLift": 1.1623224400270098,
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "3連複",
+      "betType": "馬単",
       "conditions": [
-        "venue=04",
+        "venue=09",
         "field=large"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 24590,
       "discovery": {
-        "count": 4508,
-        "highPayoutCount": 532,
-        "observedRate": 0.11801242236024845,
-        "posteriorRate": 0.1162160742112378,
-        "lift": 1.1619260411883565,
-        "averagePayoutYen": 26591.583850931678,
-        "medianPayoutYen": 7020
+        "count": 5961,
+        "highPayoutCount": 700,
+        "observedRate": 0.11742996141586982,
+        "posteriorRate": 0.11608237754301544,
+        "lift": 1.1606324728962998,
+        "averagePayoutYen": 13455.46552591847,
+        "medianPayoutYen": 4200
       },
       "validation": {
-        "count": 1635,
-        "highPayoutCount": 198,
-        "observedRate": 0.12110091743119267,
-        "posteriorRate": 0.11298104117725438,
-        "lift": 1.3072114830882635,
-        "averagePayoutYen": 27959.070336391436,
-        "medianPayoutYen": 7120
+        "count": 2032,
+        "highPayoutCount": 225,
+        "observedRate": 0.11072834645669291,
+        "posteriorRate": 0.10696943245355416,
+        "lift": 1.1666015093632187,
+        "averagePayoutYen": 12489.817913385827,
+        "medianPayoutYen": 4020
       },
-      "robustLift": 1.1619260411883565,
+      "robustLift": 1.1606324728962998,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "馬単",
+      "conditions": [
+        "venue=03",
+        "class=conditions"
+      ],
+      "highPayoutThresholdYen": 24590,
+      "discovery": {
+        "count": 2507,
+        "highPayoutCount": 299,
+        "observedRate": 0.11926605504587157,
+        "posteriorRate": 0.11606526149166038,
+        "lift": 1.1604613405898212,
+        "averagePayoutYen": 12538.603909054647,
+        "medianPayoutYen": 4440
+      },
+      "validation": {
+        "count": 692,
+        "highPayoutCount": 94,
+        "observedRate": 0.13583815028901733,
+        "posteriorRate": 0.11732097564798587,
+        "lift": 1.2794947503375131,
+        "averagePayoutYen": 12772.182080924855,
+        "medianPayoutYen": 5010
+      },
+      "robustLift": 1.1604613405898212,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "ワイド",
+      "conditions": [
+        "raceBand=late",
+        "going=重"
+      ],
+      "highPayoutThresholdYen": 4270,
+      "discovery": {
+        "count": 3776,
+        "highPayoutCount": 447,
+        "observedRate": 0.1183792372881356,
+        "posteriorRate": 0.11625221043722332,
+        "lift": 1.1603301981698555,
+        "averagePayoutYen": 2160.423728813559,
+        "medianPayoutYen": 1060
+      },
+      "validation": {
+        "count": 1846,
+        "highPayoutCount": 224,
+        "observedRate": 0.12134344528710726,
+        "posteriorRate": 0.1151898684601857,
+        "lift": 1.2456882628033852,
+        "averagePayoutYen": 2276.5059588299023,
+        "medianPayoutYen": 1100
+      },
+      "robustLift": 1.1603301981698555,
       "usePolicy": "volatility_prior_only"
     },
     {
       "betType": "馬連",
       "conditions": [
-        "venue=07",
+        "field=large",
+        "going=稍重"
+      ],
+      "highPayoutThresholdYen": 12350,
+      "discovery": {
+        "count": 7081,
+        "highPayoutCount": 839,
+        "observedRate": 0.11848608953537636,
+        "posteriorRate": 0.11727278897011371,
+        "lift": 1.171673075023603,
+        "averagePayoutYen": 6642.666290072024,
+        "medianPayoutYen": 2170
+      },
+      "validation": {
+        "count": 2743,
+        "highPayoutCount": 304,
+        "observedRate": 0.11082756106452789,
+        "posteriorRate": 0.10811302650977513,
+        "lift": 1.1597485781015326,
+        "averagePayoutYen": 6368.7057965730955,
+        "medianPayoutYen": 2020
+      },
+      "robustLift": 1.1597485781015326,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "馬連",
+      "conditions": [
+        "venue=03",
         "field=large"
       ],
-      "highPayoutThresholdYen": 12330,
+      "highPayoutThresholdYen": 12350,
       "discovery": {
-        "count": 4225,
-        "highPayoutCount": 537,
-        "observedRate": 0.12710059171597632,
-        "posteriorRate": 0.12423529889734045,
-        "lift": 1.2420601785046228,
-        "averagePayoutYen": 6969.3514792899405,
-        "medianPayoutYen": 2320
+        "count": 3910,
+        "highPayoutCount": 494,
+        "observedRate": 0.12634271099744246,
+        "posteriorRate": 0.12336621614114106,
+        "lift": 1.2325525391653611,
+        "averagePayoutYen": 6753.780051150895,
+        "medianPayoutYen": 2330
       },
       "validation": {
-        "count": 1673,
-        "highPayoutCount": 189,
-        "observedRate": 0.11297071129707113,
-        "posteriorRate": 0.10846716897126922,
-        "lift": 1.1613396601904868,
-        "averagePayoutYen": 6258.619246861925,
+        "count": 1199,
+        "highPayoutCount": 137,
+        "observedRate": 0.11426188490408674,
+        "posteriorRate": 0.10806977337916464,
+        "lift": 1.159284593710906,
+        "averagePayoutYen": 7202.577147623019,
+        "medianPayoutYen": 2570
+      },
+      "robustLift": 1.159284593710906,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "馬連",
+      "conditions": [
+        "venue=03",
+        "class=conditions"
+      ],
+      "highPayoutThresholdYen": 12350,
+      "discovery": {
+        "count": 2500,
+        "highPayoutCount": 298,
+        "observedRate": 0.1192,
+        "posteriorRate": 0.116015004394144,
+        "lift": 1.1591065424563658,
+        "averagePayoutYen": 6266.884,
         "medianPayoutYen": 2290
       },
-      "robustLift": 1.1613396601904868,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "ワイド",
-      "conditions": [
-        "distance=mile",
-        "class=open_graded"
-      ],
-      "highPayoutThresholdYen": 4270,
-      "discovery": {
-        "count": 3878,
-        "highPayoutCount": 458,
-        "observedRate": 0.1181021144920062,
-        "posteriorRate": 0.11604727603613521,
-        "lift": 1.1591982338151936,
-        "averagePayoutYen": 2241.407942238267,
-        "medianPayoutYen": 1040
-      },
       "validation": {
-        "count": 1685,
-        "highPayoutCount": 219,
-        "observedRate": 0.12997032640949555,
-        "posteriorRate": 0.12138921345885384,
-        "lift": 1.312729326441538,
-        "averagePayoutYen": 2396.528189910979,
-        "medianPayoutYen": 1070
+        "count": 690,
+        "highPayoutCount": 89,
+        "observedRate": 0.1289855072463768,
+        "posteriorRate": 0.11395844115226951,
+        "lift": 1.2224534300412182,
+        "averagePayoutYen": 6596.724637681159,
+        "medianPayoutYen": 2650
       },
-      "robustLift": 1.1591982338151936,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "ワイド",
-      "conditions": [
-        "distance=sprint",
-        "weather=雨"
-      ],
-      "highPayoutThresholdYen": 4270,
-      "discovery": {
-        "count": 2415,
-        "highPayoutCount": 288,
-        "observedRate": 0.11925465838509317,
-        "posteriorRate": 0.11597083172768438,
-        "lift": 1.158434630304898,
-        "averagePayoutYen": 2128.4844720496894,
-        "medianPayoutYen": 940
-      },
-      "validation": {
-        "count": 773,
-        "highPayoutCount": 103,
-        "observedRate": 0.1332470892626132,
-        "posteriorRate": 0.11723128940109633,
-        "lift": 1.2677646323619838,
-        "averagePayoutYen": 2412.35446313066,
-        "medianPayoutYen": 1000
-      },
-      "robustLift": 1.158434630304898,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "3連複",
-      "conditions": [
-        "surface=ダート",
-        "raceBand=late"
-      ],
-      "highPayoutThresholdYen": 47270,
-      "discovery": {
-        "count": 6776,
-        "highPayoutCount": 793,
-        "observedRate": 0.11703069657615112,
-        "posteriorRate": 0.11586175091394707,
-        "lift": 1.1583835237791598,
-        "averagePayoutYen": 25644.672373081463,
-        "medianPayoutYen": 6720
-      },
-      "validation": {
-        "count": 2887,
-        "highPayoutCount": 336,
-        "observedRate": 0.11638378940076204,
-        "posteriorRate": 0.11196177233936762,
-        "lift": 1.295418354654005,
-        "averagePayoutYen": 25496.30758572913,
-        "medianPayoutYen": 7760
-      },
-      "robustLift": 1.1583835237791598,
+      "robustLift": 1.1591065424563658,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -5514,87 +5514,31 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       "usePolicy": "volatility_prior_only"
     },
     {
-      "betType": "馬連",
+      "betType": "3連複",
       "conditions": [
-        "weather=曇",
-        "class=open_graded"
-      ],
-      "highPayoutThresholdYen": 12330,
-      "discovery": {
-        "count": 1080,
-        "highPayoutCount": 133,
-        "observedRate": 0.12314814814814815,
-        "posteriorRate": 0.11583024512021119,
-        "lift": 1.1580294506243873,
-        "averagePayoutYen": 6545.018518518518,
-        "medianPayoutYen": 2190
-      },
-      "validation": {
-        "count": 528,
-        "highPayoutCount": 68,
-        "observedRate": 0.12878787878787878,
-        "posteriorRate": 0.1115750565900467,
-        "lift": 1.194615288063261,
-        "averagePayoutYen": 7466.420454545455,
-        "medianPayoutYen": 2730
-      },
-      "robustLift": 1.1580294506243873,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "馬連",
-      "conditions": [
-        "venue=03",
+        "venue=04",
         "field=large"
       ],
-      "highPayoutThresholdYen": 12330,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 3758,
-        "highPayoutCount": 481,
-        "observedRate": 0.12799361362426823,
-        "posteriorRate": 0.12470920321510888,
-        "lift": 1.2467981047361036,
-        "averagePayoutYen": 6812.610431080362,
-        "medianPayoutYen": 2340
+        "count": 4741,
+        "highPayoutCount": 557,
+        "observedRate": 0.11748576249736342,
+        "posteriorRate": 0.11581947939762732,
+        "lift": 1.1579657130874037,
+        "averagePayoutYen": 26437.6777051255,
+        "medianPayoutYen": 6930
       },
       "validation": {
-        "count": 1199,
-        "highPayoutCount": 137,
-        "observedRate": 0.11426188490408674,
-        "posteriorRate": 0.10812192947296528,
-        "lift": 1.1576432391863503,
-        "averagePayoutYen": 7202.577147623019,
-        "medianPayoutYen": 2570
+        "count": 1635,
+        "highPayoutCount": 198,
+        "observedRate": 0.12110091743119267,
+        "posteriorRate": 0.1129914105391083,
+        "lift": 1.3066620619691558,
+        "averagePayoutYen": 27959.070336391436,
+        "medianPayoutYen": 7120
       },
-      "robustLift": 1.1576432391863503,
-      "usePolicy": "volatility_prior_only"
-    },
-    {
-      "betType": "ワイド",
-      "conditions": [
-        "distance=middle",
-        "field=large"
-      ],
-      "highPayoutThresholdYen": 4270,
-      "discovery": {
-        "count": 54358,
-        "highPayoutCount": 6307,
-        "observedRate": 0.11602707973067442,
-        "posteriorRate": 0.11588200398275912,
-        "lift": 1.1575473284349336,
-        "averagePayoutYen": 2172.86747120939,
-        "medianPayoutYen": 940
-      },
-      "validation": {
-        "count": 18857,
-        "highPayoutCount": 2135,
-        "observedRate": 0.11322055470117198,
-        "posteriorRate": 0.11268458084453147,
-        "lift": 1.2185955382479627,
-        "averagePayoutYen": 2222.691308267487,
-        "medianPayoutYen": 940
-      },
-      "robustLift": 1.1575473284349336,
+      "robustLift": 1.1579657130874037,
       "usePolicy": "volatility_prior_only"
     },
     {
@@ -5605,12 +5549,12 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
       ],
       "highPayoutThresholdYen": 4270,
       "discovery": {
-        "count": 3858,
-        "highPayoutCount": 542,
-        "observedRate": 0.14048729911871435,
-        "posteriorRate": 0.13585474403079392,
-        "lift": 1.3570553718716676,
-        "averagePayoutYen": 2444.0150336962156,
+        "count": 4062,
+        "highPayoutCount": 565,
+        "observedRate": 0.13909404234367306,
+        "posteriorRate": 0.13482999820902386,
+        "lift": 1.345757796369817,
+        "averagePayoutYen": 2451.4598719842443,
         "medianPayoutYen": 1080
       },
       "validation": {
@@ -5628,29 +5572,85 @@ window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
     {
       "betType": "3連複",
       "conditions": [
+        "surface=ダート",
+        "raceBand=late"
+      ],
+      "highPayoutThresholdYen": 47210,
+      "discovery": {
+        "count": 6886,
+        "highPayoutCount": 805,
+        "observedRate": 0.11690386291025269,
+        "posteriorRate": 0.11576088431125979,
+        "lift": 1.157379878119729,
+        "averagePayoutYen": 25630.657856520476,
+        "medianPayoutYen": 6720
+      },
+      "validation": {
+        "count": 2887,
+        "highPayoutCount": 336,
+        "observedRate": 0.11638378940076204,
+        "posteriorRate": 0.11196830868054214,
+        "lift": 1.2948306459549639,
+        "averagePayoutYen": 25496.30758572913,
+        "medianPayoutYen": 7760
+      },
+      "robustLift": 1.157379878119729,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "ワイド",
+      "conditions": [
+        "distance=mile",
+        "going=不良"
+      ],
+      "highPayoutThresholdYen": 4270,
+      "discovery": {
+        "count": 1864,
+        "highPayoutCount": 224,
+        "observedRate": 0.12017167381974249,
+        "posteriorRate": 0.11594519958949533,
+        "lift": 1.1572658783049279,
+        "averagePayoutYen": 2192.516094420601,
+        "medianPayoutYen": 960
+      },
+      "validation": {
+        "count": 620,
+        "highPayoutCount": 80,
+        "observedRate": 0.12903225806451613,
+        "posteriorRate": 0.11271020661392465,
+        "lift": 1.2188726608854406,
+        "averagePayoutYen": 2325.2419354838707,
+        "medianPayoutYen": 1080
+      },
+      "robustLift": 1.1572658783049279,
+      "usePolicy": "volatility_prior_only"
+    },
+    {
+      "betType": "3連複",
+      "conditions": [
         "venue=09",
         "field=large"
       ],
-      "highPayoutThresholdYen": 47270,
+      "highPayoutThresholdYen": 47210,
       "discovery": {
-        "count": 5886,
-        "highPayoutCount": 689,
-        "observedRate": 0.11705742439687394,
-        "posteriorRate": 0.11572347316784824,
-        "lift": 1.1570010255731282,
-        "averagePayoutYen": 27472.930682976556,
-        "medianPayoutYen": 6230
+        "count": 5955,
+        "highPayoutCount": 697,
+        "observedRate": 0.11704450041981528,
+        "posteriorRate": 0.1157257771530542,
+        "lift": 1.1570288759765883,
+        "averagePayoutYen": 27474.073887489503,
+        "medianPayoutYen": 6260
       },
       "validation": {
         "count": 2031,
         "highPayoutCount": 215,
         "observedRate": 0.10585918266863614,
-        "posteriorRate": 0.10202075184252792,
-        "lift": 1.180398914120642,
+        "posteriorRate": 0.10202949881509135,
+        "lift": 1.1798956634607467,
         "averagePayoutYen": 23499.566715903497,
         "medianPayoutYen": 6490
       },
-      "robustLift": 1.1570010255731282,
+      "robustLift": 1.1570288759765883,
       "usePolicy": "volatility_prior_only"
     },
     {
