@@ -31,6 +31,12 @@ for (const [raceId, rows] of byRace) {
   const total = rows.reduce((sum, row) => sum + row.probability, 0);
   if (Math.abs(total - 1) > 1e-9 || rows.some((row) => !(row.probability > 0 && row.probability < 1)
     || !Number.isInteger(row.historyStarts) || row.historyStarts < 0)) failures.push(`${raceId}: invalid probability/history`);
+  if (rows.some((row) => !row.agentSignals
+    || artifact.activeFeatureGroups.some((group) => row.agentSignals[group]?.status !== "available")
+    || Object.values(row.agentSignals).some((signal) => signal.status === "available"
+      && (!Number.isFinite(signal.contribution) || !Array.isArray(signal.topFactors))))) {
+    failures.push(`${raceId}: specialist agent signals`);
+  }
 }
 
 for (const type of types) {
@@ -51,6 +57,9 @@ if (audit.evaluationScope !== "ai_prediction_top_ticket_only"
   || !primary || primary.roi >= 1 || primary.bets !== 72) failures.push("AI recommendation external ROI gate");
 if (output.modelVersion !== artifact.modelVersion || output.predictions.length !== 72
   || output.predictions.some((row) => row.modelVersion !== artifact.modelVersion || row.predictionContext !== "out_of_sample_ability_model")) failures.push("public prediction model coverage");
+if (output.predictions.some((row) => !Array.isArray(row.forecastPanel) || row.forecastPanel.length < 10
+  || row.masterConsensus?.agent !== "chief-expectancy-agent"
+  || row.forecastPanel.filter((agent) => agent.status === "available").length < 3)) failures.push("specialist forecast panel");
 if (output.logic.deploymentStatus !== "benchmark_only" || output.logic.referenceWeekExternalAudit?.status !== "fail") failures.push("public fail-closed gate");
 if (output.candidates.some((row) => row.recommendationEligible !== false || row.externalValidationStatus !== "fail")) failures.push("candidate purchase gate");
 

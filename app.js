@@ -104,6 +104,8 @@ const els = {
   aiMarks: document.querySelector("#ai-marks"),
   aiScenario: document.querySelector("#ai-scenario"),
   aiComment: document.querySelector("#ai-comment"),
+  masterConsensus: document.querySelector("#master-consensus"),
+  forecasterPanel: document.querySelector("#forecaster-panel"),
   ticketCoverage: document.querySelector("#ticket-coverage"),
   candidateCount: document.querySelector("#candidate-count"),
   featureReadinessStatus: document.querySelector("#feature-readiness-status"),
@@ -551,6 +553,8 @@ function renderAiPrediction() {
     els.aiMarks.innerHTML = "";
     els.aiScenario.textContent = "シナリオ計算中";
     els.aiComment.textContent = "公式オッズから各馬の勝率分布を計算しています。";
+    els.masterConsensus.textContent = "マスター集計中";
+    els.forecasterPanel.innerHTML = "";
     return;
   }
   els.aiConfidence.textContent = `信頼度 ${prediction.confidence}・${Math.round(prediction.confidenceScore * 100)}`;
@@ -560,6 +564,21 @@ function renderAiPrediction() {
   </div>`).join("");
   els.aiScenario.textContent = prediction.scenario;
   els.aiComment.textContent = prediction.comment;
+  const panel = prediction.forecastPanel ?? [];
+  const available = panel.filter((agent) => agent.status === "available");
+  els.masterConsensus.textContent = `${available.length}人参加・意見差 ${percent(prediction.masterConsensus?.disagreement)}`;
+  els.forecasterPanel.innerHTML = panel.map((agent) => {
+    if (agent.status !== "available") return `<article class="forecaster-card unavailable">
+      <header><strong>${escapeHtml(agent.label)}</strong><span>判断不能</span></header>
+      <p>${escapeHtml(agent.reason ?? "有効な事前情報なし")}</p>
+    </article>`;
+    const marks = agent.marks?.slice(0, 3) ?? [];
+    return `<article class="forecaster-card">
+      <header><strong>${escapeHtml(agent.label)}</strong><span>${escapeHtml(marks[0]?.mark ?? "-")}</span></header>
+      <div>${marks.map((mark) => `<b>${escapeHtml(mark.mark)} ${mark.horseNumber} ${escapeHtml(mark.horseName)}</b>`).join("")}</div>
+      <p>${escapeHtml(agent.opinion ?? "")}</p>
+    </article>`;
+  }).join("");
 }
 
 function matchingAiPrediction(raceNo = state.raceNo) {

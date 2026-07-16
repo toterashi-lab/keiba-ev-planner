@@ -3,6 +3,7 @@ import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
 import { loadCompatibleModelArtifact } from "../model/model-artifact-compatibility.mjs";
+import { runExpectancyAgentEnsemble } from "../model/expectancy-agent-ensemble.mjs";
 import { EXPECTANCY_ENGINE_VERSION, normalizeMarket, selectProbability } from "../model/expectancy-engine-v2.mjs";
 import { buildStructuredDefinitions } from "../model/structured-ticket-search.mjs";
 import { buildFinishOrderProbabilityBooks, calibrateFinishOrderProbabilityBooks } from "../model/finish-order-probabilities.mjs";
@@ -241,6 +242,26 @@ function candidate(race, betType, method, selectionKey, rows, probabilities, abi
   const conservativeAbilityProbabilities = abilityProbabilities.map((probability, index) => Math.max(0, probability - calibrationErrors[index]));
   const conservativeAbilityEv = average(rows.map((row, index) => row.odds_low * conservativeAbilityProbabilities[index]));
   const display = method === "1点" ? selectionKey.split("-").map((number) => `${number} ${names.get(Number(number)) ?? ""}`.trim()).join("・") : selectionKey;
+  const oddsObservedAt = rows.reduce((latest, row) => row.observed_at > latest ? row.observed_at : latest, "");
+  const agentEnsemble = runExpectancyAgentEnsemble({
+    oddsObservedAt,
+    points: rows.length,
+    totalInvestmentYen: rows.length * 100,
+    modelVersion: artifact?.modelVersion ?? "market-baseline",
+    betType,
+    method,
+    abilityModelStatus: artifact?.researchProbabilityStatus ?? "not_trained",
+    calibrationStatus: hasModel ? "pass" : "benchmark",
+    abilityExpectedReturn: abilityEv,
+    marketExpectedReturn: marketEv,
+    conservativeExpectedReturn: hasModel ? conservativeAbilityEv : marketEv,
+    calibrationError: rows.length === 1 ? calibrationErrors[0] : average(calibrationErrors),
+    externalValidationStatus: artifact?.deploymentStatus === "eligible" ? "pass" : "insufficient",
+    deploymentStatus: artifact?.deploymentStatus ?? "benchmark_only",
+    payoutVolatilityPrior: { status: "live_context_pending", lift: 1, conditions: [], usePolicy: "volatility_prior_only" },
+    contextStatus: "available",
+    contextEvidence: { direction: race.direction, weather: race.weather, going: race.going },
+  });
   return {
     date: race.race_date, meetingName: race.meeting_name, raceNo: race.race_number, raceId: race.race_id,
     betType, method, selection: display, points: rows.length, totalInvestmentYen: rows.length * 100,
@@ -251,10 +272,12 @@ function candidate(race, betType, method, selectionKey, rows, probabilities, abi
     adoptedExpectedReturn: hasModel ? conservativeAbilityEv : marketEv,
     abilityModelStatus: artifact?.researchProbabilityStatus ?? "not_trained",
     status: "ready", predictionContext: "pre_race", calculationMode: hasModel ? "ability_and_market_scenarios" : "market_baseline",
-    oddsObservedAt: rows.reduce((latest, row) => row.observed_at > latest ? row.observed_at : latest, ""), modelVersion: artifact?.modelVersion ?? "market-baseline",
+    oddsObservedAt, modelVersion: artifact?.modelVersion ?? "market-baseline",
     calibrationStatus: hasModel ? "pass" : "benchmark",
     calibrationError: rows.length === 1 ? calibrationErrors[0] : average(calibrationErrors),
-    recommendationEligible: false,
+    recommendationEligible: agentEnsemble.chiefDecision.purchaseEligible,
+    agentVotes: compactAgentVotes(agentEnsemble.assessments),
+    chiefDecision: compactChiefDecision(agentEnsemble.chiefDecision),
     baseBatchId: batchIds.baseBatchId,
     exoticBatchId: batchIds.exoticBatchId,
     optimizationScenarios,
@@ -317,11 +340,64 @@ function aiPrediction(race, probabilities, names, raceCandidates, artifact, hasM
   const ranked = Object.entries(probabilities).map(([horseNumber, probability]) => ({ horseNumber: Number(horseNumber), horseName: names.get(Number(horseNumber)) ?? "", probability }))
     .sort((left, right) => right.probability - left.probability || left.horseNumber - right.horseNumber);
   const top = [...raceCandidates].sort(byAbilityEv)[0];
+  const specialistForecasts = buildLiveForecastPanel(probabilities, names, raceCandidates);
   return { date: race.race_date, meetingName: race.meeting_name, raceNo: race.race_number, raceId: race.race_id, modelVersion: artifact?.modelVersion ?? "market-baseline",
     predictionContext: "pre_race", status: "ready", confidence: ranked[0].probability >= 0.25 ? "中" : "低", confidenceScore: ranked[0].probability,
     scenario: ranked[0].probability - ranked[1].probability >= 0.08 ? "本命軸" : "混戦", marks: ranked.slice(0, 5).map((row, index) => ({ mark: marks[index], ...row })),
-    topTicket: top ? { betType: top.betType, method: top.method, selection: top.selection, expectedReturn: top.adoptedExpectedReturn } : null,
-    comment: `${hasModel ? "30年能力モデル" : "市場基準"}で全${ranked.length}頭を比較。1位推定勝率${(ranked[0].probability * 100).toFixed(1)}%。`, };
+    forecastPanel: specialistForecasts,
+    masterConsensus: { agent: "chief-expectancy-agent", participatingForecasters: specialistForecasts.length,
+      topHorseNumber: ranked[0].horseNumber, topHorseName: ranked[0].horseName },
+    topTicket: top ? { betType: top.betType, method: top.method, selection: top.selection, expectedReturn: top.adoptedExpectedReturn,
+      chiefDecision: top.chiefDecision } : null,
+    comment: `${specialistForecasts.length}予想家の評価をマスターが統合。全${ranked.length}頭中の1位統合勝率${(ranked[0].probability * 100).toFixed(1)}%。`, };
+}
+
+function buildLiveForecastPanel(probabilities, names, candidates) {
+  const marks = ["◎", "○", "▲", "△", "☆"];
+  const ability = Object.entries(probabilities).map(([horseNumber, probability]) => ({
+    horseNumber: Number(horseNumber), horseName: names.get(Number(horseNumber)) ?? "", score: probability,
+  })).sort((left, right) => right.score - left.score);
+  const ticketHorseScores = new Map();
+  for (const candidate of candidates.filter((row) => row.method === "1点" && row.abilityProbability != null)) {
+    const horseNumber = Number(candidate.componentSelectionKeys?.[0]);
+    if (Number.isInteger(horseNumber)) ticketHorseScores.set(horseNumber,
+      (candidate.abilityExpectedReturn ?? 0) - (candidate.conservativeExpectedReturn ?? 0));
+  }
+  const uncertainty = [...ability].sort((left, right) =>
+    (ticketHorseScores.get(left.horseNumber) ?? Infinity) - (ticketHorseScores.get(right.horseNumber) ?? Infinity));
+  return [
+    { id: "ability", label: "能力・近走担当", status: "available",
+      marks: ability.slice(0, 5).map((row, index) => ({ mark: marks[index], ...row })),
+      opinion: `${ability[0]?.horseName ?? "-"}を能力上位に評価。` },
+    { id: "uncertainty", label: "安定性担当", status: "available",
+      marks: uncertainty.slice(0, 5).map((row, index) => ({ mark: marks[index], ...row })),
+      opinion: `${uncertainty[0]?.horseName ?? "-"}は校正下振れ幅が相対的に小さい。` },
+    { id: "ticket_value", label: "買い目妙味担当", status: "available",
+      marks: [...ability].sort((left, right) => {
+        const leftCandidate = candidates.filter((row) => row.method === "1点" && row.selection.startsWith(`${left.horseNumber} `))
+          .sort(byAbilityEv)[0];
+        const rightCandidate = candidates.filter((row) => row.method === "1点" && row.selection.startsWith(`${right.horseNumber} `))
+          .sort(byAbilityEv)[0];
+        return (rightCandidate?.adoptedExpectedReturn ?? 0) - (leftCandidate?.adoptedExpectedReturn ?? 0);
+      }).slice(0, 5).map((row, index) => ({ mark: marks[index], ...row })),
+      opinion: "能力確率と現在オッズの差から妙味を評価。" },
+  ];
+}
+
+function compactAgentVotes(assessments) {
+  return Object.fromEntries(Object.entries(assessments).map(([id, value]) => [id, value.status]));
+}
+
+function compactChiefDecision(decision) {
+  return {
+    agent: decision.agent,
+    version: decision.version,
+    status: decision.status,
+    rankingExpectedReturn: decision.rankingExpectedReturn,
+    purchaseEligible: decision.purchaseEligible,
+    agreementSpread: decision.agreementSpread,
+    confidence: decision.confidence,
+  };
 }
 
 function waiting(reason, outputPath = OUTPUT) { const result = { status: "waiting", reason, generatedAt: new Date().toISOString(), candidates: [], predictions: [] }; fs.mkdirSync(path.dirname(outputPath), { recursive: true }); fs.writeFileSync(outputPath, `${JSON.stringify(result, null, 2)}\n`, "utf8"); return result; }
@@ -335,7 +411,10 @@ function loadArtifact(artifactPath) {
 function normalize(values) { const total = Object.values(values).reduce((sum, value) => sum + value, 0); return Object.fromEntries(Object.entries(values).map(([key, value]) => [key, value / total])); }
 function group(rows, key) { const map = new Map(); for (const row of rows) { if (!map.has(row[key])) map.set(row[key], []); map.get(row[key]).push(row); } return map; }
 function average(values) { return values.reduce((sum, value) => sum + value, 0) / values.length; }
-function byAbilityEv(left, right) { return right.adoptedExpectedReturn - left.adoptedExpectedReturn; }
+function byAbilityEv(left, right) {
+  return (right.chiefDecision?.rankingExpectedReturn ?? right.adoptedExpectedReturn)
+    - (left.chiefDecision?.rankingExpectedReturn ?? left.adoptedExpectedReturn);
+}
 function tokyoDate() { return new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(new Date()); }
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {

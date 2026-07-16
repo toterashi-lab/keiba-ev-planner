@@ -3,6 +3,7 @@ import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
 import { EXPECTANCY_ENGINE_VERSION, normalizeMarket, selectProbability } from "../model/expectancy-engine-v2.mjs";
+import { runExpectancyAgentEnsemble } from "../model/expectancy-agent-ensemble.mjs";
 import { buildStructuredDefinitions } from "../model/structured-ticket-search.mjs";
 import { buildFinishOrderProbabilityBooks, calibrateFinishOrderProbabilityBooks } from "../model/finish-order-probabilities.mjs";
 
@@ -39,7 +40,7 @@ export function generateMarketEv() {
     const horseNumbers = new Map(entries.map((row) => [`${row.race_id}|${row.horse_id}`, row.horse_number]));
     const modelPredictionRows = (VALIDATION_ARTIFACT?.predictions ?? []).map((row) => ({
       race_id: row.raceId, horse_number: horseNumbers.get(`${row.raceId}|${row.horseId}`), win_probability: row.probability,
-      history_starts: row.historyStarts,
+      history_starts: row.historyStarts, agent_signals: row.agentSignals ?? null,
     })).filter((row) => Number.isInteger(row.horse_number));
 
     const namesByRace = group(entries, "race_id");
@@ -91,7 +92,8 @@ export function generateMarketEv() {
       }
       evaluatedByRace[race.race_id] = evaluated;
       candidates.push(...raceCandidates);
-      predictions.push(makeAiPrediction(race, researchHorseProbabilities, names, raceCandidates, hasCompleteModel));
+      predictions.push(makeAiPrediction(race, researchHorseProbabilities, names, raceCandidates, hasCompleteModel,
+        modelRows, horseProbabilities));
     }
 
     if (Object.values(coverageCounts).some((count) => count !== 72)) throw new Error(`券種カバレッジ不合格: ${JSON.stringify(coverageCounts)}`);
@@ -130,7 +132,7 @@ export function generateMarketEv() {
   }
 }
 
-function makeAiPrediction(race, horseProbabilities, names, raceCandidates, abilityModelAvailable) {
+function makeAiPrediction(race, horseProbabilities, names, raceCandidates, abilityModelAvailable, modelRows, marketProbabilities) {
   const marks = ["◎", "○", "▲", "△", "☆"];
   const ranked = Object.entries(horseProbabilities)
     .map(([horseNumber, probability]) => ({ horseNumber: Number(horseNumber), horseName: names.get(Number(horseNumber)) ?? "", probability }))
@@ -142,6 +144,7 @@ function makeAiPrediction(race, horseProbabilities, names, raceCandidates, abili
   const confidence = confidenceScore >= 0.55 ? "高" : confidenceScore >= 0.35 ? "中" : "低";
   const scenario = ranked[0].probability >= 0.3 && gap >= 0.08 ? "本命軸" : gap <= 0.03 ? "混戦・広め" : "バランス";
   const topTicket = [...raceCandidates].sort(byExpectedReturn)[0] ?? null;
+  const forecastPanel = buildForecastPanel({ horseProbabilities, marketProbabilities, modelRows, names });
   return {
     date: race.race_date,
     meetingName: meetingName(race),
@@ -153,6 +156,15 @@ function makeAiPrediction(race, horseProbabilities, names, raceCandidates, abili
     confidence,
     confidenceScore,
     scenario,
+    forecastPanel,
+    masterConsensus: {
+      agent: "chief-expectancy-agent",
+      participatingForecasters: forecastPanel.filter((agent) => agent.status === "available").length,
+      unavailableForecasters: forecastPanel.filter((agent) => agent.status !== "available").map((agent) => agent.id),
+      topHorseNumber: ranked[0].horseNumber,
+      topHorseName: ranked[0].horseName,
+      disagreement: forecastDisagreement(forecastPanel),
+    },
     marks: ranked.slice(0, marks.length).map((row, index) => ({ mark: marks[index], ...row })),
     topTicket: topTicket ? {
       recommendationSource: "ai_prediction_top_ticket",
@@ -164,8 +176,109 @@ function makeAiPrediction(race, horseProbabilities, names, raceCandidates, abili
       ticketKeys: topTicket.ticketKeys,
       expectedReturn: topTicket.adoptedExpectedReturn,
       payoutVolatilityPrior: topTicket.payoutVolatilityPrior,
+      chiefDecision: topTicket.chiefDecision,
     } : null,
-    comment: `${ranked.length}頭の市場確率を比較。◎${ranked[0].horseName}は推定勝率${(ranked[0].probability * 100).toFixed(1)}%、○との差は${(gap * 100).toFixed(1)}ポイント。${scenario}シナリオで評価します。`,
+    comment: `${forecastPanel.filter((agent) => agent.status === "available").length}予想家の印と根拠をマスターが統合。◎${ranked[0].horseName}は統合勝率${(ranked[0].probability * 100).toFixed(1)}%、○との差は${(gap * 100).toFixed(1)}ポイント。${scenario}シナリオで評価します。`,
+  };
+}
+
+function buildForecastPanel({ horseProbabilities, marketProbabilities, modelRows, names }) {
+  const marks = ["◎", "○", "▲", "△", "☆"];
+  const labels = {
+    race_context: "枠・レース条件担当",
+    weather_going: "天候・馬場担当",
+    body_load: "馬体・斤量担当",
+    horse_form: "近走能力担当",
+    pace_shape: "展開・脚質担当",
+    horse_suitability: "コース適性担当",
+    connections: "騎手・厩舎担当",
+    field_strength: "相手関係担当",
+  };
+  const byHorse = new Map(modelRows.map((row) => [row.horse_number, row]));
+  const panel = Object.entries(labels).map(([id, label]) => {
+    const values = [...byHorse].map(([horseNumber, row]) => ({
+      horseNumber,
+      horseName: names.get(horseNumber) ?? "",
+      contribution: Number(row.agent_signals?.[id]?.contribution),
+      topFactors: row.agent_signals?.[id]?.topFactors ?? [],
+      signalStatus: row.agent_signals?.[id]?.status ?? "not_available",
+    }));
+    const available = values.length > 1 && values.every((row) => row.signalStatus === "available" && Number.isFinite(row.contribution));
+    if (!available) return { id, label, status: "not_available", reason: "学習採用外または寄与データ未生成", marks: [] };
+    const probabilities = softmax(values.map((row) => row.contribution));
+    const ranked = values.map((row, index) => ({ ...row, score: probabilities[index] }))
+      .sort((left, right) => right.score - left.score || left.horseNumber - right.horseNumber);
+    return {
+      id,
+      label,
+      status: "available",
+      marks: ranked.slice(0, 5).map((row, index) => ({ mark: marks[index], ...row })),
+      opinion: `${ranked[0].horseName}を最上位。主因は${factorSummary(ranked[0].topFactors)}。`,
+    };
+  });
+  const marketRanked = Object.entries(marketProbabilities).map(([horseNumber, probability]) => ({
+    horseNumber: Number(horseNumber), horseName: names.get(Number(horseNumber)) ?? "", score: probability,
+  })).sort((left, right) => right.score - left.score || left.horseNumber - right.horseNumber);
+  panel.push({
+    id: "market",
+    label: "市場評価担当",
+    status: "available",
+    marks: marketRanked.slice(0, 5).map((row, index) => ({ mark: marks[index], ...row })),
+    opinion: `${marketRanked[0].horseName}が市場支持1位。オッズを集合知として独立評価。`,
+  });
+  const valueRanked = Object.entries(horseProbabilities).map(([horseNumber, probability]) => {
+    const market = marketProbabilities[horseNumber] ?? 0;
+    return { horseNumber: Number(horseNumber), horseName: names.get(Number(horseNumber)) ?? "",
+      score: probability - market, abilityProbability: probability, marketProbability: market };
+  }).sort((left, right) => right.score - left.score || left.horseNumber - right.horseNumber);
+  panel.push({
+    id: "value_gap",
+    label: "妙味発見担当",
+    status: "available",
+    marks: valueRanked.slice(0, 5).map((row, index) => ({ mark: marks[index], ...row })),
+    opinion: `${valueRanked[0].horseName}の能力・市場差が最大。ただし最終判断はオッズ込み安全側EVで行う。`,
+  });
+  return panel;
+}
+
+function forecastDisagreement(panel) {
+  const votes = panel.filter((agent) => agent.status === "available" && agent.marks[0])
+    .map((agent) => agent.marks[0].horseNumber);
+  return votes.length ? new Set(votes).size / votes.length : null;
+}
+
+function factorSummary(factors) {
+  const labels = {
+    priorWinRate: "過去勝率", priorPlaceRate: "過去複勝率", recent3WinRate: "近3走勝率",
+    recent3PlaceRate: "近3走複勝率", lastFinishPercentile: "前走着順", daysSinceLastRace: "レース間隔",
+    bodyWeightDelta: "馬体重増減", carriedWeightBodyRatio: "斤量体重比",
+    jockeyWinRateSmoothed: "騎手勝率", trainerWinRateSmoothed: "調教師勝率",
+    horseNumberFieldRatio: "馬番位置", gateNumberFieldRatio: "枠位置",
+  };
+  const top = (factors ?? []).filter((factor) => factor.contribution > 0).slice(0, 2);
+  return top.length ? top.map((factor) => labels[factor.feature] ?? factor.feature).join("・") : "総合寄与";
+}
+
+function softmax(values) {
+  const max = Math.max(...values);
+  const exp = values.map((value) => Math.exp(value - max));
+  const total = exp.reduce((sum, value) => sum + value, 0);
+  return exp.map((value) => value / total);
+}
+
+function compactAgentVotes(assessments) {
+  return Object.fromEntries(Object.entries(assessments).map(([id, value]) => [id, value.status]));
+}
+
+function compactChiefDecision(decision) {
+  return {
+    agent: decision.agent,
+    version: decision.version,
+    status: decision.status,
+    rankingExpectedReturn: decision.rankingExpectedReturn,
+    purchaseEligible: decision.purchaseEligible,
+    agreementSpread: decision.agreementSpread,
+    confidence: decision.confidence,
   };
 }
 
@@ -216,6 +329,35 @@ function makeCandidate(race, betType, method, selection, rows, probability, name
   const displayNumbers = combinations ? [...new Set(combinations.flat())] : selection;
   const display = displayOverride ?? displayNumbers.map((number) => `${number} ${names.get(number) ?? ""}`.trim()).join("・");
   const useAbility = hasCompleteModel && VALIDATION_ARTIFACT?.researchProbabilityStatus === "research_pass";
+  const payoutPrior = payoutVolatilityPrior(race, betType);
+  const externalValidationStatus = REFERENCE_EV_AUDIT?.status === "evaluation_only" ? "fail" : "insufficient";
+  const deploymentStatus = VALIDATION_ARTIFACT?.deploymentStatus ?? "benchmark_only";
+  const agentEnsemble = runExpectancyAgentEnsemble({
+    oddsObservedAt: rows[0].observed_at,
+    points: rows.length,
+    totalInvestmentYen: rows.length * 100,
+    modelVersion: useAbility ? VALIDATION_ARTIFACT.modelVersion : "expectancy-v2-market-baseline",
+    betType,
+    method,
+    abilityModelStatus: useAbility ? "research_pass" : "not_available",
+    calibrationStatus: useAbility ? "pass" : "benchmark",
+    abilityExpectedReturn,
+    marketExpectedReturn: expectedReturn,
+    conservativeExpectedReturn: useAbility ? conservativeAbilityExpectedReturn : expectedReturn,
+    calibrationError,
+    externalValidationStatus,
+    deploymentStatus,
+    payoutVolatilityPrior: payoutPrior,
+    contextStatus: "available",
+    contextEvidence: {
+      venueCode: race.venue_code,
+      surface: race.surface,
+      distanceM: race.distance_m,
+      weather: race.weather,
+      going: race.going,
+      fieldSize: race.fieldSize,
+    },
+  });
   return {
     date: race.race_date,
     meetingName: meetingName(race),
@@ -245,12 +387,14 @@ function makeCandidate(race, betType, method, selection, rows, probability, name
     oddsObservedAt: rows[0].observed_at,
     modelVersion: useAbility ? VALIDATION_ARTIFACT.modelVersion : "expectancy-v2-market-baseline",
     calibrationStatus: useAbility ? "pass" : "benchmark",
-    externalValidationStatus: REFERENCE_EV_AUDIT?.status === "evaluation_only" ? "fail" : "insufficient",
-    recommendationEligible: false,
-    payoutVolatilityPrior: payoutVolatilityPrior(race, betType),
+    externalValidationStatus,
+    recommendationEligible: agentEnsemble.chiefDecision.purchaseEligible,
+    payoutVolatilityPrior: payoutPrior,
+    agentVotes: compactAgentVotes(agentEnsemble.assessments),
+    chiefDecision: compactChiefDecision(agentEnsemble.chiefDecision),
     optimizationScenarios,
     comment: useAbility
-      ? `対象レース前で学習を停止した能力モデルとJRA公式最終オッズで${method} ${rows.length}点を各100円計算。表示順位は券種別の校正誤差を確率から控除した保守期待値です。対象レースの結果・払戻は予測確率に使用していません。`
+      ? `対象レース前で学習を停止した能力モデルとJRA公式最終オッズで${method} ${rows.length}点を各100円計算。専門7エージェントを期待値統合エージェントが評価し、順位は券種別の校正誤差を控除した安全側期待値です。${agentEnsemble.chiefDecision.rationale}`
       : `期待値v2の市場基準検証。JRA公式最終オッズで${method} ${rows.length}点を各100円計算。学習・校正ゲート未合格のため能力モデルは混合せず、払戻結果も確率算出に使用していません。`,
   };
 }
@@ -401,7 +545,8 @@ function group(rows, key) {
 }
 
 function byExpectedReturn(left, right) {
-  return right.adoptedExpectedReturn - left.adoptedExpectedReturn;
+  return (right.chiefDecision?.rankingExpectedReturn ?? right.adoptedExpectedReturn)
+    - (left.chiefDecision?.rankingExpectedReturn ?? left.adoptedExpectedReturn);
 }
 
 function meetingName(race) {

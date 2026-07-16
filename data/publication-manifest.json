@@ -1,17 +1,17 @@
 {
   "version": "publication-manifest-v1",
-  "generatedAt": "2026-07-16T09:19:00.557Z",
-  "databaseRaces": 75491,
-  "completeMonths": 263,
+  "generatedAt": "2026-07-16T09:50:42.057Z",
+  "databaseRaces": 76427,
+  "completeMonths": 266,
   "expectedMonths": 367,
-  "modelVersion": "ability-softmax-v2-asof-2026-07-11-9b3651d45ed5",
-  "modelCoverageRaces": 45932,
-  "expectancyCandidateCount": 10510,
+  "modelVersion": "ability-softmax-v2-asof-2026-07-11-38ce1d9ff7df",
+  "modelCoverageRaces": 75563,
+  "expectancyCandidateCount": 10459,
   "expectancyPredictionCount": 72,
   "liveRaceCount": 0,
   "liveCandidateCount": 0,
   "livePredictionCount": 0,
-  "liveRacecardsSha256": "a679394132d043a9f4485b31ffb6378d605a7c7997456c4e0bdb87dd9562ca76",
+  "liveRacecardsSha256": "6f30e498e1e1ce696b6d9ec8501a180c25ff7e1bfd0db05d84a0d079cb7556a4",
   "liveModelOutputsSha256": "e0e1171b72fe209919b3299493dddc430ac79fcc0720026046e285ed4076ceab",
-  "manifestId": "7922a7784865ea68bbf1"
+  "manifestId": "19416755fec3f7c85878"
 }

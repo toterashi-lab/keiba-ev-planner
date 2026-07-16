@@ -7,18 +7,29 @@ description: Research, audit, and improve horse-racing probability, expected-ret
 
 Use this workflow whenever changing probability or expected-return logic.
 
+## Agent Contract
+
+Read the repository `AGENTS.md`, then run:
+
+```powershell
+node scripts/horse-racing-ev-agent.mjs
+```
+
+Follow the returned `phase` and `nextAction`. Do not skip ahead to training or publication while an earlier data phase is incomplete.
+
 ## Required Workflow
 
 1. Read `references/research-method.md`.
-2. Inspect the database status and use every row exposed by the quality-gated `complete_*` views.
-3. Keep the final target period untouched. Discover conditions on older data and confirm them on a later holdout.
-4. Select models primarily by log loss, Brier score, ECE, and calibration-bin downside error. Accuracy is secondary.
-5. Compare the ability model with the parimutuel market. Correct favorite-longshot bias only with parameters fitted before the target period.
-6. Derive place and exotic probabilities from a coherent finish-order model, then calibrate each ticket type on historical folds.
-7. Treat high-payout patterns as volatility priors. Never add their lift directly to hit probability or EV.
-8. Compute conservative EV from a lower probability bound and an odds downside scenario.
-9. Permit abstention. A race can have an AI forecast without having a purchase recommendation.
-10. Evaluate purchased cases using only the AI recommendation stored before the result. Exclude candidate rankings and retrospective alternatives.
+2. Read `references/agent-hierarchy.md` when generating or changing predictions.
+3. Inspect the database status and use every row exposed by the quality-gated `complete_*` views.
+4. Keep the final target period untouched. Discover conditions on older data and confirm them on a later holdout.
+5. Select models primarily by log loss, Brier score, ECE, and calibration-bin downside error. Accuracy is secondary.
+6. Compare the ability model with the parimutuel market. Correct favorite-longshot bias only with parameters fitted before the target period.
+7. Derive place and exotic probabilities from a coherent finish-order model, then calibrate each ticket type on historical folds.
+8. Treat high-payout patterns as volatility priors. Never add their lift directly to hit probability or EV.
+9. Compute conservative EV from a lower probability bound and an odds downside scenario.
+10. Permit abstention. A race can have an AI forecast without having a purchase recommendation.
+11. Evaluate purchased cases using only the AI recommendation stored before the result. Exclude candidate rankings and retrospective alternatives.
 
 ## Acceptance Rules
 
@@ -41,6 +52,7 @@ node scripts/train-expectancy-model.mjs
 node scripts/generate-market-ev.mjs
 node scripts/evaluate-reference-ev.mjs
 node scripts/reference-ev-scope-check.mjs
+node scripts/horse-racing-ev-agent-check.mjs
 ```
 
 When the database backfill changes, rerun the pattern analysis and model pipeline from the full quality-gated database.

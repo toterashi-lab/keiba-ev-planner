@@ -55,7 +55,7 @@ if (resultLinksData.raceCount !== resultsData.results.length || !sameSet(resultL
 const stageDir = fs.mkdtempSync(path.join(process.cwd(), ".public-stage-"));
 const stageDataDir = path.join(stageDir, "data");
 fs.mkdirSync(stageDataDir, { recursive: true });
-for (const file of ["index.html", "styles.css", "ticket-engine.js", "app.js"]) copy(file, path.join(stageDir, file));
+for (const file of ["AGENTS.md", "index.html", "styles.css", "ticket-engine.js", "app.js"]) copy(file, path.join(stageDir, file));
 fs.mkdirSync(path.join(stageDir, "docs"), { recursive: true });
 fs.mkdirSync(path.join(stageDir, "scripts"), { recursive: true });
 fs.mkdirSync(path.join(stageDir, "model"), { recursive: true });
@@ -72,6 +72,7 @@ copy("docs/reference-site-analysis.md", path.join(stageDir, "docs", "reference-s
 copy("docs/ui-framework-v4.md", path.join(stageDir, "docs", "ui-framework-v4.md"));
 copy("model/feature-registry.mjs", path.join(stageDir, "model", "feature-registry.mjs"));
 copy("model/model-artifact-compatibility.mjs", path.join(stageDir, "model", "model-artifact-compatibility.mjs"));
+copy("model/expectancy-agent-ensemble.mjs", path.join(stageDir, "model", "expectancy-agent-ensemble.mjs"));
 copy("model/validation-policy.mjs", path.join(stageDir, "model", "validation-policy.mjs"));
 copy("model/expectancy-engine-v2.mjs", path.join(stageDir, "model", "expectancy-engine-v2.mjs"));
   copy("model/structured-ticket-search.mjs", path.join(stageDir, "model", "structured-ticket-search.mjs"));
@@ -79,11 +80,17 @@ copy("model/expectancy-engine-v2.mjs", path.join(stageDir, "model", "expectancy-
 copy("docs/model-feature-research.md", path.join(stageDir, "docs", "model-feature-research.md"));
 fs.mkdirSync(path.join(stageDir, ".agents", "skills", "horse-racing-ev-research", "agents"), { recursive: true });
 fs.mkdirSync(path.join(stageDir, ".agents", "skills", "horse-racing-ev-research", "references"), { recursive: true });
+fs.mkdirSync(path.join(stageDir, ".agents", "roles"), { recursive: true });
 copy(".agents/skills/horse-racing-ev-research/SKILL.md", path.join(stageDir, ".agents", "skills", "horse-racing-ev-research", "SKILL.md"));
 copy(".agents/skills/horse-racing-ev-research/agents/openai.yaml", path.join(stageDir, ".agents", "skills", "horse-racing-ev-research", "agents", "openai.yaml"));
 copy(".agents/skills/horse-racing-ev-research/references/research-method.md", path.join(stageDir, ".agents", "skills", "horse-racing-ev-research", "references", "research-method.md"));
+copy(".agents/skills/horse-racing-ev-research/references/agent-hierarchy.md", path.join(stageDir, ".agents", "skills", "horse-racing-ev-research", "references", "agent-hierarchy.md"));
+for (const role of fs.readdirSync(".agents/roles")) copy(path.join(".agents", "roles", role), path.join(stageDir, ".agents", "roles", role));
 for (const file of [
   "jra-free-db.mjs",
+  "horse-racing-ev-agent.mjs",
+  "horse-racing-ev-agent-check.mjs",
+  "expectancy-agent-ensemble-check.mjs",
   "jra-free-odds.mjs",
   "jra-free-exotic-odds.mjs",
   "jra-free-exotic-odds-check.mjs",

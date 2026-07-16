@@ -69,13 +69,17 @@ for (const raceId of raceIds) {
     || row.totalInvestmentYen !== row.points * 100
     || !Number.isFinite(row.conservativeExpectedReturn)
     || !Number.isFinite(row.abilityExpectedReturn)
-    || !Number.isFinite(row.adoptedExpectedReturn))) {
+    || !Number.isFinite(row.adoptedExpectedReturn)
+    || row.chiefDecision?.agent !== "chief-expectancy-agent"
+    || !row.agentVotes)) {
     failures.push(`${raceId}: invalid candidate value`);
   }
   const prediction = model.predictions.find((row) => row.raceId === raceId);
   if (!prediction || prediction.status !== "ready" || prediction.predictionContext !== "pre_race" || prediction.marks?.length !== 5) {
     failures.push(`${raceId}: invalid AI prediction`);
   }
+  if (!Array.isArray(prediction?.forecastPanel) || prediction.forecastPanel.length < 3
+    || prediction.masterConsensus?.agent !== "chief-expectancy-agent") failures.push(`${raceId}: live specialist forecast panel`);
 }
 
 const source = fs.readFileSync("scripts/generate-live-market-ev.mjs", "utf8");

@@ -6,6 +6,8 @@ const ordered = [
   '"scripts\\model-artifact-compatibility-check.mjs"',
   '"scripts\\reference-ev-scope-check.mjs"',
   '"scripts\\goal-completion-audit-check.mjs"',
+  '"scripts\\horse-racing-ev-agent-check.mjs"',
+  '"scripts\\expectancy-agent-ensemble-check.mjs"',
   '"scripts\\audit-automation-tasks.ps1"',
   '"scripts\\jra-free-db.mjs" audit',
   '"scripts\\audit-field-availability.mjs"',

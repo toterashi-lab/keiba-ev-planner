@@ -990,6 +990,27 @@ main {
 .payout-pattern-card small { color: #8f9b95; font-size: 10px; }
 .payout-pattern-card div strong { color: #5de0a0; font-size: 20px; }
 .payout-pattern-card p { margin: 9px 0 5px; }
+.forecaster-board { border-top: 1px solid #303733; padding: 10px 12px 12px; }
+.forecaster-board > header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+.forecaster-board > header strong { font-size: 12px; }
+.forecaster-board > header span { color: #8f9b95; font-size: 10px; }
+.forecaster-panel { display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x proximity; }
+.forecaster-card {
+  flex: 0 0 220px;
+  min-height: 118px;
+  padding: 9px;
+  scroll-snap-align: start;
+  border: 1px solid #343b37;
+  border-top: 2px solid #2cb77c;
+  background: #151a17;
+}
+.forecaster-card.unavailable { border-top-color: #59615d; opacity: .65; }
+.forecaster-card header { display: flex; justify-content: space-between; gap: 8px; }
+.forecaster-card header strong { font-size: 11px; }
+.forecaster-card header span { color: #e7c85e; font-weight: 900; }
+.forecaster-card div { display: grid; gap: 3px; margin: 9px 0; }
+.forecaster-card b { color: #d9dfdc; font-size: 10px; }
+.forecaster-card p { margin: 0; color: #8f9b95; font-size: 9px; line-height: 1.55; }
 .performance-cards {
   display: flex;
   grid-template-columns: none;

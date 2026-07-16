@@ -2,7 +2,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { evaluate, evaluateTicketProbabilities, FEATURE_KEYS, fitModel, fitTemperature, fitTicketCalibrationTemperatures, loadTrainingRaces, predictRace, runFeatureAblation } from "./train-expectancy-model.mjs";
+import { evaluate, evaluateTicketProbabilities, FEATURE_KEYS, fitModel, fitTemperature, fitTicketCalibrationTemperatures, loadTrainingRaces, MODEL_FEATURE_GROUPS, predictRace, runFeatureAblation } from "./train-expectancy-model.mjs";
 import { captureModelImplementationSnapshot } from "./model-data-snapshot.mjs";
 
 const DATABASE = path.join("data", "jra-free-private", "keiba.sqlite");
@@ -53,7 +53,9 @@ try {
   const predictions = target.flatMap((race) => {
     const probabilities = predictRace(model, race, temperature);
     return race.rows.map((row, index) => ({ raceId: race.id, horseId: row.horseId, probability: probabilities[index],
-      historyStarts: Math.max(0, Math.round(Math.expm1(Number(row.featureValues[FEATURE_KEYS.indexOf("careerStarts")]) || 0))), asOfTime: row.asOfTime }));
+      historyStarts: Math.max(0, Math.round(Math.expm1(Number(row.featureValues[FEATURE_KEYS.indexOf("careerStarts")]) || 0))),
+      agentSignals: featureAgentSignals(model, row.featureValues, temperature),
+      asOfTime: row.asOfTime }));
   });
   const probabilitySumsValid = target.every((race) => {
     const rows = predictions.filter((row) => row.raceId === race.id);
@@ -121,4 +123,22 @@ function wilsonLower(rate, count, z) {
   const center = (rate + z2 / (2 * count)) / denominator;
   const margin = z * Math.sqrt(rate * (1 - rate) / count + z2 / (4 * count * count)) / denominator;
   return Math.max(0, center - margin);
+}
+
+function featureAgentSignals(model, featureValues, temperature) {
+  const active = new Set(model.activeFeatureIndexes);
+  return Object.fromEntries(MODEL_FEATURE_GROUPS.map((group) => {
+    const contributions = group.indexes.filter((index) => active.has(index)).map((index) => {
+      const standardized = (Number(featureValues[index]) - model.means[index]) / model.scales[index];
+      return {
+        feature: FEATURE_KEYS[index],
+        contribution: model.weights[index] * standardized / temperature,
+      };
+    }).filter((row) => Number.isFinite(row.contribution));
+    return [group.id, {
+      status: contributions.length ? "available" : "not_admitted",
+      contribution: contributions.reduce((sum, row) => sum + row.contribution, 0),
+      topFactors: contributions.sort((left, right) => Math.abs(right.contribution) - Math.abs(left.contribution)).slice(0, 4),
+    }];
+  }));
 }
