@@ -28,6 +28,8 @@ try {
     create table complete_race_entries(race_id text,horse_id text);
     create table complete_race_results(race_id text,horse_id text);
     create table complete_payouts(race_id text);
+    create table historical_odds_jobs(race_id text,status text);
+    create table historical_win_place_odds(race_id text,horse_number integer,win_odds real,place_odds_low real,place_odds_high real);
     create table model_runs(id integer primary key,model_version text);
     create table model_quality_gates(model_run_id integer,gate_name text,status text);
     create table live_ev_candidates(id integer primary key);
@@ -41,6 +43,8 @@ try {
     insert into complete_race_entries values('r1','h1');
     insert into complete_race_results values('r1','h1');
     insert into complete_payouts values('r1');
+    insert into historical_odds_jobs values('r1','complete');
+    insert into historical_win_place_odds values('r1',1,2.0,1.2,1.4);
     insert into model_runs values(1,'unit-model');
     insert into live_racecard_batches values(1,'2099-01-01','complete',1,5,'2026-01-01T00:00:00.000Z');
     insert into live_races values('live-r1',1,'2099-01-01','12:00');
@@ -183,7 +187,7 @@ try {
     fieldAvailabilityAuditPath, publicationManifestPath, publicationReceiptPath, automationAuditPath, liveOutputPath,
     publicLiveRacecardsPath, publicLiveModelOutputsPath,
     today: "2026-01-01", pipelineFiles: [pipeline] });
-  if (report.failures.length || report.checks.length !== 28) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
+  if (report.failures.length || report.checks.length !== 29) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
   const liveFixture = JSON.parse(fs.readFileSync(liveOutputPath, "utf8"));
   if (!inspectLiveCoverage(db, artifact, liveFixture, { today: "2026-01-01" }).pass) throw new Error("valid live coverage was rejected");
   const missingPrediction = structuredClone(liveFixture);

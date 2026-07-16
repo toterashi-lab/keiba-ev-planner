@@ -83,6 +83,25 @@ try {
 
   & $node --no-warnings "scripts\jra-free-db.mjs" audit
   if ($LASTEXITCODE -ne 0) { throw "Full database audit failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\jra-historical-win-place-odds.mjs" init
+  if ($LASTEXITCODE -ne 0) { throw "Historical win/place odds queue initialization failed: $LASTEXITCODE" }
+  $oddsStatusJson = & $node --no-warnings "scripts\jra-historical-win-place-odds.mjs" status
+  if ($LASTEXITCODE -ne 0) { throw "Historical win/place odds status failed: $LASTEXITCODE" }
+  $oddsStatus = $oddsStatusJson | ConvertFrom-Json
+  if ([int]$oddsStatus.pendingRaces -gt 0) {
+    $oddsRunLock = Join-Path $privateDir "historical-odds-run.lock"
+    if (-not (Test-Path -LiteralPath $oddsRunLock)) {
+      Start-Process -FilePath "powershell.exe" -ArgumentList @(
+        "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
+        (Join-Path $PSScriptRoot "run-historical-win-place-odds-backfill.ps1")
+      ) -WorkingDirectory $root -WindowStyle Hidden
+    }
+    Write-Output ("Historical win/place odds pending: {0}/{1} races. Model pipeline is waiting." -f
+      $oddsStatus.pendingRaces,$oddsStatus.totalRaces)
+    exit 0
+  }
+  & $node --no-warnings "scripts\jra-historical-win-place-odds.mjs" audit
+  if ($LASTEXITCODE -ne 0) { throw "Historical win/place odds audit failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\audit-field-availability.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Source field availability audit failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\analyze-historical-payout-patterns.mjs"

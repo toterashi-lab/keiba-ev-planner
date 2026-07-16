@@ -35,6 +35,8 @@ Use this workflow whenever changing probability or expected-return logic.
 node scripts/jra-free-db.mjs status
 node scripts/analyze-historical-payout-patterns.mjs
 node scripts/historical-payout-patterns-check.mjs
+node scripts/jra-historical-win-place-odds.mjs status
+node scripts/jra-historical-win-place-odds.mjs audit
 node scripts/train-expectancy-model.mjs
 node scripts/generate-market-ev.mjs
 node scripts/evaluate-reference-ev.mjs

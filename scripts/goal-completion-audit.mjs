@@ -64,6 +64,22 @@ export function auditCompletedGoal(database, report, options = {}) {
     (select count(*) from complete_race_entries) runners,(select count(*) from complete_payouts) payouts
     from complete_races`).get();
   check(report, "normalized_database_nonempty", coverage.races > 0 && coverage.runners > 0 && coverage.payouts > 0, coverage);
+  const historicalOddsReady = database.prepare(`select count(*) count from sqlite_master
+    where type='table' and name='historical_odds_jobs'`).get().count === 1;
+  const historicalOdds = historicalOddsReady ? database.prepare(`select
+    count(*) total,
+    sum(case when status='complete' then 1 else 0 end) complete,
+    sum(case when status<>'complete' then 1 else 0 end) pending,
+    (select count(distinct race_id) from historical_win_place_odds) pricedRaces,
+    (select count(*) from historical_win_place_odds where win_odds is null or place_odds_low is null or place_odds_high is null) missingPrices
+    from historical_odds_jobs`).get() : null;
+  check(report, "historical_win_place_odds_complete", historicalOddsReady
+    && historicalOdds.total === coverage.races
+    && historicalOdds.complete === coverage.races
+    && historicalOdds.pending === 0
+    && historicalOdds.pricedRaces === coverage.races
+    && historicalOdds.missingPrices === 0,
+  historicalOdds ?? { status: "missing" });
   const databaseAuditPath = options.databaseAuditPath ?? DATABASE_AUDIT;
   const databaseAudit = fs.existsSync(databaseAuditPath) ? JSON.parse(fs.readFileSync(databaseAuditPath, "utf8")) : null;
   check(report, "raw_archive_hash_audit", databaseAudit?.pass === true

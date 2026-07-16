@@ -87,6 +87,9 @@ for (const file of [
   "jra-free-odds.mjs",
   "jra-free-exotic-odds.mjs",
   "jra-free-exotic-odds-check.mjs",
+  "jra-historical-win-place-odds.mjs",
+  "historical-win-place-odds-check.mjs",
+  "run-historical-win-place-odds-backfill.ps1",
   "generate-market-ev.mjs",
   "train-reference-asof-model.mjs",
   "evaluate-reference-ev.mjs",
@@ -293,6 +296,11 @@ function exportDatabaseStatus() {
     const estimatedCompletionAt = estimatedHoursRemaining == null ? null
       : new Date(Date.now() + estimatedHoursRemaining * 60 * 60 * 1000).toISOString();
     const activeJob = db.prepare("select updated_at from backfill_jobs where status='running' order by updated_at desc limit 1").get();
+    const historicalOddsJobs = db.prepare(`select count(*) count from sqlite_master
+      where type='table' and name='historical_odds_jobs'`).get().count
+      ? Object.fromEntries(db.prepare("select status,count(*) count from historical_odds_jobs group by status")
+        .all().map((row) => [row.status, row.count]))
+      : {};
     const workerHeartbeatAgeSeconds = activeJob ? (Date.now() - new Date(activeJob.updated_at).getTime()) / 1000 : null;
     const preflightPath = path.join("data", "jra-free-private", "models", "training-preflight.json");
     const preflight = fs.existsSync(preflightPath) ? JSON.parse(fs.readFileSync(preflightPath, "utf8")) : null;
@@ -314,6 +322,9 @@ function exportDatabaseStatus() {
       estimatedCompletionAt,
       workerHealth: !activeJob ? "idle" : workerHeartbeatAgeSeconds <= 30 * 60 ? "healthy" : "stalled",
       workerHeartbeatAgeSeconds,
+      historicalOddsCompleteRaces: historicalOddsJobs.complete ?? 0,
+      historicalOddsPendingRaces: (historicalOddsJobs.queued ?? 0) + (historicalOddsJobs.running ?? 0) + (historicalOddsJobs.failed ?? 0),
+      historicalOddsTotalRaces: Object.values(historicalOddsJobs).reduce((sum, count) => sum + count, 0),
       liveEvValidation: liveValidation ? {
         status: liveValidation.status,
         generatedAt: liveValidation.generatedAt,

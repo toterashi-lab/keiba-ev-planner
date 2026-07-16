@@ -890,6 +890,11 @@ function statusReport() {
     ? Math.max(0, (Date.now() - new Date(activeJobs[0].updated_at).getTime()) / 1000) : null;
   const workerHealth = classifyWorkerHealth(activeJobs.length, runProcessAlive, heartbeatAgeSeconds);
   const latestModel = db.prepare("select id from model_runs order by created_at desc limit 1").get();
+  const historicalOdds = db.prepare(`select count(*) count from sqlite_master
+    where type='table' and name='historical_odds_jobs'`).get().count
+    ? Object.fromEntries(db.prepare("select status,count(*) count from historical_odds_jobs group by status")
+      .all().map((row) => [row.status, row.count]))
+    : {};
   const requiredGates = ["calibration", "walk_forward", "odds_coverage", "odds_freshness", "drawdown"];
   const passedGates = latestModel ? db.prepare(`select gate_name from model_quality_gates
     where model_run_id=? and status='pass'`).all(latestModel.id).map((row) => row.gate_name) : [];
@@ -908,6 +913,10 @@ function statusReport() {
     heartbeatAgeSeconds,
     activeJobs,
     failedJobs,
+    historicalOdds: {
+      ...historicalOdds,
+      pending: (historicalOdds.queued ?? 0) + (historicalOdds.running ?? 0) + (historicalOdds.failed ?? 0),
+    },
     ...totals,
     earliestComplete,
     latestComplete,
