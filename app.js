@@ -230,6 +230,13 @@ function bindEvents() {
     });
   });
 
+  document.querySelectorAll("[data-newspaper-link]").forEach((link) => {
+    link.addEventListener("click", () => {
+      state.appMode = "newspaper";
+      renderAppMode();
+    });
+  });
+
   document.querySelectorAll(".view-tabs button").forEach((button) => {
     button.addEventListener("click", () => {
       state.view = button.dataset.view;
