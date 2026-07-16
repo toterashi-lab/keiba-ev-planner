@@ -113,9 +113,11 @@ export function auditCompletedGoal(database, report, options = {}) {
       && artifact.featureAdmission?.admittedGroups?.length > 0
       && artifact.activeFeatureIndexes?.length > 0
       && artifact.activeFeatureKeys?.length === artifact.activeFeatureIndexes?.length
-      && artifact.folds.every((fold) => Array.isArray(fold.featureAblation) && fold.featureAblation.length > 0), {
+      && artifact.folds.every((fold) => Array.isArray(fold.featureAblation) && fold.featureAblation.length > 0
+        && fold.featureAblation.some((group) => group.id === "pace_shape")), {
       featureAdmission: artifact.featureAdmission,
       activeFeatureKeys: artifact.activeFeatureKeys,
+      paceShapeEvaluatedInEveryFold: artifact.folds?.every((fold) => fold.featureAblation?.some((group) => group.id === "pace_shape")),
     });
   check(report, "probability_research_gate", artifact.researchProbabilityStatus === "research_pass", {
     status: artifact.researchProbabilityStatus, metrics: artifact.metrics,
@@ -165,7 +167,15 @@ export function auditCompletedGoal(database, report, options = {}) {
     && referenceArtifact.researchProbabilityStatus === "research_pass"
     && referenceArtifact.deploymentStatus === "benchmark_only"
     && referenceArtifact.noTargetLeakage === true
-    && referenceArtifact.featureSelectionSource === artifact.modelVersion
+    && referenceArtifact.featureSelectionSource === "reference-asof-group-ablation-v1"
+    && referenceArtifact.featureSelectionSplit?.calibrationEnd < targetStart
+    && referenceArtifact.featureAblation?.some((group) => group.id === "pace_shape")
+    && referenceArtifact.trainingImplementation?.fingerprint === artifact.trainingImplementation?.fingerprint
+    && Array.isArray(referenceArtifact.featureKeys) && referenceArtifact.featureKeys.length === artifact.featureKeys?.length
+    && referenceArtifact.featureKeys.every((key, index) => key === artifact.featureKeys[index])
+    && [referenceArtifact.means, referenceArtifact.scales, referenceArtifact.weights]
+      .every((values) => Array.isArray(values) && values.length === referenceArtifact.featureKeys.length)
+    && referenceArtifact.activeFeatureIndexes?.every((index) => Number.isInteger(index) && index >= 0 && index < referenceArtifact.featureKeys.length)
     && referenceArtifact.split?.trainEnd < referenceArtifact.split?.calibrationStart
     && referenceArtifact.split?.calibrationEnd < targetStart
     && referenceArtifact.split?.embargoDays >= 7
@@ -179,6 +189,8 @@ export function auditCompletedGoal(database, report, options = {}) {
       split: referenceArtifact?.split,
       counts: referenceArtifact?.counts,
       featureSelectionSource: referenceArtifact?.featureSelectionSource,
+      featureSelectionSplit: referenceArtifact?.featureSelectionSplit,
+      featureAblation: referenceArtifact?.featureAblation,
     });
 
   const run = database.prepare("select id from model_runs where model_version=? order by id desc limit 1").get(artifact.modelVersion);
@@ -213,10 +225,16 @@ export function auditCompletedGoal(database, report, options = {}) {
   check(report, "all_ticket_expectancy_rankings", completeTicketCoverage && market.unitStakeYen === 100, {
     races: raceKeys.length, betTypes: BET_TYPES.length, unitStakeYen: market.unitStakeYen, candidates: market.candidates?.length ?? 0,
   });
-  const primaryExternalStrategy = referenceAudit?.strategies?.find((row) => row.name === "全券種・各レース各券種1位 EV>1");
+  const primaryExternalStrategy = referenceAudit?.strategies?.find((row) => row.name === "AI推奨・全レース");
   check(report, "reference_expectancy_external_audit", referenceAudit?.status === "evaluation_only"
     && referenceAudit.modelVersion === referenceArtifact?.modelVersion
-    && primaryExternalStrategy?.bets > 0 && Number.isFinite(primaryExternalStrategy.roi)
+    && referenceAudit.evaluationScope === "ai_prediction_top_ticket_only"
+    && referenceAudit.recommendationCoverage?.auditedRecommendations === 72
+    && referenceAudit.recommendationCoverage?.predictions === 72
+    && referenceAudit.recommendations?.length === 72
+    && referenceAudit.recommendations.every((row) => row.recommendationSource === "ai_prediction_top_ticket"
+      && row.investmentYen === row.points * 100 && Array.isArray(row.ticketKeys) && row.ticketKeys.length === row.points)
+    && primaryExternalStrategy?.bets === 72 && Number.isFinite(primaryExternalStrategy.roi)
     && market.modelVersion === referenceArtifact?.modelVersion
     && market.logic?.engineVersion === "expectancy-engine-v3"
     && market.logic?.deploymentStatus === "benchmark_only"
@@ -227,6 +245,8 @@ export function auditCompletedGoal(database, report, options = {}) {
       auditModelVersion: referenceAudit?.modelVersion,
       outputModelVersion: market.modelVersion,
       primaryStrategy: primaryExternalStrategy,
+      evaluationScope: referenceAudit?.evaluationScope,
+      recommendationCoverage: referenceAudit?.recommendationCoverage,
     });
 
   const publicationManifestPath = options.publicationManifestPath ?? PUBLICATION_MANIFEST;

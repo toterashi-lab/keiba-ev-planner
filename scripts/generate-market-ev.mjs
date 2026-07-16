@@ -16,6 +16,7 @@ const TARGET_DATES = ["2026-07-11", "2026-07-12"];
 const OUTPUT = path.join("data", "model-outputs-2026-07-11-2026-07-12.json");
 const VALIDATION_ARTIFACT = loadValidationArtifact();
 const REFERENCE_EV_AUDIT = loadReferenceEvAudit();
+const PAYOUT_PATTERNS = loadPayoutPatterns();
 
 export function generateMarketEv() {
   const db = new DatabaseSync(path.join("data", "jra-free-private", "keiba.sqlite"), { readOnly: true });
@@ -27,7 +28,7 @@ export function generateMarketEv() {
     if (!baseBatch || !exoticBatch) throw new Error("単勝・複勝または全券種の完了バッチがありません");
 
     const placeholders = TARGET_DATES.map(() => "?").join(",");
-    const races = db.prepare(`select race_id,race_date,venue_code,race_number from complete_races
+    const races = db.prepare(`select race_id,race_date,venue_code,race_number,race_class,surface,distance_m,weather,going from complete_races
       where race_date in (${placeholders}) order by race_date,venue_code,race_number`).all(...TARGET_DATES);
     if (races.length !== 72) throw new Error(`対象レース不足: ${races.length}/72`);
     const entries = db.prepare(`select e.race_id,e.horse_id,e.horse_number,h.name from complete_race_entries e
@@ -58,6 +59,7 @@ export function generateMarketEv() {
       }
       const names = new Map((namesByRace.get(race.race_id) ?? []).map((row) => [row.horse_number, row.name]));
       const winRows = byType.get("win");
+      race.fieldSize = winRows.length;
       const horseProbabilities = normalize(Object.fromEntries(winRows.map((row) => [row.selection_key, 1 / row.odds_low])));
       const structuralBooks = buildFinishOrderProbabilityBooks(horseProbabilities);
       const pricedHorseNumbers = new Set(winRows.map((row) => Number(row.selection_key)));
@@ -152,7 +154,17 @@ function makeAiPrediction(race, horseProbabilities, names, raceCandidates, abili
     confidenceScore,
     scenario,
     marks: ranked.slice(0, marks.length).map((row, index) => ({ mark: marks[index], ...row })),
-    topTicket: topTicket ? { betType: topTicket.betType, method: topTicket.method, selection: topTicket.selection, expectedReturn: topTicket.adoptedExpectedReturn } : null,
+    topTicket: topTicket ? {
+      recommendationSource: "ai_prediction_top_ticket",
+      betType: topTicket.betType,
+      method: topTicket.method,
+      selection: topTicket.selection,
+      points: topTicket.points,
+      totalInvestmentYen: topTicket.totalInvestmentYen,
+      ticketKeys: topTicket.ticketKeys,
+      expectedReturn: topTicket.adoptedExpectedReturn,
+      payoutVolatilityPrior: topTicket.payoutVolatilityPrior,
+    } : null,
     comment: `${ranked.length}頭の市場確率を比較。◎${ranked[0].horseName}は推定勝率${(ranked[0].probability * 100).toFixed(1)}%、○との差は${(gap * 100).toFixed(1)}ポイント。${scenario}シナリオで評価します。`,
   };
 }
@@ -235,6 +247,7 @@ function makeCandidate(race, betType, method, selection, rows, probability, name
     calibrationStatus: useAbility ? "pass" : "benchmark",
     externalValidationStatus: REFERENCE_EV_AUDIT?.status === "evaluation_only" ? "fail" : "insufficient",
     recommendationEligible: false,
+    payoutVolatilityPrior: payoutVolatilityPrior(race, betType),
     optimizationScenarios,
     comment: useAbility
       ? `対象レース前で学習を停止した能力モデルとJRA公式最終オッズで${method} ${rows.length}点を各100円計算。表示順位は券種別の校正誤差を確率から控除した保守期待値です。対象レースの結果・払戻は予測確率に使用していません。`
@@ -267,10 +280,44 @@ function loadReferenceEvAudit() {
   return audit.modelVersion === VALIDATION_ARTIFACT?.modelVersion ? audit : null;
 }
 
+function loadPayoutPatterns() {
+  const file = path.join("data", "historical-payout-patterns.json");
+  if (!fs.existsSync(file)) return { status: "missing", patterns: [] };
+  const report = JSON.parse(fs.readFileSync(file, "utf8"));
+  return report.status === "research_only" ? report : { status: "invalid", patterns: [] };
+}
+
+function payoutVolatilityPrior(race, betType) {
+  const available = new Set([
+    `venue=${race.venue_code}`,
+    `surface=${String(race.surface ?? "").trim()}`,
+    `distance=${distanceBucket(race.distance_m)}`,
+    `field=${fieldBucket(race.fieldSize)}`,
+    `raceBand=${raceBand(race.race_number)}`,
+    `going=${String(race.going ?? "").trim()}`,
+    `weather=${String(race.weather ?? "").trim()}`,
+    `class=${classBucket(race.race_class)}`,
+  ]);
+  const matches = (PAYOUT_PATTERNS.patterns ?? []).filter((pattern) =>
+    pattern.betType === betType && pattern.conditions.every((condition) => available.has(condition)));
+  const strongest = matches.sort((left, right) => right.robustLift - left.robustLift)[0];
+  return strongest ? {
+    status: "matched_historical_pattern",
+    lift: strongest.robustLift,
+    conditions: strongest.conditions,
+    discoveryCount: strongest.discovery.count,
+    validationCount: strongest.validation.count,
+    usePolicy: strongest.usePolicy,
+  } : { status: "baseline", lift: 1, conditions: [], usePolicy: "volatility_prior_only" };
+}
+
 function summarizeReferenceAudit() {
-  const strategy = REFERENCE_EV_AUDIT?.strategies?.find((row) => row.name === "全券種・各レース各券種1位 EV>1");
+  const strategy = REFERENCE_EV_AUDIT?.strategies?.find((row) => row.name === "AI推奨・全レース");
   return strategy ? { status: "fail", sampleRaces: 72, bets: strategy.bets, hits: strategy.hits, roi: strategy.roi,
-    reason: "72レース外部監査でROIゲート不合格。確率・期待値の表示は研究比較専用。" }
+    evaluationScope: REFERENCE_EV_AUDIT.evaluationScope,
+    recommendations: REFERENCE_EV_AUDIT.recommendations,
+    strategies: REFERENCE_EV_AUDIT.strategies,
+    reason: "AI推奨買い目だけを対象にした72レース外部監査でROIゲート不合格。確率・期待値の表示は研究比較専用。" }
     : { status: "insufficient", sampleRaces: 0, reason: "外部期待値監査未完了" };
 }
 
@@ -307,6 +354,40 @@ function ticketCredibilityPool(rows, modelBook, modelRows, betType) {
 function normalize(values) {
   const total = Object.values(values).reduce((sum, value) => sum + value, 0);
   return Object.fromEntries(Object.entries(values).map(([key, value]) => [key, value / total]));
+}
+
+function distanceBucket(value) {
+  const distance = Number(value);
+  if (!(distance > 0)) return "";
+  if (distance <= 1200) return "sprint";
+  if (distance <= 1600) return "mile";
+  if (distance <= 2200) return "middle";
+  return "long";
+}
+
+function fieldBucket(value) {
+  const size = Number(value);
+  if (!(size > 0)) return "";
+  if (size <= 7) return "small";
+  if (size <= 12) return "medium";
+  return "large";
+}
+
+function raceBand(value) {
+  const number = Number(value);
+  if (!(number > 0)) return "";
+  if (number <= 4) return "early";
+  if (number <= 8) return "middle";
+  return "late";
+}
+
+function classBucket(value) {
+  const text = String(value ?? "").trim();
+  if (/新馬/.test(text)) return "maiden_debut";
+  if (/未勝利/.test(text)) return "maiden";
+  if (/障害/.test(text)) return "jump";
+  if (/G[ⅠI1]|重賞|オープン|OP/.test(text)) return "open_graded";
+  return text ? "conditions" : "";
 }
 
 function group(rows, key) {

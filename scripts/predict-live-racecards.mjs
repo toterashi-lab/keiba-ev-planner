@@ -2,19 +2,27 @@ import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { buildFeatureRows } from "./model-feature-pipeline.mjs";
-import { predictRace } from "./train-expectancy-model.mjs";
+import { FEATURE_KEYS, predictRace } from "./train-expectancy-model.mjs";
 import { resolveLiveTargetDates, resolveStoredRacecardTargetDates } from "./generate-live-market-ev.mjs";
+import { loadCompatibleModelArtifact } from "../model/model-artifact-compatibility.mjs";
 
 const databasePath = path.join("data", "jra-free-private", "keiba.sqlite");
-const artifactPath = path.join("data", "jra-free-private", "models", "ability-softmax-v1.json");
+const artifactPaths = [
+  path.join("data", "jra-free-private", "models", "ability-softmax-v1.json"),
+  path.join("data", "jra-free-private", "models", "reference-asof-model.json"),
+];
 const outputPath = path.join("data", "jra-free-private", "models", "live-ability-predictions.json");
 const requestedDate = process.argv.includes("--date") ? process.argv[process.argv.indexOf("--date") + 1] : null;
 
-if (!fs.existsSync(artifactPath)) {
-  console.log(JSON.stringify({ status: "waiting_for_trained_model" }));
-  process.exit(0);
+const modelSelection = loadCompatibleModelArtifact(artifactPaths, FEATURE_KEYS);
+if (!modelSelection.artifact) {
+  const waiting = { status: "waiting_for_compatible_trained_model", generatedAt: new Date().toISOString(), rejected: modelSelection.rejected };
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+  fs.writeFileSync(outputPath, `${JSON.stringify(waiting, null, 2)}\n`, "utf8");
+  console.error(JSON.stringify(waiting));
+  process.exit(12);
 }
-const artifact = JSON.parse(fs.readFileSync(artifactPath, "utf8"));
+const artifact = modelSelection.artifact;
 const db = new DatabaseSync(databasePath);
 try {
   const batch = requestedDate ? null : db.prepare("select * from live_racecard_batches where status='complete' and race_count>0 order by id desc limit 1").get();
@@ -48,7 +56,9 @@ try {
     }
     db.exec("commit");
   } catch (error) { db.exec("rollback"); throw error; }
-  const output = { status: "ready", generatedAt, targetDates: dates, modelVersion: artifact.modelVersion, researchProbabilityStatus: artifact.researchProbabilityStatus, races: races.length, entries: predictions.length, predictions };
+  const output = { status: "ready", generatedAt, targetDates: dates, modelVersion: artifact.modelVersion,
+    modelArtifactPath: modelSelection.artifactPath, researchProbabilityStatus: artifact.researchProbabilityStatus,
+    races: races.length, entries: predictions.length, predictions };
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   fs.writeFileSync(outputPath, `${JSON.stringify(output, null, 2)}\n`, "utf8");
   console.log(JSON.stringify({ ...output, predictions: undefined }, null, 2));

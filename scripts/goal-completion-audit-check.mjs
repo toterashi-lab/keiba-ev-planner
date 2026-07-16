@@ -61,6 +61,7 @@ try {
     featureTimePolicy: { policy: "strictly-before-race-start; same-start races update together", rows: 1, rowsWithPriorHistory: 1, violations: 0, coverage: 1 },
     activeFeatureIndexes: [10, 11],
     activeFeatureKeys: ["priorWinRate", "priorPlaceRate"],
+    featureKeys: ["priorWinRate", "priorPlaceRate"],
     featureAdmission: {
       method: "group-ablation-on-each-walk-forward-fold",
       fallback: false,
@@ -70,8 +71,8 @@ try {
     trainingSnapshot: captureModelDataSnapshot(db),
     trainingImplementation: captureModelImplementationSnapshot(),
     folds: [
-      { trainEnd: "2024-01-01", calibrationStart: "2024-01-09", calibrationEnd: "2024-06-30", testStart: "2024-07-08", featureAblation: [{ id: "horse_form", pass: true }] },
-      { trainEnd: "2024-07-01", calibrationStart: "2024-07-09", calibrationEnd: "2024-12-31", testStart: "2025-01-08", featureAblation: [{ id: "horse_form", pass: true }] },
+      { trainEnd: "2024-01-01", calibrationStart: "2024-01-09", calibrationEnd: "2024-06-30", testStart: "2024-07-08", featureAblation: [{ id: "horse_form", pass: true }, { id: "pace_shape", pass: false }] },
+      { trainEnd: "2024-07-01", calibrationStart: "2024-07-09", calibrationEnd: "2024-12-31", testStart: "2025-01-08", featureAblation: [{ id: "horse_form", pass: true }, { id: "pace_shape", pass: false }] },
     ],
     metrics: { maxProbabilitySumError: 1e-12, meanEce: 0.01, meanMaxCalibrationBinError: 0.03, meanLogLoss: 1.2, meanUniformLogLoss: 2.1 },
     ticketProbabilityStatus: "research_pass",
@@ -90,12 +91,24 @@ try {
     modelVersion: "unit-reference-model", targetDates: ["2026-01-01", "2026-01-02"],
     split: { trainEnd: "2024-12-31", calibrationStart: "2025-01-08", calibrationEnd: "2025-12-24", embargoDays: 7 },
     counts: { trainRaces: 1, calibrationRaces: 0, targetRaces: 72, predictions: 946 },
-    featureSelectionSource: "unit-model", ticketCalibrationUncertainty: uncertaintyFixture(),
+    featureKeys: artifact.featureKeys, activeFeatureIndexes: [0], means: [0, 0], scales: [1, 1], weights: [0, 0],
+    trainingImplementation: artifact.trainingImplementation,
+    featureSelectionSource: "reference-asof-group-ablation-v1",
+    featureSelectionSplit: { trainEnd: "2024-12-31", calibrationStart: "2025-01-08", calibrationEnd: "2025-12-24" },
+    featureAblation: [{ id: "horse_form", pass: true }, { id: "pace_shape", pass: false }],
+    ticketCalibrationUncertainty: uncertaintyFixture(),
     predictions: Array.from({ length: 946 }, (_, index) => ({ raceId: `r${Math.floor(index / 14)}`, horseId: `h${index}`, probability: 0.1 })),
   };
   fs.writeFileSync(referenceArtifactPath, JSON.stringify(referenceArtifact));
+  const recommendationFixture = Array.from({ length: 72 }, (_, index) => ({
+    recommendationSource: "ai_prediction_top_ticket", raceId: `r${index + 1}`, betType: "単勝",
+    ticketKeys: ["1"], points: 1, investmentYen: 100, payoutYen: 0, expectedReturn: 0.8,
+  }));
   fs.writeFileSync(referenceAuditPath, JSON.stringify({ status: "evaluation_only", modelVersion: "unit-reference-model",
-    strategies: [{ name: "全券種・各レース各券種1位 EV>1", bets: 10, hits: 1, roi: 0.5 }] }));
+    evaluationScope: "ai_prediction_top_ticket_only",
+    recommendationCoverage: { predictions: 72, auditedRecommendations: 72, excludedCandidateRows: 1152 },
+    recommendations: recommendationFixture,
+    strategies: [{ name: "AI推奨・全レース", bets: 72, hits: 1, roi: 0.5 }] }));
 
   const candidates = [];
   const predictions = [];

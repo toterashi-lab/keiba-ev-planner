@@ -16,6 +16,7 @@ const modelData = {
 };
 const databaseData = window.KEIBA_DATABASE_STATUS ?? {};
 const featureCoverageData = window.KEIBA_MODEL_FEATURE_COVERAGE ?? { groups: [] };
+const payoutPatternData = window.KEIBA_HISTORICAL_PAYOUT_PATTERNS ?? { patterns: [], coverage: {} };
 const closingOddsData = window.KEIBA_CLOSING_ODDS ?? { races: [], quality: [] };
 const ticketEngine = window.KEIBA_TICKET_ENGINE;
 
@@ -24,7 +25,7 @@ const state = {
   venueCode: "",
   raceNo: 11,
   view: "summary",
-  benchmark: "favorite",
+  benchmark: "ai_all",
   rankingBetType: "",
   rankingMethod: "",
 };
@@ -107,6 +108,8 @@ const els = {
   candidateCount: document.querySelector("#candidate-count"),
   featureReadinessStatus: document.querySelector("#feature-readiness-status"),
   featureReadinessGrid: document.querySelector("#feature-readiness-grid"),
+  payoutPatternStatus: document.querySelector("#payout-pattern-status"),
+  payoutPatternList: document.querySelector("#payout-pattern-list"),
 };
 
 initialize();
@@ -119,9 +122,34 @@ function initialize() {
   renderCoverage();
   renderDatabaseStatus();
   renderFeatureReadiness();
+  renderPayoutPatterns();
   renderPerformance();
   renderAll();
   renderStrategies();
+}
+
+function renderPayoutPatterns() {
+  const patterns = payoutPatternData.patterns ?? [];
+  const coverage = payoutPatternData.coverage ?? {};
+  els.payoutPatternStatus.textContent = `${number(coverage.totalRows)}件・${patterns.length}条件`;
+  els.payoutPatternStatus.className = "decision hold";
+  els.payoutPatternList.innerHTML = patterns.slice(0, 12).map((pattern, index) => `<article class="payout-pattern-card">
+    <header><span>${String(index + 1).padStart(2, "0")}</span><strong>${escapeHtml(pattern.betType)}</strong></header>
+    <h3>${pattern.conditions.map(conditionLabel).join(" × ")}</h3>
+    <div><span>再現リフト</span><strong>${pattern.robustLift.toFixed(2)}倍</strong></div>
+    <p>旧期間 ${number(pattern.discovery.count)}件 / 検証期間 ${number(pattern.validation.count)}件</p>
+    <small>上位10%基準 ${yen(pattern.highPayoutThresholdYen)}</small>
+  </article>`).join("");
+}
+
+function conditionLabel(value) {
+  const labels = {
+    "field=large": "多頭数", "field=medium": "中頭数", "field=small": "少頭数",
+    "class=open_graded": "重賞・OP", "class=maiden": "未勝利", "class=maiden_debut": "新馬",
+    "distance=sprint": "短距離", "distance=mile": "マイル", "distance=middle": "中距離", "distance=long": "長距離",
+    "raceBand=early": "前半R", "raceBand=middle": "中盤R", "raceBand=late": "後半R",
+  };
+  return escapeHtml(labels[value] ?? value.replace("=", " "));
 }
 
 function renderFeatureReadiness() {
@@ -207,9 +235,9 @@ function bindEvents() {
 }
 
 function renderPerformance() {
-  const reports = buildBenchmarkReports();
-  els.heroFavoriteRoi.textContent = percent(reports.favorite.roi);
-  els.performanceCards.innerHTML = [reports.favorite, reports.top3, reports.all].map((report) => {
+  const reports = buildAiRecommendationReports();
+  els.heroFavoriteRoi.textContent = percent(reports.ai_all.roi);
+  els.performanceCards.innerHTML = [reports.ai_all, reports.ai_ev1, reports.ai_ev11].map((report) => {
     const roiClass = report.roi >= 1 ? "positive" : "negative";
     return `<article class="performance-card ${state.benchmark === report.id ? "active" : ""}">
       <header><strong>${report.name}</strong><span>${report.pointsLabel}</span></header>
@@ -217,12 +245,12 @@ function renderPerformance() {
       <dl><div><dt>対象</dt><dd>${report.trials}R</dd></div><div><dt>的中</dt><dd>${report.hits}R</dd></div><div><dt>的中率</dt><dd>${percent(report.hitRate)}</dd></div><div><dt>投資</dt><dd>${yen(report.investment)}</dd></div><div><dt>払戻</dt><dd>${yen(report.payout)}</dd></div></dl>
     </article>`;
   }).join("") + `<article class="performance-card blocked">
-    <header><strong>期待値モデル</strong><span>自動推奨</span></header>
-    <div class="performance-primary"><span>検証済み</span><strong>0 / 72</strong><small>学習・校正前</small></div>
-    <p>発走前オッズとwalk-forward検証が揃うまで、的中率・回収率・買い目を公開しません。</p>
+    <header><strong>購入判定</strong><span>外部監査</span></header>
+    <div class="performance-primary"><span>現在の状態</span><strong>購入不可</strong><small>回収率ゲート不合格</small></div>
+    <p>AI推奨だけに限定しても回収率100%を下回るため、研究表示のまま固定します。</p>
   </article>`;
 
-  const selected = reports[state.benchmark] ?? reports.favorite;
+  const selected = reports[state.benchmark] ?? reports.ai_all;
   els.performanceRule.textContent = selected.rule;
   const rows = selected.details.slice(0, 30);
   els.performanceBody.innerHTML = rows.length ? rows.map((row) => `<tr>
@@ -233,54 +261,58 @@ function renderPerformance() {
   </tr>`).join("") : `<tr><td colspan="10" class="empty-row">検証可能なレースがありません</td></tr>`;
 }
 
-function buildBenchmarkReports() {
-  const definitions = {
-    favorite: { id: "favorite", name: "単勝1番人気", count: 1, pointsLabel: "1点 / レース", rule: "各レースの単勝最低オッズ1頭を100円購入" },
-    top3: { id: "top3", name: "単勝オッズ上位3頭", count: 3, pointsLabel: "3点 / レース", rule: "各レースの単勝オッズ上位3頭を各100円購入" },
-    all: { id: "all", name: "単勝全頭", count: Infinity, pointsLabel: "発売全頭", rule: "単勝オッズを取得できた全馬を各100円購入する対照基準" },
-  };
-  const reports = Object.fromEntries(Object.values(definitions).map((definition) => [definition.id, { ...definition, details: [] }]));
-
-  for (const meeting of meetingData.meetings ?? []) {
-    for (const track of meeting.tracks ?? []) {
-      for (const race of track.races ?? []) {
-        const result = resultData.results.find((item) => item.meetingName === track.meetingName && item.raceNo === race.no);
-        const oddsRace = closingOddsData.races?.find((item) => item.date === meeting.date && item.venueCode === track.venueCode && item.raceNo === race.no);
-        const prices = (oddsRace?.prices ?? []).filter((price) => Number(price.win) > 1).sort((a, b) => a.win - b.win || a.horseNumber - b.horseNumber);
-        const winners = new Set((result?.runners ?? []).filter((runner) => runner.finishPosition === 1).map((runner) => runner.horseNumber));
-        if (!result || !prices.length || !winners.size) continue;
-        const runnerNames = new Map(result.runners.map((runner) => [runner.horseNumber, runner.horseName]));
-        const winRefunds = (result.refunds ?? []).filter((refund) => refund.betType === "単勝").map((refund) => ({
-          horseNumber: Number(String(refund.selection).match(/\d+/)?.[0]), payout: Number(refund.payoutYen) || 0,
-        }));
-        const winnerPrice = prices.find((price) => winners.has(price.horseNumber));
-
-        for (const report of Object.values(reports)) {
-          const selected = prices.slice(0, report.count);
-          const selectedNumbers = new Set(selected.map((price) => price.horseNumber));
-          const payout = winRefunds.filter((refund) => selectedNumbers.has(refund.horseNumber)).reduce((sum, refund) => sum + refund.payout, 0);
-          const investment = selected.length * 100;
-          report.details.push({
-            date: meeting.date, venueName: track.venueName, raceNo: race.no, winnerName: result.winner,
-            winnerOdds: winnerPrice?.win, selection: selected.map((price) => `${price.horseNumber} ${runnerNames.get(price.horseNumber) ?? ""}`).join(" / "),
-            points: selected.length, investment, payout, net: payout - investment, hit: payout > 0,
-          });
-        }
-      }
-    }
-  }
-
-  for (const report of Object.values(reports)) {
-    report.details.sort((a, b) => b.date.localeCompare(a.date) || b.raceNo - a.raceNo || a.venueName.localeCompare(b.venueName, "ja"));
-    report.trials = report.details.length;
-    report.hits = report.details.filter((detail) => detail.hit).length;
-    report.investment = report.details.reduce((sum, detail) => sum + detail.investment, 0);
-    report.payout = report.details.reduce((sum, detail) => sum + detail.payout, 0);
-    report.net = report.payout - report.investment;
-    report.hitRate = report.trials ? report.hits / report.trials : 0;
-    report.roi = report.investment ? report.payout / report.investment : 0;
-  }
-  return reports;
+function buildAiRecommendationReports() {
+  const audit = modelData.logic?.referenceWeekExternalAudit ?? {};
+  const recommendations = audit.evaluationScope === "ai_prediction_top_ticket_only" ? (audit.recommendations ?? []) : [];
+  const definitions = [
+    { id: "ai_all", name: "AI推奨すべて", strategy: "AI推奨・全レース", filter: () => true,
+      rule: "各レースでAIが最上位に保存した1買い目だけを購入" },
+    { id: "ai_ev1", name: "AI推奨 EV>100%", strategy: "AI推奨・期待回収率>1", filter: (row) => row.expectedReturn > 1,
+      rule: "AI最上位買い目のうち、推定期待回収率100%超だけを購入" },
+    { id: "ai_ev11", name: "AI推奨 EV>110%", strategy: "AI推奨・期待回収率>1.1", filter: (row) => row.expectedReturn > 1.1,
+      rule: "AI最上位買い目のうち、推定期待回収率110%超だけを購入" },
+  ];
+  return Object.fromEntries(definitions.map((definition) => {
+    const strategy = (audit.strategies ?? []).find((row) => row.name === definition.strategy);
+    const details = recommendations.filter(definition.filter).map((row) => {
+      const result = resultData.results.find((item) => item.meetingName === row.meetingName && item.raceNo === row.raceNo);
+      const track = meetingData.meetings.flatMap((meeting) => meeting.tracks.map((entry) => ({ meeting, entry })))
+        .find(({ meeting, entry }) => meeting.date === row.date && entry.meetingName === row.meetingName);
+      const oddsRace = closingOddsData.races?.find((item) => item.date === row.date
+        && item.venueCode === track?.entry.venueCode && item.raceNo === row.raceNo);
+      const winnerNumber = result?.runners?.find((runner) => runner.finishPosition === 1)?.horseNumber;
+      const winnerOdds = oddsRace?.prices?.find((price) => price.horseNumber === winnerNumber)?.win;
+      return {
+        date: row.date,
+        venueName: track?.entry.venueName ?? row.meetingName,
+        raceNo: row.raceNo,
+        winnerName: result?.winner ?? "--",
+        winnerOdds,
+        selection: `${row.betType} ${row.method} / ${row.selection}`,
+        points: row.points,
+        investment: row.investmentYen,
+        payout: row.payoutYen,
+        net: row.netYen,
+        hit: row.hit,
+      };
+    }).sort((a, b) => b.date.localeCompare(a.date) || b.raceNo - a.raceNo || a.venueName.localeCompare(b.venueName, "ja"));
+    const investment = strategy?.investmentYen ?? details.reduce((sum, row) => sum + row.investment, 0);
+    const payout = strategy?.payoutYen ?? details.reduce((sum, row) => sum + row.payout, 0);
+    const trials = strategy?.bets ?? details.length;
+    const hits = strategy?.hits ?? details.filter((row) => row.hit).length;
+    return [definition.id, {
+      ...definition,
+      details,
+      pointsLabel: `${trials}件 / AI推奨のみ`,
+      trials,
+      hits,
+      investment,
+      payout,
+      net: payout - investment,
+      hitRate: trials ? hits / trials : 0,
+      roi: investment ? payout / investment : 0,
+    }];
+  }));
 }
 
 function renderAll() {

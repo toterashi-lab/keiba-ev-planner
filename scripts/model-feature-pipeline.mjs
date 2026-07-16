@@ -27,7 +27,7 @@ export function buildFeatureRows(database, options) {
     if (!raceRows.length) return;
     const emit = options.emitHistorical !== false && raceRows[0].race_date >= options.from && raceRows[0].race_date <= options.to;
     if (emit) {
-      const fieldPriorRates = raceRows.map((row) => rate(getStats(histories, row.horse_id)));
+      const fieldPriorRates = raceRows.map((row) => priorProfile(getStats(histories, row.horse_id)));
       for (let index = 0; index < raceRows.length; index += 1) {
         const featureRow = createFeatureRow(raceRows[index], histories, jockeys, trainers, fieldPriorRates, false, "historical");
         if (options.collect !== false) output.push(featureRow);
@@ -73,7 +73,7 @@ export function buildFeatureRows(database, options) {
       let end = start + 1;
       while (end < liveRows.length && liveRows[end].race_id === liveRows[start].race_id) end += 1;
       const liveRaceRows = liveRows.slice(start, end);
-      const fieldPriorRates = liveRaceRows.map((row) => rate(getStats(histories, row.horse_id)));
+      const fieldPriorRates = liveRaceRows.map((row) => priorProfile(getStats(histories, row.horse_id)));
       for (const row of liveRaceRows) {
         const featureRow = createFeatureRow(row, histories, jockeys, trainers, fieldPriorRates, true, "live");
         if (options.collect !== false) output.push(featureRow);
@@ -99,6 +99,8 @@ function createFeatureRow(row, histories, jockeys, trainers, fieldPriorRates, so
   const trainer = getStats(trainers, row.trainer_id);
   const horseRate = rate(horse);
   const horseSmoothed = smoothedRate(horse);
+  const pace = paceProfile(horse);
+  const fieldFrontRunnerRate = averageMetric(fieldPriorRates, "frontRunnerRateSmoothed", 0.2);
   const fieldAverage = average(fieldPriorRates);
   const age = Number(String(row.sex_age ?? "").match(/\d+/)?.[0]) || null;
   const month = Number(row.race_date.slice(5, 7));
@@ -167,6 +169,18 @@ function createFeatureRow(row, histories, jockeys, trainers, fieldPriorRates, so
       recent3MeanFinalSectional: recentMean(horse.recentSectionals, 3),
       recent5MeanPopularity: recentMean(horse.recentPopularities, 5),
       lastPopularity: horse.recentPopularities.at(-1) ?? null,
+      paceHistoryStarts: pace.starts,
+      priorAverageEarlyPositionPercentile: pace.averageEarlyPositionPercentile,
+      priorAverageLateCornerPositionPercentile: pace.averageLateCornerPositionPercentile,
+      priorAveragePositionGain: pace.averagePositionGain,
+      frontRunnerRate: pace.frontRunnerRate,
+      frontRunnerRateSmoothed: pace.frontRunnerRateSmoothed,
+      recent3EarlyPositionPercentile: recentMean(horse.recentEarlyPositionPercentiles ?? [], 3),
+      recent3LateCornerPositionPercentile: recentMean(horse.recentLateCornerPositionPercentiles ?? [], 3),
+      recent3PositionGain: recentMean(horse.recentPositionGains ?? [], 3),
+      fieldRelativeFrontRunnerRate: pace.frontRunnerRateSmoothed - fieldFrontRunnerRate,
+      pacePressureFrontInteraction: pace.frontRunnerRateSmoothed * fieldFrontRunnerRate,
+      pacePressureGainInteraction: (pace.averagePositionGain ?? 0) * fieldFrontRunnerRate,
       surfaceStarts: surface.starts, surfaceWinRate: rate(surface).win, venueStarts: venue.starts, venueWinRate: rate(venue).win,
       distanceBandStarts: distance.starts, distanceBandWinRate: rate(distance).win, goingStarts: going.starts, goingWinRate: rate(going).win,
       weatherStarts: weather.starts, weatherWinRate: rate(weather).win,
@@ -193,7 +207,7 @@ function createFeatureRow(row, histories, jockeys, trainers, fieldPriorRates, so
 }
 
 function updateHistories(row, fieldSize, histories, jockeys, trainers) {
-  update(getStats(histories, row.horse_id), row, fieldSize);
+  update(getStats(histories, row.horse_id), row, fieldSize, true);
   update(getStats(histories, `${row.horse_id}|surface|${row.surface}`), row, fieldSize);
   update(getStats(histories, `${row.horse_id}|venue|${row.venue_code}`), row, fieldSize);
   update(getStats(histories, `${row.horse_id}|distance|${distanceBand(row.distance_m)}`), row, fieldSize);
@@ -214,7 +228,7 @@ function getStats(map, key) {
   return map.get(safeKey);
 }
 
-function update(stats, row, fieldSize) {
+function update(stats, row, fieldSize, trackPace = false) {
   stats.starts += 1;
   if (row.finish_position === 1) stats.wins += 1;
   if (row.finish_position && row.finish_position <= racePlaceDepth(fieldSize)) stats.places += 1;
@@ -226,6 +240,7 @@ function update(stats, row, fieldSize) {
   if (row.finish_position) { stats.finishSum += row.finish_position; stats.finishCount += 1; }
   if (Number.isFinite(row.final_sectional)) { stats.sectionalSum += row.final_sectional; stats.sectionalCount += 1; }
   if (row.popularity) { stats.popularitySum += row.popularity; stats.popularityCount += 1; }
+  if (trackPace) updatePace(stats, row.corner_positions, fieldSize);
   stats.lastDate = row.race_date;
   stats.lastAsOfTime = raceStartKey(row);
   stats.lastClassLevel = raceClassLevel(`${row.race_name ?? ""} ${row.race_class ?? ""}`);
@@ -235,12 +250,61 @@ function update(stats, row, fieldSize) {
 
 function rate(stats) { return { win: stats.starts ? stats.wins / stats.starts : 0, place: stats.starts ? stats.places / stats.starts : 0, starts: stats.starts, wins: stats.wins }; }
 function smoothedRate(stats) { return { win: (stats.wins + 1) / (stats.starts + 13), place: (stats.places + 3) / (stats.starts + 13) }; }
+function priorProfile(stats) { return { ...rate(stats), frontRunnerRateSmoothed: paceProfile(stats).frontRunnerRateSmoothed }; }
+function paceProfile(stats) {
+  const starts = stats.cornerCount ?? 0;
+  return {
+    starts,
+    averageEarlyPositionPercentile: mean(stats.earlyPositionPercentileSum ?? 0, starts),
+    averageLateCornerPositionPercentile: mean(stats.lateCornerPositionPercentileSum ?? 0, starts),
+    averagePositionGain: mean(stats.positionGainSum ?? 0, starts),
+    frontRunnerRate: starts ? (stats.frontRuns ?? 0) / starts : 0,
+    frontRunnerRateSmoothed: ((stats.frontRuns ?? 0) + 1) / (starts + 5),
+  };
+}
+function updatePace(stats, value, fieldSize) {
+  const metrics = cornerMetrics(value, fieldSize);
+  if (!metrics) return;
+  stats.cornerCount = (stats.cornerCount ?? 0) + 1;
+  stats.earlyPositionPercentileSum = (stats.earlyPositionPercentileSum ?? 0) + metrics.earlyPositionPercentile;
+  stats.lateCornerPositionPercentileSum = (stats.lateCornerPositionPercentileSum ?? 0) + metrics.lateCornerPositionPercentile;
+  stats.positionGainSum = (stats.positionGainSum ?? 0) + metrics.positionGain;
+  stats.frontRuns = (stats.frontRuns ?? 0) + metrics.frontRunner;
+  stats.recentEarlyPositionPercentiles ??= [];
+  stats.recentLateCornerPositionPercentiles ??= [];
+  stats.recentPositionGains ??= [];
+  pushRecent(stats.recentEarlyPositionPercentiles, metrics.earlyPositionPercentile);
+  pushRecent(stats.recentLateCornerPositionPercentiles, metrics.lateCornerPositionPercentile);
+  pushRecent(stats.recentPositionGains, metrics.positionGain);
+}
+function cornerMetrics(value, fieldSize) {
+  let positions = [];
+  try {
+    const parsed = JSON.parse(String(value ?? ""));
+    if (Array.isArray(parsed)) positions = parsed.map(Number);
+  } catch {
+    positions = (String(value ?? "").match(/\d+/g) ?? []).map(Number);
+  }
+  positions = positions.filter((position) => Number.isFinite(position) && position > 0);
+  if (!positions.length || fieldSize < 2) return null;
+  const denominator = fieldSize - 1;
+  const earlyPositionPercentile = clamp((fieldSize - positions[0]) / denominator, 0, 1);
+  const lateCornerPositionPercentile = clamp((fieldSize - positions.at(-1)) / denominator, 0, 1);
+  return {
+    earlyPositionPercentile,
+    lateCornerPositionPercentile,
+    positionGain: lateCornerPositionPercentile - earlyPositionPercentile,
+    frontRunner: earlyPositionPercentile >= 0.8 ? 1 : 0,
+  };
+}
 function mean(sum, count) { return count ? sum / count : null; }
 function average(values) { return values.length ? values.reduce((sum, value) => sum + value.win, 0) / values.length : 0; }
 function averageSmoothed(values) { return values.length ? values.reduce((sum, value) => sum + (value.win * value.starts + 1) / (value.starts + 13), 0) / values.length : 1 / 13; }
+function averageMetric(values, key, fallback) { return values.length ? values.reduce((sum, value) => sum + (value[key] ?? fallback), 0) / values.length : fallback; }
 function recentRate(values, count) { const slice = values.slice(-count); return slice.length ? slice.reduce((sum, value) => sum + value, 0) / slice.length : null; }
 function recentMean(values, count) { const slice = values.slice(-count); return slice.length ? slice.reduce((sum, value) => sum + value, 0) / slice.length : null; }
 function pushRecent(values, value) { values.push(value); if (values.length > 5) values.shift(); }
+function clamp(value, lower, upper) { return Math.min(upper, Math.max(lower, value)); }
 function distanceBand(distance) { return Math.round((Number(distance) || 0) / 200) * 200; }
 function racePlaceDepth(fieldSize) { return fieldSize >= 8 ? 3 : 2; }
 function dateDiffDays(left, right) { return Math.round((new Date(`${right}T00:00:00Z`) - new Date(`${left}T00:00:00Z`)) / 86400000); }

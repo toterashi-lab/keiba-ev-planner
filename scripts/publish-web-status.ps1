@@ -76,12 +76,21 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Model training pipeline validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\train-expectancy-model-unit-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Model numerical unit validation failed: $LASTEXITCODE" }
-  & $node --no-warnings "scripts\model-training-preflight.mjs"
-  if ($LASTEXITCODE -ne 0) { throw "Real database model preflight failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\model-training-preflight-freshness.mjs"
+  if ($LASTEXITCODE -eq 10) {
+    & $node --max-old-space-size=8192 --no-warnings "scripts\model-training-preflight.mjs"
+    if ($LASTEXITCODE -ne 0) { throw "Real database model preflight failed: $LASTEXITCODE" }
+  } elseif ($LASTEXITCODE -ne 0) {
+    throw "Real database model preflight freshness check failed: $LASTEXITCODE"
+  }
   & $node --no-warnings "scripts\model-data-snapshot-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Model data snapshot validation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\model-artifact-compatibility-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Model artifact compatibility validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\market-ev-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Market expectancy validation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\reference-ev-scope-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "AI recommendation evaluation scope failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\jra-live-racecards-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Live racecard validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\jra-live-odds-check.mjs"
@@ -110,6 +119,10 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Database audit failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\audit-field-availability.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Source field availability audit failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\analyze-historical-payout-patterns.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Historical payout pattern analysis failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\historical-payout-patterns-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Historical payout pattern validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\build-public-demo.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Public build failed: $LASTEXITCODE" }
 

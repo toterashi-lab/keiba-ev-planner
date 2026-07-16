@@ -9,6 +9,9 @@ if (!FORBIDDEN_TARGET_FIELDS.every((field) => field.startsWith("target."))) thro
 const database = new DatabaseSync("data/jra-free-private/keiba.sqlite", { readOnly: true });
 try {
   const report = auditFeatureRegistry(database);
+  if (!report.groups.some((group) => group.id === "pace_shape" && group.status === "ready")) {
+    throw new Error("Prior corner-position pace data is not ready");
+  }
   if (!report.groups.some((group) => group.id === "weather_going" && group.status === "ready")) throw new Error("天候・馬場特徴量が利用可能と判定されません");
   if (!report.groups.some((group) => group.id === "horse_form" && group.status === "ready")) throw new Error("近走特徴量が利用可能と判定されません");
   if (!report.groups.some((group) => group.id === "course_geometry" && group.status === "missing")) throw new Error("未取得コース形状が誤って利用可能です");

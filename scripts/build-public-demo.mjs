@@ -13,6 +13,7 @@ const programmeData = JSON.parse(programmeRaw);
 const resultsData = JSON.parse(resultsRaw);
 const resultLinksData = JSON.parse(resultLinksRaw);
 const modelOutputs = JSON.parse(fs.readFileSync("data/model-outputs-2026-07-11-2026-07-12.json", "utf8"));
+const payoutPatterns = JSON.parse(fs.readFileSync("data/historical-payout-patterns.json", "utf8"));
 const abilityArtifactPath = [path.join("data", "jra-free-private", "models", "reference-asof-model.json"),
   path.join("data", "jra-free-private", "models", "ability-softmax-v1.json")].find((candidate) => fs.existsSync(candidate));
 const abilityArtifact = fs.existsSync(abilityArtifactPath) ? JSON.parse(fs.readFileSync(abilityArtifactPath, "utf8")) : null;
@@ -65,13 +66,22 @@ copy("docs/free-data-pipeline.md", path.join(stageDir, "docs", "free-data-pipeli
 copy("docs/expectancy-methodology.md", path.join(stageDir, "docs", "expectancy-methodology.md"));
 copy("docs/expectancy-research-v2.md", path.join(stageDir, "docs", "expectancy-research-v2.md"));
 copy("docs/expectancy-research-v3.md", path.join(stageDir, "docs", "expectancy-research-v3.md"));
+copy("docs/expectancy-research-v4.md", path.join(stageDir, "docs", "expectancy-research-v4.md"));
+copy("docs/pace-shape-v3.1.md", path.join(stageDir, "docs", "pace-shape-v3.1.md"));
 copy("docs/reference-site-analysis.md", path.join(stageDir, "docs", "reference-site-analysis.md"));
+copy("docs/ui-framework-v4.md", path.join(stageDir, "docs", "ui-framework-v4.md"));
 copy("model/feature-registry.mjs", path.join(stageDir, "model", "feature-registry.mjs"));
+copy("model/model-artifact-compatibility.mjs", path.join(stageDir, "model", "model-artifact-compatibility.mjs"));
 copy("model/validation-policy.mjs", path.join(stageDir, "model", "validation-policy.mjs"));
 copy("model/expectancy-engine-v2.mjs", path.join(stageDir, "model", "expectancy-engine-v2.mjs"));
   copy("model/structured-ticket-search.mjs", path.join(stageDir, "model", "structured-ticket-search.mjs"));
   copy("model/finish-order-probabilities.mjs", path.join(stageDir, "model", "finish-order-probabilities.mjs"));
 copy("docs/model-feature-research.md", path.join(stageDir, "docs", "model-feature-research.md"));
+fs.mkdirSync(path.join(stageDir, ".agents", "skills", "horse-racing-ev-research", "agents"), { recursive: true });
+fs.mkdirSync(path.join(stageDir, ".agents", "skills", "horse-racing-ev-research", "references"), { recursive: true });
+copy(".agents/skills/horse-racing-ev-research/SKILL.md", path.join(stageDir, ".agents", "skills", "horse-racing-ev-research", "SKILL.md"));
+copy(".agents/skills/horse-racing-ev-research/agents/openai.yaml", path.join(stageDir, ".agents", "skills", "horse-racing-ev-research", "agents", "openai.yaml"));
+copy(".agents/skills/horse-racing-ev-research/references/research-method.md", path.join(stageDir, ".agents", "skills", "horse-racing-ev-research", "references", "research-method.md"));
 for (const file of [
   "jra-free-db.mjs",
   "jra-free-odds.mjs",
@@ -81,6 +91,9 @@ for (const file of [
   "train-reference-asof-model.mjs",
   "evaluate-reference-ev.mjs",
   "reference-asof-model-check.mjs",
+  "reference-ev-scope-check.mjs",
+  "analyze-historical-payout-patterns.mjs",
+  "historical-payout-patterns-check.mjs",
   "market-ev-check.mjs",
   "expectancy-engine-v2-check.mjs",
   "finish-order-probabilities-check.mjs",
@@ -104,9 +117,12 @@ for (const file of [
   "train-expectancy-model-check.mjs",
   "train-expectancy-model-unit-check.mjs",
   "model-training-preflight.mjs",
+  "model-training-preflight-freshness.mjs",
+  "model-training-preflight-freshness-check.mjs",
   "model-training-resource-check.mjs",
   "model-data-snapshot.mjs",
   "model-data-snapshot-check.mjs",
+  "model-artifact-compatibility-check.mjs",
   "model-freshness.mjs",
   "race-time.mjs",
   "race-time-check.mjs",
@@ -139,6 +155,7 @@ writeBrowserData(path.join(stageDataDir, "result-links-2026-07-11-2026-07-12.js"
 writeBrowserData(path.join(stageDataDir, "results-2026-07-11-2026-07-12.js"), "KEIBA_RESULTS", resultsData);
 writeBrowserData(path.join(stageDataDir, "database-status.js"), "KEIBA_DATABASE_STATUS", databaseExport.status);
 writeBrowserData(path.join(stageDataDir, "model-feature-coverage.js"), "KEIBA_MODEL_FEATURE_COVERAGE", featureCoverage);
+writeBrowserData(path.join(stageDataDir, "historical-payout-patterns.js"), "KEIBA_HISTORICAL_PAYOUT_PATTERNS", payoutPatterns);
 writeBrowserData(path.join(stageDataDir, "closing-odds-2026-07-11-2026-07-12.js"), "KEIBA_CLOSING_ODDS", databaseExport.odds);
 writeBrowserData(path.join(stageDataDir, "model-outputs-2026-07-11-2026-07-12.js"), "KEIBA_MODEL_OUTPUTS", modelOutputs, 0);
 fs.writeFileSync(path.join(stageDataDir, "live-racecards.js"), liveRacecardsText, "utf8");

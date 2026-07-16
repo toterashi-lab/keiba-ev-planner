@@ -2,10 +2,12 @@ import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
+import { loadCompatibleModelArtifact } from "../model/model-artifact-compatibility.mjs";
 import { EXPECTANCY_ENGINE_VERSION, normalizeMarket, selectProbability } from "../model/expectancy-engine-v2.mjs";
 import { buildStructuredDefinitions } from "../model/structured-ticket-search.mjs";
 import { buildFinishOrderProbabilityBooks, calibrateFinishOrderProbabilityBooks } from "../model/finish-order-probabilities.mjs";
 import { isPreRaceObservation } from "./race-time.mjs";
+import { FEATURE_KEYS } from "./train-expectancy-model.mjs";
 
 await import(pathToFileURL(path.resolve("ticket-engine.js")).href);
 const engine = globalThis.KEIBA_TICKET_ENGINE;
@@ -35,9 +37,12 @@ export function generateLiveMarketEv(options = {}) {
     const placeholders = raceIds.map(() => "?").join(",");
     const entries = db.prepare(`select race_id,horse_id,horse_number,horse_name from live_entries where race_id in (${placeholders}) order by race_id,horse_number`).all(...raceIds);
     const artifact = options.artifact ?? loadArtifact(options.artifactPath);
-    const predictionColumns = new Set(db.prepare("pragma table_info(live_predictions)").all().map((row) => row.name));
+    const hasPredictionTable = db.prepare("select count(*) count from sqlite_master where type='table' and name='live_predictions'").get().count === 1;
+    const predictionColumns = hasPredictionTable
+      ? new Set(db.prepare("pragma table_info(live_predictions)").all().map((row) => row.name))
+      : new Set();
     const historyStartsSql = predictionColumns.has("history_starts") ? "p.history_starts" : "0";
-    const modelRows = artifact ? db.prepare(`select p.race_id,e.horse_number,p.win_probability,${historyStartsSql} history_starts
+    const modelRows = artifact && hasPredictionTable ? db.prepare(`select p.race_id,e.horse_number,p.win_probability,${historyStartsSql} history_starts
       from live_predictions p join live_entries e on e.race_id=p.race_id and e.horse_id=p.horse_id
       where p.model_version=? and p.race_id in (${placeholders})`).all(artifact.modelVersion, ...raceIds) : [];
     const oddsByRace = group(odds, "race_id");
@@ -320,7 +325,13 @@ function aiPrediction(race, probabilities, names, raceCandidates, artifact, hasM
 }
 
 function waiting(reason, outputPath = OUTPUT) { const result = { status: "waiting", reason, generatedAt: new Date().toISOString(), candidates: [], predictions: [] }; fs.mkdirSync(path.dirname(outputPath), { recursive: true }); fs.writeFileSync(outputPath, `${JSON.stringify(result, null, 2)}\n`, "utf8"); return result; }
-function loadArtifact(artifactPath = path.join("data", "jra-free-private", "models", "ability-softmax-v1.json")) { return fs.existsSync(artifactPath) ? JSON.parse(fs.readFileSync(artifactPath, "utf8")) : null; }
+function loadArtifact(artifactPath) {
+  const paths = artifactPath ? [artifactPath] : [
+    path.join("data", "jra-free-private", "models", "ability-softmax-v1.json"),
+    path.join("data", "jra-free-private", "models", "reference-asof-model.json"),
+  ];
+  return loadCompatibleModelArtifact(paths, FEATURE_KEYS).artifact;
+}
 function normalize(values) { const total = Object.values(values).reduce((sum, value) => sum + value, 0); return Object.fromEntries(Object.entries(values).map(([key, value]) => [key, value / total])); }
 function group(rows, key) { const map = new Map(); for (const row of rows) { if (!map.has(row[key])) map.set(row[key], []); map.get(row[key]).push(row); } return map; }
 function average(values) { return values.reduce((sum, value) => sum + value, 0) / values.length; }

@@ -2,7 +2,8 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { evaluate, evaluateTicketProbabilities, FEATURE_KEYS, fitModel, fitTemperature, fitTicketCalibrationTemperatures, loadTrainingRaces, predictRace } from "./train-expectancy-model.mjs";
+import { evaluate, evaluateTicketProbabilities, FEATURE_KEYS, fitModel, fitTemperature, fitTicketCalibrationTemperatures, loadTrainingRaces, predictRace, runFeatureAblation } from "./train-expectancy-model.mjs";
+import { captureModelImplementationSnapshot } from "./model-data-snapshot.mjs";
 
 const DATABASE = path.join("data", "jra-free-private", "keiba.sqlite");
 const PREFLIGHT = path.join("data", "jra-free-private", "models", "training-preflight.json");
@@ -34,10 +35,10 @@ try {
     throw new Error(`as-of分割不足: train=${train.length}, calibration=${calibration.length}, target=${target.length}, evaluation=${targetEvaluation.length}`);
   }
 
-  const activeFeatureIndexes = fullModelSelectionReady
-    ? fullModel.featureAdmission.activeFeatureIndexes : preflight.featureAdmission.selectedFeatureIndexes;
-  const activeFeatureGroups = fullModelSelectionReady
-    ? fullModel.featureAdmission.admittedGroups : preflight.featureAdmission.selectedGroups;
+  const featureAblation = runFeatureAblation(train, calibration);
+  if (featureAblation.fallback) throw new Error("Reference as-of feature ablation did not admit a stable feature group");
+  const activeFeatureIndexes = featureAblation.selectedFeatureIndexes;
+  const activeFeatureGroups = featureAblation.selectedGroups;
   const model = fitModel(train, activeFeatureIndexes);
   const temperature = fitTemperature(model, calibration);
   const ticketCalibrationTemperatures = fitTicketCalibrationTemperatures(model, calibration, temperature);
@@ -45,6 +46,10 @@ try {
   const ticketCalibrationMetrics = evaluateTicketProbabilities(model, calibration, temperature, ticketCalibrationTemperatures);
   const targetMetrics = evaluate(model, targetEvaluation, temperature);
   const targetTicketMetrics = evaluateTicketProbabilities(model, targetEvaluation, temperature, ticketCalibrationTemperatures);
+  const calibrationPass = calibrationMetrics.logLoss < calibrationMetrics.uniformLogLoss
+    && calibrationMetrics.ece <= 0.025 && calibrationMetrics.maxCalibrationBinError <= 0.075
+    && Object.values(ticketCalibrationMetrics.byType).every((metric) => metric.researchPass);
+  if (!calibrationPass) throw new Error(`Reference as-of calibration gate failed: ${JSON.stringify(calibrationMetrics)}`);
   const predictions = target.flatMap((race) => {
     const probabilities = predictRace(model, race, temperature);
     return race.rows.map((row, index) => ({ raceId: race.id, horseId: row.horseId, probability: probabilities[index],
@@ -64,7 +69,7 @@ try {
       downsideError90: Math.max(0, bin.predicted - wilsonLower(bin.observed, bin.count, 1.645)),
     }))]));
   const versionHash = crypto.createHash("sha256").update(JSON.stringify({
-    activeFeatureIndexes, trainEnd: TRAIN_END, calibrationEnd: CALIBRATION_END, temperature,
+    activeFeatureIndexes, featureKeys: FEATURE_KEYS, trainEnd: TRAIN_END, calibrationEnd: CALIBRATION_END, temperature,
     ticketCalibrationTemperatures, calibrationMetrics, predictions,
   })).digest("hex").slice(0, 12);
   const artifact = {
@@ -78,12 +83,21 @@ try {
     targetDates: TARGET_DATES,
     split: { trainStart: coverage.minDate, trainEnd: TRAIN_END, calibrationStart: CALIBRATION_START, calibrationEnd: CALIBRATION_END, embargoDays: 7 },
     counts: { trainRaces: train.length, calibrationRaces: calibration.length, targetRaces: target.length, predictions: predictions.length },
+    featureKeys: FEATURE_KEYS,
     activeFeatureIndexes,
     activeFeatureGroups,
-    featureSelectionSource: fullModelSelectionReady ? fullModel.modelVersion : "training-preflight",
+    featureSelectionSource: "reference-asof-group-ablation-v1",
+    featureSelectionSplit: { trainEnd: TRAIN_END, calibrationStart: CALIBRATION_START, calibrationEnd: CALIBRATION_END },
+    featureAblation: featureAblation.groups,
+    trainingImplementation: captureModelImplementationSnapshot(),
+    means: model.means,
+    scales: model.scales,
+    weights: model.weights,
     temperature,
     ticketCalibrationTemperatures,
     calibrationMetrics,
+    ticketProbabilityStatus: "research_pass",
+    ticketCalibrationPolicy: "calibration-only-one-standard-error-most-regularized-temperature",
     ticketCalibrationErrors,
     ticketCalibrationUncertainty,
     targetAudit: { evaluationOnlyAfterPrediction: true, metrics: targetMetrics, ticketMetrics: targetTicketMetrics },

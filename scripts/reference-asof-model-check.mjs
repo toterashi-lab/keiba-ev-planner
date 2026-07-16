@@ -1,5 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
+import { FEATURE_KEYS } from "./train-expectancy-model.mjs";
+import { captureModelImplementationSnapshot } from "./model-data-snapshot.mjs";
 
 const artifact = JSON.parse(fs.readFileSync(path.join("data", "jra-free-private", "models", "reference-asof-model.json"), "utf8"));
 const audit = JSON.parse(fs.readFileSync(path.join("data", "jra-free-private", "models", "reference-ev-audit.json"), "utf8"));
@@ -13,6 +15,15 @@ if (artifact.split.trainEnd >= artifact.targetDates[0] || artifact.split.calibra
   || artifact.split.embargoDays < 7) failures.push("time split or embargo");
 if (artifact.counts.targetRaces !== 72 || artifact.counts.predictions !== 946 || artifact.predictions.length !== 946) failures.push("prediction coverage");
 if (artifact.featureTimePolicy.violations !== 0 || artifact.featureTimePolicy.coverage !== 1) failures.push("feature timing");
+const currentImplementation = captureModelImplementationSnapshot();
+if (artifact.featureSelectionSource !== "reference-asof-group-ablation-v1"
+  || artifact.featureSelectionSplit?.calibrationEnd >= artifact.targetDates[0]
+  || !artifact.featureAblation?.some((group) => group.id === "pace_shape")) failures.push("as-of feature selection");
+if (artifact.trainingImplementation?.fingerprint !== currentImplementation.fingerprint
+  || artifact.featureKeys?.length !== FEATURE_KEYS.length
+  || artifact.featureKeys.some((key, index) => key !== FEATURE_KEYS[index])
+  || ![artifact.means, artifact.scales, artifact.weights].every((values) => values?.length === FEATURE_KEYS.length)
+  || artifact.activeFeatureIndexes.some((index) => index < 0 || index >= FEATURE_KEYS.length)) failures.push("model artifact compatibility");
 
 const byRace = group(artifact.predictions, (row) => row.raceId);
 if (byRace.size !== 72) failures.push(`prediction races ${byRace.size}/72`);
@@ -32,8 +43,12 @@ for (const type of types) {
 }
 
 if (audit.modelVersion !== artifact.modelVersion || audit.status !== "evaluation_only") failures.push("external audit version/status");
-const primary = audit.strategies.find((row) => row.name === "全券種・各レース各券種1位 EV>1");
-if (!primary || primary.roi >= 1 || primary.bets < 1) failures.push("external ROI gate fixture");
+const primary = audit.strategies.find((row) => row.name === "AI推奨・全レース");
+if (audit.evaluationScope !== "ai_prediction_top_ticket_only"
+  || audit.recommendationCoverage?.auditedRecommendations !== 72
+  || audit.recommendations?.length !== 72
+  || audit.recommendations.some((row) => row.recommendationSource !== "ai_prediction_top_ticket")
+  || !primary || primary.roi >= 1 || primary.bets !== 72) failures.push("AI recommendation external ROI gate");
 if (output.modelVersion !== artifact.modelVersion || output.predictions.length !== 72
   || output.predictions.some((row) => row.modelVersion !== artifact.modelVersion || row.predictionContext !== "out_of_sample_ability_model")) failures.push("public prediction model coverage");
 if (output.logic.deploymentStatus !== "benchmark_only" || output.logic.referenceWeekExternalAudit?.status !== "fail") failures.push("public fail-closed gate");

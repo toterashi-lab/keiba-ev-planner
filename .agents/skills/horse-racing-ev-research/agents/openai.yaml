@@ -1,0 +1,4 @@
+interface:
+  display_name: "競馬期待値リサーチ"
+  short_description: "過去全データと研究知見で期待値モデルを厳密監査・改善"
+  default_prompt: "Use $horse-racing-ev-research to audit and improve this horse-racing expectancy model without target leakage."

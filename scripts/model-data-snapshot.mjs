@@ -6,6 +6,7 @@ export const MODEL_IMPLEMENTATION_FILES = Object.freeze([
   "scripts/train-expectancy-model.mjs",
   "scripts/model-feature-pipeline.mjs",
   "model/feature-registry.mjs",
+  "model/model-artifact-compatibility.mjs",
   "model/finish-order-probabilities.mjs",
   "model/validation-policy.mjs",
 ]);

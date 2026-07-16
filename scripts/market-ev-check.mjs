@@ -32,12 +32,19 @@ for (const race of expectedRaces) {
   }
   if (rows.some((row) => row.status !== "ready" || row.points < 1 || row.totalInvestmentYen !== row.points * 100
     || !Number.isFinite(row.conservativeExpectedReturn) || !Number.isFinite(row.abilityExpectedReturn)
-    || !Number.isFinite(row.adoptedExpectedReturn))) {
+    || !Number.isFinite(row.adoptedExpectedReturn)
+    || row.payoutVolatilityPrior?.usePolicy !== "volatility_prior_only")) {
     failures.push(`${race.key}: invalid candidate`);
   }
   const prediction = model.predictions?.find((row) => row.date === race.date && row.meetingName === race.meetingName && row.raceNo === race.raceNo);
   if (!prediction || prediction.status !== "ready" || prediction.marks?.length !== 5) failures.push(`${race.key}: AI prediction missing`);
   if (prediction?.marks?.some((row) => !(row.probability > 0 && row.probability < 1))) failures.push(`${race.key}: invalid AI probability`);
+  const recommendation = prediction?.topTicket;
+  if (recommendation?.recommendationSource !== "ai_prediction_top_ticket"
+    || !Array.isArray(recommendation.ticketKeys) || recommendation.ticketKeys.length !== recommendation.points
+    || recommendation.totalInvestmentYen !== recommendation.points * 100
+    || !Number.isFinite(recommendation.expectedReturn)
+    || recommendation.payoutVolatilityPrior?.usePolicy !== "volatility_prior_only") failures.push(`${race.key}: auditable AI top-ticket missing`);
 }
 
 const source = fs.readFileSync("scripts/generate-market-ev.mjs", "utf8");

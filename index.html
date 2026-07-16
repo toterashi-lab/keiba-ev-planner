@@ -3,8 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0e0c" />
     <title>競馬期待値ラボ｜実データ予想・検証</title>
-    <link rel="stylesheet" href="styles.css?v=4e93bb28b5a3" />
+    <link rel="stylesheet" href="styles.css?v=aace6c64e807" />
   </head>
   <body>
     <header class="site-header">
@@ -17,7 +18,7 @@
           </div>
         </div>
         <nav class="global-nav" aria-label="主要メニュー">
-          <a href="#race-workspace" class="active">レース</a>
+          <a href="#race-workspace" class="active">ホーム</a>
           <a href="#expectancy">期待値分析</a>
           <a href="#performance">検証実績</a>
           <a href="#quality">データ品質</a>
@@ -33,18 +34,23 @@
     <main>
       <section class="landing-hero" aria-labelledby="hero-title">
         <div class="hero-content">
-          <p class="hero-kicker">JRA公式結果 × 保存済みオッズ</p>
-          <h1 id="hero-title">競馬期待値ラボ</h1>
-          <p class="hero-lead">勘ではなく、確率・オッズ・損益を残す。<br />先週の全72レースから検証を始めます。</p>
+          <p class="hero-kicker">FEATURED ANALYSIS / JRA公式結果 × 保存済みオッズ</p>
+          <h1 id="hero-title">期待値トップレース</h1>
+          <p class="hero-lead">開催日・競馬場・券種・買い方を横断して比較。<br />全72レースを同じ100円基準で検証します。</p>
+          <div class="hero-tags" aria-label="分析条件">
+            <span>全7券種</span>
+            <span>1点・BOX・フォーメーション</span>
+            <span>外部検証済み</span>
+          </div>
           <div class="hero-actions">
-            <a class="hero-primary" href="#race-workspace">レースを見る</a>
-            <a class="hero-secondary" href="#performance">検証実績を見る</a>
+            <a class="hero-primary" href="#race-workspace">ランキングを見る</a>
+            <a class="hero-secondary" href="#ai-prediction">全レースAI予想</a>
           </div>
           <div class="hero-state"><span class="status-dot"></span><strong>データ収集中</strong><span>自動購入は未接続</span></div>
         </div>
         <div class="hero-figures" aria-label="現在の主要指標">
           <div><span>先週検証</span><strong>72R</strong><small>結果・払戻照合済み</small></div>
-          <div><span>1番人気回収率</span><strong id="hero-favorite-roi">--</strong><small>市場ベンチマーク</small></div>
+          <div><span>AI推奨回収率</span><strong id="hero-favorite-roi">--</strong><small>推奨72件だけを検証</small></div>
           <div><span>蓄積完了</span><strong id="hero-db-months">--</strong><small id="hero-db-races">DB集計中</small></div>
         </div>
       </section>
@@ -281,19 +287,19 @@
       <section id="performance" class="performance-section">
         <div class="section-title">
           <div>
-            <h2>先週72レース・市場ベンチマーク検証</h2>
-            <p>JRA公式結果と保存済み締切後単勝オッズから、同じ100円単位で機械的に再計算しています。</p>
+            <h2>先週72レース・AI推奨購入検証</h2>
+            <p>各レースでAIが最上位に選んだ1買い目だけを100円単位で照合します。候補ランキングは含めません。</p>
           </div>
-          <span class="benchmark-label">予測実績ではありません</span>
+          <span class="benchmark-label">外部検証不合格・購入不可</span>
         </div>
         <div id="performance-cards" class="performance-cards"></div>
         <div class="performance-detail-head">
-          <div class="benchmark-tabs" role="tablist" aria-label="比較基準">
-            <button type="button" class="active" data-benchmark="favorite">1番人気</button>
-            <button type="button" data-benchmark="top3">オッズ上位3頭</button>
-            <button type="button" data-benchmark="all">全頭購入</button>
+          <div class="benchmark-tabs" role="tablist" aria-label="AI推奨検証">
+            <button type="button" class="active" data-benchmark="ai_all">AI推奨すべて</button>
+            <button type="button" data-benchmark="ai_ev1">期待回収率100%超</button>
+            <button type="button" data-benchmark="ai_ev11">期待回収率110%超</button>
           </div>
-          <p id="performance-rule">各レースの単勝最低オッズ1頭を100円購入</p>
+          <p id="performance-rule">各レースのAI最上位買い目だけを購入した想定</p>
         </div>
         <div class="table-scroll">
           <table class="dense-table performance-table">
@@ -303,8 +309,24 @@
         </div>
         <div class="audit-note">
           <strong>集計仕様</strong>
-          <span>同着時は選択した的中馬の単勝払戻を合算。発売対象外・オッズ欠損馬は点数から除外し、取得できないレースは集計対象外として明示します。</span>
-          <a href="docs/reference-site-analysis.md">参考サイト構造と採否</a>
+          <span>AI予想に保存されたtopTicketだけを予想後に払戻照合。券種別候補、ランキング上位、1番人気、全頭購入は回収率へ含めません。</span>
+          <a href="docs/expectancy-research-v3.md">期待値ロジック</a>
+        </div>
+      </section>
+
+      <section id="payout-patterns" class="performance-section payout-pattern-section">
+        <div class="section-title">
+          <div>
+            <h2>過去全取得データ・高配当条件</h2>
+            <p>過去期間で発見し、2020年以降でも再現した条件だけを表示。期待値への直接加算はしません。</p>
+          </div>
+          <span id="payout-pattern-status" class="decision hold">全件集計中</span>
+        </div>
+        <div id="payout-pattern-list" class="payout-pattern-list"></div>
+        <div class="audit-note">
+          <strong>用途制限</strong>
+          <span>高配当リフトはレースの荒れやすさ指標です。モデル確率と締切前オッズで正の期待値が確認できない限り、購入推奨にはしません。</span>
+          <a href="data/historical-payout-patterns.json">集計JSON</a>
         </div>
       </section>
 
@@ -338,16 +360,17 @@
       <p>本サービスはJRA・netkeibaの公式サービスではありません。結果と発売情報は必ず主催者発表で確認してください。実購入機能は未接続です。</p>
     </footer>
 
-    <script src="data/meet-2026-07-11-2026-07-12.js?v=4e93bb28b5a3"></script>
-    <script src="data/result-links-2026-07-11-2026-07-12.js?v=4e93bb28b5a3"></script>
-    <script src="data/results-2026-07-11-2026-07-12.js?v=4e93bb28b5a3"></script>
-    <script src="data/database-status.js?v=4e93bb28b5a3"></script>
-    <script src="data/model-feature-coverage.js?v=4e93bb28b5a3"></script>
-    <script src="data/closing-odds-2026-07-11-2026-07-12.js?v=4e93bb28b5a3"></script>
-    <script src="data/model-outputs-2026-07-11-2026-07-12.js?v=4e93bb28b5a3"></script>
-    <script src="data/live-racecards.js?v=4e93bb28b5a3"></script>
-    <script src="data/live-model-outputs.js?v=4e93bb28b5a3"></script>
-    <script src="ticket-engine.js?v=4e93bb28b5a3"></script>
-    <script src="app.js?v=4e93bb28b5a3"></script>
+    <script src="data/meet-2026-07-11-2026-07-12.js?v=aace6c64e807"></script>
+    <script src="data/result-links-2026-07-11-2026-07-12.js?v=aace6c64e807"></script>
+    <script src="data/results-2026-07-11-2026-07-12.js?v=aace6c64e807"></script>
+    <script src="data/database-status.js?v=aace6c64e807"></script>
+    <script src="data/model-feature-coverage.js?v=aace6c64e807"></script>
+    <script src="data/historical-payout-patterns.js?v=aace6c64e807"></script>
+    <script src="data/closing-odds-2026-07-11-2026-07-12.js?v=aace6c64e807"></script>
+    <script src="data/model-outputs-2026-07-11-2026-07-12.js?v=aace6c64e807"></script>
+    <script src="data/live-racecards.js?v=aace6c64e807"></script>
+    <script src="data/live-model-outputs.js?v=aace6c64e807"></script>
+    <script src="ticket-engine.js?v=aace6c64e807"></script>
+    <script src="app.js?v=aace6c64e807"></script>
   </body>
 </html>

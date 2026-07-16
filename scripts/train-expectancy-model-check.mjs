@@ -1,6 +1,9 @@
 import fs from "node:fs";
 
 const source = fs.readFileSync("scripts/train-expectancy-model.mjs", "utf8");
+for (const required of ["pace_shape", "paceHistoryStarts", "fieldRelativeFrontRunnerRate", "pacePressureGainInteraction"]) {
+  if (!source.includes(required)) throw new Error(`Prior-race pace feature group is missing: ${required}`);
+}
 for (const required of ["runFeatureAblation", "aggregateFeatureAdmission", "activeFeatureIndexes"]) {
   if (!source.includes(required)) throw new Error(`特徴量選別の必須処理がありません: ${required}`);
 }

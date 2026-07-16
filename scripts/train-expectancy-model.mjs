@@ -26,6 +26,9 @@ const FEATURE_GROUP_KEYS = {
     "priorWinRateSmoothed", "priorPlaceRateSmoothed", "priorAveragePopularity", "lastFinishPercentile",
     "recent3WinRate", "recent3PlaceRate", "recent5WinRate", "recent5PlaceRate", "recent3MeanFinishPercentile", "recent5MeanFinishPercentile",
     "recent3MeanFinalSectional", "recent5MeanPopularity", "lastPopularity", "classChange", "distanceChangeHundreds", "surfaceChanged"],
+  pace_shape: ["paceHistoryStarts", "priorAverageEarlyPositionPercentile", "priorAverageLateCornerPositionPercentile", "priorAveragePositionGain",
+    "frontRunnerRate", "frontRunnerRateSmoothed", "recent3EarlyPositionPercentile", "recent3LateCornerPositionPercentile",
+    "recent3PositionGain", "fieldRelativeFrontRunnerRate", "pacePressureFrontInteraction", "pacePressureGainInteraction"],
   horse_suitability: ["surfaceStarts", "surfaceWinRate", "venueStarts", "venueWinRate", "distanceBandStarts", "distanceBandWinRate",
     "directionStarts", "directionWinRate", "classStarts", "classWinRate", "seasonStarts", "seasonWinRate",
     "surfaceWinRateSmoothed", "venueWinRateSmoothed", "distanceBandWinRateSmoothed", "goingWinRateSmoothed",
@@ -42,7 +45,7 @@ const GROUPED_FEATURE_INDEXES = MODEL_FEATURE_GROUPS.flatMap((group) => group.in
 if (GROUPED_FEATURE_INDEXES.some((index) => index < 0) || new Set(GROUPED_FEATURE_INDEXES).size !== FEATURE_KEYS.length
   || GROUPED_FEATURE_INDEXES.length !== FEATURE_KEYS.length) throw new Error("Feature groups must cover every model feature exactly once");
 const LOG_FEATURES = new Set(["careerStarts", "surfaceStarts", "venueStarts", "distanceBandStarts", "goingStarts", "weatherStarts",
-  "directionStarts", "classStarts", "seasonStarts", "jockeyStarts", "trainerStarts", "daysSinceLastRace"]);
+  "directionStarts", "classStarts", "seasonStarts", "jockeyStarts", "trainerStarts", "daysSinceLastRace", "paceHistoryStarts"]);
 
 export function trainExpectancyModel() {
 const db = new DatabaseSync(DATABASE_PATH);
@@ -246,8 +249,10 @@ export function runFeatureAblation(trainRaces, calibrationRaces) {
     const ablatedMetrics = evaluate(ablatedModel, calibrationRaces, ablatedTemperature);
     const logLossImprovement = ablatedMetrics.logLoss - fullMetrics.logLoss;
     const eceRegression = fullMetrics.ece - ablatedMetrics.ece;
+    const calibrationSafeHarbor = fullMetrics.ece <= policy.absoluteEceSafeHarbor
+      && fullMetrics.maxCalibrationBinError <= policy.absoluteMaxCalibrationBinSafeHarbor;
     const pass = logLossImprovement >= policy.minimumLogLossImprovement
-      && (!policy.rejectOnCalibrationRegression || eceRegression <= policy.maximumEceRegression)
+      && (!policy.rejectOnCalibrationRegression || eceRegression <= policy.maximumEceRegression || calibrationSafeHarbor)
       && fullMetrics.maxCalibrationBinError <= 0.075;
     return {
       id: group.id,
@@ -256,6 +261,7 @@ export function runFeatureAblation(trainRaces, calibrationRaces) {
       pass,
       logLossImprovement,
       eceRegression,
+      calibrationSafeHarbor,
       full: summarizeMetrics(fullMetrics),
       ablated: summarizeMetrics(ablatedMetrics),
     };
@@ -272,6 +278,8 @@ export function runFeatureAblation(trainRaces, calibrationRaces) {
     thresholds: {
       minimumLogLossImprovement: policy.minimumLogLossImprovement,
       maximumEceRegression: policy.maximumEceRegression,
+      absoluteEceSafeHarbor: policy.absoluteEceSafeHarbor,
+      absoluteMaxCalibrationBinSafeHarbor: policy.absoluteMaxCalibrationBinSafeHarbor,
     },
     groups,
   };

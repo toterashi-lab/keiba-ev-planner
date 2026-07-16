@@ -85,6 +85,10 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Full database audit failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\audit-field-availability.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Source field availability audit failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\analyze-historical-payout-patterns.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Historical payout pattern analysis failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\historical-payout-patterns-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Historical payout pattern validation failed: $LASTEXITCODE" }
   $artifact = Join-Path $privateDir "models\ability-softmax-v1.json"
   $needsTraining = $ForceModel -or -not (Test-Path $artifact)
   if (-not $needsTraining) {
@@ -93,18 +97,20 @@ try {
     elseif ($LASTEXITCODE -ne 0) { throw "Model freshness validation failed: $LASTEXITCODE" }
   }
   if ($needsTraining) {
-    & $node --no-warnings "scripts\model-training-preflight.mjs"
+    & $node --max-old-space-size=8192 --no-warnings "scripts\model-training-preflight.mjs"
     if ($LASTEXITCODE -ne 0) { throw "Model training preflight failed: $LASTEXITCODE" }
     & $node --no-warnings "scripts\model-training-resource-check.mjs"
     if ($LASTEXITCODE -ne 0) { throw "Model training resource gate failed: $LASTEXITCODE" }
-    & $node --no-warnings "scripts\train-expectancy-model.mjs"
+    & $node --max-old-space-size=8192 --no-warnings "scripts\train-expectancy-model.mjs"
     if ($LASTEXITCODE -ne 0) { throw "Model training failed: $LASTEXITCODE" }
   }
   & $node --no-warnings "scripts\model-freshness.mjs"
   if ($LASTEXITCODE -ne 0) { throw "New model is stale against the current database: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\model-artifact-compatibility-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Model artifact compatibility validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\finish-order-probabilities-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "All-ticket finish probability validation failed: $LASTEXITCODE" }
-  & $node --no-warnings "scripts\train-reference-asof-model.mjs"
+  & $node --max-old-space-size=8192 --no-warnings "scripts\train-reference-asof-model.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Reference as-of model training failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\generate-market-ev.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Reference expectancy generation failed: $LASTEXITCODE" }
@@ -122,6 +128,8 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Model numerical unit check failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\market-ev-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Expectancy output check failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\reference-ev-scope-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "AI recommendation evaluation scope failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\reference-asof-model-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Reference as-of model audit failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\live-market-ev-check.mjs"

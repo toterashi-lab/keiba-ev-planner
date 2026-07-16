@@ -35,6 +35,13 @@ for (const token of ["capturedDates", "set target_dates=?", "dates: capturedDate
 }
 const predictorSource = fs.readFileSync("scripts/predict-live-racecards.mjs", "utf8");
 if (!predictorSource.includes("resolveStoredRacecardTargetDates")) throw new Error("Prediction target-date recovery is missing");
+for (const token of ["loadCompatibleModelArtifact", "waiting_for_compatible_trained_model", "process.exit(12)"]) {
+  if (!predictorSource.includes(token)) throw new Error(`Stale model fail-closed prediction is missing: ${token}`);
+}
+const livePublishSource = fs.readFileSync("scripts/publish-live-web.ps1", "utf8");
+for (const token of ["processStartedAt", "Get-Process -Id ([int]$existingOwner.pid)", "$sameProcess", "Remove-Item -LiteralPath $lockPath"]) {
+  if (!livePublishSource.includes(token)) throw new Error(`Stale live publication lock recovery is missing: ${token}`);
+}
 const liveTaskInstaller = fs.readFileSync("scripts/install-live-odds-task.ps1", "utf8");
 for (const token of ["-WindowMinutes 7", "KeibaEV-JRA-Live-Odds-Offset", "$index -lt 48", "OffsetMinutes = 5", "AddMinutes(10)"]) {
   if (!liveTaskInstaller.includes(token)) throw new Error(`Five-minute odds capture schedule is missing: ${token}`);
@@ -46,6 +53,8 @@ console.log(JSON.stringify({
   verifiedLivePublication: true,
   capturedTargetDatesPersisted: true,
   fiveMinuteOddsCadence: true,
+  staleModelFailClosed: true,
+  stalePublishLockRecovery: true,
 }, null, 2));
 
 function checkOrder(file, tokens) {
