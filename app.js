@@ -573,7 +573,7 @@ function renderAiPrediction() {
       <p>${escapeHtml(agent.reason ?? "有効な事前情報なし")}</p>
     </article>`;
     const marks = agent.marks?.slice(0, 3) ?? [];
-    return `<article class="forecaster-card">
+    return `<article class="forecaster-card${agent.persona ? ` persona ${escapeHtml(agent.personaTone ?? "")}` : ""}">
       <header><strong>${escapeHtml(agent.label)}</strong><span>${escapeHtml(marks[0]?.mark ?? "-")}</span></header>
       <div>${marks.map((mark) => `<b>${escapeHtml(mark.mark)} ${mark.horseNumber} ${escapeHtml(mark.horseName)}</b>`).join("")}</div>
       <p>${escapeHtml(agent.opinion ?? "")}</p>

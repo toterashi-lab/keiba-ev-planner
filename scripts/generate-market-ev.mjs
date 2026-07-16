@@ -238,7 +238,85 @@ function buildForecastPanel({ horseProbabilities, marketProbabilities, modelRows
     marks: valueRanked.slice(0, 5).map((row, index) => ({ mark: marks[index], ...row })),
     opinion: `${valueRanked[0].horseName}の能力・市場差が最大。ただし最終判断はオッズ込み安全側EVで行う。`,
   });
+  panel.push(...buildPersonaForecasts({ horseProbabilities, marketProbabilities, modelRows, names }));
   return panel;
+}
+
+function buildPersonaForecasts({ horseProbabilities, marketProbabilities, modelRows, names }) {
+  const marks = ["◎", "○", "▲", "△", "☆"];
+  const horseNumbers = Object.keys(horseProbabilities).map(Number);
+  const signalBooks = {
+    ability: normalizedSignal(horseNumbers, (horseNumber) => horseProbabilities[horseNumber]),
+    market: normalizedSignal(horseNumbers, (horseNumber) => marketProbabilities[horseNumber]),
+    value: normalizedSignal(horseNumbers, (horseNumber) =>
+      (horseProbabilities[horseNumber] ?? 0) - (marketProbabilities[horseNumber] ?? 0)),
+  };
+  const byHorse = new Map(modelRows.map((row) => [row.horse_number, row]));
+  for (const group of ["body_load", "horse_form", "connections"]) {
+    const available = horseNumbers.every((horseNumber) =>
+      byHorse.get(horseNumber)?.agent_signals?.[group]?.status === "available"
+      && Number.isFinite(Number(byHorse.get(horseNumber)?.agent_signals?.[group]?.contribution)));
+    if (available) {
+      signalBooks[group] = normalizedSignal(horseNumbers,
+        (horseNumber) => Number(byHorse.get(horseNumber).agent_signals[group].contribution));
+    }
+  }
+  const personas = [
+    {
+      id: "persona_orthodox", label: "王道派・本命の剛", tone: "orthodox", stance: "能力を最優先し、市場支持で裏を取る。",
+      weights: { ability: 0.6, market: 0.4 },
+    },
+    {
+      id: "persona_market", label: "市場派・オッズの澪", tone: "market", stance: "市場の集合知を尊重し、能力評価との一致を重視。",
+      weights: { market: 0.65, ability: 0.25, connections: 0.1 },
+    },
+    {
+      id: "persona_value", label: "穴党・妙味の蓮", tone: "value", stance: "能力に対して売れていない馬を拾う。",
+      weights: { value: 0.65, horse_form: 0.2, ability: 0.15 },
+    },
+    {
+      id: "persona_trackside", label: "現場派・気配の凛", tone: "trackside", stance: "馬体・斤量と騎手厩舎の状態を中心に見る。",
+      weights: { body_load: 0.45, connections: 0.35, horse_form: 0.2 },
+    },
+    {
+      id: "persona_consensus", label: "合議派・総合の司", tone: "consensus", stance: "能力、市場、近走、状態を均等に合議する。",
+      weights: { ability: 0.25, market: 0.2, value: 0.15, horse_form: 0.15, body_load: 0.1, connections: 0.15 },
+    },
+  ];
+  return personas.map((persona) => {
+    const availableWeights = Object.entries(persona.weights).filter(([signal]) => signalBooks[signal]);
+    const totalWeight = availableWeights.reduce((sum, [, weight]) => sum + weight, 0);
+    if (!totalWeight) {
+      return { id: persona.id, label: persona.label, persona: true, personaTone: persona.tone,
+        status: "not_available", reason: "担当する事前特徴量が未取得", marks: [] };
+    }
+    const ranked = horseNumbers.map((horseNumber) => ({
+      horseNumber,
+      horseName: names.get(horseNumber) ?? "",
+      score: availableWeights.reduce((sum, [signal, weight]) =>
+        sum + signalBooks[signal].get(horseNumber) * weight / totalWeight, 0),
+    })).sort((left, right) => right.score - left.score || left.horseNumber - right.horseNumber);
+    return {
+      id: persona.id,
+      label: persona.label,
+      persona: true,
+      personaTone: persona.tone,
+      status: "available",
+      marks: ranked.slice(0, 5).map((row, index) => ({ mark: marks[index], ...row })),
+      opinion: `${persona.stance} ◎${ranked[0].horseName}。`,
+      evidenceSignals: availableWeights.map(([signal]) => signal),
+    };
+  });
+}
+
+function normalizedSignal(horseNumbers, getter) {
+  const rows = horseNumbers.map((horseNumber) => [horseNumber, Number(getter(horseNumber))]);
+  if (rows.some(([, value]) => !Number.isFinite(value))) return null;
+  const values = rows.map(([, value]) => value);
+  const minimum = Math.min(...values);
+  const maximum = Math.max(...values);
+  const range = maximum - minimum;
+  return new Map(rows.map(([horseNumber, value]) => [horseNumber, range > 0 ? (value - minimum) / range : 0.5]));
 }
 
 function forecastDisagreement(panel) {

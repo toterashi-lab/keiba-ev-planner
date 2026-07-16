@@ -368,7 +368,7 @@ function buildLiveForecastPanel(probabilities, names, candidates) {
   }
   const uncertainty = [...ability].sort((left, right) =>
     (ticketHorseScores.get(left.horseNumber) ?? Infinity) - (ticketHorseScores.get(right.horseNumber) ?? Infinity));
-  return [
+  const basePanel = [
     { id: "ability", label: "能力・近走担当", status: "available",
       marks: ability.slice(0, 5).map((row, index) => ({ mark: marks[index], ...row })),
       opinion: `${ability[0]?.horseName ?? "-"}を能力上位に評価。` },
@@ -385,6 +385,40 @@ function buildLiveForecastPanel(probabilities, names, candidates) {
       }).slice(0, 5).map((row, index) => ({ mark: marks[index], ...row })),
       opinion: "能力確率と現在オッズの差から妙味を評価。" },
   ];
+  const valueOrder = [...ability].sort((left, right) => liveHorseEv(right.horseNumber, candidates, "adoptedExpectedReturn")
+    - liveHorseEv(left.horseNumber, candidates, "adoptedExpectedReturn"));
+  const conservativeOrder = [...ability].sort((left, right) =>
+    liveHorseEv(right.horseNumber, candidates, "conservativeExpectedReturn")
+    - liveHorseEv(left.horseNumber, candidates, "conservativeExpectedReturn"));
+  const consensusOrder = [...ability].map((row) => ({
+    ...row,
+    score: rankScore(row.horseNumber, ability) * 0.45
+      + rankScore(row.horseNumber, uncertainty) * 0.25
+      + rankScore(row.horseNumber, valueOrder) * 0.3,
+  })).sort((left, right) => right.score - left.score || left.horseNumber - right.horseNumber);
+  const personaRows = [
+    ["persona_orthodox", "王道派・本命の剛", "orthodox", ability, "能力上位を素直に信頼する。"],
+    ["persona_stable", "堅実派・守りの環", "stable", uncertainty, "校正下振れが小さい馬を優先する。"],
+    ["persona_value", "穴党・妙味の蓮", "value", valueOrder, "現在オッズとの妙味を優先する。"],
+    ["persona_conservative", "慎重派・安全の慧", "conservative", conservativeOrder, "安全側期待値が残る馬だけを見る。"],
+    ["persona_consensus", "合議派・総合の司", "consensus", consensusOrder, "能力・安定性・妙味を合議する。"],
+  ].map(([id, label, tone, rows, stance]) => ({
+    id, label, persona: true, personaTone: tone, status: "available",
+    marks: rows.slice(0, 5).map((row, index) => ({ mark: marks[index], ...row })),
+    opinion: `${stance} ◎${rows[0]?.horseName ?? "-"}。`,
+  }));
+  return [...basePanel, ...personaRows];
+}
+
+function liveHorseEv(horseNumber, candidates, field) {
+  return candidates.filter((row) => row.method === "1点"
+    && Number(row.componentSelectionKeys?.[0]) === horseNumber)
+    .reduce((best, row) => Math.max(best, Number(row[field]) || 0), 0);
+}
+
+function rankScore(horseNumber, rows) {
+  const index = rows.findIndex((row) => row.horseNumber === horseNumber);
+  return index < 0 || rows.length < 2 ? 0 : 1 - index / (rows.length - 1);
 }
 
 function compactAgentVotes(assessments) {

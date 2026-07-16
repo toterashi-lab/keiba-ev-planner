@@ -40,6 +40,9 @@ for (const race of expectedRaces) {
   if (!prediction || prediction.status !== "ready" || prediction.marks?.length !== 5) failures.push(`${race.key}: AI prediction missing`);
   if (!Array.isArray(prediction?.forecastPanel) || prediction.forecastPanel.length < 10
     || prediction.masterConsensus?.agent !== "chief-expectancy-agent") failures.push(`${race.key}: specialist forecast panel missing`);
+  if (prediction.forecastPanel.filter((agent) => agent.persona === true && agent.status === "available").length !== 5) {
+    failures.push(`${race.key}: five persona forecasters missing`);
+  }
   if (prediction?.marks?.some((row) => !(row.probability > 0 && row.probability < 1))) failures.push(`${race.key}: invalid AI probability`);
   const recommendation = prediction?.topTicket;
   if (recommendation?.recommendationSource !== "ai_prediction_top_ticket"

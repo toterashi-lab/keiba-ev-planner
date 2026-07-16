@@ -1005,6 +1005,14 @@ main {
   background: #151a17;
 }
 .forecaster-card.unavailable { border-top-color: #59615d; opacity: .65; }
+.forecaster-card.persona { min-height: 132px; background: #181d19; }
+.forecaster-card.persona.orthodox { border-top-color: #e2c45e; }
+.forecaster-card.persona.market { border-top-color: #62a8d9; }
+.forecaster-card.persona.value { border-top-color: #e07878; }
+.forecaster-card.persona.trackside,
+.forecaster-card.persona.stable { border-top-color: #4bc994; }
+.forecaster-card.persona.conservative { border-top-color: #a5b0aa; }
+.forecaster-card.persona.consensus { border-top-color: #d59ad5; }
 .forecaster-card header { display: flex; justify-content: space-between; gap: 8px; }
 .forecaster-card header strong { font-size: 11px; }
 .forecaster-card header span { color: #e7c85e; font-weight: 900; }
