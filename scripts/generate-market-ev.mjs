@@ -347,6 +347,9 @@ function makeCandidate(race, betType, method, selection, rows, probability, name
     calibrationError,
     externalValidationStatus,
     deploymentStatus,
+    chronologyAuditStatus: useAbility ? "pass" : "not_evaluated",
+    sampleSizeStatus: deploymentStatus === "eligible" ? "pass" : "blocked",
+    drawdownStatus: deploymentStatus === "eligible" ? "pass" : "blocked",
     payoutVolatilityPrior: payoutPrior,
     contextStatus: "available",
     contextEvidence: {
@@ -394,7 +397,7 @@ function makeCandidate(race, betType, method, selection, rows, probability, name
     chiefDecision: compactChiefDecision(agentEnsemble.chiefDecision),
     optimizationScenarios,
     comment: useAbility
-      ? `対象レース前で学習を停止した能力モデルとJRA公式最終オッズで${method} ${rows.length}点を各100円計算。専門7エージェントを期待値統合エージェントが評価し、順位は券種別の校正誤差を控除した安全側期待値です。${agentEnsemble.chiefDecision.rationale}`
+      ? `対象レース前で学習を停止した能力モデルとJRA公式最終オッズで${method} ${rows.length}点を各100円計算。専門15エージェントを4階層で監査し、期待値統合エージェントだけが券種別の安全側期待値を順位決定に使います。${agentEnsemble.chiefDecision.rationale}`
       : `期待値v2の市場基準検証。JRA公式最終オッズで${method} ${rows.length}点を各100円計算。学習・校正ゲート未合格のため能力モデルは混合せず、払戻結果も確率算出に使用していません。`,
   };
 }

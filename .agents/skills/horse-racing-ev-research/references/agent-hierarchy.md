@@ -1,16 +1,19 @@
 # Agent Hierarchy
 
-## Level 0: Source Observers
+## Level 0: Source and Arithmetic Observers
 
 - official result and payout observer
 - historical win/place odds observer
 - live odds timestamp observer
 - weather and going observer
 - runner and change observer
+- source completeness auditor
+- odds provenance auditor
+- 100-yen ticket arithmetic auditor
 
 They report facts and quality only.
 
-## Level 1: Feature Analysts
+## Level 1: Feature and Probability Analysts
 
 - draw and race-context analyst
 - weather and going analyst
@@ -22,6 +25,10 @@ They report facts and quality only.
 - field-strength analyst
 - market-support analyst
 - value-gap analyst
+- ability probability analyst
+- probability calibration analyst
+- market benchmark analyst
+- model-market disagreement analyst
 
 Each analyst outputs horse-level score, top factors, missing evidence, and no more than five marks.
 
@@ -29,9 +36,10 @@ Each analyst outputs horse-level score, top factors, missing evidence, and no mo
 
 Specialists convert only their assigned feature contribution into a within-race probability ranking. Unsupported specialists abstain.
 
-## Level 3: Validation and Risk
+## Level 3: Independent Validation and Risk
 
-This layer checks calibration, uncertainty, odds age, data quality, historical ROI confidence intervals, and drawdown.
+This layer is independent from the forecasters and ticket constructor. Separate agents check chronology/leakage,
+external ROI, sample adequacy, and drawdown. Missing evidence is blocked, never treated as a pass.
 
 ## Level 4: Chief Expectancy Agent
 
@@ -44,3 +52,5 @@ Constraints:
 - candidate rankings are not counted as purchased bets;
 - conservative lower-bound EV is the ranking authority;
 - unsupported specialists contribute zero votes, not neutral invented scores.
+- a specialist cannot authorize a purchase;
+- all independent audit agents must pass before the chief can authorize a purchase.

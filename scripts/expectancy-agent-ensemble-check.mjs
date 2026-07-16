@@ -15,16 +15,29 @@ const base = {
   calibrationError: 0.02,
   externalValidationStatus: "fail",
   deploymentStatus: "benchmark_only",
+  chronologyAuditStatus: "pass",
+  sampleSizeStatus: "blocked",
+  drawdownStatus: "blocked",
   payoutVolatilityPrior: { status: "matched_historical_pattern", lift: 3, conditions: ["field=large"] },
 };
+
 const blocked = runExpectancyAgentEnsemble(base);
 assert(blocked.chiefDecision.rankingExpectedReturn === 1.05, "chief must use conservative lower bound");
 assert(blocked.chiefDecision.purchaseEligible === false, "external validation must block purchase");
 assert(blocked.chiefDecision.authorityPolicy.volatilityMayIncreaseExpectedReturn === false, "volatility cannot inflate EV");
-const eligible = runExpectancyAgentEnsemble({ ...base, externalValidationStatus: "pass", deploymentStatus: "eligible" });
+assert(blocked.chiefDecision.authorityPolicy.missingAuditMayPass === false, "missing audits cannot pass");
+assert(blocked.chiefDecision.hierarchy.level3IndependentAudit.length === 4, "four independent audit agents required");
+
+const eligible = runExpectancyAgentEnsemble({
+  ...base,
+  externalValidationStatus: "pass",
+  deploymentStatus: "eligible",
+  sampleSizeStatus: "pass",
+  drawdownStatus: "pass",
+});
 assert(eligible.chiefDecision.purchaseEligible === true, "all gates should allow eligibility");
-assert(Object.keys(eligible.assessments).length === 7, "seven specialist agents required");
-console.log("OK 専門7エージェント＋期待値統合エージェント・権限制約");
+assert(Object.keys(eligible.assessments).length === 15, "fifteen specialist agents required");
+console.log("OK 専門15エージェント＋期待値統合エージェントの4階層権限分離");
 
 function assert(condition, label) {
   if (!condition) throw new Error(`expectancy agent ensemble check failed: ${label}`);
