@@ -1019,6 +1019,71 @@ main {
 .forecaster-card div { display: grid; gap: 3px; margin: 9px 0; }
 .forecaster-card b { color: #d9dfdc; font-size: 10px; }
 .forecaster-card p { margin: 0; color: #8f9b95; font-size: 9px; line-height: 1.55; }
+
+/* Reader view: keep the race newspaper and recommendation surfaces primary. */
+.landing-hero,
+.insight-strip,
+.source-strip,
+#performance,
+#payout-patterns,
+#warehouse,
+.technical-analysis { display: none !important; }
+.race-workspace { margin-top: 18px; }
+.app-mode-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  margin: 12px 0;
+  border-bottom: 2px solid #276d50;
+}
+.app-mode-tabs button {
+  min-height: 46px;
+  border: 1px solid #343b37;
+  border-bottom: 0;
+  background: #151a17;
+  color: #aeb8b3;
+  font-weight: 800;
+}
+.app-mode-tabs button.active { background: #226f50; color: #fff; }
+.app-mode-panel { display: none; }
+.app-mode-panel.active { display: block; }
+.forecaster-panel { display: block; overflow: visible; }
+.newspaper-scroll { overflow-x: auto; border: 1px solid #343b37; }
+.newspaper-marks-table {
+  width: 100%;
+  min-width: 720px;
+  table-layout: fixed;
+  border-collapse: collapse;
+  background: #f4f1e7;
+  color: #151812;
+}
+.newspaper-marks-table th,
+.newspaper-marks-table td { border: 1px solid #bbb6a8; padding: 6px 8px; text-align: center; }
+.newspaper-marks-table thead th { background: #263b30; color: #fff; font-size: 11px; }
+.newspaper-marks-table tbody tr:nth-child(even) { background: #e8e4d8; }
+.newspaper-marks-table th:nth-child(2),
+.newspaper-marks-table td:nth-child(2) { width: 170px; text-align: left; font-weight: 800; }
+.paper-mark { width: 56px; font-size: 19px; font-weight: 900; }
+.paper-mark-honmei { color: #c40016; }
+.paper-mark-taikou { color: #1458a5; }
+.paper-mark-tanana { color: #16814e; }
+.paper-mark-renka { color: #5f5f5f; }
+.paper-mark-ana { color: #9a5800; }
+.top-recommendation { margin-top: 12px; }
+
+@media (max-width: 700px) {
+  .global-nav { display: none; }
+  .race-workspace { width: min(100% - 18px, 1320px); }
+  .app-mode-tabs button { min-height: 42px; padding: 6px; font-size: 11px; }
+  .newspaper-marks-table { min-width: 590px; }
+  .newspaper-marks-table th,
+  .newspaper-marks-table td { padding: 5px 4px; }
+  .newspaper-marks-table th:first-child,
+  .newspaper-marks-table td:first-child { width: 38px; }
+  .newspaper-marks-table th:nth-child(2),
+  .newspaper-marks-table td:nth-child(2) { width: 112px; min-width: 112px; max-width: 112px; font-size: 11px; }
+  .paper-mark { width: 38px; font-size: 17px; }
+}
 .performance-cards {
   display: flex;
   grid-template-columns: none;
