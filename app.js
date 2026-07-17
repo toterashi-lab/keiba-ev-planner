@@ -104,6 +104,13 @@ const els = {
   scenarioAbilityReturn: document.querySelector("#scenario-ability-return"),
   scenarioAdoptedReturn: document.querySelector("#scenario-adopted-return"),
   scenarioAdoptedNote: document.querySelector("#scenario-adopted-note"),
+  racePurchaseJudgement: document.querySelector("#race-purchase-judgement"),
+  racePurchaseSelection: document.querySelector("#race-purchase-selection"),
+  racePurchaseTicket: document.querySelector("#race-purchase-ticket"),
+  racePurchaseInvestment: document.querySelector("#race-purchase-investment"),
+  racePurchasePayout: document.querySelector("#race-purchase-payout"),
+  racePurchaseNet: document.querySelector("#race-purchase-net"),
+  racePurchaseRoi: document.querySelector("#race-purchase-roi"),
   aiPrediction: document.querySelector("#ai-prediction"),
   aiConfidence: document.querySelector("#ai-confidence"),
   aiMarks: document.querySelector("#ai-marks"),
@@ -276,7 +283,7 @@ function renderPerformance() {
 
   const selected = reports[state.benchmark] ?? reports.ai_all;
   els.performanceRule.textContent = selected.rule;
-  const rows = selected.details.slice(0, 30);
+  const rows = selected.details;
   els.performanceBody.innerHTML = rows.length ? rows.map((row) => `<tr>
     <td>${formatShortDate(row.date)}</td><td>${escapeHtml(row.venueName)} ${row.raceNo}R</td><td><strong>${escapeHtml(row.winnerName)}</strong></td>
     <td>${row.winnerOdds ? row.winnerOdds.toFixed(1) : "--"}</td><td class="selection-cell">${escapeHtml(row.selection)}</td><td>${row.points}</td>
@@ -411,10 +418,12 @@ function renderRaceList() {
   els.sidebarVenue.textContent = track?.venueName ?? "競馬場";
   els.raceList.innerHTML = (track?.races ?? []).map((race) => {
     const active = race.no === state.raceNo ? "active" : "";
+    const result = matchingAuditRecommendation(race.no);
+    const net = result ? Number(result.netYen) : null;
     return `<button type="button" class="${active}" data-race="${race.no}">
       <span class="side-r">${race.no}R</span>
       <span class="side-name"><strong>${escapeHtml(race.name)}</strong><small>${escapeHtml(race.surface)} ${race.distanceM}m</small></span>
-      <span class="side-time">${race.start}</span>
+      <span class="side-result"><small>${race.start}</small><strong class="${net === null ? "" : net >= 0 ? "positive" : "negative"}">${net === null ? "結果待ち" : signedYen(net)}</strong></span>
     </button>`;
   }).join("");
   bindRaceButtons(els.raceList);
@@ -628,7 +637,8 @@ function renderTopRecommendation() {
   const counts = ticketEngine?.candidateCounts(runners.length) ?? {};
   const candidates = matchingAutomaticCandidates().filter(isRecommendationReady).sort((left, right) => candidateExpectedReturn(right) - candidateExpectedReturn(left));
   const marketGuardrail = modelData.logic?.marketBenchmark?.abilityMaySetExpectedReturn === false;
-  const top = candidates[0] ?? null;
+  const auditedRecommendation = matchingAuditRecommendation();
+  const top = candidates.find((candidate) => candidateMatchesAudit(candidate, auditedRecommendation)) ?? candidates[0] ?? null;
   const expectedReturn = top ? candidateExpectedReturn(top) : null;
   const edge = expectedReturn === null ? null : expectedReturn - 1;
   const passes = edge !== null && edge >= 0.08 && isPurchaseEligible(top);
@@ -652,6 +662,7 @@ function renderTopRecommendation() {
   els.topTicketEdge.className = edge === null ? "" : edge >= 0 ? "positive" : "negative";
   els.topTicketStake.textContent = top ? yen((Math.max(1, Number(top.points) || 1)) * ticketEngine.UNIT_STAKE) : "0円";
   renderExpectancyScenarios(top, marketGuardrail);
+  renderRacePurchaseResult();
   els.topRecommendationComment.textContent = marketGuardrail
     ? `このレースの参考買い目1位です。購入基準は未達のため、推奨判断は見送りです。`
     : top
@@ -691,6 +702,46 @@ function renderExpectancyScenarios(candidate, marketGuardrail) {
 function finiteReturn(value) {
   const number = Number(value);
   return Number.isFinite(number) ? number : null;
+}
+
+function matchingAuditRecommendation(raceNo = state.raceNo) {
+  const audit = modelData.logic?.referenceWeekExternalAudit;
+  if (audit?.evaluationScope !== "ai_prediction_top_ticket_only") return null;
+  return (audit.recommendations ?? []).find((row) => row.date === state.date
+    && row.meetingName === selectedTrack()?.meetingName && Number(row.raceNo) === Number(raceNo)) ?? null;
+}
+
+function candidateMatchesAudit(candidate, audit) {
+  if (!candidate || !audit || candidate.betType !== audit.betType || (candidate.method ?? "1点") !== (audit.method ?? "1点")) return false;
+  return (candidate.ticketKeys ?? []).join("|") === (audit.ticketKeys ?? []).join("|");
+}
+
+function renderRacePurchaseResult() {
+  const result = matchingAuditRecommendation();
+  if (!result) {
+    els.racePurchaseJudgement.textContent = "結果待ち";
+    els.racePurchaseJudgement.className = "quality missing";
+    els.racePurchaseSelection.textContent = "未確定";
+    els.racePurchaseTicket.textContent = "予想保存後に照合します";
+    els.racePurchaseInvestment.textContent = "--";
+    els.racePurchasePayout.textContent = "--";
+    els.racePurchaseNet.textContent = "--";
+    els.racePurchaseNet.className = "";
+    els.racePurchaseRoi.textContent = "回収率 --";
+    return;
+  }
+  const investment = Number(result.investmentYen) || 0;
+  const payout = Number(result.payoutYen) || 0;
+  const net = Number(result.netYen) || 0;
+  els.racePurchaseJudgement.textContent = result.hit ? "的中" : "不的中";
+  els.racePurchaseJudgement.className = `quality ${result.hit ? "complete" : "missing"}`;
+  els.racePurchaseSelection.textContent = result.selection;
+  els.racePurchaseTicket.textContent = `${result.betType}・${result.method ?? "1点"}${Number(result.points) > 1 ? `・${result.points}点` : ""}`;
+  els.racePurchaseInvestment.textContent = yen(investment);
+  els.racePurchasePayout.textContent = yen(payout);
+  els.racePurchaseNet.textContent = signedYen(net);
+  els.racePurchaseNet.className = net >= 0 ? "positive" : "negative";
+  els.racePurchaseRoi.textContent = `回収率 ${investment ? percent(payout / investment) : "--"}`;
 }
 
 function matchingAutomaticCandidates(raceNo = state.raceNo) {

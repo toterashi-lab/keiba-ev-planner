@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0b0e0c" />
     <title>AIデジタル競馬新聞｜予想印・期待値・推奨買い目</title>
-    <link rel="stylesheet" href="styles.css?v=aidigital-20260717" />
+    <link rel="stylesheet" href="styles.css?v=racepl-20260717" />
   </head>
   <body>
     <header class="site-header">
@@ -164,6 +164,18 @@
             <div><span>AI理論値</span><strong id="scenario-ability-return">--</strong><small>能力モデル・研究値</small></div>
             <div class="adopted"><span>採用期待値</span><strong id="scenario-adopted-return">--</strong><small id="scenario-adopted-note">安全側判定</small></div>
           </div>
+          <section class="race-purchase-result" aria-labelledby="race-purchase-result-title">
+            <header>
+              <div><span>予想時点の最上位買い目を各100円で購入した想定</span><h3 id="race-purchase-result-title">このレースのAI購入シミュレーション</h3></div>
+              <span id="race-purchase-judgement" class="quality missing">照合中</span>
+            </header>
+            <div class="race-purchase-grid">
+              <div><span>AI買い目</span><strong id="race-purchase-selection">--</strong><small id="race-purchase-ticket">--</small></div>
+              <div><span>投資</span><strong id="race-purchase-investment">--</strong><small>1点100円</small></div>
+              <div><span>払戻</span><strong id="race-purchase-payout">--</strong><small>確定払戻</small></div>
+              <div class="net"><span>損益</span><strong id="race-purchase-net">--</strong><small id="race-purchase-roi">回収率 --</small></div>
+            </div>
+          </section>
           <div id="ticket-coverage" class="ticket-coverage" aria-label="券種別の算出状態"></div>
           <p id="candidate-count" class="candidate-count"></p>
         </section>
@@ -389,6 +401,6 @@
     <script src="data/live-racecards.js?v=aidigital-20260717"></script>
     <script src="data/live-model-outputs.js?v=aidigital-20260717"></script>
     <script src="ticket-engine.js?v=aidigital-20260717"></script>
-    <script src="app.js?v=aidigital-20260717"></script>
+    <script src="app.js?v=racepl-20260717"></script>
   </body>
 </html>

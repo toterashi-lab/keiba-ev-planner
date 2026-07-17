@@ -181,6 +181,16 @@ main { width: min(1240px, 100%); margin: 0 auto; padding: 14px 18px 30px; }
 .expectancy-scenarios span, .expectancy-scenarios small { display: block; color: var(--muted); font-size: 10px; }
 .expectancy-scenarios strong { display: block; margin: 3px 0; font-size: 18px; font-variant-numeric: tabular-nums; }
 .expectancy-scenarios .adopted { background: var(--green-100); }
+.race-purchase-result { border-top: 1px solid var(--line); }
+.race-purchase-result > header { min-height: 50px; padding: 9px 13px; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #edf1ef; }
+.race-purchase-result > header span:first-child { display: block; color: var(--muted); font-size: 9px; }
+.race-purchase-result h3 { margin: 2px 0 0; font-size: 14px; }
+.race-purchase-grid { display: grid; grid-template-columns: minmax(220px, 2fr) repeat(3, minmax(100px, 1fr)); }
+.race-purchase-grid > div { min-width: 0; padding: 10px 13px; border-top: 1px solid var(--line); border-right: 1px solid var(--line); }
+.race-purchase-grid > div:last-child { border-right: 0; }
+.race-purchase-grid span, .race-purchase-grid small { display: block; color: var(--muted); font-size: 10px; }
+.race-purchase-grid strong { display: block; margin: 3px 0; overflow-wrap: anywhere; font-size: 17px; font-variant-numeric: tabular-nums; }
+.race-purchase-grid > div:first-child strong { font-size: 13px; }
 .ticket-coverage { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border-top: 1px solid var(--line); }
 .ticket-coverage > div { min-width: 0; padding: 9px 8px; border-right: 1px solid var(--line); border-top: 3px solid var(--green-700); }
 .ticket-coverage > div:last-child { border-right: 0; }
@@ -249,7 +259,9 @@ main { width: min(1240px, 100%); margin: 0 auto; padding: 14px 18px 30px; }
 .race-list .side-name { min-width: 0; }
 .race-list .side-name strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
 .race-list .side-name small { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; }
-.race-list .side-time { color: #4b555c; font-size: 11px; }
+.race-list .side-result { display: grid; justify-items: end; gap: 3px; }
+.race-list .side-result small { color: #4b555c; font-size: 10px; }
+.race-list .side-result strong { font-size: 11px; font-variant-numeric: tabular-nums; }
 
 .automatic-policy { margin-bottom: 10px; padding: 11px 13px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border: 1px solid #abc2b5; border-left: 4px solid var(--green-700); background: var(--green-100); }
 .automatic-policy div { flex: 0 0 auto; }
@@ -867,6 +879,11 @@ main {
 .expectancy-scenarios > div { border-color: #303733; }
 .expectancy-scenarios span, .expectancy-scenarios small { color: #87918c; }
 .expectancy-scenarios .adopted { background: #142b21; }
+.race-purchase-result { border-color: #303733; }
+.race-purchase-result > header { background: #202622; }
+.race-purchase-result > header span:first-child { color: #87918c; }
+.race-purchase-grid > div { border-color: #303733; }
+.race-purchase-grid span, .race-purchase-grid small { color: #87918c; }
 .ticket-coverage > div { border-color: #303733; }
 .ticket-coverage > div.blocked { background: #181b19; }
 .candidate-count { background: #1c211e; color: #8d9792; }
@@ -889,7 +906,7 @@ main {
 .race-list button:hover { background: #1d251f; }
 .race-list button.active { background: #222824; box-shadow: inset 4px 0 var(--amber-700); }
 .race-list .side-r { color: #6ed8a0; }
-.race-list .side-name small, .race-list .side-time { color: #84908a; }
+.race-list .side-name small, .race-list .side-result small { color: #84908a; }
 
 .summary-band,
 .logic-status-grid,
@@ -1223,6 +1240,10 @@ footer { background: #070908; color: #7f8984; }
   .expectancy-scenarios { grid-template-columns: 1fr; }
   .expectancy-scenarios > div { border-right: 0; border-bottom: 1px solid #303733; }
   .expectancy-scenarios > div:last-child { border-bottom: 0; }
+  .race-purchase-result > header { align-items: flex-start; }
+  .race-purchase-grid { grid-template-columns: 1fr 1fr; }
+  .race-purchase-grid > div { border-right: 1px solid #303733; }
+  .race-purchase-grid > div:nth-child(even) { border-right: 0; }
   .summary-band > div,
   .logic-status-grid > div,
   .ev-metrics div,
