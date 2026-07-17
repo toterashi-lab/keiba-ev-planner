@@ -67,6 +67,7 @@ copy("docs/expectancy-methodology.md", path.join(stageDir, "docs", "expectancy-m
 copy("docs/expectancy-research-v2.md", path.join(stageDir, "docs", "expectancy-research-v2.md"));
 copy("docs/expectancy-research-v3.md", path.join(stageDir, "docs", "expectancy-research-v3.md"));
 copy("docs/expectancy-research-v4.md", path.join(stageDir, "docs", "expectancy-research-v4.md"));
+copy("docs/expectancy-research-v5.md", path.join(stageDir, "docs", "expectancy-research-v5.md"));
 copy("docs/pace-shape-v3.1.md", path.join(stageDir, "docs", "pace-shape-v3.1.md"));
 copy("docs/reference-site-analysis.md", path.join(stageDir, "docs", "reference-site-analysis.md"));
 copy("docs/ui-framework-v4.md", path.join(stageDir, "docs", "ui-framework-v4.md"));
@@ -193,7 +194,7 @@ fs.writeFileSync(stagedIndexPath, stagedIndex, "utf8");
 
 fs.writeFileSync(path.join(stageDir, ".nojekyll"), "", "utf8");
 fs.writeFileSync(path.join(stageDir, ".gitignore"), ".DS_Store\nThumbs.db\n", "utf8");
-fs.writeFileSync(path.join(stageDir, "README.md"), `# 競馬期待値ラボ
+fs.writeFileSync(path.join(stageDir, "README.md"), `# AIデジタル競馬新聞
 
 先週のJRA中央競馬72レースを使った、過去データ蓄積・期待値検証画面です。
 
@@ -210,7 +211,7 @@ fs.writeFileSync(path.join(stageDir, "README.md"), `# 競馬期待値ラボ
 
 出典はJRA公式番組・結果ページです。JRAおよびnetkeibaの公式サービスではありません。
 無課金の長期蓄積コードは \`scripts/jra-free-db.mjs\`、公式単勝・複勝オッズ収集は \`scripts/jra-free-odds.mjs\`、検査仕様は \`docs/free-data-pipeline.md\` に収録しています。
-期待値の研究根拠、4シナリオ、校正・時系列検証ゲートは \`docs/expectancy-methodology.md\` に収録しています。
+期待値の研究根拠、3シナリオ、校正・時系列検証ゲートは \`docs/expectancy-research-v5.md\` に収録しています。
 原本HTMLとSQLite本体は個人利用のローカルDBにのみ保存し、この公開リポジトリには収録しません。
 
 期待値候補は、全馬オッズ履歴、確率校正、時系列検証、オッズ鮮度、ドローダウンの全ゲートが合格するまで生成を停止します。

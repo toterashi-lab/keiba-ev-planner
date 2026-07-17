@@ -175,6 +175,12 @@ main { width: min(1240px, 100%); margin: 0 auto; padding: 14px 18px 30px; }
 .recommendation-metrics dt { color: var(--muted); font-size: 10px; }
 .recommendation-metrics dd { margin: 7px 0 0; font-size: 18px; font-weight: 900; font-variant-numeric: tabular-nums; }
 .recommendation-comment { margin: 0; padding: 10px 14px; background: #fbfcfc; border-top: 1px solid var(--line); color: #465159; font-size: 11px; line-height: 1.7; }
+.expectancy-scenarios { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); }
+.expectancy-scenarios > div { min-width: 0; padding: 10px 13px; border-right: 1px solid var(--line); }
+.expectancy-scenarios > div:last-child { border-right: 0; }
+.expectancy-scenarios span, .expectancy-scenarios small { display: block; color: var(--muted); font-size: 10px; }
+.expectancy-scenarios strong { display: block; margin: 3px 0; font-size: 18px; font-variant-numeric: tabular-nums; }
+.expectancy-scenarios .adopted { background: var(--green-100); }
 .ticket-coverage { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border-top: 1px solid var(--line); }
 .ticket-coverage > div { min-width: 0; padding: 9px 8px; border-right: 1px solid var(--line); border-top: 3px solid var(--green-700); }
 .ticket-coverage > div:last-child { border-right: 0; }
@@ -857,6 +863,10 @@ main {
 .recommendation-ticket small,
 .recommendation-metrics dt { color: #87918c; }
 .recommendation-comment { background: #121613; color: #abb4af; }
+.expectancy-scenarios { border-color: #303733; }
+.expectancy-scenarios > div { border-color: #303733; }
+.expectancy-scenarios span, .expectancy-scenarios small { color: #87918c; }
+.expectancy-scenarios .adopted { background: #142b21; }
 .ticket-coverage > div { border-color: #303733; }
 .ticket-coverage > div.blocked { background: #181b19; }
 .candidate-count { background: #1c211e; color: #8d9792; }
@@ -1210,6 +1220,9 @@ footer { background: #070908; color: #7f8984; }
   .ai-mark:last-child { grid-column: auto; }
   .ticket-coverage > div,
   .ticket-coverage > div:nth-child(4) { border-color: #303733; }
+  .expectancy-scenarios { grid-template-columns: 1fr; }
+  .expectancy-scenarios > div { border-right: 0; border-bottom: 1px solid #303733; }
+  .expectancy-scenarios > div:last-child { border-bottom: 0; }
   .summary-band > div,
   .logic-status-grid > div,
   .ev-metrics div,

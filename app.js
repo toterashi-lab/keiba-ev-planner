@@ -100,6 +100,10 @@ const els = {
   topTicketEdge: document.querySelector("#top-ticket-edge"),
   topTicketStake: document.querySelector("#top-ticket-stake"),
   topRecommendationComment: document.querySelector("#top-recommendation-comment"),
+  scenarioMarketReturn: document.querySelector("#scenario-market-return"),
+  scenarioAbilityReturn: document.querySelector("#scenario-ability-return"),
+  scenarioAdoptedReturn: document.querySelector("#scenario-adopted-return"),
+  scenarioAdoptedNote: document.querySelector("#scenario-adopted-note"),
   aiPrediction: document.querySelector("#ai-prediction"),
   aiConfidence: document.querySelector("#ai-confidence"),
   aiMarks: document.querySelector("#ai-marks"),
@@ -647,6 +651,7 @@ function renderTopRecommendation() {
   els.topTicketEdge.textContent = edge === null ? "--" : signedPercent(edge);
   els.topTicketEdge.className = edge === null ? "" : edge >= 0 ? "positive" : "negative";
   els.topTicketStake.textContent = top ? yen((Math.max(1, Number(top.points) || 1)) * ticketEngine.UNIT_STAKE) : "0円";
+  renderExpectancyScenarios(top, marketGuardrail);
   els.topRecommendationComment.textContent = marketGuardrail
     ? `このレースの参考買い目1位です。購入基準は未達のため、推奨判断は見送りです。`
     : top
@@ -667,6 +672,25 @@ function renderTopRecommendation() {
   }).join("");
   const total = Object.values(counts).reduce((sum, count) => sum + count, 0);
   els.candidateCount.textContent = `${runners.length}頭立て・基本組み合わせ${number(total)}候補。BOXとフォーメーションは構成点へ展開し、重複を除いて総投資ベースで比較します。`;
+}
+
+function renderExpectancyScenarios(candidate, marketGuardrail) {
+  const market = finiteReturn(candidate?.marketExpectedReturn);
+  const ability = finiteReturn(candidate?.abilityExpectedReturn);
+  const adopted = candidate ? candidateExpectedReturn(candidate) : null;
+  els.scenarioMarketReturn.textContent = market === null ? "--" : percent(market);
+  els.scenarioAbilityReturn.textContent = ability === null ? "--" : percent(ability);
+  els.scenarioAdoptedReturn.textContent = adopted === null ? "--" : percent(adopted);
+  els.scenarioAbilityReturn.className = ability !== null && ability >= 1 ? "positive" : "";
+  els.scenarioAdoptedReturn.className = adopted === null ? "" : adopted >= 1 ? "positive" : "negative";
+  els.scenarioAdoptedNote.textContent = marketGuardrail
+    ? "外部監査により市場基準を採用"
+    : "校正誤差を引いた安全側";
+}
+
+function finiteReturn(value) {
+  const number = Number(value);
+  return Number.isFinite(number) ? number : null;
 }
 
 function matchingAutomaticCandidates(raceNo = state.raceNo) {
