@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0b0e0c" />
     <title>AIデジタル競馬新聞｜予想印・期待値・推奨買い目</title>
-    <link rel="stylesheet" href="styles.css?v=racepl-20260717" />
+    <link rel="stylesheet" href="styles.css?v=allbets-20260717" />
   </head>
   <body>
     <header class="site-header">
@@ -174,6 +174,18 @@
               <div><span>投資</span><strong id="race-purchase-investment">--</strong><small>1点100円</small></div>
               <div><span>払戻</span><strong id="race-purchase-payout">--</strong><small>確定払戻</small></div>
               <div class="net"><span>損益</span><strong id="race-purchase-net">--</strong><small id="race-purchase-roi">回収率 --</small></div>
+            </div>
+          </section>
+          <section class="bet-type-paper" aria-labelledby="bet-type-paper-title">
+            <header>
+              <div><span>全候補から券種ごとの期待値1位を選出</span><h3 id="bet-type-paper-title">券種別AI推奨買い目</h3></div>
+              <span>1点100円・買い方込み</span>
+            </header>
+            <div class="table-scroll">
+              <table class="dense-table bet-type-table">
+                <thead><tr><th>券種</th><th>買い方</th><th>推奨買い目</th><th>点数</th><th>投資</th><th>市場基準</th><th>AI理論値</th><th>採用期待値</th><th>判定</th></tr></thead>
+                <tbody id="bet-type-recommendation-body"></tbody>
+              </table>
             </div>
           </section>
           <div id="ticket-coverage" class="ticket-coverage" aria-label="券種別の算出状態"></div>
@@ -401,6 +413,6 @@
     <script src="data/live-racecards.js?v=aidigital-20260717"></script>
     <script src="data/live-model-outputs.js?v=aidigital-20260717"></script>
     <script src="ticket-engine.js?v=aidigital-20260717"></script>
-    <script src="app.js?v=racepl-20260717"></script>
+    <script src="app.js?v=allbets-20260717"></script>
   </body>
 </html>

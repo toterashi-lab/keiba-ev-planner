@@ -55,6 +55,13 @@ for (const race of expectedRaces) {
     || !Number.isFinite(recommendation.expectedReturn)
     || recommendation.chiefDecision?.agent !== "chief-expectancy-agent"
     || recommendation.payoutVolatilityPrior?.usePolicy !== "volatility_prior_only") failures.push(`${race.key}: auditable AI top-ticket missing`);
+  const betTypeRecommendations = prediction?.betTypeRecommendations ?? [];
+  if (betTypeRecommendations.length !== betTypes.length
+    || betTypes.some((betType) => !betTypeRecommendations.some((row) => row.betType === betType
+      && row.recommendationSource === "ai_prediction_bet_type_top_ticket"
+      && row.totalInvestmentYen === row.points * 100))) {
+    failures.push(`${race.key}: bet-type recommendations incomplete`);
+  }
 }
 
 const source = fs.readFileSync("scripts/generate-market-ev.mjs", "utf8");
@@ -69,4 +76,5 @@ if (failures.length) {
 console.log(`OK 72レース・7券種・${model.evaluatedTotal.toLocaleString("ja-JP")}通り・1点100円`);
 console.log("OK 全72レース AI予想・各レース5頭印・信頼度・シナリオ");
 console.log("OK 全72レース 馬連・ワイド・馬単・3連複・3連単のBOX／フォーメーション");
+console.log("OK 全72レース・7券種ごとの最上位買い目を保存");
 console.log(`OK 公開候補 ${model.candidates.length.toLocaleString("ja-JP")}件・結果/払戻リークなし`);

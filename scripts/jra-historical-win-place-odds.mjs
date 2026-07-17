@@ -5,11 +5,16 @@ import zlib from "node:zlib";
 import { DatabaseSync } from "node:sqlite";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
-const PRIVATE_DIR = path.join(ROOT, "data", "jra-free-private");
+const PRIVATE_DIR = process.env.KEIBA_PRIVATE_DIR
+  ? path.resolve(process.env.KEIBA_PRIVATE_DIR)
+  : [path.join(ROOT, "data", "jra-free-private"), path.join(ROOT, "..", "data", "jra-free-private")]
+    .find((candidate) => fs.existsSync(path.join(candidate, "keiba.sqlite")))
+    ?? path.join(ROOT, "data", "jra-free-private");
 const DB_PATH = path.join(PRIVATE_DIR, "keiba.sqlite");
 const RAW_DIR = path.join(PRIVATE_DIR, "raw", "historical-odds-win-place");
 const RUN_LOCK = path.join(PRIVATE_DIR, "historical-odds-run.lock");
 const WORK_LOCK = path.join(PRIVATE_DIR, "historical-odds-worker.lock");
+const RESULT_URL = "https://www.jra.go.jp/JRADB/accessS.html";
 const ODDS_URL = "https://www.jra.go.jp/JRADB/accessO.html";
 const PARSER_VERSION = "jra-historical-win-place-v1";
 const USER_AGENT = "keiba-ev-planner/1.0 (personal research; low-rate official JRA historical odds fetcher)";
@@ -95,30 +100,38 @@ async function ingest(raceId, delayMs) {
   db.prepare(`update historical_odds_jobs set status='running',attempts=attempts+1,last_error=null,
     started_at=?,completed_at=null,updated_at=? where race_id=?`).run(now, now, raceId);
   try {
-    const race = db.prepare(`select r.race_id,r.source_page_id,p.raw_path from complete_races r
+    const race = db.prepare(`select r.race_id,r.source_cname,r.source_page_id,p.raw_path from complete_races r
       join raw_pages p on p.id=r.source_page_id where r.race_id=?`).get(raceId);
     if (!race) throw new Error("Complete race source is missing");
-    const resultHtml = readRaw(race.raw_path);
+    const resultHtml = fs.existsSync(path.join(PRIVATE_DIR, race.raw_path))
+      ? readRaw(race.raw_path)
+      : await fetchResultSource(race.source_cname, delayMs);
     const cname = resultHtml.match(/'(pw151ou[^']+)'/)?.[1];
     if (!cname) throw new Error("Official historical win/place CNAME is missing");
     const page = await fetchPage(cname, delayMs);
     const parsed = parseWinPlace(page.html);
-    const expected = db.prepare("select horse_number from complete_race_entries where race_id=? order by horse_number")
-      .all(raceId).map((row) => row.horse_number);
+    const expectedRows = db.prepare(`select e.horse_number,r.finish_text from complete_race_entries e
+      left join complete_race_results r on r.race_id=e.race_id and r.horse_id=e.horse_id
+      where e.race_id=? order by e.horse_number`).all(raceId);
+    const expected = expectedRows.map((row) => row.horse_number);
+    const saleEligible = expectedRows.filter((row) => !["取消", "除外"].includes(row.finish_text))
+      .map((row) => row.horse_number);
     const actual = parsed.runners.map((row) => row.horseNumber).sort((left, right) => left - right);
     if (JSON.stringify(expected) !== JSON.stringify(actual)) {
       throw new Error(`Runner set mismatch: expected=${expected.length}, actual=${actual.length}`);
     }
+    const priced = parsed.runners.filter((row) => row.win !== null && row.placeLow !== null && row.placeHigh !== null)
+      .map((row) => row.horseNumber).sort((left, right) => left - right);
+    if (JSON.stringify(saleEligible) !== JSON.stringify(priced)) {
+      throw new Error(`Price coverage mismatch: saleEligible=${saleEligible.length}, priced=${priced.length}`);
+    }
     const winCount = parsed.runners.filter((row) => row.win !== null).length;
     const placeCount = parsed.runners.filter((row) => row.placeLow !== null && row.placeHigh !== null).length;
-    if (winCount !== expected.length || placeCount !== expected.length) {
-      throw new Error(`Price coverage mismatch: runners=${expected.length}, win=${winCount}, place=${placeCount}`);
-    }
     db.exec("begin immediate");
     try {
       db.prepare("delete from historical_win_place_odds where race_id=?").run(raceId);
       const insert = db.prepare("insert into historical_win_place_odds values(?,?,?,?,?,?,?)");
-      for (const runner of parsed.runners) {
+      for (const runner of parsed.runners.filter((row) => priced.includes(row.horseNumber))) {
         insert.run(raceId, runner.horseNumber, runner.win, runner.placeLow, runner.placeHigh,
           page.fetchedAt, page.id);
       }
@@ -126,7 +139,7 @@ async function ingest(raceId, delayMs) {
       const completedAt = new Date().toISOString();
       db.prepare(`update historical_odds_jobs set status='complete',request_key=?,runner_count=?,
         win_price_count=?,place_price_count=?,completed_at=?,updated_at=? where race_id=?`)
-        .run(cname, expected.length, winCount, placeCount, completedAt, completedAt, raceId);
+        .run(cname, saleEligible.length, winCount, placeCount, completedAt, completedAt, raceId);
       db.exec("commit");
     } catch (error) {
       db.exec("rollback");
@@ -138,6 +151,24 @@ async function ingest(raceId, delayMs) {
       .run(String(error.stack ?? error).slice(0, 3000), failedAt, raceId);
     throw error;
   }
+}
+
+async function fetchResultSource(cname, delayMs) {
+  await sleep(delayMs);
+  const response = await fetch(RESULT_URL, {
+    method: "POST",
+    headers: {
+      "content-type": "application/x-www-form-urlencoded",
+      "user-agent": USER_AGENT,
+      accept: "text/html,application/xhtml+xml",
+    },
+    body: `cname=${encodeURIComponent(cname)}`,
+    signal: AbortSignal.timeout(30_000),
+  });
+  if (!response.ok) throw new Error(`Result source HTTP ${response.status}`);
+  const html = new TextDecoder("shift_jis").decode(await response.arrayBuffer());
+  if (/ＤＢ検索エラー|DB検索エラー|パラメータエラー/.test(html)) throw new Error("JRA result source returned an error page");
+  return html;
 }
 
 async function fetchPage(cname, delayMs) {

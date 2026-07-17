@@ -145,7 +145,9 @@ function makeAiPrediction(race, horseProbabilities, names, raceCandidates, abili
   const confidenceScore = Math.min(1, concentration * 0.55 + Math.min(1, ranked[0].probability / 0.35) * 0.25 + Math.min(1, gap / 0.12) * 0.2);
   const confidence = confidenceScore >= 0.55 ? "高" : confidenceScore >= 0.35 ? "中" : "低";
   const scenario = ranked[0].probability >= 0.3 && gap >= 0.08 ? "本命軸" : gap <= 0.03 ? "混戦・広め" : "バランス";
-  const topTicket = [...raceCandidates].sort(byExpectedReturn)[0] ?? null;
+  const bestByBetType = Object.values(DB_TYPES).map((betType) =>
+    [...raceCandidates].filter((candidate) => candidate.betType === betType).sort(byExpectedReturn)[0] ?? null).filter(Boolean);
+  const topTicket = [...bestByBetType].sort(byExpectedReturn)[0] ?? null;
   const forecastPanel = buildForecastPanel({ horseProbabilities, marketProbabilities, modelRows, names });
   return {
     date: race.race_date,
@@ -168,19 +170,27 @@ function makeAiPrediction(race, horseProbabilities, names, raceCandidates, abili
       disagreement: forecastDisagreement(forecastPanel),
     },
     marks: ranked.slice(0, marks.length).map((row, index) => ({ mark: marks[index], ...row })),
-    topTicket: topTicket ? {
-      recommendationSource: "ai_prediction_top_ticket",
-      betType: topTicket.betType,
-      method: topTicket.method,
-      selection: topTicket.selection,
-      points: topTicket.points,
-      totalInvestmentYen: topTicket.totalInvestmentYen,
-      ticketKeys: topTicket.ticketKeys,
-      expectedReturn: topTicket.adoptedExpectedReturn,
-      payoutVolatilityPrior: topTicket.payoutVolatilityPrior,
-      chiefDecision: topTicket.chiefDecision,
-    } : null,
+    betTypeRecommendations: bestByBetType.map((candidate) => recommendationSummary(candidate, "ai_prediction_bet_type_top_ticket")),
+    topTicket: topTicket ? recommendationSummary(topTicket, "ai_prediction_top_ticket") : null,
     comment: `${forecastPanel.filter((agent) => agent.status === "available").length}予想家の印と根拠をマスターが統合。◎${ranked[0].horseName}は統合勝率${(ranked[0].probability * 100).toFixed(1)}%、○との差は${(gap * 100).toFixed(1)}ポイント。${scenario}シナリオで評価します。`,
+  };
+}
+
+function recommendationSummary(candidate, recommendationSource) {
+  return {
+    recommendationSource,
+    betType: candidate.betType,
+    method: candidate.method,
+    selection: candidate.selection,
+    points: candidate.points,
+    totalInvestmentYen: candidate.totalInvestmentYen,
+    ticketKeys: candidate.ticketKeys,
+    expectedReturn: candidate.adoptedExpectedReturn,
+    marketExpectedReturn: candidate.marketExpectedReturn,
+    abilityExpectedReturn: candidate.abilityExpectedReturn,
+    conservativeExpectedReturn: candidate.conservativeExpectedReturn,
+    payoutVolatilityPrior: candidate.payoutVolatilityPrior,
+    chiefDecision: candidate.chiefDecision,
   };
 }
 

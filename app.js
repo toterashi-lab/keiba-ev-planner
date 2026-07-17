@@ -19,6 +19,7 @@ const featureCoverageData = window.KEIBA_MODEL_FEATURE_COVERAGE ?? { groups: [] 
 const payoutPatternData = window.KEIBA_HISTORICAL_PAYOUT_PATTERNS ?? { patterns: [], coverage: {} };
 const closingOddsData = window.KEIBA_CLOSING_ODDS ?? { races: [], quality: [] };
 const ticketEngine = window.KEIBA_TICKET_ENGINE;
+const DISPLAY_BET_TYPES = ["単勝", "複勝", "馬連", "ワイド", "3連複", "3連単"];
 
 const state = {
   date: meetingData.meetings.at(-1)?.date ?? "",
@@ -111,6 +112,7 @@ const els = {
   racePurchasePayout: document.querySelector("#race-purchase-payout"),
   racePurchaseNet: document.querySelector("#race-purchase-net"),
   racePurchaseRoi: document.querySelector("#race-purchase-roi"),
+  betTypeRecommendationBody: document.querySelector("#bet-type-recommendation-body"),
   aiPrediction: document.querySelector("#ai-prediction"),
   aiConfidence: document.querySelector("#ai-confidence"),
   aiMarks: document.querySelector("#ai-marks"),
@@ -208,7 +210,7 @@ function renderDatabaseStatus() {
   const healthLabel = ({ healthy: "正常稼働", stalled: "自動復旧待ち", idle: "待機中" })[databaseData.workerHealth] ?? "確認中";
   const etaLabel = databaseData.estimatedCompletionAt ? `・完了見込 ${formatTimestamp(databaseData.estimatedCompletionAt)}` : "";
   const historicalOddsText = databaseData.historicalOddsTotalRaces
-    ? `・過去単複オッズ ${number(databaseData.historicalOddsCompleteRaces)}/${number(databaseData.historicalOddsTotalRaces)}R`
+    ? `・過去単複オッズ ${number(databaseData.historicalOddsCompleteRaces)}/${number(databaseData.historicalOddsTotalRaces)}R${databaseData.historicalOddsWorkerHealth === "running" ? "・取得中" : ""}`
     : "";
   els.dbProgressLabel.textContent = `${percentValue.toFixed(1)}%・${healthLabel}・処理中${databaseData.runningMonths}・待機${databaseData.queuedMonths}・再検査${databaseData.failedMonths}${historicalOddsText}${etaLabel}`;
   els.dbProgressBar.style.width = `${percentValue}%`;
@@ -663,6 +665,7 @@ function renderTopRecommendation() {
   els.topTicketStake.textContent = top ? yen((Math.max(1, Number(top.points) || 1)) * ticketEngine.UNIT_STAKE) : "0円";
   renderExpectancyScenarios(top, marketGuardrail);
   renderRacePurchaseResult();
+  renderBetTypeRecommendations(candidates);
   els.topRecommendationComment.textContent = marketGuardrail
     ? `このレースの参考買い目1位です。購入基準は未達のため、推奨判断は見送りです。`
     : top
@@ -742,6 +745,34 @@ function renderRacePurchaseResult() {
   els.racePurchaseNet.textContent = signedYen(net);
   els.racePurchaseNet.className = net >= 0 ? "positive" : "negative";
   els.racePurchaseRoi.textContent = `回収率 ${investment ? percent(payout / investment) : "--"}`;
+}
+
+function renderBetTypeRecommendations(candidates) {
+  const rows = DISPLAY_BET_TYPES.map((betType) => {
+    const candidate = candidates.filter((row) => row.betType === betType)
+      .sort((left, right) => candidateExpectedReturn(right) - candidateExpectedReturn(left))[0] ?? null;
+    return { betType, candidate };
+  });
+  els.betTypeRecommendationBody.innerHTML = rows.map(({ betType, candidate }) => {
+    if (!candidate) return `<tr><td><strong>${betType}</strong></td><td colspan="8" class="empty-row">オッズ未取得・算出待ち</td></tr>`;
+    const market = finiteReturn(candidate.marketExpectedReturn);
+    const ability = finiteReturn(candidate.abilityExpectedReturn);
+    const adopted = candidateExpectedReturn(candidate);
+    const edge = adopted - 1;
+    const eligible = isPurchaseEligible(candidate) && edge >= 0.08;
+    const judgement = eligible ? "購入候補" : edge > 0 ? "参考・検証中" : "見送り";
+    return `<tr>
+      <td><strong>${betType}</strong></td>
+      <td>${escapeHtml(candidate.method ?? "1点")}</td>
+      <td class="selection-cell">${escapeHtml(candidate.selection)}</td>
+      <td>${number(candidate.points ?? 1)}点</td>
+      <td>${yen((candidate.points ?? 1) * ticketEngine.UNIT_STAKE)}</td>
+      <td>${market === null ? "--" : percent(market)}</td>
+      <td class="${ability !== null && ability >= 1 ? "positive" : ""}">${ability === null ? "--" : percent(ability)}</td>
+      <td class="${adopted >= 1 ? "positive" : "negative"}"><strong>${percent(adopted)}</strong></td>
+      <td><span class="quality ${eligible ? "complete" : "missing"}">${judgement}</span></td>
+    </tr>`;
+  }).join("");
 }
 
 function matchingAutomaticCandidates(raceNo = state.raceNo) {

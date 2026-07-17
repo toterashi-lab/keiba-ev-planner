@@ -191,6 +191,16 @@ main { width: min(1240px, 100%); margin: 0 auto; padding: 14px 18px 30px; }
 .race-purchase-grid span, .race-purchase-grid small { display: block; color: var(--muted); font-size: 10px; }
 .race-purchase-grid strong { display: block; margin: 3px 0; overflow-wrap: anywhere; font-size: 17px; font-variant-numeric: tabular-nums; }
 .race-purchase-grid > div:first-child strong { font-size: 13px; }
+.bet-type-paper { border-top: 1px solid var(--line); }
+.bet-type-paper > header { min-height: 50px; padding: 9px 13px; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #edf1ef; }
+.bet-type-paper > header span { color: var(--muted); font-size: 9px; }
+.bet-type-paper > header span:first-child { display: block; }
+.bet-type-paper h3 { margin: 2px 0 0; font-size: 14px; }
+.bet-type-paper .table-scroll { border-inline: 0; border-bottom: 0; }
+.bet-type-table { min-width: 1050px; table-layout: auto; }
+.bet-type-table th, .bet-type-table td { white-space: nowrap; }
+.bet-type-table .selection-cell { min-width: 250px; max-width: 430px; white-space: normal; line-height: 1.5; }
+.bet-type-table td:nth-child(n+4):not(:last-child) { text-align: right; font-variant-numeric: tabular-nums; }
 .ticket-coverage { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border-top: 1px solid var(--line); }
 .ticket-coverage > div { min-width: 0; padding: 9px 8px; border-right: 1px solid var(--line); border-top: 3px solid var(--green-700); }
 .ticket-coverage > div:last-child { border-right: 0; }
@@ -884,6 +894,9 @@ main {
 .race-purchase-result > header span:first-child { color: #87918c; }
 .race-purchase-grid > div { border-color: #303733; }
 .race-purchase-grid span, .race-purchase-grid small { color: #87918c; }
+.bet-type-paper { border-color: #303733; }
+.bet-type-paper > header { background: #202622; }
+.bet-type-paper > header span { color: #87918c; }
 .ticket-coverage > div { border-color: #303733; }
 .ticket-coverage > div.blocked { background: #181b19; }
 .candidate-count { background: #1c211e; color: #8d9792; }
