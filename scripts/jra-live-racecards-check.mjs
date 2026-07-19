@@ -10,14 +10,25 @@ try {
   const entries = db.prepare("select * from live_entries where batch_id=?").all(batch.id);
   if (races.length !== batch.race_count || entries.length !== batch.entry_count) throw new Error("出馬表バッチ件数が一致しません");
   if (races.some((race) => !race.race_id || !race.race_date || !race.venue_code || !race.race_number || !race.start_time)) throw new Error("レース必須項目が欠損しています");
-  if (entries.some((entry) => !entry.horse_id || !entry.horse_name || !entry.horse_number || !entry.jockey_id || !entry.trainer_id)) throw new Error("出走馬必須項目が欠損しています");
+  if (entries.some((entry) => !entry.horse_id || !entry.horse_name || !entry.horse_number || !entry.jockey_name || !entry.trainer_name)) {
+    throw new Error("出走馬の表示必須項目が欠損しています");
+  }
   let comparableRaces = 0;
   for (const race of races) {
-    const historical = db.prepare("select horse_id,horse_number from complete_race_entries where race_id=? order by horse_number").all(race.race_id);
+    const historical = db.prepare(`select e.horse_id,e.horse_number,r.finish_text
+      from complete_race_entries e join complete_race_results r on r.race_id=e.race_id and r.horse_id=e.horse_id
+      where e.race_id=? order by e.horse_number`).all(race.race_id);
     if (!historical.length) continue;
     comparableRaces += 1;
     const live = db.prepare("select horse_id,horse_number from live_entries where race_id=? order by horse_number").all(race.race_id);
-    if (JSON.stringify(live) !== JSON.stringify(historical)) throw new Error(`${race.race_id}の出馬表と結果DBの馬集合が一致しません`);
+    const historicalKeys = new Set(historical.map((entry) => `${entry.horse_id}:${entry.horse_number}`));
+    if (live.some((entry) => !historicalKeys.has(`${entry.horse_id}:${entry.horse_number}`))) {
+      throw new Error(`${race.race_id}の出馬表に結果DBと一致しない馬がいます`);
+    }
+    const liveKeys = new Set(live.map((entry) => `${entry.horse_id}:${entry.horse_number}`));
+    const unexplainedMissing = historical.filter((entry) => !liveKeys.has(`${entry.horse_id}:${entry.horse_number}`)
+      && !["取消", "除外"].includes(entry.finish_text));
+    if (unexplainedMissing.length) throw new Error(`${race.race_id}の出馬表と結果DBの馬集合が一致しません`);
   }
   const dates = [...new Set(races.map((race) => race.race_date))];
   const featureRows = buildFeatureRows(db, { from: dates[0], to: dates.at(-1), completeOnly: true, includeLive: true, emitHistorical: false });

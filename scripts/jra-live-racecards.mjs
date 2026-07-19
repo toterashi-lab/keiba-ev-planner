@@ -41,10 +41,11 @@ export function parseRaceCard(html, cname) {
       gateNumber: numberOrNull(cell(row, "waku").match(/waku\/(\d+)\.png/i)?.[1]),
       sexAge: stripHtml(jockeyCell.match(/<p class="age">([\s\S]*?)<\/p>/i)?.[1] ?? ""),
       carriedWeight: numberOrNull(stripHtml(jockeyCell.match(/<p class="weight">([\s\S]*?)<\/p>/i)?.[1] ?? "")),
-      jockeyId: jockeyCell.match(/pw04kmk([^/'"]+)/i)?.[1] ?? null,
+      jockeyId: jockeyCell.match(/pw04(?:kmk|krc)([^/'"]+)/i)?.[1] ?? null,
       jockeyName: stripHtml(jockeyCell.match(/<p class="jockey">[\s\S]*?<a[^>]*>([\s\S]*?)<\/a>/i)?.[1] ?? ""),
       trainerId: trainerBlock.match(/pw05cmk([^/'"]+)/i)?.[1] ?? null,
-      trainerName: stripHtml(trainerBlock.match(/<a[^>]*>([\s\S]*?)<\/a>/i)?.[1] ?? ""),
+      trainerName: stripHtml(trainerBlock.match(/<a[^>]*>([\s\S]*?)<\/a>/i)?.[1] ?? trainerBlock)
+        .replace(/\(本会外\)$/, "").trim(),
       bodyWeight: bodyMatch ? Number(bodyMatch[1]) : null,
       bodyWeightDelta: bodyMatch?.[2] ? Number(bodyMatch[2]) : null,
       ownerName: stripHtml(horseCell.match(/<p class="owner">([\s\S]*?)<\/p>/i)?.[1] ?? ""),
@@ -80,7 +81,7 @@ export function parseRaceCard(html, cname) {
 }
 
 export function parseRaceKey(cname) {
-  const match = cname.match(/^pw01dde10(\d{2})(\d{4})(\d{2})(\d{2})(\d{2})(\d{8})/);
+  const match = cname.match(/^pw01dde(?:01|10)(\d{2})(\d{4})(\d{2})(\d{2})(\d{2})(\d{8})/);
   if (!match) return null;
   return {
     venueCode: match[1],
@@ -224,7 +225,7 @@ function uniqueCnames(html, prefix) {
   return [...new Set([...quoted, ...query])];
 }
 function parseMeetingDate(cname) { const value = cname.match(/(\d{8})\/[0-9A-F]{2}$/)?.[1]; return value ? `${value.slice(0, 4)}-${value.slice(4, 6)}-${value.slice(6, 8)}` : null; }
-function canonicalHorseId(raw) { return raw ? `10${raw.slice(2)}` : null; }
+function canonicalHorseId(raw) { return raw || null; }
 function cell(row, className) { return row.match(new RegExp(`<td[^>]*class="[^"]*\\b${className}\\b[^"]*"[^>]*>([\\s\\S]*?)<\\/td>`, "i"))?.[1] ?? ""; }
 function stripHtml(value) { return String(value ?? "").replace(/<[^>]+>/g, " ").replace(/&nbsp;|&#160;/gi, " ").replace(/\s+/g, " ").trim(); }
 function numberOrNull(value) { const number = Number(String(value ?? "").match(/\d+(?:\.\d+)?/)?.[0]); return Number.isFinite(number) ? number : null; }

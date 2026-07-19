@@ -1,8 +1,9 @@
 const historicalMeetingData = window.KEIBA_REFERENCE_MEETINGS ?? window.KEIBA_MEETINGS ?? { meetings: [] };
 const liveRacecardData = window.KEIBA_LIVE_RACECARDS ?? { meetings: [], results: [] };
-const meetingData = { ...historicalMeetingData, meetings: [...(historicalMeetingData.meetings ?? []), ...(liveRacecardData.meetings ?? [])] };
+const hasCurrentWeek = (liveRacecardData.meetings ?? []).length > 0;
+const meetingData = hasCurrentWeek ? liveRacecardData : historicalMeetingData;
 const historicalResultData = window.KEIBA_RESULTS ?? { results: [] };
-const resultData = { ...historicalResultData, results: [...(historicalResultData.results ?? []), ...(liveRacecardData.results ?? [])] };
+const resultData = hasCurrentWeek ? liveRacecardData : historicalResultData;
 const historicalModelData = window.KEIBA_MODEL_OUTPUTS ?? { status: "blocked", candidates: [], predictions: [] };
 const liveModelData = window.KEIBA_LIVE_MODEL_OUTPUTS ?? { status: "waiting", candidates: [], predictions: [] };
 const modelData = {
