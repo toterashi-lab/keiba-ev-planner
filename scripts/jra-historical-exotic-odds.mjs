@@ -218,8 +218,16 @@ function recoverInterrupted() {
 
 async function withLock(task) {
   let handle;
-  try { handle = fs.openSync(RUN_LOCK, "wx"); fs.writeFileSync(handle, JSON.stringify({ pid: process.pid, startedAt: new Date().toISOString() })); return await task(); }
-  finally { if (handle !== undefined) fs.closeSync(handle); fs.rmSync(RUN_LOCK, { force: true }); }
+  let acquired = false;
+  try {
+    handle = fs.openSync(RUN_LOCK, "wx");
+    acquired = true;
+    fs.writeFileSync(handle, JSON.stringify({ pid: process.pid, startedAt: new Date().toISOString() }));
+    return await task();
+  } finally {
+    if (handle !== undefined) fs.closeSync(handle);
+    if (acquired) fs.rmSync(RUN_LOCK, { force: true });
+  }
 }
 
 function readRaw(relative) { return zlib.gunzipSync(fs.readFileSync(path.join(PRIVATE_DIR, relative))).toString("utf8"); }

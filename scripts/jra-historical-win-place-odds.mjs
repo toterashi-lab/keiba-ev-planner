@@ -308,13 +308,15 @@ function recoverInterrupted() {
 
 async function withLock(lockPath, task) {
   let handle;
+  let acquired = false;
   try {
     handle = fs.openSync(lockPath, "wx");
+    acquired = true;
     fs.writeFileSync(handle, JSON.stringify({ pid: process.pid, startedAt: new Date().toISOString() }));
     return await task();
   } finally {
     if (handle !== undefined) fs.closeSync(handle);
-    fs.rmSync(lockPath, { force: true });
+    if (acquired) fs.rmSync(lockPath, { force: true });
   }
 }
 

@@ -2,7 +2,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { evaluate, evaluateTicketProbabilities, FEATURE_KEYS, fitModel, fitTemperature, fitTicketCalibrationTemperatures, loadTrainingRaces, MODEL_FEATURE_GROUPS, predictRace, runFeatureAblation } from "./train-expectancy-model.mjs";
+import { evaluate, evaluateHistoricalMarketCalibration, evaluateTicketProbabilities, FEATURE_KEYS, fitHistoricalMarketCalibration, fitModel, fitTemperature, fitTicketCalibrationTemperatures, loadHistoricalWinOdds, loadTrainingRaces, MODEL_FEATURE_GROUPS, predictRace, runFeatureAblation } from "./train-expectancy-model.mjs";
 import { captureModelImplementationSnapshot } from "./model-data-snapshot.mjs";
 import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
@@ -30,6 +30,7 @@ db.exec("PRAGMA busy_timeout=30000; begin;");
 try {
   const coverage = db.prepare("select min(race_date) minDate,max(race_date) maxDate,count(*) races from complete_races").get();
   const { races, predictionRaces, featureTiming } = loadTrainingRaces(db, { from: coverage.minDate, to: TARGET_DATES.at(-1), includePredictionRows: true });
+  const historicalWinOdds = loadHistoricalWinOdds(db);
   const train = races.filter((race) => race.date <= TRAIN_END);
   const calibration = races.filter((race) => race.date >= CALIBRATION_START && race.date <= CALIBRATION_END);
   const targetEvaluation = races.filter((race) => TARGET_DATES.includes(race.date));
@@ -49,6 +50,9 @@ try {
   const ticketCalibrationMetrics = evaluateTicketProbabilities(model, calibration, temperature, ticketCalibrationTemperatures);
   const targetMetrics = evaluate(model, targetEvaluation, temperature);
   const targetTicketMetrics = evaluateTicketProbabilities(model, targetEvaluation, temperature, ticketCalibrationTemperatures);
+  const historicalMarketCalibration = fitHistoricalMarketCalibration(model, calibration, temperature, historicalWinOdds);
+  const historicalMarketTargetAudit = evaluateHistoricalMarketCalibration(model, targetEvaluation, temperature,
+    historicalWinOdds, historicalMarketCalibration);
   const calibrationPass = calibrationMetrics.logLoss < calibrationMetrics.uniformLogLoss
     && calibrationMetrics.ece <= 0.025 && calibrationMetrics.maxCalibrationBinError <= 0.075
     && Object.values(ticketCalibrationMetrics.byType).every((metric) => metric.researchPass);
@@ -75,7 +79,7 @@ try {
     }))]));
   const versionHash = crypto.createHash("sha256").update(JSON.stringify({
     activeFeatureIndexes, featureKeys: FEATURE_KEYS, trainEnd: TRAIN_END, calibrationEnd: CALIBRATION_END, temperature,
-    ticketCalibrationTemperatures, calibrationMetrics, predictions,
+    ticketCalibrationTemperatures, calibrationMetrics, historicalMarketCalibration, predictions,
   })).digest("hex").slice(0, 12);
   const artifact = {
     status: "pass",
@@ -100,12 +104,14 @@ try {
     weights: model.weights,
     temperature,
     ticketCalibrationTemperatures,
+    historicalMarketCalibration,
     calibrationMetrics,
     ticketProbabilityStatus: "research_pass",
     ticketCalibrationPolicy: "calibration-only-one-standard-error-most-regularized-temperature",
     ticketCalibrationErrors,
     ticketCalibrationUncertainty,
-    targetAudit: { evaluationOnlyAfterPrediction: true, metrics: targetMetrics, ticketMetrics: targetTicketMetrics },
+    targetAudit: { evaluationOnlyAfterPrediction: true, metrics: targetMetrics, ticketMetrics: targetTicketMetrics,
+      historicalMarket: historicalMarketTargetAudit },
     noTargetLeakage: true,
     featureTimePolicy: featureTiming,
     predictions,

@@ -1,4 +1,10 @@
 import { parseExoticOdds } from "./jra-free-exotic-odds.mjs";
+import fs from "node:fs";
+
+const collectorSource = fs.readFileSync("scripts/jra-historical-exotic-odds.mjs", "utf8");
+for (const token of ["let acquired = false", "if (acquired) fs.rmSync(RUN_LOCK"]) {
+  if (!collectorSource.includes(token)) throw new Error(`exotic odds lock safety missing: ${token}`);
+}
 
 const pair = parseExoticOdds(`<table class="basic narrow-xy umaren"><caption>1</caption><tbody><tr><th scope="row">2</th><td>3.4</td></tr></tbody></table>`, "pw154ou-test");
 check("馬連", pair.prices[0], { selectionKey: "1-2", oddsLow: 3.4, oddsHigh: 3.4 });

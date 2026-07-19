@@ -79,6 +79,7 @@ try {
   }
 
   const { rows, races, featureTiming } = loadTrainingRaces(db, { from: coverage.minDate, to: coverage.maxDate });
+  const historicalWinOdds = loadHistoricalWinOdds(db);
   const foldSpecs = buildFoldSpecs(coverage.minDate, coverage.maxDate);
   const folds = [];
   let lastValidationModel;
@@ -94,15 +95,22 @@ try {
     const metrics = evaluate(model, test, temperature);
     const ticketCalibrationTemperatures = fitTicketCalibrationTemperatures(model, calibration, temperature);
     const ticketMetrics = evaluateTicketProbabilities(model, test, temperature, ticketCalibrationTemperatures);
+    const marketCalibration = fitHistoricalMarketCalibration(model, calibration, temperature, historicalWinOdds);
+    const marketMetrics = evaluateHistoricalMarketCalibration(model, test, temperature, historicalWinOdds, marketCalibration);
     folds.push({ ...spec, trainRaces: train.length, calibrationRaces: calibration.length, testRaces: test.length,
       temperature, selectedFeatureGroups: ablation.selectedGroups, selectedFeatureIndexes: ablation.selectedFeatureIndexes,
       featureSelectionFallback: ablation.fallback, featureAblation: ablation.groups, metrics,
-      ticketCalibrationTemperatures, ticketMetrics });
+      ticketCalibrationTemperatures, ticketMetrics, marketCalibration, marketMetrics });
     lastValidationModel = { ...model, temperature, test, spec };
   }
   if (!lastValidationModel || folds.length < 2) throw new Error(`有効なwalk-forward foldが不足しています: ${folds.length}`);
 
   const aggregate = aggregateMetrics(folds);
+  const historicalMarket = aggregateHistoricalMarketMetrics(folds);
+  const historicalMarketPass = historicalMarket.coverageRatio >= 0.995
+    && historicalMarket.adjustedMarket.logLoss < historicalMarket.rawMarket.logLoss
+    && historicalMarket.pooled.logLoss <= historicalMarket.rawMarket.logLoss
+    && historicalMarket.marketWeight.foldStddev <= 0.15;
   const ticketMetrics = aggregateTicketMetrics(folds);
   const ticketCalibrationUncertainty = buildTicketCalibrationUncertainty(ticketMetrics);
   const ticketResearchPass = Object.values(ticketMetrics.byType).every((metric) => metric.researchPass);
@@ -144,11 +152,13 @@ try {
     ticketCalibrationPolicy: "calibration-only-one-standard-error-most-regularized-temperature",
     ticketMetrics,
     ticketCalibrationUncertainty,
+    historicalMarket,
+    historicalMarketStatus: historicalMarketPass ? "research_pass" : "fail",
     noTargetLeakage: true,
     featureTimePolicy: featureTiming,
     sourceTimingVerified: false,
     deploymentStatus: "benchmark_only",
-    deploymentReasons: ["historical_source_timing_not_verified", "historical_pre_race_odds_coverage_insufficient", "roi_gate_not_passed"],
+    deploymentReasons: ["historical_source_timing_not_verified", "live_roi_confidence_gate_not_passed"],
   };
   db.exec("commit");
   transactionOpen = false;
@@ -537,6 +547,134 @@ export function predictRace(model, race, temperature = model.temperature ?? 1) {
   return softmax(race.rows.map((row) => dot(model.weights, standardizedVector(row, model.means, model.scales)) / temperature));
 }
 
+export function loadHistoricalWinOdds(database) {
+  return new Map(database.prepare(`select e.race_id,e.horse_id,o.win_odds
+    from historical_win_place_odds o join complete_race_entries e
+      on e.race_id=o.race_id and e.horse_number=o.horse_number
+    where o.win_odds is not null and o.win_odds>=1`).all()
+    .map((row) => [`${row.race_id}|${row.horse_id}`, row.win_odds]));
+}
+
+export function fitHistoricalMarketCalibration(model, races, abilityTemperature, oddsByRunner) {
+  const covered = marketCoveredRaces(model, races, abilityTemperature, oddsByRunner);
+  if (!covered.length) throw new Error("Historical market calibration has no fully priced races");
+  let marketTemperature = 1;
+  let bestMarketLoss = Infinity;
+  for (let value = 0.5; value <= 2.5 + 1e-9; value += 0.05) {
+    const loss = mean(covered.map((race) => -Math.log(Math.max(1e-12,
+      calibrateMarket(race.rawMarket, value)[race.winnerIndex]))));
+    if (loss < bestMarketLoss) { bestMarketLoss = loss; marketTemperature = value; }
+  }
+  marketTemperature = round(marketTemperature, 4);
+  let marketWeight = 1;
+  let bestPooledLoss = Infinity;
+  for (let value = 0; value <= 1 + 1e-9; value += 0.05) {
+    const loss = mean(covered.map((race) => {
+      const market = calibrateMarket(race.rawMarket, marketTemperature);
+      const pooled = logPoolProbabilities(race.ability, market, value);
+      return -Math.log(Math.max(1e-12, pooled[race.winnerIndex]));
+    }));
+    if (loss < bestPooledLoss) { bestPooledLoss = loss; marketWeight = value; }
+  }
+  return { method: "calibration-period-only-market-temperature-and-log-pool-v1",
+    races: covered.length, marketTemperature, marketWeight: round(marketWeight, 4),
+    calibrationLogLoss: { adjustedMarket: bestMarketLoss, pooled: bestPooledLoss } };
+}
+
+export function evaluateHistoricalMarketCalibration(model, races, abilityTemperature, oddsByRunner, calibration) {
+  const covered = marketCoveredRaces(model, races, abilityTemperature, oddsByRunner);
+  if (!covered.length) throw new Error("Historical market evaluation has no fully priced races");
+  const evaluated = covered.map((race) => {
+    const adjustedMarket = calibrateMarket(race.rawMarket, calibration.marketTemperature);
+    const pooled = logPoolProbabilities(race.ability, adjustedMarket, calibration.marketWeight);
+    return { ...race, adjustedMarket, pooled };
+  });
+  return {
+    races: evaluated.length,
+    requestedRaces: races.length,
+    coverageRatio: evaluated.length / races.length,
+    rawMarket: probabilityMetrics(evaluated, (race) => race.rawMarket),
+    adjustedMarket: probabilityMetrics(evaluated, (race) => race.adjustedMarket),
+    ability: probabilityMetrics(evaluated, (race) => race.ability),
+    pooled: probabilityMetrics(evaluated, (race) => race.pooled),
+  };
+}
+
+export function aggregateHistoricalMarketMetrics(folds) {
+  const values = folds.map((fold) => fold.marketMetrics);
+  const temperatures = folds.map((fold) => fold.marketCalibration.marketTemperature);
+  const weights = folds.map((fold) => fold.marketCalibration.marketWeight);
+  const aggregate = (key) => Object.fromEntries(["logLoss", "brier", "ece", "maxCalibrationBinError"]
+    .map((metric) => [metric, mean(values.map((value) => value[key][metric]))]));
+  return {
+    method: "expanding-window-closing-market-calibration-v1",
+    folds: folds.length,
+    races: values.reduce((sum, value) => sum + value.races, 0),
+    requestedRaces: values.reduce((sum, value) => sum + value.requestedRaces, 0),
+    coverageRatio: mean(values.map((value) => value.coverageRatio)),
+    marketTemperature: { median: median(temperatures), foldStddev: standardDeviation(temperatures), values: temperatures },
+    marketWeight: { median: median(weights), foldStddev: standardDeviation(weights), values: weights },
+    rawMarket: aggregate("rawMarket"), adjustedMarket: aggregate("adjustedMarket"),
+    ability: aggregate("ability"), pooled: aggregate("pooled"),
+  };
+}
+
+function marketCoveredRaces(model, races, abilityTemperature, oddsByRunner) {
+  return races.flatMap((race) => {
+    const odds = race.rows.map((row) => Number(oddsByRunner.get(`${race.id}|${row.horseId}`)));
+    if (odds.some((value) => !Number.isFinite(value) || value < 1)) return [];
+    const inverse = odds.map((value) => 1 / value);
+    const total = inverse.reduce((sum, value) => sum + value, 0);
+    return [{ winnerIndex: race.winnerIndex, ability: predictRace(model, race, abilityTemperature),
+      rawMarket: inverse.map((value) => value / total) }];
+  });
+}
+
+function calibrateMarket(probabilities, temperature) {
+  const exponent = 1 / temperature;
+  const powered = probabilities.map((value) => Math.pow(Math.max(1e-15, value), exponent));
+  const total = powered.reduce((sum, value) => sum + value, 0);
+  return powered.map((value) => value / total);
+}
+
+function logPoolProbabilities(ability, market, marketWeight) {
+  const pooled = ability.map((value, index) => Math.pow(Math.max(1e-15, value), 1 - marketWeight)
+    * Math.pow(Math.max(1e-15, market[index]), marketWeight));
+  const total = pooled.reduce((sum, value) => sum + value, 0);
+  return pooled.map((value) => value / total);
+}
+
+function probabilityMetrics(races, select) {
+  let logLoss = 0;
+  let brier = 0;
+  const rows = [];
+  for (const race of races) {
+    const probabilities = select(race);
+    logLoss -= Math.log(Math.max(1e-12, probabilities[race.winnerIndex]));
+    for (let index = 0; index < probabilities.length; index += 1) {
+      const target = index === race.winnerIndex ? 1 : 0;
+      brier += (probabilities[index] - target) ** 2 / probabilities.length;
+      rows.push({ probability: probabilities[index], target });
+    }
+  }
+  rows.sort((left, right) => left.probability - right.probability);
+  const bins = Array.from({ length: 10 }, (_, index) => {
+    const values = rows.slice(Math.floor(index * rows.length / 10), Math.floor((index + 1) * rows.length / 10));
+    if (!values.length) return null;
+    const predicted = mean(values.map((row) => row.probability));
+    const observed = mean(values.map((row) => row.target));
+    return { count: values.length, error: Math.abs(predicted - observed) };
+  }).filter(Boolean);
+  return { logLoss: logLoss / races.length, brier: brier / races.length,
+    ece: bins.reduce((sum, bin) => sum + bin.count * bin.error, 0) / rows.length,
+    maxCalibrationBinError: Math.max(...bins.map((bin) => bin.error)) };
+}
+
+function standardDeviation(values) {
+  const average = mean(values);
+  return Math.sqrt(mean(values.map((value) => (value - average) ** 2)));
+}
+
 function persistRun(database, artifact, finalModel) {
   const now = artifact.generatedAt;
   database.exec("begin immediate");
@@ -558,12 +696,20 @@ function persistRun(database, artifact, finalModel) {
       artifact.featureTimePolicy.coverage, 1, JSON.stringify(artifact.featureTimePolicy), now);
     gate.run(run.id, "feature_observation_time_coverage", "insufficient", 0, 0.995, JSON.stringify({ reason: "historical result pages do not prove pre-race observation timestamps" }), now);
     gate.run(run.id, "prediction_probability_sum_error", artifact.metrics.maxProbabilitySumError <= 1e-6 ? "pass" : "fail", artifact.metrics.maxProbabilitySumError, 1e-6, JSON.stringify({ folds: artifact.folds.length }), now);
-    gate.run(run.id, "log_loss_vs_market_delta", "insufficient", null, 0, JSON.stringify({ reason: "historical full-field closing win odds coverage is insufficient" }), now);
-    gate.run(run.id, "brier_score_vs_market_delta", "insufficient", null, 0, JSON.stringify({ reason: "historical full-field closing win odds coverage is insufficient" }), now);
+    const market = artifact.historicalMarket;
+    const logLossDelta = market.ability.logLoss - market.rawMarket.logLoss;
+    const brierDelta = market.ability.brier - market.rawMarket.brier;
+    gate.run(run.id, "log_loss_vs_market_delta", logLossDelta < 0 ? "pass" : "fail", logLossDelta, 0,
+      JSON.stringify({ ability: market.ability.logLoss, market: market.rawMarket.logLoss, races: market.races }), now);
+    gate.run(run.id, "brier_score_vs_market_delta", brierDelta < 0 ? "pass" : "fail", brierDelta, 0,
+      JSON.stringify({ ability: market.ability.brier, market: market.rawMarket.brier, races: market.races }), now);
     gate.run(run.id, "expected_calibration_error", artifact.metrics.meanEce <= 0.025 ? "pass" : "fail", artifact.metrics.meanEce, 0.025, JSON.stringify({ folds: artifact.folds.length }), now);
     gate.run(run.id, "max_calibration_bin_error", artifact.metrics.meanMaxCalibrationBinError <= 0.075 ? "pass" : "fail", artifact.metrics.meanMaxCalibrationBinError, 0.075, JSON.stringify({ folds: artifact.folds.length }), now);
-    gate.run(run.id, "favorite_longshot_adjustment_oos_delta", "insufficient", null, 0, JSON.stringify({ reason: "historical market odds coverage is insufficient" }), now);
-    gate.run(run.id, "stacking_weight_fold_stddev", "insufficient", null, 0.15, JSON.stringify({ reason: "market stacking cannot be fitted without historical odds" }), now);
+    const favoriteLongshotDelta = market.adjustedMarket.logLoss - market.rawMarket.logLoss;
+    gate.run(run.id, "favorite_longshot_adjustment_oos_delta", favoriteLongshotDelta < 0 ? "pass" : "fail",
+      favoriteLongshotDelta, 0, JSON.stringify(market.marketTemperature), now);
+    gate.run(run.id, "stacking_weight_fold_stddev", market.marketWeight.foldStddev <= 0.15 ? "pass" : "fail",
+      market.marketWeight.foldStddev, 0.15, JSON.stringify(market.marketWeight), now);
     gate.run(run.id, "calibration", artifact.metrics.meanEce <= 0.025 ? "pass" : "fail", artifact.metrics.meanEce, 0.025, JSON.stringify({ folds: artifact.folds.length }), now);
     gate.run(run.id, "walk_forward", researchStatus, artifact.metrics.meanLogLoss - artifact.metrics.meanUniformLogLoss, 0, JSON.stringify({ folds: artifact.folds.length, baseline: "uniform-within-race" }), now);
     for (const type of FINISH_ORDER_TYPES) {
@@ -572,7 +718,8 @@ function persistRun(database, artifact, finalModel) {
         metric.meanWinnerLogLoss - metric.meanUniformWinnerLogLoss, 0,
         JSON.stringify({ ...metric, temperature: artifact.ticketCalibrationTemperatures[type] }), now);
     }
-    gate.run(run.id, "odds_coverage", "insufficient", 0, 0.995, JSON.stringify({ reason: "30年無料結果データに全買い目の締切前オッズ履歴なし" }), now);
+    gate.run(run.id, "odds_coverage", market.coverageRatio >= 0.995 ? "pass" : "fail",
+      market.coverageRatio, 0.995, JSON.stringify({ races: market.races, requestedRaces: market.requestedRaces }), now);
     gate.run(run.id, "odds_freshness", "insufficient", null, 300, JSON.stringify({ reason: "今後の締切前スナップショットを日次蓄積中" }), now);
     gate.run(run.id, "drawdown", "insufficient", null, -0.25, JSON.stringify({ reason: "ROI検証対象オッズが未充足" }), now);
     gate.run(run.id, "pre_race_odds_coverage", "insufficient", 0, 0.995, JSON.stringify({ reason: "future snapshots are accumulating daily" }), now);

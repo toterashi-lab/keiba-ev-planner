@@ -1,4 +1,4 @@
-import { aggregateTicketMetrics, buildTicketCalibrationUncertainty, evaluate, evaluateTicketProbabilities, FEATURE_KEYS, fitModel, fitTemperature, fitTicketCalibrationTemperatures, runFeatureAblation } from "./train-expectancy-model.mjs";
+import { aggregateHistoricalMarketMetrics, aggregateTicketMetrics, buildTicketCalibrationUncertainty, evaluate, evaluateHistoricalMarketCalibration, evaluateTicketProbabilities, FEATURE_KEYS, fitHistoricalMarketCalibration, fitModel, fitTemperature, fitTicketCalibrationTemperatures, runFeatureAblation } from "./train-expectancy-model.mjs";
 
 const races = Array.from({ length: 240 }, (_, raceIndex) => {
   const winnerIndex = raceIndex % 4;
@@ -12,7 +12,7 @@ const races = Array.from({ length: 240 }, (_, raceIndex) => {
       values[FEATURE_KEYS.indexOf("priorPlaceRate")] = runnerIndex === winnerIndex ? 0.9 : 0.2;
       values[FEATURE_KEYS.indexOf("fieldRelativePriorWinRate")] = runnerIndex === winnerIndex ? 0.7 : -0.2;
       const finishOrder = [winnerIndex, ...[0, 1, 2, 3].filter((index) => index !== winnerIndex)];
-      return { featureValues: values, target: { finishPosition: finishOrder.indexOf(runnerIndex) + 1 } };
+      return { horseId: `horse-${raceIndex}-${runnerIndex}`, featureValues: values, target: { finishPosition: finishOrder.indexOf(runnerIndex) + 1 } };
     }),
   };
 });
@@ -30,6 +30,19 @@ const temperature = fitTemperature(model, calibration);
 const metrics = evaluate(model, test, temperature);
 const ticketCalibrationTemperatures = fitTicketCalibrationTemperatures(model, calibration, temperature);
 const ticketMetrics = evaluateTicketProbabilities(model, test, temperature, ticketCalibrationTemperatures);
+const historicalOdds = new Map(races.flatMap((race) => race.rows.map((row, index) => [
+  `${race.id}|${row.horseId}`, index === race.winnerIndex ? 2.2 : 7 + index,
+])));
+const marketCalibration = fitHistoricalMarketCalibration(model, calibration, temperature, historicalOdds);
+const marketMetrics = evaluateHistoricalMarketCalibration(model, test, temperature, historicalOdds, marketCalibration);
+const aggregateMarket = aggregateHistoricalMarketMetrics([
+  { marketCalibration, marketMetrics }, { marketCalibration, marketMetrics },
+]);
+if (marketMetrics.coverageRatio !== 1 || !Number.isFinite(aggregateMarket.pooled.logLoss)
+  || marketCalibration.marketTemperature < 0.5 || marketCalibration.marketTemperature > 2.5
+  || marketCalibration.marketWeight < 0 || marketCalibration.marketWeight > 1) {
+  throw new Error(`Historical market calibration failed: ${JSON.stringify({ marketCalibration, marketMetrics })}`);
+}
 if (!(metrics.logLoss < metrics.uniformLogLoss)) throw new Error(`一様予測を改善できません: ${JSON.stringify(metrics)}`);
 if (metrics.maxProbabilitySumError > 1e-12) throw new Error(`確率合計が1ではありません: ${metrics.maxProbabilitySumError}`);
 if (metrics.ece > 0.025) throw new Error(`校正誤差が閾値を超えています: ${metrics.ece}`);
@@ -52,4 +65,7 @@ console.log(JSON.stringify({ status: "pass", temperature, selectedGroups: ablati
   logLoss: metrics.logLoss, uniformLogLoss: metrics.uniformLogLoss, brier: metrics.brier,
   ece: metrics.ece, maxCalibrationBinError: metrics.maxCalibrationBinError,
   maxProbabilitySumError: metrics.maxProbabilitySumError, calibrationMethod: metrics.calibrationMethod,
-}, ticketTypes: Object.keys(ticketMetrics.byType).length, ticketCalibrationTemperatures, wilsonUncertainty: "pass" }, null, 2));
+}, ticketTypes: Object.keys(ticketMetrics.byType).length, ticketCalibrationTemperatures,
+historicalMarket: { coverageRatio: marketMetrics.coverageRatio, marketTemperature: marketCalibration.marketTemperature,
+  marketWeight: marketCalibration.marketWeight, pooledLogLoss: aggregateMarket.pooled.logLoss },
+wilsonUncertainty: "pass" }, null, 2));
