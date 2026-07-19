@@ -281,7 +281,7 @@ function renderPerformance() {
   }).join("") + `<article class="performance-card blocked">
     <header><strong>新・選別運用</strong><span>市場ガードレール</span></header>
     <div class="performance-primary"><span>現在の状態</span><strong>全レース見送り</strong><small>能力モデルをEVから除外</small></div>
-    <p>市場より確率性能が悪いモデルでは買いません。予想印だけを研究表示し、資金を減らす強制購入を停止します。</p>
+    <p>市場より確率性能が悪いモデルは推奨買い目に使いません。予想印と研究結果を分離して表示します。</p>
   </article>`;
 
   const selected = reports[state.benchmark] ?? reports.ai_all;
@@ -498,7 +498,7 @@ function renderVenueRanking() {
     const rank = row.expectedReturn === null ? "--" : `${ranked.indexOf(row) + 1}位`;
     const edge = row.expectedReturn === null ? null : row.expectedReturn - 1;
     const purchaseEligible = row.top && isPurchaseEligible(row.top) && edge >= 0.08;
-    const status = row.expectedReturn === null ? "データ待ち" : purchaseEligible ? "購入候補" : edge >= 0.08 ? "研究上位・購入不可" : "見送り";
+    const status = row.expectedReturn === null ? "データ待ち" : purchaseEligible ? "推奨候補" : edge >= 0.08 ? "研究上位・基準未達" : "見送り";
     return `<button type="button" class="${row.race.no === state.raceNo ? "active" : ""} ${row.expectedReturn === null ? "blocked" : ""}" data-ranking-race="${row.race.no}">
       <span class="ranking-place">${rank}</span><strong>${row.race.no}R ${escapeHtml(row.race.name)}</strong>
       <small>${row.prediction?.marks?.[0] ? `◎ ${escapeHtml(row.prediction.marks[0].horseName)}・${percent(row.expectedReturn)}` : status}</small>
@@ -569,7 +569,7 @@ function renderSelectionRanking(track) {
       <td>${escapeHtml(optimizationScenarioText(row.candidate))}</td>
       <td class="selection-cell">${escapeHtml(row.candidate.selection)}</td><td>${number(row.candidate.points ?? 1)}</td><td>${yen((row.candidate.points ?? 1) * ticketEngine.UNIT_STAKE)}</td>
       <td><strong>${percent(row.expectedReturn)}</strong></td><td class="${edge >= 0 ? "positive" : "negative"}">${signedPercent(edge)}</td>
-      <td><span class="quality ${edge > 0 ? "complete" : "missing"}">${isPurchaseEligible(row.candidate) && edge >= 0.08 ? "購入候補" : edge > 0 ? "研究上位" : "見送り"}</span></td>
+      <td><span class="quality ${edge > 0 ? "complete" : "missing"}">${isPurchaseEligible(row.candidate) && edge >= 0.08 ? "推奨候補" : edge > 0 ? "研究上位" : "見送り"}</span></td>
     </tr>`;
   }).join("") : `<tr><td colspan="11" class="empty-row">該当する計算済み買い目がありません</td></tr>`;
   els.selectionRankingBody.querySelectorAll("button[data-selection-race]").forEach((button) => {
@@ -649,8 +649,8 @@ function renderTopRecommendation() {
   els.topRecommendation.classList.toggle("blocked", !top);
   els.topRecommendation.classList.toggle("available", Boolean(top));
   const retrospective = top?.calculationMode === "closing_market_validation";
-  els.topRecommendationStatus.textContent = marketGuardrail ? "参考買い目・購入は見送り" : !top ? "計算準備中" : retrospective ? "検証計算済み"
-    : modelData.logic?.deploymentStatus === "benchmark_only" ? "研究検証中・購入対象外" : passes ? "購入候補" : "基準未達・見送り";
+  els.topRecommendationStatus.textContent = marketGuardrail ? "参考買い目・推奨は見送り" : !top ? "計算準備中" : retrospective ? "検証計算済み"
+    : modelData.logic?.deploymentStatus === "benchmark_only" ? "研究検証中・参考予想" : passes ? "推奨候補" : "基準未達・見送り";
   els.topRecommendationStatus.className = `decision ${!top ? "reject" : passes ? "buy" : "hold"}`;
   els.topTicketLabel.textContent = top ? `${top.betType}・${top.method ?? "1点"}` : "推奨買い目なし";
   els.topTicketSelection.textContent = top?.selection ?? "見送り";
@@ -668,9 +668,9 @@ function renderTopRecommendation() {
   renderRacePurchaseResult();
   renderBetTypeRecommendations(candidates);
   els.topRecommendationComment.textContent = marketGuardrail
-    ? `このレースの参考買い目1位です。購入基準は未達のため、推奨判断は見送りです。`
+    ? `このレースの参考買い目1位です。予想採用基準は未達のため、推奨判断は見送りです。`
     : top
-    ? top.comment ?? `${top.betType}${top.method ? ` ${top.method}` : ""}の構成点を合算し、安全側期待回収率${percent(expectedReturn)}。${passes ? "採用閾値8%を通過しました。" : "採用閾値8%を下回るため購入しません。"}`
+    ? top.comment ?? `${top.betType}${top.method ? ` ${top.method}` : ""}の構成点を合算し、安全側期待回収率${percent(expectedReturn)}。${passes ? "採用閾値8%を通過しました。" : "採用閾値8%を下回るため推奨しません。"}`
     : "単勝・複勝は締切後オッズのみのため事前推奨に不使用。馬連・ワイド・馬単・3連複・3連単は全組み合わせオッズ未取得、30年モデルは校正前です。結果・払戻は順位付けに使用しません。";
 
   const coverage = modelData.oddsCoverage ?? {};
@@ -761,7 +761,7 @@ function renderBetTypeRecommendations(candidates) {
     const adopted = candidateExpectedReturn(candidate);
     const edge = adopted - 1;
     const eligible = isPurchaseEligible(candidate) && edge >= 0.08;
-    const judgement = eligible ? "購入候補" : edge > 0 ? "参考・検証中" : "見送り";
+    const judgement = eligible ? "推奨候補" : edge > 0 ? "参考・検証中" : "見送り";
     return `<tr>
       <td><strong>${betType}</strong></td>
       <td>${escapeHtml(candidate.method ?? "1点")}</td>
@@ -860,7 +860,7 @@ function renderStrategies() {
     ? `${logic.abilityModelStatus === "research_pass" ? "30年能力モデルEV（研究）" : "期待値v2 市場基準検証"} ${modelData.modelVersion ?? ""}` : "期待値モデル準備中";
   els.logicVersion.textContent = logic.engineVersion ?? "未設定";
   els.logicProbabilityMode.textContent = logic.probabilityMode === "market_baseline" ? "市場確率へ自動縮退" : "検証済み統合確率";
-  els.logicDeploymentStatus.textContent = logic.deploymentStatus === "benchmark_only" ? "検証専用・購入対象外" : "検証ゲート合格";
+  els.logicDeploymentStatus.textContent = logic.deploymentStatus === "benchmark_only" ? "検証専用・参考予想" : "予想採用基準合格";
   if (!candidates.length) { renderBlockedAutomaticState(); return; }
 
   const top = candidates[0];
@@ -876,7 +876,7 @@ function renderStrategies() {
   els.edgeValue.className = edge >= 0 ? "positive" : "negative";
   els.unitExpectedProfit.textContent = signedYen(Math.round(expectedProfit));
   els.unitExpectedProfit.className = expectedProfit >= 0 ? "positive" : "negative";
-  els.edgeBadge.textContent = passes ? "安全側EV基準通過" : logic.deploymentStatus === "benchmark_only" ? "研究検証中・購入対象外" : "最上位も基準未達";
+  els.edgeBadge.textContent = passes ? "安全側EV基準通過" : logic.deploymentStatus === "benchmark_only" ? "研究検証中・参考予想" : "最上位も基準未達";
   els.edgeBadge.className = `decision ${passes ? "buy" : "reject"}`;
   els.strategyGrid.innerHTML = candidates.slice(0, 8).map((candidate, index) => automaticCandidateCard(candidate, index + 1)).join("");
   renderAutomaticRationale(top, candidates.length);
@@ -895,14 +895,14 @@ function renderBlockedAutomaticState() {
   els.edgeBadge.textContent = "計算準備中";
   els.edgeBadge.className = "decision reject";
   els.strategyGrid.innerHTML = `<article class="strategy-card blocked"><header><strong>計算準備中</strong><span>入力操作なし</span></header>
-    <dl><div><dt>購入単位</dt><dd>1点100円固定</dd></div><div><dt>比較対象</dt><dd>全券種・全買い目</dd></div><div><dt>BOX・フォーメーション</dt><dd>構成点へ自動展開</dd></div></dl>
+    <dl><div><dt>検証単位</dt><dd>1点100円固定</dd></div><div><dt>比較対象</dt><dd>全券種・全買い目</dd></div><div><dt>BOX・フォーメーション</dt><dd>構成点へ自動展開</dd></div></dl>
     <footer class="reject">必要データ未取得のため全候補を停止</footer></article>`;
   els.rationaleList.innerHTML = [
     ["取得品質", "先週72レースの結果検査は合格。予測用30年データは蓄積中です。"],
     ["オッズ", "先週の締切後オッズは取得済みですが、予測時点のオッズではないため自動EVには使いません。"],
     ["モデル確率", "時系列検証と確率校正が未完了のため、勝率を推測で補完しません。"],
     ["100円固定", "各構成点100円、総投資は点数×100円で自動計算します。資金額や配分率の入力は使用しません。"],
-    ["結論", "欠損を成功扱いせず、推奨・買い目・購入候補をすべて停止しています。入力による代替計算は行いません。"],
+    ["結論", "欠損を成功扱いせず、予想印・期待値・推奨買い目をすべて保留しています。入力による代替計算は行いません。"],
   ].map(([title, body]) => `<li class="blocked"><strong>${title}</strong><br>${body}</li>`).join("");
 }
 
@@ -919,7 +919,7 @@ function renderAutomaticRationale(candidate, candidateCount) {
     ["時点整合", `オッズ観測時刻${escapeHtml(candidate.oddsObservedAt)}以前の特徴量だけで計算し、結果と払戻は使用しません。`],
     ["判定", isPurchaseEligible(candidate) && edge >= 0.08
       ? `安全側期待回収率${percent(expectedReturn)}でEV差8%以上と外部検証を通過しました。`
-      : edge >= 0.08 ? `安全側期待回収率${percent(expectedReturn)}ですが、外部ROI検証不合格のため購入対象外です。`
+      : edge >= 0.08 ? `安全側期待回収率${percent(expectedReturn)}ですが、外部ROI検証不合格のため参考予想です。`
         : `最上位でも安全側期待回収率${percent(expectedReturn)}のため見送ります。`],
   ];
   els.rationaleList.innerHTML = comments.map(([title, body]) => `<li><strong>${title}</strong><br>${body}</li>`).join("");
@@ -932,7 +932,7 @@ function automaticCandidateCard(candidate, rank) {
   const investment = points * ticketEngine.UNIT_STAKE;
   return `<article class="strategy-card"><header><strong>${rank}位 ${escapeHtml(candidate.betType)}・${escapeHtml(candidate.method ?? "1点")}</strong><span>${points}点</span></header>
     <dl><div><dt>買い目</dt><dd>${escapeHtml(candidate.selection)}</dd></div><div><dt>探索根拠</dt><dd>${escapeHtml(optimizationScenarioText(candidate))}</dd></div><div><dt>総投資</dt><dd>${yen(investment)}</dd></div><div><dt>期待回収率</dt><dd>${percent(expectedReturn)}</dd></div><div><dt>安全側EV</dt><dd class="${edge >= 0 ? "positive" : "negative"}">${signedPercent(edge)}</dd></div><div><dt>期待利益</dt><dd>${signedYen(Math.round(investment * edge))}</dd></div></dl>
-    <footer class="${isPurchaseEligible(candidate) && edge >= 0.08 ? "" : "reject"}">${isPurchaseEligible(candidate) && edge >= 0.08 ? "購入候補" : edge >= 0.08 ? "研究上位・購入不可" : "見送り"}</footer></article>`;
+    <footer class="${isPurchaseEligible(candidate) && edge >= 0.08 ? "" : "reject"}">${isPurchaseEligible(candidate) && edge >= 0.08 ? "推奨候補" : edge >= 0.08 ? "研究上位・基準未達" : "見送り"}</footer></article>`;
 }
 
 function optimizationScenarioText(candidate) {

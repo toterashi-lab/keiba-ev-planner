@@ -7,7 +7,7 @@ for (const token of [
   "$horse-racing-ev-research",
   "AI推奨だけを集計",
   "高配当条件のリフトを確率や期待値へ直接加算しない",
-  "IPAT実購入",
+  "外部投票サービス連携",
 ]) {
   if (!agents.includes(token)) throw new Error(`AGENTS.md contract missing: ${token}`);
 }
@@ -17,7 +17,7 @@ for (const token of [
   "full_walk_forward_training",
   "external_ai_recommendation_validation",
   "ai_prediction_top_ticket_only",
-  "ipatPurchaseEnabled: false",
+  "externalBettingIntegration: \"out_of_scope\"",
 ]) {
   if (!source.includes(token)) throw new Error(`agent state machine missing: ${token}`);
 }

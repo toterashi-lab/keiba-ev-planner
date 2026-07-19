@@ -46,7 +46,7 @@
             <a class="hero-primary" href="#race-workspace">ランキングを見る</a>
             <a class="hero-secondary" href="#ai-prediction">AI予想を見る</a>
           </div>
-          <div class="hero-state"><span class="status-dot"></span><strong>データ収集中</strong><span>自動購入は未接続</span></div>
+          <div class="hero-state"><span class="status-dot"></span><strong>データ収集中</strong><span>予想モデルを検証中</span></div>
         </div>
         <div class="hero-figures" aria-label="現在の主要指標">
           <div><span>先週検証</span><strong>72R</strong><small>結果・払戻照合済み</small></div>
@@ -166,7 +166,7 @@
           </div>
           <section class="race-purchase-result" aria-labelledby="race-purchase-result-title">
             <header>
-              <div><span>予想時点の最上位買い目を各100円で購入した想定</span><h3 id="race-purchase-result-title">このレースのAI購入シミュレーション</h3></div>
+              <div><span>予想時点の最上位買い目を各100円で評価</span><h3 id="race-purchase-result-title">このレースのAI買い目検証</h3></div>
               <span id="race-purchase-judgement" class="quality missing">照合中</span>
             </header>
             <div class="race-purchase-grid">
@@ -216,8 +216,8 @@
                   <strong class="hold">判定保留</strong>
                 </div>
                 <div>
-                  <span>実購入</span>
-                  <strong class="locked">未接続</strong>
+                  <span>予想保存</span>
+                  <strong class="locked">結果照合</strong>
                 </div>
               </div>
 
@@ -253,7 +253,7 @@
               <div class="logic-status-grid" aria-label="期待値ロジック状態">
                 <div><span>ロジック</span><strong id="logic-version">確認中</strong></div>
                 <div><span>確率方式</span><strong id="logic-probability-mode">確認中</strong></div>
-                <div><span>購入ゲート</span><strong id="logic-deployment-status">確認中</strong></div>
+                <div><span>予想採用基準</span><strong id="logic-deployment-status">確認中</strong></div>
                 <a href="docs/expectancy-research-v5.md" target="_blank" rel="noreferrer">調査・計算仕様</a>
               </div>
 
@@ -332,7 +332,7 @@
             <h2>AI予想成績</h2>
             <p>先週72レースを対象に、各レースのAI最上位買い目だけを100円単位で結果・払戻と照合しています。</p>
           </div>
-          <span class="benchmark-label">外部検証不合格・購入不可</span>
+          <span class="benchmark-label">外部検証不合格・参考予想</span>
         </div>
         <div id="performance-cards" class="performance-cards"></div>
         <div class="performance-detail-head">
@@ -341,7 +341,7 @@
             <button type="button" data-benchmark="ai_ev1">期待回収率100%超</button>
             <button type="button" data-benchmark="ai_ev11">期待回収率110%超</button>
           </div>
-          <p id="performance-rule">各レースのAI最上位買い目だけを購入した想定</p>
+          <p id="performance-rule">各レースのAI最上位買い目を1点100円で仮想検証</p>
         </div>
         <div class="table-scroll">
           <table class="dense-table performance-table">
@@ -351,7 +351,7 @@
         </div>
         <div class="audit-note">
           <strong>集計仕様</strong>
-          <span>AI予想に保存されたtopTicketだけを予想後に払戻照合。券種別候補、ランキング上位、1番人気、全頭購入は回収率へ含めません。</span>
+          <span>AI予想に保存されたtopTicketだけを予想後に払戻照合。券種別候補、ランキング上位、1番人気、全頭買いは回収率へ含めません。</span>
           <a href="docs/expectancy-research-v5.md">期待値ロジック</a>
         </div>
       </section>
@@ -367,7 +367,7 @@
         <div id="payout-pattern-list" class="payout-pattern-list"></div>
         <div class="audit-note">
           <strong>用途制限</strong>
-          <span>高配当リフトはレースの荒れやすさ指標です。モデル確率と締切前オッズで正の期待値が確認できない限り、購入推奨にはしません。</span>
+          <span>高配当リフトはレースの荒れやすさ指標です。モデル確率と締切前オッズで正の期待値が確認できない限り、推奨買い目にはしません。</span>
           <a href="data/historical-payout-patterns.json">集計JSON</a>
         </div>
       </section>
@@ -399,7 +399,7 @@
     </main>
 
     <footer>
-      <p>本サービスはJRA・netkeibaの公式サービスではありません。結果と発売情報は必ず主催者発表で確認してください。実購入機能は未接続です。</p>
+      <p>本サービスはJRA・netkeibaの公式サービスではありません。予想・期待値・買い目は研究情報です。結果と発売情報は必ず主催者発表で確認してください。</p>
     </footer>
 
     <script src="data/meet-2026-07-11-2026-07-12.js?v=aidigital-20260717"></script>
@@ -413,6 +413,6 @@
     <script src="data/live-racecards.js?v=aidigital-20260719"></script>
     <script src="data/live-model-outputs.js?v=aidigital-20260717"></script>
     <script src="ticket-engine.js?v=aidigital-20260717"></script>
-    <script src="app.js?v=currentweek-20260719"></script>
+    <script src="app.js?v=prediction-focus-20260719"></script>
   </body>
 </html>

@@ -159,7 +159,7 @@ function rationale({ assessments, conservative, spread, purchaseEligible }) {
     spread === null ? "市場・能力差は比較不能" : `市場・能力差${(spread * 100).toFixed(1)}pt`,
     `高配当傾向は${assessments.payoutVolatility.authority === "uncertainty_and_scenario_only" ? "荒れ度だけに使用" : "不正"}`,
   ];
-  parts.push(purchaseEligible ? "全検証ゲート合格" : `未合格監査${blockedAudits.length}件のため購入不可`);
+  parts.push(purchaseEligible ? "全予想採用基準合格" : `未合格監査${blockedAudits.length}件のため参考予想`);
   return parts.join("。");
 }
 

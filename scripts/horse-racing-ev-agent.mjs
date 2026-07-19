@@ -52,7 +52,7 @@ try {
       purchaseEvaluationScope: "ai_prediction_top_ticket_only",
       unitStakeYen: 100,
       roiGuarantee: false,
-      ipatPurchaseEnabled: false,
+      externalBettingIntegration: "out_of_scope",
     },
     progress: {
       resultJobs,
