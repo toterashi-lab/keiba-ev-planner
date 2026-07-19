@@ -6,21 +6,23 @@ import { pathToFileURL } from "node:url";
 import { inspectBackfillReadiness } from "./backfill-readiness.mjs";
 import { captureModelDataSnapshot, captureModelImplementationSnapshot } from "./model-data-snapshot.mjs";
 import { isPreRaceObservation } from "./race-time.mjs";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
-const PRIVATE_DIR = path.join("data", "jra-free-private");
+const ROOT = path.resolve(import.meta.dirname, "..");
+const PRIVATE_DIR = resolvePrivateDataDir(ROOT);
 const OUTPUT = path.join(PRIVATE_DIR, "models", "goal-completion-audit.json");
 const DATABASE_AUDIT = path.join(PRIVATE_DIR, "models", "database-audit.json");
 const FIELD_AVAILABILITY_AUDIT = path.join(PRIVATE_DIR, "models", "field-availability-audit.json");
 const PUBLICATION_RECEIPT = path.join(PRIVATE_DIR, "models", "publication-receipt.json");
 const AUTOMATION_AUDIT = path.join(PRIVATE_DIR, "models", "automation-audit.json");
-const PUBLICATION_MANIFEST = path.join("public", "data", "publication-manifest.json");
-const PUBLIC_LIVE_RACECARDS = path.join("public", "data", "live-racecards.js");
-const PUBLIC_LIVE_MODEL_OUTPUTS = path.join("public", "data", "live-model-outputs.js");
+const PUBLICATION_MANIFEST = path.join(ROOT, "data", "publication-manifest.json");
+const PUBLIC_LIVE_RACECARDS = path.join(ROOT, "data", "live-racecards.js");
+const PUBLIC_LIVE_MODEL_OUTPUTS = path.join(ROOT, "data", "live-model-outputs.js");
 const ARTIFACT = path.join(PRIVATE_DIR, "models", "ability-softmax-v1.json");
 const REFERENCE_ARTIFACT = path.join(PRIVATE_DIR, "models", "reference-asof-model.json");
 const REFERENCE_EV_AUDIT = path.join(PRIVATE_DIR, "models", "reference-ev-audit.json");
 const LIVE_OUTPUT = path.join(PRIVATE_DIR, "models", "live-market-ev.json");
-const MARKET_OUTPUT = path.join("data", "model-outputs-2026-07-11-2026-07-12.json");
+const MARKET_OUTPUT = path.join(ROOT, "data", "model-outputs-2026-07-11-2026-07-12.json");
 const BET_TYPES = ["単勝", "複勝", "馬連", "ワイド", "馬単", "3連複", "3連単"];
 const STRUCTURED_TYPES = ["馬連", "ワイド", "馬単", "3連複", "3連単"];
 const REQUIRED_AUTOMATION_TASKS = ["KeibaEV-JRA-Free-Backfill", "KeibaEV-PostBackfill-Model", "KeibaEV-JRA-Current-Sync",
@@ -71,15 +73,39 @@ export function auditCompletedGoal(database, report, options = {}) {
     sum(case when status='complete' then 1 else 0 end) complete,
     sum(case when status<>'complete' then 1 else 0 end) pending,
     (select count(distinct race_id) from historical_win_place_odds) pricedRaces,
-    (select count(*) from historical_win_place_odds where win_odds is null or place_odds_low is null or place_odds_high is null) missingPrices
+    (select count(*) from historical_win_place_odds where win_odds is null) missingWinPrices,
+    (select count(*) from historical_win_place_odds o join historical_odds_jobs j on j.race_id=o.race_id
+      where (o.place_odds_low is null or o.place_odds_high is null)
+      and not (j.request_key like 'kaggle:%' and j.place_price_count=0)) unauditedMissingPlacePrices,
+    sum(case when status='complete' and request_key like 'kaggle:%' and place_price_count=0 then 1 else 0 end) auditedWinOnlyRaces,
+    sum(case when status='complete' and runner_count=win_price_count and runner_count=place_price_count then 1 else 0 end) completeWinPlaceRaces
     from historical_odds_jobs`).get() : null;
-  check(report, "historical_win_place_odds_complete", historicalOddsReady
+  check(report, "historical_market_odds_complete_by_available_source", historicalOddsReady
     && historicalOdds.total === coverage.races
     && historicalOdds.complete === coverage.races
     && historicalOdds.pending === 0
     && historicalOdds.pricedRaces === coverage.races
-    && historicalOdds.missingPrices === 0,
+    && historicalOdds.missingWinPrices === 0
+    && historicalOdds.unauditedMissingPlacePrices === 0
+    && historicalOdds.completeWinPlaceRaces + historicalOdds.auditedWinOnlyRaces === coverage.races,
   historicalOdds ?? { status: "missing" });
+  const historicalExoticReady = database.prepare(`select count(*) count from sqlite_master
+    where type='table' and name='historical_exotic_odds_jobs'`).get().count === 1;
+  const historicalExotic = historicalExoticReady ? database.prepare(`select
+    count(*) total,
+    sum(case when status='complete' then 1 else 0 end) complete,
+    sum(case when status<>'complete' then 1 else 0 end) pending,
+    (select count(*) from historical_exotic_odds where odds_low<1 or odds_high<odds_low) invalidPrices,
+    (select count(*) from historical_exotic_odds_jobs j where j.status='complete' and
+      (select count(*) from historical_exotic_odds o where o.race_id=j.race_id and o.bet_type=j.bet_type)<>j.price_count) invalidCoverage
+    from historical_exotic_odds_jobs`).get() : null;
+  check(report, "historical_exotic_odds_complete_by_available_source", historicalExoticReady
+    && historicalExotic.total > 0
+    && historicalExotic.complete === historicalExotic.total
+    && historicalExotic.pending === 0
+    && historicalExotic.invalidPrices === 0
+    && historicalExotic.invalidCoverage === 0,
+  historicalExotic ?? { status: "missing", sourceCoverageFrom: "2020-04-12" });
   const databaseAuditPath = options.databaseAuditPath ?? DATABASE_AUDIT;
   const databaseAudit = fs.existsSync(databaseAuditPath) ? JSON.parse(fs.readFileSync(databaseAuditPath, "utf8")) : null;
   check(report, "raw_archive_hash_audit", databaseAudit?.pass === true

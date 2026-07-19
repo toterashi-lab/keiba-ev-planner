@@ -2,9 +2,12 @@ import fs from "node:fs";
 import path from "node:path";
 import { FEATURE_KEYS } from "./train-expectancy-model.mjs";
 import { captureModelImplementationSnapshot } from "./model-data-snapshot.mjs";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
-const artifact = JSON.parse(fs.readFileSync(path.join("data", "jra-free-private", "models", "reference-asof-model.json"), "utf8"));
-const audit = JSON.parse(fs.readFileSync(path.join("data", "jra-free-private", "models", "reference-ev-audit.json"), "utf8"));
+const root = path.resolve(import.meta.dirname, "..");
+const privateDir = resolvePrivateDataDir(root);
+const artifact = JSON.parse(fs.readFileSync(path.join(privateDir, "models", "reference-asof-model.json"), "utf8"));
+const audit = JSON.parse(fs.readFileSync(path.join(privateDir, "models", "reference-ev-audit.json"), "utf8"));
 const output = JSON.parse(fs.readFileSync(path.join("data", "model-outputs-2026-07-11-2026-07-12.json"), "utf8"));
 const types = ["win", "place", "quinella", "wide", "exacta", "trio", "trifecta"];
 const failures = [];

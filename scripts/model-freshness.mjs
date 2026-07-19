@@ -3,6 +3,7 @@ import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
 import { captureModelDataSnapshot, captureModelImplementationSnapshot } from "./model-data-snapshot.mjs";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
 export function inspectModelFreshness(database, artifact, currentImplementation = captureModelImplementationSnapshot()) {
   const current = captureModelDataSnapshot(database);
@@ -16,8 +17,10 @@ export function inspectModelFreshness(database, artifact, currentImplementation 
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
-  const artifactPath = path.join("data", "jra-free-private", "models", "ability-softmax-v1.json");
-  const databasePath = path.join("data", "jra-free-private", "keiba.sqlite");
+  const root = path.resolve(import.meta.dirname, "..");
+  const privateDir = resolvePrivateDataDir(root);
+  const artifactPath = path.join(privateDir, "models", "ability-softmax-v1.json");
+  const databasePath = path.join(privateDir, "keiba.sqlite");
   const artifact = fs.existsSync(artifactPath) ? JSON.parse(fs.readFileSync(artifactPath, "utf8")) : null;
   const db = new DatabaseSync(databasePath, { readOnly: true });
   db.exec("PRAGMA busy_timeout=30000; BEGIN");

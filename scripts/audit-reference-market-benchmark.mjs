@@ -1,14 +1,17 @@
 import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
+const ROOT = path.resolve(import.meta.dirname, "..");
+const PRIVATE_DIR = resolvePrivateDataDir(ROOT);
 const MODEL_PATH = path.join("data", "model-outputs-2026-07-11-2026-07-12.json");
-const ABILITY_PATH = path.join("data", "jra-free-private", "models", "reference-asof-model.json");
-const OUTPUT_PATH = path.join("data", "jra-free-private", "models", "reference-market-benchmark.json");
+const ABILITY_PATH = path.join(PRIVATE_DIR, "models", "reference-asof-model.json");
+const OUTPUT_PATH = path.join(PRIVATE_DIR, "models", "reference-market-benchmark.json");
 
 const model = JSON.parse(fs.readFileSync(MODEL_PATH, "utf8"));
 const ability = JSON.parse(fs.readFileSync(ABILITY_PATH, "utf8"));
-const db = new DatabaseSync(path.join("data", "jra-free-private", "keiba.sqlite"), { readOnly: true });
+const db = new DatabaseSync(path.join(PRIVATE_DIR, "keiba.sqlite"), { readOnly: true });
 
 try {
   const winners = new Map(db.prepare(`select rr.race_id,rr.horse_id,e.horse_number

@@ -81,10 +81,10 @@ try {
     exit 0
   }
 
-  & $node --no-warnings "scripts\jra-free-db.mjs" audit
-  if ($LASTEXITCODE -ne 0) { throw "Full database audit failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\jra-historical-win-place-odds.mjs" init
   if ($LASTEXITCODE -ne 0) { throw "Historical win/place odds queue initialization failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\jra-historical-win-place-odds.mjs" repair-raw
+  if ($LASTEXITCODE -ne 0) { throw "Historical win/place raw repair initialization failed: $LASTEXITCODE" }
   $oddsStatusJson = & $node --no-warnings "scripts\jra-historical-win-place-odds.mjs" status
   if ($LASTEXITCODE -ne 0) { throw "Historical win/place odds status failed: $LASTEXITCODE" }
   $oddsStatus = $oddsStatusJson | ConvertFrom-Json
@@ -102,6 +102,38 @@ try {
   }
   & $node --no-warnings "scripts\jra-historical-win-place-odds.mjs" audit
   if ($LASTEXITCODE -ne 0) { throw "Historical win/place odds audit failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\jra-historical-exotic-odds.mjs" repair-raw
+  if ($LASTEXITCODE -ne 0) { throw "Historical exotic odds raw repair initialization failed: $LASTEXITCODE" }
+  $exoticStatusJson = & $node --no-warnings "scripts\jra-historical-exotic-odds.mjs" status
+  if ($LASTEXITCODE -ne 0) { throw "Historical exotic odds status failed: $LASTEXITCODE" }
+  $exoticStatus = $exoticStatusJson | ConvertFrom-Json
+  if ([int]$exoticStatus.pendingJobs -gt 0) {
+    $exoticSupervisor = Get-CimInstance Win32_Process | Where-Object {
+      $_.CommandLine -like "*run-historical-exotic-odds-backfill.ps1*"
+    } | Select-Object -First 1
+    if (-not $exoticSupervisor) {
+      Start-Process -FilePath "powershell.exe" -ArgumentList @(
+        "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
+        (Join-Path $PSScriptRoot "run-historical-exotic-odds-backfill.ps1")
+      ) -WorkingDirectory $root -WindowStyle Hidden
+    }
+    Write-Output ("Historical exotic odds pending: {0}/{1} jobs. Model pipeline is waiting." -f
+      $exoticStatus.pendingJobs,$exoticStatus.totalJobs)
+    exit 0
+  }
+  & $node --no-warnings "scripts\jra-historical-exotic-odds.mjs" audit
+  if ($LASTEXITCODE -ne 0) { throw "Historical exotic odds audit failed: $LASTEXITCODE" }
+  $coreRepairJson = & $node --no-warnings "scripts\jra-free-db.mjs" repair-raw
+  if ($LASTEXITCODE -ne 0) { throw "Core raw archive repair initialization failed: $LASTEXITCODE" }
+  $coreRepair = $coreRepairJson | ConvertFrom-Json
+  if ([int]$coreRepair.queuedMonths -gt 0) {
+    $task = Get-ScheduledTask -TaskName "KeibaEV-JRA-Free-Backfill" -ErrorAction SilentlyContinue
+    if ($task -and $task.State -ne "Running") { Start-ScheduledTask -TaskName "KeibaEV-JRA-Free-Backfill" }
+    Write-Output ("Core raw archive repair queued: {0} months. Model pipeline is waiting." -f $coreRepair.queuedMonths)
+    exit 0
+  }
+  & $node --no-warnings "scripts\jra-free-db.mjs" audit
+  if ($LASTEXITCODE -ne 0) { throw "Full database audit failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\audit-field-availability.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Source field availability audit failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\analyze-historical-payout-patterns.mjs"
@@ -167,7 +199,7 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Live expectancy ledger evaluation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\live-ev-ledger-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Live expectancy ledger unit check failed: $LASTEXITCODE" }
-  & (Join-Path $PSScriptRoot "publish-web-status.ps1")
+  & (Join-Path $PSScriptRoot "publish-live-web.ps1")
   if ($LASTEXITCODE -ne 0) { throw "Web publish failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\goal-completion-audit.mjs" --require-complete
   if ($LASTEXITCODE -ne 0) { throw "Goal completion audit failed: $LASTEXITCODE" }

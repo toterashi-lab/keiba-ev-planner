@@ -3,13 +3,10 @@ import fs from "node:fs";
 import path from "node:path";
 import zlib from "node:zlib";
 import { DatabaseSync } from "node:sqlite";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
-const PRIVATE_DIR = process.env.KEIBA_PRIVATE_DIR
-  ? path.resolve(process.env.KEIBA_PRIVATE_DIR)
-  : [path.join(ROOT, "data", "jra-free-private"), path.join(ROOT, "..", "data", "jra-free-private")]
-    .find((candidate) => fs.existsSync(path.join(candidate, "keiba.sqlite")))
-    ?? path.join(ROOT, "data", "jra-free-private");
+const PRIVATE_DIR = resolvePrivateDataDir(ROOT);
 const DB_PATH = path.join(PRIVATE_DIR, "keiba.sqlite");
 const RAW_DIR = path.join(PRIVATE_DIR, "raw", "historical-odds-win-place");
 const RUN_LOCK = path.join(PRIVATE_DIR, "historical-odds-run.lock");
@@ -50,10 +47,12 @@ try {
     const report = audit();
     console.log(JSON.stringify(report, null, 2));
     if (!report.pass) process.exitCode = 2;
+  } else if (command === "repair-raw") {
+    console.log(JSON.stringify(requeueMissingRaw(), null, 2));
   } else if (command === "status") {
     console.log(JSON.stringify(status(), null, 2));
   } else {
-    throw new Error("Commands: init, run, audit, status");
+    throw new Error("Commands: init, run, audit, repair-raw, status");
   }
 } finally {
   db.close();
@@ -241,6 +240,16 @@ function status() {
     sum(case when win_odds is not null then 1 else 0 end) winPrices,
     sum(case when place_odds_low is not null and place_odds_high is not null then 1 else 0 end) placePrices
     from historical_win_place_odds`).get();
+  const coverage = db.prepare(`select
+    sum(case when j.status='complete' and j.runner_count=j.win_price_count
+      and (select count(*) from historical_win_place_odds o where o.race_id=j.race_id)=j.runner_count then 1 else 0 end) completeWinRaces,
+    sum(case when j.status='complete' and j.runner_count=j.win_price_count and j.runner_count=j.place_price_count
+      and (select count(*) from historical_win_place_odds o where o.race_id=j.race_id
+        and o.win_odds is not null and o.place_odds_low is not null and o.place_odds_high is not null)=j.runner_count then 1 else 0 end) completeWinPlaceRaces,
+    sum(case when j.status='complete' and j.request_key like 'kaggle:%' and j.runner_count=j.win_price_count
+      and j.place_price_count=0 and not exists(select 1 from historical_win_place_odds o
+        where o.race_id=j.race_id and (o.win_odds is null or o.place_odds_low is not null or o.place_odds_high is not null)) then 1 else 0 end) auditedWinOnlyRaces
+    from historical_odds_jobs j`).get();
   const total = Object.values(jobs).reduce((sum, value) => sum + value, 0);
   return {
     jobs,
@@ -248,17 +257,47 @@ function status() {
     completeRaces: jobs.complete ?? 0,
     pendingRaces: (jobs.queued ?? 0) + (jobs.running ?? 0) + (jobs.failed ?? 0),
     progressPercent: total ? 100 * (jobs.complete ?? 0) / total : 0,
+    coverage,
     ...totals,
   };
 }
 
 function audit() {
   const invalidComplete = db.prepare(`select count(*) count from historical_odds_jobs j where j.status='complete' and (
-    j.runner_count<>j.win_price_count or j.runner_count<>j.place_price_count
-    or (select count(*) from historical_win_place_odds o where o.race_id=j.race_id)<>j.runner_count)`).get().count;
+    j.runner_count<>j.win_price_count
+    or (select count(*) from historical_win_place_odds o where o.race_id=j.race_id)<>j.runner_count
+    or (j.runner_count<>j.place_price_count and not (
+      j.request_key like 'kaggle:%' and j.place_price_count=0
+      and not exists(select 1 from historical_win_place_odds o where o.race_id=j.race_id
+        and (o.win_odds is null or o.place_odds_low is not null or o.place_odds_high is not null))
+    )))`).get().count;
   const invalidPrices = db.prepare(`select count(*) count from historical_win_place_odds
     where win_odds<1 or place_odds_low<1 or place_odds_high<place_odds_low`).get().count;
-  return { pass: invalidComplete === 0 && invalidPrices === 0, invalidComplete, invalidPrices, ...status() };
+  const unauditedMissingPlace = db.prepare(`select count(*) count from historical_win_place_odds o
+    join historical_odds_jobs j on j.race_id=o.race_id
+    where (o.place_odds_low is null or o.place_odds_high is null)
+      and not (j.request_key like 'kaggle:%' and j.place_price_count=0)`).get().count;
+  return { pass: invalidComplete === 0 && invalidPrices === 0 && unauditedMissingPlace === 0,
+    invalidComplete, invalidPrices, unauditedMissingPlace, ...status() };
+}
+
+function requeueMissingRaw() {
+  const rows = db.prepare(`select j.race_id,min(p.raw_path) raw_path from historical_odds_jobs j
+    left join historical_win_place_odds o on o.race_id=j.race_id
+    left join raw_pages p on p.id=o.source_page_id
+    where j.status='complete' group by j.race_id`).all();
+  const missing = rows.filter((row) => !row.raw_path || !fs.existsSync(path.join(PRIVATE_DIR, row.raw_path)));
+  const now = new Date().toISOString();
+  const update = db.prepare(`update historical_odds_jobs set status='queued',attempts=0,
+    last_error='Raw odds archive repair required',updated_at=? where race_id=? and status='complete'`);
+  let queued = 0;
+  db.exec("begin immediate");
+  try {
+    for (const row of missing) queued += Number(update.run(now, row.race_id).changes);
+    db.exec("commit");
+  } catch (error) { db.exec("rollback"); throw error; }
+  return { status: queued ? "repair_queued" : "complete", checkedCompleteRaces: rows.length,
+    missingRawRaces: missing.length, queuedRaces: queued };
 }
 
 function recoverInterrupted() {

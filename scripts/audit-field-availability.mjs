@@ -2,9 +2,12 @@ import fs from "node:fs";
 import path from "node:path";
 import zlib from "node:zlib";
 import { DatabaseSync } from "node:sqlite";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
-const DATABASE = path.join("data", "jra-free-private", "keiba.sqlite");
-const OUTPUT = path.join("data", "jra-free-private", "models", "field-availability-audit.json");
+const ROOT = path.resolve(import.meta.dirname, "..");
+const PRIVATE_DIR = resolvePrivateDataDir(ROOT);
+const DATABASE = path.join(PRIVATE_DIR, "keiba.sqlite");
+const OUTPUT = path.join(PRIVATE_DIR, "models", "field-availability-audit.json");
 
 const db = new DatabaseSync(DATABASE, { readOnly: true });
 db.exec("PRAGMA busy_timeout=30000;");
@@ -88,7 +91,7 @@ try {
 
 function loadRawRaceRows(relativePath, cache) {
   if (cache.has(relativePath)) return cache.get(relativePath);
-  const absolutePath = path.join("data", "jra-free-private", relativePath);
+  const absolutePath = path.join(PRIVATE_DIR, relativePath);
   const html = zlib.gunzipSync(fs.readFileSync(absolutePath)).toString("utf8");
   const rows = new Map();
   for (const match of html.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/g)) {

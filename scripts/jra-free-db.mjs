@@ -55,12 +55,14 @@ try {
     fs.writeFileSync(AUDIT_REPORT_PATH, `${JSON.stringify(result, null, 2)}\n`, "utf8");
     console.log(JSON.stringify(result, null, 2));
     if (!result.pass) process.exitCode = 2;
+  } else if (command === "repair-raw") {
+    console.log(JSON.stringify(requeueMissingCoreRaw(), null, 2));
   } else if (command === "lock-self-check") {
     await lockSelfCheck();
   } else if (command === "status") {
     console.log(JSON.stringify(statusReport(), null, 2));
   } else {
-    throw new Error("Commands: init, ingest-month, run, sync-current, audit, lock-self-check, status");
+    throw new Error("Commands: init, ingest-month, run, sync-current, audit, repair-raw, lock-self-check, status");
   }
 } finally {
   db.close();
@@ -860,6 +862,37 @@ function auditDatabase() {
     invalidEvEvaluations,
     ...statusReport(),
   };
+}
+
+function requeueMissingCoreRaw() {
+  const months = new Set();
+  const missingByType = {};
+  for (const row of db.prepare(`select id,request_key,page_type,raw_path from raw_pages
+    where page_type in ('month','meeting','race')`).all()) {
+    if (fs.existsSync(path.join(PRIVATE_DIR, row.raw_path))) continue;
+    missingByType[row.page_type] = (missingByType[row.page_type] ?? 0) + 1;
+    if (row.page_type === "month") {
+      const match = row.request_key.match(/^pw01skl10(\d{4})(\d{2})/);
+      if (match) months.add(`${match[1]}-${match[2]}`);
+    } else if (row.page_type === "meeting") {
+      const linked = db.prepare("select substr(race_date,1,7) month from meetings where source_page_id=?").get(row.id);
+      if (linked?.month) months.add(linked.month);
+    } else {
+      const linked = db.prepare("select substr(race_date,1,7) month from races where source_page_id=?").get(row.id);
+      if (linked?.month) months.add(linked.month);
+    }
+  }
+  const now = new Date().toISOString();
+  const update = db.prepare(`update backfill_jobs set status='queued',attempts=0,
+    last_error='Raw archive repair required',updated_at=? where month=? and status='complete'`);
+  let queuedMonths = 0;
+  db.exec("begin immediate");
+  try {
+    for (const month of [...months].sort()) queuedMonths += Number(update.run(now, month).changes);
+    db.exec("commit");
+  } catch (error) { db.exec("rollback"); throw error; }
+  return { status: queuedMonths ? "repair_queued" : "complete", queuedMonths,
+    affectedMonths: months.size, missingCoreRaw: Object.values(missingByType).reduce((sum, count) => sum + count, 0), missingByType };
 }
 
 function migrateCanonicalHashes() {

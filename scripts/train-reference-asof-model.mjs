@@ -4,11 +4,14 @@ import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { evaluate, evaluateTicketProbabilities, FEATURE_KEYS, fitModel, fitTemperature, fitTicketCalibrationTemperatures, loadTrainingRaces, MODEL_FEATURE_GROUPS, predictRace, runFeatureAblation } from "./train-expectancy-model.mjs";
 import { captureModelImplementationSnapshot } from "./model-data-snapshot.mjs";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
-const DATABASE = path.join("data", "jra-free-private", "keiba.sqlite");
-const PREFLIGHT = path.join("data", "jra-free-private", "models", "training-preflight.json");
-const FULL_MODEL = path.join("data", "jra-free-private", "models", "ability-softmax-v1.json");
-const OUTPUT = path.join("data", "jra-free-private", "models", "reference-asof-model.json");
+const ROOT = path.resolve(import.meta.dirname, "..");
+const PRIVATE_DIR = resolvePrivateDataDir(ROOT);
+const DATABASE = path.join(PRIVATE_DIR, "keiba.sqlite");
+const PREFLIGHT = path.join(PRIVATE_DIR, "models", "training-preflight.json");
+const FULL_MODEL = path.join(PRIVATE_DIR, "models", "ability-softmax-v1.json");
+const OUTPUT = path.join(PRIVATE_DIR, "models", "reference-asof-model.json");
 const TARGET_DATES = ["2026-07-11", "2026-07-12"];
 const TRAIN_END = "2025-06-30";
 const CALIBRATION_START = "2025-07-08";

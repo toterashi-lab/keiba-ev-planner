@@ -10,8 +10,11 @@ try {
   const resultJobs = counts("backfill_jobs");
   const hasOddsJobs = tableExists("historical_odds_jobs");
   const oddsJobs = hasOddsJobs ? counts("historical_odds_jobs") : {};
+  const hasExoticOddsJobs = tableExists("historical_exotic_odds_jobs");
+  const exoticOddsJobs = hasExoticOddsJobs ? counts("historical_exotic_odds_jobs") : {};
   const resultPending = pending(resultJobs);
   const oddsPending = hasOddsJobs ? pending(oddsJobs) : null;
+  const exoticOddsPending = hasExoticOddsJobs ? pending(exoticOddsJobs) : null;
   const completeRaces = db.prepare("select count(*) count from complete_races").get().count;
   const pricedRaces = tableExists("historical_win_place_odds")
     ? db.prepare("select count(distinct race_id) count from historical_win_place_odds").get().count
@@ -26,9 +29,10 @@ try {
   if (resultPending > 0) {
     phase = "race_results_backfill";
     nextAction = "continue_jra_free_backfill";
-  } else if (!hasOddsJobs || oddsPending > 0 || pricedRaces !== completeRaces) {
-    phase = "historical_odds_backfill";
-    nextAction = "continue_historical_win_place_odds";
+  } else if (!hasOddsJobs || oddsPending > 0 || pricedRaces !== completeRaces
+    || !hasExoticOddsJobs || exoticOddsPending > 0) {
+    phase = "historical_market_odds_backfill";
+    nextAction = "continue_win_place_and_exotic_odds";
   } else if (model?.dataCoverage?.races !== completeRaces) {
     phase = "full_walk_forward_training";
     nextAction = "run_post_backfill_model_pipeline";
@@ -62,6 +66,8 @@ try {
       completeRaces,
       oddsJobs,
       oddsPending,
+      exoticOddsJobs,
+      exoticOddsPending,
       pricedRaces,
       modelCoverageRaces: model?.dataCoverage?.races ?? null,
       modelDeploymentStatus: model?.deploymentStatus ?? "not_trained",

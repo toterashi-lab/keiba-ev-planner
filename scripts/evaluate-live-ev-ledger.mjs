@@ -2,9 +2,12 @@ import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
-const DB_PATH = path.join("data", "jra-free-private", "keiba.sqlite");
-const OUTPUT_PATH = path.join("data", "jra-free-private", "models", "live-ev-validation.json");
+const ROOT = path.resolve(import.meta.dirname, "..");
+const PRIVATE_DIR = resolvePrivateDataDir(ROOT);
+const DB_PATH = path.join(PRIVATE_DIR, "keiba.sqlite");
+const OUTPUT_PATH = path.join(PRIVATE_DIR, "models", "live-ev-validation.json");
 const UNIT_STAKE_YEN = 100;
 const MAX_ODDS_AGE_SECONDS = 300;
 const INITIAL_BANKROLL_YEN = 100_000;

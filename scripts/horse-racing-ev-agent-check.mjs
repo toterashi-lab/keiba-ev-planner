@@ -13,7 +13,8 @@ for (const token of [
 }
 for (const token of [
   "race_results_backfill",
-  "historical_odds_backfill",
+  "historical_market_odds_backfill",
+  "exoticOddsPending",
   "full_walk_forward_training",
   "external_ai_recommendation_validation",
   "ai_prediction_top_ticket_only",

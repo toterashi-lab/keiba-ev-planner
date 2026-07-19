@@ -1,8 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
 const source = fs.readFileSync("scripts/evaluate-reference-ev.mjs", "utf8");
-const report = JSON.parse(fs.readFileSync(path.join("data", "jra-free-private", "models", "reference-ev-audit.json"), "utf8"));
+const root = path.resolve(import.meta.dirname, "..");
+const report = JSON.parse(fs.readFileSync(path.join(resolvePrivateDataDir(root), "models", "reference-ev-audit.json"), "utf8"));
 const failures = [];
 if (report.evaluationScope !== "ai_prediction_top_ticket_only") failures.push("evaluation scope");
 if (report.recommendationCoverage?.predictions !== 72

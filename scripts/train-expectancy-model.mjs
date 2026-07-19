@@ -63,6 +63,16 @@ try {
     from complete_races`).get();
   const queue = db.prepare(`select status,count(*) count from backfill_jobs group by status`).all();
   const pending = queue.filter((row) => row.status !== "complete").reduce((sum, row) => sum + row.count, 0);
+  const historicalOddsCoverage = db.prepare(`select count(*) total,
+    sum(case when status='complete' then 1 else 0 end) complete,
+    sum(case when status<>'complete' then 1 else 0 end) pending from historical_odds_jobs`).get();
+  const historicalExoticCoverage = db.prepare(`select count(*) total,
+    sum(case when status='complete' then 1 else 0 end) complete,
+    sum(case when status<>'complete' then 1 else 0 end) pending from historical_exotic_odds_jobs`).get();
+  if (historicalOddsCoverage.total !== coverage.races || historicalOddsCoverage.pending !== 0
+    || historicalExoticCoverage.total <= 0 || historicalExoticCoverage.pending !== 0) {
+    throw new Error(`Historical market odds are incomplete: winPlace=${JSON.stringify(historicalOddsCoverage)}, exotic=${JSON.stringify(historicalExoticCoverage)}`);
+  }
   if (pending) throw new Error(`30年バックフィル未完了: 残り${pending}か月`);
   if (!coverage.minDate || monthsBetween(coverage.minDate, coverage.maxDate) < MIN_TRAIN_MONTHS + CALIBRATION_MONTHS + TEST_MONTHS) {
     throw new Error("学習・校正・テスト期間が不足しています");
@@ -114,7 +124,8 @@ try {
     modelName: "race-conditional-ability-softmax-recency-bayes",
     modelVersion,
     generatedAt: new Date().toISOString(),
-    dataCoverage: { ...coverage, rows: rows.length, usableRaces: races.length },
+    dataCoverage: { ...coverage, rows: rows.length, usableRaces: races.length,
+      historicalOdds: historicalOddsCoverage, historicalExoticOdds: historicalExoticCoverage },
     trainingSnapshot,
     trainingImplementation,
     policy: { minimumTrainMonths: MIN_TRAIN_MONTHS, calibrationMonths: CALIBRATION_MONTHS, testMonths: TEST_MONTHS, embargoDays: EMBARGO_DAYS },
@@ -145,7 +156,10 @@ try {
   transactionOpen = true;
   const finalSnapshot = captureModelDataSnapshot(db);
   const finalImplementation = captureModelImplementationSnapshot();
-  const finalPending = db.prepare("select count(*) count from backfill_jobs where status<>'complete'").get().count;
+  const finalPending = db.prepare(`select
+    (select count(*) from backfill_jobs where status<>'complete')
+    +(select count(*) from historical_odds_jobs where status<>'complete')
+    +(select count(*) from historical_exotic_odds_jobs where status<>'complete') count`).get().count;
   db.exec("commit");
   transactionOpen = false;
   if (finalPending || finalSnapshot.fingerprint !== trainingSnapshot.fingerprint

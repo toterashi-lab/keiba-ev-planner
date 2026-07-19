@@ -1,7 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
-const file = path.join("data", "jra-free-private", "models", "reference-market-benchmark.json");
+const root = path.resolve(import.meta.dirname, "..");
+const file = path.join(resolvePrivateDataDir(root), "models", "reference-market-benchmark.json");
 const report = JSON.parse(fs.readFileSync(file, "utf8"));
 const failures = [];
 if (report.races !== 72) failures.push(`races ${report.races}/72`);

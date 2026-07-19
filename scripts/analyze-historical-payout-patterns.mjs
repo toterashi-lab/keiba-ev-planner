@@ -1,8 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
-const DB_PATH = path.join("data", "jra-free-private", "keiba.sqlite");
+const ROOT = path.resolve(import.meta.dirname, "..");
+const DB_PATH = path.join(resolvePrivateDataDir(ROOT), "keiba.sqlite");
 const OUTPUT_PATH = path.join("data", "historical-payout-patterns.json");
 const VALIDATION_FROM = "2020-01-01";
 const TARGET_CUTOFF = "2026-07-11";

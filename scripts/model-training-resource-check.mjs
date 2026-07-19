@@ -2,9 +2,12 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
-const reportPath = path.join("data", "jra-free-private", "models", "training-preflight.json");
-const databasePath = path.join("data", "jra-free-private", "keiba.sqlite");
+const root = path.resolve(import.meta.dirname, "..");
+const privateDir = resolvePrivateDataDir(root);
+const reportPath = path.join(privateDir, "models", "training-preflight.json");
+const databasePath = path.join(privateDir, "keiba.sqlite");
 const report = fs.existsSync(reportPath) ? JSON.parse(fs.readFileSync(reportPath, "utf8")) : null;
 const db = new DatabaseSync(databasePath, { readOnly: true });
 let databaseRaces;

@@ -1,6 +1,7 @@
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
 const DEFAULT_FROM = "1996-01";
 
@@ -56,7 +57,8 @@ function monthRange(from, to) {
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
-  const db = new DatabaseSync(path.join("data", "jra-free-private", "keiba.sqlite"), { readOnly: true });
+  const root = path.resolve(import.meta.dirname, "..");
+  const db = new DatabaseSync(path.join(resolvePrivateDataDir(root), "keiba.sqlite"), { readOnly: true });
   try {
     const report = inspectBackfillReadiness(db);
     console.log(JSON.stringify(report));

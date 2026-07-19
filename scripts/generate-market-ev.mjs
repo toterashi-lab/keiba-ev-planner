@@ -6,6 +6,7 @@ import { EXPECTANCY_ENGINE_VERSION, normalizeMarket, selectProbability } from ".
 import { runExpectancyAgentEnsemble } from "../model/expectancy-agent-ensemble.mjs";
 import { buildStructuredDefinitions } from "../model/structured-ticket-search.mjs";
 import { buildFinishOrderProbabilityBooks, calibrateFinishOrderProbabilityBooks } from "../model/finish-order-probabilities.mjs";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
 await import(pathToFileURL(path.resolve("ticket-engine.js")).href);
 
@@ -14,6 +15,8 @@ const [win, place, quinella, wide, exacta, trio, trifecta] = Object.keys(engine.
 const DB_TYPES = { win, place, quinella, wide, exacta, trio, trifecta };
 const ORDERED = new Set(["win", "place", "exacta", "trifecta"]);
 const TARGET_DATES = ["2026-07-11", "2026-07-12"];
+const ROOT = path.resolve(import.meta.dirname, "..");
+const PRIVATE_DIR = resolvePrivateDataDir(ROOT);
 const OUTPUT = path.join("data", "model-outputs-2026-07-11-2026-07-12.json");
 const VALIDATION_ARTIFACT = loadValidationArtifact();
 const REFERENCE_EV_AUDIT = loadReferenceEvAudit();
@@ -21,7 +24,7 @@ const MARKET_BENCHMARK = loadMarketBenchmark();
 const PAYOUT_PATTERNS = loadPayoutPatterns();
 
 export function generateMarketEv() {
-  const db = new DatabaseSync(path.join("data", "jra-free-private", "keiba.sqlite"), { readOnly: true });
+  const db = new DatabaseSync(path.join(PRIVATE_DIR, "keiba.sqlite"), { readOnly: true });
   try {
     const baseBatch = db.prepare(`select id from odds_ingestion_batches
       where status='complete' and source='JRA official odds' order by id desc limit 1`).get();
@@ -495,8 +498,8 @@ function makeCandidate(race, betType, method, selection, rows, probability, name
 }
 
 function loadValidationArtifact() {
-  const paths = [path.join("data", "jra-free-private", "models", "reference-asof-model.json"),
-    path.join("data", "jra-free-private", "models", "ability-softmax-v1.json")];
+  const paths = [path.join(PRIVATE_DIR, "models", "reference-asof-model.json"),
+    path.join(PRIVATE_DIR, "models", "ability-softmax-v1.json")];
   const artifactPath = paths.find((candidate) => fs.existsSync(candidate));
   if (!artifactPath) return null;
   const artifact = JSON.parse(fs.readFileSync(artifactPath, "utf8"));
@@ -513,14 +516,14 @@ function calibrationErrorForBetType(betType, probability) {
 }
 
 function loadReferenceEvAudit() {
-  const auditPath = path.join("data", "jra-free-private", "models", "reference-ev-audit.json");
+  const auditPath = path.join(PRIVATE_DIR, "models", "reference-ev-audit.json");
   if (!fs.existsSync(auditPath)) return null;
   const audit = JSON.parse(fs.readFileSync(auditPath, "utf8"));
   return audit.modelVersion === VALIDATION_ARTIFACT?.modelVersion ? audit : null;
 }
 
 function loadMarketBenchmark() {
-  const benchmarkPath = path.join("data", "jra-free-private", "models", "reference-market-benchmark.json");
+  const benchmarkPath = path.join(PRIVATE_DIR, "models", "reference-market-benchmark.json");
   if (!fs.existsSync(benchmarkPath)) return null;
   const benchmark = JSON.parse(fs.readFileSync(benchmarkPath, "utf8"));
   return benchmark.modelVersion === VALIDATION_ARTIFACT?.modelVersion ? benchmark : null;

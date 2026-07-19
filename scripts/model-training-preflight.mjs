@@ -2,9 +2,12 @@ import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { evaluate, evaluateTicketProbabilities, fitModel, fitTemperature, fitTicketCalibrationTemperatures, loadTrainingRaces, runFeatureAblation } from "./train-expectancy-model.mjs";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
-const DATABASE = path.join("data", "jra-free-private", "keiba.sqlite");
-const OUTPUT = path.join("data", "jra-free-private", "models", "training-preflight.json");
+const ROOT = path.resolve(import.meta.dirname, "..");
+const PRIVATE_DIR = resolvePrivateDataDir(ROOT);
+const DATABASE = path.join(PRIVATE_DIR, "keiba.sqlite");
+const OUTPUT = path.join(PRIVATE_DIR, "models", "training-preflight.json");
 const started = Date.now();
 const db = new DatabaseSync(DATABASE, { readOnly: true });
 db.exec("PRAGMA busy_timeout=30000;");
