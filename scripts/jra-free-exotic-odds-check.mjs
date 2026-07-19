@@ -2,7 +2,7 @@ import { parseExoticOdds } from "./jra-free-exotic-odds.mjs";
 import fs from "node:fs";
 
 const collectorSource = fs.readFileSync("scripts/jra-historical-exotic-odds.mjs", "utf8");
-for (const token of ["let acquired = false", "if (acquired) fs.rmSync(RUN_LOCK"]) {
+for (const token of ["let acquired = false", "if (acquired) fs.rmSync(RUN_LOCK", "isProcessAlive(owner.pid)"]) {
   if (!collectorSource.includes(token)) throw new Error(`exotic odds lock safety missing: ${token}`);
 }
 

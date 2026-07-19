@@ -220,7 +220,7 @@ async function withLock(task) {
   let handle;
   let acquired = false;
   try {
-    handle = fs.openSync(RUN_LOCK, "wx");
+    handle = acquireLock(RUN_LOCK);
     acquired = true;
     fs.writeFileSync(handle, JSON.stringify({ pid: process.pid, startedAt: new Date().toISOString() }));
     return await task();
@@ -229,6 +229,22 @@ async function withLock(task) {
     if (acquired) fs.rmSync(RUN_LOCK, { force: true });
   }
 }
+
+function acquireLock(lockPath) {
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    try { return fs.openSync(lockPath, "wx"); }
+    catch (error) {
+      if (error.code !== "EEXIST") throw error;
+      const owner = readLockOwner(lockPath);
+      if (owner?.pid && isProcessAlive(owner.pid)) throw new Error(`Historical exotic odds lock is owned by live pid ${owner.pid}`);
+      fs.rmSync(lockPath, { force: true });
+    }
+  }
+  throw new Error(`Historical exotic odds lock could not be acquired: ${lockPath}`);
+}
+
+function readLockOwner(lockPath) { try { return JSON.parse(fs.readFileSync(lockPath, "utf8")); } catch { return null; } }
+function isProcessAlive(pid) { try { process.kill(Number(pid), 0); return true; } catch { return false; } }
 
 function readRaw(relative) { return zlib.gunzipSync(fs.readFileSync(path.join(PRIVATE_DIR, relative))).toString("utf8"); }
 function loadCachedWinPlace(raceId) {
