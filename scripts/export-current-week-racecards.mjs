@@ -1,8 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
-const databasePath = path.join("data", "jra-free-private", "keiba.sqlite");
+const root = path.resolve(import.meta.dirname, "..");
+const databasePath = path.join(resolvePrivateDataDir(root), "keiba.sqlite");
 const outputPath = path.join("data", "live-racecards.js");
 const db = new DatabaseSync(databasePath, { readOnly: true });
 

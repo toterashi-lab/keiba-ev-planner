@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
-$public = Join-Path $root "public"
-$privateDir = Join-Path $root "data\jra-free-private"
+$public = $root
+$privateDir = if ($env:KEIBA_PRIVATE_DIR) { $env:KEIBA_PRIVATE_DIR } else { Join-Path (Split-Path $root -Parent) "data\jra-free-private" }
 $lockPath = Join-Path $privateDir "web-publish.lock"
 $node = Get-Command node -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source -First 1
 if (-not $node) { $node = Join-Path $env:USERPROFILE ".cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe" }
@@ -44,17 +44,23 @@ for ($attempt = 0; $attempt -lt 2 -and -not $lock; $attempt++) {
 if (-not $lock) { throw "Live web publication lock could not be acquired." }
 try {
   Set-Location $root
-  & $node --no-warnings "scripts\jra-live-racecards-check.mjs"
+  & $node --max-old-space-size=8192 --no-warnings "scripts\jra-live-racecards-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Live racecard check failed: $LASTEXITCODE" }
-  & $node --no-warnings "scripts\jra-live-odds-check.mjs"
-  if ($LASTEXITCODE -ne 0) { throw "Live odds check failed: $LASTEXITCODE" }
-  & $node --no-warnings "scripts\generate-live-market-ev.mjs"
+  & $node --no-warnings "scripts\generate-live-market-ev.mjs" --include-batch
   if ($LASTEXITCODE -ne 0) { throw "Live expectancy generation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\live-market-ev-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Live expectancy validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\audit-field-availability.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Source field availability audit failed: $LASTEXITCODE" }
-  & $node --no-warnings "scripts\build-public-demo.mjs"
+  & $node --no-warnings "scripts\prediction-snapshot.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Prediction snapshot persistence failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\export-current-week-racecards.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Racecard export failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\export-current-live-predictions.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Prediction export failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\agent-performance.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Agent performance export failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\build-live-publication.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Public build failed: $LASTEXITCODE" }
   Set-Location $public
   $manifestPath = Join-Path $public "data\publication-manifest.json"

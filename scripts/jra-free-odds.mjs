@@ -4,11 +4,12 @@ import path from "node:path";
 import zlib from "node:zlib";
 import { DatabaseSync } from "node:sqlite";
 import { isPreRaceObservation } from "./race-time.mjs";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
 const ODDS_URL = "https://www.jra.go.jp/JRADB/accessO.html";
 const LANDING_CNAME = "pw15oli00/6D";
 const ROOT = path.resolve(import.meta.dirname, "..");
-const PRIVATE_DIR = path.join(ROOT, "data", "jra-free-private");
+const PRIVATE_DIR = resolvePrivateDataDir(ROOT);
 const RAW_DIR = path.join(PRIVATE_DIR, "raw", "odds");
 const DB_PATH = path.join(PRIVATE_DIR, "keiba.sqlite");
 const LOCK_PATH = path.join(PRIVATE_DIR, "odds.lock");

@@ -1,8 +1,10 @@
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { buildFeatureRows } from "./model-feature-pipeline.mjs";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
-const db = new DatabaseSync(path.join("data", "jra-free-private", "keiba.sqlite"), { readOnly: true });
+const root = path.resolve(import.meta.dirname, "..");
+const db = new DatabaseSync(path.join(resolvePrivateDataDir(root), "keiba.sqlite"), { readOnly: true });
 try {
   const batch = db.prepare("select * from live_racecard_batches where status='complete' order by id desc limit 1").get();
   if (!batch) throw new Error("合格済み出馬表バッチがありません");

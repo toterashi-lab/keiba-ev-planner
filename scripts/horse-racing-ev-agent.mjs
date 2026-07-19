@@ -1,8 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
-const databasePath = path.join("data", "jra-free-private", "keiba.sqlite");
+const privateDir = resolvePrivateDataDir(process.cwd());
+const databasePath = path.join(privateDir, "keiba.sqlite");
 const db = new DatabaseSync(databasePath, { readOnly: true });
 try {
   const resultJobs = counts("backfill_jobs");
@@ -14,9 +16,9 @@ try {
   const pricedRaces = tableExists("historical_win_place_odds")
     ? db.prepare("select count(distinct race_id) count from historical_win_place_odds").get().count
     : 0;
-  const modelPath = path.join("data", "jra-free-private", "models", "ability-softmax-v1.json");
+  const modelPath = path.join(privateDir, "models", "ability-softmax-v1.json");
   const model = fs.existsSync(modelPath) ? JSON.parse(fs.readFileSync(modelPath, "utf8")) : null;
-  const receiptPath = path.join("data", "jra-free-private", "models", "publication-receipt.json");
+  const receiptPath = path.join(privateDir, "models", "publication-receipt.json");
   const receipt = fs.existsSync(receiptPath) ? JSON.parse(fs.readFileSync(receiptPath, "utf8")) : null;
 
   let phase;

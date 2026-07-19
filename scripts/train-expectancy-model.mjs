@@ -7,9 +7,12 @@ import { buildFeatureRows } from "./model-feature-pipeline.mjs";
 import { captureModelDataSnapshot, captureModelImplementationSnapshot } from "./model-data-snapshot.mjs";
 import { MODEL_VALIDATION_POLICY } from "../model/validation-policy.mjs";
 import { buildFinishOrderProbabilityBooks, calibrateFinishOrderProbabilityBooks, FINISH_ORDER_TYPES, placeDepth, ticketOutcomeMultiplicity } from "../model/finish-order-probabilities.mjs";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
-const DATABASE_PATH = path.join("data", "jra-free-private", "keiba.sqlite");
-const ARTIFACT_PATH = path.join("data", "jra-free-private", "models", "ability-softmax-v1.json");
+const ROOT = path.resolve(import.meta.dirname, "..");
+const PRIVATE_DIR = resolvePrivateDataDir(ROOT);
+const DATABASE_PATH = path.join(PRIVATE_DIR, "keiba.sqlite");
+const ARTIFACT_PATH = path.join(PRIVATE_DIR, "models", "ability-softmax-v1.json");
 const MIN_TRAIN_MONTHS = 60;
 const CALIBRATION_MONTHS = 12;
 const TEST_MONTHS = 6;
