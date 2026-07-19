@@ -80,8 +80,10 @@ for (const raceId of raceIds) {
   }
   if (!Array.isArray(prediction?.forecastPanel) || prediction.forecastPanel.length < 3
     || prediction.masterConsensus?.agent !== "chief-expectancy-agent") failures.push(`${raceId}: live specialist forecast panel`);
-  if (prediction.forecastPanel.filter((agent) => agent.persona === true && agent.status === "available").length !== 5) {
-    failures.push(`${raceId}: live five persona forecasters`);
+  if (prediction.forecastPanel.filter((agent) => agent.persona === true).length !== 5
+    || prediction.forecastPanel.filter((agent) => agent.persona === true && agent.status === "available").length < 3
+    || prediction.forecastPanel.some((agent) => !["available", "unavailable"].includes(agent.status))) {
+    failures.push(`${raceId}: live five specialist agents with explicit availability`);
   }
 }
 

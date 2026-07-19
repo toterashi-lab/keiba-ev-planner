@@ -9,16 +9,19 @@ import { buildStructuredDefinitions } from "../model/structured-ticket-search.mj
 import { buildFinishOrderProbabilityBooks, calibrateFinishOrderProbabilityBooks } from "../model/finish-order-probabilities.mjs";
 import { isPreRaceObservation } from "./race-time.mjs";
 import { FEATURE_KEYS } from "./train-expectancy-model.mjs";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
 await import(pathToFileURL(path.resolve("ticket-engine.js")).href);
 const engine = globalThis.KEIBA_TICKET_ENGINE;
 const TYPES = { win: "単勝", place: "複勝", quinella: "馬連", wide: "ワイド", exacta: "馬単", trio: "3連複", trifecta: "3連単" };
 const ORDERED = new Set(["win", "place", "exacta", "trifecta"]);
-const OUTPUT = path.join("data", "jra-free-private", "models", "live-market-ev.json");
+const ROOT = path.resolve(import.meta.dirname, "..");
+const PRIVATE_DIR = resolvePrivateDataDir(ROOT);
+const OUTPUT = path.join(PRIVATE_DIR, "models", "live-market-ev.json");
 
 export function generateLiveMarketEv(options = {}) {
   const outputPath = options.outputPath ?? OUTPUT;
-  const db = new DatabaseSync(options.databasePath ?? path.join("data", "jra-free-private", "keiba.sqlite"));
+  const db = new DatabaseSync(options.databasePath ?? path.join(PRIVATE_DIR, "keiba.sqlite"));
   db.exec("PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=30000;");
   try {
     initializeLedgerSchema(db);
@@ -27,8 +30,10 @@ export function generateLiveMarketEv(options = {}) {
       and snapshot_kind=? and target_dates=? order by id desc limit 1`).get(base.snapshot_kind, base.target_dates) : null;
     const racecardBatch = db.prepare("select * from live_racecard_batches where status='complete' and race_count>0 order by id desc limit 1").get();
     const racecardTargetDates = resolveStoredRacecardTargetDates(db, racecardBatch);
-    const targetDates = resolveLiveTargetDates({ baseTargetDates: base?.target_dates, racecardTargetDates,
-      today: tokyoDate(), allowFixture: options.allowFixture === true });
+    const targetDates = options.includeBatch === true
+      ? racecardTargetDates
+      : resolveLiveTargetDates({ baseTargetDates: base?.target_dates, racecardTargetDates,
+        today: tokyoDate(), allowFixture: options.allowFixture === true });
     if (!targetDates.length) return waiting("live_racecards", outputPath);
     const datePlaceholders = targetDates.map(() => "?").join(",");
     const races = db.prepare(`select * from live_races where race_date in (${datePlaceholders}) order by race_date,venue_code,race_number`).all(...targetDates);
@@ -43,7 +48,8 @@ export function generateLiveMarketEv(options = {}) {
       ? new Set(db.prepare("pragma table_info(live_predictions)").all().map((row) => row.name))
       : new Set();
     const historyStartsSql = predictionColumns.has("history_starts") ? "p.history_starts" : "0";
-    const modelRows = artifact && hasPredictionTable ? db.prepare(`select p.race_id,e.horse_number,p.win_probability,${historyStartsSql} history_starts
+    const featuresSql = predictionColumns.has("features_json") ? "p.features_json" : "null";
+    const modelRows = artifact && hasPredictionTable ? db.prepare(`select p.race_id,e.horse_number,p.win_probability,${historyStartsSql} history_starts,${featuresSql} features_json
       from live_predictions p join live_entries e on e.race_id=p.race_id and e.horse_id=p.horse_id
       where p.model_version=? and p.race_id in (${placeholders})`).all(artifact.modelVersion, ...raceIds) : [];
     const oddsByRace = group(odds, "race_id");
@@ -51,6 +57,7 @@ export function generateLiveMarketEv(options = {}) {
     const modelByRace = group(modelRows, "race_id");
     const candidates = [];
     const predictions = [];
+    const generatedAt = new Date().toISOString();
     const coverageCounts = Object.fromEntries(Object.values(TYPES).map((label) => [label, 0]));
     const evaluatedByRace = {};
 
@@ -65,7 +72,7 @@ export function generateLiveMarketEv(options = {}) {
       if (!abilityHorse) continue;
       const hasCompleteOdds = Object.keys(TYPES).every((type) => byType.get(type)?.length);
       if (!hasCompleteOdds) {
-        predictions.push(aiPrediction(race, abilityHorse, names, [], artifact, hasModel));
+        predictions.push(aiPrediction(race, abilityHorse, names, [], artifact, hasModel, trainedRows, marketHorse, generatedAt, options.allowFixture === true));
         continue;
       }
       const marketBooks = buildFinishOrderProbabilityBooks(marketHorse);
@@ -93,12 +100,12 @@ export function generateLiveMarketEv(options = {}) {
       }
       evaluatedByRace[race.race_id] = evaluated;
       candidates.push(...raceCandidates);
-      predictions.push(aiPrediction(race, abilityHorse, names, raceCandidates, artifact, hasModel));
+      predictions.push(aiPrediction(race, abilityHorse, names, raceCandidates, artifact, hasModel, trainedRows, marketHorse, generatedAt, options.allowFixture === true));
     }
     const result = {
       status: predictions.length ? "ready" : "waiting",
       reason: candidates.length ? null : predictions.length ? "waiting_for_complete_odds" : "ability_model_or_live_odds",
-      generatedAt: new Date().toISOString(),
+      generatedAt,
       snapshotKind: base?.snapshot_kind ?? "pre_race",
       targetDates,
       baseBatchId: base?.id ?? null,
@@ -338,77 +345,71 @@ export function persistCandidateLedger(db, result) {
   }
 }
 
-function aiPrediction(race, probabilities, names, raceCandidates, artifact, hasModel) {
+function aiPrediction(race, probabilities, names, raceCandidates, artifact, hasModel, trainedRows = [], marketHorse = null,
+  generatedAt = new Date().toISOString(), allowFixture = false) {
   const marks = ["◎", "○", "▲", "△", "☆"];
   const ranked = Object.entries(probabilities).map(([horseNumber, probability]) => ({ horseNumber: Number(horseNumber), horseName: names.get(Number(horseNumber)) ?? "", probability }))
     .sort((left, right) => right.probability - left.probability || left.horseNumber - right.horseNumber);
   const top = [...raceCandidates].sort(byAbilityEv)[0];
-  const specialistForecasts = buildLiveForecastPanel(probabilities, names, raceCandidates);
+  const specialistForecasts = buildLiveForecastPanel(probabilities, names, trainedRows, marketHorse);
+  const predictionContext = allowFixture || isPreRaceObservation(race.race_date, race.start_time, generatedAt) ? "pre_race" : "as_of_replay";
   return { date: race.race_date, meetingName: race.meeting_name, raceNo: race.race_number, raceId: race.race_id, modelVersion: artifact?.modelVersion ?? "market-baseline",
-    predictionContext: "pre_race", status: "ready", confidence: ranked[0].probability >= 0.25 ? "中" : "低", confidenceScore: ranked[0].probability,
+    generatedAt, predictionContext, status: "ready", confidence: ranked[0].probability >= 0.25 ? "中" : "低", confidenceScore: ranked[0].probability,
     scenario: ranked[0].probability - ranked[1].probability >= 0.08 ? "本命軸" : "混戦", marks: ranked.slice(0, 5).map((row, index) => ({ mark: marks[index], ...row })),
     forecastPanel: specialistForecasts,
     masterConsensus: { agent: "chief-expectancy-agent", participatingForecasters: specialistForecasts.length,
       topHorseNumber: ranked[0].horseNumber, topHorseName: ranked[0].horseName },
     topTicket: top ? { betType: top.betType, method: top.method, selection: top.selection, expectedReturn: top.adoptedExpectedReturn,
       chiefDecision: top.chiefDecision } : null,
-    comment: `${specialistForecasts.length}予想家の評価をマスターが統合。全${ranked.length}頭中の1位統合勝率${(ranked[0].probability * 100).toFixed(1)}%。`, };
+    comment: `${specialistForecasts.filter((agent) => agent.status === "available").length}人の専門AIを評価点と信頼度で統合。全${ranked.length}頭中の1位勝率${(ranked[0].probability * 100).toFixed(1)}%。${predictionContext === "pre_race" ? "発走前予想として保存対象。" : "発走時点特徴量による後日再現で成績対象外。"}`, };
 }
 
-function buildLiveForecastPanel(probabilities, names, candidates) {
+function buildLiveForecastPanel(probabilities, names, trainedRows, marketHorse) {
   const marks = ["◎", "○", "▲", "△", "☆"];
-  const ability = Object.entries(probabilities).map(([horseNumber, probability]) => ({
-    horseNumber: Number(horseNumber), horseName: names.get(Number(horseNumber)) ?? "", score: probability,
-  })).sort((left, right) => right.score - left.score);
-  const ticketHorseScores = new Map();
-  for (const candidate of candidates.filter((row) => row.method === "1点" && row.abilityProbability != null)) {
-    const horseNumber = Number(candidate.componentSelectionKeys?.[0]);
-    if (Number.isInteger(horseNumber)) ticketHorseScores.set(horseNumber,
-      (candidate.abilityExpectedReturn ?? 0) - (candidate.conservativeExpectedReturn ?? 0));
-  }
-  const uncertainty = [...ability].sort((left, right) =>
-    (ticketHorseScores.get(left.horseNumber) ?? Infinity) - (ticketHorseScores.get(right.horseNumber) ?? Infinity));
-  const basePanel = [
-    { id: "ability", label: "能力・近走担当", status: "available",
-      marks: ability.slice(0, 5).map((row, index) => ({ mark: marks[index], ...row })),
-      opinion: `${ability[0]?.horseName ?? "-"}を能力上位に評価。` },
-    { id: "uncertainty", label: "安定性担当", status: "available",
-      marks: uncertainty.slice(0, 5).map((row, index) => ({ mark: marks[index], ...row })),
-      opinion: `${uncertainty[0]?.horseName ?? "-"}は校正下振れ幅が相対的に小さい。` },
-    { id: "ticket_value", label: "買い目妙味担当", status: "available",
-      marks: [...ability].sort((left, right) => {
-        const leftCandidate = candidates.filter((row) => row.method === "1点" && row.selection.startsWith(`${left.horseNumber} `))
-          .sort(byAbilityEv)[0];
-        const rightCandidate = candidates.filter((row) => row.method === "1点" && row.selection.startsWith(`${right.horseNumber} `))
-          .sort(byAbilityEv)[0];
-        return (rightCandidate?.adoptedExpectedReturn ?? 0) - (leftCandidate?.adoptedExpectedReturn ?? 0);
-      }).slice(0, 5).map((row, index) => ({ mark: marks[index], ...row })),
-      opinion: "能力確率と現在オッズの差から妙味を評価。" },
-  ];
-  const valueOrder = [...ability].sort((left, right) => liveHorseEv(right.horseNumber, candidates, "adoptedExpectedReturn")
-    - liveHorseEv(left.horseNumber, candidates, "adoptedExpectedReturn"));
-  const conservativeOrder = [...ability].sort((left, right) =>
-    liveHorseEv(right.horseNumber, candidates, "conservativeExpectedReturn")
-    - liveHorseEv(left.horseNumber, candidates, "conservativeExpectedReturn"));
-  const consensusOrder = [...ability].map((row) => ({
-    ...row,
-    score: rankScore(row.horseNumber, ability) * 0.45
-      + rankScore(row.horseNumber, uncertainty) * 0.25
-      + rankScore(row.horseNumber, valueOrder) * 0.3,
-  })).sort((left, right) => right.score - left.score || left.horseNumber - right.horseNumber);
-  const personaRows = [
-    ["persona_orthodox", "王道派・本命の剛", "orthodox", ability, "能力上位を素直に信頼する。"],
-    ["persona_stable", "堅実派・守りの環", "stable", uncertainty, "校正下振れが小さい馬を優先する。"],
-    ["persona_value", "穴党・妙味の蓮", "value", valueOrder, "現在オッズとの妙味を優先する。"],
-    ["persona_conservative", "慎重派・安全の慧", "conservative", conservativeOrder, "安全側期待値が残る馬だけを見る。"],
-    ["persona_consensus", "合議派・総合の司", "consensus", consensusOrder, "能力・安定性・妙味を合議する。"],
-  ].map(([id, label, tone, rows, stance]) => ({
-    id, label, persona: true, personaTone: tone, status: "available",
-    marks: rows.slice(0, 5).map((row, index) => ({ mark: marks[index], ...row })),
-    opinion: `${stance} ◎${rows[0]?.horseName ?? "-"}。`,
+  const features = new Map(trainedRows.map((row) => {
+    try { return [Number(row.horse_number), JSON.parse(row.features_json ?? "{}")]; }
+    catch { return [Number(row.horse_number), {}]; }
   }));
-  return [...basePanel, ...personaRows];
+  const base = Object.entries(probabilities).map(([horseNumber, probability]) => ({
+    horseNumber: Number(horseNumber), horseName: names.get(Number(horseNumber)) ?? "", probability,
+    features: features.get(Number(horseNumber)) ?? {}, market: marketHorse?.[horseNumber] ?? null,
+  }));
+  const signal = (row, keys) => averageFinite(keys.map((key) => Number(row.features[key])));
+  const scored = (scoreFn) => base.map((row) => ({ ...row, score: scoreFn(row) }))
+    .filter((row) => Number.isFinite(row.score)).sort((a, b) => b.score - a.score || a.horseNumber - b.horseNumber);
+  const ability = scored((row) => row.probability * .65 + finiteOr(signal(row, ["priorWinRateSmoothed", "recent3PlaceRate", "recent5PlaceRate"]), 0) * .35);
+  const pace = scored((row) => row.features.paceHistoryStarts > 0
+    ? signal(row, ["frontRunnerRateSmoothed", "recent3PositionGain", "priorAveragePositionGain", "recent3LateCornerPositionPercentile"]) : NaN);
+  const data = scored((row) => signal(row, ["venueWinRateSmoothed", "distanceBandWinRateSmoothed", "surfaceWinRateSmoothed",
+    "goingWinRateSmoothed", "jockeyWinRateSmoothed", "trainerWinRateSmoothed"]));
+  const value = scored((row) => row.market > 0 ? row.probability / row.market
+    + Math.max(0, finiteOr(signal(row, ["recent3PositionGain", "fieldRelativeSmoothedWinRate"]), 0)) : NaN);
+  const odds = scored((row) => row.market > 0 ? Math.log(Math.max(1e-12, row.probability) / Math.max(1e-12, row.market)) : NaN);
+  const rows = [
+    specialist("agent_ability", "能力AI", "ability", ability, "能力・近走・格の履歴を重視", marks),
+    specialist("agent_pace", "展開AI", "pace", pace, "脚質・位置取り・想定ペースを重視", marks),
+    specialist("agent_data", "データAI", "data", data, "コース・距離・騎手・厩舎を重視", marks),
+    specialist("agent_value", "穴馬AI", "value", value, "人気薄と能力に対する過小評価を重視", marks),
+    specialist("agent_odds", "オッズAI", "odds", odds, "AI確率と市場確率の差を重視", marks),
+  ];
+  return rows;
 }
+
+function specialist(id, label, tone, rows, stance, marks) {
+  if (!rows.length) return { id, label, persona: true, personaTone: tone, status: "unavailable", marks: [],
+    confidence: 0, opinion: `${stance}。必要データ待ち。` };
+  const confidence = Math.min(1, rows.filter((row) => Object.keys(row.features).length > 0).length / rows.length);
+  return { id, label, persona: true, personaTone: tone, status: "available", confidence,
+    marks: rows.slice(0, 5).map((row, index) => ({ mark: marks[index], horseNumber: row.horseNumber,
+      horseName: row.horseName, score: row.score })),
+    opinion: `${stance}。◎${rows[0].horseName}を最上位に評価。` };
+}
+
+function averageFinite(values) {
+  const finite = values.filter(Number.isFinite);
+  return finite.length ? finite.reduce((sum, value) => sum + value, 0) / finite.length : NaN;
+}
+function finiteOr(value, fallback) { return Number.isFinite(value) ? value : fallback; }
 
 function liveHorseEv(horseNumber, candidates, field) {
   return candidates.filter((row) => row.method === "1点"
@@ -440,8 +441,8 @@ function compactChiefDecision(decision) {
 function waiting(reason, outputPath = OUTPUT) { const result = { status: "waiting", reason, generatedAt: new Date().toISOString(), candidates: [], predictions: [] }; fs.mkdirSync(path.dirname(outputPath), { recursive: true }); fs.writeFileSync(outputPath, `${JSON.stringify(result, null, 2)}\n`, "utf8"); return result; }
 function loadArtifact(artifactPath) {
   const paths = artifactPath ? [artifactPath] : [
-    path.join("data", "jra-free-private", "models", "ability-softmax-v1.json"),
-    path.join("data", "jra-free-private", "models", "reference-asof-model.json"),
+    path.join(PRIVATE_DIR, "models", "ability-softmax-v1.json"),
+    path.join(PRIVATE_DIR, "models", "reference-asof-model.json"),
   ];
   return loadCompatibleModelArtifact(paths, FEATURE_KEYS).artifact;
 }
@@ -455,6 +456,9 @@ function byAbilityEv(left, right) {
 function tokyoDate() { return new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(new Date()); }
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
-  const result = generateLiveMarketEv({ allowFixture: process.argv.includes("--allow-fixture") });
+  const result = generateLiveMarketEv({
+    allowFixture: process.argv.includes("--allow-fixture"),
+    includeBatch: process.argv.includes("--include-batch"),
+  });
   console.log(JSON.stringify({ status: result.status, races: Object.keys(result.evaluatedByRace ?? {}).length, evaluated: result.evaluatedTotal ?? 0, candidates: result.candidates.length }, null, 2));
 }
