@@ -345,6 +345,51 @@ create table live_ev_validation_runs (
   metrics jsonb not null
 );
 
+create table prediction_publications (
+  id bigserial primary key,
+  race_id text not null,
+  model_version text not null,
+  prediction_context text not null,
+  published_at timestamptz not null,
+  odds_observed_at timestamptz,
+  content_hash text not null unique,
+  created_at timestamptz not null default now()
+);
+
+create table prediction_agent_snapshots (
+  publication_id bigint not null references prediction_publications(id),
+  agent_id text not null,
+  agent_name text not null,
+  status text not null,
+  confidence numeric not null,
+  marks jsonb not null,
+  opinion text not null,
+  primary key (publication_id, agent_id)
+);
+
+create table prediction_master_snapshots (
+  publication_id bigint primary key references prediction_publications(id),
+  marks jsonb not null,
+  consensus jsonb not null,
+  comment text not null
+);
+
+create table prediction_ticket_snapshots (
+  id bigserial primary key,
+  publication_id bigint not null references prediction_publications(id),
+  rank integer not null,
+  bet_type text not null,
+  method text not null,
+  selection_display text not null,
+  ticket_keys jsonb not null,
+  points integer not null check (points between 1 and 5),
+  unit_stake_yen integer not null check (unit_stake_yen = 100),
+  total_investment_yen integer not null,
+  expected_return numeric,
+  decision_status text not null,
+  unique (publication_id, bet_type, rank)
+);
+
 create table bet_orders (
   id bigserial primary key,
   candidate_id bigint not null references bet_candidates(id),

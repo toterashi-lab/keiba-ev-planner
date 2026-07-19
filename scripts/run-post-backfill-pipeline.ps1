@@ -2,7 +2,7 @@ param([switch]$ForceModel)
 
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
-$privateDir = Join-Path $root "data\jra-free-private"
+$privateDir = if ($env:KEIBA_PRIVATE_DIR) { $env:KEIBA_PRIVATE_DIR } else { Join-Path (Split-Path $root -Parent) "data\jra-free-private" }
 $lockPath = Join-Path $privateDir "post-backfill.lock"
 $logDir = Join-Path $privateDir "logs"
 $node = Get-Command node -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source -First 1
@@ -143,10 +143,14 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Reference expectancy external audit failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\generate-market-ev.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Audited reference expectancy generation failed: $LASTEXITCODE" }
-  & $node --no-warnings "scripts\predict-live-racecards.mjs"
+  & $node --max-old-space-size=8192 --no-warnings "scripts\predict-live-racecards.mjs" --include-batch
   if ($LASTEXITCODE -ne 0) { throw "Live ability prediction failed: $LASTEXITCODE" }
-  & $node --no-warnings "scripts\generate-live-market-ev.mjs"
+  & $node --no-warnings "scripts\generate-live-market-ev.mjs" --include-batch
   if ($LASTEXITCODE -ne 0) { throw "Live expectancy generation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\prediction-snapshot.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Prediction snapshot persistence failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\export-current-live-predictions.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Live AI output export failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\train-expectancy-model-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Model pipeline check failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\train-expectancy-model-unit-check.mjs"

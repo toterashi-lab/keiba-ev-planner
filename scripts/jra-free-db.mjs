@@ -4,10 +4,11 @@ import path from "node:path";
 import zlib from "node:zlib";
 import { DatabaseSync } from "node:sqlite";
 import { isPreRaceObservation } from "./race-time.mjs";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
 const BASE_URL = "https://www.jra.go.jp/JRADB/accessS.html";
 const ROOT = path.resolve(import.meta.dirname, "..");
-const PRIVATE_DIR = path.join(ROOT, "data", "jra-free-private");
+const PRIVATE_DIR = resolvePrivateDataDir(ROOT);
 const RAW_DIR = path.join(PRIVATE_DIR, "raw");
 const DB_PATH = path.join(PRIVATE_DIR, "keiba.sqlite");
 const AUDIT_REPORT_PATH = path.join(PRIVATE_DIR, "models", "database-audit.json");
@@ -291,6 +292,33 @@ function initializeSchema() {
     create table if not exists live_ev_validation_runs(
       id integer primary key,model_version text not null,generated_at text not null,metrics_json text not null
     );
+    create table if not exists prediction_publications(
+      id integer primary key,race_id text not null,model_version text not null,prediction_context text not null,
+      published_at text not null,odds_observed_at text,content_hash text not null unique,created_at text not null
+    );
+    create table if not exists prediction_agent_snapshots(
+      publication_id integer not null references prediction_publications(id),agent_id text not null,agent_name text not null,
+      status text not null,confidence real not null,marks_json text not null,opinion text not null,
+      primary key(publication_id,agent_id)
+    );
+    create table if not exists prediction_master_snapshots(
+      publication_id integer primary key references prediction_publications(id),marks_json text not null,consensus_json text not null,comment text not null
+    );
+    create table if not exists prediction_ticket_snapshots(
+      id integer primary key,publication_id integer not null references prediction_publications(id),rank integer not null,
+      bet_type text not null,method text not null,selection_display text not null,ticket_keys_json text not null,
+      points integer not null check(points between 1 and 5),unit_stake_yen integer not null check(unit_stake_yen=100),
+      total_investment_yen integer not null,expected_return real,decision_status text not null,
+      unique(publication_id,bet_type,rank)
+    );
+    create trigger if not exists prediction_publications_no_update before update on prediction_publications begin select raise(abort,'prediction publications are append-only'); end;
+    create trigger if not exists prediction_publications_no_delete before delete on prediction_publications begin select raise(abort,'prediction publications are append-only'); end;
+    create trigger if not exists prediction_agents_no_update before update on prediction_agent_snapshots begin select raise(abort,'prediction snapshots are append-only'); end;
+    create trigger if not exists prediction_agents_no_delete before delete on prediction_agent_snapshots begin select raise(abort,'prediction snapshots are append-only'); end;
+    create trigger if not exists prediction_master_no_update before update on prediction_master_snapshots begin select raise(abort,'prediction snapshots are append-only'); end;
+    create trigger if not exists prediction_master_no_delete before delete on prediction_master_snapshots begin select raise(abort,'prediction snapshots are append-only'); end;
+    create trigger if not exists prediction_tickets_no_update before update on prediction_ticket_snapshots begin select raise(abort,'prediction snapshots are append-only'); end;
+    create trigger if not exists prediction_tickets_no_delete before delete on prediction_ticket_snapshots begin select raise(abort,'prediction snapshots are append-only'); end;
     create index if not exists races_date_idx on races(race_date, venue_code, race_number);
     create index if not exists entries_horse_idx on race_entries(horse_id, race_id);
     create index if not exists raw_pages_type_idx on raw_pages(page_type, fetched_at);
