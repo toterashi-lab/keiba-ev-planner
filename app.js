@@ -6,6 +6,7 @@ const liveModel = window.KEIBA_LIVE_MODEL_OUTPUTS ?? { predictions: [], candidat
 const dbStatus = window.KEIBA_DATABASE_STATUS ?? {};
 const featureStatus = window.KEIBA_MODEL_FEATURE_COVERAGE ?? { groups: [] };
 const ticketEngine = window.KEIBA_TICKET_ENGINE;
+const forecastPolicy = window.KEIBA_FORECAST_POLICY;
 const savedPerformance = window.KEIBA_AGENT_PERFORMANCE ?? { records: [] };
 
 const currentEdition = liveEdition.meetings?.length ? liveEdition : referenceMeetings;
@@ -105,14 +106,16 @@ function renderRaceCards(track) {
 function raceCardHtml(race, track) {
   const prediction = findPrediction(race.no, track);
   const consensus = buildConsensus(prediction);
-  const top = topCandidate(race.no, track);
+  const realCandidates = readyCandidates(race.no, track);
+  const volatility = forecastPolicy.volatilityProfile({ race, prediction, consensus, candidates: realCandidates });
+  const top = displayedTopTicket(race, track, prediction, consensus, volatility);
   const result = findResult(race.no, track);
   const status = raceStatus(result, prediction, top, race);
   return `<button type="button" class="race-card" data-race="${race.no}" aria-label="${escapeHtml(track.venueName)}${race.no}レース ${escapeHtml(race.name)}を見る">
     <div class="race-card-top"><span class="race-card-no">${race.no}R</span><span class="race-card-title"><strong>${escapeHtml(race.name)}</strong><small>${escapeHtml(race.surface)}${number(race.distanceM)}m・${escapeHtml(race.condition)}</small></span><span class="race-card-time">${escapeHtml(race.start)}<br>${statusBadge(status)}</span></div>
     <div class="race-card-body"><span class="race-card-pick"><span>総合本命</span><strong>${consensus.top ? `${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}` : "予想準備中"}</strong></span><span class="agreement">一致度 ${consensus.agreement}/5</span>
-      <span class="race-card-ticket"><span>おすすめ</span><strong>${top ? `${escapeHtml(top.betType)} ${escapeHtml(top.selection)}・${unitStake}円` : status.id === "odds" ? "オッズ取得待ち" : "買い目なし"}</strong></span>
-      <span class="stars" aria-label="おすすめ度${recommendationStars(top)}段階">${"★".repeat(recommendationStars(top))}${"☆".repeat(5 - recommendationStars(top))}</span></div>
+      <span class="race-card-ticket"><span>AI予想買い目</span><strong>${top ? `${escapeHtml(top.betType)} ${escapeHtml(displayTicket(top.betType, top.ticketKeys?.[0] ?? top.selection, top))}・${unitStake}円` : "予想準備中"}</strong></span>
+      ${volatilityMeterHtml(volatility, true)}</div>
   </button>`;
 }
 
@@ -142,12 +145,14 @@ function raceDetailHtml(race, track) {
   const prediction = findPrediction(race.no, track);
   const result = findResult(race.no, track);
   const consensus = buildConsensus(prediction);
-  const top = topCandidate(race.no, track);
+  const realCandidates = readyCandidates(race.no, track);
+  const volatility = forecastPolicy.volatilityProfile({ race, prediction, consensus, candidates: realCandidates });
+  const top = displayedTopTicket(race, track, prediction, consensus, volatility);
   const status = raceStatus(result, prediction, top, race);
   return `<article class="detail-shell">
     <header class="detail-head"><span class="race-card-no">${race.no}R</span><div class="detail-title"><h2>${escapeHtml(race.name)}</h2><p>${escapeHtml(track.venueName)}・${escapeHtml(race.start)}発走・${escapeHtml(race.surface)}${number(race.distanceM)}m・${escapeHtml(race.condition)}</p></div>${statusBadge(status)}</header>
     <nav class="detail-tabs" aria-label="レース詳細"><button type="button" data-tab="conclusion">結論</button><button type="button" data-tab="agents">5人の予想</button><button type="button" data-tab="bets">買い目</button><button type="button" data-tab="runners">出馬表</button><button type="button" data-tab="result">結果</button></nav>
-    ${detailPanel("conclusion", conclusionHtml(consensus, top, prediction))}
+    ${detailPanel("conclusion", conclusionHtml(consensus, top, prediction, volatility))}
     ${detailPanel("agents", agentsHtml(prediction, result, consensus))}
     ${detailPanel("bets", betsHtml(race.no, track, top))}
     ${detailPanel("runners", runnersHtml(result, prediction))}
@@ -157,14 +162,14 @@ function raceDetailHtml(race, track) {
 
 function detailPanel(id, html) { return `<section class="detail-panel ${state.detailTab === id ? "active" : ""}" data-panel="${id}">${html}</section>`; }
 
-function conclusionHtml(consensus, top, prediction) {
+function conclusionHtml(consensus, top, prediction, volatility) {
   const topMark = consensus.top;
   const expected = expectedReturn(top);
   return `<div class="conclusion-grid"><section class="consensus-card"><div class="consensus-top"><div><span class="eyebrow">5人の合議結果</span><h3>${topMark ? `<span class="horse-number">${topMark.horseNumber}</span>${escapeHtml(topMark.horseName)}` : "予想準備中"}</h3></div><span class="agreement">${consensus.split ? "意見割れ" : `一致 ${consensus.agreement}/5`}</span></div>
     <div class="consensus-picks"><div><span>総合本命</span><strong>${markLabel(consensus.ranked[0], "◎")}</strong></div><div><span>対抗</span><strong>${markLabel(consensus.ranked[1], "○")}</strong></div><div><span>穴候補</span><strong>${markLabel(consensus.value, "☆")}</strong></div></div>
     <p class="plain-explanation">${prediction ? escapeHtml(prediction.comment ?? "各AIの評価点と信頼度を加重して総合判断しています。") : "保存済みのAI予想がありません。予測生成後に5人の評価を統合します。"}</p></section>
-    <section class="recommend-card"><span>最終おすすめ買い目</span><h3>${top ? `${escapeHtml(top.betType)} ${escapeHtml(top.selection)}` : "買い目なし"}</h3><p>${top ? `${escapeHtml(top.method ?? "1点")}・1点${unitStake}円。${escapeHtml(top.comment ?? "発走前オッズとAI確率を比較した候補です。")}` : "有効な発走前オッズがないため、期待値を推測で表示しません。"}</p>
-    <div class="recommend-metrics"><div class="metric"><span>おすすめ度</span><strong class="stars">${"★".repeat(recommendationStars(top))}${"☆".repeat(5 - recommendationStars(top))}</strong></div><div class="metric"><span>${unitStake}円あたり期待払戻</span><strong>${expected == null ? "対象外" : yen(Math.round(unitStake * expected))}</strong></div><div class="metric"><span>AI推定的中率</span><strong>${top?.abilityProbability == null ? "対象外" : percent(top.abilityProbability)}</strong></div><div class="metric"><span>判定</span><strong>${recommendationDecision(top)}</strong></div></div></section></div>
+    <section class="recommend-card"><span>AI予想買い目</span><h3>${top ? `${escapeHtml(top.betType)} ${escapeHtml(displayTicket(top.betType, top.ticketKeys?.[0] ?? top.selection, top))}` : "予想準備中"}</h3><p>${top ? `${escapeHtml(top.method ?? "1点")}・1点${unitStake}円。${escapeHtml(top.comment ?? "5人のAI合議から組み立てた予想買い目です。")}` : "出走馬予測の生成後に買い目を表示します。"}</p>
+    ${volatilityMeterHtml(volatility)}<div class="recommend-metrics"><div class="metric"><span>${unitStake}円あたり期待払戻</span><strong>${expected == null ? "オッズ取得待ち" : yen(Math.round(unitStake * expected))}</strong></div><div class="metric"><span>AI推定的中率</span><strong>${top?.abilityProbability == null ? "券種別校正待ち" : percent(top.abilityProbability)}</strong></div><div class="metric"><span>買い目区分</span><strong>${top?.forecastOnly ? "参考予想" : recommendationDecision(top)}</strong></div><div class="metric"><span>1点金額</span><strong>${yen(unitStake)}</strong></div></div></section></div>
     <p class="plain-explanation">同じ条件で${unitStake}円を何度も購入した場合に、平均でいくら戻るとAIが推定しているかを表示しています。</p>`;
 }
 
@@ -186,10 +191,16 @@ function agentCardHtml(definition, agent, result, predictionContext = "pre_race"
 }
 
 function betsHtml(raceNo, track, top) {
-  const raceCandidates = readyCandidates(raceNo, track);
-  if (!raceCandidates.length) return empty("有効な発走前オッズがないため、参考買い目はありません。能力予想は「5人の予想」で確認できます。");
+  const prediction = findPrediction(raceNo, track);
+  const forecastRows = forecastPolicy.buildForecastTickets(prediction, unitStake);
+  const realRows = readyCandidates(raceNo, track);
+  const raceCandidates = BET_TYPES.flatMap((type) => {
+    const priced = realRows.filter((row) => row.betType === type);
+    return priced.length ? priced : forecastRows.filter((row) => row.betType === type);
+  });
+  if (!raceCandidates.length) return empty("予想生成中です。出走馬予測の完了後に全券種の買い目を表示します。");
   const cards = BET_TYPES.map((type) => betCardHtml(type, raceCandidates.filter((row) => row.betType === type))).filter(Boolean).join("");
-  return `<div class="bet-section-head"><div><h3>参考買い目</h3><p>すべて1点${unitStake}円。各券種は最大5点です。</p></div><span class="status-badge ${top ? "ready" : "skip"}">${top ? "買い目あり" : "見送り"}</span></div><div class="bet-card-list">${cards || empty("推奨条件を満たす買い目がありません")}</div>`;
+  return `<div class="bet-section-head"><div><h3>全券種の予想買い目</h3><p>すべて1点${unitStake}円。3連系・フォーメーションは最大5点です。</p></div><span class="status-badge ${realRows.length ? "ready" : "waiting"}">${realRows.length ? "期待値反映" : "オッズ待ち予想"}</span></div><div class="bet-card-list">${cards}</div>`;
 }
 
 function betCardHtml(type, rows) {
@@ -205,7 +216,8 @@ function betCardHtml(type, rows) {
     if (tickets.length === 5) break;
   }
   const copyText = `${type}\n${tickets.map((ticket, index) => `${index + 1}. ${ticket.display} ${unitStake}円`).join("\n")}\n合計${tickets.length * unitStake}円`;
-  return `<article class="bet-card"><header><h4>${escapeHtml(type)}</h4><span class="status-badge ready">最大${tickets.length}点</span></header><ol>${tickets.map((ticket) => `<li><span class="bet-line"><strong>${escapeHtml(ticket.display)}</strong><span>${unitStake}円</span></span></li>`).join("")}</ol><footer><strong>合計 ${yen(tickets.length * unitStake)}</strong><button type="button" class="copy-button" data-copy="${escapeHtml(copyText)}">買い目をコピー</button></footer></article>`;
+  const forecastOnly = rows.every((row) => row.forecastOnly);
+  return `<article class="bet-card ${forecastOnly ? "forecast-only" : ""}"><header><h4>${escapeHtml(type)}</h4><span class="status-badge ${forecastOnly ? "waiting" : "ready"}">${forecastOnly ? "参考予想" : `${tickets.length}点`}</span></header><ol>${tickets.map((ticket) => `<li><span class="bet-line"><strong>${escapeHtml(ticket.display)}</strong><span>${unitStake}円</span></span></li>`).join("")}</ol><footer><strong>合計 ${yen(tickets.length * unitStake)}</strong><button type="button" class="copy-button" data-copy="${escapeHtml(copyText)}">買い目をコピー</button></footer></article>`;
 }
 
 function runnersHtml(result, prediction) {
@@ -331,18 +343,26 @@ function readyCandidates(raceNo = state.raceNo, track = selectedTrack()) {
     .filter((row) => row.status === "ready" && expectedReturn(row) != null && row.selection);
 }
 function topCandidate(raceNo = state.raceNo, track = selectedTrack()) { return readyCandidates(raceNo, track).sort((a, b) => (expectedReturn(b) ?? 0) - (expectedReturn(a) ?? 0))[0] ?? null; }
+function displayedTopTicket(race, track, prediction, consensus, volatility) {
+  return topCandidate(race.no, track) ?? forecastPolicy.primaryForecastTicket(forecastPolicy.buildForecastTickets(prediction, unitStake), volatility);
+}
 function expectedReturn(row) { for (const key of ["conservativeExpectedReturn", "adoptedExpectedReturn", "abilityExpectedReturn", "marketExpectedReturn"]) { const value = Number(row?.[key]); if (Number.isFinite(value)) return value; } return null; }
 
 function raceStatus(result, prediction, top, race = selectedRace()) {
   if (isFinalResult(result)) return { id: "result", label: "結果確定" };
   if ((result && result.status !== "pre_race") || hasStarted(state.date, race?.start)) return { id: "closed", label: "発走済み" };
   if (!prediction) return { id: "waiting", label: "予想準備中" };
-  if (top) return { id: "ready", label: "買い目あり" };
-  return { id: "odds", label: "オッズ取得待ち" };
+  if (top?.forecastOnly) return { id: "odds", label: "予想公開中" };
+  if (top) return { id: "ready", label: "期待値計算済み" };
+  return { id: "waiting", label: "予想生成中" };
 }
 function statusBadge(status) { const className = status.id === "odds" ? "waiting" : status.id; return `<span class="status-badge ${className}">${status.label}</span>`; }
-function recommendationStars(top) { const value = expectedReturn(top); if (value == null) return 0; if (value >= 1.2) return 5; if (value >= 1.1) return 4; if (value >= 1.03) return 3; if (value >= 1) return 2; return 1; }
 function recommendationDecision(top) { const value = expectedReturn(top); if (value == null) return "対象外"; if (top.recommendationEligible && value >= 1.08) return "買い"; if (value >= 1) return "候補"; return "見送り"; }
+
+function volatilityMeterHtml(profile, compact = false) {
+  const segments = Array.from({ length: 5 }, (_, index) => `<i class="${index < profile.level ? "active" : ""}"></i>`).join("");
+  return `<div class="volatility-meter level-${profile.level} ${compact ? "compact" : ""}" aria-label="荒れ具合 ${profile.label} ${profile.score}点"><div class="volatility-label"><span>荒れ具合</span><strong>${escapeHtml(profile.label)} <b>${profile.score}</b></strong></div><div class="volatility-track" aria-hidden="true">${segments}</div>${compact ? "" : `<div class="volatility-factors">${profile.factors.map((factor) => `<span>${escapeHtml(factor)}</span>`).join("")}</div>`}</div>`;
+}
 
 function findPrediction(raceNo = state.raceNo, track = selectedTrack(), date = state.date) { return predictions.find((row) => row.date === date && row.meetingName === track?.meetingName && Number(row.raceNo) === Number(raceNo)) ?? null; }
 function findResult(raceNo = state.raceNo, track = selectedTrack(), date = state.date) { return results.find((row) => row.meetingName === track?.meetingName && Number(row.raceNo) === Number(raceNo) && (!row.date || row.date === date)) ?? null; }
