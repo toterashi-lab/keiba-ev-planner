@@ -1,418 +1,95 @@
 <!doctype html>
-<html lang="ja">
+<html lang="ja" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0b0e0c" />
-    <title>AIデジタル競馬新聞｜予想印・期待値・推奨買い目</title>
-    <link rel="stylesheet" href="styles.css?v=allbets-20260717" />
+    <meta name="theme-color" content="#111512" />
+    <meta name="description" content="5人の専門AI予想、合議結果、100円単位の参考買い目と確定結果を確認できる競馬予想サイト" />
+    <title>AIデジタル競馬新聞</title>
+    <link rel="stylesheet" href="styles.css?v=mobile-agents-20260719" />
   </head>
   <body>
-    <header class="site-header">
-      <div class="header-inner">
-        <div class="brand">
-          <span class="brand-mark">AI</span>
-          <div>
-            <strong>AIデジタル競馬新聞</strong>
-            <small>5人予想・期待値・推奨買い目</small>
-          </div>
-        </div>
-        <nav class="global-nav" aria-label="主要メニュー">
-          <a href="#race-workspace" class="active" data-mode-link="newspaper">出馬表</a>
-          <a href="#ai-prediction" data-newspaper-link>AI予想印</a>
-          <a href="#top-recommendation" data-newspaper-link>オッズ・買い目</a>
-          <a href="#performance">予想成績</a>
-          <a href="#ranking" data-mode-link="ranking">推奨ランキング</a>
-        </nav>
-        <div class="header-status">
-          <span class="status-dot"></span>
-          <span id="header-status-text">データベース確認中</span>
-        </div>
-      </div>
+    <a class="skip-link" href="#main-content">本文へ移動</a>
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="AIデジタル競馬新聞 ホーム">
+        <span class="brand-mark" aria-hidden="true">AI</span>
+        <span><strong>AIデジタル競馬新聞</strong><small>5人の予想を、ひと目で。</small></span>
+      </a>
+      <nav class="desktop-nav" aria-label="サイト全体">
+        <a href="#home" data-route="home">ホーム</a>
+        <a href="#races" data-route="races">今日のレース</a>
+        <a href="#results" data-route="results">予想結果</a>
+        <a href="#performance" data-route="performance">AI成績</a>
+        <a href="#research" data-route="research">データ／研究</a>
+      </nav>
+      <button id="theme-toggle" class="icon-button" type="button" title="表示テーマを切り替える" aria-label="表示テーマを切り替える">◐</button>
     </header>
 
-    <main>
-      <section class="landing-hero" aria-labelledby="hero-title">
-        <div class="hero-content">
-          <p class="hero-kicker">AI DIGITAL RACING PAPER / JRA公式結果 × 保存済みオッズ</p>
-          <h1 id="hero-title">AIデジタル競馬新聞</h1>
-          <p class="hero-lead">5人のAI予想印、全頭評価、期待値と推奨買い目を一紙に集約。<br />全レースを1点100円基準で比較します。</p>
-          <div class="hero-tags" aria-label="分析条件">
-            <span>全7券種</span>
-            <span>1点・BOX・フォーメーション</span>
-            <span>外部検証済み</span>
-          </div>
-          <div class="hero-actions">
-            <a class="hero-primary" href="#race-workspace">ランキングを見る</a>
-            <a class="hero-secondary" href="#ai-prediction">AI予想を見る</a>
-          </div>
-          <div class="hero-state"><span class="status-dot"></span><strong>データ収集中</strong><span>予想モデルを検証中</span></div>
+    <main id="main-content">
+      <section id="page-home" class="page" data-page="home" aria-labelledby="home-title">
+        <div class="home-lead">
+          <div><span class="eyebrow">JRA公式データ × 5専門AI</span><h1 id="home-title">本日の予想</h1><p id="home-summary">開催データを読み込んでいます。</p></div>
+          <div id="next-race-card" class="next-race-card" aria-live="polite"></div>
         </div>
-        <div class="hero-figures" aria-label="現在の主要指標">
-          <div><span>先週検証</span><strong>72R</strong><small>結果・払戻照合済み</small></div>
-          <div><span>AI推奨回収率</span><strong id="hero-favorite-roi">--</strong><small>推奨72件だけを検証</small></div>
-          <div><span>蓄積完了</span><strong id="hero-db-months">--</strong><small id="hero-db-races">DB集計中</small></div>
-        </div>
-      </section>
-
-      <nav class="insight-strip" aria-label="レース情報メニュー">
-        <a href="#race-workspace"><span>01</span><strong>出馬表</strong><small>全頭・騎手・オッズ</small></a>
-        <a href="#ai-prediction"><span>02</span><strong>5人AI新聞</strong><small>予想印・展開見解</small></a>
-        <a href="#top-recommendation"><span>03</span><strong>推奨買い目</strong><small>期待値・BOX・フォーメーション</small></a>
-        <a href="#performance"><span>04</span><strong>結果・予想成績</strong><small>払戻・的中・回収率</small></a>
-        <a href="#warehouse"><span>05</span><strong>データ</strong><small>傾向・30年収録状況</small></a>
-      </nav>
-
-      <section class="source-strip">
-        <div>
-          <strong>今週開催</strong>
-          <span>2026年7月18日・19日</span>
-          <span>函館・福島・小倉</span>
-          <span id="source-db-count">長期DB読込中</span>
-        </div>
-        <p>JRA公式番組・結果を照合。長期DBへ同じ形式で継続蓄積します。</p>
-      </section>
-
-      <section id="race-workspace" class="race-workspace">
-        <div id="date-tabs" class="date-tabs" aria-label="開催日"></div>
-        <div id="venue-tabs" class="venue-tabs" aria-label="競馬場"></div>
-        <div class="app-mode-tabs" role="tablist" aria-label="表示切替">
-          <button type="button" class="active" data-app-mode="newspaper">デジタル競馬新聞</button>
-          <button type="button" data-app-mode="ranking">開催別・期待値ランキング</button>
-        </div>
-        <div id="ranking-mode" class="app-mode-panel">
-        <section class="venue-ranking" aria-labelledby="venue-ranking-title">
-          <header>
-            <div><span id="venue-ranking-context">開催を選択中</span><h2 id="venue-ranking-title">レース期待値ランキング</h2></div>
-            <span id="venue-ranking-status" class="decision reject">算出 0 / 12R</span>
-          </header>
-          <div id="ranking-bet-tabs" class="ranking-bet-tabs" aria-label="券種別ランキング"></div>
-          <div id="ranking-method-tabs" class="ranking-method-tabs" aria-label="買い方別ランキング"></div>
-          <div id="venue-ranking-list" class="venue-ranking-list"></div>
-          <p>各レースの最上位買い目を安全側期待回収率で比較。順位を選ぶと対象レースへ移動します。</p>
-          <div class="selection-ranking-head">
-            <strong>買い目別期待値ランキング</strong>
-            <span id="selection-ranking-count">0件</span>
-          </div>
-          <div class="table-scroll selection-ranking-scroll">
-            <table class="dense-table selection-ranking-table">
-              <thead><tr><th>順位</th><th>レース</th><th>券種</th><th>方式</th><th>探索根拠</th><th>買い目</th><th>点数</th><th>総投資</th><th>採用期待回収率</th><th>期待値差</th><th>判定</th></tr></thead>
-              <tbody id="selection-ranking-body"></tbody>
-            </table>
-          </div>
+        <div id="home-date-tabs" class="chip-row" aria-label="開催日"></div>
+        <div id="home-venue-tabs" class="segmented-scroll" aria-label="競馬場"></div>
+        <section class="section-block" aria-labelledby="featured-title">
+          <header class="section-heading"><div><span>発走順</span><h2 id="featured-title">レース一覧</h2></div><span id="race-list-count" class="count-badge"></span></header>
+          <div id="home-race-list" class="race-card-list"></div>
         </section>
-        </div>
-        <div id="newspaper-mode" class="app-mode-panel active">
-        <div id="race-tabs" class="race-tabs" aria-label="レース番号"></div>
-
-        <div class="race-heading">
-          <div class="race-number"><strong id="race-number">11</strong><span>R</span></div>
-          <div class="race-title-block">
-            <div class="race-title-line">
-              <h1 id="race-title">レースを読み込み中</h1>
-              <span id="result-badge" class="result-badge">確定</span>
-            </div>
-            <p id="race-meta">発走・コース情報を確認中</p>
-            <p id="race-condition"></p>
-          </div>
-          <div class="race-source">
-            <span>データ出典</span>
-            <a id="official-link" href="#" target="_blank" rel="noreferrer">JRA公式結果</a>
-          </div>
-        </div>
-
-        <section id="ai-prediction" class="ai-prediction" aria-labelledby="ai-prediction-title">
-          <header>
-            <div><span>タイプの違う5人が全頭を評価</span><h2 id="ai-prediction-title">AI競馬新聞・5人予想</h2></div>
-            <span id="ai-confidence" class="decision hold">計算準備中</span>
-          </header>
-          <div class="ai-prediction-body">
-            <div id="ai-marks" class="ai-marks"></div>
-            <div class="ai-analysis">
-              <strong id="ai-scenario">シナリオ計算中</strong>
-              <p id="ai-comment">公式オッズから各馬の勝率分布を計算しています。</p>
-              <small>先週レースの最終オッズ検証。結果・払戻は予想計算に使用していません。</small>
-            </div>
-          </div>
-          <div class="forecaster-board">
-            <header><strong>5人の予想印</strong><span id="master-consensus">集計中</span></header>
-            <div id="forecaster-panel" class="forecaster-panel"></div>
-          </div>
-        </section>
-
-        <section id="top-recommendation" class="top-recommendation blocked" aria-labelledby="top-recommendation-title">
-          <header>
-            <div><span>このレースの最優先判断</span><h2 id="top-recommendation-title">AI推奨買い目</h2></div>
-            <span id="top-recommendation-status" class="decision reject">計算準備中</span>
-          </header>
-          <div class="recommendation-main">
-            <div class="recommendation-ticket">
-              <span id="top-ticket-label">推奨買い目なし</span>
-              <strong id="top-ticket-selection">見送り</strong>
-              <small id="top-ticket-method">必要データを検査中</small>
-            </div>
-            <dl class="recommendation-metrics">
-              <div><dt>点数</dt><dd id="top-ticket-points">--</dd></div>
-              <div><dt>期待回収率</dt><dd id="top-ticket-return">--</dd></div>
-              <div><dt>安全側EV</dt><dd id="top-ticket-edge">--</dd></div>
-              <div><dt>総投資（1点100円）</dt><dd id="top-ticket-stake">0円</dd></div>
-            </dl>
-          </div>
-          <p id="top-recommendation-comment" class="recommendation-comment">発走前オッズと校正済み確率が揃うまで、買い目を推測で表示しません。</p>
-          <div class="expectancy-scenarios" aria-label="期待値シナリオ比較">
-            <div><span>市場基準</span><strong id="scenario-market-return">--</strong><small>オッズから逆算</small></div>
-            <div><span>AI理論値</span><strong id="scenario-ability-return">--</strong><small>能力モデル・研究値</small></div>
-            <div class="adopted"><span>採用期待値</span><strong id="scenario-adopted-return">--</strong><small id="scenario-adopted-note">安全側判定</small></div>
-          </div>
-          <section class="race-purchase-result" aria-labelledby="race-purchase-result-title">
-            <header>
-              <div><span>予想時点の最上位買い目を各100円で評価</span><h3 id="race-purchase-result-title">このレースのAI買い目検証</h3></div>
-              <span id="race-purchase-judgement" class="quality missing">照合中</span>
-            </header>
-            <div class="race-purchase-grid">
-              <div><span>AI買い目</span><strong id="race-purchase-selection">--</strong><small id="race-purchase-ticket">--</small></div>
-              <div><span>投資</span><strong id="race-purchase-investment">--</strong><small>1点100円</small></div>
-              <div><span>払戻</span><strong id="race-purchase-payout">--</strong><small>確定払戻</small></div>
-              <div class="net"><span>損益</span><strong id="race-purchase-net">--</strong><small id="race-purchase-roi">回収率 --</small></div>
-            </div>
-          </section>
-          <section class="bet-type-paper" aria-labelledby="bet-type-paper-title">
-            <header>
-              <div><span>全候補から券種ごとの期待値1位を選出</span><h3 id="bet-type-paper-title">券種別AI推奨買い目</h3></div>
-              <span>1点100円・買い方込み</span>
-            </header>
-            <div class="table-scroll">
-              <table class="dense-table bet-type-table">
-                <thead><tr><th>券種</th><th>買い方</th><th>推奨買い目</th><th>点数</th><th>投資</th><th>市場基準</th><th>AI理論値</th><th>採用期待値</th><th>判定</th></tr></thead>
-                <tbody id="bet-type-recommendation-body"></tbody>
-              </table>
-            </div>
-          </section>
-          <div id="ticket-coverage" class="ticket-coverage" aria-label="券種別の算出状態"></div>
-          <p id="candidate-count" class="candidate-count"></p>
-        </section>
-
-        <div class="view-tabs" role="tablist" aria-label="レース情報">
-          <button type="button" data-view="summary" class="active">出馬表</button>
-          <button type="button" data-view="expectancy">AI予想・買い目</button>
-          <button type="button" data-view="result">結果・払戻</button>
-          <button type="button" data-view="quality">データ</button>
-        </div>
-
-        <div class="race-layout">
-          <div class="race-main">
-            <section id="view-summary" class="view-panel active">
-              <div class="summary-band">
-                <div>
-                  <span>勝馬</span>
-                  <strong id="winner-name">未取得</strong>
-                </div>
-                <div>
-                  <span>払戻データ</span>
-                  <strong id="refund-count">0件</strong>
-                </div>
-                <div>
-                  <span>期待値判定</span>
-                  <strong class="hold">判定保留</strong>
-                </div>
-                <div>
-                  <span>予想保存</span>
-                  <strong class="locked">結果照合</strong>
-                </div>
-              </div>
-
-              <div class="section-title">
-                <div>
-                  <h2>全馬結果</h2>
-                  <p>JRA公式結果から取得した出走馬・騎手・調教師・走破内容です。</p>
-                </div>
-                <span id="runner-count" class="decision buy">0頭取得</span>
-              </div>
-              <div class="table-scroll">
-                <table class="dense-table runner-table">
-                  <thead><tr><th>着順</th><th>枠</th><th>馬番</th><th>馬名</th><th>AI印</th><th>単勝</th><th>複勝</th><th>性齢</th><th>斤量</th><th>騎手</th><th>タイム</th><th>着差</th><th>通過</th><th>上り</th><th>馬体重</th><th>調教師</th><th>人気</th></tr></thead>
-                  <tbody id="runner-body"></tbody>
-                </table>
-              </div>
-            </section>
-
-            <section id="view-expectancy" class="view-panel">
-              <div id="expectancy" class="section-title">
-                <div>
-                  <h2>期待値・買い目検証</h2>
-                  <p>取得オッズと校正済みモデル確率から、期待値・買い目・根拠を自動生成します。</p>
-                </div>
-                <span id="edge-badge" class="decision hold">未計算</span>
-              </div>
-
-              <div class="automatic-policy">
-                <div><strong>全自動計算</strong><span id="model-status">30年モデル未学習・自動推奨停止中</span></div>
-                <p>全券種・全買い目を1点100円で比較。BOX・フォーメーションは構成点へ展開し、総投資と期待払戻を自動集計します。</p>
-              </div>
-
-              <div class="logic-status-grid" aria-label="期待値ロジック状態">
-                <div><span>ロジック</span><strong id="logic-version">確認中</strong></div>
-                <div><span>確率方式</span><strong id="logic-probability-mode">確認中</strong></div>
-                <div><span>予想採用基準</span><strong id="logic-deployment-status">確認中</strong></div>
-                <a href="docs/expectancy-research-v5.md" target="_blank" rel="noreferrer">調査・計算仕様</a>
-              </div>
-
-              <div class="ev-metrics">
-                <div><span>算出候補</span><strong id="evaluated-candidates">--</strong></div>
-                <div><span>期待回収率</span><strong id="expected-return">--</strong></div>
-                <div><span>安全側EV</span><strong id="edge-value">--</strong></div>
-                <div><span>買い目全体の期待利益</span><strong id="unit-expected-profit">--</strong></div>
-              </div>
-
-              <div id="strategy-grid" class="strategy-grid"></div>
-              <section class="rationale-panel" aria-labelledby="rationale-title">
-                <header><h3 id="rationale-title">判定根拠</h3><span>自動コメント</span></header>
-                <ul id="rationale-list"></ul>
-                <div class="research-links">
-                  <strong>ロジック参照</strong>
-                  <a href="https://gwern.net/doc/statistics/decision/1994-benter.pdf" target="_blank" rel="noreferrer">Benter統合モデル</a>
-                  <a href="https://icml.cc/Conferences/2005/proceedings/papers/079_GoodProbabilities_NiculescuMizilCaruana.pdf" target="_blank" rel="noreferrer">確率校正</a>
-                  <a href="https://otexts.com/fpp3/tscv.html" target="_blank" rel="noreferrer">時系列検証</a>
-                  <a href="https://doi.org/10.1016/j.ijforecast.2009.12.014" target="_blank" rel="noreferrer">人気薄バイアス</a>
-                  <a href="https://www.jra.go.jp/faq/pop02/1_6.html" target="_blank" rel="noreferrer">JRA過去結果</a>
-                </div>
-              </section>
-              <p class="formula-note">1点の期待払戻＝100円×オッズ×安全側的中確率。複数点は構成点ごとの期待払戻を合算し、総投資＝点数×100円で期待回収率を計算します。</p>
-            </section>
-
-            <section id="view-result" class="view-panel">
-              <div class="section-title">
-                <div><h2>結果・払戻</h2><p>JRA公式結果ページから取得した確定情報です。</p></div>
-                <a id="result-link-secondary" href="#" target="_blank" rel="noreferrer">公式結果で照合</a>
-              </div>
-              <table class="dense-table payout-table">
-                <thead><tr><th>券種</th><th>的中番号</th><th>払戻</th><th>人気</th></tr></thead>
-                <tbody id="payout-body"></tbody>
-              </table>
-            </section>
-
-            <section id="view-quality" class="view-panel">
-              <div id="quality" class="section-title">
-                <div><h2>データ品質</h2><p>推奨に使えるデータと、検証専用データを分離します。</p></div>
-                <span class="batch-id">初回バッチ：2026-W28</span>
-              </div>
-              <div class="coverage-grid">
-                <div><span>番組</span><strong>72 / 72</strong><small>100%</small></div>
-                <div><span>勝馬</span><strong>72 / 72</strong><small>100%</small></div>
-                <div><span>払戻</span><strong id="quality-refunds">--</strong><small>取得済み</small></div>
-                <div><span>全出走馬</span><strong id="quality-runners">--</strong><small>取得済み</small></div>
-                <div><span>締切後オッズ</span><strong id="quality-odds">--</strong><small id="quality-odds-note">検査中</small></div>
-                <div><span>モデル予測</span><strong>0 / 72</strong><small class="danger-text">学習前</small></div>
-              </div>
-              <div class="quality-note">
-                <strong>現在できること</strong>
-                <p>開催・全出走馬・着順・騎手・調教師・走破内容・勝馬・払戻・締切後単勝複勝オッズの保存と、取得漏れの検査。</p>
-                <strong>まだできないこと</strong>
-                <p>先週開催前に遡った推奨の再現。発走前オッズ時系列と校正済み確率モデルが必要です。</p>
-              </div>
-              <div class="feature-readiness-head">
-                <div><h3>モデル要素の充足状況</h3><p>利用可能時点とリーク検査を通した特徴量だけを候補にします。</p></div>
-                <span id="feature-readiness-status" class="decision hold">監査中</span>
-              </div>
-              <div id="feature-readiness-grid" class="feature-readiness-grid"></div>
-            </section>
-          </div>
-
-          <aside class="race-sidebar">
-            <div class="sidebar-title"><strong id="sidebar-venue">福島</strong><span>全12R</span></div>
-            <div id="race-list" class="race-list"></div>
-          </aside>
-        </div>
-        </div>
       </section>
 
-      <section id="performance" class="performance-section">
-        <div class="section-title">
-          <div>
-            <h2>AI予想成績</h2>
-            <p>先週72レースを対象に、各レースのAI最上位買い目だけを100円単位で結果・払戻と照合しています。</p>
-          </div>
-          <span class="benchmark-label">外部検証不合格・参考予想</span>
-        </div>
-        <div id="performance-cards" class="performance-cards"></div>
-        <div class="performance-detail-head">
-          <div class="benchmark-tabs" role="tablist" aria-label="AI推奨検証">
-            <button type="button" class="active" data-benchmark="ai_all">AI推奨すべて</button>
-            <button type="button" data-benchmark="ai_ev1">期待回収率100%超</button>
-            <button type="button" data-benchmark="ai_ev11">期待回収率110%超</button>
-          </div>
-          <p id="performance-rule">各レースのAI最上位買い目を1点100円で仮想検証</p>
-        </div>
-        <div class="table-scroll">
-          <table class="dense-table performance-table">
-            <thead><tr><th>日付</th><th>競馬場・R</th><th>勝馬</th><th>勝馬オッズ</th><th>買い目</th><th>点数</th><th>投資</th><th>払戻</th><th>損益</th><th>判定</th></tr></thead>
-            <tbody id="performance-body"></tbody>
-          </table>
-        </div>
-        <div class="audit-note">
-          <strong>集計仕様</strong>
-          <span>AI予想に保存されたtopTicketだけを予想後に払戻照合。券種別候補、ランキング上位、1番人気、全頭買いは回収率へ含めません。</span>
-          <a href="docs/expectancy-research-v5.md">期待値ロジック</a>
-        </div>
+      <section id="page-races" class="page" data-page="races" aria-labelledby="races-title">
+        <header class="page-heading"><div><span class="eyebrow">TODAY'S RACES</span><h1 id="races-title">今日のレース</h1></div><p>開催・競馬場・レースを選ぶと詳細を表示します。</p></header>
+        <div id="race-date-tabs" class="chip-row" aria-label="開催日"></div>
+        <div id="race-venue-tabs" class="segmented-scroll" aria-label="競馬場"></div>
+        <div id="race-number-tabs" class="race-number-strip" aria-label="レース番号"></div>
+        <div id="race-detail"></div>
       </section>
 
-      <section id="payout-patterns" class="performance-section payout-pattern-section">
-        <div class="section-title">
-          <div>
-            <h2>レース傾向データ</h2>
-            <p>収録済みの過去レースから、高配当が発生しやすかった条件と直近期間での再現性を表示します。</p>
-          </div>
-          <span id="payout-pattern-status" class="decision hold">全件集計中</span>
-        </div>
-        <div id="payout-pattern-list" class="payout-pattern-list"></div>
-        <div class="audit-note">
-          <strong>用途制限</strong>
-          <span>高配当リフトはレースの荒れやすさ指標です。モデル確率と締切前オッズで正の期待値が確認できない限り、推奨買い目にはしません。</span>
-          <a href="data/historical-payout-patterns.json">集計JSON</a>
-        </div>
+      <section id="page-results" class="page" data-page="results" aria-labelledby="results-title">
+        <header class="page-heading"><div><span class="eyebrow">PREDICTION VS RESULT</span><h1 id="results-title">予想結果</h1></div><p>公開時点の予想と確定結果をレース単位で照合します。</p></header>
+        <div id="result-filter" class="chip-row" aria-label="結果期間"></div>
+        <div id="result-list" class="result-list"></div>
       </section>
 
-      <section id="warehouse" class="warehouse-section">
-        <div class="section-title">
-          <div><h2>データ収録状況</h2><p>過去30年のレース・出走馬・払戻を月単位で収録し、重複と欠損を自動検査しています。</p></div>
-          <span id="warehouse-status" class="warehouse-status">DB読込中</span>
-        </div>
-        <div class="pipeline-overview" aria-label="長期データベース進捗">
-          <div><span>完了月</span><strong id="db-months">--</strong><small>1996年以降</small></div>
-          <div><span>レース</span><strong id="db-races">--</strong><small>品質合格分</small></div>
-          <div><span>出走馬</span><strong id="db-runners">--</strong><small>正規化済み</small></div>
-          <div><span>払戻</span><strong id="db-payouts">--</strong><small>正規化済み</small></div>
-          <div><span>原本</span><strong id="db-raw-pages">--</strong><small>gzip・SHA-256</small></div>
-        </div>
-        <div class="progress-row">
-          <div><strong>30年バックフィル</strong><span id="db-progress-label">進捗確認中</span></div>
-          <div class="progress-track" role="progressbar" aria-label="30年バックフィル進捗" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="db-progress-bar"></span></div>
-          <p id="db-updated-at">公開集計時刻を確認中</p>
-        </div>
-        <div class="table-scroll">
-        <table class="dense-table batch-table">
-          <thead><tr><th>バッチ</th><th>対象期間</th><th>競馬場</th><th>レース</th><th>結果</th><th>払戻</th><th>状態</th></tr></thead>
-          <tbody><tr><td>2026-W28</td><td>7月11日〜12日</td><td>福島・小倉・函館</td><td>72</td><td>72</td><td id="batch-refunds">--</td><td><span class="quality complete">取込完了</span></td></tr></tbody>
-        </table>
-        </div>
+      <section id="page-performance" class="page" data-page="performance" aria-labelledby="performance-title">
+        <header class="page-heading"><div><span class="eyebrow">AI PERFORMANCE</span><h1 id="performance-title">AI成績</h1></div><p>各AIと総合予想を、同じ固定ルールで比較します。</p></header>
+        <div id="performance-filter" class="chip-row" aria-label="成績期間"></div>
+        <div id="performance-summary" class="performance-grid"></div>
+        <p class="disclosure">成績は保存済み予想だけを対象に集計します。後から生成した予想を過去時点の実績として扱いません。</p>
+      </section>
+
+      <section id="page-research" class="page" data-page="research" aria-labelledby="research-title">
+        <header class="page-heading"><div><span class="eyebrow">DATA & RESEARCH</span><h1 id="research-title">データ／研究</h1></div><p>データ品質、収録状況、モデルと期待値計算の詳細です。</p></header>
+        <div id="research-overview" class="research-grid"></div>
+        <details class="research-details"><summary>モデルと期待値の計算方法</summary><div id="model-methodology"></div></details>
+        <details class="research-details"><summary>データ品質・不足項目</summary><div id="data-quality"></div></details>
+        <details class="research-details"><summary>監査・参照資料</summary><div class="source-links"><a href="docs/expectancy-research-v5.md">期待値ロジック</a><a href="docs/free-data-pipeline.md">データ取得仕様</a><a href="docs/model-feature-research.md">特徴量調査</a></div></details>
       </section>
     </main>
 
-    <footer>
-      <p>本サービスはJRA・netkeibaの公式サービスではありません。予想・期待値・買い目は研究情報です。結果と発売情報は必ず主催者発表で確認してください。</p>
-    </footer>
+    <nav class="mobile-nav" aria-label="モバイルナビゲーション">
+      <a href="#home" data-route="home"><span aria-hidden="true">⌂</span>ホーム</a>
+      <a href="#races" data-route="races"><span aria-hidden="true">馬</span>レース</a>
+      <a href="#results" data-route="results"><span aria-hidden="true">✓</span>結果</a>
+      <a href="#performance" data-route="performance"><span aria-hidden="true">計</span>成績</a>
+      <a href="#research" data-route="research"><span aria-hidden="true">詳</span>研究</a>
+    </nav>
 
-    <script src="data/meet-2026-07-11-2026-07-12.js?v=aidigital-20260717"></script>
-    <script src="data/result-links-2026-07-11-2026-07-12.js?v=aidigital-20260717"></script>
-    <script src="data/results-2026-07-11-2026-07-12.js?v=aidigital-20260717"></script>
-    <script src="data/database-status.js?v=aidigital-20260717"></script>
-    <script src="data/model-feature-coverage.js?v=aidigital-20260717"></script>
-    <script src="data/historical-payout-patterns.js?v=aidigital-20260717"></script>
-    <script src="data/closing-odds-2026-07-11-2026-07-12.js?v=aidigital-20260717"></script>
-    <script src="data/model-outputs-2026-07-11-2026-07-12.js?v=aidigital-20260717"></script>
-    <script src="data/live-racecards.js?v=aidigital-20260719"></script>
-    <script src="data/live-model-outputs.js?v=aidigital-20260717"></script>
-    <script src="ticket-engine.js?v=aidigital-20260717"></script>
-    <script src="app.js?v=prediction-focus-20260719"></script>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <footer><p>本サービスはJRA・netkeibaの公式サービスではありません。予想を参考に、購入判断は利用者自身で行ってください。購入・自動投票機能はありません。</p></footer>
+
+    <script src="data/meet-2026-07-11-2026-07-12.js"></script>
+    <script src="data/results-2026-07-11-2026-07-12.js"></script>
+    <script src="data/database-status.js"></script>
+    <script src="data/model-feature-coverage.js"></script>
+    <script src="data/historical-payout-patterns.js"></script>
+    <script src="data/closing-odds-2026-07-11-2026-07-12.js"></script>
+    <script src="data/model-outputs-2026-07-11-2026-07-12.js"></script>
+    <script src="data/live-racecards.js"></script>
+    <script src="data/live-model-outputs.js"></script>
+    <script src="ticket-engine.js"></script>
+    <script src="app.js?v=mobile-agents-20260719"></script>
   </body>
 </html>
