@@ -4,6 +4,8 @@ checkOrder("scripts/sync-jra-live-racecards.ps1", [
   '"scripts\\jra-live-racecards.mjs" capture',
   '"scripts\\predict-live-racecards.mjs"',
   '"scripts\\generate-live-market-ev.mjs"',
+  '"scripts\\prediction-snapshot.mjs"',
+  '"scripts\\export-current-live-predictions.mjs"',
   '"publish-live-web.ps1"',
 ]);
 checkOrder("scripts/capture-jra-live-odds.ps1", [
@@ -15,7 +17,11 @@ checkOrder("scripts/publish-live-web.ps1", [
   '"scripts\\generate-live-market-ev.mjs"',
   '"scripts\\live-market-ev-check.mjs"',
   '"scripts\\audit-field-availability.mjs"',
-  '"scripts\\build-public-demo.mjs"',
+  '"scripts\\prediction-snapshot.mjs"',
+  '"scripts\\export-current-week-racecards.mjs"',
+  '"scripts\\export-current-live-predictions.mjs"',
+  '"scripts\\agent-performance.mjs"',
+  '"scripts\\build-live-publication.mjs"',
   "git push origin main",
   "git fetch origin main --quiet",
   'if ($localCommit -ne $remoteCommit)',
@@ -55,6 +61,7 @@ console.log(JSON.stringify({
   fiveMinuteOddsCadence: true,
   staleModelFailClosed: true,
   stalePublishLockRecovery: true,
+  immutablePredictionSnapshots: true,
 }, null, 2));
 
 function checkOrder(file, tokens) {

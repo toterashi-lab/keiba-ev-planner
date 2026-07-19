@@ -107,7 +107,7 @@ function raceCardHtml(race, track) {
   const consensus = buildConsensus(prediction);
   const top = topCandidate(race.no, track);
   const result = findResult(race.no, track);
-  const status = raceStatus(result, prediction, top);
+  const status = raceStatus(result, prediction, top, race);
   return `<button type="button" class="race-card" data-race="${race.no}" aria-label="${escapeHtml(track.venueName)}${race.no}レース ${escapeHtml(race.name)}を見る">
     <div class="race-card-top"><span class="race-card-no">${race.no}R</span><span class="race-card-title"><strong>${escapeHtml(race.name)}</strong><small>${escapeHtml(race.surface)}${number(race.distanceM)}m・${escapeHtml(race.condition)}</small></span><span class="race-card-time">${escapeHtml(race.start)}<br>${statusBadge(status)}</span></div>
     <div class="race-card-body"><span class="race-card-pick"><span>総合本命</span><strong>${consensus.top ? `${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}` : "予想準備中"}</strong></span><span class="agreement">一致度 ${consensus.agreement}/5</span>
@@ -119,8 +119,8 @@ function raceCardHtml(race, track) {
 function renderNextRace(track) {
   const root = document.querySelector("#next-race-card");
   const raceNo = nextRaceNumber(track);
-  const race = track?.races?.find((row) => row.no === raceNo) ?? track?.races?.[0];
-  if (!race) { root.innerHTML = "開催情報なし"; return; }
+  const race = track?.races?.find((row) => row.no === raceNo);
+  if (!race) { root.innerHTML = `<span class="time">本日の開催</span><strong>${escapeHtml(track?.venueName ?? "")} 全レース発走済み</strong><small>結果確定後に予想との比較を表示します。</small>`; return; }
   const prediction = findPrediction(race.no, track);
   const consensus = buildConsensus(prediction);
   root.innerHTML = `<span class="time">次の発走 ${escapeHtml(race.start)}</span><strong>${escapeHtml(track.venueName)}${race.no}R ${escapeHtml(race.name)}</strong><small>${consensus.top ? `総合本命 ${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}・一致度 ${consensus.agreement}/5` : "予想準備中"}</small>`;
@@ -143,7 +143,7 @@ function raceDetailHtml(race, track) {
   const result = findResult(race.no, track);
   const consensus = buildConsensus(prediction);
   const top = topCandidate(race.no, track);
-  const status = raceStatus(result, prediction, top);
+  const status = raceStatus(result, prediction, top, race);
   return `<article class="detail-shell">
     <header class="detail-head"><span class="race-card-no">${race.no}R</span><div class="detail-title"><h2>${escapeHtml(race.name)}</h2><p>${escapeHtml(track.venueName)}・${escapeHtml(race.start)}発走・${escapeHtml(race.surface)}${number(race.distanceM)}m・${escapeHtml(race.condition)}</p></div>${statusBadge(status)}</header>
     <nav class="detail-tabs" aria-label="レース詳細"><button type="button" data-tab="conclusion">結論</button><button type="button" data-tab="agents">5人の予想</button><button type="button" data-tab="bets">買い目</button><button type="button" data-tab="runners">出馬表</button><button type="button" data-tab="result">結果</button></nav>
@@ -333,9 +333,9 @@ function readyCandidates(raceNo = state.raceNo, track = selectedTrack()) {
 function topCandidate(raceNo = state.raceNo, track = selectedTrack()) { return readyCandidates(raceNo, track).sort((a, b) => (expectedReturn(b) ?? 0) - (expectedReturn(a) ?? 0))[0] ?? null; }
 function expectedReturn(row) { for (const key of ["conservativeExpectedReturn", "adoptedExpectedReturn", "abilityExpectedReturn", "marketExpectedReturn"]) { const value = Number(row?.[key]); if (Number.isFinite(value)) return value; } return null; }
 
-function raceStatus(result, prediction, top) {
+function raceStatus(result, prediction, top, race = selectedRace()) {
   if (isFinalResult(result)) return { id: "result", label: "結果確定" };
-  if (result && result.status !== "pre_race") return { id: "closed", label: "発走済み" };
+  if ((result && result.status !== "pre_race") || hasStarted(state.date, race?.start)) return { id: "closed", label: "発走済み" };
   if (!prediction) return { id: "waiting", label: "予想準備中" };
   if (top) return { id: "ready", label: "買い目あり" };
   return { id: "odds", label: "オッズ取得待ち" };
@@ -360,12 +360,14 @@ function renderPeriodTabs(selector, active, onSelect) { const root = document.qu
 function inPeriod(date, periodId) { const period = PERIODS.find((row) => row.id === periodId); if (!date || period?.days == null) return true; const now = new Date(); const target = new Date(`${date}T00:00:00+09:00`); const diff = Math.floor((now - target) / 86400000); return diff >= 0 && diff <= period.days; }
 function isFinalResult(result) { return Boolean(result && result.status !== "pre_race" && (result.runners ?? []).some((row) => Number(row.finishPosition) === 1)); }
 function resultPositionMap(result) { return new Map((result?.runners ?? []).map((row) => [Number(row.horseNumber), Number(row.finishPosition) || null])); }
-function resultDate(result) { return result?.date ?? inferDateFromResult(result) ?? ""; }
+function resultDate(result) { return normalizeDate(result?.date) || inferDateFromResult(result) || ""; }
 function inferDateFromResult(result) { return currentEdition.meetings?.find((meeting) => meeting.tracks.some((track) => track.meetingName === result?.meetingName))?.date ?? referenceMeetings.meetings?.find((meeting) => meeting.tracks.some((track) => track.meetingName === result?.meetingName))?.date ?? ""; }
 function trackForResult(result) { const meetings = [...(currentEdition.meetings ?? []), ...(referenceMeetings.meetings ?? [])]; return meetings.flatMap((meeting) => meeting.tracks.map((track) => ({ ...track, date: meeting.date }))).find((track) => track.meetingName === result.meetingName) ?? { meetingName: result.meetingName }; }
 function resultIdentity(result) { return `${resultDate(result)}|${result.meetingName}|${result.raceNo}`; }
 
-function nextRaceNumber(track) { if (!track?.races?.length) return null; const now = new Date(); if (state.date !== tokyoDate()) return track.races[0].no; const minute = now.getHours() * 60 + now.getMinutes(); return track.races.find((race) => { const [hour, min] = race.start.split(":").map(Number); return hour * 60 + min >= minute; })?.no ?? track.races.at(-1).no; }
+function nextRaceNumber(track) { if (!track?.races?.length) return null; if (state.date !== tokyoDate()) return state.date > tokyoDate() ? track.races[0].no : null; const minute = tokyoMinutes(); return track.races.find((race) => { const [hour, min] = race.start.split(":").map(Number); return hour * 60 + min > minute; })?.no ?? null; }
+function hasStarted(date, startTime) { if (!date || !/^\d{2}:\d{2}$/.test(String(startTime ?? ""))) return false; if (date < tokyoDate()) return true; if (date > tokyoDate()) return false; const [hour, minute] = startTime.split(":").map(Number); return hour * 60 + minute <= tokyoMinutes(); }
+function tokyoMinutes() { const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Tokyo", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).formatToParts(new Date()); return Number(parts.find((part) => part.type === "hour")?.value) * 60 + Number(parts.find((part) => part.type === "minute")?.value); }
 function agentMarkFor(agent, horseNumber) { return agent?.marks?.find((mark) => Number(mark.horseNumber) === Number(horseNumber))?.mark ?? ""; }
 function markLabel(row, mark) { return row ? `${mark} ${row.horseNumber}番 ${escapeHtml(row.horseName)}` : `${mark} --`; }
 function displayTicket(type, key, row) { const raw = String(key ?? row.selection ?? ""); if (/^\d+(?:-\d+){0,2}$/.test(raw)) return ["3連単"].includes(type) ? raw.replaceAll("-", "→") : raw; return row.method === "1点" ? raw.replace(/\s+[^・]+(?:・|$)/g, "-").replace(/-$/, "") || raw : raw; }
@@ -376,7 +378,8 @@ function predictionKey(row) { return `${row.date}|${row.meetingName}|${row.raceN
 function candidateKey(row) { return `${row.date}|${row.meetingName}|${row.raceNo}|${row.betType}|${row.method}|${row.selection}|${row.modelVersion}`; }
 function dedupeBy(rows, keyFn) { return [...new Map(rows.map((row) => [keyFn(row), row])).values()]; }
 function candidateKeySafe() {}
-function formatDate(value) { if (!value) return "--"; const [, month, day] = value.split("-").map(Number); return `${month}月${day}日`; }
+function formatDate(value) { const normalized = normalizeDate(value); if (!normalized) return "--"; const [, month, day] = normalized.split("-").map(Number); return `${month}月${day}日`; }
+function normalizeDate(value) { const text = String(value ?? ""); if (/^\d{4}-\d{2}-\d{2}/.test(text)) return text.slice(0, 10); const match = text.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/); return match ? `${match[1]}-${match[2].padStart(2, "0")}-${match[3].padStart(2, "0")}` : ""; }
 function formatDateTime(value) { try { return new Intl.DateTimeFormat("ja-JP", { dateStyle: "medium", timeStyle: "short", timeZone: "Asia/Tokyo" }).format(new Date(value)); } catch { return value; } }
 function weekday(value) { return new Intl.DateTimeFormat("ja-JP", { weekday: "short", timeZone: "Asia/Tokyo" }).format(new Date(`${value}T00:00:00+09:00`)); }
 function tokyoDate() { return new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(new Date()); }

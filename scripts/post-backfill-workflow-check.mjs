@@ -31,6 +31,8 @@ const ordered = [
   '"scripts\\generate-market-ev.mjs"',
   '"scripts\\predict-live-racecards.mjs"',
   '"scripts\\generate-live-market-ev.mjs"',
+  '"scripts\\prediction-snapshot.mjs"',
+  '"scripts\\export-current-live-predictions.mjs"',
   '"scripts\\train-expectancy-model-check.mjs"',
   '"scripts\\train-expectancy-model-unit-check.mjs"',
   '"scripts\\market-ev-check.mjs"',
