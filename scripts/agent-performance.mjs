@@ -12,6 +12,7 @@ const OUTPUT_JSON = path.join(PRIVATE_DIR, "models", "agent-performance.json");
 const OUTPUT_JS = path.join(ROOT, "data", "agent-performance.js");
 
 export function evaluateAgentPerformance(database) {
+  if (hasAgentSystemTables(database)) return evaluateImmutableAgentPerformance(database);
   initializePredictionSnapshotSchema(database);
   const publications = database.prepare(`select p.*,coalesce(l.race_date,r.race_date) race_date
     from prediction_publications p left join live_races l on l.race_id=p.race_id left join races r on r.race_id=p.race_id
@@ -47,6 +48,50 @@ export function evaluateAgentPerformance(database) {
   }
   return { generatedAt: new Date().toISOString(), policy: { agentTicket: "each_agent_honmei_win_100_yen", masterTicket: "published_top_ticket_only",
     postPublicationMutation: "forbidden" }, records };
+}
+
+function evaluateImmutableAgentPerformance(database) {
+  const rows = database.prepare(`select p.prediction_id,p.race_id,p.agent_id,p.predicted_at,p.model_version,p.top_pick,
+      s.top_pick_finish,s.top_pick_win,s.top_pick_place,s.investment_yen,s.payout_yen,s.profit_yen,s.roi,s.recovery_rate,
+      s.brier_score,s.log_loss,s.skip_decision,s.skip_outcome,s.failure_reasons_json,s.scored_at
+    from agent_predictions p join agent_race_scores s on s.prediction_id=p.prediction_id
+    join current_agent_prediction_status state on state.prediction_id=p.prediction_id and state.status='settled'
+    order by p.predicted_at,p.agent_id`).all();
+  return {
+    generatedAt: new Date().toISOString(),
+    policy: {
+      agentTicket: "immutable_recommended_bets_only",
+      masterTicket: "not_stored_until_chief_snapshot_is_added",
+      postPublicationMutation: "forbidden",
+    },
+    records: rows.map((row) => ({
+      predictionId: row.prediction_id,
+      raceId: row.race_id,
+      raceDate: String(row.predicted_at).slice(0, 10),
+      publishedAt: row.predicted_at,
+      settledAt: row.scored_at,
+      modelVersion: row.model_version,
+      agentId: row.agent_id,
+      honmeiHorseNumber: row.top_pick,
+      honmeiFinish: row.top_pick_finish,
+      markFinish: null,
+      recommendation: row.skip_decision ? "見送り" : "保存済み推奨買い目",
+      recommendationHit: Number(row.payout_yen) > 0,
+      investmentYen: Number(row.investment_yen),
+      payoutYen: Number(row.payout_yen),
+      netYen: Number(row.profit_yen),
+      roi: row.recovery_rate,
+      brierScore: Number(row.brier_score),
+      logLoss: Number(row.log_loss),
+      skipDecision: Boolean(row.skip_decision),
+      skipOutcome: row.skip_outcome,
+      failureReasons: JSON.parse(row.failure_reasons_json ?? "[]"),
+    })),
+  };
+}
+
+function hasAgentSystemTables(database) {
+  return database.prepare("select count(*) count from sqlite_master where type='table' and name='agent_race_scores'").get().count === 1;
 }
 
 function record(publication, agentId, marks, finishByNumber, podium, investmentYen, payoutYen, recommendation) {
