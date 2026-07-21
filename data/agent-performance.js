@@ -1,8 +1,8 @@
 window.KEIBA_AGENT_PERFORMANCE = {
-  "generatedAt": "2026-07-19T07:08:15.008Z",
+  "generatedAt": "2026-07-21T23:47:03.785Z",
   "policy": {
-    "agentTicket": "each_agent_honmei_win_100_yen",
-    "masterTicket": "published_top_ticket_only",
+    "agentTicket": "immutable_recommended_bets_only",
+    "masterTicket": "not_stored_until_chief_snapshot_is_added",
     "postPublicationMutation": "forbidden"
   },
   "records": []
