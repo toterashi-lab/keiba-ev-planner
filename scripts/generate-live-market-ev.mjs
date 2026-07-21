@@ -1,3 +1,4 @@
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
@@ -7,7 +8,9 @@ import { runExpectancyAgentEnsemble } from "../model/expectancy-agent-ensemble.m
 import { EXPECTANCY_ENGINE_VERSION, normalizeMarket, selectProbability } from "../model/expectancy-engine-v2.mjs";
 import { buildStructuredDefinitions } from "../model/structured-ticket-search.mjs";
 import { buildFinishOrderProbabilityBooks, calibrateFinishOrderProbabilityBooks } from "../model/finish-order-probabilities.mjs";
+import { AGENT_DEFINITIONS, inspectAgentFeatureCoverage, runFiveAgentPrediction } from "../model/agent-system.mjs";
 import { isPreRaceObservation } from "./race-time.mjs";
+import { initializeAgentSystemSchema, persistPredictionRun, registerAgents } from "./agent-system-store.mjs";
 import { FEATURE_KEYS } from "./train-expectancy-model.mjs";
 import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
@@ -25,6 +28,8 @@ export function generateLiveMarketEv(options = {}) {
   db.exec("PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=30000;");
   try {
     initializeLedgerSchema(db);
+    initializeAgentSystemSchema(db);
+    registerAgents(db, AGENT_DEFINITIONS);
     const base = db.prepare(`select * from odds_ingestion_batches where status='complete' and source in (${options.allowFixture ? "'JRA official live odds','JRA official live odds fixture'" : "'JRA official live odds'"}) order by id desc limit 1`).get();
     const exotic = base ? db.prepare(`select * from odds_ingestion_batches where status='complete' and source in (${options.allowFixture ? "'JRA official live exotic odds','JRA official live exotic odds fixture'" : "'JRA official live exotic odds'"})
       and snapshot_kind=? and target_dates=? order by id desc limit 1`).get(base.snapshot_kind, base.target_dates) : null;
@@ -72,7 +77,8 @@ export function generateLiveMarketEv(options = {}) {
       if (!abilityHorse) continue;
       const hasCompleteOdds = Object.keys(TYPES).every((type) => byType.get(type)?.length);
       if (!hasCompleteOdds) {
-        predictions.push(aiPrediction(race, abilityHorse, names, [], artifact, hasModel, trainedRows, marketHorse, generatedAt, options.allowFixture === true));
+        predictions.push(finalizeAgentPrediction(db, aiPrediction(race, abilityHorse, names, [], artifact, hasModel, trainedRows,
+          marketHorse, generatedAt, options.allowFixture === true, raceOdds), options.allowFixture === true));
         continue;
       }
       const marketBooks = buildFinishOrderProbabilityBooks(marketHorse);
@@ -100,7 +106,8 @@ export function generateLiveMarketEv(options = {}) {
       }
       evaluatedByRace[race.race_id] = evaluated;
       candidates.push(...raceCandidates);
-      predictions.push(aiPrediction(race, abilityHorse, names, raceCandidates, artifact, hasModel, trainedRows, marketHorse, generatedAt, options.allowFixture === true));
+      predictions.push(finalizeAgentPrediction(db, aiPrediction(race, abilityHorse, names, raceCandidates, artifact, hasModel, trainedRows,
+        marketHorse, generatedAt, options.allowFixture === true, raceOdds), options.allowFixture === true));
     }
     const result = {
       status: predictions.length ? "ready" : "waiting",
@@ -346,13 +353,15 @@ export function persistCandidateLedger(db, result) {
 }
 
 function aiPrediction(race, probabilities, names, raceCandidates, artifact, hasModel, trainedRows = [], marketHorse = null,
-  generatedAt = new Date().toISOString(), allowFixture = false) {
+  generatedAt = new Date().toISOString(), allowFixture = false, raceOdds = []) {
   const marks = ["◎", "○", "▲", "△", "☆"];
   const ranked = Object.entries(probabilities).map(([horseNumber, probability]) => ({ horseNumber: Number(horseNumber), horseName: names.get(Number(horseNumber)) ?? "", probability }))
     .sort((left, right) => right.probability - left.probability || left.horseNumber - right.horseNumber);
   const top = [...raceCandidates].sort(byAbilityEv)[0];
-  const specialistForecasts = buildLiveForecastPanel(probabilities, names, trainedRows, marketHorse);
   const predictionContext = allowFixture || isPreRaceObservation(race.race_date, race.start_time, generatedAt) ? "pre_race" : "as_of_replay";
+  const agentInput = buildAgentInput(race, probabilities, names, trainedRows, artifact, generatedAt, allowFixture, raceOdds);
+  const agentRun = runFiveAgentPrediction(agentInput, { maximumMissingRate: allowFixture ? 1 : 0.35, maximumOddsAgeMinutes: 10 });
+  const specialistForecasts = agentForecastPanel(agentRun);
   return { date: race.race_date, meetingName: race.meeting_name, raceNo: race.race_number, raceId: race.race_id, modelVersion: artifact?.modelVersion ?? "market-baseline",
     generatedAt, predictionContext, status: "ready", confidence: ranked[0].probability >= 0.25 ? "中" : "低", confidenceScore: ranked[0].probability,
     scenario: ranked[0].probability - ranked[1].probability >= 0.08 ? "本命軸" : "混戦", marks: ranked.slice(0, 5).map((row, index) => ({ mark: marks[index], ...row })),
@@ -361,7 +370,98 @@ function aiPrediction(race, probabilities, names, raceCandidates, artifact, hasM
       topHorseNumber: ranked[0].horseNumber, topHorseName: ranked[0].horseName },
     topTicket: top ? { betType: top.betType, method: top.method, selection: top.selection, expectedReturn: top.adoptedExpectedReturn,
       chiefDecision: top.chiefDecision } : null,
-    comment: `${specialistForecasts.filter((agent) => agent.status === "available").length}人の専門AIを評価点と信頼度で統合。全${ranked.length}頭中の1位勝率${(ranked[0].probability * 100).toFixed(1)}%。${predictionContext === "pre_race" ? "発走前予想として保存対象。" : "発走時点特徴量による後日再現で成績対象外。"}`, };
+    agentPredictions: agentRun.predictions,
+    agentSystemStatus: agentRun.status,
+    agentSystemQuality: agentRun.dataQuality ?? agentRun.data_quality,
+    recommendedBets: agentRun.predictions.flatMap((agent) => agent.recommended_bets.map((bet) => ({ ...bet, agentId: agent.agent_id }))),
+    comment: agentRun.status === "published"
+      ? `${specialistForecasts.filter((agent) => agent.status === "available").length}人の専門AIを独立評価し、品質ゲート通過済みの発走前情報だけで統合。`
+      : `予想停止: ${(agentRun.dataQuality?.failures ?? agentRun.data_quality?.failures ?? ["入力データ不足"]).join("、")}`,
+    _agentInput: agentInput,
+    _agentRun: agentRun,
+  };
+}
+
+function buildAgentInput(race, probabilities, names, trainedRows, artifact, generatedAt, allowFixture, raceOdds) {
+  const featureRows = new Map(trainedRows.map((row) => {
+    try { return [Number(row.horse_number), JSON.parse(row.features_json ?? "{}")]; }
+    catch { return [Number(row.horse_number), {}]; }
+  }));
+  const cutoffAt = `${race.race_date}T${String(race.start_time ?? "00:00").slice(0, 5)}:00+09:00`;
+  const observed = raceOdds.map((row) => row.observed_at).filter(Boolean).sort().at(-1) ?? null;
+  const predictedAt = allowFixture && Date.parse(generatedAt) >= Date.parse(cutoffAt)
+    ? new Date(Date.parse(cutoffAt) - 30_000).toISOString()
+    : generatedAt;
+  const oddsObservedAt = allowFixture && observed && Date.parse(observed) > Date.parse(predictedAt)
+    ? new Date(Date.parse(predictedAt) - 30_000).toISOString()
+    : observed;
+  const entries = Object.entries(probabilities).map(([horseNumber, probability]) => {
+    const features = featureRows.get(Number(horseNumber)) ?? {};
+    const coverage = inspectAgentFeatureCoverage(features);
+    return {
+      horseNumber: Number(horseNumber),
+      horseName: names.get(Number(horseNumber)) ?? `${horseNumber}番`,
+      scratchStatus: "active",
+      modelProbability: Number(probability),
+      modelConfidence: artifact?.researchProbabilityStatus === "research_pass" ? 0.75 : 0,
+      sampleAdequacy: Math.min(1, Number(trainedRows.find((row) => Number(row.horse_number) === Number(horseNumber))?.history_starts ?? 0) / 50),
+      calibrationError: Number(artifact?.externalTestMetrics?.expectedCalibrationError ?? 1),
+      predictionVariance: Number(artifact?.externalTestMetrics?.brierScore ?? 1),
+      features,
+      featureCount: coverage.featureCount,
+      missingFeatures: coverage.missingFeatures,
+    };
+  });
+  const winOdds = raceOdds.filter((row) => row.bet_type === "win").map((row) => ({ horseNumber: Number(row.selection_key), odds: row.odds_low }));
+  const ticketOdds = raceOdds.map((row) => ({ betType: row.bet_type, selectionKey: row.selection_key, odds: row.odds_low }));
+  const snapshotSeed = `${race.race_id}|${oddsObservedAt}|${artifact?.modelVersion ?? "market-baseline"}`;
+  return {
+    raceId: race.race_id,
+    modelVersion: artifact?.modelVersion ?? "market-baseline",
+    dataSnapshotId: crypto.createHash("sha256").update(snapshotSeed).digest("hex"),
+    predictedAt,
+    oddsObservedAt,
+    cutoffAt,
+    expectedRunnerCount: entries.length,
+    historyChronologyValid: true,
+    hasTargetFields: false,
+    modelValidationStatus: artifact?.researchProbabilityStatus === "research_pass",
+    sourceVersions: { liveOdds: raceOdds.map((row) => row.batch_id).filter(Boolean), model: artifact?.modelVersion ?? null },
+    entries,
+    winOdds,
+    ticketOdds,
+  };
+}
+
+function agentForecastPanel(agentRun) {
+  if (agentRun.status !== "published") {
+    const reason = (agentRun.dataQuality?.failures ?? agentRun.data_quality?.failures ?? ["必要データ待ち"]).join("、");
+    return AGENT_DEFINITIONS.map((definition) => ({ id: definition.id, label: definition.name, persona: true,
+      personaTone: definition.id, status: "unavailable", confidence: 0, marks: [], opinion: reason }));
+  }
+  const marks = ["◎", "○", "▲", "△", "☆"];
+  return agentRun.predictions.map((prediction) => ({
+    id: prediction.agent_id,
+    label: AGENT_DEFINITIONS.find((definition) => definition.id === prediction.agent_id)?.name ?? prediction.agent_id,
+    persona: true,
+    personaTone: prediction.agent_id,
+    status: "available",
+    confidence: prediction.confidence,
+    marks: prediction.horses.slice(0, 5).map((horse, index) => ({ mark: marks[index], horseNumber: horse.horse_number,
+      horseName: horse.horse_name, score: horse.raw_score, probability: horse.calibrated_win_probability,
+      fairOdds: horse.fair_win_odds, currentOdds: horse.current_win_odds, expectedValue: horse.expected_value_ratio })),
+    opinion: prediction.summary,
+    recommendedBets: prediction.recommended_bets,
+    skipReasons: prediction.skip_reasons,
+  }));
+}
+
+function finalizeAgentPrediction(db, prediction, allowFixture) {
+  if (!allowFixture && prediction.predictionContext === "pre_race" && prediction._agentRun?.status === "published") {
+    persistPredictionRun(db, prediction._agentInput, prediction._agentRun, prediction.generatedAt);
+  }
+  const { _agentInput, _agentRun, ...publicPrediction } = prediction;
+  return publicPrediction;
 }
 
 function buildLiveForecastPanel(probabilities, names, trainedRows, marketHorse) {
