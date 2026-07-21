@@ -832,9 +832,10 @@ function auditDatabase() {
       and b.source in ('JRA official live odds','JRA official live odds fixture'))
     or not exists(select 1 from odds_ingestion_batches b where b.id=c.exotic_batch_id and b.status='complete'
       and b.source in ('JRA official live exotic odds','JRA official live exotic odds fixture'))`).get().count;
-  const postStartEvCandidates = db.prepare(`select c.odds_observed_at,r.race_date,r.start_time from live_ev_candidates c
+  const hasLiveRaces = db.prepare("select count(*) count from sqlite_master where type='table' and name='live_races'").get().count === 1;
+  const postStartEvCandidates = hasLiveRaces ? db.prepare(`select c.odds_observed_at,r.race_date,r.start_time from live_ev_candidates c
     left join live_races r on r.race_id=c.race_id where c.snapshot_kind='pre_race'`).all()
-    .filter((row) => !isPreRaceObservation(row.race_date, row.start_time, row.odds_observed_at)).length;
+    .filter((row) => !isPreRaceObservation(row.race_date, row.start_time, row.odds_observed_at)).length : 0;
   const orphanEvEvaluations = db.prepare(`select count(*) count from live_ev_evaluations e
     where not exists(select 1 from live_ev_candidates c where c.id=e.candidate_id)`).get().count;
   const invalidEvEvaluations = db.prepare(`select count(*) count from live_ev_evaluations e join live_ev_candidates c on c.id=e.candidate_id
