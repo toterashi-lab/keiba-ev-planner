@@ -45,6 +45,10 @@ try {
   Set-Location $root
   & $node --no-warnings "scripts\post-backfill-workflow-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Post-backfill workflow validation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\settle-agent-predictions.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Agent prediction settlement failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\agent-performance.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Agent performance aggregation failed: $LASTEXITCODE" }
   $statusJson = & $node --no-warnings "scripts\jra-free-db.mjs" status
   if ($LASTEXITCODE -ne 0) { throw "Database status failed: $LASTEXITCODE" }
   $status = $statusJson | ConvertFrom-Json
@@ -197,6 +201,8 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Live expectancy capability check failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\evaluate-live-ev-ledger.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Live expectancy ledger evaluation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\train-agent-models.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Agent model training failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\live-ev-ledger-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Live expectancy ledger unit check failed: $LASTEXITCODE" }
   & (Join-Path $PSScriptRoot "publish-live-web.ps1")
