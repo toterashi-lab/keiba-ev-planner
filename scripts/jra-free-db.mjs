@@ -43,12 +43,16 @@ try {
     console.log(JSON.stringify(statusReport(), null, 2));
   } else if (command === "sync-current") {
     fs.writeFileSync(SYNC_REQUEST_PATH, JSON.stringify({ pid: process.pid, requestedAt: new Date().toISOString() }));
+    let deferred = false;
     try {
-      await withLock(() => ingestMonth(currentMonth(), Number(options.delay ?? 1500)), LOCK_PATH, { waitMs: 30 * 60 * 1000 });
+      await withLock(() => ingestMonth(currentMonth(), Number(options.delay ?? 1500)), LOCK_PATH, { waitMs: Number(options.wait ?? 120_000) });
+    } catch (error) {
+      if (!String(error.message ?? error).includes("Another worker owns")) throw error;
+      deferred = true;
     } finally {
       fs.rmSync(SYNC_REQUEST_PATH, { force: true });
     }
-    console.log(JSON.stringify(statusReport(), null, 2));
+    console.log(JSON.stringify({ ...statusReport(), currentSync: deferred ? "deferred" : "completed" }, null, 2));
   } else if (command === "audit") {
     const result = auditDatabase();
     fs.mkdirSync(path.dirname(AUDIT_REPORT_PATH), { recursive: true });

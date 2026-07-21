@@ -38,6 +38,12 @@ try {
   const evaluations = database.prepare('select count(*) count from live_ev_evaluations').get().count;
   const gates = database.prepare('select count(*) count from model_quality_gates where model_run_id=1').get().count;
   if (evaluations !== 3 || gates !== 10) throw new Error(`ledger persistence failed: evaluations=${evaluations}, gates=${gates}`);
+  const emptyDatabase = new DatabaseSync(":memory:");
+  try {
+    emptyDatabase.exec("create table complete_races(race_id text primary key,race_date text not null);");
+    const emptyReport = evaluateLiveEvLedger({ database: emptyDatabase, outputPath });
+    if (emptyReport.status !== "insufficient" || emptyReport.storedCandidates !== 0) throw new Error(`empty live data handling failed: ${JSON.stringify(emptyReport)}`);
+  } finally { emptyDatabase.close(); }
   console.log(JSON.stringify({ status: 'pass', recommendations: report.recommendations, evaluations, gates, metrics: report.metrics }, null, 2));
 } finally {
   database.close();

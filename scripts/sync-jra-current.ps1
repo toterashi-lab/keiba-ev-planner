@@ -1,4 +1,4 @@
-param([int]$DelayMs = 1500)
+param([int]$DelayMs = 1500, [int]$WaitMs = 120000)
 
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
@@ -16,7 +16,7 @@ $exitCode = 0
 
 Start-Transcript -Path $logPath | Out-Null
 try {
-  & $node --no-warnings "scripts\jra-free-db.mjs" sync-current --refresh --delay $DelayMs
+  & $node --no-warnings "scripts\jra-free-db.mjs" sync-current --refresh --delay $DelayMs --wait $WaitMs
   if ($LASTEXITCODE -ne 0) { $exitCode = $LASTEXITCODE }
   & $node --no-warnings "scripts\jra-free-db.mjs" audit
   if ($LASTEXITCODE -ne 0) { $exitCode = $LASTEXITCODE }

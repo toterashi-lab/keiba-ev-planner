@@ -18,10 +18,11 @@ export function evaluateLiveEvLedger(options = {}) {
   database.exec("PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=30000;");
   try {
     initializeSchema(database);
-    const candidateRows = database.prepare(`select c.*,r.race_date,lr.start_time
+    const liveRacesAvailable = hasTable(database, "live_races");
+    const candidateRows = database.prepare(`select c.*,r.race_date,${liveRacesAvailable ? "lr.start_time" : "null as start_time"}
       from live_ev_candidates c
       join complete_races r on r.race_id=c.race_id
-      left join live_races lr on lr.race_id=c.race_id
+      ${liveRacesAvailable ? "left join live_races lr on lr.race_id=c.race_id" : ""}
       where c.snapshot_kind='pre_race' order by c.race_id,c.generated_at,c.id`).all();
     const raceIds = [...new Set(candidateRows.map((row) => row.race_id))];
     const payoutRows = raceIds.length ? database.prepare(`select race_id,bet_type,selection_key,payout_yen
@@ -85,6 +86,10 @@ export function evaluateLiveEvLedger(options = {}) {
   } finally {
     if (ownsDatabase) database.close();
   }
+}
+
+function hasTable(database, tableName) {
+  return database.prepare("select count(*) count from sqlite_master where type='table' and name=?").get(tableName).count === 1;
 }
 
 export function evaluateCandidate(row, racePayouts, evaluatedAt = new Date().toISOString()) {
