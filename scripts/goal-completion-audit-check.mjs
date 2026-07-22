@@ -34,6 +34,16 @@ try {
     create table historical_exotic_odds(race_id text,bet_type text,selection_key text,odds_low real,odds_high real);
     create table model_runs(id integer primary key,model_version text);
     create table model_quality_gates(model_run_id integer,gate_name text,status text);
+    create table agents(agent_id text primary key,active integer not null);
+    create table data_snapshots(data_snapshot_id text primary key);
+    create table agent_predictions(prediction_id text primary key,agent_id text not null);
+    create table prediction_horses(prediction_id text,horse_number integer);
+    create table recommended_bets(recommended_bet_id text primary key,prediction_id text);
+    create table agent_race_scores(prediction_id text primary key,agent_id text not null);
+    create trigger data_snapshots_immutable_update before update on data_snapshots begin select raise(abort,'append-only'); end;
+    create trigger agent_predictions_immutable_update before update on agent_predictions begin select raise(abort,'append-only'); end;
+    create trigger prediction_horses_immutable_update before update on prediction_horses begin select raise(abort,'append-only'); end;
+    create trigger recommended_bets_immutable_update before update on recommended_bets begin select raise(abort,'append-only'); end;
     create table live_ev_candidates(id integer primary key);
     create table live_ev_evaluations(candidate_id integer primary key);
     create table live_ev_validation_runs(id integer primary key);
@@ -61,6 +71,13 @@ try {
     "ticket_probability_quinella", "ticket_probability_wide", "ticket_probability_exacta", "ticket_probability_trio", "ticket_probability_trifecta"];
   const insertGate = db.prepare("insert into model_quality_gates values(1,?,'pass')");
   for (const gate of requiredGates) insertGate.run(gate);
+  const agentIds = ["safety", "sniper", "pace", "analyst", "contrarian"];
+  const insertAgent = db.prepare("insert into agents values(?,1)");
+  const insertScore = db.prepare("insert into agent_race_scores values(?,?)");
+  for (const agentId of agentIds) {
+    insertAgent.run(agentId);
+    insertScore.run(`prediction-${agentId}`, agentId);
+  }
 
   const artifact = {
     modelVersion: "unit-model",
@@ -191,7 +208,7 @@ try {
     fieldAvailabilityAuditPath, publicationManifestPath, publicationReceiptPath, automationAuditPath, liveOutputPath,
     publicLiveRacecardsPath, publicLiveModelOutputsPath,
     today: "2026-01-01", pipelineFiles: [pipeline] });
-  if (report.failures.length || report.checks.length !== 30) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
+  if (report.failures.length || report.checks.length !== 32) throw new Error(`completion audit failed: ${report.failures.join(", ")}`);
   const liveFixture = JSON.parse(fs.readFileSync(liveOutputPath, "utf8"));
   if (!inspectLiveCoverage(db, artifact, liveFixture, { today: "2026-01-01" }).pass) throw new Error("valid live coverage was rejected");
   const missingPrediction = structuredClone(liveFixture);

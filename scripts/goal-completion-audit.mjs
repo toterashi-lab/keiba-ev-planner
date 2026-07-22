@@ -350,6 +350,21 @@ export function auditCompletedGoal(database, report, options = {}) {
     && ["persistCandidateLedger", "componentSelectionKeys", "oddsObservedAt"].every((token) => liveGenerator.includes(token))
     && ["latest-within-five-minutes", "race-day-block-bootstrap-2000", "positive_ev_roi_ci95_lower"].every((token) => ledgerEvaluator.includes(token));
   check(report, "immutable_pre_race_expectancy_ledger", ledgerImplementation, { ledgerTables });
+  const requiredAgentIds = ["safety", "sniper", "pace", "analyst", "contrarian"];
+  const requiredAgentTables = ["agents", "data_snapshots", "agent_predictions", "prediction_horses", "recommended_bets", "agent_race_scores"];
+  const agentTables = database.prepare(`select name from sqlite_master where type='table'
+    and name in (${requiredAgentTables.map(() => "?").join(",")}) order by name`).all(...requiredAgentTables).map((row) => row.name);
+  const immutableAgentTriggers = database.prepare(`select name from sqlite_master where type='trigger'
+    and name in ('data_snapshots_immutable_update','agent_predictions_immutable_update','prediction_horses_immutable_update','recommended_bets_immutable_update')`).all().map((row) => row.name);
+  const activeAgentIds = agentTables.includes("agents")
+    ? database.prepare("select agent_id from agents where active=1 order by agent_id").all().map((row) => row.agent_id) : [];
+  const settledAgentIds = agentTables.includes("agent_race_scores")
+    ? database.prepare("select distinct agent_id from agent_race_scores order by agent_id").all().map((row) => row.agent_id) : [];
+  check(report, "five_agent_immutable_snapshot_system", requiredAgentTables.every((name) => agentTables.includes(name))
+    && requiredAgentIds.every((id) => activeAgentIds.includes(id))
+    && immutableAgentTriggers.length === 4, { requiredAgentTables, agentTables, activeAgentIds, immutableAgentTriggers });
+  check(report, "five_agent_settlement_and_scoring", requiredAgentIds.every((id) => settledAgentIds.includes(id)),
+    { requiredAgentIds, settledAgentIds, policy: "published pre-race predictions only" });
   const pipelineFiles = options.pipelineFiles ?? ["scripts/jra-live-racecards.mjs", "scripts/jra-free-odds.mjs", "scripts/jra-free-exotic-odds.mjs",
     "scripts/sync-jra-live-racecards.ps1", "scripts/predict-live-racecards.mjs", "scripts/generate-live-market-ev.mjs",
     "scripts/evaluate-live-ev-ledger.mjs", "scripts/publish-live-web.ps1", "scripts/live-pipeline-workflow-check.mjs"]
