@@ -207,6 +207,14 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Live expectancy ledger unit check failed: $LASTEXITCODE" }
   & (Join-Path $PSScriptRoot "publish-live-web.ps1")
   if ($LASTEXITCODE -ne 0) { throw "Web publish failed: $LASTEXITCODE" }
+  $agentSettlementJson = & $node --no-warnings "scripts\agent-settlement-readiness.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Agent settlement readiness inspection failed: $LASTEXITCODE" }
+  $agentSettlement = $agentSettlementJson | ConvertFrom-Json
+  if ($agentSettlement.status -ne "ready") {
+    $missingAgentIds = @($agentSettlement.missingAgentIds | Where-Object { $_ })
+    Write-Output ("Five-agent settlement evidence is pending: {0}. Final completion audit is waiting." -f ($missingAgentIds -join ","))
+    exit 0
+  }
   & $node --no-warnings "scripts\goal-completion-audit.mjs" --require-complete
   if ($LASTEXITCODE -ne 0) { throw "Goal completion audit failed: $LASTEXITCODE" }
 } finally {

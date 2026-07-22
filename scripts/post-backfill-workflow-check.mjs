@@ -52,6 +52,8 @@ const ordered = [
   '"scripts\\evaluate-live-ev-ledger.mjs"',
   '"scripts\\live-ev-ledger-check.mjs"',
   '"publish-live-web.ps1"',
+  '"scripts\\agent-settlement-readiness.mjs"',
+  'if ($agentSettlement.status -ne "ready")',
   '"scripts\\goal-completion-audit.mjs" --require-complete',
 ];
 
