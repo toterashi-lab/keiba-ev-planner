@@ -50,6 +50,16 @@ export function evaluateAgentPerformance(database) {
     postPublicationMutation: "forbidden" }, records };
 }
 
+export function shouldWritePublicPerformance(existingText, output) {
+  if (!existingText) return true;
+  try {
+    const existing = JSON.parse(existingText.replace(/^window\.KEIBA_AGENT_PERFORMANCE\s*=\s*/, "").replace(/;\s*$/, ""));
+    return stablePerformance(existing) !== stablePerformance(output);
+  } catch {
+    return true;
+  }
+}
+
 function evaluateImmutableAgentPerformance(database) {
   const rows = database.prepare(`select p.prediction_id,p.race_id,p.agent_id,p.predicted_at,p.model_version,p.top_pick,
       s.top_pick_finish,s.top_pick_win,s.top_pick_place,s.investment_yen,s.payout_yen,s.profit_yen,s.roi,s.recovery_rate,
@@ -122,7 +132,16 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
     const output = evaluateAgentPerformance(db);
     fs.mkdirSync(path.dirname(OUTPUT_JSON), { recursive: true });
     fs.writeFileSync(OUTPUT_JSON, `${JSON.stringify(output, null, 2)}\n`, "utf8");
-    fs.writeFileSync(OUTPUT_JS, `window.KEIBA_AGENT_PERFORMANCE = ${JSON.stringify(output, null, 2)};\n`, "utf8");
+    const existingPublic = fs.existsSync(OUTPUT_JS) ? fs.readFileSync(OUTPUT_JS, "utf8") : null;
+    if (shouldWritePublicPerformance(existingPublic, output)) {
+      fs.writeFileSync(OUTPUT_JS, `window.KEIBA_AGENT_PERFORMANCE = ${JSON.stringify(output, null, 2)};\n`, "utf8");
+    }
     console.log(JSON.stringify({ status: "ready", records: output.records.length, output: OUTPUT_JS }, null, 2));
   } finally { db.close(); }
+}
+
+function stablePerformance(output) {
+  const copy = structuredClone(output);
+  delete copy.generatedAt;
+  return JSON.stringify(copy);
 }

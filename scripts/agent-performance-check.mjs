@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { DatabaseSync } from "node:sqlite";
-import { evaluateAgentPerformance } from "./agent-performance.mjs";
+import { evaluateAgentPerformance, shouldWritePublicPerformance } from "./agent-performance.mjs";
 import { persistPredictionSnapshots } from "./prediction-snapshot.mjs";
 
 const db = new DatabaseSync(":memory:");
@@ -22,5 +22,8 @@ const output = evaluateAgentPerformance(db);
 assert.equal(output.records.length, 6);
 assert.ok(output.records.every((row) => row.honmeiFinish === 1 && row.markFinish));
 assert.ok(output.records.every((row) => row.investmentYen === 100 && row.payoutYen === 250 && row.roi === 2.5));
+const unchangedPublic = `window.KEIBA_AGENT_PERFORMANCE = ${JSON.stringify({ ...output, generatedAt: "2099-01-02T00:00:00.000Z" })};\n`;
+assert.equal(shouldWritePublicPerformance(unchangedPublic, output), false);
+assert.equal(shouldWritePublicPerformance(unchangedPublic, { ...output, records: [...output.records, { agentId: "new" }] }), true);
 console.log(JSON.stringify({ status: "pass", records: output.records.length, agentPolicies: 5, masterPolicies: 1 }));
 db.close();
