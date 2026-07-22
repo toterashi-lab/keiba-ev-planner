@@ -77,6 +77,7 @@ export function auditCompletedGoal(database, report, options = {}) {
     (select count(*) from historical_win_place_odds o join historical_odds_jobs j on j.race_id=o.race_id
       where (o.place_odds_low is null or o.place_odds_high is null)
       and not (j.request_key like 'kaggle:%' and j.place_price_count=0)) unauditedMissingPlacePrices,
+    (select count(*) from historical_win_place_odds where time_basis<>'historical_closing_reference') invalidTimeBasis,
     sum(case when status='complete' and request_key like 'kaggle:%' and place_price_count=0 then 1 else 0 end) auditedWinOnlyRaces,
     sum(case when status='complete' and runner_count=win_price_count and runner_count=place_price_count then 1 else 0 end) completeWinPlaceRaces
     from historical_odds_jobs`).get() : null;
@@ -87,6 +88,7 @@ export function auditCompletedGoal(database, report, options = {}) {
     && historicalOdds.pricedRaces === coverage.races
     && historicalOdds.missingWinPrices === 0
     && historicalOdds.unauditedMissingPlacePrices === 0
+    && historicalOdds.invalidTimeBasis === 0
     && historicalOdds.completeWinPlaceRaces + historicalOdds.auditedWinOnlyRaces === coverage.races,
   historicalOdds ?? { status: "missing" });
   const historicalExoticReady = database.prepare(`select count(*) count from sqlite_master
@@ -96,6 +98,7 @@ export function auditCompletedGoal(database, report, options = {}) {
     sum(case when status='complete' then 1 else 0 end) complete,
     sum(case when status<>'complete' then 1 else 0 end) pending,
     (select count(*) from historical_exotic_odds where odds_low<1 or odds_high<odds_low) invalidPrices,
+    (select count(*) from historical_exotic_odds where time_basis<>'historical_closing_reference') invalidTimeBasis,
     (select count(*) from historical_exotic_odds_jobs j where j.status='complete' and
       (select count(*) from historical_exotic_odds o where o.race_id=j.race_id and o.bet_type=j.bet_type)<>j.price_count) invalidCoverage
     from historical_exotic_odds_jobs`).get() : null;
@@ -104,6 +107,7 @@ export function auditCompletedGoal(database, report, options = {}) {
     && historicalExotic.complete === historicalExotic.total
     && historicalExotic.pending === 0
     && historicalExotic.invalidPrices === 0
+    && historicalExotic.invalidTimeBasis === 0
     && historicalExotic.invalidCoverage === 0,
   historicalExotic ?? { status: "missing", sourceCoverageFrom: "2020-04-12" });
   const databaseAuditPath = options.databaseAuditPath ?? DATABASE_AUDIT;

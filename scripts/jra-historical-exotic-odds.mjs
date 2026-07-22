@@ -66,11 +66,13 @@ function initializeSchema() {
     );
     create table if not exists historical_exotic_odds(
       race_id text not null,bet_type text not null,selection_key text not null,
-      odds_low real not null,odds_high real not null,observed_at text not null,source_page_id integer not null,
+      odds_low real not null,odds_high real not null,observed_at text not null,
+      time_basis text not null default 'historical_closing_reference' check(time_basis='historical_closing_reference'),source_page_id integer not null,
       primary key(race_id,bet_type,selection_key)
     );
     create index if not exists historical_exotic_jobs_status_idx on historical_exotic_odds_jobs(status,race_id,bet_type);
   `);
+  addColumnIfMissing("historical_exotic_odds", "time_basis", "text not null default 'historical_closing_reference'");
 }
 
 async function ingestRace(raceId, delayMs) {
@@ -108,8 +110,8 @@ async function ingestRace(raceId, delayMs) {
       db.exec("begin immediate");
       try {
         db.prepare("delete from historical_exotic_odds where race_id=? and bet_type=?").run(raceId, betType);
-        const insert = db.prepare("insert into historical_exotic_odds values(?,?,?,?,?,?,?)");
-        for (const row of parsed.prices) insert.run(raceId, betType, row.selectionKey, row.oddsLow, row.oddsHigh, fetched.fetchedAt, sourcePageId);
+        const insert = db.prepare("insert into historical_exotic_odds values(?,?,?,?,?,?,?,?)");
+        for (const row of parsed.prices) insert.run(raceId, betType, row.selectionKey, row.oddsLow, row.oddsHigh, fetched.fetchedAt, "historical_closing_reference", sourcePageId);
         const completedAt = new Date().toISOString();
         db.prepare(`update historical_exotic_odds_jobs set status='complete',request_key=?,price_count=?,
           completed_at=?,updated_at=? where race_id=? and bet_type=?`)
@@ -122,6 +124,11 @@ async function ingestRace(raceId, delayMs) {
         where race_id=? and bet_type=?`).run(String(error.stack ?? error).slice(0, 3000), failedAt, raceId, betType);
     }
   }
+}
+
+function addColumnIfMissing(table, column, definition) {
+  const columns = db.prepare(`pragma table_info(${table})`).all().map((row) => row.name);
+  if (!columns.includes(column)) db.exec(`alter table ${table} add column ${column} ${definition}`);
 }
 
 async function fetchAndRestoreRaceSource(race, delayMs) {

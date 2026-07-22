@@ -551,7 +551,7 @@ export function loadHistoricalWinOdds(database) {
   return new Map(database.prepare(`select e.race_id,e.horse_id,o.win_odds
     from historical_win_place_odds o join complete_race_entries e
       on e.race_id=o.race_id and e.horse_number=o.horse_number
-    where o.win_odds is not null and o.win_odds>=1`).all()
+    where o.win_odds is not null and o.win_odds>=1 and o.time_basis='historical_closing_reference'`).all()
     .map((row) => [`${row.race_id}|${row.horse_id}`, row.win_odds]));
 }
 

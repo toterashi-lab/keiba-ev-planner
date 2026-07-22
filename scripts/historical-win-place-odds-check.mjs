@@ -5,6 +5,7 @@ for (const token of [
   "complete_races", "historical_odds_jobs", "historical_win_place_odds",
   "Runner set mismatch", "Price coverage mismatch", "jra-historical-win-place-v1",
   "auditedWinOnlyRaces", "completeWinPlaceRaces", "unauditedMissingPlace",
+  "historical_closing_reference", "time_basis",
   "let acquired = false", "if (acquired) fs.rmSync(lockPath", "isProcessAlive(owner.pid)",
 ]) {
   if (!source.includes(token)) throw new Error(`historical odds pipeline missing: ${token}`);

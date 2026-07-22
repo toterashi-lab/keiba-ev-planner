@@ -80,11 +80,13 @@ function initializeSchema() {
       place_odds_low real check(place_odds_low>=1),
       place_odds_high real check(place_odds_high>=place_odds_low),
       observed_at text not null,
+      time_basis text not null default 'historical_closing_reference' check(time_basis='historical_closing_reference'),
       source_page_id integer not null references raw_pages(id),
       primary key(race_id,horse_number)
     );
     create index if not exists historical_odds_status_idx on historical_odds_jobs(status,race_id);
   `);
+  addColumnIfMissing("historical_win_place_odds", "time_basis", "text not null default 'historical_closing_reference'");
 }
 
 function seedJobs() {
@@ -129,10 +131,10 @@ async function ingest(raceId, delayMs) {
     db.exec("begin immediate");
     try {
       db.prepare("delete from historical_win_place_odds where race_id=?").run(raceId);
-      const insert = db.prepare("insert into historical_win_place_odds values(?,?,?,?,?,?,?)");
+      const insert = db.prepare("insert into historical_win_place_odds values(?,?,?,?,?,?,?,?)");
       for (const runner of parsed.runners.filter((row) => priced.includes(row.horseNumber))) {
         insert.run(raceId, runner.horseNumber, runner.win, runner.placeLow, runner.placeHigh,
-          page.fetchedAt, page.id);
+          page.fetchedAt, "historical_closing_reference", page.id);
       }
       db.prepare("update raw_pages set parsed_at=? where id=?").run(new Date().toISOString(), page.id);
       const completedAt = new Date().toISOString();
@@ -150,6 +152,11 @@ async function ingest(raceId, delayMs) {
       .run(String(error.stack ?? error).slice(0, 3000), failedAt, raceId);
     throw error;
   }
+}
+
+function addColumnIfMissing(table, column, definition) {
+  const columns = db.prepare(`pragma table_info(${table})`).all().map((row) => row.name);
+  if (!columns.includes(column)) db.exec(`alter table ${table} add column ${column} ${definition}`);
 }
 
 async function fetchResultSource(cname, delayMs) {
