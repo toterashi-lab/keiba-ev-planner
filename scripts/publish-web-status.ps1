@@ -2,7 +2,7 @@ param([switch]$DryRun)
 
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
-$public = Join-Path $root "public"
+$public = $root
 $privateDir = Join-Path $root "data\jra-free-private"
 $lockPath = Join-Path $privateDir "web-publish.lock"
 $node = Get-Command node -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source -First 1

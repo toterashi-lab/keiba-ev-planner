@@ -32,6 +32,9 @@ for (const token of ["manifestId", "remoteManifestId", "manifestSha256", "remote
 for (const token of ["processStartedAt", "Get-Process -Id ([int]$existingOwner.pid)", "$sameProcess", "Remove-Item -LiteralPath $lockPath"]) {
   if (!source.includes(token)) throw new Error(`Stale publication lock recovery is missing: ${token}`);
 }
+if (!source.includes("$public = $root") || source.includes('Join-Path $root "public"')) {
+  throw new Error("Publication root must resolve to the repository root without a nested public directory");
+}
 for (const token of ["if ($LASTEXITCODE -eq 10)", "--max-old-space-size=8192", '"scripts\\model-training-preflight.mjs"']) {
   if (!source.includes(token)) throw new Error(`Model preflight freshness fallback is missing: ${token}`);
 }
