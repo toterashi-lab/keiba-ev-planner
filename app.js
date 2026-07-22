@@ -23,6 +23,13 @@ const AGENTS = [
   { id: "analyst", name: "数理派 アナリスト", short: "数", description: "校正確率、誤差、期待値を重視", aliases: ["analyst", "agent_analyst", "agent_data", "persona_trackside", "data"] },
   { id: "contrarian", name: "逆張り派 コントラリアン", short: "逆", description: "評価集中と過剰人気のリスクを検証", aliases: ["contrarian", "agent_contrarian", "agent_odds", "persona_market", "odds"] },
 ];
+const AGENT_PERSONAS = Object.freeze({
+  safety: { name: "堅実派 セーフティ", symbol: "堅", role: "安定担当", focus: "安定感・複勝圏", voice: "大きな上振れより、崩れにくさを評価します。" },
+  sniper: { name: "穴狙い スナイパー", symbol: "穴", role: "妙味担当", focus: "人気薄・過小評価", voice: "人気はありませんが、市場評価ほど弱くないと見ます。" },
+  pace: { name: "展開派 ペースメーカー", symbol: "展", role: "流れ担当", focus: "ペース・位置取り", voice: "隊列とペースから、走りやすい位置を探します。" },
+  analyst: { name: "数理派 アナリスト", symbol: "数", role: "確率担当", focus: "確率・オッズ・誤差", voice: "推定勝率、誤差、オッズの3点で判断します。" },
+  contrarian: { name: "逆張り派 コントラリアン", symbol: "逆", role: "過熱監視", focus: "過剰人気・評価集中", voice: "評価が集中しても、オッズの妙味は別に確認します。" },
+});
 const PERIODS = [{ id: "today", label: "今日", days: 0 }, { id: "7d", label: "直近7日", days: 7 }, { id: "30d", label: "直近30日", days: 30 }, { id: "all", label: "全期間", days: null }];
 const BET_TYPES = ["単勝", "複勝", "馬連", "ワイド", "3連複", "3連単"];
 
@@ -165,7 +172,12 @@ function detailPanel(id, html) { return `<section class="detail-panel ${state.de
 function conclusionHtml(consensus, top, prediction, volatility) {
   const topMark = consensus.top;
   const expected = expectedReturn(top);
-  return `<div class="conclusion-grid"><section class="consensus-card"><div class="consensus-top"><div><span class="eyebrow">5人の合議結果</span><h3>${topMark ? `<span class="horse-number">${topMark.horseNumber}</span>${escapeHtml(topMark.horseName)}` : "発走前スナップショットなし"}</h3></div><span class="agreement">${consensus.split ? "意見割れ" : `一致 ${consensus.agreement}/5`}</span></div>
+  const ticket = top ? `${top.betType} ${displayTicket(top.betType, top.ticketKeys?.[0] ?? top.selection, top)}` : "";
+  const decision = top ? `今回の結論：${ticket} を${unitStake}円で検討` : "今回の結論：購入見送り";
+  const decisionReason = top
+    ? `総合本命は${topMark ? `${topMark.horseNumber}番 ${topMark.horseName}` : "未確定"}。5人中${consensus.agreement}人が上位評価しています。`
+    : "発走前のオッズ・データ品質・確率校正のいずれかが購入条件を満たしていません。";
+  return `<section class="decision-banner ${top ? "has-ticket" : "no-ticket"}"><span>まず見る結論</span><strong>${escapeHtml(decision)}</strong><p>${escapeHtml(decisionReason)}</p></section><div class="conclusion-grid"><section class="consensus-card"><div class="consensus-top"><div><span class="eyebrow">5人の合議結果</span><h3>${topMark ? `<span class="horse-number">${topMark.horseNumber}</span>${escapeHtml(topMark.horseName)}` : "発走前スナップショットなし"}</h3></div><span class="agreement">${consensus.split ? "意見割れ" : `一致 ${consensus.agreement}/5`}</span></div>
     <div class="consensus-picks"><div><span>総合本命</span><strong>${markLabel(consensus.ranked[0], "◎")}</strong></div><div><span>対抗</span><strong>${markLabel(consensus.ranked[1], "○")}</strong></div><div><span>穴候補</span><strong>${markLabel(consensus.value, "☆")}</strong></div></div>
     <p class="plain-explanation">${prediction ? escapeHtml(prediction.comment ?? "各AIの評価点と信頼度を加重して総合判断しています。") : "保存済みのAI予想がありません。予測生成後に5人の評価を統合します。"}</p></section>
     <section class="recommend-card"><span>AI予想買い目</span><h3>${top ? `${escapeHtml(top.betType)} ${escapeHtml(displayTicket(top.betType, top.ticketKeys?.[0] ?? top.selection, top))}` : "購入条件未達"}</h3><p>${top ? `${escapeHtml(top.method ?? "1点")}・1点${unitStake}円。${escapeHtml(top.comment ?? "5人のAI合議から組み立てた予想買い目です。")}` : "発走前オッズ、品質ゲート、確率校正の条件を満たす保存済み買い目はありません。"}</p>
@@ -181,16 +193,22 @@ function agentsHtml(prediction, result, consensus) {
 }
 
 function agentCardHtml(definition, agent, result, predictionContext = "pre_race") {
-  if (!agent || agent.status !== "available") return `<article class="agent-card unavailable"><header><span class="agent-name"><span class="agent-icon ${definition.id}">${definition.short}</span><span><h3>${definition.name}</h3><small>${definition.description}</small></span></span><span class="status-badge waiting">データ不足</span></header><p>発走前オッズまたは担当特徴量が不足し、このAIは推測で印を出しません。</p></article>`;
+  const persona = agentPersona(definition);
+  const heading = `<span class="agent-name"><span class="agent-icon ${definition.id}">${persona.symbol}</span><span><h3>${persona.name}</h3><small>${persona.role}・${persona.focus}</small></span></span>`;
+  if (!agent || agent.status !== "available") return `<article class="agent-card unavailable"><header>${heading}<span class="status-badge waiting">データ不足</span></header><p>${persona.voice} ただし、発走前オッズまたは担当データが不足しているため、推測で印は出しません。</p></article>`;
   const marks = (agent.marks ?? []).slice(0, 3);
   const top = marks[0];
   const positions = resultPositionMap(result);
   const hit = marks.some((mark) => positions.get(Number(mark.horseNumber)) === 1);
   const verified = predictionContext === "pre_race";
-  return `<article class="agent-card"><header><span class="agent-name"><span class="agent-icon ${definition.id}">${definition.short}</span><span><h3>${definition.name}</h3><small>${definition.description}</small></span></span>${isFinalResult(result) && verified ? `<span class="hit-badge ${hit ? "hit" : "miss"}">${hit ? "✓ ◎的中" : "× ◎不的中"}</span>` : `<span class="status-badge ${verified ? "ready" : "waiting"}">${verified ? "発走前保存" : "後日再現"}</span>`}</header>
+  return `<article class="agent-card"><header>${heading}${isFinalResult(result) && verified ? `<span class="hit-badge ${hit ? "hit" : "miss"}">${hit ? "✓ ◎的中" : "× ◎不的中"}</span>` : `<span class="status-badge ${verified ? "ready" : "waiting"}">${verified ? "発走前保存" : "後日再現"}</span>`}</header>
     <div class="agent-marks">${marks.map((mark) => `<div class="agent-mark"><span>${escapeHtml(mark.mark)}</span><strong>${number(mark.horseNumber)} ${escapeHtml(mark.horseName)}</strong>${isFinalResult(result) ? `<small>${positions.get(Number(mark.horseNumber)) ?? "--"}着</small>` : ""}</div>`).join("")}</div>
     ${top ? `<div class="agent-ev"><span>勝率 ${percent(top.probability)}</span><span>適正 ${Number(top.fairOdds).toFixed(1)}倍</span><span>現オッズ ${Number(top.currentOdds).toFixed(1)}倍</span><span>EV ${Number(top.expectedValue).toFixed(2)}</span></div>` : ""}
-    <p>${escapeHtml(agent.opinion ?? agent.reason ?? `${marks[0]?.horseName ?? "上位馬"}を中心に評価。`)}</p>${agent.skipReasons?.length ? `<small class="agent-skip">見送り理由: ${escapeHtml(agent.skipReasons.join("、"))}</small>` : ""}</article>`;
+    <p><b>${escapeHtml(persona.voice)}</b> ${escapeHtml(agent.opinion ?? agent.reason ?? `${marks[0]?.horseName ?? "上位馬"}を中心に評価。`)}</p>${agent.skipReasons?.length ? `<small class="agent-skip">見送り理由: ${escapeHtml(agent.skipReasons.join("、"))}</small>` : ""}</article>`;
+}
+
+function agentPersona(definition) {
+  return AGENT_PERSONAS[definition.id] ?? { name: definition.name, symbol: definition.short, role: "予想担当", focus: definition.description, voice: "根拠をもとに評価します。" };
 }
 
 function betsHtml(raceNo, track, top) {

@@ -136,6 +136,13 @@ main { width: min(100%, var(--content)); min-height: calc(100vh - 160px); margin
 .detail-panel { display: none; padding: 18px; }
 .detail-panel.active { display: block; }
 
+.decision-banner { margin-bottom: 12px; padding: 15px 16px; border: 1px solid var(--line); border-left: 4px solid var(--muted); background: var(--surface-3); }
+.decision-banner.has-ticket { border-left-color: var(--gold); }
+.decision-banner.no-ticket { border-left-color: var(--red); }
+.decision-banner span, .decision-banner strong, .decision-banner p { display: block; }
+.decision-banner span { color: var(--muted); font-size: 10px; font-weight: 900; }
+.decision-banner strong { margin-top: 4px; font-size: 18px; }
+.decision-banner p { margin: 5px 0 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
 .conclusion-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(280px, .7fr); gap: 12px; }
 .consensus-card, .recommend-card, .agent-card, .bet-card, .result-card, .performance-card, .research-card { border: 1px solid var(--line); background: var(--surface-2); border-radius: var(--radius); }
 .consensus-card { padding: 18px; }
@@ -173,6 +180,7 @@ main { width: min(100%, var(--content)); min-height: calc(100vh - 160px); margin
 .agent-mark span { font-size: 17px; font-weight: 900; }
 .agent-mark strong { margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 10px; }
 .agent-card p { min-height: 34px; margin: 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
+.agent-card p b { color: var(--text); font-weight: 800; }
 .agent-card.unavailable { opacity: .72; }
 .agent-ev { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; margin: 0 0 10px; color: var(--muted); font-size: 10px; }
 .agent-ev span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
