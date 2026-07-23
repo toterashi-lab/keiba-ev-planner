@@ -36,10 +36,10 @@ try {
   } else if (command === "ingest-month") {
     const month = options.month;
     if (!/^\d{4}-\d{2}$/.test(month ?? "")) throw new Error("--month YYYY-MM is required");
-    await withLock(() => ingestMonth(month, Number(options.delay ?? 1500)), LOCK_PATH, { waitMs: Number(options.wait ?? 0) });
+    await withLock(() => ingestMonth(month, Number(options.delay ?? 1000)), LOCK_PATH, { waitMs: Number(options.wait ?? 0) });
     console.log(JSON.stringify(statusReport(), null, 2));
   } else if (command === "run") {
-    await withLock(() => runQueue(Number(options.limit ?? 1), Number(options.delay ?? 1500)), RUN_LOCK_PATH, { recover: false });
+    await withLock(() => runQueue(Number(options.limit ?? 1), Number(options.delay ?? 1000)), RUN_LOCK_PATH, { recover: false });
     console.log(JSON.stringify(statusReport(), null, 2));
   } else if (command === "sync-current") {
     fs.writeFileSync(SYNC_REQUEST_PATH, JSON.stringify({ pid: process.pid, requestedAt: new Date().toISOString() }));

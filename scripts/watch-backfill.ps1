@@ -29,7 +29,8 @@ try {
   }
 
   $task = Get-ScheduledTask -TaskName "KeibaEV-JRA-Free-Backfill" -ErrorAction SilentlyContinue
-  $healthy = $status.workerHealth -eq "healthy" -and $task -and $task.State -eq "Running"
+  # A healthy worker can be a direct recovery process when Task Scheduler cannot be rewritten.
+  $healthy = $status.workerHealth -eq "healthy"
   if ($healthy) {
     Write-Output ("Backfill healthy: pending={0}, pid={1}." -f $pending,$status.workerPid)
     exit 0

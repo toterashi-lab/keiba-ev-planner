@@ -1,6 +1,6 @@
 param(
   [int]$MonthsPerRun = 400,
-  [int]$DelayMs = 1500,
+  [int]$DelayMs = 1000,
   [int]$Passes = 5
 )
 

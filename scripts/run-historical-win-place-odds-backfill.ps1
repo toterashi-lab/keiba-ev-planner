@@ -1,6 +1,6 @@
 param(
   [int]$RacesPerRun = 100000,
-  [int]$DelayMs = 1500
+  [int]$DelayMs = 1000
 )
 
 $ErrorActionPreference = "Stop"
