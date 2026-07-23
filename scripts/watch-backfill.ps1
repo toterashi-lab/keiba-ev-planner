@@ -24,7 +24,17 @@ try {
   $status = $statusJson | ConvertFrom-Json
   $pending = [int]$status.jobs.queued + [int]$status.jobs.running + [int]$status.jobs.failed
   if ($pending -le 0) {
-    Write-Output "Backfill is complete; watchdog is idle."
+    # Keep supervising the next phase instead of waiting for the 15-minute model task.
+    $oddsStatusJson = & $node --no-warnings "scripts\jra-historical-win-place-odds.mjs" status
+    if ($LASTEXITCODE -ne 0) { throw "Historical odds status failed: $LASTEXITCODE" }
+    $oddsStatus = $oddsStatusJson | ConvertFrom-Json
+    if ([int]$oddsStatus.pendingRaces -gt 0) {
+      Write-Output ("Results are complete; advancing historical odds: pending={0}." -f $oddsStatus.pendingRaces)
+      & (Join-Path $PSScriptRoot "run-post-backfill-pipeline.ps1")
+      if ($LASTEXITCODE -ne 0) { throw "Historical odds recovery pipeline failed: $LASTEXITCODE" }
+      exit 0
+    }
+    Write-Output "Results and historical win/place odds are complete; watchdog is idle."
     exit 0
   }
 
