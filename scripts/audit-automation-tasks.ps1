@@ -7,6 +7,7 @@ if (-not $OutputPath) { $OutputPath = Join-Path $privateDir "models\automation-a
 
 $specs = @(
   @{ Name = "KeibaEV-JRA-Free-Backfill"; Script = "scripts\run-jra-free-backfill.ps1" },
+  @{ Name = "KeibaEV-Backfill-Watchdog"; Script = "scripts\watch-backfill.ps1" },
   @{ Name = "KeibaEV-PostBackfill-Model"; Script = "scripts\run-post-backfill-pipeline.ps1" },
   @{ Name = "KeibaEV-JRA-Current-Sync"; Script = "scripts\sync-jra-current.ps1" },
   @{ Name = "KeibaEV-JRA-Live-Racecards"; Script = "scripts\sync-jra-live-racecards.ps1" },

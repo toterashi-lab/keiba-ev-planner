@@ -69,6 +69,10 @@ for (const token of ["$needsTraining", "if ($LASTEXITCODE -eq 10)", "New model i
 for (const token of ["processStartedAt", "Get-Process -Id ([int]$existingOwner.pid)", "$sameProcess", "Remove-Item -LiteralPath $lockPath"]) {
   if (!source.includes(token)) throw new Error(`${file}: stale post-backfill lock recovery is missing: ${token}`);
 }
+const watchdog = fs.readFileSync("scripts/watch-backfill.ps1", "utf8");
+for (const token of ["run-post-backfill-pipeline.ps1", "workerHealth -eq \"healthy\"", "workerHealth -ne \"healthy\""]) {
+  if (!watchdog.includes(token)) throw new Error(`scripts/watch-backfill.ps1: recovery token is missing: ${token}`);
+}
 
 console.log(JSON.stringify({
   status: "pass",
