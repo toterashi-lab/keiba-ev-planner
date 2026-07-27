@@ -49,10 +49,12 @@ try {
     if (!report.pass) process.exitCode = 2;
   } else if (command === "repair-raw") {
     console.log(JSON.stringify(requeueMissingRaw(), null, 2));
+  } else if (command === "repair-foreign-key") {
+    console.log(JSON.stringify(requeueForeignKeyFailures(), null, 2));
   } else if (command === "status") {
     console.log(JSON.stringify(status(), null, 2));
   } else {
-    throw new Error("Commands: init, run, audit, repair-raw, status");
+    throw new Error("Commands: init, run, audit, repair-raw, repair-foreign-key, status");
   }
 } finally {
   db.close();
@@ -131,10 +133,12 @@ async function ingest(raceId, delayMs) {
     db.exec("begin immediate");
     try {
       db.prepare("delete from historical_win_place_odds where race_id=?").run(raceId);
-      const insert = db.prepare("insert into historical_win_place_odds values(?,?,?,?,?,?,?,?)");
+      const insert = db.prepare(`insert into historical_win_place_odds(
+        race_id,horse_number,win_odds,place_odds_low,place_odds_high,observed_at,source_page_id,time_basis
+      ) values(?,?,?,?,?,?,?,?)`);
       for (const runner of parsed.runners.filter((row) => priced.includes(row.horseNumber))) {
         insert.run(raceId, runner.horseNumber, runner.win, runner.placeLow, runner.placeHigh,
-          page.fetchedAt, "historical_closing_reference", page.id);
+          page.fetchedAt, page.id, "historical_closing_reference");
       }
       db.prepare("update raw_pages set parsed_at=? where id=?").run(new Date().toISOString(), page.id);
       const completedAt = new Date().toISOString();
@@ -305,6 +309,14 @@ function requeueMissingRaw() {
   } catch (error) { db.exec("rollback"); throw error; }
   return { status: queued ? "repair_queued" : "complete", checkedCompleteRaces: rows.length,
     missingRawRaces: missing.length, queuedRaces: queued };
+}
+
+function requeueForeignKeyFailures() {
+  const now = new Date().toISOString();
+  const result = db.prepare(`update historical_odds_jobs set status='queued',attempts=0,
+    last_error='Requeued after source_page_id column-order repair',updated_at=?
+    where status='failed' and last_error like '%FOREIGN KEY constraint failed%'`).run(now);
+  return { status: "requeued", jobs: Number(result.changes) };
 }
 
 function recoverInterrupted() {

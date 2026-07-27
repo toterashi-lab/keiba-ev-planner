@@ -4,7 +4,11 @@ import crypto from "node:crypto";
 import { DatabaseSync } from "node:sqlite";
 import { auditFeatureRegistry } from "../model/feature-registry.mjs";
 
-const outDir = "public";
+const outDir = path.resolve(process.cwd(), "public");
+const sourceDir = path.resolve(import.meta.dirname, "..");
+if (outDir === sourceDir) {
+  throw new Error("公開生成の出力先がソース直下を指しています。作業ディレクトリを確認してください。");
+}
 const dataDir = path.join(outDir, "data");
 const programmeRaw = fs.readFileSync("data/meet-2026-07-11-2026-07-12.json", "utf8");
 const resultsRaw = fs.readFileSync("data/results-2026-07-11-2026-07-12.json", "utf8");
