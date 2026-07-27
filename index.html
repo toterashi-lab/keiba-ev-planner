@@ -13,14 +13,14 @@
     <header class="topbar">
       <a class="brand" href="#home" aria-label="AIデジタル競馬新聞 ホーム">
         <span class="brand-mark" aria-hidden="true">AI</span>
-        <span><strong>AIデジタル競馬新聞</strong><small>5人の予想を、ひと目で。</small></span>
+        <span><strong>AIデジタル競馬新聞</strong><small>5人のAIが、レースを語る。</small></span>
       </a>
       <nav class="desktop-nav" aria-label="サイト全体">
         <a href="#home" data-route="home">ホーム</a>
         <a href="#races" data-route="races">今日のレース</a>
         <a href="#results" data-route="results">予想結果</a>
-        <a href="#performance" data-route="performance">AI成績</a>
-        <a href="#research" data-route="research">データ／研究</a>
+        <a href="#performance" data-route="performance">AIの通信簿</a>
+        <a href="#research" data-route="research">裏側・研究室</a>
       </nav>
       <button id="theme-toggle" class="icon-button" type="button" title="表示テーマを切り替える" aria-label="表示テーマを切り替える">◐</button>
     </header>
@@ -28,7 +28,7 @@
     <main id="main-content">
       <section id="page-home" class="page" data-page="home" aria-labelledby="home-title">
         <div class="home-lead">
-          <div><span class="eyebrow">JRA公式データ × 5専門AI</span><h1 id="home-title">本日の予想</h1><p id="home-summary">開催データを読み込んでいます。</p></div>
+          <div><span class="eyebrow">AI予想会議</span><h1 id="home-title">今日の勝負レース</h1><p id="home-summary">開催データを読み込んでいます。</p></div>
           <div id="next-race-card" class="next-race-card" aria-live="polite"></div>
         </div>
         <div id="home-date-tabs" class="chip-row" aria-label="開催日"></div>
@@ -48,20 +48,20 @@
       </section>
 
       <section id="page-results" class="page" data-page="results" aria-labelledby="results-title">
-        <header class="page-heading"><div><span class="eyebrow">PREDICTION VS RESULT</span><h1 id="results-title">予想結果</h1></div><p>公開時点の予想と確定結果をレース単位で照合します。</p></header>
+        <header class="page-heading"><div><span class="eyebrow">AI PREDICTION VS RESULT</span><h1 id="results-title">予想はどうだった？</h1></div><p>AIの印とレース結果を、レースごとに見比べられます。</p></header>
         <div id="result-filter" class="chip-row" aria-label="結果期間"></div>
         <div id="result-list" class="result-list"></div>
       </section>
 
       <section id="page-performance" class="page" data-page="performance" aria-labelledby="performance-title">
-        <header class="page-heading"><div><span class="eyebrow">AI PERFORMANCE</span><h1 id="performance-title">AI成績</h1></div><p>各AIと総合予想を、同じ固定ルールで比較します。</p></header>
+        <header class="page-heading"><div><span class="eyebrow">AI SCOREBOARD</span><h1 id="performance-title">AIの通信簿</h1></div><p>5人のAIが、これまでどんな予想をしてきたかを見られます。</p></header>
         <div id="performance-filter" class="chip-row" aria-label="成績期間"></div>
         <div id="performance-summary" class="performance-grid"></div>
         <p class="disclosure">成績は保存済み予想だけを対象に集計します。後から生成した予想を過去時点の実績として扱いません。</p>
       </section>
 
       <section id="page-research" class="page" data-page="research" aria-labelledby="research-title">
-        <header class="page-heading"><div><span class="eyebrow">DATA & RESEARCH</span><h1 id="research-title">データ／研究</h1></div><p>データ品質、収録状況、モデルと期待値計算の詳細です。</p></header>
+        <header class="page-heading"><div><span class="eyebrow">BEHIND THE PREDICTIONS</span><h1 id="research-title">裏側・研究室</h1></div><p>データの収録状況と、AI予想を支える仕組みです。</p></header>
         <div id="research-overview" class="research-grid"></div>
         <details class="research-details"><summary>モデルと期待値の計算方法</summary><div id="model-methodology"></div></details>
         <details class="research-details"><summary>データ品質・不足項目</summary><div id="data-quality"></div></details>
@@ -73,8 +73,8 @@
       <a href="#home" data-route="home"><span aria-hidden="true">⌂</span>ホーム</a>
       <a href="#races" data-route="races"><span aria-hidden="true">馬</span>レース</a>
       <a href="#results" data-route="results"><span aria-hidden="true">✓</span>結果</a>
-      <a href="#performance" data-route="performance"><span aria-hidden="true">計</span>成績</a>
-      <a href="#research" data-route="research"><span aria-hidden="true">詳</span>研究</a>
+      <a href="#performance" data-route="performance"><span aria-hidden="true">計</span>通信簿</a>
+      <a href="#research" data-route="research"><span aria-hidden="true">詳</span>裏側</a>
     </nav>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
