@@ -94,6 +94,21 @@ main { width: min(100%, var(--content)); min-height: calc(100vh - 160px); margin
 .count-badge, .status-badge, .hit-badge { display: inline-flex; align-items: center; min-height: 27px; padding: 4px 9px; border: 1px solid var(--line); border-radius: 5px; color: var(--muted); font-size: 10px; font-weight: 900; }
 
 .race-card-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.finder-filters { display: grid; gap: 10px; margin-bottom: 20px; }
+.finder-group { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid var(--line); background: var(--surface); }
+.finder-group > span { width: 58px; flex: 0 0 58px; color: var(--muted); font-size: 10px; font-weight: 900; }
+.finder-group > div { display: flex; gap: 7px; overflow-x: auto; scrollbar-width: none; }
+.finder-group > div::-webkit-scrollbar { display: none; }
+.finder-group button { flex: 0 0 auto; min-height: 32px; padding: 5px 10px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface-2); color: var(--muted); font-size: 11px; font-weight: 800; cursor: pointer; }
+.finder-group button.active { border-color: var(--green); background: var(--green-soft); color: var(--text); }
+.finder-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.finder-race { padding: 14px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: var(--text); text-align: left; cursor: pointer; }
+.finder-race:hover { border-color: var(--green); }
+.finder-race-meta, .finder-race small { display: block; color: var(--muted); font-size: 10px; }
+.finder-race strong { display: block; margin: 5px 0 3px; font-size: 15px; }
+.finder-race > div { display: grid; gap: 5px; margin-top: 11px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 11px; }
+.finder-race > div span { color: var(--muted); }
+.finder-race > div b { color: var(--text); }
 .race-card { min-width: 0; padding: 0; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: var(--text); text-align: left; overflow: hidden; cursor: pointer; box-shadow: 0 4px 12px rgba(0, 0, 0, .08); }
 .race-card:hover { border-color: var(--green); }
 .race-card-top { padding: 12px 14px 10px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--line); }
@@ -274,10 +289,10 @@ footer { padding: 22px 20px 34px; border-top: 1px solid var(--line); color: var(
   .brand { min-width: 0; }
   main { padding: 20px 14px 90px; }
   .home-lead { grid-template-columns: 1fr; }
-  .race-card-list, .agent-grid, .bet-card-list { grid-template-columns: 1fr; }
+  .race-card-list, .finder-list, .agent-grid, .bet-card-list { grid-template-columns: 1fr; }
   .performance-grid { grid-template-columns: repeat(2, 1fr); }
   .research-grid { grid-template-columns: repeat(2, 1fr); }
-  .mobile-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; min-height: 62px; padding-bottom: env(safe-area-inset-bottom); display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--line); background: color-mix(in srgb, var(--bg) 95%, transparent); backdrop-filter: blur(14px); }
+  .mobile-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; min-height: 62px; padding-bottom: env(safe-area-inset-bottom); display: grid; grid-template-columns: repeat(6, 1fr); border-top: 1px solid var(--line); background: color-mix(in srgb, var(--bg) 95%, transparent); backdrop-filter: blur(14px); }
   .mobile-nav a { min-width: 0; padding: 8px 2px 6px; display: grid; place-items: center; gap: 3px; color: var(--muted); font-size: 9px; font-weight: 800; text-decoration: none; }
   .mobile-nav a span { font-size: 16px; }
   .mobile-nav a.active { color: var(--green); }

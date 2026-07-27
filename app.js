@@ -39,6 +39,7 @@ const state = {
   venueCode: currentEdition.meetings?.at(-1)?.tracks?.[0]?.venueCode ?? "",
   raceNo: 1,
   detailTab: "conclusion",
+  discover: { venue: "all", surface: "all", volatility: "all" },
   resultPeriod: "all",
   performancePeriod: "all",
 };
@@ -67,16 +68,60 @@ function renderAll() {
   renderRoute();
   renderHome();
   renderRaceWorkspace();
+  renderDiscoverPage();
   renderResultsPage();
   renderPerformancePage();
   renderResearchPage();
 }
 
 function renderRoute() {
-  const route = ["home", "races", "results", "performance", "research"].includes(state.route) ? state.route : "home";
+  const route = ["home", "races", "discover", "results", "performance", "research"].includes(state.route) ? state.route : "home";
   document.querySelectorAll("[data-page]").forEach((page) => page.classList.toggle("active", page.dataset.page === route));
   document.querySelectorAll("[data-route]").forEach((link) => link.classList.toggle("active", link.dataset.route === route));
   document.title = `${routeLabel(route)}｜AIデジタル競馬新聞`;
+}
+
+function renderDiscoverPage() {
+  const all = (currentEdition.meetings ?? []).flatMap((meeting) => (meeting.tracks ?? []).flatMap((track) => (track.races ?? []).map((race) => {
+    const prediction = findPrediction(race.no, track);
+    const consensus = buildConsensus(prediction);
+    const volatility = forecastPolicy.volatilityProfile({ race, prediction, consensus, candidates: readyCandidates(race.no, track) });
+    return { meeting, track, race, consensus, volatility, top: displayedTopTicket(race, track, prediction, consensus, volatility) };
+  })));
+  const venues = [...new Set(all.map((row) => row.track.venueName))];
+  const filter = state.discover;
+  const filtered = all.filter((row) => (filter.venue === "all" || row.track.venueName === filter.venue)
+    && (filter.surface === "all" || row.race.surface === filter.surface)
+    && (filter.volatility === "all" || String(row.volatility.level) === filter.volatility));
+  const filters = document.querySelector("#discover-filters");
+  filters.innerHTML = finderGroup("競馬場", "venue", [{ value: "all", label: "すべて" }, ...venues.map((value) => ({ value, label: value }))], filter.venue)
+    + finderGroup("コース", "surface", [{ value: "all", label: "すべて" }, { value: "芝", label: "芝" }, { value: "ダート", label: "ダート" }, { value: "障害", label: "障害" }], filter.surface)
+    + finderGroup("荒れ具合", "volatility", [{ value: "all", label: "すべて" }, { value: "1", label: "落ち着き" }, { value: "3", label: "標準" }, { value: "5", label: "波乱含み" }], filter.volatility);
+  filters.querySelectorAll("button[data-finder-key]").forEach((button) => button.addEventListener("click", () => {
+    state.discover[button.dataset.finderKey] = button.dataset.finderValue;
+    renderDiscoverPage();
+  }));
+  document.querySelector("#discover-count").textContent = `${filtered.length}レース`;
+  document.querySelector("#discover-list").innerHTML = filtered.map(finderRaceHtml).join("") || empty("条件に合うレースがありません");
+  document.querySelectorAll("button[data-finder-race]").forEach((button) => button.addEventListener("click", () => {
+    state.date = button.dataset.finderDate;
+    state.venueCode = button.dataset.finderVenue;
+    state.raceNo = Number(button.dataset.finderRace);
+    state.route = "races";
+    location.hash = "races";
+    renderAll();
+  }));
+}
+
+function finderGroup(label, key, options, selected) {
+  return `<div class="finder-group"><span>${escapeHtml(label)}</span><div>${options.map((option) => `<button type="button" class="${option.value === selected ? "active" : ""}" data-finder-key="${key}" data-finder-value="${escapeHtml(option.value)}">${escapeHtml(option.label)}</button>`).join("")}</div></div>`;
+}
+
+function finderRaceHtml(row) {
+  const { meeting, track, race, consensus, volatility, top } = row;
+  const pick = consensus.top ? `${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}` : "予想準備中";
+  const ticket = top ? `${escapeHtml(top.betType)} ${escapeHtml(displayTicket(top.betType, top.ticketKeys?.[0] ?? top.selection, top))}` : "買い目を準備中";
+  return `<button type="button" class="finder-race" data-finder-date="${escapeHtml(meeting.date)}" data-finder-venue="${escapeHtml(track.venueCode)}" data-finder-race="${race.no}"><span class="finder-race-meta">${escapeHtml(formatDate(meeting.date))}・${escapeHtml(track.venueName)} ${race.no}R</span><strong>${escapeHtml(race.name)}</strong><small>${escapeHtml(race.surface)}${number(race.distanceM)}m　荒れ具合：${escapeHtml(volatility.label)}</small><div><span>総合本命 <b>${pick}</b></span><span>AI一致 ${consensus.agreement}/5</span><span>注目 ${ticket}</span></div></button>`;
 }
 
 function renderHome() {
@@ -437,7 +482,7 @@ function markLabel(row, mark) { return row ? `${mark} ${row.horseNumber}番 ${es
 function displayTicket(type, key, row) { const raw = String(key ?? row.selection ?? ""); if (/^\d+(?:-\d+){0,2}$/.test(raw)) return ["3連単"].includes(type) ? raw.replaceAll("-", "→") : raw; return row.method === "1点" ? raw.replace(/\s+[^・]+(?:・|$)/g, "-").replace(/-$/, "") || raw : raw; }
 function addMarkFallback() {}
 function routeFromHash() { return location.hash.replace("#", "").split("/")[0] || "home"; }
-function routeLabel(route) { return ({ home: "ホーム", races: "今日のレース", results: "予想結果", performance: "AI成績", research: "データ／研究" })[route] ?? "ホーム"; }
+function routeLabel(route) { return ({ home: "ホーム", races: "今日のレース", discover: "データから探す", results: "予想はどうだった？", performance: "AIの通信簿", research: "裏側・研究室" })[route] ?? "ホーム"; }
 function predictionKey(row) { return `${row.date}|${row.meetingName}|${row.raceNo}|${row.modelVersion}`; }
 function candidateKey(row) { return `${row.date}|${row.meetingName}|${row.raceNo}|${row.betType}|${row.method}|${row.selection}|${row.modelVersion}`; }
 function dedupeBy(rows, keyFn) { return [...new Map(rows.map((row) => [keyFn(row), row])).values()]; }

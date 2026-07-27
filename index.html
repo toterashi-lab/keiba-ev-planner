@@ -18,6 +18,7 @@
       <nav class="desktop-nav" aria-label="サイト全体">
         <a href="#home" data-route="home">ホーム</a>
         <a href="#races" data-route="races">今日のレース</a>
+        <a href="#discover" data-route="discover">データから探す</a>
         <a href="#results" data-route="results">予想結果</a>
         <a href="#performance" data-route="performance">AIの通信簿</a>
         <a href="#research" data-route="research">裏側・研究室</a>
@@ -47,6 +48,15 @@
         <div id="race-detail"></div>
       </section>
 
+      <section id="page-discover" class="page" data-page="discover" aria-labelledby="discover-title">
+        <header class="page-heading"><div><span class="eyebrow">RACE FINDER</span><h1 id="discover-title">データから探す</h1></div><p>条件に合うレースを選び、AI予想を見比べます。</p></header>
+        <div id="discover-filters" class="finder-filters" aria-label="レースの絞り込み"></div>
+        <section class="section-block" aria-labelledby="discover-list-title">
+          <header class="section-heading"><div><span>条件に合うレース</span><h2 id="discover-list-title">レースを選ぶ</h2></div><span id="discover-count" class="count-badge"></span></header>
+          <div id="discover-list" class="finder-list"></div>
+        </section>
+      </section>
+
       <section id="page-results" class="page" data-page="results" aria-labelledby="results-title">
         <header class="page-heading"><div><span class="eyebrow">AI PREDICTION VS RESULT</span><h1 id="results-title">予想はどうだった？</h1></div><p>AIの印とレース結果を、レースごとに見比べられます。</p></header>
         <div id="result-filter" class="chip-row" aria-label="結果期間"></div>
@@ -72,6 +82,7 @@
     <nav class="mobile-nav" aria-label="モバイルナビゲーション">
       <a href="#home" data-route="home"><span aria-hidden="true">⌂</span>ホーム</a>
       <a href="#races" data-route="races"><span aria-hidden="true">馬</span>レース</a>
+      <a href="#discover" data-route="discover"><span aria-hidden="true">探</span>探す</a>
       <a href="#results" data-route="results"><span aria-hidden="true">✓</span>結果</a>
       <a href="#performance" data-route="performance"><span aria-hidden="true">計</span>通信簿</a>
       <a href="#research" data-route="research"><span aria-hidden="true">詳</span>裏側</a>
