@@ -1,6 +1,6 @@
 window.KEIBA_REFERENCE_EV_AUDIT = {
   "status": "evaluation_only",
-  "checkedAt": "2026-07-28T14:53:52.018Z",
+  "checkedAt": "2026-07-28T14:59:23.467Z",
   "modelVersion": "ability-softmax-v2-asof-2026-07-11-38ce1d9ff7df",
   "targetDates": [
     "2026-07-11",

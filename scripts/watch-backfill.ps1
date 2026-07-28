@@ -29,6 +29,15 @@ try {
     if ($LASTEXITCODE -ne 0) { throw "Historical odds status failed: $LASTEXITCODE" }
     $oddsStatus = $oddsStatusJson | ConvertFrom-Json
     if ([int]$oddsStatus.pendingRaces -gt 0) {
+      $snapshotWorker = Get-CimInstance Win32_Process | Where-Object {
+        $_.CommandLine -like "*run-current-snapshot-refresh.ps1*"
+      } | Select-Object -First 1
+      if (-not $snapshotWorker) {
+        Start-Process -FilePath "powershell.exe" -ArgumentList @(
+          "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
+          (Join-Path $PSScriptRoot "run-current-snapshot-refresh.ps1")
+        ) -WorkingDirectory $root -WindowStyle Hidden
+      }
       Write-Output ("Results are complete; advancing historical odds: pending={0}." -f $oddsStatus.pendingRaces)
       & (Join-Path $PSScriptRoot "run-post-backfill-pipeline.ps1")
       if ($LASTEXITCODE -ne 0) { throw "Historical odds recovery pipeline failed: $LASTEXITCODE" }

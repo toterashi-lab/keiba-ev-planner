@@ -15,14 +15,14 @@ Read the repository `AGENTS.md`, then run:
 node scripts/horse-racing-ev-agent.mjs
 ```
 
-Follow the returned `phase` and `nextAction`. Do not skip ahead to training or publication while an earlier data phase is incomplete.
+Follow the returned `phase` and `nextAction`. Do not wait for the historical backlog to finish: train, validate, calculate, and publish from every quality-gated row available when the run starts. Keep backlog collection running in parallel and create a new immutable data snapshot for each refresh.
 
 ## Required Workflow
 
 1. Read `references/research-method.md`.
 2. Read `references/github-method-sources.md` before adopting a method from GitHub or an external repository.
 3. Read `references/agent-hierarchy.md` when generating or changing predictions.
-4. Inspect the database status and use every row exposed by the quality-gated `complete_*` views.
+4. Inspect the database status and use every row exposed by the quality-gated `complete_*` views at run start. Missing or queued rows are excluded from that snapshot and must never block the refresh.
 5. Keep the final target period untouched. Discover conditions on older data and confirm them on a later holdout.
 6. Select models primarily by log loss, Brier score, ECE, and calibration-bin downside error. Accuracy is secondary.
 7. Compare the ability model with the parimutuel market. Correct favorite-longshot bias only with parameters fitted before the target period.
@@ -68,4 +68,4 @@ node scripts/reference-ev-scope-check.mjs
 node scripts/horse-racing-ev-agent-check.mjs
 ```
 
-When the database backfill changes, rerun the pattern analysis and model pipeline from the full quality-gated database.
+When the database backfill changes, rerun the pattern analysis and model pipeline from the then-current quality-gated database; do not wait for the full backlog.

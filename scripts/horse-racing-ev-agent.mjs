@@ -26,11 +26,14 @@ try {
 
   let phase;
   let nextAction;
+  const currentSnapshotReady = completeRaces >= 5000 && pricedRaces >= 1000;
   if (resultPending > 0) {
     phase = "race_results_backfill";
     nextAction = "continue_jra_free_backfill";
-  } else if (!hasOddsJobs || oddsPending > 0 || pricedRaces !== completeRaces
-    || !hasExoticOddsJobs || exoticOddsPending > 0) {
+  } else if (currentSnapshotReady && (oddsPending > 0 || exoticOddsPending > 0)) {
+    phase = "continuous_snapshot_learning";
+    nextAction = "refresh_current_quality_gated_snapshot_while_backfill_continues";
+  } else if (!hasOddsJobs || oddsPending > 0 || !hasExoticOddsJobs || exoticOddsPending > 0) {
     phase = "historical_market_odds_backfill";
     nextAction = "continue_win_place_and_exotic_odds";
   } else if (model?.dataCoverage?.races !== completeRaces) {
@@ -53,7 +56,8 @@ try {
     nextAction,
     rules: {
       skill: "horse-racing-ev-research",
-      allQualityGatedDataRequired: true,
+      dataSnapshotPolicy: "use_all_quality_gated_rows_available_at_run_start",
+      historicalBackfillBlocksForecastRefresh: false,
       targetLeakageForbidden: true,
       purchaseEvaluationScope: "ai_prediction_top_ticket_only",
       unitStakeYen: 100,
@@ -64,6 +68,7 @@ try {
       resultJobs,
       resultPending,
       completeRaces,
+      currentSnapshotReady,
       oddsJobs,
       oddsPending,
       exoticOddsJobs,

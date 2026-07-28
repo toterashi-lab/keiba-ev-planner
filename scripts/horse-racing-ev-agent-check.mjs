@@ -14,10 +14,12 @@ for (const token of [
 for (const token of [
   "race_results_backfill",
   "historical_market_odds_backfill",
+  "continuous_snapshot_learning",
   "exoticOddsPending",
   "full_walk_forward_training",
   "external_ai_recommendation_validation",
   "ai_prediction_top_ticket_only",
+  "use_all_quality_gated_rows_available_at_run_start",
   "externalBettingIntegration: \"out_of_scope\"",
 ]) {
   if (!source.includes(token)) throw new Error(`agent state machine missing: ${token}`);
