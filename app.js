@@ -119,8 +119,8 @@ function finderGroup(label, key, options, selected) {
 
 function finderRaceHtml(row) {
   const { meeting, track, race, consensus, volatility, top } = row;
-  const pick = consensus.top ? `${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}` : "予想準備中";
-  const ticket = top ? `${escapeHtml(top.betType)} ${escapeHtml(displayTicket(top.betType, top.ticketKeys?.[0] ?? top.selection, top))}` : "買い目を準備中";
+  const pick = consensus.top ? `${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}` : "予想公開前";
+  const ticket = top ? `${escapeHtml(top.betType)} ${escapeHtml(displayTicket(top.betType, top.ticketKeys?.[0] ?? top.selection, top))}` : "見送り";
   return `<button type="button" class="finder-race" data-finder-date="${escapeHtml(meeting.date)}" data-finder-venue="${escapeHtml(track.venueCode)}" data-finder-race="${race.no}"><span class="finder-race-meta">${escapeHtml(formatDate(meeting.date))}・${escapeHtml(track.venueName)} ${race.no}R</span><strong>${escapeHtml(race.name)}</strong><small>${escapeHtml(race.surface)}${number(race.distanceM)}m　荒れ具合：${escapeHtml(volatility.label)}</small><div><span>総合本命 <b>${pick}</b></span><span>AI一致 ${consensus.agreement}/5</span><span>注目 ${ticket}</span></div></button>`;
 }
 
@@ -168,10 +168,10 @@ function raceCardHtml(race, track) {
   const indexSummary = consensusIndexSummary(consensus);
   return `<button type="button" class="race-card" data-race="${race.no}" aria-label="${escapeHtml(track.venueName)}${race.no}レース ${escapeHtml(race.name)}を見る">
     <div class="race-card-top"><span class="race-card-no">${race.no}R</span><span class="race-card-title"><strong>${escapeHtml(race.name)}</strong><small>${escapeHtml(race.surface)}${number(race.distanceM)}m・${escapeHtml(race.condition)}</small></span><span class="race-card-time">${escapeHtml(race.start)}<br>${statusBadge(status)}</span></div>
-    <div class="race-card-body"><span class="race-card-pick"><span>総合本命</span><strong>${consensus.top ? `${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}` : "発走前記録なし"}</strong></span><span class="agreement">一致度 ${consensus.agreement}/5</span>
+    <div class="race-card-body"><span class="race-card-pick"><span>総合本命</span><strong>${consensus.top ? `${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}` : "予想公開前"}</strong></span><span class="agreement">一致度 ${consensus.agreement}/5</span>
       <span class="race-card-marks"><span>総合印</span><strong>${marks.length ? marks.map((mark, index) => `${["◎", "○", "▲"][index]}${mark.horseNumber}`).join(" ") : "--"}</strong></span>
       <span class="race-card-index"><span>総合AI指数</span><strong>${indexSummary}</strong></span>
-      <span class="race-card-ticket"><span>AI予想買い目</span><strong>${top ? `${escapeHtml(top.betType)} ${escapeHtml(displayTicket(top.betType, top.ticketKeys?.[0] ?? top.selection, top))}・${unitStake}円` : "購入条件未達"}</strong></span>
+      <span class="race-card-ticket"><span>AI予想買い目</span><strong>${top ? `${escapeHtml(top.betType)} ${escapeHtml(displayTicket(top.betType, top.ticketKeys?.[0] ?? top.selection, top))}・${unitStake}円` : "見送り"}</strong></span>
       ${resultSummary ? `<span class="race-card-result"><span>確定結果</span><strong>${escapeHtml(resultSummary)}</strong></span>` : ""}
       ${volatilityMeterHtml(volatility, true)}</div>
   </button>`;
@@ -191,7 +191,7 @@ function renderNextRace(track) {
   }
   const prediction = findPrediction(race.no, track);
   const consensus = buildConsensus(prediction);
-  root.innerHTML = `<span class="time">次の発走 ${escapeHtml(race.start)}</span><strong>${escapeHtml(track.venueName)}${race.no}R ${escapeHtml(race.name)}</strong><small>${consensus.top ? `総合本命 ${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}・一致度 ${consensus.agreement}/5` : "発走前記録なし"}</small>`;
+  root.innerHTML = `<span class="time">次の発走 ${escapeHtml(race.start)}</span><strong>${escapeHtml(track.venueName)}${race.no}R ${escapeHtml(race.name)}</strong><small>${consensus.top ? `総合本命 ${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}・一致度 ${consensus.agreement}/5` : "予想公開前"}</small>`;
 }
 
 function renderRaceWorkspace() {
@@ -233,12 +233,12 @@ function conclusionHtml(consensus, top, prediction, volatility) {
   const ticket = top ? `${top.betType} ${displayTicket(top.betType, top.ticketKeys?.[0] ?? top.selection, top)}` : "";
   const decision = top ? `今回の結論：${ticket} を${unitStake}円で検討` : "今回の結論：購入見送り";
   const decisionReason = top
-    ? `総合本命は${topMark ? `${topMark.horseNumber}番 ${topMark.horseName}` : "未確定"}。5人中${consensus.agreement}人が上位評価しています。`
+    ? `総合本命は${topMark ? `${topMark.horseNumber}番 ${topMark.horseName}` : "予想公開前"}。5人中${consensus.agreement}人が上位評価しています。`
     : "発走前のオッズ・データ品質・確率校正のいずれかが購入条件を満たしていません。";
   return `<section class="decision-banner ${top ? "has-ticket" : "no-ticket"}"><span>まず見る結論</span><strong>${escapeHtml(decision)}</strong><p>${escapeHtml(decisionReason)}</p></section><div class="conclusion-grid"><section class="consensus-card"><div class="consensus-top"><div><span class="eyebrow">5人の合議結果</span><h3>${topMark ? `<span class="horse-number">${topMark.horseNumber}</span>${escapeHtml(topMark.horseName)}` : "発走前スナップショットなし"}</h3></div><span class="agreement">${consensus.split ? "意見割れ" : `一致 ${consensus.agreement}/5`}</span></div>
     <div class="consensus-picks"><div><span>総合本命</span><strong>${markLabel(consensus.ranked[0], "◎")}</strong></div><div><span>対抗</span><strong>${markLabel(consensus.ranked[1], "○")}</strong></div><div><span>穴候補</span><strong>${markLabel(consensus.value, "☆")}</strong></div></div>
     <p class="plain-explanation">${prediction ? escapeHtml(prediction.comment ?? "各AIの評価点と信頼度を加重して総合判断しています。") : "保存済みのAI予想がありません。予測生成後に5人の評価を統合します。"}</p></section>
-    <section class="recommend-card"><span>AI予想買い目</span><h3>${top ? `${escapeHtml(top.betType)} ${escapeHtml(displayTicket(top.betType, top.ticketKeys?.[0] ?? top.selection, top))}` : "購入条件未達"}</h3><p>${top ? `${escapeHtml(top.method ?? "1点")}・1点${unitStake}円。${escapeHtml(top.comment ?? "5人のAI合議から組み立てた予想買い目です。")}` : "発走前オッズ、品質ゲート、確率校正の条件を満たす保存済み買い目はありません。"}</p>
+    <section class="recommend-card"><span>AI予想買い目</span><h3>${top ? `${escapeHtml(top.betType)} ${escapeHtml(displayTicket(top.betType, top.ticketKeys?.[0] ?? top.selection, top))}` : "見送り"}</h3><p>${top ? `${escapeHtml(top.method ?? "1点")}・1点${unitStake}円。${escapeHtml(top.comment ?? "5人のAI合議から組み立てた予想買い目です。")}` : "予想は公開済みですが、保存済みの推奨買い目はありません。"}</p>
     ${volatilityMeterHtml(volatility)}<div class="recommend-metrics"><div class="metric"><span>${unitStake}円あたり期待払戻</span><strong>${expected == null ? "推定対象外" : yen(Math.round(unitStake * expected))}</strong></div><div class="metric"><span>AI推定的中率</span><strong>${top?.abilityProbability == null ? "推定対象外" : percent(top.abilityProbability)}</strong></div><div class="metric"><span>買い目区分</span><strong>${top?.referenceEstimate ? "参考推定" : recommendationDecision(top)}</strong></div><div class="metric"><span>1点金額</span><strong>${yen(unitStake)}</strong></div></div></section></div>
     <p class="plain-explanation">同じ条件で${unitStake}円を何度も購入した場合に、平均でいくら戻るとAIが推定しているかを表示しています。</p>`;
 }
@@ -247,13 +247,13 @@ function agentsHtml(prediction, result, consensus) {
   const agents = normalizedAgents(prediction);
   const cards = AGENTS.map((definition) => agentCardHtml(definition, agents.get(definition.id), result, prediction?.predictionContext)).join("");
   const runnerRows = consensus.ranked.slice(0, 8).map((horse) => `<tr><td><span class="horse-number">${horse.horseNumber}</span></td><td><strong>${escapeHtml(horse.horseName)}</strong></td>${AGENTS.map((agent) => `<td>${escapeHtml(agentMarkFor(agents.get(agent.id), horse.horseNumber))}</td>`).join("")}<td><strong>${horse.recommendedBy}/5</strong></td><td>${Number(horse.index ?? 0).toFixed(1)}</td></tr>`).join("");
-  return `<div class="agent-grid">${cards}</div><div class="index-note">総合AI指数は、各AIの印・AI内の相対評価・信頼度を合成したレース内の比較値です。勝率や期待回収額ではありません。</div><div class="table-scroll"><table class="consensus-table"><thead><tr><th>馬番</th><th>馬名</th>${AGENTS.map((agent) => `<th>${escapeHtml(agent.name)}</th>`).join("")}<th>推奨</th><th>総合AI指数</th></tr></thead><tbody>${runnerRows || `<tr><td colspan="9">発走前5エージェント保存なし</td></tr>`}</tbody></table></div>`;
+  return `<div class="agent-grid">${cards}</div><div class="index-note">総合AI指数は、各AIの印・AI内の相対評価・信頼度を合成したレース内の比較値です。勝率や期待回収額ではありません。</div><div class="table-scroll"><table class="consensus-table"><thead><tr><th>馬番</th><th>馬名</th>${AGENTS.map((agent) => `<th>${escapeHtml(agent.name)}</th>`).join("")}<th>推奨</th><th>総合AI指数</th></tr></thead><tbody>${runnerRows || `<tr><td colspan="9">エージェント予想公開前</td></tr>`}</tbody></table></div>`;
 }
 
 function agentCardHtml(definition, agent, result, predictionContext = "pre_race") {
   const persona = agentPersona(definition);
   const heading = `<span class="agent-name"><span class="agent-icon ${definition.id}">${persona.symbol}</span><span><h3>${persona.name}</h3><small>${persona.role}・${persona.focus}</small></span></span>`;
-  if (!agent || agent.status !== "available") return `<article class="agent-card unavailable"><header>${heading}<span class="status-badge waiting">データ不足</span></header><p>${persona.voice} ただし、発走前オッズまたは担当データが不足しているため、推測で印は出しません。</p></article>`;
+  if (!agent || agent.status !== "available") return `<article class="agent-card unavailable"><header>${heading}<span class="status-badge waiting">公開保留</span></header><p>${persona.voice} 発走前オッズまたは担当データが揃うまで、推測で印は出しません。</p></article>`;
   const marks = (agent.marks ?? []).slice(0, 3);
   const top = marks[0];
   const positions = resultPositionMap(result);
@@ -460,10 +460,10 @@ function expectedReturn(row) { for (const key of ["expected_value_ratio", "conse
 function raceStatus(result, prediction, top, race = selectedRace()) {
   if (isFinalResult(result)) return { id: "result", label: "結果確定" };
   if ((result && result.status !== "pre_race") || hasStarted(state.date, race?.start)) return { id: "closed", label: "発走済み" };
-  if (!prediction) return { id: "waiting", label: "発走前データ未取得" };
+  if (!prediction) return { id: "waiting", label: "予想公開前" };
   if (prediction?.agentSystemStatus === "blocked") return { id: "waiting", label: "品質確認中" };
   if (top) return { id: "ready", label: "期待値計算済み" };
-  return { id: "waiting", label: "購入条件未達" };
+  return { id: "waiting", label: "見送り" };
 }
 function statusBadge(status) { const className = status.id === "odds" ? "waiting" : status.id; return `<span class="status-badge ${className}">${status.label}</span>`; }
 function recommendationDecision(top) { const value = expectedReturn(top); if (value == null) return "対象外"; if (top.recommendationEligible && value >= 1.08) return "買い"; if (value >= 1) return "候補"; return "見送り"; }
