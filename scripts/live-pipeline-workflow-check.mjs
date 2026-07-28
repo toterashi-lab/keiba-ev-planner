@@ -19,6 +19,7 @@ checkOrder("scripts/publish-live-web.ps1", [
   '"scripts\\audit-field-availability.mjs"',
   '"scripts\\prediction-snapshot.mjs"',
   '"scripts\\export-current-week-racecards.mjs"',
+  '"scripts\\sync-published-replay-results.mjs"',
   '"scripts\\export-current-live-predictions.mjs"',
   '"scripts\\agent-performance.mjs"',
   '"scripts\\build-live-publication.mjs"',

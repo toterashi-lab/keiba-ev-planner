@@ -56,6 +56,8 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Prediction snapshot persistence failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\export-current-week-racecards.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Racecard export failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\sync-published-replay-results.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Published result synchronization failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\export-current-live-predictions.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Prediction export failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\agent-performance.mjs"
