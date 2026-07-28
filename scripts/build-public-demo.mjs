@@ -198,7 +198,7 @@ fs.writeFileSync(stagedIndexPath, stagedIndex, "utf8");
 
 fs.writeFileSync(path.join(stageDir, ".nojekyll"), "", "utf8");
 fs.writeFileSync(path.join(stageDir, ".gitignore"), ".DS_Store\nThumbs.db\n", "utf8");
-fs.writeFileSync(path.join(stageDir, "README.md"), `# AIデジタル競馬新聞
+fs.writeFileSync(path.join(stageDir, "README.md"), `# ウマヨミ
 
 先週のJRA中央競馬72レースを使った、過去データ蓄積・期待値検証画面です。
 

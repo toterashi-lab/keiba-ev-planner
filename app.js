@@ -80,7 +80,7 @@ function renderRoute() {
   const route = ["home", "races", "results", "performance"].includes(state.route) ? state.route : "home";
   document.querySelectorAll("[data-page]").forEach((page) => page.classList.toggle("active", page.dataset.page === route));
   document.querySelectorAll("[data-route]").forEach((link) => link.classList.toggle("active", link.dataset.route === route));
-  document.title = `${routeLabel(route)}｜AIデジタル競馬新聞`;
+  document.title = `${routeLabel(route)}｜ウマヨミ`;
 }
 
 function renderDiscoverPage() {
