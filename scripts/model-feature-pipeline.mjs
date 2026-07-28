@@ -8,16 +8,18 @@ export function buildFeatureRows(database, options) {
   const entryTable = options.completeOnly ? "complete_race_entries" : "race_entries";
   const resultTable = options.completeOnly ? "complete_race_results" : "race_results";
   const historyOperator = options.includeLive ? "<" : "<=";
+  const historyFrom = options.historyFrom ?? null;
+  const historyFilter = historyFrom ? "and r.race_date>=?" : "";
   const rows = database.prepare(`select r.race_id,r.race_date,r.venue_code,r.race_number,r.race_name,r.race_class,r.surface,r.distance_m,r.direction,r.weather,r.going,r.start_time,
       e.horse_id,e.horse_number,e.gate_number,e.sex_age,e.carried_weight,e.body_weight,e.body_weight_delta,e.jockey_id,e.trainer_id,
       rr.finish_position,rr.final_sectional,rr.corner_positions,rr.popularity
     from ${raceTable} r join ${entryTable} e on e.race_id=r.race_id
     left join ${resultTable} rr on rr.race_id=e.race_id and rr.horse_id=e.horse_id
-    where r.race_date ${historyOperator} ? order by r.race_date,
+    where r.race_date ${historyOperator} ? ${historyFilter} order by r.race_date,
       cast(r.start_time as integer),
       case when instr(r.start_time,'時')>0 then cast(substr(r.start_time,instr(r.start_time,'時')+1) as integer)
            else cast(substr(r.start_time,instr(r.start_time,':')+1) as integer) end,
-      r.venue_code,r.race_number,e.horse_number`).iterate(options.to);
+      r.venue_code,r.race_number,e.horse_number`).iterate(options.to, ...(historyFrom ? [historyFrom] : []));
   const histories = new Map();
   const jockeys = new Map();
   const trainers = new Map();

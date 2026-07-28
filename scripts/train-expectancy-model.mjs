@@ -198,6 +198,7 @@ export function loadTrainingRaces(database, options) {
   buildFeatureRows(database, {
     from: options.from,
     to: options.to,
+    historyFrom: options.historyFrom,
     completeOnly: options.completeOnly !== false,
     collect: false,
     onRow(row) {
