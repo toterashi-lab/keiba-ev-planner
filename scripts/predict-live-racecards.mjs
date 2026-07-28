@@ -6,6 +6,7 @@ import { FEATURE_KEYS, predictRace } from "./train-expectancy-model.mjs";
 import { resolveLiveTargetDates, resolveStoredRacecardTargetDates } from "./generate-live-market-ev.mjs";
 import { loadCompatibleModelArtifact } from "../model/model-artifact-compatibility.mjs";
 import { resolvePrivateDataDir } from "./private-data-path.mjs";
+import { applyRacewiseCalibrator } from "../model/independent-probability-engine.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const privateDir = resolvePrivateDataDir(root);
@@ -51,7 +52,7 @@ try {
       values(?,?,?,?,?,?,?,?) on conflict(race_id,horse_id,model_version,as_of_time) do update set
       win_probability=excluded.win_probability,history_starts=excluded.history_starts,features_json=excluded.features_json,created_at=excluded.created_at`);
     for (const race of races) {
-      const probabilities = predictRace(artifact, race, artifact.temperature);
+      const probabilities = applyRacewiseCalibrator(predictRace(artifact, race, artifact.temperature), artifact.racewiseCalibrator);
       const sum = probabilities.reduce((total, value) => total + value, 0);
       if (Math.abs(1 - sum) > 1e-6) throw new Error(`${race.id}の勝率合計が1ではありません: ${sum}`);
       race.rows.forEach((row, index) => {

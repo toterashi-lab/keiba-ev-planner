@@ -1,0 +1,58 @@
+{
+  "version": "upstream-method-audit-v1",
+  "policy": "GitHubのコードや主張を直接採用せず、独自実装を時系列外部検証で採否判定する",
+  "sources": [
+    {
+      "repo": "scikit-learn/scikit-learn",
+      "purpose": "時系列分割と確率校正",
+      "use": "method_reference",
+      "url": "https://github.com/scikit-learn/scikit-learn",
+      "defaultBranch": "main",
+      "commit": "19b57abab044e04aea98f0ec777b6b218d662ed8",
+      "license": "BSD-3-Clause",
+      "archived": false,
+      "fetchedAt": "2026-07-28T12:46:45.777Z",
+      "status": "reference_only",
+      "directCodeImport": false
+    },
+    {
+      "repo": "pymc-devs/pymc",
+      "purpose": "予測不確実性",
+      "use": "method_reference_only",
+      "url": "https://github.com/pymc-devs/pymc",
+      "defaultBranch": "main",
+      "commit": "b2d75ab9818643603c5cd59ddcc02e5ca422414c",
+      "license": "NOASSERTION",
+      "archived": false,
+      "fetchedAt": "2026-07-28T12:46:45.830Z",
+      "status": "reference_only",
+      "directCodeImport": false
+    },
+    {
+      "repo": "mlflow/mlflow",
+      "purpose": "実験系譜と成果物追跡",
+      "use": "method_reference",
+      "url": "https://github.com/mlflow/mlflow",
+      "defaultBranch": "master",
+      "commit": "8ddb62ee585b15d53e9a68e08b0286ca440b1b8f",
+      "license": "Apache-2.0",
+      "archived": false,
+      "fetchedAt": "2026-07-28T12:46:45.869Z",
+      "status": "reference_only",
+      "directCodeImport": false
+    },
+    {
+      "repo": "optuna/optuna",
+      "purpose": "時系列fold内の探索",
+      "use": "method_reference",
+      "url": "https://github.com/optuna/optuna",
+      "defaultBranch": "master",
+      "commit": "405d85f656cde4449eb68ca7d2616de10940bec9",
+      "license": "MIT",
+      "archived": false,
+      "fetchedAt": "2026-07-28T12:46:45.901Z",
+      "status": "reference_only",
+      "directCodeImport": false
+    }
+  ]
+}

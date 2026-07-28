@@ -9,6 +9,7 @@ export const MODEL_IMPLEMENTATION_FILES = Object.freeze([
   "model/feature-registry.mjs",
   "model/model-artifact-compatibility.mjs",
   "model/finish-order-probabilities.mjs",
+  "model/independent-probability-engine.mjs",
   "model/validation-policy.mjs",
 ]);
 

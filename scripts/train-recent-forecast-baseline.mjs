@@ -3,9 +3,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
-import { FEATURE_KEYS, fitModel, fitTemperature, evaluate, loadTrainingRaces } from "./train-expectancy-model.mjs";
+import { FEATURE_KEYS, fitModel, fitTemperature, evaluate, loadTrainingRaces, predictRace } from "./train-expectancy-model.mjs";
 import { captureModelDataSnapshot, captureModelImplementationSnapshot } from "./model-data-snapshot.mjs";
 import { resolvePrivateDataDir } from "./private-data-path.mjs";
+import { INDEPENDENT_PROBABILITY_ENGINE_VERSION, selectRacewiseCalibrator } from "../model/independent-probability-engine.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const PRIVATE_DIR = resolvePrivateDataDir(ROOT);
@@ -37,7 +38,10 @@ export function trainRecentForecastBaseline(options = {}) {
     const finalCalibration = races.filter((race) => race.date >= evaluated.at(-1).spec.calibrationStart && race.date <= evaluated.at(-1).spec.calibrationEnd);
     if (finalTraining.length < 1000 || finalCalibration.length < 100) throw new Error("直近モデルの学習・校正サンプルが不足しています");
     const model = fitModel(finalTraining);
-    const temperature = fitTemperature(model, finalCalibration);
+    const { fitting, selection } = splitCalibration(finalCalibration);
+    const temperature = fitTemperature(model, fitting);
+    const racewiseCalibration = selectRacewiseCalibrator({ fittingRaces: fitting, selectionRaces: selection,
+      minimumSamples: 500, predict: (race) => predictRace(model, race, temperature) });
     const aggregate = aggregateMetrics(evaluated);
     const trainingSnapshot = captureModelDataSnapshot(db);
     const trainingImplementation = captureModelImplementationSnapshot(ROOT);
@@ -64,6 +68,8 @@ export function trainRecentForecastBaseline(options = {}) {
       scales: model.scales,
       weights: model.weights,
       temperature,
+      racewiseCalibrator: racewiseCalibration.calibrator,
+      calibrationEngine: { version: INDEPENDENT_PROBABILITY_ENGINE_VERSION, selection: racewiseCalibration },
       folds: evaluated,
       metrics: aggregate,
       featureTimePolicy: featureTiming,
@@ -93,8 +99,19 @@ function evaluateFold(races, spec) {
   const test = races.filter((race) => race.date >= spec.testStart && race.date <= spec.testEnd);
   if (train.length < 1000 || calibration.length < 100 || test.length < 100) return null;
   const model = fitModel(train);
-  const temperature = fitTemperature(model, calibration);
-  return { spec, trainRaces: train.length, calibrationRaces: calibration.length, testRaces: test.length, temperature, metrics: evaluate(model, test, temperature) };
+  const { fitting, selection } = splitCalibration(calibration);
+  if (fitting.length < 100 || selection.length < 50) return null;
+  const temperature = fitTemperature(model, fitting);
+  const racewiseCalibration = selectRacewiseCalibrator({ fittingRaces: fitting, selectionRaces: selection,
+    minimumSamples: 500, predict: (race) => predictRace(model, race, temperature) });
+  const metrics = evaluate(model, test, temperature);
+  return { spec, trainRaces: train.length, calibrationRaces: calibration.length, testRaces: test.length, temperature,
+    calibrationEngine: { version: INDEPENDENT_PROBABILITY_ENGINE_VERSION, selection: racewiseCalibration }, metrics };
+}
+
+function splitCalibration(races) {
+  const boundary = Math.max(1, Math.floor(races.length * 0.7));
+  return { fitting: races.slice(0, boundary), selection: races.slice(boundary) };
 }
 
 function buildRecentFolds(from, to) {
