@@ -28,11 +28,11 @@ const AGENTS = [
   { id: "contrarian", name: "逆張り派 コントラリアン", short: "逆", description: "評価集中と過剰人気のリスクを検証", aliases: ["contrarian", "agent_contrarian", "agent_odds", "persona_market", "odds"] },
 ];
 const AGENT_PERSONAS = Object.freeze({
-  safety: { name: "堅実派 セーフティ", symbol: "堅", role: "安定担当", focus: "安定感・複勝圏", voice: "大きな上振れより、崩れにくさを評価します。" },
-  sniper: { name: "穴狙い スナイパー", symbol: "穴", role: "妙味担当", focus: "人気薄・過小評価", voice: "人気はありませんが、市場評価ほど弱くないと見ます。" },
-  pace: { name: "展開派 ペースメーカー", symbol: "展", role: "流れ担当", focus: "ペース・位置取り", voice: "隊列とペースから、走りやすい位置を探します。" },
-  analyst: { name: "数理派 アナリスト", symbol: "数", role: "確率担当", focus: "確率・オッズ・誤差", voice: "推定勝率、誤差、オッズの3点で判断します。" },
-  contrarian: { name: "逆張り派 コントラリアン", symbol: "逆", role: "過熱監視", focus: "過剰人気・評価集中", voice: "評価が集中しても、オッズの妙味は別に確認します。" },
+  safety: { name: "堅実派 セーフティ", symbol: "堅", role: "安定担当", focus: "安定感・複勝圏", type: "本命の軸を見つける安定型", voice: "大きな上振れより、崩れにくさを評価します。" },
+  sniper: { name: "穴狙い スナイパー", symbol: "穴", role: "妙味担当", focus: "人気薄・過小評価", type: "人気に埋もれた一変候補を探す攻撃型", voice: "人気はありませんが、市場評価ほど弱くないと見ます。" },
+  pace: { name: "展開派 ペースメーカー", symbol: "展", role: "流れ担当", focus: "ペース・位置取り", type: "隊列とペースで着順を読む展開型", voice: "隊列とペースから、走りやすい位置を探します。" },
+  analyst: { name: "数理派 アナリスト", symbol: "数", role: "確率担当", focus: "確率・オッズ・誤差", type: "データからブレを抑える分析型", voice: "推定勝率、誤差、オッズの3点で判断します。" },
+  contrarian: { name: "逆張り派 コントラリアン", symbol: "逆", role: "過熱監視", focus: "過剰人気・評価集中", type: "人気の偏りを見抜く逆張り型", voice: "評価が集中しても、オッズの妙味は別に確認します。" },
 });
 const PERIODS = [{ id: "today", label: "今日", days: 0 }, { id: "7d", label: "直近7日", days: 7 }, { id: "30d", label: "直近30日", days: 30 }, { id: "all", label: "全期間", days: null }];
 const BET_TYPES = SUPPORTED_BET_TYPES;
@@ -42,7 +42,7 @@ const state = {
   date: currentEdition.meetings?.at(-1)?.date ?? "",
   venueCode: currentEdition.meetings?.at(-1)?.tracks?.[0]?.venueCode ?? "",
   raceNo: 1,
-  detailTab: "conclusion",
+  detailTab: "overview",
   discover: { venue: "all", surface: "all", volatility: "all" },
   resultPeriod: "all",
   performancePeriod: "all",
@@ -72,14 +72,12 @@ function renderAll() {
   renderRoute();
   renderHome();
   renderRaceWorkspace();
-  renderDiscoverPage();
   renderResultsPage();
   renderPerformancePage();
-  renderResearchPage();
 }
 
 function renderRoute() {
-  const route = ["home", "races", "discover", "results", "performance", "research"].includes(state.route) ? state.route : "home";
+  const route = ["home", "races", "results", "performance"].includes(state.route) ? state.route : "home";
   document.querySelectorAll("[data-page]").forEach((page) => page.classList.toggle("active", page.dataset.page === route));
   document.querySelectorAll("[data-route]").forEach((link) => link.classList.toggle("active", link.dataset.route === route));
   document.title = `${routeLabel(route)}｜AIデジタル競馬新聞`;
@@ -130,15 +128,37 @@ function finderRaceHtml(row) {
 
 function renderHome() {
   const meeting = selectedMeeting();
-  const track = selectedTrack();
   document.querySelector("#home-summary").textContent = meeting
-    ? `${formatDate(meeting.date)} ${meeting.tracks.map((row) => row.venueName).join("・")}、全${meeting.tracks.reduce((sum, row) => sum + row.races.length, 0)}レース。`
+    ? `${formatDate(meeting.date)}・${meeting.tracks.reduce((sum, row) => sum + row.races.length, 0)}レースをAI指数の高い順に表示`
     : "開催データがありません。";
   renderDateTabs("#home-date-tabs");
-  renderVenueTabs("#home-venue-tabs");
-  renderRaceCards(track);
-  renderNextRace(track);
-  renderHomeForecastBoard(track);
+  renderHomeRanking(meeting);
+}
+
+function renderHomeRanking(meeting) {
+  const root = document.querySelector("#home-race-list");
+  const rows = (meeting?.tracks ?? []).flatMap((track) => (track.races ?? []).map((race) => {
+    const prediction = findPrediction(race.no, track, meeting.date);
+    const consensus = buildConsensus(prediction);
+    return { track, race, prediction, consensus, result: findResult(race.no, track, meeting.date) };
+  })).filter((row) => row.consensus.top).sort((left, right) => Number(right.consensus.top.index ?? 0) - Number(left.consensus.top.index ?? 0) || left.race.no - right.race.no);
+  document.querySelector("#race-list-count").textContent = `${rows.length}レース`;
+  root.innerHTML = rows.map((row, index) => rankingRaceCardHtml(row, index + 1)).join("") || empty("指数ランキングを作成できる予想データがありません");
+  root.querySelectorAll("button[data-home-ranking]").forEach((button) => button.addEventListener("click", () => {
+    state.date = button.dataset.homeDate;
+    state.venueCode = button.dataset.homeVenue;
+    state.raceNo = Number(button.dataset.homeRace);
+    state.detailTab = "overview";
+    state.route = "races";
+    location.hash = "#races";
+    renderAll();
+  }));
+}
+
+function rankingRaceCardHtml({ track, race, prediction, consensus, result }, rank) {
+  const marks = consensus.ranked.slice(0, 5).map((mark, index) => `${["◎", "○", "▲", "△", "☆"][index]}${mark.horseNumber}`).join(" ");
+  const resultSummary = raceResultSummary(result);
+  return `<button type="button" class="race-card" data-home-ranking="true" data-home-date="${escapeHtml(state.date)}" data-home-venue="${escapeHtml(track.venueCode)}" data-home-race="${race.no}"><div class="race-card-top"><span class="race-card-no">${rank}位</span><span class="race-card-title"><strong>${escapeHtml(track.venueName)} ${race.no}R ${escapeHtml(race.name)}</strong><small>${escapeHtml(race.surface)}${number(race.distanceM)}m・${escapeHtml(race.start)}</small></span><span class="home-index-score"><span>AI指数</span><strong>${Number(consensus.top.index ?? 0).toFixed(1)}</strong></span></div><div class="race-card-body"><span class="race-card-pick"><span>本命</span><strong>${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}</strong></span><span class="race-card-marks"><span>AI印</span><strong>${marks}</strong></span><span class="race-card-ticket"><span>買い目</span><strong>${commonBetSummary(prediction)}</strong></span>${resultSummary ? `<span class="race-card-result"><span>確定結果</span><strong>${escapeHtml(resultSummary)}</strong></span>` : ""}</div></button>`;
 }
 
 function renderDateTabs(selector) {
@@ -224,7 +244,7 @@ function renderRaceWorkspace() {
   const race = selectedRace();
   const strip = document.querySelector("#race-number-tabs");
   strip.innerHTML = (track?.races ?? []).map((row) => `<button type="button" class="${row.no === state.raceNo ? "active" : ""}" data-race="${row.no}"><strong>${row.no}R</strong><small>${escapeHtml(row.start)}</small></button>`).join("");
-  strip.querySelectorAll("button").forEach((button) => button.addEventListener("click", () => { state.raceNo = Number(button.dataset.race); state.detailTab = "conclusion"; renderRaceWorkspace(); }));
+  strip.querySelectorAll("button").forEach((button) => button.addEventListener("click", () => { state.raceNo = Number(button.dataset.race); state.detailTab = "overview"; renderRaceWorkspace(); }));
   document.querySelector("#race-detail").innerHTML = race ? raceDetailHtml(race, track) : empty("レースを選択してください");
   bindRaceDetailEvents();
 }
@@ -239,16 +259,18 @@ function raceDetailHtml(race, track) {
   const status = raceStatus(result, prediction, top, race);
   return `<article class="detail-shell">
     <header class="detail-head"><span class="race-card-no">${race.no}R</span><div class="detail-title"><h2>${escapeHtml(race.name)}</h2><p>${escapeHtml(track.venueName)}・${escapeHtml(race.start)}発走・${escapeHtml(race.surface)}${number(race.distanceM)}m・${escapeHtml(race.condition)}</p></div>${statusBadge(status)}</header>
-    <nav class="detail-tabs" aria-label="レース詳細"><button type="button" data-tab="conclusion">結論</button><button type="button" data-tab="agents">5人の予想</button><button type="button" data-tab="bets">買い目</button><button type="button" data-tab="runners">出馬表</button><button type="button" data-tab="result">結果</button></nav>
-    ${detailPanel("conclusion", conclusionHtml(consensus, top, prediction, volatility))}
+    <nav class="detail-tabs" aria-label="レース詳細"><button type="button" data-tab="overview">予想・結果</button><button type="button" data-tab="agents">5人の予想</button><button type="button" data-tab="runners">出馬表</button></nav>
+    ${detailPanel("overview", predictionResultHtml(race, track, prediction, result, consensus, top, volatility))}
     ${detailPanel("agents", agentsHtml(prediction, result, consensus))}
-    ${detailPanel("bets", betsHtml(race.no, track, top))}
     ${detailPanel("runners", runnersHtml(result, prediction))}
-    ${detailPanel("result", comparisonHtml(race, track, prediction, result))}
   </article>`;
 }
 
 function detailPanel(id, html) { return `<section class="detail-panel ${state.detailTab === id ? "active" : ""}" data-panel="${id}">${html}</section>`; }
+
+function predictionResultHtml(race, track, prediction, result, consensus, top, volatility) {
+  return `${conclusionHtml(consensus, top, prediction, volatility)}<section class="section-block">${betsHtml(race.no, track, top)}</section><section class="section-block">${comparisonHtml(race, track, prediction, result)}</section>`;
+}
 
 function conclusionHtml(consensus, top, prediction, volatility) {
   const topMark = consensus.top;
@@ -260,8 +282,8 @@ function conclusionHtml(consensus, top, prediction, volatility) {
       ? `総合印の上位5頭から、単勝・馬連BOX・3連複BOXを同じ条件で作る全レース共通の予想です。`
       : `総合本命は${topMark ? `${topMark.horseNumber}番 ${topMark.horseName}` : "予想公開前"}。5人中${consensus.agreement}人が上位評価しています。`
     : "予想データを確認しています。";
-  return `<section class="decision-banner ${top ? "has-ticket" : "no-ticket"}"><span>まず見る結論</span><strong>${escapeHtml(decision)}</strong><p>${escapeHtml(decisionReason)}</p></section><div class="conclusion-grid"><section class="consensus-card"><div class="consensus-top"><div><span class="eyebrow">5人の合議結果</span><h3>${topMark ? `<span class="horse-number">${topMark.horseNumber}</span>${escapeHtml(topMark.horseName)}` : "発走前スナップショットなし"}</h3></div><span class="agreement">${consensus.split ? "意見割れ" : `一致 ${consensus.agreement}/5`}</span></div>
-    <div class="consensus-picks"><div><span>総合本命</span><strong>${markLabel(consensus.ranked[0], "◎")}</strong></div><div><span>対抗</span><strong>${markLabel(consensus.ranked[1], "○")}</strong></div><div><span>穴候補</span><strong>${markLabel(consensus.value, "☆")}</strong></div></div>
+  return `<section class="decision-banner ${top ? "has-ticket" : "no-ticket"}"><span>まず見る結論</span><strong>${escapeHtml(decision)}</strong><p>${escapeHtml(decisionReason)}</p></section><div class="conclusion-grid"><section class="consensus-card"><div class="consensus-top"><div><span class="eyebrow">AI印</span><h3>${topMark ? `<span class="horse-number">${topMark.horseNumber}</span>${escapeHtml(topMark.horseName)}` : "発走前スナップショットなし"}</h3></div><span class="agreement">${consensus.split ? "意見割れ" : `一致 ${consensus.agreement}/5`}</span></div>
+    <div class="consensus-picks"><div><span>本命</span><strong>${markLabel(consensus.ranked[0], "◎")}</strong></div><div><span>対抗</span><strong>${markLabel(consensus.ranked[1], "○")}</strong></div><div><span>穴候補</span><strong>${markLabel(consensus.value, "☆")}</strong></div></div>
     <p class="plain-explanation">${prediction ? escapeHtml(prediction.comment ?? "各AIの評価点と信頼度を加重して総合判断しています。") : "保存済みのAI予想がありません。予測生成後に5人の評価を統合します。"}</p></section>
     <section class="recommend-card"><span>AI共通買い目</span><h3>${ticket}</h3><p>${top ? "総合印の上位5頭と連動。単勝100円、馬連BOX、3連複BOXを同じ条件で表示します。" : "予想データを確認しています。"}</p>
     ${volatilityMeterHtml(volatility)}<div class="recommend-metrics"><div class="metric"><span>${unitStake}円あたり期待払戻</span><strong>${top?.indexForecast ? "オッズ取得後に算出" : expected == null ? "推定対象外" : yen(Math.round(unitStake * expected))}</strong></div><div class="metric"><span>AI推定的中率</span><strong>${top?.indexForecast ? "指数予想" : top?.abilityProbability == null ? "推定対象外" : percent(top.abilityProbability)}</strong></div><div class="metric"><span>買い目区分</span><strong>${top?.indexForecast ? "全レース指数予想" : top?.referenceEstimate ? "参考推定" : recommendationDecision(top)}</strong></div><div class="metric"><span>1点金額</span><strong>${yen(unitStake)}</strong></div></div></section></div>
@@ -350,7 +372,7 @@ function renderResultsPage() {
   document.querySelectorAll("button[data-result-race]").forEach((button) => button.addEventListener("click", () => {
     const result = completed.find((row) => resultIdentity(row) === button.dataset.resultRace);
     if (!result) return;
-    selectRaceByResult(result); state.detailTab = "result"; location.hash = "#races"; renderRaceWorkspace();
+    selectRaceByResult(result); state.detailTab = "overview"; location.hash = "#races"; renderRaceWorkspace();
   }));
 }
 
@@ -368,11 +390,23 @@ function resultListCard(result) {
 
 function renderPerformancePage() {
   renderPeriodTabs("#performance-filter", state.performancePeriod, (value) => { state.performancePeriod = value; renderPerformancePage(); });
-  const rows = performanceReports(state.performancePeriod);
   const allRace = liveReplaySummary();
   const actualCount = savedPerformance.records.length;
   document.querySelector("#all-race-audit").innerHTML = allRace ? `<article class="all-race-audit"><header><div><span class="eyebrow">確定結果との全件照合</span><h2>AI共通3パターンの買い目・払戻結果</h2><p>${allRace.races}件の確定レースについて、単勝100円・馬連BOX・3連複BOXの全3パターンとJRA公式払戻を100円単位で照合しています。</p></div><span class="status-badge waiting">本番成績には含めない</span></header><div class="all-race-metrics"><div><span>3パターン購入額</span><strong>${yen(allRace.investmentYen)}</strong></div><div><span>払戻額</span><strong>${yen(allRace.payoutYen)}</strong></div><div><span>収支</span><strong class="${allRace.netYen >= 0 ? "positive" : "negative"}">${signedYen(allRace.netYen)}</strong></div><div><span>回収率</span><strong>${percent(allRace.recoveryRate)}</strong></div><div><span>一部以上的中</span><strong>${allRace.hits} / ${allRace.races}</strong></div></div><footer>うち${replayAudit.coverage?.replayOnly ?? 0}件はレース後の再現予想です。本番成績は発走前に保存・ロック・精算された${actualCount}件だけを集計します。</footer></article>` : empty("確定結果との照合データを読み込んでいます");
-  document.querySelector("#performance-summary").innerHTML = `<p class="plain-explanation">本番成績は、予想公開後に上書きできない発走前スナップショットのみを対象にします。現在の確定・精算済み本番記録は${actualCount}件です。</p>${rows.map((row) => `<article class="performance-card"><header><h2>${escapeHtml(row.name)}</h2><span class="status-badge ${row.races ? "ready" : "waiting"}">${row.races ? `${row.races}R・本番` : "本番実績なし"}</span></header><div class="performance-main"><span>◎の1着率</span><strong>${row.races ? percent(row.winHits / row.races) : "--"}</strong></div><div class="performance-metrics"><div class="metric"><span>◎の複勝率</span><strong>${row.races ? percent(row.placeHits / row.races) : "--"}</strong></div><div class="metric"><span>印内決着率</span><strong>${row.races ? percent(row.markFinish / row.races) : "--"}</strong></div><div class="metric"><span>購入額</span><strong>${row.races ? yen(row.investment) : "未集計"}</strong></div><div class="metric"><span>回収率</span><strong>${row.investment ? percent(row.payout / row.investment) : "未集計"}</strong></div></div></article>`).join("")}`;
+  document.querySelector("#performance-summary").innerHTML = `<p class="plain-explanation">予想タイプと成績です。本番成績は発走前に固定保存された予想だけを対象にします。現在の本番精算済み記録は${actualCount}件です。</p>${AGENTS.map(agentProfileHtml).join("")}`;
+}
+
+function agentProfileHtml(agent) {
+  const persona = agentPersona(agent);
+  const replay = agentReplayMetrics(agent.id);
+  return `<article class="agent-profile ${agent.id}"><div class="agent-profile-portrait" role="img" aria-label="${escapeHtml(persona.name)}の2Dアニメ調プロフィール画像"></div><div class="agent-profile-body"><header><div><span class="eyebrow">${escapeHtml(persona.role)}</span><h2>${escapeHtml(persona.name)}</h2><p>${escapeHtml(persona.type)}</p></div><span class="agent-icon ${agent.id}">${escapeHtml(persona.symbol)}</span></header><blockquote>「${escapeHtml(persona.voice)}」</blockquote><div class="agent-focus"><span>重視するもの</span><strong>${escapeHtml(persona.focus)}</strong></div><div class="agent-profile-metrics"><div><span>参考レース数</span><strong>${replay.races || "--"}</strong></div><div><span>◎ 1着率</span><strong>${replay.races ? percent(replay.winRate) : "--"}</strong></div><div><span>◎ 複勝率</span><strong>${replay.races ? percent(replay.placeRate) : "--"}</strong></div></div><small>参考成績は後日再現データによるものです。本番成績とは分けて表示します。</small></div></article>`;
+}
+
+function agentReplayMetrics(agentId) {
+  const rows = (replayAudit.records ?? []).flatMap((record) => (record.agents ?? []).filter((agent) => agent.agentId === agentId && agent.status === "available"));
+  const races = rows.length;
+  return { races, winRate: races ? rows.filter((row) => row.topPickFinish === 1).length / races : null,
+    placeRate: races ? rows.filter((row) => row.topPickFinish > 0 && row.topPickFinish <= 3).length / races : null };
 }
 
 function liveReplaySummary() {
@@ -529,7 +563,7 @@ function selectedRace() { return selectedTrack()?.races?.find((row) => Number(ro
 
 function selectDate(date) { state.date = date; state.venueCode = selectedMeeting()?.tracks?.[0]?.venueCode ?? ""; state.raceNo = selectedTrack()?.races?.[0]?.no ?? 1; renderHome(); renderRaceWorkspace(); }
 function selectVenue(venueCode) { state.venueCode = venueCode; state.raceNo = selectedTrack()?.races?.[0]?.no ?? 1; renderHome(); renderRaceWorkspace(); }
-function openRace(raceNo) { state.raceNo = raceNo; state.detailTab = "conclusion"; state.route = "races"; location.hash = "#races"; renderAll(); window.scrollTo({ top: 0, behavior: "smooth" }); }
+function openRace(raceNo) { state.raceNo = raceNo; state.detailTab = "overview"; state.route = "races"; location.hash = "#races"; renderAll(); window.scrollTo({ top: 0, behavior: "smooth" }); }
 function selectRaceByResult(result) { state.date = resultDate(result); const meeting = currentEdition.meetings?.find((row) => row.date === state.date); const track = meeting?.tracks?.find((row) => row.meetingName === result.meetingName); state.venueCode = track?.venueCode ?? meeting?.tracks?.[0]?.venueCode ?? ""; state.raceNo = result.raceNo; }
 
 function renderPeriodTabs(selector, active, onSelect) { const root = document.querySelector(selector); root.innerHTML = PERIODS.map((period) => `<button type="button" class="${period.id === active ? "active" : ""}" data-period="${period.id}">${period.label}</button>`).join(""); root.querySelectorAll("button").forEach((button) => button.addEventListener("click", () => onSelect(button.dataset.period))); }
@@ -563,7 +597,7 @@ function markLabel(row, mark) { return row ? `${mark} ${row.horseNumber}番 ${es
 function displayTicket(type, key, row) { const raw = String(key ?? row.selection ?? ""); if (/^\d+(?:-\d+){0,2}$/.test(raw)) return ["3連単"].includes(type) ? raw.replaceAll("-", "→") : raw; return row.method === "1点" ? raw.replace(/\s+[^・]+(?:・|$)/g, "-").replace(/-$/, "") || raw : raw; }
 function addMarkFallback() {}
 function routeFromHash() { return location.hash.replace("#", "").split("/")[0] || "home"; }
-function routeLabel(route) { return ({ home: "ホーム", races: "今日のレース", discover: "データから探す", results: "予想はどうだった？", performance: "AIの通信簿", research: "裏側・研究室" })[route] ?? "ホーム"; }
+function routeLabel(route) { return ({ home: "AI指数ランキング", races: "予想・結果", results: "結果アーカイブ", performance: "AIエージェント" })[route] ?? "AI指数ランキング"; }
 function predictionKey(row) { return `${row.date}|${row.meetingName}|${row.raceNo}|${row.modelVersion}`; }
 function candidateKey(row) { return `${row.date}|${row.meetingName}|${row.raceNo}|${row.betType}|${row.method}|${row.selection}|${row.modelVersion}`; }
 function dedupeBy(rows, keyFn) { return [...new Map(rows.map((row) => [keyFn(row), row])).values()]; }

@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#111512" />
     <meta name="description" content="5人の専門AI予想、合議結果、100円単位の参考買い目と確定結果を確認できる競馬予想サイト" />
     <title>AIデジタル競馬新聞</title>
-    <link rel="stylesheet" href="styles.css?v=home-hierarchy-20260728" />
+    <link rel="stylesheet" href="styles.css?v=anime-agent-world-20260729" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">本文へ移動</a>
@@ -17,33 +17,25 @@
       </a>
       <nav class="desktop-nav" aria-label="サイト全体">
         <a href="#home" data-route="home">ホーム</a>
-        <a href="#races" data-route="races">今日のレース</a>
-        <a href="#discover" data-route="discover">データから探す</a>
-        <a href="#results" data-route="results">予想結果</a>
-        <a href="#performance" data-route="performance">AIの通信簿</a>
-        <a href="#research" data-route="research">裏側・研究室</a>
+        <a href="#races" data-route="races">予想・結果</a>
+        <a href="#results" data-route="results">結果アーカイブ</a>
+        <a href="#performance" data-route="performance">AIエージェント</a>
       </nav>
       <button id="theme-toggle" class="icon-button" type="button" title="表示テーマを切り替える" aria-label="表示テーマを切り替える">◐</button>
     </header>
 
     <main id="main-content">
       <section id="page-home" class="page" data-page="home" aria-labelledby="home-title">
-        <div class="home-lead">
-          <div><span class="eyebrow">AI予想会議</span><h1 id="home-title">今日の勝負レース</h1><p id="home-summary">開催データを読み込んでいます。</p></div>
-          <div id="next-race-card" class="next-race-card" aria-live="polite"></div>
-        </div>
+        <header class="page-heading ranking-hero"><div><span class="eyebrow">RACE INDEX RANKING</span><h1 id="home-title">AI指数ランキング</h1><p id="home-summary">開催データを読み込んでいます。</p></div></header>
         <div id="home-date-tabs" class="chip-row" aria-label="開催日"></div>
-        <div id="home-venue-tabs" class="segmented-scroll" aria-label="競馬場"></div>
-        <p class="home-flow" aria-label="予想の見方"><strong>1. 開催を選ぶ</strong><span aria-hidden="true">→</span><strong>2. レースを選ぶ</strong><span aria-hidden="true">→</span><strong>3. 印と買い目を見る</strong></p>
-        <section class="home-forecast-section" aria-labelledby="home-forecast-title"><header class="section-heading"><div><span>結論を先に確認</span><h2 id="home-forecast-title">AI予想・総合指数</h2></div><span class="count-badge">総合AI</span></header><div id="home-forecast-board" class="home-forecast-grid"></div></section>
         <section class="section-block" aria-labelledby="featured-title">
-          <header class="section-heading"><div><span>結論を先に表示</span><h2 id="featured-title">開催レース一覧</h2></div><span id="race-list-count" class="count-badge"></span></header>
+          <header class="section-heading"><div><span>指数の高い順</span><h2 id="featured-title">注目レース</h2></div><span id="race-list-count" class="count-badge"></span></header>
           <div id="home-race-list" class="race-card-list"></div>
         </section>
       </section>
 
       <section id="page-races" class="page" data-page="races" aria-labelledby="races-title">
-        <header class="page-heading"><div><span class="eyebrow">TODAY'S RACES</span><h1 id="races-title">今日のレース</h1></div><p>開催・競馬場・レースを選ぶと詳細を表示します。</p></header>
+        <header class="page-heading"><div><span class="eyebrow">PREDICTION AND RESULT</span><h1 id="races-title">予想・結果</h1></div><p>AI印、3種類の共通買い目、確定後の結果を同じ画面で確認します。</p></header>
         <div id="race-date-tabs" class="chip-row" aria-label="開催日"></div>
         <div id="race-venue-tabs" class="segmented-scroll" aria-label="競馬場"></div>
         <div id="race-number-tabs" class="race-number-strip" aria-label="レース番号"></div>
@@ -60,13 +52,14 @@
       </section>
 
       <section id="page-results" class="page" data-page="results" aria-labelledby="results-title">
-        <header class="page-heading"><div><span class="eyebrow">AI PREDICTION VS RESULT</span><h1 id="results-title">予想はどうだった？</h1></div><p>AIの印とレース結果を、レースごとに見比べられます。</p></header>
+        <header class="page-heading"><div><span class="eyebrow">RESULT ARCHIVE</span><h1 id="results-title">結果アーカイブ</h1></div><p>確定したレースを日付順に探し、予想と買い目の照合結果を確認します。</p></header>
         <div id="result-filter" class="chip-row" aria-label="結果期間"></div>
         <div id="result-list" class="result-list"></div>
       </section>
 
       <section id="page-performance" class="page" data-page="performance" aria-labelledby="performance-title">
-        <header class="page-heading"><div><span class="eyebrow">AI SCOREBOARD</span><h1 id="performance-title">AIの通信簿</h1></div><p>5人のAIが、これまでどんな予想をしてきたかを見られます。</p></header>
+        <header class="page-heading"><div><span class="eyebrow">FIVE RACING AGENTS</span><h1 id="performance-title">AIエージェント</h1></div><p>5人の予想タイプと、買い目の成績を確認します。</p></header>
+        <section class="agent-hero" aria-label="5人のAIエージェント"><img src="assets/agent-lineup-anime.png" alt="競馬場に立つ5人の女性AIエージェント" /></section>
         <div id="performance-filter" class="chip-row" aria-label="成績期間"></div>
         <div id="all-race-audit"></div>
         <div id="performance-summary" class="performance-grid"></div>
@@ -84,11 +77,9 @@
 
     <nav class="mobile-nav" aria-label="モバイルナビゲーション">
       <a href="#home" data-route="home"><span aria-hidden="true">⌂</span>ホーム</a>
-      <a href="#races" data-route="races"><span aria-hidden="true">馬</span>レース</a>
-      <a href="#discover" data-route="discover"><span aria-hidden="true">探</span>探す</a>
-      <a href="#results" data-route="results"><span aria-hidden="true">✓</span>結果</a>
-      <a href="#performance" data-route="performance"><span aria-hidden="true">計</span>通信簿</a>
-      <a href="#research" data-route="research"><span aria-hidden="true">詳</span>裏側</a>
+      <a href="#races" data-route="races"><span aria-hidden="true">馬</span>予想</a>
+      <a href="#results" data-route="results"><span aria-hidden="true">✓</span>履歴</a>
+      <a href="#performance" data-route="performance"><span aria-hidden="true">AI</span>エージェント</a>
     </nav>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -108,6 +99,6 @@
     <script src="data/agent-performance.js?v=20260719-1605"></script>
     <script src="ticket-engine.js"></script>
     <script src="forecast-policy.js?v=all-races-20260720-1"></script>
-    <script src="app.js?v=settled-replay-visibility-20260729"></script>
+    <script src="app.js?v=ranking-unified-anime-20260729"></script>
   </body>
 </html>
