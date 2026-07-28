@@ -165,10 +165,12 @@ function raceCardHtml(race, track) {
   const status = raceStatus(result, prediction, top, race);
   const marks = consensus.ranked.slice(0, 3);
   const resultSummary = raceResultSummary(result);
+  const indexSummary = consensusIndexSummary(consensus);
   return `<button type="button" class="race-card" data-race="${race.no}" aria-label="${escapeHtml(track.venueName)}${race.no}レース ${escapeHtml(race.name)}を見る">
     <div class="race-card-top"><span class="race-card-no">${race.no}R</span><span class="race-card-title"><strong>${escapeHtml(race.name)}</strong><small>${escapeHtml(race.surface)}${number(race.distanceM)}m・${escapeHtml(race.condition)}</small></span><span class="race-card-time">${escapeHtml(race.start)}<br>${statusBadge(status)}</span></div>
     <div class="race-card-body"><span class="race-card-pick"><span>総合本命</span><strong>${consensus.top ? `${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}` : "発走前記録なし"}</strong></span><span class="agreement">一致度 ${consensus.agreement}/5</span>
       <span class="race-card-marks"><span>総合印</span><strong>${marks.length ? marks.map((mark, index) => `${["◎", "○", "▲"][index]}${mark.horseNumber}`).join(" ") : "--"}</strong></span>
+      <span class="race-card-index"><span>総合AI指数</span><strong>${indexSummary}</strong></span>
       <span class="race-card-ticket"><span>AI予想買い目</span><strong>${top ? `${escapeHtml(top.betType)} ${escapeHtml(displayTicket(top.betType, top.ticketKeys?.[0] ?? top.selection, top))}・${unitStake}円` : "購入条件未達"}</strong></span>
       ${resultSummary ? `<span class="race-card-result"><span>確定結果</span><strong>${escapeHtml(resultSummary)}</strong></span>` : ""}
       ${volatilityMeterHtml(volatility, true)}</div>
@@ -244,8 +246,8 @@ function conclusionHtml(consensus, top, prediction, volatility) {
 function agentsHtml(prediction, result, consensus) {
   const agents = normalizedAgents(prediction);
   const cards = AGENTS.map((definition) => agentCardHtml(definition, agents.get(definition.id), result, prediction?.predictionContext)).join("");
-  const runnerRows = consensus.ranked.slice(0, 8).map((horse) => `<tr><td><span class="horse-number">${horse.horseNumber}</span></td><td><strong>${escapeHtml(horse.horseName)}</strong></td>${AGENTS.map((agent) => `<td>${escapeHtml(agentMarkFor(agents.get(agent.id), horse.horseNumber))}</td>`).join("")}<td><strong>${horse.recommendedBy}/5</strong></td><td>${horse.score.toFixed(2)}</td></tr>`).join("");
-  return `<div class="agent-grid">${cards}</div><div class="table-scroll"><table class="consensus-table"><thead><tr><th>馬番</th><th>馬名</th>${AGENTS.map((agent) => `<th>${escapeHtml(agent.name)}</th>`).join("")}<th>推奨</th><th>総合点</th></tr></thead><tbody>${runnerRows || `<tr><td colspan="9">発走前5エージェント保存なし</td></tr>`}</tbody></table></div>`;
+  const runnerRows = consensus.ranked.slice(0, 8).map((horse) => `<tr><td><span class="horse-number">${horse.horseNumber}</span></td><td><strong>${escapeHtml(horse.horseName)}</strong></td>${AGENTS.map((agent) => `<td>${escapeHtml(agentMarkFor(agents.get(agent.id), horse.horseNumber))}</td>`).join("")}<td><strong>${horse.recommendedBy}/5</strong></td><td>${Number(horse.index ?? 0).toFixed(1)}</td></tr>`).join("");
+  return `<div class="agent-grid">${cards}</div><div class="index-note">総合AI指数は、各AIの印・AI内の相対評価・信頼度を合成したレース内の比較値です。勝率や期待回収額ではありません。</div><div class="table-scroll"><table class="consensus-table"><thead><tr><th>馬番</th><th>馬名</th>${AGENTS.map((agent) => `<th>${escapeHtml(agent.name)}</th>`).join("")}<th>推奨</th><th>総合AI指数</th></tr></thead><tbody>${runnerRows || `<tr><td colspan="9">発走前5エージェント保存なし</td></tr>`}</tbody></table></div>`;
 }
 
 function agentCardHtml(definition, agent, result, predictionContext = "pre_race") {
@@ -393,14 +395,20 @@ function buildConsensus(prediction) {
   const agents = normalizedAgents(prediction);
   const scores = new Map();
   const markPoints = { "◎": 5, "○": 3, "▲": 2, "△": 1, "☆": 1 };
+  const indexPoints = { "◎": 100, "○": 70, "▲": 50, "△": 30, "☆": 20 };
+  let availableAgents = 0;
   for (const definition of AGENTS) {
     const agent = agents.get(definition.id);
     if (!agent || agent.status !== "available") continue;
+    availableAgents += 1;
     const confidence = Math.max(.4, Math.min(1, Number(agent.confidence ?? 1)));
+    const maximumScore = Math.max(...(agent.marks ?? []).map((mark) => Number(mark.score) || 0), 0);
     for (const mark of agent.marks ?? []) {
       const id = Number(mark.horseNumber);
-      const row = scores.get(id) ?? { horseNumber: id, horseName: mark.horseName, score: 0, recommendedBy: 0, honmeiBy: 0, valueBy: 0 };
+      const row = scores.get(id) ?? { horseNumber: id, horseName: mark.horseName, score: 0, index: 0, recommendedBy: 0, honmeiBy: 0, valueBy: 0 };
       row.score += (markPoints[mark.mark] ?? 0) * confidence + Math.max(0, Number(mark.score ?? 0));
+      const relativeScore = maximumScore ? Math.max(0, Math.min(1, Number(mark.score) / maximumScore)) * 100 : 0;
+      row.index += ((indexPoints[mark.mark] ?? 0) * .75 + relativeScore * .25) * confidence;
       if (["◎", "○", "▲"].includes(mark.mark)) row.recommendedBy += 1;
       if (mark.mark === "◎") row.honmeiBy += 1;
       if (definition.id === "sniper" && ["◎", "○", "▲"].includes(mark.mark)) row.valueBy += 1;
@@ -408,8 +416,9 @@ function buildConsensus(prediction) {
     }
   }
   if (!scores.size && prediction?.marks?.length) {
-    prediction.marks.forEach((mark, index) => scores.set(Number(mark.horseNumber), { ...mark, score: 5 - index, recommendedBy: 0, honmeiBy: 0, valueBy: mark.mark === "☆" ? 1 : 0 }));
+    prediction.marks.forEach((mark, index) => scores.set(Number(mark.horseNumber), { ...mark, score: 5 - index, index: [100, 70, 50, 30, 20][index] ?? 0, recommendedBy: 0, honmeiBy: 0, valueBy: mark.mark === "☆" ? 1 : 0 }));
   }
+  if (availableAgents) scores.forEach((row) => { row.index = Math.min(100, row.index / availableAgents); });
   const ranked = [...scores.values()].sort((a, b) => b.score - a.score || b.honmeiBy - a.honmeiBy || a.horseNumber - b.horseNumber);
   const top = ranked[0] ?? null;
   return { ranked, top, agreement: top?.honmeiBy ?? 0, split: Boolean(top && top.honmeiBy < 3), value: ranked.find((row) => row.valueBy > 0 && row !== top) ?? ranked[2] ?? null };
@@ -487,6 +496,12 @@ function raceResultSummary(result) {
     .sort((a, b) => Number(a.finishPosition) - Number(b.finishPosition))
     .map((row) => `${row.finishPosition}着 ${row.horseNumber}番`)
     .join(" / ");
+}
+
+function consensusIndexSummary(consensus) {
+  if (!consensus.top || !Number.isFinite(consensus.top.index)) return "--";
+  const gap = Math.max(0, consensus.top.index - Number(consensus.ranked[1]?.index ?? 0));
+  return `${consensus.top.index.toFixed(1)}　2番手差 +${gap.toFixed(1)}`;
 }
 function resultDate(result) { return normalizeDate(result?.date) || inferDateFromResult(result) || ""; }
 function inferDateFromResult(result) { return currentEdition.meetings?.find((meeting) => meeting.tracks.some((track) => track.meetingName === result?.meetingName))?.date ?? referenceMeetings.meetings?.find((meeting) => meeting.tracks.some((track) => track.meetingName === result?.meetingName))?.date ?? ""; }

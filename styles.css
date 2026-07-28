@@ -124,14 +124,17 @@ main { width: min(100%, var(--content)); min-height: calc(100vh - 160px); margin
 .race-card-title small { margin-top: 3px; color: var(--muted); font-size: 10px; }
 .race-card-time { text-align: right; font-size: 12px; font-weight: 900; }
 .race-card-body { padding: 12px 14px; display: grid; grid-template-columns: 1fr auto; gap: 10px 12px; }
-.race-card-pick span, .race-card-ticket span, .race-card-marks span, .race-card-result span { display: block; color: var(--muted); font-size: 9px; }
+.race-card-pick span, .race-card-ticket span, .race-card-marks span, .race-card-index span, .race-card-result span { display: block; color: var(--muted); font-size: 9px; }
 .race-card-pick strong { display: block; margin-top: 3px; font-size: 16px; }
 .race-card-marks { grid-column: 1 / -1; display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
 .race-card-marks strong { color: var(--text); font-size: 13px; letter-spacing: 0; }
+.race-card-index { grid-column: 1 / -1; display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.race-card-index strong { color: var(--green); font-size: 13px; }
 .race-card-ticket { grid-column: 1 / -1; padding-top: 9px; border-top: 1px solid var(--line); }
 .race-card-ticket strong { display: block; margin-top: 3px; color: var(--gold); font-size: 13px; }
 .race-card-result { grid-column: 1 / -1; display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding-top: 8px; border-top: 1px dashed var(--line); }
 .race-card-result strong { color: var(--text); font-size: 11px; }
+.index-note { margin: 14px 0 8px; padding: 10px 12px; border-left: 3px solid var(--green); background: var(--green-soft); color: var(--muted); font-size: 11px; line-height: 1.65; }
 .agreement { align-self: center; padding: 7px 9px; background: var(--blue-soft); color: var(--blue); font-size: 11px; font-weight: 900; border-radius: 5px; }
 .volatility-meter { margin: 12px 0; padding: 10px; border: 1px solid var(--line); background: var(--surface); }
 .volatility-meter.compact { min-width: 130px; margin: 0; padding: 0; border: 0; background: transparent; }
