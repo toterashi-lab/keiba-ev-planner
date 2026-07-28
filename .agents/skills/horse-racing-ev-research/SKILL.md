@@ -20,17 +20,28 @@ Follow the returned `phase` and `nextAction`. Do not skip ahead to training or p
 ## Required Workflow
 
 1. Read `references/research-method.md`.
-2. Read `references/agent-hierarchy.md` when generating or changing predictions.
-3. Inspect the database status and use every row exposed by the quality-gated `complete_*` views.
-4. Keep the final target period untouched. Discover conditions on older data and confirm them on a later holdout.
-5. Select models primarily by log loss, Brier score, ECE, and calibration-bin downside error. Accuracy is secondary.
-6. Compare the ability model with the parimutuel market. Correct favorite-longshot bias only with parameters fitted before the target period.
-7. Require the pooled ability probability to beat the market probability on an untouched chronological benchmark before it may control EV ranking.
-8. Derive place and exotic probabilities from a coherent finish-order model, then calibrate each ticket type on historical folds.
-9. Treat high-payout patterns as volatility priors. Never add their lift directly to hit probability or EV.
-10. Compute conservative EV from a lower probability bound and an odds downside scenario.
-11. Permit abstention. A race can have an AI forecast without having a purchase recommendation.
-12. Evaluate purchased cases using only the AI recommendation stored before the result. Exclude candidate rankings and retrospective alternatives.
+2. Read `references/github-method-sources.md` before adopting a method from GitHub or an external repository.
+3. Read `references/agent-hierarchy.md` when generating or changing predictions.
+4. Inspect the database status and use every row exposed by the quality-gated `complete_*` views.
+5. Keep the final target period untouched. Discover conditions on older data and confirm them on a later holdout.
+6. Select models primarily by log loss, Brier score, ECE, and calibration-bin downside error. Accuracy is secondary.
+7. Compare the ability model with the parimutuel market. Correct favorite-longshot bias only with parameters fitted before the target period.
+8. Require the pooled ability probability to beat the market probability on an untouched chronological benchmark before it may control EV ranking.
+9. Derive place and exotic probabilities from a coherent finish-order model, then calibrate each ticket type on historical folds.
+10. Treat high-payout patterns as volatility priors. Never add their lift directly to hit probability or EV.
+11. Compute conservative EV from a lower probability bound and an odds downside scenario.
+12. Permit abstention. A race can have an AI forecast without having a purchase recommendation.
+13. Evaluate purchased cases using only the AI recommendation stored before the result. Exclude candidate rankings and retrospective alternatives.
+
+## External Method Intake
+
+Use GitHub repositories as evidence for a reproducible method, never as a source of unverified betting rules or copied backtest claims.
+
+1. Record upstream repository, immutable commit SHA, license, method class, and the local role that will review it.
+2. Add the method behind a feature flag and write a leakage test before comparing it with the active baseline.
+3. Tune only inside chronological training and calibration folds. Reserve the final audit period for one evaluation.
+4. Promote a method only when it improves probability metrics without weakening calibration, uncertainty, or drawdown evidence.
+5. Keep rejected methods and their evidence in the experiment record; do not silently replace the active model.
 
 ## Acceptance Rules
 
