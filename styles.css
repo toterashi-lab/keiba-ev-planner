@@ -78,6 +78,11 @@ main { width: min(100%, var(--content)); min-height: calc(100vh - 160px); margin
 .next-race-card .time { color: var(--gold); font-weight: 900; }
 .next-race-card strong { display: block; margin: 5px 0; font-size: 19px; }
 .next-race-card small { color: var(--muted); }
+.next-race-link { width: 100%; padding: 0; border: 0; background: transparent; color: inherit; text-align: left; cursor: pointer; }
+.next-race-link:hover strong { color: var(--green); }
+.home-flow { margin: 0 0 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 7px; color: var(--muted); font-size: 11px; }
+.home-flow strong { color: var(--text); font-size: 11px; }
+.home-flow span { color: var(--green); font-weight: 900; }
 
 .chip-row, .segmented-scroll, .race-number-strip { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 10px; scrollbar-width: none; }
 .chip-row::-webkit-scrollbar, .segmented-scroll::-webkit-scrollbar, .race-number-strip::-webkit-scrollbar { display: none; }
@@ -119,10 +124,14 @@ main { width: min(100%, var(--content)); min-height: calc(100vh - 160px); margin
 .race-card-title small { margin-top: 3px; color: var(--muted); font-size: 10px; }
 .race-card-time { text-align: right; font-size: 12px; font-weight: 900; }
 .race-card-body { padding: 12px 14px; display: grid; grid-template-columns: 1fr auto; gap: 10px 12px; }
-.race-card-pick span, .race-card-ticket span { display: block; color: var(--muted); font-size: 9px; }
+.race-card-pick span, .race-card-ticket span, .race-card-marks span, .race-card-result span { display: block; color: var(--muted); font-size: 9px; }
 .race-card-pick strong { display: block; margin-top: 3px; font-size: 16px; }
+.race-card-marks { grid-column: 1 / -1; display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.race-card-marks strong { color: var(--text); font-size: 13px; letter-spacing: 0; }
 .race-card-ticket { grid-column: 1 / -1; padding-top: 9px; border-top: 1px solid var(--line); }
 .race-card-ticket strong { display: block; margin-top: 3px; color: var(--gold); font-size: 13px; }
+.race-card-result { grid-column: 1 / -1; display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding-top: 8px; border-top: 1px dashed var(--line); }
+.race-card-result strong { color: var(--text); font-size: 11px; }
 .agreement { align-self: center; padding: 7px 9px; background: var(--blue-soft); color: var(--blue); font-size: 11px; font-weight: 900; border-radius: 5px; }
 .volatility-meter { margin: 12px 0; padding: 10px; border: 1px solid var(--line); background: var(--surface); }
 .volatility-meter.compact { min-width: 130px; margin: 0; padding: 0; border: 0; background: transparent; }
@@ -289,6 +298,7 @@ footer { padding: 22px 20px 34px; border-top: 1px solid var(--line); color: var(
   .brand { min-width: 0; }
   main { padding: 20px 14px 90px; }
   .home-lead { grid-template-columns: 1fr; }
+  .home-flow { margin-top: 2px; }
   .race-card-list, .finder-list, .agent-grid, .bet-card-list { grid-template-columns: 1fr; }
   .performance-grid { grid-template-columns: repeat(2, 1fr); }
   .research-grid { grid-template-columns: repeat(2, 1fr); }

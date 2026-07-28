@@ -163,10 +163,14 @@ function raceCardHtml(race, track) {
   const top = displayedTopTicket(race, track, prediction, consensus, volatility);
   const result = findResult(race.no, track);
   const status = raceStatus(result, prediction, top, race);
+  const marks = consensus.ranked.slice(0, 3);
+  const resultSummary = raceResultSummary(result);
   return `<button type="button" class="race-card" data-race="${race.no}" aria-label="${escapeHtml(track.venueName)}${race.no}レース ${escapeHtml(race.name)}を見る">
     <div class="race-card-top"><span class="race-card-no">${race.no}R</span><span class="race-card-title"><strong>${escapeHtml(race.name)}</strong><small>${escapeHtml(race.surface)}${number(race.distanceM)}m・${escapeHtml(race.condition)}</small></span><span class="race-card-time">${escapeHtml(race.start)}<br>${statusBadge(status)}</span></div>
     <div class="race-card-body"><span class="race-card-pick"><span>総合本命</span><strong>${consensus.top ? `${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}` : "発走前記録なし"}</strong></span><span class="agreement">一致度 ${consensus.agreement}/5</span>
+      <span class="race-card-marks"><span>総合印</span><strong>${marks.length ? marks.map((mark, index) => `${["◎", "○", "▲"][index]}${mark.horseNumber}`).join(" ") : "--"}</strong></span>
       <span class="race-card-ticket"><span>AI予想買い目</span><strong>${top ? `${escapeHtml(top.betType)} ${escapeHtml(displayTicket(top.betType, top.ticketKeys?.[0] ?? top.selection, top))}・${unitStake}円` : "購入条件未達"}</strong></span>
+      ${resultSummary ? `<span class="race-card-result"><span>確定結果</span><strong>${escapeHtml(resultSummary)}</strong></span>` : ""}
       ${volatilityMeterHtml(volatility, true)}</div>
   </button>`;
 }
@@ -175,7 +179,14 @@ function renderNextRace(track) {
   const root = document.querySelector("#next-race-card");
   const raceNo = nextRaceNumber(track);
   const race = track?.races?.find((row) => row.no === raceNo);
-  if (!race) { root.innerHTML = `<span class="time">本日の開催</span><strong>${escapeHtml(track?.venueName ?? "")} 全レース発走済み</strong><small>結果確定後に予想との比較を表示します。</small>`; return; }
+  if (!race) {
+    const latest = [...(track?.races ?? [])].sort((a, b) => b.no - a.no)[0];
+    const result = latest ? findResult(latest.no, track) : null;
+    const summary = raceResultSummary(result);
+    root.innerHTML = latest ? `<button type="button" class="next-race-link" data-next-race="${latest.no}"><span class="time">この開催は結果確定</span><strong>${escapeHtml(track?.venueName ?? "")} ${latest.no}R ${escapeHtml(latest.name)}</strong><small>${summary ? `確定結果 ${summary}。予想と結果を確認` : "予想と結果を確認"}</small></button>` : "";
+    root.querySelector("button[data-next-race]")?.addEventListener("click", () => { state.raceNo = Number(latest.no); state.detailTab = "result"; state.route = "races"; location.hash = "#races"; renderAll(); window.scrollTo({ top: 0, behavior: "smooth" }); });
+    return;
+  }
   const prediction = findPrediction(race.no, track);
   const consensus = buildConsensus(prediction);
   root.innerHTML = `<span class="time">次の発走 ${escapeHtml(race.start)}</span><strong>${escapeHtml(track.venueName)}${race.no}R ${escapeHtml(race.name)}</strong><small>${consensus.top ? `総合本命 ${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}・一致度 ${consensus.agreement}/5` : "発走前記録なし"}</small>`;
@@ -469,6 +480,14 @@ function renderPeriodTabs(selector, active, onSelect) { const root = document.qu
 function inPeriod(date, periodId) { const period = PERIODS.find((row) => row.id === periodId); if (!date || period?.days == null) return true; const now = new Date(); const target = new Date(`${date}T00:00:00+09:00`); const diff = Math.floor((now - target) / 86400000); return diff >= 0 && diff <= period.days; }
 function isFinalResult(result) { return Boolean(result && result.status !== "pre_race" && (result.runners ?? []).some((row) => Number(row.finishPosition) === 1)); }
 function resultPositionMap(result) { return new Map((result?.runners ?? []).map((row) => [Number(row.horseNumber), Number(row.finishPosition) || null])); }
+function raceResultSummary(result) {
+  if (!isFinalResult(result)) return "";
+  return [...(result.runners ?? [])]
+    .filter((row) => Number(row.finishPosition) >= 1 && Number(row.finishPosition) <= 3)
+    .sort((a, b) => Number(a.finishPosition) - Number(b.finishPosition))
+    .map((row) => `${row.finishPosition}着 ${row.horseNumber}番`)
+    .join(" / ");
+}
 function resultDate(result) { return normalizeDate(result?.date) || inferDateFromResult(result) || ""; }
 function inferDateFromResult(result) { return currentEdition.meetings?.find((meeting) => meeting.tracks.some((track) => track.meetingName === result?.meetingName))?.date ?? referenceMeetings.meetings?.find((meeting) => meeting.tracks.some((track) => track.meetingName === result?.meetingName))?.date ?? ""; }
 function trackForResult(result) { const meetings = [...(currentEdition.meetings ?? []), ...(referenceMeetings.meetings ?? [])]; return meetings.flatMap((meeting) => meeting.tracks.map((track) => ({ ...track, date: meeting.date }))).find((track) => track.meetingName === result.meetingName) ?? { meetingName: result.meetingName }; }

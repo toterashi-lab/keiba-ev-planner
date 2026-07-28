@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#111512" />
     <meta name="description" content="5人の専門AI予想、合議結果、100円単位の参考買い目と確定結果を確認できる競馬予想サイト" />
     <title>AIデジタル競馬新聞</title>
-    <link rel="stylesheet" href="styles.css?v=five-agent-20260722" />
+    <link rel="stylesheet" href="styles.css?v=home-hierarchy-20260728" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">本文へ移動</a>
@@ -34,8 +34,9 @@
         </div>
         <div id="home-date-tabs" class="chip-row" aria-label="開催日"></div>
         <div id="home-venue-tabs" class="segmented-scroll" aria-label="競馬場"></div>
+        <p class="home-flow" aria-label="予想の見方"><strong>1. 開催を選ぶ</strong><span aria-hidden="true">→</span><strong>2. レースを選ぶ</strong><span aria-hidden="true">→</span><strong>3. 印と買い目を見る</strong></p>
         <section class="section-block" aria-labelledby="featured-title">
-          <header class="section-heading"><div><span>発走順</span><h2 id="featured-title">レース一覧</h2></div><span id="race-list-count" class="count-badge"></span></header>
+          <header class="section-heading"><div><span>結論を先に表示</span><h2 id="featured-title">開催レース一覧</h2></div><span id="race-list-count" class="count-badge"></span></header>
           <div id="home-race-list" class="race-card-list"></div>
         </section>
       </section>
@@ -103,6 +104,6 @@
     <script src="data/agent-performance.js?v=20260719-1605"></script>
     <script src="ticket-engine.js"></script>
     <script src="forecast-policy.js?v=all-races-20260720-1"></script>
-    <script src="app.js?v=five-agent-20260722"></script>
+    <script src="app.js?v=home-hierarchy-20260728"></script>
   </body>
 </html>
