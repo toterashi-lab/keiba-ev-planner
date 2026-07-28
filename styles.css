@@ -335,7 +335,7 @@ body { background: radial-gradient(circle at 8% 0%, #353064 0, transparent 28%),
 .agent-hero::after { content: ""; position: absolute; inset: auto 0 0; height: 38%; background: linear-gradient(transparent, rgba(13, 16, 14, .72)); pointer-events: none; }
 .agent-hero img { width: 100%; min-height: 230px; max-height: 390px; display: block; object-fit: cover; object-position: center; }
 .agent-profile { display: grid; grid-template-columns: 160px 1fr; overflow: hidden; margin-bottom: 12px; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(110deg, var(--surface-2), var(--surface)); box-shadow: var(--shadow); }
-.agent-profile-portrait { min-height: 250px; background-image: url("assets/agent-lineup-anime.png"); background-repeat: no-repeat; background-size: 500% auto; background-position-y: center; }
+.agent-profile-portrait { min-height: 250px; background-image: url("assets/agent-chibi-sprite.png"); background-repeat: no-repeat; background-size: 500% auto; background-position-y: center; background-color: #eee6ff; }
 .agent-profile.safety .agent-profile-portrait { background-position-x: 0%; }
 .agent-profile.sniper .agent-profile-portrait { background-position-x: 25%; }
 .agent-profile.pace .agent-profile-portrait { background-position-x: 50%; }
@@ -354,6 +354,18 @@ body { background: radial-gradient(circle at 8% 0%, #353064 0, transparent 28%),
 .agent-profile-metrics span { color: var(--muted); font-size: 9px; }
 .agent-profile-metrics strong { margin-top: 4px; color: var(--gold); font-size: 17px; }
 .agent-profile-body > small { color: var(--muted); font-size: 10px; }
+.agent-card-avatar { width: 42px; height: 42px; flex: 0 0 42px; display: inline-block; border: 1px solid var(--line); border-radius: 50%; background-image: url("assets/agent-chibi-sprite.png"); background-repeat: no-repeat; background-size: 500% auto; background-position-y: center; background-color: #eee6ff; }
+.agent-card-avatar.safety { background-position-x: 0%; }
+.agent-card-avatar.sniper { background-position-x: 25%; }
+.agent-card-avatar.pace { background-position-x: 50%; }
+.agent-card-avatar.analyst { background-position-x: 75%; }
+.agent-card-avatar.contrarian { background-position-x: 100%; }
+.agent-ticket-groups { display: grid; gap: 14px; }
+.agent-ticket-group { padding: 14px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(0,0,0,.1); }
+.agent-ticket-group > header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.agent-ticket-group > header h3 { margin: 0; font-size: 16px; }
+.agent-ticket-group > header p { margin: 2px 0 0; color: var(--muted); font-size: 10px; }
+.agent-ticket-group > header > strong { margin-left: auto; color: var(--gold); font-size: 12px; }
 @media (max-width: 760px) {
   .mobile-nav { grid-template-columns: repeat(4, 1fr); }
   .agent-profile { grid-template-columns: 104px 1fr; }
@@ -361,6 +373,7 @@ body { background: radial-gradient(circle at 8% 0%, #353064 0, transparent 28%),
   .agent-profile-body { padding: 14px; }
   .agent-profile-body h2 { font-size: 18px; }
   .agent-profile-metrics { grid-template-columns: 1fr; }
+  .agent-ticket-group { padding: 11px; }
 }
 
 @media (max-width: 900px) {

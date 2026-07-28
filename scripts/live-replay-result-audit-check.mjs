@@ -16,6 +16,7 @@ assert.ok(records.every((record) => record.tickets?.length === 3));
 assert.ok(records.every((record) => record.tickets.map((ticket) => ticket.betType).join("|") === "単勝|馬連|3連複"));
 assert.ok(records.every((record) => record.tickets.every((ticket) => ticket.unitStakeYen === 100)));
 assert.ok(records.every((record) => record.tickets.every((ticket) => ticket.investmentYen === ticket.points * 100)));
+assert.ok(records.every((record) => record.agentTickets?.filter((group) => group.status === "available").every((group) => group.tickets.length === 3)));
 assert.ok(records.every((record) => Number.isFinite(record.payoutYen) && record.payoutYen >= 0));
 assert.ok(records.filter((record) => record.sourceClassification === "as_of_replay").every((record) => record.predictionContext === "as_of_replay"));
 assert.equal(audit.coverage.immutableSnapshots, 0, "不変スナップショットなしの公開データを本番成績に混ぜてはいけません");

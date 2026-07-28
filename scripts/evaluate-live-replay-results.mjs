@@ -84,6 +84,7 @@ function evaluateResult(result, prediction) {
     hit: Number(payoutYen) > 0,
     finishByHorseNumber,
     agents: agentResults(prediction?.forecastPanel ?? [], finishByHorseNumber),
+    agentTickets: agentTicketResults(prediction?.forecastPanel ?? [], payoutByKey),
   };
 }
 
@@ -113,6 +114,26 @@ function agentResults(panels, finishByHorseNumber) {
       topPickFinish: finishByHorseNumber[marks[0]?.horseNumber] ?? null,
       marks: marks.slice(0, 3).map((mark) => ({ ...mark, finish: finishByHorseNumber[mark.horseNumber] ?? null })),
     };
+  });
+}
+
+function agentTicketResults(panels, payoutByKey) {
+  const aliases = {
+    safety: ["agent_ability", "ability", "persona_orthodox"],
+    sniper: ["agent_value", "value", "persona_value"],
+    pace: ["agent_pace", "pace", "persona_pace"],
+    analyst: ["agent_data", "data", "persona_trackside"],
+    contrarian: ["agent_odds", "odds", "persona_market"],
+  };
+  return Object.entries(aliases).map(([agentId, ids]) => {
+    const panel = panels.find((candidate) => ids.includes(candidate.id) || ids.includes(candidate.personaTone));
+    if (panel?.status !== "available" || !panel.marks?.length) return { agentId, status: panel?.status ?? "unavailable", tickets: [] };
+    const tickets = policy.buildForecastTickets({ marks: panel.marks }, 100).map((ticket) => {
+      const payoutYen = ticket.ticketKeys.reduce((total, key) => total + (payoutByKey.get(`${ticket.betType}|${canonical(key, ticket.betType)}`) ?? 0), 0);
+      return { betType: ticket.betType, method: ticket.method, selection: ticket.selection, points: ticket.points,
+        investmentYen: ticket.totalInvestmentYen, payoutYen, netYen: payoutYen - ticket.totalInvestmentYen, hit: payoutYen > 0 };
+    });
+    return { agentId, status: "available", tickets };
   });
 }
 

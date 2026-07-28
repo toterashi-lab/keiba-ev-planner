@@ -1,6 +1,6 @@
 window.KEIBA_LIVE_REPLAY_AUDIT = {
   "status": "replay_only",
-  "calculatedAt": "2026-07-28T22:46:50.997Z",
+  "calculatedAt": "2026-07-28T23:53:26.206Z",
   "label": "後日再現（本番成績に含めない）",
   "policy": {
     "source": "画面で表示する総合AI指数の買い目とJRA公式払戻の照合",
@@ -253,6 +253,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 120,
+              "netYen": 20,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-6-3-4-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 130,
+              "netYen": -870,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-6-3-4-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 290,
+              "netYen": -710,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-6-2-8-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 130,
+              "netYen": -870,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-6-2-8-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 290,
+              "netYen": -710,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 120,
+              "netYen": 20,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-6-7-4-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 130,
+              "netYen": -870,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-6-7-4-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -487,6 +607,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 850,
+              "netYen": 750,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-7-12-5-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1050,
+              "netYen": 50,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-7-12-5-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 9850,
+              "netYen": 8850,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 850,
+              "netYen": 750,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-5-3-10-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1050,
+              "netYen": 50,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-5-3-10-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 850,
+              "netYen": 750,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-1-8-9-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-1-8-9-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -720,6 +960,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 470,
+              "netYen": 370,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-4-11-2-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 880,
+              "netYen": -120,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-4-11-2-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1190,
+              "netYen": 190,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 470,
+              "netYen": 370,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-3-2-9-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-3-2-9-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 470,
+              "netYen": 370,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-10-9-2-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-10-9-2-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -959,6 +1319,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 220,
+              "netYen": 120,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-3-5-1-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2920,
+              "netYen": 1920,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-3-5-1-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 4860,
+              "netYen": 3860,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-8-9-10-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2920,
+              "netYen": 1920,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-8-9-10-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 4860,
+              "netYen": 3860,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 220,
+              "netYen": 120,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-1-6-16-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-1-6-16-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -1195,6 +1675,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 2450,
+              "netYen": 2350,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-6-2-9-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 26010,
+              "netYen": 25010,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-6-2-9-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 74210,
+              "netYen": 73210,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "12",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "12-6-13-8-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "12-6-13-8-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 2450,
+              "netYen": 2350,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-3-6-11-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-3-6-11-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -1428,6 +2028,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "12",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 360,
+              "netYen": 260,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "12-2-6-11-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 330,
+              "netYen": -670,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "12-2-6-11-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2460,
+              "netYen": 1460,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-11-12-2-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 330,
+              "netYen": -670,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-11-12-2-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2460,
+              "netYen": 1460,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "12",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 360,
+              "netYen": 260,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "12-11-10-5-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "12-11-10-5-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -1665,6 +2385,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 310,
+              "netYen": 210,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-11-2-7-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 530,
+              "netYen": -470,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-11-2-7-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 17700,
+              "netYen": 16700,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-4-11-7-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 530,
+              "netYen": -470,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-4-11-7-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 310,
+              "netYen": 210,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-11-1-5-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 530,
+              "netYen": -470,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-11-1-5-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -1898,6 +2738,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-6-3-5-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 9910,
+              "netYen": 8910,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-6-3-5-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 39440,
+              "netYen": 38440,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-6-10-1-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 9910,
+              "netYen": 8910,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-6-10-1-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 39440,
+              "netYen": 38440,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 2460,
+              "netYen": 2360,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-5-7-12-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-5-7-12-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -2134,6 +3094,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 220,
+              "netYen": 120,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-7-4-2-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 720,
+              "netYen": -280,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-7-4-2-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2420,
+              "netYen": 1420,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-7-4-1-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-7-4-1-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 220,
+              "netYen": 120,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-3-8-2-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-3-8-2-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -2365,6 +3445,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 510,
+              "netYen": 410,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-4-5-8-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 560,
+              "netYen": -440,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-4-5-8-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1020,
+              "netYen": 20,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-10-6-8-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 560,
+              "netYen": -440,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-10-6-8-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 510,
+              "netYen": 410,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-1-8-7-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-1-8-7-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -2601,6 +3801,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 370,
+              "netYen": 270,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-12-11-7-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1610,
+              "netYen": 610,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-12-11-7-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2190,
+              "netYen": 1190,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-11-10-6-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-11-10-6-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 370,
+              "netYen": 270,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-11-7-12-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1610,
+              "netYen": 610,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-11-7-12-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2190,
+              "netYen": 1190,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -2834,6 +4154,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 690,
+              "netYen": 590,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-3-7-6-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2860,
+              "netYen": 1860,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-3-7-6-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 7180,
+              "netYen": 6180,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-10-3-8-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-10-3-8-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 690,
+              "netYen": 590,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-9-10-5-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-9-10-5-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -3070,6 +4510,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "12",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 760,
+              "netYen": 660,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "12-5-8-4-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1510,
+              "netYen": 510,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "12-5-8-4-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1860,
+              "netYen": 860,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-5-12-11-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1510,
+              "netYen": 510,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-5-12-11-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "12",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 760,
+              "netYen": 660,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "12-2-4-5-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1510,
+              "netYen": 510,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "12-2-4-5-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1860,
+              "netYen": 860,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -3300,6 +4860,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 200,
+              "netYen": 100,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-1-3-9-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 870,
+              "netYen": -130,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-1-3-9-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 420,
+              "netYen": -580,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-9-8-2-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-9-8-2-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 200,
+              "netYen": 100,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-1-8-9-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 870,
+              "netYen": -130,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-1-8-9-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 420,
+              "netYen": -580,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -3539,6 +5219,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 370,
+              "netYen": 270,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-6-9-3-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 690,
+              "netYen": -310,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-6-9-3-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 490,
+              "netYen": -510,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-6-13-14-15 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 690,
+              "netYen": -310,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-6-13-14-15 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 370,
+              "netYen": 270,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-2-3-5-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-2-3-5-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -3777,6 +5577,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "12",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 390,
+              "netYen": 290,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "12-4-9-11-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1770,
+              "netYen": 770,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "12-4-9-11-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 11320,
+              "netYen": 10320,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "9",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "9-3-12-11-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "9-3-12-11-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "12",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 390,
+              "netYen": 290,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "12-3-4-11-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1770,
+              "netYen": 770,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "12-3-4-11-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -4014,6 +5934,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 270,
+              "netYen": 170,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-1-13-9-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1510,
+              "netYen": 510,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-1-13-9-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 3740,
+              "netYen": 2740,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-3-2-7-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1510,
+              "netYen": 510,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-3-2-7-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 270,
+              "netYen": 170,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-9-3-11-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-9-3-11-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -4250,6 +6290,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 1790,
+              "netYen": 1690,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-15-3-1-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 5010,
+              "netYen": 4010,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-15-3-1-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 132910,
+              "netYen": 131910,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "12",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "12-1-2-13-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "12-1-2-13-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 1790,
+              "netYen": 1690,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-10-15-12-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 5010,
+              "netYen": 4010,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-10-15-12-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -4489,6 +6649,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "11",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 390,
+              "netYen": 290,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "11-13-7-8-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 8160,
+              "netYen": 7160,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "11-13-7-8-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 33470,
+              "netYen": 32470,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-8-11-5-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-8-11-5-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "11",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 390,
+              "netYen": 290,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "11-8-12-14-15 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "11-8-12-14-15 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -4727,6 +7007,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "12",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 650,
+              "netYen": 550,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "12-11-7-1-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 3430,
+              "netYen": 2430,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "12-11-7-1-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 167810,
+              "netYen": 166810,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-11-12-1-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 3430,
+              "netYen": 2430,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-11-12-1-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "12",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 650,
+              "netYen": 550,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "12-2-14-11-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 3430,
+              "netYen": 2430,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "12-2-14-11-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -4960,6 +7360,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-8-11-2-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2940,
+              "netYen": 1940,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-8-11-2-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1870,
+              "netYen": 870,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "11",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "11-7-8-5-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2940,
+              "netYen": 1940,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "11-7-8-5-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1870,
+              "netYen": 870,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 3010,
+              "netYen": 2910,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-5-10-2-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2940,
+              "netYen": 1940,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-5-10-2-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1870,
+              "netYen": 870,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -5197,6 +7717,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "15",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 1830,
+              "netYen": 1730,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "15-6-14-3-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 12210,
+              "netYen": 11210,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "15-6-14-3-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 19870,
+              "netYen": 18870,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-15-14-5-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 12210,
+              "netYen": 11210,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-15-14-5-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 19870,
+              "netYen": 18870,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "15",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 1830,
+              "netYen": 1730,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "15-3-10-4-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "15-3-10-4-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -5436,6 +8076,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 480,
+              "netYen": 380,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-4-8-5-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 4940,
+              "netYen": 3940,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-4-8-5-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 16060,
+              "netYen": 15060,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-5-9-15-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-5-9-15-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 480,
+              "netYen": 380,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-16-8-12-15 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 4940,
+              "netYen": 3940,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-16-8-12-15 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -5674,6 +8434,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 400,
+              "netYen": 300,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-2-8-13-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 500,
+              "netYen": -500,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-2-8-13-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2590,
+              "netYen": 1590,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-3-6-4-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 500,
+              "netYen": -500,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-3-6-4-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2590,
+              "netYen": 1590,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 400,
+              "netYen": 300,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-2-14-16-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 500,
+              "netYen": -500,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-2-14-16-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -5908,6 +8788,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 420,
+              "netYen": 320,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-9-6-11-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1630,
+              "netYen": 630,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-9-6-11-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2990,
+              "netYen": 1990,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-2-3-7-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1630,
+              "netYen": 630,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-2-3-7-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 420,
+              "netYen": 320,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-11-9-5-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-11-9-5-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -6140,6 +9140,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-4-10-7-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 350,
+              "netYen": -650,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-4-10-7-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2000,
+              "netYen": 1000,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-9-2-10-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-9-2-10-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 460,
+              "netYen": 360,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-5-6-9-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 350,
+              "netYen": -650,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-5-6-9-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2000,
+              "netYen": 1000,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -6377,6 +9497,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 320,
+              "netYen": 220,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-14-5-7-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1750,
+              "netYen": 750,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-14-5-7-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 3510,
+              "netYen": 2510,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 320,
+              "netYen": 220,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-14-3-5-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1750,
+              "netYen": 750,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-14-3-5-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 3510,
+              "netYen": 2510,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 320,
+              "netYen": 220,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-3-13-12-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1750,
+              "netYen": 750,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-3-13-12-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -6607,6 +9847,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "7",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "7-4-5-2-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 29400,
+              "netYen": 28400,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "7-4-5-2-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 10340,
+              "netYen": 9340,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 8260,
+              "netYen": 8160,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-2-7-3-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 29400,
+              "netYen": 28400,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-2-7-3-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 8260,
+              "netYen": 8160,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-4-6-3-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-4-6-3-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -6835,6 +10195,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 120,
+              "netYen": 20,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-3-5-2-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 220,
+              "netYen": -780,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-3-5-2-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 390,
+              "netYen": -610,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-1-5-3-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 220,
+              "netYen": -780,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-1-5-3-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 390,
+              "netYen": -610,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 120,
+              "netYen": 20,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-3-6-2-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 220,
+              "netYen": -780,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-3-6-2-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 390,
+              "netYen": -610,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -7070,6 +10550,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 340,
+              "netYen": 240,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-12-3-13-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 400,
+              "netYen": -600,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-12-3-13-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2570,
+              "netYen": 1570,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-12-6-8-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 400,
+              "netYen": -600,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-12-6-8-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2570,
+              "netYen": 1570,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 340,
+              "netYen": 240,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-13-10-9-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-13-10-9-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -7307,6 +10907,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 280,
+              "netYen": 180,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-12-8-2-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 990,
+              "netYen": -10,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-12-8-2-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1350,
+              "netYen": 350,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-6-12-7-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-6-12-7-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 280,
+              "netYen": 180,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-11-6-14-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-11-6-14-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -7538,6 +11258,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 270,
+              "netYen": 170,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-5-9-4-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 670,
+              "netYen": -330,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-5-9-4-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 3650,
+              "netYen": 2650,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-4-3-8-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 670,
+              "netYen": -330,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-4-3-8-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 270,
+              "netYen": 170,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-4-1-7-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 670,
+              "netYen": -330,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-4-1-7-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -7779,6 +11619,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "16",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 190,
+              "netYen": 90,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "16-10-8-3-17 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 3710,
+              "netYen": 2710,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "16-10-8-3-17 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 12490,
+              "netYen": 11490,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-11-10-16-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 3710,
+              "netYen": 2710,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-11-10-16-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 12490,
+              "netYen": 11490,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "16",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 190,
+              "netYen": 90,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "16-17-1-8-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 3710,
+              "netYen": 2710,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "16-17-1-8-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -8013,6 +11973,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 500,
+              "netYen": 400,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-1-7-5-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 810,
+              "netYen": -190,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-1-7-5-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 4360,
+              "netYen": 3360,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "7",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "7-1-5-2-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 810,
+              "netYen": -190,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "7-1-5-2-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 4360,
+              "netYen": 3360,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 500,
+              "netYen": 400,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-7-12-3-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-7-12-3-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -8246,6 +12326,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 180,
+              "netYen": 80,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-10-3-1-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2260,
+              "netYen": 1260,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-10-3-1-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 4720,
+              "netYen": 3720,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 180,
+              "netYen": 80,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-10-1-12-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-10-1-12-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 180,
+              "netYen": 80,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-11-1-12-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-11-1-12-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -8483,6 +12683,126 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 160,
+              "netYen": 60,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-7-14-6-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 550,
+              "netYen": -450,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-7-14-6-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2020,
+              "netYen": 1020,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-5-7-8-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 550,
+              "netYen": -450,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-5-7-8-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 160,
+              "netYen": 60,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-1-10-8-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-1-10-8-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -8690,6 +13010,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 170,
+              "netYen": 70,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-2-3-4-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 510,
+              "netYen": -490,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-2-3-4-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1260,
+              "netYen": 260,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-5-1-3-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 510,
+              "netYen": -490,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-5-1-3-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1260,
+              "netYen": 260,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -8900,6 +13309,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-10-8-6-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 880,
+              "netYen": -120,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-10-8-6-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-10-8-7-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 880,
+              "netYen": -120,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-10-8-7-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -9115,6 +13613,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-11-1-7-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-11-1-7-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-11-1-12-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-11-1-12-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -9327,6 +13914,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-7-9-13-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-7-9-13-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "7",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "7-3-13-12-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "7-3-13-12-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -9541,6 +14217,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-14-8-13-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-14-8-13-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "14",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "14-8-13-6-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "14-8-13-6-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -9758,6 +14523,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "11",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "11-3-14-1-15 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "11-3-14-1-15 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "15",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "15-11-1-9-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2000,
+              "netYen": 1000,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "15-11-1-9-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -9972,6 +14826,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-7-14-4-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-7-14-4-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "7",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "7-10-11-14-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "7-10-11-14-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -10181,6 +15124,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-3-6-10-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-3-6-10-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-4-10-3-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-4-10-3-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -10394,6 +15426,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-2-9-1-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 480,
+              "netYen": -520,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-2-9-1-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-9-2-6-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-9-2-6-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -10609,6 +15730,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "9",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 410,
+              "netYen": 310,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "9-14-3-12-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 440,
+              "netYen": -560,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "9-14-3-12-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1050,
+              "netYen": 50,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "9",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 410,
+              "netYen": 310,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "9-14-3-1-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "9-14-3-1-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -10821,6 +16031,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "11",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "11-10-12-2-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "11-10-12-2-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "11",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "11-12-10-4-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "11-12-10-4-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -11036,6 +16335,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 330,
+              "netYen": 230,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-8-5-3-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1600,
+              "netYen": 600,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-8-5-3-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1890,
+              "netYen": 890,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 330,
+              "netYen": 230,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-3-8-2-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-3-8-2-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -11245,6 +16633,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-1-3-10-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-1-3-10-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 110,
+              "netYen": 10,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-2-6-3-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 920,
+              "netYen": -80,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-2-6-3-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -11462,6 +16939,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-8-13-16-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-8-13-16-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "16",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 340,
+              "netYen": 240,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "16-8-13-2-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "16-8-13-2-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -11678,6 +17244,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-8-10-14-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-8-10-14-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-7-4-10-16 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-7-4-10-16 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -11893,6 +17548,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "12",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "12-9-3-14-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "12-9-3-14-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-9-13-4-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-9-13-4-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -12105,6 +17849,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "9",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "9-5-11-2-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1320,
+              "netYen": 320,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "9-5-11-2-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1010,
+              "netYen": 10,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "9",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "9-2-11-4-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1320,
+              "netYen": 320,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "9-2-11-4-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1010,
+              "netYen": 10,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -12322,6 +18155,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-14-6-13-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 980,
+              "netYen": -20,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-14-6-13-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "14",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 270,
+              "netYen": 170,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "14-6-2-11-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 980,
+              "netYen": -20,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "14-6-2-11-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -12536,6 +18458,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "15",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "15-4-7-13-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "15-4-7-13-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-15-7-13-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-15-7-13-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -12753,6 +18764,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-8-12-15-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-8-12-15-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-8-12-13-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-8-12-13-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -12969,6 +19069,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-10-14-1-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-10-14-1-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-3-6-2-15 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-3-6-2-15 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -13180,6 +19369,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-10-1-7-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 550,
+              "netYen": -450,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-10-1-7-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-10-7-12-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 550,
+              "netYen": -450,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-10-7-12-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -13397,6 +19675,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-7-14-1-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-7-14-1-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "7",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "7-1-3-11-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "7-1-3-11-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -13612,6 +19979,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-10-15-6-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-10-15-6-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-15-10-11-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-15-10-11-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -13822,6 +20278,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 980,
+              "netYen": 880,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-8-3-1-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 7480,
+              "netYen": 6480,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-8-3-1-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 5380,
+              "netYen": 4380,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 980,
+              "netYen": 880,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-9-8-11-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-9-8-11-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -14041,6 +20586,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-5-1-4-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-5-1-4-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-9-3-5-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-9-3-5-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -14257,6 +20891,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-1-16-7-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-1-16-7-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-3-13-16-15 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-3-13-16-15 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -14471,6 +21194,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "11",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "11-14-1-3-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "11-14-1-3-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "11",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "11-14-3-12-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "11-14-3-12-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -14678,6 +21490,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-2-4-3-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-2-4-3-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-8-7-6-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-8-7-6-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -14892,6 +21793,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-5-4-1-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-5-4-1-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-10-4-1-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-10-4-1-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -15110,6 +22100,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-2-5-16-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-2-5-16-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "16",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "16-13-5-4-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "16-13-5-4-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -15324,6 +22403,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "12",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 5960,
+              "netYen": 5860,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "12-9-6-13-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "12-9-6-13-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-13-12-6-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-13-12-6-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -15531,6 +22699,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-1-5-8-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-1-5-8-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-8-2-6-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 890,
+              "netYen": -110,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-8-2-6-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 960,
+              "netYen": -40,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -15747,6 +23004,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-12-1-15-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-12-1-15-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "15",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "15-13-1-10-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "15-13-1-10-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     },
@@ -15966,6 +23312,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPickFinish": null,
           "marks": []
         }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-13-9-17-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 5650,
+              "netYen": 4650,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-13-9-17-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-13-9-17-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-13-9-17-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
+        }
       ]
     },
     {
@@ -16174,6 +23609,95 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "topPick": null,
           "topPickFinish": null,
           "marks": []
+        }
+      ],
+      "agentTickets": [
+        {
+          "agentId": "safety",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "7",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 220,
+              "netYen": 120,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "7-4-5-3-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 3570,
+              "netYen": 2570,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "7-4-5-3-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1170,
+              "netYen": 170,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "pace",
+          "status": "unavailable",
+          "tickets": []
+        },
+        {
+          "agentId": "analyst",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "7",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 220,
+              "netYen": 120,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "7-4-8-6-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "7-4-8-6-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "contrarian",
+          "status": "unavailable",
+          "tickets": []
         }
       ]
     }
