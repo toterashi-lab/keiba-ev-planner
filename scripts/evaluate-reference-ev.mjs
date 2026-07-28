@@ -1,13 +1,16 @@
 import fs from "node:fs";
 import path from "node:path";
+import vm from "node:vm";
 import { DatabaseSync } from "node:sqlite";
 import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const PRIVATE_DIR = resolvePrivateDataDir(ROOT);
-const MODEL_PATH = path.join("data", "model-outputs-2026-07-11-2026-07-12.json");
+const MODEL_JSON_PATH = path.join("data", "model-outputs-2026-07-11-2026-07-12.json");
+const MODEL_BROWSER_PATH = path.join("data", "model-outputs-2026-07-11-2026-07-12.js");
 const OUTPUT_PATH = path.join(PRIVATE_DIR, "models", "reference-ev-audit.json");
-const model = JSON.parse(fs.readFileSync(MODEL_PATH, "utf8"));
+const PUBLIC_OUTPUT_PATH = path.join(ROOT, "data", "reference-ev-audit.js");
+const model = loadModel();
 const db = new DatabaseSync(path.join(PRIVATE_DIR, "keiba.sqlite"), { readOnly: true });
 
 try {
@@ -43,6 +46,7 @@ try {
     strategies,
   };
   fs.writeFileSync(OUTPUT_PATH, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+  fs.writeFileSync(PUBLIC_OUTPUT_PATH, `window.KEIBA_REFERENCE_EV_AUDIT = ${JSON.stringify(report, null, 2)};\n`, "utf8");
   console.log(JSON.stringify({
     output: OUTPUT_PATH,
     evaluationScope: report.evaluationScope,
@@ -55,6 +59,14 @@ try {
   }, null, 2));
 } finally {
   db.close();
+}
+
+function loadModel() {
+  if (fs.existsSync(MODEL_JSON_PATH)) return JSON.parse(fs.readFileSync(MODEL_JSON_PATH, "utf8"));
+  const sandbox = { window: {} };
+  vm.runInNewContext(fs.readFileSync(MODEL_BROWSER_PATH, "utf8"), sandbox, { filename: MODEL_BROWSER_PATH });
+  if (!sandbox.window.KEIBA_MODEL_OUTPUTS) throw new Error("Reference model output is unavailable");
+  return sandbox.window.KEIBA_MODEL_OUTPUTS;
 }
 
 function recommendationFromPrediction(prediction, payoutMap) {

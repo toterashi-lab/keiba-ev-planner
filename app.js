@@ -2,6 +2,7 @@ const liveEdition = window.KEIBA_LIVE_RACECARDS ?? { meetings: [], results: [] }
 const referenceMeetings = window.KEIBA_REFERENCE_MEETINGS ?? { meetings: [] };
 const referenceResults = window.KEIBA_RESULTS ?? { results: [] };
 const referenceModel = window.KEIBA_MODEL_OUTPUTS ?? { predictions: [], candidates: [] };
+const referenceAudit = window.KEIBA_REFERENCE_EV_AUDIT ?? null;
 const liveModel = window.KEIBA_LIVE_MODEL_OUTPUTS ?? { predictions: [], candidates: [] };
 const dbStatus = window.KEIBA_DATABASE_STATUS ?? {};
 const featureStatus = window.KEIBA_MODEL_FEATURE_COVERAGE ?? { groups: [] };
@@ -13,7 +14,7 @@ const currentEdition = liveEdition.meetings?.length ? liveEdition : referenceMee
 const results = [...(referenceResults.results ?? []), ...(liveEdition.results ?? [])];
 const predictions = dedupeBy([...referenceModel.predictions ?? [], ...liveModel.predictions ?? []], predictionKey);
 const candidates = dedupeBy([...referenceModel.candidates ?? [], ...liveModel.candidates ?? []], candidateKey);
-const auditRows = referenceModel.logic?.referenceWeekExternalAudit?.recommendations ?? [];
+const auditRows = referenceAudit?.recommendations ?? referenceModel.logic?.referenceWeekExternalAudit?.recommendations ?? [];
 const unitStake = Number(liveModel.unitStakeYen ?? referenceModel.unitStakeYen ?? ticketEngine?.UNIT_STAKE ?? 100);
 
 const AGENTS = [
@@ -352,7 +353,19 @@ function resultListCard(result) {
 function renderPerformancePage() {
   renderPeriodTabs("#performance-filter", state.performancePeriod, (value) => { state.performancePeriod = value; renderPerformancePage(); });
   const rows = performanceReports(state.performancePeriod);
+  const allRace = allRaceAuditSummary();
+  document.querySelector("#all-race-audit").innerHTML = allRace ? `<article class="all-race-audit"><header><div><span class="eyebrow">全レース再現検証</span><h2>AI推奨を全レースで購入した場合</h2><p>各レースで保存された総合AIの最上位買い目を、表示どおり100円単位で全件照合しています。</p></div><span class="status-badge closed">${allRace.races}レース</span></header><div class="all-race-metrics"><div><span>購入額</span><strong>${yen(allRace.investmentYen)}</strong></div><div><span>払戻額</span><strong>${yen(allRace.payoutYen)}</strong></div><div><span>収支</span><strong class="${allRace.netYen >= 0 ? "positive" : "negative"}">${signedYen(allRace.netYen)}</strong></div><div><span>回収率</span><strong>${percent(allRace.roi)}</strong></div><div><span>的中レース</span><strong>${allRace.hits} / ${allRace.races}</strong></div></div><footer>検証用の時点固定データによる再現結果です。発走前に公開・保存された実運用成績とは分けて表示します。</footer></article>` : empty("全レース検証の保存データを読み込んでいます");
   document.querySelector("#performance-summary").innerHTML = rows.map((row) => `<article class="performance-card"><header><h2>${escapeHtml(row.name)}</h2><span class="status-badge ${row.races ? "ready" : "waiting"}">${row.races}R</span></header><div class="performance-main"><span>◎の1着率</span><strong>${row.races ? percent(row.winHits / row.races) : "--"}</strong></div><div class="performance-metrics"><div class="metric"><span>◎の複勝率</span><strong>${row.races ? percent(row.placeHits / row.races) : "--"}</strong></div><div class="metric"><span>印内決着率</span><strong>${row.races ? percent(row.markFinish / row.races) : "--"}</strong></div><div class="metric"><span>購入額</span><strong>${row.investment == null ? "対象外" : yen(row.investment)}</strong></div><div class="metric"><span>回収率</span><strong>${row.investment ? percent(row.payout / row.investment) : "--"}</strong></div></div></article>`).join("");
+}
+
+function allRaceAuditSummary() {
+  const rows = auditRows.filter((row) => Number.isInteger(row.points) && row.points > 0
+    && Number(row.investmentYen) === Number(row.points) * unitStake && Number.isFinite(Number(row.payoutYen)));
+  if (!rows.length) return null;
+  const investmentYen = rows.reduce((sum, row) => sum + Number(row.investmentYen), 0);
+  const payoutYen = rows.reduce((sum, row) => sum + Number(row.payoutYen), 0);
+  return { races: new Set(rows.map((row) => row.raceId)).size, hits: rows.filter((row) => row.hit === true).length,
+    investmentYen, payoutYen, netYen: payoutYen - investmentYen, roi: investmentYen ? payoutYen / investmentYen : null };
 }
 
 function performanceReports(period) {

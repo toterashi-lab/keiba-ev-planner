@@ -263,6 +263,16 @@ main { width: min(100%, var(--content)); min-height: calc(100vh - 160px); margin
 .hit-badge.miss { border-color: var(--red); background: var(--red-soft); color: var(--red); }
 
 .performance-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.all-race-audit { margin: 4px 0 18px; padding: 18px; border: 1px solid var(--green); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); }
+.all-race-audit header { display: flex; align-items: start; justify-content: space-between; gap: 16px; }
+.all-race-audit h2 { margin: 2px 0 5px; font-size: 19px; }
+.all-race-audit p, .all-race-audit footer { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.65; }
+.all-race-metrics { margin: 16px 0 12px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.all-race-metrics > div { min-width: 0; padding: 12px 10px; border-right: 1px solid var(--line); }
+.all-race-metrics > div:last-child { border-right: 0; }
+.all-race-metrics span, .all-race-metrics strong { display: block; }
+.all-race-metrics span { color: var(--muted); font-size: 9px; }
+.all-race-metrics strong { margin-top: 5px; font-size: 16px; }
 .performance-card { padding: 15px; }
 .performance-card header { display: flex; align-items: center; justify-content: space-between; }
 .performance-card h2 { margin: 0; font-size: 15px; }
@@ -304,6 +314,7 @@ footer { padding: 22px 20px 34px; border-top: 1px solid var(--line); color: var(
   .home-flow { margin-top: 2px; }
   .race-card-list, .finder-list, .agent-grid, .bet-card-list { grid-template-columns: 1fr; }
   .performance-grid { grid-template-columns: repeat(2, 1fr); }
+  .all-race-metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .research-grid { grid-template-columns: repeat(2, 1fr); }
   .mobile-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; min-height: 62px; padding-bottom: env(safe-area-inset-bottom); display: grid; grid-template-columns: repeat(6, 1fr); border-top: 1px solid var(--line); background: color-mix(in srgb, var(--bg) 95%, transparent); backdrop-filter: blur(14px); }
   .mobile-nav a { min-width: 0; padding: 8px 2px 6px; display: grid; place-items: center; gap: 3px; color: var(--muted); font-size: 9px; font-weight: 800; text-decoration: none; }
@@ -334,6 +345,11 @@ footer { padding: 22px 20px 34px; border-top: 1px solid var(--line); color: var(
   .agent-grid { gap: 8px; }
   .consensus-table { min-width: 620px; }
   .performance-grid { grid-template-columns: 1fr; }
+  .all-race-audit { padding: 15px; }
+  .all-race-audit h2 { font-size: 17px; }
+  .all-race-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .all-race-metrics > div:nth-child(2) { border-right: 0; }
+  .all-race-metrics > div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
   .result-card { grid-template-columns: 1fr 1fr; }
   .result-card > div:first-child { grid-column: 1 / -1; }
   .finish-podium { grid-template-columns: 1fr; }

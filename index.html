@@ -67,6 +67,7 @@
       <section id="page-performance" class="page" data-page="performance" aria-labelledby="performance-title">
         <header class="page-heading"><div><span class="eyebrow">AI SCOREBOARD</span><h1 id="performance-title">AIの通信簿</h1></div><p>5人のAIが、これまでどんな予想をしてきたかを見られます。</p></header>
         <div id="performance-filter" class="chip-row" aria-label="成績期間"></div>
+        <div id="all-race-audit"></div>
         <div id="performance-summary" class="performance-grid"></div>
         <p class="disclosure">成績は保存済み予想だけを対象に集計します。後から生成した予想を過去時点の実績として扱いません。</p>
       </section>
@@ -99,11 +100,12 @@
     <script src="data/historical-payout-patterns.js"></script>
     <script src="data/closing-odds-2026-07-11-2026-07-12.js"></script>
     <script src="data/model-outputs-2026-07-11-2026-07-12.js"></script>
+    <script src="data/reference-ev-audit.js?v=20260728"></script>
     <script src="data/live-racecards.js?v=20260719-1605"></script>
     <script src="data/live-model-outputs.js?v=20260719-1605"></script>
     <script src="data/agent-performance.js?v=20260719-1605"></script>
     <script src="ticket-engine.js"></script>
     <script src="forecast-policy.js?v=all-races-20260720-1"></script>
-    <script src="app.js?v=decision-states-20260728"></script>
+    <script src="app.js?v=all-race-audit-20260728"></script>
   </body>
 </html>
