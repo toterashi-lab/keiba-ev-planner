@@ -58,6 +58,10 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Racecard export failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\sync-published-replay-results.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Published result synchronization failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\evaluate-live-replay-results.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Live replay result audit failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\live-replay-result-audit-check.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Live replay result audit validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\export-current-live-predictions.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Prediction export failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\agent-performance.mjs"

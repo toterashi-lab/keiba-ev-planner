@@ -9,6 +9,7 @@ const featureStatus = window.KEIBA_MODEL_FEATURE_COVERAGE ?? { groups: [] };
 const ticketEngine = window.KEIBA_TICKET_ENGINE;
 const forecastPolicy = window.KEIBA_FORECAST_POLICY;
 const savedPerformance = window.KEIBA_AGENT_PERFORMANCE ?? { records: [] };
+const replayAudit = window.KEIBA_LIVE_REPLAY_AUDIT ?? { records: [], summary: null, coverage: {} };
 
 const currentEdition = liveEdition.meetings?.length ? liveEdition : referenceMeetings;
 const results = [...(referenceResults.results ?? []), ...(liveEdition.results ?? [])];
@@ -336,13 +337,17 @@ function runnersHtml(result, prediction) {
 
 function comparisonHtml(race, track, prediction, result) {
   const snapshotTime = prediction?.publishedAt ?? prediction?.generatedAt ?? prediction?.oddsObservedAt ?? null;
-  const published = prediction?.predictionContext === "pre_race";
   const podium = [...(result?.runners ?? [])].filter((row) => Number(row.finishPosition) >= 1 && Number(row.finishPosition) <= 3).sort((a, b) => a.finishPosition - b.finishPosition);
-  const audit = findAudit(race.no, track);
+  const replay = findReplayAudit(result?.raceId ?? prediction?.raceId);
+  const published = replay?.eligibleForActualPerformance === true;
+  const audit = replay;
+  const auditLabel = published ? "本番スナップショットの精算" : replay?.sourceClassification === "pre_race_timestamp_only" ? "公開時刻記録の照合結果" : "後日再現の照合結果";
   if (!prediction && !isFinalResult(result)) return empty("予想と結果は、予想公開後にここへ固定保存されます。");
-  return `<div class="snapshot-band"><div><strong>${published ? "予想時点の保存情報" : "発走時点データによる再現予想"}</strong><small>${snapshotTime ? formatDateTime(snapshotTime) : "公開日時のスナップショットなし"}</small></div><span class="status-badge ${published ? "ready" : "waiting"}">${published ? "発走前保存済み" : prediction ? "成績対象外" : "履歴なし"}</span></div>
+  return `<div class="snapshot-band"><div><strong>${published ? "予想時点の保存情報" : auditLabel}</strong><small>${snapshotTime ? formatDateTime(snapshotTime) : "公開日時のスナップショットなし"}</small></div><span class="status-badge ${published ? "ready" : "waiting"}">${published ? "発走前保存済み" : prediction ? "本番成績対象外" : "履歴なし"}</span></div>
+    ${!published && replay ? `<p class="plain-explanation">${replay.sourceClassification === "pre_race_timestamp_only" ? "公開時刻は残っていますが、本番用の不変スナップショットが保存されていません。" : "レース後の特徴量で再現された予想です。"} 指数予想の買い目とJRA公式払戻は照合済みですが、本番成績・AI学習には含めません。</p>` : ""}
     <div class="finish-podium">${[0, 1, 2].map((index) => `<div><span>${index + 1}着</span><strong>${podium[index] ? `${podium[index].horseNumber}番 ${escapeHtml(podium[index].horseName)}` : "結果待ち"}</strong></div>`).join("")}</div>
-    <div class="result-finance"><div class="metric"><span>購入額</span><strong>${audit ? yen(audit.investmentYen) : "対象なし"}</strong></div><div class="metric"><span>払戻額</span><strong>${audit ? yen(audit.payoutYen) : "対象なし"}</strong></div><div class="metric"><span>収支</span><strong class="${audit?.netYen >= 0 ? "positive" : "negative"}">${audit ? signedYen(audit.netYen) : "対象なし"}</strong></div><div class="metric"><span>回収率</span><strong>${audit ? percent(audit.payoutYen / audit.investmentYen) : "対象なし"}</strong></div></div>
+    <div class="result-finance"><div class="metric"><span>購入額</span><strong>${audit ? yen(audit.investmentYen) : "対象なし"}</strong></div><div class="metric"><span>払戻額</span><strong>${audit ? yen(audit.payoutYen) : "対象なし"}</strong></div><div class="metric"><span>収支</span><strong class="${audit?.netYen >= 0 ? "positive" : "negative"}">${audit ? signedYen(audit.netYen) : "対象なし"}</strong></div><div class="metric"><span>回収率</span><strong>${audit ? percent(audit.recoveryRate ?? audit.payoutYen / audit.investmentYen) : "対象なし"}</strong></div></div>
+    ${audit?.ticket ? `<p class="plain-explanation">照合買い目：${escapeHtml(audit.ticket.betType)} ${escapeHtml(audit.ticket.selection)}・${audit.ticket.points}点 ${yen(audit.investmentYen)}。${audit.hit ? "的中" : "不的中"}。</p>` : ""}
     ${isFinalResult(result) ? `<div class="agent-grid" style="margin-top:10px">${AGENTS.map((agent) => agentCardHtml(agent, normalizedAgents(prediction).get(agent.id), result, prediction?.predictionContext)).join("")}</div>` : `<p class="plain-explanation">結果確定後に、各AIの印と推奨買い目を照合します。</p>`}`;
 }
 
@@ -371,18 +376,27 @@ function renderResultsPage() {
 function resultListCard(result) {
   const track = trackForResult(result);
   const prediction = findPrediction(result.raceNo, track, resultDate(result));
-  const audit = findAudit(result.raceNo, track, resultDate(result));
+  const replay = findReplayAudit(result.raceId);
   const consensus = buildConsensus(prediction);
-  const verified = prediction?.predictionContext === "pre_race";
-  return `<button type="button" class="result-card" data-result-race="${escapeHtml(resultIdentity(result))}"><div><h3>${escapeHtml(result.meetingName)} ${result.raceNo}R ${escapeHtml(result.raceTitle)}</h3><p>${formatDate(resultDate(result))}・${prediction ? `総合本命 ${consensus.top?.horseNumber ?? "--"}番${verified ? "" : "（後日再現）"}` : "予想スナップショットなし"}</p></div><div class="result-stat"><span>AI買い目</span><strong>${audit ? `${escapeHtml(audit.betType)} ${escapeHtml(audit.selection)}` : "対象なし"}</strong></div><div class="result-stat"><span>購入</span><strong>${audit ? yen(audit.investmentYen) : "--"}</strong></div><div class="result-stat"><span>払戻</span><strong>${audit ? yen(audit.payoutYen) : "--"}</strong></div>${audit ? `<span class="hit-badge ${audit.hit ? "hit" : "miss"}">${audit.hit ? "✓ 的中" : "× 不的中"}</span>` : `<span class="status-badge ${verified ? "closed" : "waiting"}">${verified ? "履歴なし" : "成績対象外"}</span>`}</button>`;
+  const verified = replay?.eligibleForActualPerformance === true;
+  const audit = replay;
+  const ticket = audit?.ticket ?? audit;
+  const sourceLabel = verified ? "本番精算済み" : replay?.sourceClassification === "pre_race_timestamp_only" ? "公開時刻記録・本番対象外" : "後日再現・本番対象外";
+  return `<button type="button" class="result-card" data-result-race="${escapeHtml(resultIdentity(result))}"><div><h3>${escapeHtml(result.meetingName)} ${result.raceNo}R ${escapeHtml(result.raceTitle)}</h3><p>${formatDate(resultDate(result))}・${prediction ? `総合本命 ${consensus.top?.horseNumber ?? "--"}番（${sourceLabel}）` : "予想スナップショットなし"}</p></div><div class="result-stat"><span>AI買い目</span><strong>${ticket ? `${escapeHtml(ticket.betType)} ${escapeHtml(ticket.selection)}` : "対象なし"}</strong></div><div class="result-stat"><span>購入</span><strong>${audit ? yen(audit.investmentYen) : "--"}</strong></div><div class="result-stat"><span>払戻</span><strong>${audit ? yen(audit.payoutYen) : "--"}</strong></div>${audit ? `<span class="hit-badge ${audit.hit ? "hit" : "miss"}">${audit.hit ? "✓ 的中" : "× 不的中"}</span>` : `<span class="status-badge ${verified ? "closed" : "waiting"}">${verified ? "履歴なし" : "照合待ち"}</span>`}</button>`;
 }
 
 function renderPerformancePage() {
   renderPeriodTabs("#performance-filter", state.performancePeriod, (value) => { state.performancePeriod = value; renderPerformancePage(); });
   const rows = performanceReports(state.performancePeriod);
-  const allRace = allRaceAuditSummary();
-  document.querySelector("#all-race-audit").innerHTML = allRace ? `<article class="all-race-audit"><header><div><span class="eyebrow">全レース再現検証</span><h2>AI推奨を全レースで購入した場合</h2><p>各レースで保存された総合AIの最上位買い目を、表示どおり100円単位で全件照合しています。</p></div><span class="status-badge closed">${allRace.races}レース</span></header><div class="all-race-metrics"><div><span>購入額</span><strong>${yen(allRace.investmentYen)}</strong></div><div><span>払戻額</span><strong>${yen(allRace.payoutYen)}</strong></div><div><span>収支</span><strong class="${allRace.netYen >= 0 ? "positive" : "negative"}">${signedYen(allRace.netYen)}</strong></div><div><span>回収率</span><strong>${percent(allRace.roi)}</strong></div><div><span>的中レース</span><strong>${allRace.hits} / ${allRace.races}</strong></div></div><footer>検証用の時点固定データによる再現結果です。発走前に公開・保存された実運用成績とは分けて表示します。</footer></article>` : empty("全レース検証の保存データを読み込んでいます");
-  document.querySelector("#performance-summary").innerHTML = rows.map((row) => `<article class="performance-card"><header><h2>${escapeHtml(row.name)}</h2><span class="status-badge ${row.races ? "ready" : "waiting"}">${row.races}R</span></header><div class="performance-main"><span>◎の1着率</span><strong>${row.races ? percent(row.winHits / row.races) : "--"}</strong></div><div class="performance-metrics"><div class="metric"><span>◎の複勝率</span><strong>${row.races ? percent(row.placeHits / row.races) : "--"}</strong></div><div class="metric"><span>印内決着率</span><strong>${row.races ? percent(row.markFinish / row.races) : "--"}</strong></div><div class="metric"><span>購入額</span><strong>${row.investment == null ? "対象外" : yen(row.investment)}</strong></div><div class="metric"><span>回収率</span><strong>${row.investment ? percent(row.payout / row.investment) : "--"}</strong></div></div></article>`).join("");
+  const allRace = liveReplaySummary();
+  const actualCount = savedPerformance.records.length;
+  document.querySelector("#all-race-audit").innerHTML = allRace ? `<article class="all-race-audit"><header><div><span class="eyebrow">確定結果との全件照合</span><h2>後日再現の買い目・払戻結果</h2><p>${allRace.races}件の確定レースについて、画面表示の総合AI指数買い目とJRA公式払戻を100円単位で照合しています。</p></div><span class="status-badge waiting">本番成績には含めない</span></header><div class="all-race-metrics"><div><span>購入額</span><strong>${yen(allRace.investmentYen)}</strong></div><div><span>払戻額</span><strong>${yen(allRace.payoutYen)}</strong></div><div><span>収支</span><strong class="${allRace.netYen >= 0 ? "positive" : "negative"}">${signedYen(allRace.netYen)}</strong></div><div><span>回収率</span><strong>${percent(allRace.recoveryRate)}</strong></div><div><span>的中レース</span><strong>${allRace.hits} / ${allRace.races}</strong></div></div><footer>うち${replayAudit.coverage?.replayOnly ?? 0}件はレース後の再現予想です。本番成績は発走前に保存・ロック・精算された${actualCount}件だけを集計します。</footer></article>` : empty("確定結果との照合データを読み込んでいます");
+  document.querySelector("#performance-summary").innerHTML = `<p class="plain-explanation">本番成績は、予想公開後に上書きできない発走前スナップショットのみを対象にします。現在の確定・精算済み本番記録は${actualCount}件です。</p>${rows.map((row) => `<article class="performance-card"><header><h2>${escapeHtml(row.name)}</h2><span class="status-badge ${row.races ? "ready" : "waiting"}">${row.races ? `${row.races}R・本番` : "本番実績なし"}</span></header><div class="performance-main"><span>◎の1着率</span><strong>${row.races ? percent(row.winHits / row.races) : "--"}</strong></div><div class="performance-metrics"><div class="metric"><span>◎の複勝率</span><strong>${row.races ? percent(row.placeHits / row.races) : "--"}</strong></div><div class="metric"><span>印内決着率</span><strong>${row.races ? percent(row.markFinish / row.races) : "--"}</strong></div><div class="metric"><span>購入額</span><strong>${row.races ? yen(row.investment) : "未集計"}</strong></div><div class="metric"><span>回収率</span><strong>${row.investment ? percent(row.payout / row.investment) : "未集計"}</strong></div></div></article>`).join("")}`;
+}
+
+function liveReplaySummary() {
+  const summary = replayAudit.summary;
+  return summary?.races ? summary : null;
 }
 
 function allRaceAuditSummary() {
@@ -525,6 +539,7 @@ function volatilityMeterHtml(profile, compact = false) {
 function findPrediction(raceNo = state.raceNo, track = selectedTrack(), date = state.date) { return predictions.find((row) => row.date === date && row.meetingName === track?.meetingName && Number(row.raceNo) === Number(raceNo)) ?? null; }
 function findResult(raceNo = state.raceNo, track = selectedTrack(), date = state.date) { return results.find((row) => row.meetingName === track?.meetingName && Number(row.raceNo) === Number(raceNo) && (!row.date || row.date === date)) ?? null; }
 function findAudit(raceNo, track, date = state.date) { return auditRows.find((row) => row.date === date && row.meetingName === track?.meetingName && Number(row.raceNo) === Number(raceNo)) ?? null; }
+function findReplayAudit(raceId) { return replayAudit.records?.find((row) => row.raceId === raceId) ?? null; }
 function selectedMeeting() { return currentEdition.meetings?.find((row) => row.date === state.date) ?? null; }
 function selectedTrack() { return selectedMeeting()?.tracks?.find((row) => row.venueCode === state.venueCode) ?? selectedMeeting()?.tracks?.[0] ?? null; }
 function selectedRace() { return selectedTrack()?.races?.find((row) => Number(row.no) === Number(state.raceNo)) ?? selectedTrack()?.races?.[0] ?? null; }
