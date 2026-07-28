@@ -1,6 +1,6 @@
 window.KEIBA_LIVE_REPLAY_AUDIT = {
   "status": "replay_only",
-  "calculatedAt": "2026-07-28T16:01:34.615Z",
+  "calculatedAt": "2026-07-28T22:46:50.997Z",
   "label": "後日再現（本番成績に含めない）",
   "policy": {
     "source": "画面で表示する総合AI指数の買い目とJRA公式払戻の照合",
@@ -18,11 +18,11 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
   },
   "summary": {
     "races": 72,
-    "hits": 26,
-    "investmentYen": 16600,
-    "payoutYen": 155470,
-    "netYen": 138870,
-    "recoveryRate": 9.36566265060241
+    "hits": 48,
+    "investmentYen": 151200,
+    "payoutYen": 594440,
+    "netYen": 443240,
+    "recoveryRate": 3.9314814814814816
   },
   "records": [
     {
@@ -71,21 +71,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "単勝",
-        "method": "1点",
-        "selection": "2",
-        "ticketKeys": [
-          "2"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 120,
-      "netYen": 20,
-      "recoveryRate": 1.2,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "2",
+          "ticketKeys": [
+            "2"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 120,
+          "netYen": 20,
+          "recoveryRate": 1.2,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "2-6-3-4-8 BOX",
+          "ticketKeys": [
+            "2-6",
+            "2-3",
+            "2-4",
+            "2-8",
+            "6-3",
+            "6-4",
+            "6-8",
+            "3-4",
+            "3-8",
+            "4-8"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 130,
+          "netYen": -870,
+          "recoveryRate": 0.13,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "2-6-3-4-8 BOX",
+          "ticketKeys": [
+            "2-6-3",
+            "2-6-4",
+            "2-6-8",
+            "2-3-4",
+            "2-3-8",
+            "2-4-8",
+            "6-3-4",
+            "6-3-8",
+            "6-4-8",
+            "3-4-8"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 290,
+          "netYen": -710,
+          "recoveryRate": 0.29,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 540,
+      "netYen": -1560,
+      "recoveryRate": 0.2571428571428571,
       "hit": true,
       "finishByHorseNumber": {
         "1": 8,
@@ -247,21 +301,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "馬連",
-        "method": "1点",
-        "selection": "2-7",
-        "ticketKeys": [
-          "2-7"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 1050,
-      "netYen": 950,
-      "recoveryRate": 10.5,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "2",
+          "ticketKeys": [
+            "2"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 850,
+          "netYen": 750,
+          "recoveryRate": 8.5,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "2-7-5-10-12 BOX",
+          "ticketKeys": [
+            "2-7",
+            "2-5",
+            "2-10",
+            "2-12",
+            "7-5",
+            "7-10",
+            "7-12",
+            "5-10",
+            "5-12",
+            "10-12"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 1050,
+          "netYen": 50,
+          "recoveryRate": 1.05,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "2-7-5-10-12 BOX",
+          "ticketKeys": [
+            "2-7-5",
+            "2-7-10",
+            "2-7-12",
+            "2-5-10",
+            "2-5-12",
+            "2-10-12",
+            "7-5-10",
+            "7-5-12",
+            "7-10-12",
+            "5-10-12"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 9850,
+          "netYen": 8850,
+          "recoveryRate": 9.85,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 11750,
+      "netYen": 9650,
+      "recoveryRate": 5.595238095238095,
       "hit": true,
       "finishByHorseNumber": {
         "1": 12,
@@ -427,23 +535,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 8,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "4-8-11",
-        "ticketKeys": [
-          "4-8-11",
-          "2-4-8",
-          "2-8-11"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 1190,
-      "netYen": 890,
-      "recoveryRate": 3.966666666666667,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "8",
+          "ticketKeys": [
+            "8"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 470,
+          "netYen": 370,
+          "recoveryRate": 4.7,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "8-4-11-2-5 BOX",
+          "ticketKeys": [
+            "8-4",
+            "8-11",
+            "8-2",
+            "8-5",
+            "4-11",
+            "4-2",
+            "4-5",
+            "11-2",
+            "11-5",
+            "2-5"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 880,
+          "netYen": -120,
+          "recoveryRate": 0.88,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "8-4-11-2-5 BOX",
+          "ticketKeys": [
+            "8-4-11",
+            "8-4-2",
+            "8-4-5",
+            "8-11-2",
+            "8-11-5",
+            "8-2-5",
+            "4-11-2",
+            "4-11-5",
+            "4-2-5",
+            "11-2-5"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 1190,
+          "netYen": 190,
+          "recoveryRate": 1.19,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 2540,
+      "netYen": 440,
+      "recoveryRate": 1.2095238095238094,
       "hit": true,
       "finishByHorseNumber": {
         "1": 8,
@@ -609,22 +769,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 8,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "馬連",
-        "method": "1点",
-        "selection": "8-3",
-        "ticketKeys": [
-          "8-3"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 0,
-      "netYen": -100,
-      "recoveryRate": 0,
-      "hit": false,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "8",
+          "ticketKeys": [
+            "8"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 220,
+          "netYen": 120,
+          "recoveryRate": 2.2,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "8-3-5-1-6 BOX",
+          "ticketKeys": [
+            "8-3",
+            "8-5",
+            "8-1",
+            "8-6",
+            "3-5",
+            "3-1",
+            "3-6",
+            "5-1",
+            "5-6",
+            "1-6"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 2920,
+          "netYen": 1920,
+          "recoveryRate": 2.92,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "8-3-5-1-6 BOX",
+          "ticketKeys": [
+            "8-3-5",
+            "8-3-1",
+            "8-3-6",
+            "8-5-1",
+            "8-5-6",
+            "8-1-6",
+            "3-5-1",
+            "3-5-6",
+            "3-1-6",
+            "5-1-6"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 4860,
+          "netYen": 3860,
+          "recoveryRate": 4.86,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 8000,
+      "netYen": 5900,
+      "recoveryRate": 3.8095238095238093,
+      "hit": true,
       "finishByHorseNumber": {
         "1": 7,
         "2": 6,
@@ -793,23 +1007,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 8,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "6-8-9",
-        "ticketKeys": [
-          "6-8-9",
-          "2-6-8",
-          "2-8-9"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 74210,
-      "netYen": 73910,
-      "recoveryRate": 247.36666666666667,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "8",
+          "ticketKeys": [
+            "8"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 2450,
+          "netYen": 2350,
+          "recoveryRate": 24.5,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "8-6-9-2-14 BOX",
+          "ticketKeys": [
+            "8-6",
+            "8-9",
+            "8-2",
+            "8-14",
+            "6-9",
+            "6-2",
+            "6-14",
+            "9-2",
+            "9-14",
+            "2-14"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 26010,
+          "netYen": 25010,
+          "recoveryRate": 26.01,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "8-6-9-2-14 BOX",
+          "ticketKeys": [
+            "8-6-9",
+            "8-6-2",
+            "8-6-14",
+            "8-9-2",
+            "8-9-14",
+            "8-2-14",
+            "6-9-2",
+            "6-9-14",
+            "6-2-14",
+            "9-2-14"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 74210,
+          "netYen": 73210,
+          "recoveryRate": 74.21,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 102670,
+      "netYen": 100570,
+      "recoveryRate": 48.89047619047619,
       "hit": true,
       "finishByHorseNumber": {
         "1": 8,
@@ -977,21 +1243,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 12,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "馬連",
-        "method": "1点",
-        "selection": "12-2",
-        "ticketKeys": [
-          "12-2"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 330,
-      "netYen": 230,
-      "recoveryRate": 3.3,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "12",
+          "ticketKeys": [
+            "12"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 360,
+          "netYen": 260,
+          "recoveryRate": 3.6,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "12-2-6-11-10 BOX",
+          "ticketKeys": [
+            "12-2",
+            "12-6",
+            "12-11",
+            "12-10",
+            "2-6",
+            "2-11",
+            "2-10",
+            "6-11",
+            "6-10",
+            "11-10"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 330,
+          "netYen": -670,
+          "recoveryRate": 0.33,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "12-2-6-11-10 BOX",
+          "ticketKeys": [
+            "12-2-6",
+            "12-2-11",
+            "12-2-10",
+            "12-6-11",
+            "12-6-10",
+            "12-11-10",
+            "2-6-11",
+            "2-6-10",
+            "2-11-10",
+            "6-11-10"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 2460,
+          "netYen": 1460,
+          "recoveryRate": 2.46,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 3150,
+      "netYen": 1050,
+      "recoveryRate": 1.5,
       "hit": true,
       "finishByHorseNumber": {
         "1": 10,
@@ -1157,21 +1477,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 8,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "馬連",
-        "method": "1点",
-        "selection": "8-11",
-        "ticketKeys": [
-          "8-11"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 530,
-      "netYen": 430,
-      "recoveryRate": 5.3,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "8",
+          "ticketKeys": [
+            "8"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 310,
+          "netYen": 210,
+          "recoveryRate": 3.1,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "8-11-7-1-2 BOX",
+          "ticketKeys": [
+            "8-11",
+            "8-7",
+            "8-1",
+            "8-2",
+            "11-7",
+            "11-1",
+            "11-2",
+            "7-1",
+            "7-2",
+            "1-2"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 530,
+          "netYen": -470,
+          "recoveryRate": 0.53,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "8-11-7-1-2 BOX",
+          "ticketKeys": [
+            "8-11-7",
+            "8-11-1",
+            "8-11-2",
+            "8-7-1",
+            "8-7-2",
+            "8-1-2",
+            "11-7-1",
+            "11-7-2",
+            "11-1-2",
+            "7-1-2"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 17700,
+          "netYen": 16700,
+          "recoveryRate": 17.7,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 18540,
+      "netYen": 16440,
+      "recoveryRate": 8.82857142857143,
       "hit": true,
       "finishByHorseNumber": {
         "1": 6,
@@ -1339,24 +1713,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 5,
       "topPickFinish": 4,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "1-5-6",
-        "ticketKeys": [
-          "1-5-6",
-          "1-3-5",
-          "3-5-6"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 0,
-      "netYen": -300,
-      "recoveryRate": 0,
-      "hit": false,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "5",
+          "ticketKeys": [
+            "5"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "5-1-6-3-12 BOX",
+          "ticketKeys": [
+            "5-1",
+            "5-6",
+            "5-3",
+            "5-12",
+            "1-6",
+            "1-3",
+            "1-12",
+            "6-3",
+            "6-12",
+            "3-12"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 9910,
+          "netYen": 8910,
+          "recoveryRate": 9.91,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "5-1-6-3-12 BOX",
+          "ticketKeys": [
+            "5-1-6",
+            "5-1-3",
+            "5-1-12",
+            "5-6-3",
+            "5-6-12",
+            "5-3-12",
+            "1-6-3",
+            "1-6-12",
+            "1-3-12",
+            "6-3-12"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 39440,
+          "netYen": 38440,
+          "recoveryRate": 39.44,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 49350,
+      "netYen": 47250,
+      "recoveryRate": 23.5,
+      "hit": true,
       "finishByHorseNumber": {
         "1": 2,
         "2": 9,
@@ -1521,23 +1947,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 5,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "2-5-7",
-        "ticketKeys": [
-          "2-5-7",
-          "4-5-7",
-          "2-4-5"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 2420,
-      "netYen": 2120,
-      "recoveryRate": 8.066666666666666,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "5",
+          "ticketKeys": [
+            "5"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 220,
+          "netYen": 120,
+          "recoveryRate": 2.2,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "5-7-2-4-10 BOX",
+          "ticketKeys": [
+            "5-7",
+            "5-2",
+            "5-4",
+            "5-10",
+            "7-2",
+            "7-4",
+            "7-10",
+            "2-4",
+            "2-10",
+            "4-10"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 720,
+          "netYen": -280,
+          "recoveryRate": 0.72,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "5-7-2-4-10 BOX",
+          "ticketKeys": [
+            "5-7-2",
+            "5-7-4",
+            "5-7-10",
+            "5-2-4",
+            "5-2-10",
+            "5-4-10",
+            "7-2-4",
+            "7-2-10",
+            "7-4-10",
+            "2-4-10"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 2420,
+          "netYen": 1420,
+          "recoveryRate": 2.42,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 3360,
+      "netYen": 1260,
+      "recoveryRate": 1.6,
       "hit": true,
       "finishByHorseNumber": {
         "1": 8,
@@ -1704,21 +2182,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 10,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "馬連",
-        "method": "1点",
-        "selection": "10-4",
-        "ticketKeys": [
-          "10-4"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 560,
-      "netYen": 460,
-      "recoveryRate": 5.6,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "10",
+          "ticketKeys": [
+            "10"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 510,
+          "netYen": 410,
+          "recoveryRate": 5.1,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "10-4-5-8-6 BOX",
+          "ticketKeys": [
+            "10-4",
+            "10-5",
+            "10-8",
+            "10-6",
+            "4-5",
+            "4-8",
+            "4-6",
+            "5-8",
+            "5-6",
+            "8-6"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 560,
+          "netYen": -440,
+          "recoveryRate": 0.56,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "10-4-5-8-6 BOX",
+          "ticketKeys": [
+            "10-4-5",
+            "10-4-8",
+            "10-4-6",
+            "10-5-8",
+            "10-5-6",
+            "10-8-6",
+            "4-5-8",
+            "4-5-6",
+            "4-8-6",
+            "5-8-6"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 1020,
+          "netYen": 20,
+          "recoveryRate": 1.02,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 2090,
+      "netYen": -10,
+      "recoveryRate": 0.9952380952380953,
       "hit": true,
       "finishByHorseNumber": {
         "1": 9,
@@ -1882,21 +2414,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 10,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "馬連",
-        "method": "1点",
-        "selection": "10-12",
-        "ticketKeys": [
-          "10-12"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 1610,
-      "netYen": 1510,
-      "recoveryRate": 16.1,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "10",
+          "ticketKeys": [
+            "10"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 370,
+          "netYen": 270,
+          "recoveryRate": 3.7,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "10-12-11-7-8 BOX",
+          "ticketKeys": [
+            "10-12",
+            "10-11",
+            "10-7",
+            "10-8",
+            "12-11",
+            "12-7",
+            "12-8",
+            "11-7",
+            "11-8",
+            "7-8"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 1610,
+          "netYen": 610,
+          "recoveryRate": 1.61,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "10-12-11-7-8 BOX",
+          "ticketKeys": [
+            "10-12-11",
+            "10-12-7",
+            "10-12-8",
+            "10-11-7",
+            "10-11-8",
+            "10-7-8",
+            "12-11-7",
+            "12-11-8",
+            "12-7-8",
+            "11-7-8"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 2190,
+          "netYen": 1190,
+          "recoveryRate": 2.19,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 4170,
+      "netYen": 2070,
+      "recoveryRate": 1.9857142857142858,
       "hit": true,
       "finishByHorseNumber": {
         "1": 9,
@@ -2063,21 +2649,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 1,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "馬連",
-        "method": "1点",
-        "selection": "1-3",
-        "ticketKeys": [
-          "1-3"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 1040,
-      "netYen": 940,
-      "recoveryRate": 10.4,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "1",
+          "ticketKeys": [
+            "1"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 690,
+          "netYen": 590,
+          "recoveryRate": 6.9,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "1-3-6-7-10 BOX",
+          "ticketKeys": [
+            "1-3",
+            "1-6",
+            "1-7",
+            "1-10",
+            "3-6",
+            "3-7",
+            "3-10",
+            "6-7",
+            "6-10",
+            "7-10"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 2860,
+          "netYen": 1860,
+          "recoveryRate": 2.86,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "1-3-6-7-10 BOX",
+          "ticketKeys": [
+            "1-3-6",
+            "1-3-7",
+            "1-3-10",
+            "1-6-7",
+            "1-6-10",
+            "1-7-10",
+            "3-6-7",
+            "3-6-10",
+            "3-7-10",
+            "6-7-10"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 7180,
+          "netYen": 6180,
+          "recoveryRate": 7.18,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 10730,
+      "netYen": 8630,
+      "recoveryRate": 5.109523809523809,
       "hit": true,
       "finishByHorseNumber": {
         "1": 1,
@@ -2243,21 +2883,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 12,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "馬連",
-        "method": "1点",
-        "selection": "12-5",
-        "ticketKeys": [
-          "12-5"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 1510,
-      "netYen": 1410,
-      "recoveryRate": 15.1,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "12",
+          "ticketKeys": [
+            "12"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 760,
+          "netYen": 660,
+          "recoveryRate": 7.6,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "12-5-8-4-3 BOX",
+          "ticketKeys": [
+            "12-5",
+            "12-8",
+            "12-4",
+            "12-3",
+            "5-8",
+            "5-4",
+            "5-3",
+            "8-4",
+            "8-3",
+            "4-3"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 1510,
+          "netYen": 510,
+          "recoveryRate": 1.51,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "12-5-8-4-3 BOX",
+          "ticketKeys": [
+            "12-5-8",
+            "12-5-4",
+            "12-5-3",
+            "12-8-4",
+            "12-8-3",
+            "12-4-3",
+            "5-8-4",
+            "5-8-3",
+            "5-4-3",
+            "8-4-3"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 1860,
+          "netYen": 860,
+          "recoveryRate": 1.86,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 4130,
+      "netYen": 2030,
+      "recoveryRate": 1.9666666666666666,
       "hit": true,
       "finishByHorseNumber": {
         "1": 9,
@@ -2424,22 +3118,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "馬連",
-        "method": "1点",
-        "selection": "2-1",
-        "ticketKeys": [
-          "2-1"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 0,
-      "netYen": -100,
-      "recoveryRate": 0,
-      "hit": false,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "2",
+          "ticketKeys": [
+            "2"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 200,
+          "netYen": 100,
+          "recoveryRate": 2,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "2-1-9-3-4 BOX",
+          "ticketKeys": [
+            "2-1",
+            "2-9",
+            "2-3",
+            "2-4",
+            "1-9",
+            "1-3",
+            "1-4",
+            "9-3",
+            "9-4",
+            "3-4"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 870,
+          "netYen": -130,
+          "recoveryRate": 0.87,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "2-1-9-3-4 BOX",
+          "ticketKeys": [
+            "2-1-9",
+            "2-1-3",
+            "2-1-4",
+            "2-9-3",
+            "2-9-4",
+            "2-3-4",
+            "1-9-3",
+            "1-9-4",
+            "1-3-4",
+            "9-3-4"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 420,
+          "netYen": -580,
+          "recoveryRate": 0.42,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 1490,
+      "netYen": -610,
+      "recoveryRate": 0.7095238095238096,
+      "hit": true,
       "finishByHorseNumber": {
         "1": 3,
         "2": 1,
@@ -2601,21 +3349,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 13,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "馬連",
-        "method": "1点",
-        "selection": "13-6",
-        "ticketKeys": [
-          "13-6"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 690,
-      "netYen": 590,
-      "recoveryRate": 6.9,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "13",
+          "ticketKeys": [
+            "13"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 370,
+          "netYen": 270,
+          "recoveryRate": 3.7,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "13-6-9-3-5 BOX",
+          "ticketKeys": [
+            "13-6",
+            "13-9",
+            "13-3",
+            "13-5",
+            "6-9",
+            "6-3",
+            "6-5",
+            "9-3",
+            "9-5",
+            "3-5"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 690,
+          "netYen": -310,
+          "recoveryRate": 0.69,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "13-6-9-3-5 BOX",
+          "ticketKeys": [
+            "13-6-9",
+            "13-6-3",
+            "13-6-5",
+            "13-9-3",
+            "13-9-5",
+            "13-3-5",
+            "6-9-3",
+            "6-9-5",
+            "6-3-5",
+            "9-3-5"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 490,
+          "netYen": -510,
+          "recoveryRate": 0.49,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 1550,
+      "netYen": -550,
+      "recoveryRate": 0.7380952380952381,
       "hit": true,
       "finishByHorseNumber": {
         "1": 8,
@@ -2785,23 +3587,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 12,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "4-11-12",
-        "ticketKeys": [
-          "4-11-12",
-          "4-9-12",
-          "9-11-12"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 11320,
-      "netYen": 11020,
-      "recoveryRate": 37.733333333333334,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "12",
+          "ticketKeys": [
+            "12"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 390,
+          "netYen": 290,
+          "recoveryRate": 3.9,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "12-4-11-9-10 BOX",
+          "ticketKeys": [
+            "12-4",
+            "12-11",
+            "12-9",
+            "12-10",
+            "4-11",
+            "4-9",
+            "4-10",
+            "11-9",
+            "11-10",
+            "9-10"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 1770,
+          "netYen": 770,
+          "recoveryRate": 1.77,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "12-4-11-9-10 BOX",
+          "ticketKeys": [
+            "12-4-11",
+            "12-4-9",
+            "12-4-10",
+            "12-11-9",
+            "12-11-10",
+            "12-9-10",
+            "4-11-9",
+            "4-11-10",
+            "4-9-10",
+            "11-9-10"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 11320,
+          "netYen": 10320,
+          "recoveryRate": 11.32,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 13480,
+      "netYen": 11380,
+      "recoveryRate": 6.419047619047619,
       "hit": true,
       "finishByHorseNumber": {
         "1": 13,
@@ -2971,22 +3825,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "馬連",
-        "method": "1点",
-        "selection": "2-1",
-        "ticketKeys": [
-          "2-1"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 0,
-      "netYen": -100,
-      "recoveryRate": 0,
-      "hit": false,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "2",
+          "ticketKeys": [
+            "2"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 270,
+          "netYen": 170,
+          "recoveryRate": 2.7,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "2-1-9-13-3 BOX",
+          "ticketKeys": [
+            "2-1",
+            "2-9",
+            "2-13",
+            "2-3",
+            "1-9",
+            "1-13",
+            "1-3",
+            "9-13",
+            "9-3",
+            "13-3"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 1510,
+          "netYen": 510,
+          "recoveryRate": 1.51,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "2-1-9-13-3 BOX",
+          "ticketKeys": [
+            "2-1-9",
+            "2-1-13",
+            "2-1-3",
+            "2-9-13",
+            "2-9-3",
+            "2-13-3",
+            "1-9-13",
+            "1-9-3",
+            "1-13-3",
+            "9-13-3"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 3740,
+          "netYen": 2740,
+          "recoveryRate": 3.74,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 5520,
+      "netYen": 3420,
+      "recoveryRate": 2.6285714285714286,
+      "hit": true,
       "finishByHorseNumber": {
         "1": 3,
         "2": 1,
@@ -3154,24 +4062,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "1-2-15",
-        "ticketKeys": [
-          "1-2-15",
-          "2-5-15",
-          "1-2-5"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 0,
-      "netYen": -300,
-      "recoveryRate": 0,
-      "hit": false,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "2",
+          "ticketKeys": [
+            "2"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 1790,
+          "netYen": 1690,
+          "recoveryRate": 17.9,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "2-15-1-5-3 BOX",
+          "ticketKeys": [
+            "2-15",
+            "2-1",
+            "2-5",
+            "2-3",
+            "15-1",
+            "15-5",
+            "15-3",
+            "1-5",
+            "1-3",
+            "5-3"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 5010,
+          "netYen": 4010,
+          "recoveryRate": 5.01,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "2-15-1-5-3 BOX",
+          "ticketKeys": [
+            "2-15-1",
+            "2-15-5",
+            "2-15-3",
+            "2-1-5",
+            "2-1-3",
+            "2-5-3",
+            "15-1-5",
+            "15-1-3",
+            "15-5-3",
+            "1-5-3"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 132910,
+          "netYen": 131910,
+          "recoveryRate": 132.91,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 139710,
+      "netYen": 137610,
+      "recoveryRate": 66.52857142857142,
+      "hit": true,
       "finishByHorseNumber": {
         "1": 6,
         "2": 1,
@@ -3339,22 +4299,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 11,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "馬連",
-        "method": "1点",
-        "selection": "11-8",
-        "ticketKeys": [
-          "11-8"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 0,
-      "netYen": -100,
-      "recoveryRate": 0,
-      "hit": false,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "11",
+          "ticketKeys": [
+            "11"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 390,
+          "netYen": 290,
+          "recoveryRate": 3.9,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "11-8-13-1-12 BOX",
+          "ticketKeys": [
+            "11-8",
+            "11-13",
+            "11-1",
+            "11-12",
+            "8-13",
+            "8-1",
+            "8-12",
+            "13-1",
+            "13-12",
+            "1-12"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 8160,
+          "netYen": 7160,
+          "recoveryRate": 8.16,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "11-8-13-1-12 BOX",
+          "ticketKeys": [
+            "11-8-13",
+            "11-8-1",
+            "11-8-12",
+            "11-13-1",
+            "11-13-12",
+            "11-1-12",
+            "8-13-1",
+            "8-13-12",
+            "8-1-12",
+            "13-1-12"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 8550,
+      "netYen": 6450,
+      "recoveryRate": 4.071428571428571,
+      "hit": true,
       "finishByHorseNumber": {
         "1": 4,
         "2": 10,
@@ -3523,22 +4537,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 12,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "馬連",
-        "method": "1点",
-        "selection": "12-1",
-        "ticketKeys": [
-          "12-1"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 0,
-      "netYen": -100,
-      "recoveryRate": 0,
-      "hit": false,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "12",
+          "ticketKeys": [
+            "12"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 650,
+          "netYen": 550,
+          "recoveryRate": 6.5,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "12-1-11-13-10 BOX",
+          "ticketKeys": [
+            "12-1",
+            "12-11",
+            "12-13",
+            "12-10",
+            "1-11",
+            "1-13",
+            "1-10",
+            "11-13",
+            "11-10",
+            "13-10"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 3430,
+          "netYen": 2430,
+          "recoveryRate": 3.43,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "12-1-11-13-10 BOX",
+          "ticketKeys": [
+            "12-1-11",
+            "12-1-13",
+            "12-1-10",
+            "12-11-13",
+            "12-11-10",
+            "12-13-10",
+            "1-11-13",
+            "1-11-10",
+            "1-13-10",
+            "11-13-10"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 4080,
+      "netYen": 1980,
+      "recoveryRate": 1.9428571428571428,
+      "hit": true,
       "finishByHorseNumber": {
         "1": 5,
         "2": 10,
@@ -3707,23 +4775,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 5,
       "topPickFinish": 3,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "5-8-11",
-        "ticketKeys": [
-          "5-8-11",
-          "2-5-8",
-          "2-5-11"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 1870,
-      "netYen": 1570,
-      "recoveryRate": 6.233333333333333,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "5",
+          "ticketKeys": [
+            "5"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "5-8-11-2-10 BOX",
+          "ticketKeys": [
+            "5-8",
+            "5-11",
+            "5-2",
+            "5-10",
+            "8-11",
+            "8-2",
+            "8-10",
+            "11-2",
+            "11-10",
+            "2-10"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 2940,
+          "netYen": 1940,
+          "recoveryRate": 2.94,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "5-8-11-2-10 BOX",
+          "ticketKeys": [
+            "5-8-11",
+            "5-8-2",
+            "5-8-10",
+            "5-11-2",
+            "5-11-10",
+            "5-2-10",
+            "8-11-2",
+            "8-11-10",
+            "8-2-10",
+            "11-2-10"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 1870,
+          "netYen": 870,
+          "recoveryRate": 1.87,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 4810,
+      "netYen": 2710,
+      "recoveryRate": 2.2904761904761903,
       "hit": true,
       "finishByHorseNumber": {
         "1": 11,
@@ -3889,23 +5009,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 6,
       "topPickFinish": 3,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "6-14-15",
-        "ticketKeys": [
-          "6-14-15",
-          "3-6-15",
-          "3-6-14"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 19870,
-      "netYen": 19570,
-      "recoveryRate": 66.23333333333333,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "6",
+          "ticketKeys": [
+            "6"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "6-15-14-3-12 BOX",
+          "ticketKeys": [
+            "6-15",
+            "6-14",
+            "6-3",
+            "6-12",
+            "15-14",
+            "15-3",
+            "15-12",
+            "14-3",
+            "14-12",
+            "3-12"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 12210,
+          "netYen": 11210,
+          "recoveryRate": 12.21,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "6-15-14-3-12 BOX",
+          "ticketKeys": [
+            "6-15-14",
+            "6-15-3",
+            "6-15-12",
+            "6-14-3",
+            "6-14-12",
+            "6-3-12",
+            "15-14-3",
+            "15-14-12",
+            "15-3-12",
+            "14-3-12"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 19870,
+          "netYen": 18870,
+          "recoveryRate": 19.87,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 32080,
+      "netYen": 29980,
+      "recoveryRate": 15.276190476190477,
       "hit": true,
       "finishByHorseNumber": {
         "1": 5,
@@ -4074,23 +5246,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 13,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "4-5-13",
-        "ticketKeys": [
-          "4-5-13",
-          "4-8-13",
-          "5-8-13"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 16060,
-      "netYen": 15760,
-      "recoveryRate": 53.53333333333333,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "13",
+          "ticketKeys": [
+            "13"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 480,
+          "netYen": 380,
+          "recoveryRate": 4.8,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "13-4-5-8-9 BOX",
+          "ticketKeys": [
+            "13-4",
+            "13-5",
+            "13-8",
+            "13-9",
+            "4-5",
+            "4-8",
+            "4-9",
+            "5-8",
+            "5-9",
+            "8-9"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 4940,
+          "netYen": 3940,
+          "recoveryRate": 4.94,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "13-4-5-8-9 BOX",
+          "ticketKeys": [
+            "13-4-5",
+            "13-4-8",
+            "13-4-9",
+            "13-5-8",
+            "13-5-9",
+            "13-8-9",
+            "4-5-8",
+            "4-5-9",
+            "4-8-9",
+            "5-8-9"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 16060,
+          "netYen": 15060,
+          "recoveryRate": 16.06,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 21480,
+      "netYen": 19380,
+      "recoveryRate": 10.228571428571428,
       "hit": true,
       "finishByHorseNumber": {
         "1": 9,
@@ -4260,21 +5484,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 6,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "馬連",
-        "method": "1点",
-        "selection": "6-2",
-        "ticketKeys": [
-          "6-2"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 500,
-      "netYen": 400,
-      "recoveryRate": 5,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "6",
+          "ticketKeys": [
+            "6"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 400,
+          "netYen": 300,
+          "recoveryRate": 4,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "6-2-8-13-3 BOX",
+          "ticketKeys": [
+            "6-2",
+            "6-8",
+            "6-13",
+            "6-3",
+            "2-8",
+            "2-13",
+            "2-3",
+            "8-13",
+            "8-3",
+            "13-3"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 500,
+          "netYen": -500,
+          "recoveryRate": 0.5,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "6-2-8-13-3 BOX",
+          "ticketKeys": [
+            "6-2-8",
+            "6-2-13",
+            "6-2-3",
+            "6-8-13",
+            "6-8-3",
+            "6-13-3",
+            "2-8-13",
+            "2-8-3",
+            "2-13-3",
+            "8-13-3"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 2590,
+          "netYen": 1590,
+          "recoveryRate": 2.59,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 3490,
+      "netYen": 1390,
+      "recoveryRate": 1.661904761904762,
       "hit": true,
       "finishByHorseNumber": {
         "1": 14,
@@ -4444,23 +5722,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "2-9-11",
-        "ticketKeys": [
-          "2-9-11",
-          "2-6-11",
-          "2-6-9"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 2990,
-      "netYen": 2690,
-      "recoveryRate": 9.966666666666667,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "2",
+          "ticketKeys": [
+            "2"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 420,
+          "netYen": 320,
+          "recoveryRate": 4.2,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "2-11-9-6-7 BOX",
+          "ticketKeys": [
+            "2-11",
+            "2-9",
+            "2-6",
+            "2-7",
+            "11-9",
+            "11-6",
+            "11-7",
+            "9-6",
+            "9-7",
+            "6-7"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 1630,
+          "netYen": 630,
+          "recoveryRate": 1.63,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "2-11-9-6-7 BOX",
+          "ticketKeys": [
+            "2-11-9",
+            "2-11-6",
+            "2-11-7",
+            "2-9-6",
+            "2-9-7",
+            "2-6-7",
+            "11-9-6",
+            "11-9-7",
+            "11-6-7",
+            "9-6-7"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 2990,
+          "netYen": 1990,
+          "recoveryRate": 2.99,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 5040,
+      "netYen": 2940,
+      "recoveryRate": 2.4,
       "hit": true,
       "finishByHorseNumber": {
         "1": 12,
@@ -4626,23 +5956,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 5,
       "topPickFinish": 2,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "4-5-10",
-        "ticketKeys": [
-          "4-5-10",
-          "4-5-7",
-          "5-7-10"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 2000,
-      "netYen": 1700,
-      "recoveryRate": 6.666666666666667,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "5",
+          "ticketKeys": [
+            "5"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "5-4-10-7-2 BOX",
+          "ticketKeys": [
+            "5-4",
+            "5-10",
+            "5-7",
+            "5-2",
+            "4-10",
+            "4-7",
+            "4-2",
+            "10-7",
+            "10-2",
+            "7-2"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 350,
+          "netYen": -650,
+          "recoveryRate": 0.35,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "5-4-10-7-2 BOX",
+          "ticketKeys": [
+            "5-4-10",
+            "5-4-7",
+            "5-4-2",
+            "5-10-7",
+            "5-10-2",
+            "5-7-2",
+            "4-10-7",
+            "4-10-2",
+            "4-7-2",
+            "10-7-2"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 2000,
+          "netYen": 1000,
+          "recoveryRate": 2,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 2350,
+      "netYen": 250,
+      "recoveryRate": 1.119047619047619,
       "hit": true,
       "finishByHorseNumber": {
         "1": 5,
@@ -4807,22 +6189,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "馬連",
-        "method": "1点",
-        "selection": "2-14",
-        "ticketKeys": [
-          "2-14"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 0,
-      "netYen": -100,
-      "recoveryRate": 0,
-      "hit": false,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "2",
+          "ticketKeys": [
+            "2"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 320,
+          "netYen": 220,
+          "recoveryRate": 3.2,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "2-14-5-7-1 BOX",
+          "ticketKeys": [
+            "2-14",
+            "2-5",
+            "2-7",
+            "2-1",
+            "14-5",
+            "14-7",
+            "14-1",
+            "5-7",
+            "5-1",
+            "7-1"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 1750,
+          "netYen": 750,
+          "recoveryRate": 1.75,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "2-14-5-7-1 BOX",
+          "ticketKeys": [
+            "2-14-5",
+            "2-14-7",
+            "2-14-1",
+            "2-5-7",
+            "2-5-1",
+            "2-7-1",
+            "14-5-7",
+            "14-5-1",
+            "14-7-1",
+            "5-7-1"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 3510,
+          "netYen": 2510,
+          "recoveryRate": 3.51,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 5580,
+      "netYen": 3480,
+      "recoveryRate": 2.657142857142857,
+      "hit": true,
       "finishByHorseNumber": {
         "1": 6,
         "2": 1,
@@ -4989,22 +6425,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 7,
       "topPickFinish": 2,
-      "ticket": {
-        "betType": "馬連",
-        "method": "1点",
-        "selection": "7-4",
-        "ticketKeys": [
-          "7-4"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 0,
-      "netYen": -100,
-      "recoveryRate": 0,
-      "hit": false,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "7",
+          "ticketKeys": [
+            "7"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "7-4-5-2-3 BOX",
+          "ticketKeys": [
+            "7-4",
+            "7-5",
+            "7-2",
+            "7-3",
+            "4-5",
+            "4-2",
+            "4-3",
+            "5-2",
+            "5-3",
+            "2-3"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 29400,
+          "netYen": 28400,
+          "recoveryRate": 29.4,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "7-4-5-2-3 BOX",
+          "ticketKeys": [
+            "7-4-5",
+            "7-4-2",
+            "7-4-3",
+            "7-5-2",
+            "7-5-3",
+            "7-2-3",
+            "4-5-2",
+            "4-5-3",
+            "4-2-3",
+            "5-2-3"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 10340,
+          "netYen": 9340,
+          "recoveryRate": 10.34,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 39740,
+      "netYen": 37640,
+      "recoveryRate": 18.923809523809524,
+      "hit": true,
       "finishByHorseNumber": {
         "1": 8,
         "2": 4,
@@ -5165,21 +6655,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 1,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "単勝",
-        "method": "1点",
-        "selection": "1",
-        "ticketKeys": [
-          "1"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 120,
-      "netYen": 20,
-      "recoveryRate": 1.2,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "1",
+          "ticketKeys": [
+            "1"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 120,
+          "netYen": 20,
+          "recoveryRate": 1.2,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "1-3-5-2-4 BOX",
+          "ticketKeys": [
+            "1-3",
+            "1-5",
+            "1-2",
+            "1-4",
+            "3-5",
+            "3-2",
+            "3-4",
+            "5-2",
+            "5-4",
+            "2-4"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 220,
+          "netYen": -780,
+          "recoveryRate": 0.22,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "1-3-5-2-4 BOX",
+          "ticketKeys": [
+            "1-3-5",
+            "1-3-2",
+            "1-3-4",
+            "1-5-2",
+            "1-5-4",
+            "1-2-4",
+            "3-5-2",
+            "3-5-4",
+            "3-2-4",
+            "5-2-4"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 390,
+          "netYen": -610,
+          "recoveryRate": 0.39,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 730,
+      "netYen": -1370,
+      "recoveryRate": 0.3476190476190476,
       "hit": true,
       "finishByHorseNumber": {
         "1": 1,
@@ -5340,21 +6884,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 6,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "馬連",
-        "method": "1点",
-        "selection": "6-12",
-        "ticketKeys": [
-          "6-12"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 400,
-      "netYen": 300,
-      "recoveryRate": 4,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "6",
+          "ticketKeys": [
+            "6"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 340,
+          "netYen": 240,
+          "recoveryRate": 3.4,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "6-12-13-3-9 BOX",
+          "ticketKeys": [
+            "6-12",
+            "6-13",
+            "6-3",
+            "6-9",
+            "12-13",
+            "12-3",
+            "12-9",
+            "13-3",
+            "13-9",
+            "3-9"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 400,
+          "netYen": -600,
+          "recoveryRate": 0.4,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "6-12-13-3-9 BOX",
+          "ticketKeys": [
+            "6-12-13",
+            "6-12-3",
+            "6-12-9",
+            "6-13-3",
+            "6-13-9",
+            "6-3-9",
+            "12-13-3",
+            "12-13-9",
+            "12-3-9",
+            "13-3-9"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 2570,
+          "netYen": 1570,
+          "recoveryRate": 2.57,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 3310,
+      "netYen": 1210,
+      "recoveryRate": 1.5761904761904761,
       "hit": true,
       "finishByHorseNumber": {
         "1": 7,
@@ -5521,22 +7119,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 13,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "馬連",
-        "method": "1点",
-        "selection": "13-12",
-        "ticketKeys": [
-          "13-12"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 0,
-      "netYen": -100,
-      "recoveryRate": 0,
-      "hit": false,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "13",
+          "ticketKeys": [
+            "13"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 280,
+          "netYen": 180,
+          "recoveryRate": 2.8,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "13-12-8-2-9 BOX",
+          "ticketKeys": [
+            "13-12",
+            "13-8",
+            "13-2",
+            "13-9",
+            "12-8",
+            "12-2",
+            "12-9",
+            "8-2",
+            "8-9",
+            "2-9"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 990,
+          "netYen": -10,
+          "recoveryRate": 0.99,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "13-12-8-2-9 BOX",
+          "ticketKeys": [
+            "13-12-8",
+            "13-12-2",
+            "13-12-9",
+            "13-8-2",
+            "13-8-9",
+            "13-2-9",
+            "12-8-2",
+            "12-8-9",
+            "12-2-9",
+            "8-2-9"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 1350,
+          "netYen": 350,
+          "recoveryRate": 1.35,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 2620,
+      "netYen": 520,
+      "recoveryRate": 1.2476190476190476,
+      "hit": true,
       "finishByHorseNumber": {
         "1": 14,
         "2": 4,
@@ -5703,22 +7355,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 3,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "馬連",
-        "method": "1点",
-        "selection": "3-4",
-        "ticketKeys": [
-          "3-4"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 0,
-      "netYen": -100,
-      "recoveryRate": 0,
-      "hit": false,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "3",
+          "ticketKeys": [
+            "3"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 270,
+          "netYen": 170,
+          "recoveryRate": 2.7,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "3-4-5-9-1 BOX",
+          "ticketKeys": [
+            "3-4",
+            "3-5",
+            "3-9",
+            "3-1",
+            "4-5",
+            "4-9",
+            "4-1",
+            "5-9",
+            "5-1",
+            "9-1"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 670,
+          "netYen": -330,
+          "recoveryRate": 0.67,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "3-4-5-9-1 BOX",
+          "ticketKeys": [
+            "3-4-5",
+            "3-4-9",
+            "3-4-1",
+            "3-5-9",
+            "3-5-1",
+            "3-9-1",
+            "4-5-9",
+            "4-5-1",
+            "4-9-1",
+            "5-9-1"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 3650,
+          "netYen": 2650,
+          "recoveryRate": 3.65,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 4590,
+      "netYen": 2490,
+      "recoveryRate": 2.1857142857142855,
+      "hit": true,
       "finishByHorseNumber": {
         "1": 5,
         "2": 9,
@@ -5881,23 +7587,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 16,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "8-10-16",
-        "ticketKeys": [
-          "8-10-16",
-          "3-10-16",
-          "3-8-16"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 12490,
-      "netYen": 12190,
-      "recoveryRate": 41.63333333333333,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "16",
+          "ticketKeys": [
+            "16"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 190,
+          "netYen": 90,
+          "recoveryRate": 1.9,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "16-10-8-3-17 BOX",
+          "ticketKeys": [
+            "16-10",
+            "16-8",
+            "16-3",
+            "16-17",
+            "10-8",
+            "10-3",
+            "10-17",
+            "8-3",
+            "8-17",
+            "3-17"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 3710,
+          "netYen": 2710,
+          "recoveryRate": 3.71,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "16-10-8-3-17 BOX",
+          "ticketKeys": [
+            "16-10-8",
+            "16-10-3",
+            "16-10-17",
+            "16-8-3",
+            "16-8-17",
+            "16-3-17",
+            "10-8-3",
+            "10-8-17",
+            "10-3-17",
+            "8-3-17"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 12490,
+          "netYen": 11490,
+          "recoveryRate": 12.49,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 16390,
+      "netYen": 14290,
+      "recoveryRate": 7.804761904761905,
       "hit": true,
       "finishByHorseNumber": {
         "1": 18,
@@ -6069,21 +7827,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "馬連",
-        "method": "1点",
-        "selection": "2-1",
-        "ticketKeys": [
-          "2-1"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 810,
-      "netYen": 710,
-      "recoveryRate": 8.1,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "2",
+          "ticketKeys": [
+            "2"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 500,
+          "netYen": 400,
+          "recoveryRate": 5,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "2-1-5-7-12 BOX",
+          "ticketKeys": [
+            "2-1",
+            "2-5",
+            "2-7",
+            "2-12",
+            "1-5",
+            "1-7",
+            "1-12",
+            "5-7",
+            "5-12",
+            "7-12"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 810,
+          "netYen": -190,
+          "recoveryRate": 0.81,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "2-1-5-7-12 BOX",
+          "ticketKeys": [
+            "2-1-5",
+            "2-1-7",
+            "2-1-12",
+            "2-5-7",
+            "2-5-12",
+            "2-7-12",
+            "1-5-7",
+            "1-5-12",
+            "1-7-12",
+            "5-7-12"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 4360,
+          "netYen": 3360,
+          "recoveryRate": 4.36,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 5670,
+      "netYen": 3570,
+      "recoveryRate": 2.7,
       "hit": true,
       "finishByHorseNumber": {
         "1": 2,
@@ -6249,21 +8061,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 5,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "単勝",
-        "method": "1点",
-        "selection": "5",
-        "ticketKeys": [
-          "5"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 180,
-      "netYen": 80,
-      "recoveryRate": 1.8,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "5",
+          "ticketKeys": [
+            "5"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 180,
+          "netYen": 80,
+          "recoveryRate": 1.8,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "5-10-1-3-2 BOX",
+          "ticketKeys": [
+            "5-10",
+            "5-1",
+            "5-3",
+            "5-2",
+            "10-1",
+            "10-3",
+            "10-2",
+            "1-3",
+            "1-2",
+            "3-2"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 2260,
+          "netYen": 1260,
+          "recoveryRate": 2.26,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "5-10-1-3-2 BOX",
+          "ticketKeys": [
+            "5-10-1",
+            "5-10-3",
+            "5-10-2",
+            "5-1-3",
+            "5-1-2",
+            "5-3-2",
+            "10-1-3",
+            "10-1-2",
+            "10-3-2",
+            "1-3-2"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 4720,
+          "netYen": 3720,
+          "recoveryRate": 4.72,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 7160,
+      "netYen": 5060,
+      "recoveryRate": 3.4095238095238094,
       "hit": true,
       "finishByHorseNumber": {
         "1": 5,
@@ -6429,21 +8295,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 5,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "馬連",
-        "method": "1点",
-        "selection": "5-7",
-        "ticketKeys": [
-          "5-7"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
-      "payoutYen": 550,
-      "netYen": 450,
-      "recoveryRate": 5.5,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "5",
+          "ticketKeys": [
+            "5"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 160,
+          "netYen": 60,
+          "recoveryRate": 1.6,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "5-7-6-8-13 BOX",
+          "ticketKeys": [
+            "5-7",
+            "5-6",
+            "5-8",
+            "5-13",
+            "7-6",
+            "7-8",
+            "7-13",
+            "6-8",
+            "6-13",
+            "8-13"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 550,
+          "netYen": -450,
+          "recoveryRate": 0.55,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "5-7-6-8-13 BOX",
+          "ticketKeys": [
+            "5-7-6",
+            "5-7-8",
+            "5-7-13",
+            "5-6-8",
+            "5-6-13",
+            "5-8-13",
+            "7-6-8",
+            "7-6-13",
+            "7-8-13",
+            "6-8-13"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 710,
+      "netYen": -1390,
+      "recoveryRate": 0.3380952380952381,
       "hit": true,
       "finishByHorseNumber": {
         "1": 14,
@@ -6611,24 +8531,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 1,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "1-2-3",
-        "ticketKeys": [
-          "1-2-3",
-          "1-2-4",
-          "1-3-4"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 0,
-      "netYen": -300,
-      "recoveryRate": 0,
-      "hit": false,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "1",
+          "ticketKeys": [
+            "1"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 170,
+          "netYen": 70,
+          "recoveryRate": 1.7,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "1-2-3-4-5 BOX",
+          "ticketKeys": [
+            "1-2",
+            "1-3",
+            "1-4",
+            "1-5",
+            "2-3",
+            "2-4",
+            "2-5",
+            "3-4",
+            "3-5",
+            "4-5"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 510,
+          "netYen": -490,
+          "recoveryRate": 0.51,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "1-2-3-4-5 BOX",
+          "ticketKeys": [
+            "1-2-3",
+            "1-2-4",
+            "1-2-5",
+            "1-3-4",
+            "1-3-5",
+            "1-4-5",
+            "2-3-4",
+            "2-3-5",
+            "2-4-5",
+            "3-4-5"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 1260,
+          "netYen": 260,
+          "recoveryRate": 1.26,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 1940,
+      "netYen": -160,
+      "recoveryRate": 0.9238095238095239,
+      "hit": true,
       "finishByHorseNumber": {
         "1": 1,
         "2": 8,
@@ -6767,24 +8739,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 4,
       "topPickFinish": 2,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "4-8-10",
-        "ticketKeys": [
-          "4-8-10",
-          "4-6-10",
-          "4-6-8"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 0,
-      "netYen": -300,
-      "recoveryRate": 0,
-      "hit": false,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "4",
+          "ticketKeys": [
+            "4"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "4-10-8-6-7 BOX",
+          "ticketKeys": [
+            "4-10",
+            "4-8",
+            "4-6",
+            "4-7",
+            "10-8",
+            "10-6",
+            "10-7",
+            "8-6",
+            "8-7",
+            "6-7"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 880,
+          "netYen": -120,
+          "recoveryRate": 0.88,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "4-10-8-6-7 BOX",
+          "ticketKeys": [
+            "4-10-8",
+            "4-10-6",
+            "4-10-7",
+            "4-8-6",
+            "4-8-7",
+            "4-6-7",
+            "10-8-6",
+            "10-8-7",
+            "10-6-7",
+            "8-6-7"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 880,
+      "netYen": -1220,
+      "recoveryRate": 0.41904761904761906,
+      "hit": true,
       "finishByHorseNumber": {
         "1": 3,
         "2": 5,
@@ -6925,22 +8949,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 13,
       "topPickFinish": 11,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "1-11-13",
-        "ticketKeys": [
-          "1-11-13",
-          "7-11-13",
-          "1-7-13"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "13",
+          "ticketKeys": [
+            "13"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "13-11-1-7-12 BOX",
+          "ticketKeys": [
+            "13-11",
+            "13-1",
+            "13-7",
+            "13-12",
+            "11-1",
+            "11-7",
+            "11-12",
+            "1-7",
+            "1-12",
+            "7-12"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "13-11-1-7-12 BOX",
+          "ticketKeys": [
+            "13-11-1",
+            "13-11-7",
+            "13-11-12",
+            "13-1-7",
+            "13-1-12",
+            "13-7-12",
+            "11-1-7",
+            "11-1-12",
+            "11-7-12",
+            "1-7-12"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -7087,22 +9163,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 3,
       "topPickFinish": 2,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "3-7-9",
-        "ticketKeys": [
-          "3-7-9",
-          "3-7-13",
-          "3-9-13"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "3",
+          "ticketKeys": [
+            "3"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "3-7-9-13-12 BOX",
+          "ticketKeys": [
+            "3-7",
+            "3-9",
+            "3-13",
+            "3-12",
+            "7-9",
+            "7-13",
+            "7-12",
+            "9-13",
+            "9-12",
+            "13-12"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "3-7-9-13-12 BOX",
+          "ticketKeys": [
+            "3-7-9",
+            "3-7-13",
+            "3-7-12",
+            "3-9-13",
+            "3-9-12",
+            "3-13-12",
+            "7-9-13",
+            "7-9-12",
+            "7-13-12",
+            "9-13-12"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -7248,22 +9376,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 6,
       "topPickFinish": 7,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "6-8-14",
-        "ticketKeys": [
-          "6-8-14",
-          "6-13-14",
-          "6-8-13"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "6",
+          "ticketKeys": [
+            "6"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "6-14-8-13-10 BOX",
+          "ticketKeys": [
+            "6-14",
+            "6-8",
+            "6-13",
+            "6-10",
+            "14-8",
+            "14-13",
+            "14-10",
+            "8-13",
+            "8-10",
+            "13-10"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "6-14-8-13-10 BOX",
+          "ticketKeys": [
+            "6-14-8",
+            "6-14-13",
+            "6-14-10",
+            "6-8-13",
+            "6-8-10",
+            "6-13-10",
+            "14-8-13",
+            "14-8-10",
+            "14-13-10",
+            "8-13-10"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -7410,22 +9590,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 11,
       "topPickFinish": 11,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "3-11-14",
-        "ticketKeys": [
-          "3-11-14",
-          "1-3-11",
-          "1-11-14"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "11",
+          "ticketKeys": [
+            "11"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "11-3-14-1-15 BOX",
+          "ticketKeys": [
+            "11-3",
+            "11-14",
+            "11-1",
+            "11-15",
+            "3-14",
+            "3-1",
+            "3-15",
+            "14-1",
+            "14-15",
+            "1-15"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "11-3-14-1-15 BOX",
+          "ticketKeys": [
+            "11-3-14",
+            "11-3-1",
+            "11-3-15",
+            "11-14-1",
+            "11-14-15",
+            "11-1-15",
+            "3-14-1",
+            "3-14-15",
+            "3-1-15",
+            "14-1-15"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -7574,22 +9806,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 10,
       "topPickFinish": 3,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "7-10-14",
-        "ticketKeys": [
-          "7-10-14",
-          "4-7-10",
-          "4-10-14"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "10",
+          "ticketKeys": [
+            "10"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "10-7-14-4-3 BOX",
+          "ticketKeys": [
+            "10-7",
+            "10-14",
+            "10-4",
+            "10-3",
+            "7-14",
+            "7-4",
+            "7-3",
+            "14-4",
+            "14-3",
+            "4-3"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "10-7-14-4-3 BOX",
+          "ticketKeys": [
+            "10-7-14",
+            "10-7-4",
+            "10-7-3",
+            "10-14-4",
+            "10-14-3",
+            "10-4-3",
+            "7-14-4",
+            "7-14-3",
+            "7-4-3",
+            "14-4-3"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -7736,22 +10020,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 4,
       "topPickFinish": 2,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "3-4-6",
-        "ticketKeys": [
-          "3-4-6",
-          "3-4-10",
-          "4-6-10"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "4",
+          "ticketKeys": [
+            "4"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "4-3-6-10-2 BOX",
+          "ticketKeys": [
+            "4-3",
+            "4-6",
+            "4-10",
+            "4-2",
+            "3-6",
+            "3-10",
+            "3-2",
+            "6-10",
+            "6-2",
+            "10-2"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "4-3-6-10-2 BOX",
+          "ticketKeys": [
+            "4-3-6",
+            "4-3-10",
+            "4-3-2",
+            "4-6-10",
+            "4-6-2",
+            "4-10-2",
+            "3-6-10",
+            "3-6-2",
+            "3-10-2",
+            "6-10-2"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -7894,24 +10230,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 10,
       "topPickFinish": 7,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "2-9-10",
-        "ticketKeys": [
-          "2-9-10",
-          "1-2-10",
-          "1-9-10"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 0,
-      "netYen": -300,
-      "recoveryRate": 0,
-      "hit": false,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "10",
+          "ticketKeys": [
+            "10"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "10-2-9-1-4 BOX",
+          "ticketKeys": [
+            "10-2",
+            "10-9",
+            "10-1",
+            "10-4",
+            "2-9",
+            "2-1",
+            "2-4",
+            "9-1",
+            "9-4",
+            "1-4"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 480,
+          "netYen": -520,
+          "recoveryRate": 0.48,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "10-2-9-1-4 BOX",
+          "ticketKeys": [
+            "10-2-9",
+            "10-2-1",
+            "10-2-4",
+            "10-9-1",
+            "10-9-4",
+            "10-1-4",
+            "2-9-1",
+            "2-9-4",
+            "2-1-4",
+            "9-1-4"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 480,
+      "netYen": -1620,
+      "recoveryRate": 0.22857142857142856,
+      "hit": true,
       "finishByHorseNumber": {
         "1": 4,
         "2": 5,
@@ -8055,23 +10443,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 9,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "3-9-14",
-        "ticketKeys": [
-          "3-9-14",
-          "9-12-14",
-          "3-9-12"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 1050,
-      "netYen": 750,
-      "recoveryRate": 3.5,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "9",
+          "ticketKeys": [
+            "9"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 410,
+          "netYen": 310,
+          "recoveryRate": 4.1,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "9-14-3-12-11 BOX",
+          "ticketKeys": [
+            "9-14",
+            "9-3",
+            "9-12",
+            "9-11",
+            "14-3",
+            "14-12",
+            "14-11",
+            "3-12",
+            "3-11",
+            "12-11"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 440,
+          "netYen": -560,
+          "recoveryRate": 0.44,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "9-14-3-12-11 BOX",
+          "ticketKeys": [
+            "9-14-3",
+            "9-14-12",
+            "9-14-11",
+            "9-3-12",
+            "9-3-11",
+            "9-12-11",
+            "14-3-12",
+            "14-3-11",
+            "14-12-11",
+            "3-12-11"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 1050,
+          "netYen": 50,
+          "recoveryRate": 1.05,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 1900,
+      "netYen": -200,
+      "recoveryRate": 0.9047619047619048,
       "hit": true,
       "finishByHorseNumber": {
         "1": 6,
@@ -8217,22 +10657,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 11,
       "topPickFinish": 5,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "10-11-12",
-        "ticketKeys": [
-          "10-11-12",
-          "2-10-11",
-          "2-11-12"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "11",
+          "ticketKeys": [
+            "11"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "11-10-12-2-4 BOX",
+          "ticketKeys": [
+            "11-10",
+            "11-12",
+            "11-2",
+            "11-4",
+            "10-12",
+            "10-2",
+            "10-4",
+            "12-2",
+            "12-4",
+            "2-4"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "11-10-12-2-4 BOX",
+          "ticketKeys": [
+            "11-10-12",
+            "11-10-2",
+            "11-10-4",
+            "11-12-2",
+            "11-12-4",
+            "11-2-4",
+            "10-12-2",
+            "10-12-4",
+            "10-2-4",
+            "12-2-4"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -8378,24 +10870,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 4,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "4-5-8",
-        "ticketKeys": [
-          "4-5-8",
-          "3-4-8",
-          "3-4-5"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 0,
-      "netYen": -300,
-      "recoveryRate": 0,
-      "hit": false,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "4",
+          "ticketKeys": [
+            "4"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 330,
+          "netYen": 230,
+          "recoveryRate": 3.3,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "4-8-5-3-1 BOX",
+          "ticketKeys": [
+            "4-8",
+            "4-5",
+            "4-3",
+            "4-1",
+            "8-5",
+            "8-3",
+            "8-1",
+            "5-3",
+            "5-1",
+            "3-1"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 1600,
+          "netYen": 600,
+          "recoveryRate": 1.6,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "4-8-5-3-1 BOX",
+          "ticketKeys": [
+            "4-8-5",
+            "4-8-3",
+            "4-8-1",
+            "4-5-3",
+            "4-5-1",
+            "4-3-1",
+            "8-5-3",
+            "8-5-1",
+            "8-3-1",
+            "5-3-1"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 1890,
+          "netYen": 890,
+          "recoveryRate": 1.89,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 3820,
+      "netYen": 1720,
+      "recoveryRate": 1.819047619047619,
+      "hit": true,
       "finishByHorseNumber": {
         "1": 2,
         "2": 5,
@@ -8540,22 +11084,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 9,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "1-2-3",
-        "ticketKeys": [
-          "1-2-3",
-          "1-2-10",
-          "2-3-10"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "2",
+          "ticketKeys": [
+            "2"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "2-1-3-10-9 BOX",
+          "ticketKeys": [
+            "2-1",
+            "2-3",
+            "2-10",
+            "2-9",
+            "1-3",
+            "1-10",
+            "1-9",
+            "3-10",
+            "3-9",
+            "10-9"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "2-1-3-10-9 BOX",
+          "ticketKeys": [
+            "2-1-3",
+            "2-1-10",
+            "2-1-9",
+            "2-3-10",
+            "2-3-9",
+            "2-10-9",
+            "1-3-10",
+            "1-3-9",
+            "1-10-9",
+            "3-10-9"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -8698,22 +11294,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 9,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "2-8-13",
-        "ticketKeys": [
-          "2-8-13",
-          "2-8-16",
-          "2-13-16"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "2",
+          "ticketKeys": [
+            "2"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "2-8-13-16-11 BOX",
+          "ticketKeys": [
+            "2-8",
+            "2-13",
+            "2-16",
+            "2-11",
+            "8-13",
+            "8-16",
+            "8-11",
+            "13-16",
+            "13-11",
+            "16-11"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "2-8-13-16-11 BOX",
+          "ticketKeys": [
+            "2-8-13",
+            "2-8-16",
+            "2-8-11",
+            "2-13-16",
+            "2-13-11",
+            "2-16-11",
+            "8-13-16",
+            "8-13-11",
+            "8-16-11",
+            "13-16-11"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -8862,22 +11510,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 6,
       "topPickFinish": 8,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "6-8-10",
-        "ticketKeys": [
-          "6-8-10",
-          "6-8-14",
-          "6-10-14"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "6",
+          "ticketKeys": [
+            "6"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "6-8-10-14-7 BOX",
+          "ticketKeys": [
+            "6-8",
+            "6-10",
+            "6-14",
+            "6-7",
+            "8-10",
+            "8-14",
+            "8-7",
+            "10-14",
+            "10-7",
+            "14-7"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "6-8-10-14-7 BOX",
+          "ticketKeys": [
+            "6-8-10",
+            "6-8-14",
+            "6-8-7",
+            "6-10-14",
+            "6-10-7",
+            "6-14-7",
+            "8-10-14",
+            "8-10-7",
+            "8-14-7",
+            "10-14-7"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -9026,22 +11726,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 12,
       "topPickFinish": 15,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "3-9-12",
-        "ticketKeys": [
-          "3-9-12",
-          "9-12-14",
-          "3-12-14"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "12",
+          "ticketKeys": [
+            "12"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "12-9-3-14-4 BOX",
+          "ticketKeys": [
+            "12-9",
+            "12-3",
+            "12-14",
+            "12-4",
+            "9-3",
+            "9-14",
+            "9-4",
+            "3-14",
+            "3-4",
+            "14-4"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "12-9-3-14-4 BOX",
+          "ticketKeys": [
+            "12-9-3",
+            "12-9-14",
+            "12-9-4",
+            "12-3-14",
+            "12-3-4",
+            "12-14-4",
+            "9-3-14",
+            "9-3-4",
+            "9-14-4",
+            "3-14-4"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -9189,24 +11941,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 9,
       "topPickFinish": 3,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "5-9-11",
-        "ticketKeys": [
-          "5-9-11",
-          "2-5-9",
-          "2-9-11"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 0,
-      "netYen": -300,
-      "recoveryRate": 0,
-      "hit": false,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "9",
+          "ticketKeys": [
+            "9"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "9-5-11-2-4 BOX",
+          "ticketKeys": [
+            "9-5",
+            "9-11",
+            "9-2",
+            "9-4",
+            "5-11",
+            "5-2",
+            "5-4",
+            "11-2",
+            "11-4",
+            "2-4"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 1320,
+          "netYen": 320,
+          "recoveryRate": 1.32,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "9-5-11-2-4 BOX",
+          "ticketKeys": [
+            "9-5-11",
+            "9-5-2",
+            "9-5-4",
+            "9-11-2",
+            "9-11-4",
+            "9-2-4",
+            "5-11-2",
+            "5-11-4",
+            "5-2-4",
+            "11-2-4"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 1010,
+          "netYen": 10,
+          "recoveryRate": 1.01,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 2330,
+      "netYen": 230,
+      "recoveryRate": 1.1095238095238096,
+      "hit": true,
       "finishByHorseNumber": {
         "1": 6,
         "2": 5,
@@ -9350,24 +12154,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 9,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "2-6-14",
-        "ticketKeys": [
-          "2-6-14",
-          "2-13-14",
-          "2-6-13"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 0,
-      "netYen": -300,
-      "recoveryRate": 0,
-      "hit": false,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "2",
+          "ticketKeys": [
+            "2"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "2-14-6-13-1 BOX",
+          "ticketKeys": [
+            "2-14",
+            "2-6",
+            "2-13",
+            "2-1",
+            "14-6",
+            "14-13",
+            "14-1",
+            "6-13",
+            "6-1",
+            "13-1"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 980,
+          "netYen": -20,
+          "recoveryRate": 0.98,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "2-14-6-13-1 BOX",
+          "ticketKeys": [
+            "2-14-6",
+            "2-14-13",
+            "2-14-1",
+            "2-6-13",
+            "2-6-1",
+            "2-13-1",
+            "14-6-13",
+            "14-6-1",
+            "14-13-1",
+            "6-13-1"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 980,
+      "netYen": -1120,
+      "recoveryRate": 0.4666666666666667,
+      "hit": true,
       "finishByHorseNumber": {
         "1": 14,
         "2": 9,
@@ -9514,22 +12370,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 15,
       "topPickFinish": 11,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "4-7-15",
-        "ticketKeys": [
-          "4-7-15",
-          "4-13-15",
-          "7-13-15"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "15",
+          "ticketKeys": [
+            "15"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "15-4-7-13-14 BOX",
+          "ticketKeys": [
+            "15-4",
+            "15-7",
+            "15-13",
+            "15-14",
+            "4-7",
+            "4-13",
+            "4-14",
+            "7-13",
+            "7-14",
+            "13-14"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "15-4-7-13-14 BOX",
+          "ticketKeys": [
+            "15-4-7",
+            "15-4-13",
+            "15-4-14",
+            "15-7-13",
+            "15-7-14",
+            "15-13-14",
+            "4-7-13",
+            "4-7-14",
+            "4-13-14",
+            "7-13-14"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -9677,22 +12585,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 12,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "2-8-12",
-        "ticketKeys": [
-          "2-8-12",
-          "2-8-15",
-          "2-12-15"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "2",
+          "ticketKeys": [
+            "2"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "2-8-12-15-5 BOX",
+          "ticketKeys": [
+            "2-8",
+            "2-12",
+            "2-15",
+            "2-5",
+            "8-12",
+            "8-15",
+            "8-5",
+            "12-15",
+            "12-5",
+            "15-5"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "2-8-12-15-5 BOX",
+          "ticketKeys": [
+            "2-8-12",
+            "2-8-15",
+            "2-8-5",
+            "2-12-15",
+            "2-12-5",
+            "2-15-5",
+            "8-12-15",
+            "8-12-5",
+            "8-15-5",
+            "12-15-5"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -9841,22 +12801,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 3,
       "topPickFinish": 6,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "3-10-14",
-        "ticketKeys": [
-          "3-10-14",
-          "1-3-10",
-          "1-3-14"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "3",
+          "ticketKeys": [
+            "3"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "3-10-14-1-13 BOX",
+          "ticketKeys": [
+            "3-10",
+            "3-14",
+            "3-1",
+            "3-13",
+            "10-14",
+            "10-1",
+            "10-13",
+            "14-1",
+            "14-13",
+            "1-13"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "3-10-14-1-13 BOX",
+          "ticketKeys": [
+            "3-10-14",
+            "3-10-1",
+            "3-10-13",
+            "3-14-1",
+            "3-14-13",
+            "3-1-13",
+            "10-14-1",
+            "10-14-13",
+            "10-1-13",
+            "14-1-13"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -10005,24 +13017,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 4,
       "topPickFinish": 2,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "1-4-10",
-        "ticketKeys": [
-          "1-4-10",
-          "4-7-10",
-          "1-4-7"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 0,
-      "netYen": -300,
-      "recoveryRate": 0,
-      "hit": false,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "4",
+          "ticketKeys": [
+            "4"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "4-10-1-7-2 BOX",
+          "ticketKeys": [
+            "4-10",
+            "4-1",
+            "4-7",
+            "4-2",
+            "10-1",
+            "10-7",
+            "10-2",
+            "1-7",
+            "1-2",
+            "7-2"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 550,
+          "netYen": -450,
+          "recoveryRate": 0.55,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "4-10-1-7-2 BOX",
+          "ticketKeys": [
+            "4-10-1",
+            "4-10-7",
+            "4-10-2",
+            "4-1-7",
+            "4-1-2",
+            "4-7-2",
+            "10-1-7",
+            "10-1-2",
+            "10-7-2",
+            "1-7-2"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 550,
+      "netYen": -1550,
+      "recoveryRate": 0.2619047619047619,
+      "hit": true,
       "finishByHorseNumber": {
         "1": 10,
         "2": 12,
@@ -10165,22 +13229,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 5,
       "topPickFinish": 9,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "5-7-14",
-        "ticketKeys": [
-          "5-7-14",
-          "1-5-7",
-          "1-5-14"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "5",
+          "ticketKeys": [
+            "5"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "5-7-14-1-10 BOX",
+          "ticketKeys": [
+            "5-7",
+            "5-14",
+            "5-1",
+            "5-10",
+            "7-14",
+            "7-1",
+            "7-10",
+            "14-1",
+            "14-10",
+            "1-10"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "5-7-14-1-10 BOX",
+          "ticketKeys": [
+            "5-7-14",
+            "5-7-1",
+            "5-7-10",
+            "5-14-1",
+            "5-14-10",
+            "5-1-10",
+            "7-14-1",
+            "7-14-10",
+            "7-1-10",
+            "14-1-10"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -10329,22 +13445,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 1,
       "topPickFinish": 14,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "1-10-15",
-        "ticketKeys": [
-          "1-10-15",
-          "1-6-10",
-          "1-6-15"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "1",
+          "ticketKeys": [
+            "1"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "1-10-15-6-7 BOX",
+          "ticketKeys": [
+            "1-10",
+            "1-15",
+            "1-6",
+            "1-7",
+            "10-15",
+            "10-6",
+            "10-7",
+            "15-6",
+            "15-7",
+            "6-7"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "1-10-15-6-7 BOX",
+          "ticketKeys": [
+            "1-10-15",
+            "1-10-6",
+            "1-10-7",
+            "1-15-6",
+            "1-15-7",
+            "1-6-7",
+            "10-15-6",
+            "10-15-7",
+            "10-6-7",
+            "15-6-7"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -10492,24 +13660,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 10,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "3-8-10",
-        "ticketKeys": [
-          "3-8-10",
-          "1-8-10",
-          "1-3-10"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 0,
-      "netYen": -300,
-      "recoveryRate": 0,
-      "hit": false,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "10",
+          "ticketKeys": [
+            "10"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 980,
+          "netYen": 880,
+          "recoveryRate": 9.8,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "10-8-3-1-5 BOX",
+          "ticketKeys": [
+            "10-8",
+            "10-3",
+            "10-1",
+            "10-5",
+            "8-3",
+            "8-1",
+            "8-5",
+            "3-1",
+            "3-5",
+            "1-5"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 7480,
+          "netYen": 6480,
+          "recoveryRate": 7.48,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "10-8-3-1-5 BOX",
+          "ticketKeys": [
+            "10-8-3",
+            "10-8-1",
+            "10-8-5",
+            "10-3-1",
+            "10-3-5",
+            "10-1-5",
+            "8-3-1",
+            "8-3-5",
+            "8-1-5",
+            "3-1-5"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 5380,
+          "netYen": 4380,
+          "recoveryRate": 5.38,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 13840,
+      "netYen": 11740,
+      "recoveryRate": 6.59047619047619,
+      "hit": true,
       "finishByHorseNumber": {
         "1": 7,
         "2": 11,
@@ -10651,22 +13871,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 6,
       "topPickFinish": 6,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "1-5-6",
-        "ticketKeys": [
-          "1-5-6",
-          "4-5-6",
-          "1-4-6"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "6",
+          "ticketKeys": [
+            "6"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "6-5-1-4-9 BOX",
+          "ticketKeys": [
+            "6-5",
+            "6-1",
+            "6-4",
+            "6-9",
+            "5-1",
+            "5-4",
+            "5-9",
+            "1-4",
+            "1-9",
+            "4-9"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "6-5-1-4-9 BOX",
+          "ticketKeys": [
+            "6-5-1",
+            "6-5-4",
+            "6-5-9",
+            "6-1-4",
+            "6-1-9",
+            "6-4-9",
+            "5-1-4",
+            "5-1-9",
+            "5-4-9",
+            "1-4-9"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -10817,22 +14089,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 13,
       "topPickFinish": 12,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "1-13-16",
-        "ticketKeys": [
-          "1-13-16",
-          "1-7-13",
-          "7-13-16"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "13",
+          "ticketKeys": [
+            "13"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "13-1-16-7-14 BOX",
+          "ticketKeys": [
+            "13-1",
+            "13-16",
+            "13-7",
+            "13-14",
+            "1-16",
+            "1-7",
+            "1-14",
+            "16-7",
+            "16-14",
+            "7-14"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "13-1-16-7-14 BOX",
+          "ticketKeys": [
+            "13-1-16",
+            "13-1-7",
+            "13-1-14",
+            "13-16-7",
+            "13-16-14",
+            "13-7-14",
+            "1-16-7",
+            "1-16-14",
+            "1-7-14",
+            "16-7-14"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -10981,22 +14305,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 11,
       "topPickFinish": 3,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "1-11-14",
-        "ticketKeys": [
-          "1-11-14",
-          "3-11-14",
-          "1-3-11"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "11",
+          "ticketKeys": [
+            "11"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "11-14-1-3-12 BOX",
+          "ticketKeys": [
+            "11-14",
+            "11-1",
+            "11-3",
+            "11-12",
+            "14-1",
+            "14-3",
+            "14-12",
+            "1-3",
+            "1-12",
+            "3-12"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "11-14-1-3-12 BOX",
+          "ticketKeys": [
+            "11-14-1",
+            "11-14-3",
+            "11-14-12",
+            "11-1-3",
+            "11-1-12",
+            "11-3-12",
+            "14-1-3",
+            "14-1-12",
+            "14-3-12",
+            "1-3-12"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -11143,20 +14519,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 1,
       "topPickFinish": 6,
-      "ticket": {
-        "betType": "馬連",
-        "method": "1点",
-        "selection": "1-2",
-        "ticketKeys": [
-          "1-2"
-        ],
-        "points": 1,
-        "unitStakeYen": 100,
-        "investmentYen": 100
-      },
-      "investmentYen": 100,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "1",
+          "ticketKeys": [
+            "1"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "1-2-4-3-8 BOX",
+          "ticketKeys": [
+            "1-2",
+            "1-4",
+            "1-3",
+            "1-8",
+            "2-4",
+            "2-3",
+            "2-8",
+            "4-3",
+            "4-8",
+            "3-8"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "1-2-4-3-8 BOX",
+          "ticketKeys": [
+            "1-2-4",
+            "1-2-3",
+            "1-2-8",
+            "1-4-3",
+            "1-4-8",
+            "1-3-8",
+            "2-4-3",
+            "2-4-8",
+            "2-3-8",
+            "4-3-8"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -100,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -11297,22 +14727,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 10,
       "topPickFinish": 11,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "4-5-10",
-        "ticketKeys": [
-          "4-5-10",
-          "1-5-10",
-          "1-4-10"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "10",
+          "ticketKeys": [
+            "10"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "10-5-4-1-11 BOX",
+          "ticketKeys": [
+            "10-5",
+            "10-4",
+            "10-1",
+            "10-11",
+            "5-4",
+            "5-1",
+            "5-11",
+            "4-1",
+            "4-11",
+            "1-11"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "10-5-4-1-11 BOX",
+          "ticketKeys": [
+            "10-5-4",
+            "10-5-1",
+            "10-5-11",
+            "10-4-1",
+            "10-4-11",
+            "10-1-11",
+            "5-4-1",
+            "5-4-11",
+            "5-1-11",
+            "4-1-11"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -11459,22 +14941,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 13,
       "topPickFinish": 3,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "2-5-13",
-        "ticketKeys": [
-          "2-5-13",
-          "2-13-16",
-          "5-13-16"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "13",
+          "ticketKeys": [
+            "13"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "13-2-5-16-3 BOX",
+          "ticketKeys": [
+            "13-2",
+            "13-5",
+            "13-16",
+            "13-3",
+            "2-5",
+            "2-16",
+            "2-3",
+            "5-16",
+            "5-3",
+            "16-3"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "13-2-5-16-3 BOX",
+          "ticketKeys": [
+            "13-2-5",
+            "13-2-16",
+            "13-2-3",
+            "13-5-16",
+            "13-5-3",
+            "13-16-3",
+            "2-5-16",
+            "2-5-3",
+            "2-16-3",
+            "5-16-3"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -11624,24 +15158,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 12,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "6-9-12",
-        "ticketKeys": [
-          "6-9-12",
-          "9-12-13",
-          "6-12-13"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 0,
-      "netYen": -300,
-      "recoveryRate": 0,
-      "hit": false,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "12",
+          "ticketKeys": [
+            "12"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 5960,
+          "netYen": 5860,
+          "recoveryRate": 59.6,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "12-9-6-13-4 BOX",
+          "ticketKeys": [
+            "12-9",
+            "12-6",
+            "12-13",
+            "12-4",
+            "9-6",
+            "9-13",
+            "9-4",
+            "6-13",
+            "6-4",
+            "13-4"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "12-9-6-13-4 BOX",
+          "ticketKeys": [
+            "12-9-6",
+            "12-9-13",
+            "12-9-4",
+            "12-6-13",
+            "12-6-4",
+            "12-13-4",
+            "9-6-13",
+            "9-6-4",
+            "9-13-4",
+            "6-13-4"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 5960,
+      "netYen": 3860,
+      "recoveryRate": 2.8380952380952382,
+      "hit": true,
       "finishByHorseNumber": {
         "1": 4,
         "2": 12,
@@ -11786,22 +15372,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 3,
       "topPickFinish": 2,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "1-3-5",
-        "ticketKeys": [
-          "1-3-5",
-          "1-3-8",
-          "3-5-8"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "3",
+          "ticketKeys": [
+            "3"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "3-1-5-8-2 BOX",
+          "ticketKeys": [
+            "3-1",
+            "3-5",
+            "3-8",
+            "3-2",
+            "1-5",
+            "1-8",
+            "1-2",
+            "5-8",
+            "5-2",
+            "8-2"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "3-1-5-8-2 BOX",
+          "ticketKeys": [
+            "3-1-5",
+            "3-1-8",
+            "3-1-2",
+            "3-5-8",
+            "3-5-2",
+            "3-8-2",
+            "1-5-8",
+            "1-5-2",
+            "1-8-2",
+            "5-8-2"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -11942,22 +15580,74 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 13,
       "topPickFinish": 5,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "1-12-13",
-        "ticketKeys": [
-          "1-12-13",
-          "12-13-15",
-          "1-13-15"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "13",
+          "ticketKeys": [
+            "13"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "13-12-1-15-6 BOX",
+          "ticketKeys": [
+            "13-12",
+            "13-1",
+            "13-15",
+            "13-6",
+            "12-1",
+            "12-15",
+            "12-6",
+            "1-15",
+            "1-6",
+            "15-6"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "13-12-1-15-6 BOX",
+          "ticketKeys": [
+            "13-12-1",
+            "13-12-15",
+            "13-12-6",
+            "13-1-15",
+            "13-1-6",
+            "13-15-6",
+            "12-1-15",
+            "12-1-6",
+            "12-15-6",
+            "1-15-6"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
       "payoutYen": 0,
-      "netYen": -300,
+      "netYen": -2100,
       "recoveryRate": 0,
       "hit": false,
       "finishByHorseNumber": {
@@ -12106,24 +15796,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 6,
       "topPickFinish": 4,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "6-9-13",
-        "ticketKeys": [
-          "6-9-13",
-          "6-13-17",
-          "6-9-17"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 0,
-      "netYen": -300,
-      "recoveryRate": 0,
-      "hit": false,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "6",
+          "ticketKeys": [
+            "6"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 0,
+          "netYen": -100,
+          "recoveryRate": 0,
+          "hit": false
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "6-13-9-17-1 BOX",
+          "ticketKeys": [
+            "6-13",
+            "6-9",
+            "6-17",
+            "6-1",
+            "13-9",
+            "13-17",
+            "13-1",
+            "9-17",
+            "9-1",
+            "17-1"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 5650,
+          "netYen": 4650,
+          "recoveryRate": 5.65,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "6-13-9-17-1 BOX",
+          "ticketKeys": [
+            "6-13-9",
+            "6-13-17",
+            "6-13-1",
+            "6-9-17",
+            "6-9-1",
+            "6-17-1",
+            "13-9-17",
+            "13-9-1",
+            "13-17-1",
+            "9-17-1"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 0,
+          "netYen": -1000,
+          "recoveryRate": 0,
+          "hit": false
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 5650,
+      "netYen": 3550,
+      "recoveryRate": 2.6904761904761907,
+      "hit": true,
       "finishByHorseNumber": {
         "1": 1,
         "2": 9,
@@ -12272,24 +16014,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 7,
       "topPickFinish": 1,
-      "ticket": {
-        "betType": "3連複",
-        "method": "フォーメーション",
-        "selection": "4-5-7",
-        "ticketKeys": [
-          "4-5-7",
-          "3-4-7",
-          "3-5-7"
-        ],
-        "points": 3,
-        "unitStakeYen": 100,
-        "investmentYen": 300
-      },
-      "investmentYen": 300,
-      "payoutYen": 0,
-      "netYen": -300,
-      "recoveryRate": 0,
-      "hit": false,
+      "tickets": [
+        {
+          "betType": "単勝",
+          "method": "1点",
+          "selection": "7",
+          "ticketKeys": [
+            "7"
+          ],
+          "points": 1,
+          "unitStakeYen": 100,
+          "investmentYen": 100,
+          "payoutYen": 220,
+          "netYen": 120,
+          "recoveryRate": 2.2,
+          "hit": true
+        },
+        {
+          "betType": "馬連",
+          "method": "BOX",
+          "selection": "7-4-5-3-2 BOX",
+          "ticketKeys": [
+            "7-4",
+            "7-5",
+            "7-3",
+            "7-2",
+            "4-5",
+            "4-3",
+            "4-2",
+            "5-3",
+            "5-2",
+            "3-2"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 3570,
+          "netYen": 2570,
+          "recoveryRate": 3.57,
+          "hit": true
+        },
+        {
+          "betType": "3連複",
+          "method": "BOX",
+          "selection": "7-4-5-3-2 BOX",
+          "ticketKeys": [
+            "7-4-5",
+            "7-4-3",
+            "7-4-2",
+            "7-5-3",
+            "7-5-2",
+            "7-3-2",
+            "4-5-3",
+            "4-5-2",
+            "4-3-2",
+            "5-3-2"
+          ],
+          "points": 10,
+          "unitStakeYen": 100,
+          "investmentYen": 1000,
+          "payoutYen": 1170,
+          "netYen": 170,
+          "recoveryRate": 1.17,
+          "hit": true
+        }
+      ],
+      "investmentYen": 2100,
+      "payoutYen": 4960,
+      "netYen": 2860,
+      "recoveryRate": 2.361904761904762,
+      "hit": true,
       "finishByHorseNumber": {
         "1": 6,
         "2": 2,

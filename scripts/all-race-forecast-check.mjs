@@ -20,7 +20,11 @@ for (const row of races) {
   assert.ok(prediction, `${row.date} ${row.meetingName} ${row.race.no}R の予想がありません`);
   const tickets = policy.buildForecastTickets(prediction, 100);
   assert.deepEqual(tickets.map((ticket) => ticket.betType), policy.BET_TYPES);
-  assert.ok(tickets.every((ticket) => ticket.points >= 1 && ticket.points <= 5 && ticket.totalInvestmentYen === ticket.points * 100));
+  assert.deepEqual(tickets.map((ticket) => ticket.method), ["1点", "BOX", "BOX"]);
+  assert.ok(tickets.every((ticket) => ticket.points >= 1 && ticket.points <= 10 && ticket.totalInvestmentYen === ticket.points * 100));
+  assert.equal(tickets[0].points, 1);
+  assert.equal(tickets[1].points, Math.min(10, (prediction.marks.length * (prediction.marks.length - 1)) / 2));
+  assert.equal(tickets[2].points, Math.min(10, (prediction.marks.length * (prediction.marks.length - 1) * (prediction.marks.length - 2)) / 6));
   const volatility = policy.volatilityProfile({ race: row.race, prediction, consensus: { split: false }, candidates: [] });
   assert.ok(volatility.score >= 0 && volatility.score <= 100 && volatility.level >= 1 && volatility.level <= 5);
   assert.ok(policy.primaryForecastTicket(tickets, volatility));

@@ -14,7 +14,7 @@ const replayAudit = window.KEIBA_LIVE_REPLAY_AUDIT ?? { records: [], summary: nu
 const currentEdition = liveEdition.meetings?.length ? liveEdition : referenceMeetings;
 const results = [...(referenceResults.results ?? []), ...(liveEdition.results ?? [])];
 const predictions = dedupeBy([...referenceModel.predictions ?? [], ...liveModel.predictions ?? []], predictionKey);
-const SUPPORTED_BET_TYPES = Object.freeze(["単勝", "馬連", "3連複", "3連単"]);
+const SUPPORTED_BET_TYPES = Object.freeze(["単勝", "馬連", "3連複"]);
 const candidates = dedupeBy([...referenceModel.candidates ?? [], ...liveModel.candidates ?? []], candidateKey)
   .filter((row) => SUPPORTED_BET_TYPES.includes(row.betType));
 const auditRows = referenceAudit?.recommendations ?? referenceModel.logic?.referenceWeekExternalAudit?.recommendations ?? [];
@@ -176,7 +176,7 @@ function raceCardHtml(race, track) {
     <div class="race-card-body"><span class="race-card-pick"><span>総合本命</span><strong>${consensus.top ? `${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}` : "予想公開前"}</strong></span><span class="agreement">一致度 ${consensus.agreement}/5</span>
       <span class="race-card-marks"><span>総合印</span><strong>${marks.length ? marks.map((mark, index) => `${["◎", "○", "▲"][index]}${mark.horseNumber}`).join(" ") : "--"}</strong></span>
       <span class="race-card-index"><span>総合AI指数</span><strong>${indexSummary}</strong></span>
-      <span class="race-card-ticket"><span>AI予想買い目</span><strong>${top ? `${escapeHtml(top.betType)} ${escapeHtml(displayTicket(top.betType, top.ticketKeys?.[0] ?? top.selection, top))}・${unitStake}円` : "予想公開前"}</strong></span>
+      <span class="race-card-ticket"><span>AI共通買い目</span><strong>${commonBetSummary(prediction)}</strong></span>
       ${resultSummary ? `<span class="race-card-result"><span>確定結果</span><strong>${escapeHtml(resultSummary)}</strong></span>` : ""}
       ${volatilityMeterHtml(volatility, true)}</div>
   </button>`;
@@ -192,7 +192,7 @@ function renderHomeForecastBoard(track) {
   }).filter((row) => row.consensus.top).sort((left, right) => Number(right.consensus.top.index ?? 0) - Number(left.consensus.top.index ?? 0) || left.race.no - right.race.no).slice(0, 3);
   root.innerHTML = rows.length ? rows.map(({ race, consensus, top }) => {
     const marks = consensus.ranked.slice(0, 3).map((mark, index) => `${["◎", "○", "▲"][index]}${mark.horseNumber}`).join(" ");
-    return `<button type="button" class="home-forecast-card" data-home-race="${race.no}" aria-label="${race.no}レースのAI予想を詳しく見る"><header><span>${race.no}R ${escapeHtml(race.name)}</span><small>${escapeHtml(race.surface)}${number(race.distanceM)}m・${escapeHtml(race.start)}</small></header><div class="home-forecast-main"><div><span>総合本命</span><strong>${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}</strong><small class="home-forecast-marks">${marks}</small></div><div class="home-index-score"><span>総合AI指数</span><strong>${Number(consensus.top.index ?? 0).toFixed(1)}</strong><small>2番手差 +${Math.max(0, Number(consensus.top.index ?? 0) - Number(consensus.ranked[1]?.index ?? 0)).toFixed(1)}</small></div></div><footer><span>AI予想買い目</span><strong>${top ? `${escapeHtml(top.betType)} ${escapeHtml(displayTicket(top.betType, top.ticketKeys?.[0] ?? top.selection, top))}・${unitStake}円` : "予想公開前"}</strong></footer></button>`;
+    return `<button type="button" class="home-forecast-card" data-home-race="${race.no}" aria-label="${race.no}レースのAI予想を詳しく見る"><header><span>${race.no}R ${escapeHtml(race.name)}</span><small>${escapeHtml(race.surface)}${number(race.distanceM)}m・${escapeHtml(race.start)}</small></header><div class="home-forecast-main"><div><span>総合本命</span><strong>${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}</strong><small class="home-forecast-marks">${marks}</small></div><div class="home-index-score"><span>総合AI指数</span><strong>${Number(consensus.top.index ?? 0).toFixed(1)}</strong><small>2番手差 +${Math.max(0, Number(consensus.top.index ?? 0) - Number(consensus.ranked[1]?.index ?? 0)).toFixed(1)}</small></div></div><footer><span>AI共通買い目</span><strong>${commonBetSummary(findPrediction(race.no, track))}</strong></footer></button>`;
   }).join("") : empty("この開催のAI予想は公開前です");
   root.querySelectorAll("button[data-home-race]").forEach((button) => button.addEventListener("click", () => openRace(Number(button.dataset.homeRace))));
 }
@@ -214,7 +214,7 @@ function renderNextRace(track) {
   const index = consensus.top ? consensusIndexSummary(consensus) : "--";
   const volatility = forecastPolicy.volatilityProfile({ race, prediction, consensus, candidates: readyCandidates(race.no, track) });
   const top = displayedTopTicket(race, track, prediction, consensus, volatility);
-  root.innerHTML = `<span class="time">次の発走 ${escapeHtml(race.start)}</span><strong>${escapeHtml(track.venueName)}${race.no}R ${escapeHtml(race.name)}</strong><small>${consensus.top ? `総合本命 ${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}・一致度 ${consensus.agreement}/5` : "予想公開前"}</small><div class="next-race-prediction"><span>総合AI指数 <b>${escapeHtml(index)}</b></span><span>${top ? `${escapeHtml(top.betType)} ${escapeHtml(displayTicket(top.betType, top.ticketKeys?.[0] ?? top.selection, top))}・${unitStake}円` : "予想公開前"}</span></div>`;
+  root.innerHTML = `<span class="time">次の発走 ${escapeHtml(race.start)}</span><strong>${escapeHtml(track.venueName)}${race.no}R ${escapeHtml(race.name)}</strong><small>${consensus.top ? `総合本命 ${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}・一致度 ${consensus.agreement}/5` : "予想公開前"}</small><div class="next-race-prediction"><span>総合AI指数 <b>${escapeHtml(index)}</b></span><span>${commonBetSummary(prediction)}</span></div>`;
 }
 
 function renderRaceWorkspace() {
@@ -253,17 +253,17 @@ function detailPanel(id, html) { return `<section class="detail-panel ${state.de
 function conclusionHtml(consensus, top, prediction, volatility) {
   const topMark = consensus.top;
   const expected = expectedReturn(top);
-  const ticket = top ? `${top.betType} ${displayTicket(top.betType, top.ticketKeys?.[0] ?? top.selection, top)}` : "";
-  const decision = top ? `${top.indexForecast ? "今回の指数予想" : "今回のEV評価"}：${ticket} を${unitStake}円で表示` : "今回の結論：予想公開前";
+  const ticket = commonBetSummary(prediction);
+  const decision = top ? `今回のAI共通買い目：${ticket}` : "今回の結論：予想公開前";
   const decisionReason = top
     ? top.indexForecast
-      ? `総合AI指数の◎○▲から組み立てた全レース共通の予想です。オッズ取得後に期待値評価を追加します。`
+      ? `総合印の上位5頭から、単勝・馬連BOX・3連複BOXを同じ条件で作る全レース共通の予想です。`
       : `総合本命は${topMark ? `${topMark.horseNumber}番 ${topMark.horseName}` : "予想公開前"}。5人中${consensus.agreement}人が上位評価しています。`
     : "予想データを確認しています。";
   return `<section class="decision-banner ${top ? "has-ticket" : "no-ticket"}"><span>まず見る結論</span><strong>${escapeHtml(decision)}</strong><p>${escapeHtml(decisionReason)}</p></section><div class="conclusion-grid"><section class="consensus-card"><div class="consensus-top"><div><span class="eyebrow">5人の合議結果</span><h3>${topMark ? `<span class="horse-number">${topMark.horseNumber}</span>${escapeHtml(topMark.horseName)}` : "発走前スナップショットなし"}</h3></div><span class="agreement">${consensus.split ? "意見割れ" : `一致 ${consensus.agreement}/5`}</span></div>
     <div class="consensus-picks"><div><span>総合本命</span><strong>${markLabel(consensus.ranked[0], "◎")}</strong></div><div><span>対抗</span><strong>${markLabel(consensus.ranked[1], "○")}</strong></div><div><span>穴候補</span><strong>${markLabel(consensus.value, "☆")}</strong></div></div>
     <p class="plain-explanation">${prediction ? escapeHtml(prediction.comment ?? "各AIの評価点と信頼度を加重して総合判断しています。") : "保存済みのAI予想がありません。予測生成後に5人の評価を統合します。"}</p></section>
-    <section class="recommend-card"><span>${top?.indexForecast ? "総合AI指数の予想買い目" : "AI予想買い目"}</span><h3>${top ? `${escapeHtml(top.betType)} ${escapeHtml(displayTicket(top.betType, top.ticketKeys?.[0] ?? top.selection, top))}` : "予想公開前"}</h3><p>${top ? `${escapeHtml(top.method ?? "1点")}・1点${unitStake}円。${escapeHtml(top.comment ?? "5人のAI合議から組み立てた予想買い目です。")}` : "予想データを確認しています。"}</p>
+    <section class="recommend-card"><span>AI共通買い目</span><h3>${ticket}</h3><p>${top ? "総合印の上位5頭と連動。単勝100円、馬連BOX、3連複BOXを同じ条件で表示します。" : "予想データを確認しています。"}</p>
     ${volatilityMeterHtml(volatility)}<div class="recommend-metrics"><div class="metric"><span>${unitStake}円あたり期待払戻</span><strong>${top?.indexForecast ? "オッズ取得後に算出" : expected == null ? "推定対象外" : yen(Math.round(unitStake * expected))}</strong></div><div class="metric"><span>AI推定的中率</span><strong>${top?.indexForecast ? "指数予想" : top?.abilityProbability == null ? "推定対象外" : percent(top.abilityProbability)}</strong></div><div class="metric"><span>買い目区分</span><strong>${top?.indexForecast ? "全レース指数予想" : top?.referenceEstimate ? "参考推定" : recommendationDecision(top)}</strong></div><div class="metric"><span>1点金額</span><strong>${yen(unitStake)}</strong></div></div></section></div>
     <p class="plain-explanation">期待払戻は、締切前オッズを取得できた買い目だけで計算します。指数予想は全レースで表示します。</p>`;
 }
@@ -296,36 +296,17 @@ function agentPersona(definition) {
 
 function betsHtml(raceNo, track, top) {
   const prediction = findPrediction(raceNo, track);
-  const agentRows = agentRecommendationRows(prediction);
-  const realRows = readyCandidates(raceNo, track).filter((row) => row.recommendationEligible === true);
-  const indexRows = forecastTicketRows(prediction);
-  const raceCandidates = [...agentRows, ...realRows];
-  if (!raceCandidates.length) {
-    if (!indexRows.length) return empty("予想データを確認しています。");
-    return betCardsHtml(indexRows, "総合AI指数の予想買い目", "指数予想");
-  }
-  return betCardsHtml(raceCandidates, "AI推奨買い目", "発走前保存");
+  const tickets = forecastTicketRows(prediction);
+  if (!tickets.length) return empty("予想データを確認しています。");
+  return unifiedBetCardsHtml(tickets);
 }
-function betCardsHtml(raceCandidates, title, badge) {
-  const cards = BET_TYPES.map((type) => betCardHtml(type, raceCandidates.filter((row) => row.betType === type))).filter(Boolean).join("");
-  return `<div class="bet-section-head"><div><h3>${title}</h3><p>単勝・馬連・3連複・3連単のみ。すべて1点${unitStake}円、BOX・フォーメーションは最大5点です。</p></div><span class="status-badge ready">${badge}</span></div><div class="bet-card-list">${cards}</div>`;
-}
-
-function betCardHtml(type, rows) {
-  if (!rows.length) return "";
-  const tickets = [];
-  for (const row of [...rows].sort((a, b) => (expectedReturn(b) ?? 0) - (expectedReturn(a) ?? 0))) {
-    const keys = row.ticketKeys?.length ? row.ticketKeys : [row.selection];
-    for (const key of keys) {
-      const display = displayTicket(type, key, row);
-      if (!tickets.some((ticket) => ticket.display === display)) tickets.push({ display, row });
-      if (tickets.length === 5) break;
-    }
-    if (tickets.length === 5) break;
-  }
-  const copyText = `${type}\n${tickets.map((ticket, index) => `${index + 1}. ${ticket.display} ${unitStake}円`).join("\n")}\n合計${tickets.length * unitStake}円`;
-  const referenceEstimate = rows.some((row) => row.referenceEstimate);
-  return `<article class="bet-card"><header><h4>${escapeHtml(type)}</h4><span class="status-badge ready">${tickets.length}点${referenceEstimate ? "・参考推定" : ""}</span></header><ol>${tickets.map((ticket) => `<li><span class="bet-line"><strong>${escapeHtml(ticket.display)}</strong><span>${unitStake}円</span></span><small>${ticket.row.indexForecast ? "総合AI指数からの予想" : `期待回収 ${yen(Math.round(unitStake * (expectedReturn(ticket.row) ?? 0)))}・${escapeHtml(ticket.row.agentName ?? "総合")}`}</small></li>`).join("")}</ol><footer><strong>合計 ${yen(tickets.length * unitStake)}</strong><button type="button" class="copy-button" data-copy="${escapeHtml(copyText)}">買い目をコピー</button></footer></article>`;
+function unifiedBetCardsHtml(tickets) {
+  const cards = tickets.map((ticket) => {
+    const copyText = `${ticket.betType} ${ticket.method}\n${ticket.selection}\n${ticket.points}点 x ${unitStake}円\n合計${ticket.totalInvestmentYen}円`;
+    return `<article class="bet-card"><header><h4>${escapeHtml(ticket.betType)} ${escapeHtml(ticket.method)}</h4><span class="status-badge ready">${ticket.points}点</span></header><div class="bet-line"><strong>${escapeHtml(ticket.selection)}</strong><span>各${unitStake}円</span></div><p class="plain-explanation">${escapeHtml(ticket.comment)}</p><footer><strong>合計 ${yen(ticket.totalInvestmentYen)}</strong><button type="button" class="copy-button" data-copy="${escapeHtml(copyText)}">買い目をコピー</button></footer></article>`;
+  }).join("");
+  const total = tickets.reduce((sum, ticket) => sum + ticket.totalInvestmentYen, 0);
+  return `<div class="bet-section-head"><div><h3>AI共通買い目</h3><p>総合印の上位5頭と連動。単勝100円、馬連BOX、3連複BOXの3パターンだけを全画面で同じ条件で表示します。</p></div><span class="status-badge ready">3パターン・合計${yen(total)}</span></div><div class="bet-card-list">${cards}</div>`;
 }
 
 function runnersHtml(result, prediction) {
@@ -347,7 +328,7 @@ function comparisonHtml(race, track, prediction, result) {
     ${!published && replay ? `<p class="plain-explanation">${replay.sourceClassification === "pre_race_timestamp_only" ? "公開時刻は残っていますが、本番用の不変スナップショットが保存されていません。" : "レース後の特徴量で再現された予想です。"} 指数予想の買い目とJRA公式払戻は照合済みですが、本番成績・AI学習には含めません。</p>` : ""}
     <div class="finish-podium">${[0, 1, 2].map((index) => `<div><span>${index + 1}着</span><strong>${podium[index] ? `${podium[index].horseNumber}番 ${escapeHtml(podium[index].horseName)}` : "結果待ち"}</strong></div>`).join("")}</div>
     <div class="result-finance"><div class="metric"><span>購入額</span><strong>${audit ? yen(audit.investmentYen) : "対象なし"}</strong></div><div class="metric"><span>払戻額</span><strong>${audit ? yen(audit.payoutYen) : "対象なし"}</strong></div><div class="metric"><span>収支</span><strong class="${audit?.netYen >= 0 ? "positive" : "negative"}">${audit ? signedYen(audit.netYen) : "対象なし"}</strong></div><div class="metric"><span>回収率</span><strong>${audit ? percent(audit.recoveryRate ?? audit.payoutYen / audit.investmentYen) : "対象なし"}</strong></div></div>
-    ${audit?.ticket ? `<p class="plain-explanation">照合買い目：${escapeHtml(audit.ticket.betType)} ${escapeHtml(audit.ticket.selection)}・${audit.ticket.points}点 ${yen(audit.investmentYen)}。${audit.hit ? "的中" : "不的中"}。</p>` : ""}
+    ${audit?.tickets?.length ? `<div class="bet-card-list" style="margin-top:10px">${audit.tickets.map((ticket) => `<article class="bet-card"><header><h4>${escapeHtml(ticket.betType)} ${escapeHtml(ticket.method)}</h4><span class="hit-badge ${ticket.hit ? "hit" : "miss"}">${ticket.hit ? "✓ 的中" : "× 不的中"}</span></header><div class="bet-line"><strong>${escapeHtml(ticket.selection)}</strong><span>${ticket.points}点</span></div><footer><strong>購入 ${yen(ticket.investmentYen)} / 払戻 ${yen(ticket.payoutYen)}</strong><strong class="${ticket.netYen >= 0 ? "positive" : "negative"}">${signedYen(ticket.netYen)}</strong></footer></article>`).join("")}</div>` : ""}
     ${isFinalResult(result) ? `<div class="agent-grid" style="margin-top:10px">${AGENTS.map((agent) => agentCardHtml(agent, normalizedAgents(prediction).get(agent.id), result, prediction?.predictionContext)).join("")}</div>` : `<p class="plain-explanation">結果確定後に、各AIの印と推奨買い目を照合します。</p>`}`;
 }
 
@@ -380,9 +361,9 @@ function resultListCard(result) {
   const consensus = buildConsensus(prediction);
   const verified = replay?.eligibleForActualPerformance === true;
   const audit = replay;
-  const ticket = audit?.ticket ?? audit;
   const sourceLabel = verified ? "本番精算済み" : replay?.sourceClassification === "pre_race_timestamp_only" ? "公開時刻記録・本番対象外" : "後日再現・本番対象外";
-  return `<button type="button" class="result-card" data-result-race="${escapeHtml(resultIdentity(result))}"><div><h3>${escapeHtml(result.meetingName)} ${result.raceNo}R ${escapeHtml(result.raceTitle)}</h3><p>${formatDate(resultDate(result))}・${prediction ? `総合本命 ${consensus.top?.horseNumber ?? "--"}番（${sourceLabel}）` : "予想スナップショットなし"}</p></div><div class="result-stat"><span>AI買い目</span><strong>${ticket ? `${escapeHtml(ticket.betType)} ${escapeHtml(ticket.selection)}` : "対象なし"}</strong></div><div class="result-stat"><span>購入</span><strong>${audit ? yen(audit.investmentYen) : "--"}</strong></div><div class="result-stat"><span>払戻</span><strong>${audit ? yen(audit.payoutYen) : "--"}</strong></div>${audit ? `<span class="hit-badge ${audit.hit ? "hit" : "miss"}">${audit.hit ? "✓ 的中" : "× 不的中"}</span>` : `<span class="status-badge ${verified ? "closed" : "waiting"}">${verified ? "履歴なし" : "照合待ち"}</span>`}</button>`;
+  const ticketSummary = audit?.tickets?.map((ticket) => `${ticket.betType}${ticket.hit ? "✓" : "×"}`).join(" / ") ?? "対象なし";
+  return `<button type="button" class="result-card" data-result-race="${escapeHtml(resultIdentity(result))}"><div><h3>${escapeHtml(result.meetingName)} ${result.raceNo}R ${escapeHtml(result.raceTitle)}</h3><p>${formatDate(resultDate(result))}・${prediction ? `総合本命 ${consensus.top?.horseNumber ?? "--"}番（${sourceLabel}）` : "予想スナップショットなし"}</p></div><div class="result-stat"><span>AI共通買い目</span><strong>${escapeHtml(ticketSummary)}</strong></div><div class="result-stat"><span>購入</span><strong>${audit ? yen(audit.investmentYen) : "--"}</strong></div><div class="result-stat"><span>払戻</span><strong>${audit ? yen(audit.payoutYen) : "--"}</strong></div>${audit ? `<span class="hit-badge ${audit.hit ? "hit" : "miss"}">${audit.hit ? "✓ 一部以上的中" : "× 全て不的中"}</span>` : `<span class="status-badge ${verified ? "closed" : "waiting"}">${verified ? "履歴なし" : "照合待ち"}</span>`}</button>`;
 }
 
 function renderPerformancePage() {
@@ -390,7 +371,7 @@ function renderPerformancePage() {
   const rows = performanceReports(state.performancePeriod);
   const allRace = liveReplaySummary();
   const actualCount = savedPerformance.records.length;
-  document.querySelector("#all-race-audit").innerHTML = allRace ? `<article class="all-race-audit"><header><div><span class="eyebrow">確定結果との全件照合</span><h2>後日再現の買い目・払戻結果</h2><p>${allRace.races}件の確定レースについて、画面表示の総合AI指数買い目とJRA公式払戻を100円単位で照合しています。</p></div><span class="status-badge waiting">本番成績には含めない</span></header><div class="all-race-metrics"><div><span>購入額</span><strong>${yen(allRace.investmentYen)}</strong></div><div><span>払戻額</span><strong>${yen(allRace.payoutYen)}</strong></div><div><span>収支</span><strong class="${allRace.netYen >= 0 ? "positive" : "negative"}">${signedYen(allRace.netYen)}</strong></div><div><span>回収率</span><strong>${percent(allRace.recoveryRate)}</strong></div><div><span>的中レース</span><strong>${allRace.hits} / ${allRace.races}</strong></div></div><footer>うち${replayAudit.coverage?.replayOnly ?? 0}件はレース後の再現予想です。本番成績は発走前に保存・ロック・精算された${actualCount}件だけを集計します。</footer></article>` : empty("確定結果との照合データを読み込んでいます");
+  document.querySelector("#all-race-audit").innerHTML = allRace ? `<article class="all-race-audit"><header><div><span class="eyebrow">確定結果との全件照合</span><h2>AI共通3パターンの買い目・払戻結果</h2><p>${allRace.races}件の確定レースについて、単勝100円・馬連BOX・3連複BOXの全3パターンとJRA公式払戻を100円単位で照合しています。</p></div><span class="status-badge waiting">本番成績には含めない</span></header><div class="all-race-metrics"><div><span>3パターン購入額</span><strong>${yen(allRace.investmentYen)}</strong></div><div><span>払戻額</span><strong>${yen(allRace.payoutYen)}</strong></div><div><span>収支</span><strong class="${allRace.netYen >= 0 ? "positive" : "negative"}">${signedYen(allRace.netYen)}</strong></div><div><span>回収率</span><strong>${percent(allRace.recoveryRate)}</strong></div><div><span>一部以上的中</span><strong>${allRace.hits} / ${allRace.races}</strong></div></div><footer>うち${replayAudit.coverage?.replayOnly ?? 0}件はレース後の再現予想です。本番成績は発走前に保存・ロック・精算された${actualCount}件だけを集計します。</footer></article>` : empty("確定結果との照合データを読み込んでいます");
   document.querySelector("#performance-summary").innerHTML = `<p class="plain-explanation">本番成績は、予想公開後に上書きできない発走前スナップショットのみを対象にします。現在の確定・精算済み本番記録は${actualCount}件です。</p>${rows.map((row) => `<article class="performance-card"><header><h2>${escapeHtml(row.name)}</h2><span class="status-badge ${row.races ? "ready" : "waiting"}">${row.races ? `${row.races}R・本番` : "本番実績なし"}</span></header><div class="performance-main"><span>◎の1着率</span><strong>${row.races ? percent(row.winHits / row.races) : "--"}</strong></div><div class="performance-metrics"><div class="metric"><span>◎の複勝率</span><strong>${row.races ? percent(row.placeHits / row.races) : "--"}</strong></div><div class="metric"><span>印内決着率</span><strong>${row.races ? percent(row.markFinish / row.races) : "--"}</strong></div><div class="metric"><span>購入額</span><strong>${row.races ? yen(row.investment) : "未集計"}</strong></div><div class="metric"><span>回収率</span><strong>${row.investment ? percent(row.payout / row.investment) : "未集計"}</strong></div></div></article>`).join("")}`;
 }
 
@@ -484,18 +465,20 @@ function readyCandidates(raceNo = state.raceNo, track = selectedTrack()) {
 }
 function topCandidate(raceNo = state.raceNo, track = selectedTrack()) { return readyCandidates(raceNo, track).sort((a, b) => (expectedReturn(b) ?? 0) - (expectedReturn(a) ?? 0))[0] ?? null; }
 function displayedTopTicket(race, track, prediction, consensus, volatility) {
-  return agentRecommendationRows(prediction).sort((a, b) => (expectedReturn(b) ?? 0) - (expectedReturn(a) ?? 0))[0]
-    ?? readyCandidates(race.no, track).filter((row) => row.recommendationEligible === true)
-      .sort((a, b) => (expectedReturn(b) ?? 0) - (expectedReturn(a) ?? 0))[0]
-    ?? forecastPolicy.primaryForecastTicket(forecastTicketRows(prediction), volatility)
-    ?? null;
+  return forecastPolicy.primaryForecastTicket(forecastTicketRows(prediction)) ?? null;
 }
 function forecastTicketRows(prediction) {
   return (forecastPolicy.buildForecastTickets?.(prediction, unitStake) ?? []).map((row) => ({
     ...row,
     indexForecast: true,
-    comment: "総合AI指数の◎○▲から組み立てた予想です。締切前オッズの取得後に期待値を算出します。",
+    comment: "総合印の上位5頭と連動したAI共通買い目です。期待値評価とは切り分けて、全レースで同じ3パターンを表示します。",
   }));
+}
+function commonBetSummary(prediction) {
+  const tickets = forecastTicketRows(prediction);
+  if (tickets.length !== 3) return "予想公開前";
+  const total = tickets.reduce((sum, ticket) => sum + ticket.totalInvestmentYen, 0);
+  return `単勝100円 + 馬連BOX + 3連複BOX・合計${yen(total)}`;
 }
 function agentRecommendationRows(prediction) {
   const labels = { win: "単勝", quinella: "馬連", trio: "3連複", trifecta: "3連単" };

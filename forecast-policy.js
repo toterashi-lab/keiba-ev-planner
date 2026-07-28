@@ -3,30 +3,30 @@
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   root.KEIBA_FORECAST_POLICY = api;
 }(typeof window !== "undefined" ? window : globalThis, () => {
-  const BET_TYPES = ["単勝", "馬連", "3連複", "3連単"];
+  const BET_TYPES = ["単勝", "馬連", "3連複"];
 
   function buildForecastTickets(prediction, unitStakeYen = 100) {
     const marks = uniqueMarks(prediction?.marks ?? []);
-    if (marks.length < 3) return [];
-    const [first, second, third, fourth = third] = marks.map((row) => Number(row.horseNumber));
+    if (!marks.length) return [];
+    const numbers = marks.slice(0, 5).map((row) => Number(row.horseNumber));
+    const [first] = numbers;
     const definitions = [
-      ["単勝", [[first]]],
-      ["馬連", [[first, second]]],
-      ["3連複", uniqueKeys([[first, second, third], [first, second, fourth], [first, third, fourth]], false)],
-      ["3連単", uniqueKeys([[first, second, third], [first, third, second], [second, first, third], [second, third, first], [third, first, second]], true)],
-    ];
-    return definitions.map(([betType, selections]) => ({
+      ["単勝", [first], [[first]]],
+      ["馬連", numbers, combinations(numbers, 2)],
+      ["3連複", numbers, combinations(numbers, 3)],
+    ].filter(([, , selections]) => selections.length);
+    return definitions.map(([betType, horses, selections]) => ({
       betType,
-      method: selections.length > 1 ? "フォーメーション" : "1点",
-      selection: ticketKey(selections[0]),
-      ticketKeys: selections.slice(0, 5).map(ticketKey),
-      points: Math.min(5, selections.length),
-      totalInvestmentYen: Math.min(5, selections.length) * unitStakeYen,
+      method: betType === "単勝" ? "1点" : "BOX",
+      selection: betType === "単勝" ? ticketKey(selections[0]) : `${horses.join("-")} BOX`,
+      ticketKeys: selections.map(ticketKey),
+      points: selections.length,
+      totalInvestmentYen: selections.length * unitStakeYen,
       status: "forecast",
       forecastOnly: true,
       recommendationEligible: false,
       calculationMode: "ability_forecast_without_market_ev",
-      comment: "5人のAI合議順位から組み立てた予想買い目。オッズ未取得時は期待値判定に使用しません。",
+      comment: betType === "単勝" ? "総合◎を100円で購入する共通予想です。" : `総合印の上位${horses.length}頭による${betType}BOXです。各点100円で購入します。`,
     }));
   }
 
@@ -61,25 +61,22 @@
     return { score, level, label: labels[level - 1], factors, favoriteProbability: favorite, disagreement, fieldSize };
   }
 
-  function primaryForecastTicket(tickets, volatility) {
-    const preferred = volatility.level <= 2 ? "単勝" : volatility.level === 3 ? "馬連" : "3連複";
-    return tickets.find((row) => row.betType === preferred) ?? tickets[0] ?? null;
+  function primaryForecastTicket(tickets) {
+    return tickets.find((row) => row.betType === "単勝") ?? tickets[0] ?? null;
   }
 
   function uniqueMarks(rows) {
     return [...new Map(rows.filter((row) => Number(row.horseNumber) > 0).map((row) => [Number(row.horseNumber), row])).values()];
   }
-  function uniqueKeys(selections, ordered) {
-    const seen = new Set();
-    return selections.filter((selection) => {
-      const normalized = ordered ? selection : [...selection].sort((a, b) => a - b);
-      if (new Set(normalized).size !== normalized.length) return false;
-      const key = ticketKey(normalized);
-      if (seen.has(key)) return false;
-      seen.add(key);
-      selection.splice(0, selection.length, ...normalized);
-      return true;
-    });
+  function combinations(values, size) {
+    if (values.length < size) return [];
+    const output = [];
+    const visit = (start, selected) => {
+      if (selected.length === size) { output.push([...selected]); return; }
+      for (let index = start; index <= values.length - (size - selected.length); index += 1) visit(index + 1, [...selected, values[index]]);
+    };
+    visit(0, []);
+    return output;
   }
   function ticketKey(selection) { return selection.join("-"); }
   function fieldSizeFromComment(comment) { return Number(String(comment ?? "").match(/全(\d+)頭/)?.[1]) || 0; }

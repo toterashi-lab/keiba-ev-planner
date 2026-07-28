@@ -27,7 +27,7 @@ const output = {
   coverage: {
     confirmedResults: completedResults.length,
     matchedPredictions: records.filter((record) => record.predictionFound).length,
-    evaluatedTickets: records.filter((record) => record.ticket).length,
+    evaluatedTickets: records.filter((record) => record.tickets?.length === 3).length,
     preRaceTimestamped: records.filter((record) => record.sourceClassification === "pre_race_timestamp_only").length,
     replayOnly: records.filter((record) => record.sourceClassification === "as_of_replay").length,
     immutableSnapshots: records.filter((record) => record.eligibleForActualPerformance).length,
@@ -50,10 +50,16 @@ function loadInputs() {
 }
 
 function evaluateResult(result, prediction) {
-  const ticket = prediction ? buildPrimaryTicket(prediction, result) : null;
+  const tickets = prediction ? buildTickets(prediction, result) : [];
   const payoutByKey = new Map((result.refunds ?? []).map((refund) => [`${refund.betType}|${canonical(refund.selection, refund.betType)}`, Number(refund.payoutYen) || 0]));
-  const payoutYen = ticket ? ticket.ticketKeys.reduce((total, key) => total + (payoutByKey.get(`${ticket.betType}|${canonical(key, ticket.betType)}`) ?? 0), 0) : null;
-  const investmentYen = ticket?.totalInvestmentYen ?? null;
+  const settledTickets = tickets.map((ticket) => {
+    const payoutYen = ticket.ticketKeys.reduce((total, key) => total + (payoutByKey.get(`${ticket.betType}|${canonical(key, ticket.betType)}`) ?? 0), 0);
+    return { betType: ticket.betType, method: ticket.method, selection: ticket.selection, ticketKeys: ticket.ticketKeys,
+      points: ticket.points, unitStakeYen: 100, investmentYen: ticket.totalInvestmentYen, payoutYen,
+      netYen: payoutYen - ticket.totalInvestmentYen, recoveryRate: ticket.totalInvestmentYen ? payoutYen / ticket.totalInvestmentYen : null, hit: payoutYen > 0 };
+  });
+  const investmentYen = settledTickets.length ? settledTickets.reduce((total, ticket) => total + ticket.investmentYen, 0) : null;
+  const payoutYen = settledTickets.length ? settledTickets.reduce((total, ticket) => total + ticket.payoutYen, 0) : null;
   const finishByHorseNumber = Object.fromEntries((result.runners ?? []).map((runner) => [runner.horseNumber, Number(runner.finishPosition) || null]));
   return {
     raceId: result.raceId,
@@ -70,15 +76,7 @@ function evaluateResult(result, prediction) {
     marks: prediction?.marks ?? [],
     topPick: prediction?.marks?.[0]?.horseNumber ?? null,
     topPickFinish: finishByHorseNumber[prediction?.marks?.[0]?.horseNumber] ?? null,
-    ticket: ticket ? {
-      betType: ticket.betType,
-      method: ticket.method,
-      selection: ticket.selection,
-      ticketKeys: ticket.ticketKeys,
-      points: ticket.points,
-      unitStakeYen: 100,
-      investmentYen,
-    } : null,
+    tickets: settledTickets,
     investmentYen,
     payoutYen,
     netYen: investmentYen == null || payoutYen == null ? null : payoutYen - investmentYen,
@@ -89,12 +87,12 @@ function evaluateResult(result, prediction) {
   };
 }
 
-function buildPrimaryTicket(prediction, result) {
+function buildTickets(prediction, result) {
   const tickets = policy.buildForecastTickets(prediction, 100);
   const volatility = policy.volatilityProfile({
     race: { fieldSize: result.runners?.length ?? 0 }, prediction, consensus: { split: false }, candidates: [],
   });
-  return policy.primaryForecastTicket(tickets, volatility);
+  return tickets;
 }
 
 function agentResults(panels, finishByHorseNumber) {
@@ -119,7 +117,7 @@ function agentResults(panels, finishByHorseNumber) {
 }
 
 function summarize(rows) {
-  const evaluated = rows.filter((row) => row.ticket && row.investmentYen != null && row.payoutYen != null);
+  const evaluated = rows.filter((row) => row.tickets?.length === 3 && row.investmentYen != null && row.payoutYen != null);
   const investmentYen = evaluated.reduce((total, row) => total + row.investmentYen, 0);
   const payoutYen = evaluated.reduce((total, row) => total + row.payoutYen, 0);
   return {
