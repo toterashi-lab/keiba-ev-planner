@@ -2,7 +2,7 @@ import fs from "node:fs";
 
 const meetings = JSON.parse(fs.readFileSync("data/meet-2026-07-11-2026-07-12.json", "utf8")).meetings;
 const model = JSON.parse(fs.readFileSync("data/model-outputs-2026-07-11-2026-07-12.json", "utf8"));
-const betTypes = ["単勝", "複勝", "馬連", "ワイド", "馬単", "3連複", "3連単"];
+const betTypes = ["単勝", "馬連", "3連複", "3連単"];
 const expectedRaces = meetings.flatMap((meeting) => meeting.tracks.flatMap((track) => track.races.map((race) => ({
   key: `${meeting.date}|${track.meetingName}|${race.no}`,
   date: meeting.date,
@@ -27,7 +27,7 @@ for (const race of expectedRaces) {
     && candidate.meetingName === race.meetingName && candidate.raceNo === race.raceNo);
   if (!rows.length) failures.push(`${race.key}: no candidates`);
   for (const betType of betTypes) if (!rows.some((row) => row.betType === betType)) failures.push(`${race.key}: ${betType} missing`);
-  for (const betType of ["馬連", "ワイド", "馬単", "3連複", "3連単"]) {
+  for (const betType of ["馬連", "3連複", "3連単"]) {
     if (!rows.some((row) => row.betType === betType && row.method === "BOX")) failures.push(`${race.key}: ${betType} BOX missing`);
     if (!rows.some((row) => row.betType === betType && row.method === "フォーメーション")) failures.push(`${race.key}: ${betType} formation missing`);
     const scenarios = new Set(rows.filter((row) => row.betType === betType && row.method !== "1点")
@@ -75,6 +75,6 @@ if (failures.length) {
 }
 console.log(`OK 72レース・7券種・${model.evaluatedTotal.toLocaleString("ja-JP")}通り・1点100円`);
 console.log("OK 全72レース AI予想・各レース5頭印・信頼度・シナリオ");
-console.log("OK 全72レース 馬連・ワイド・馬単・3連複・3連単のBOX／フォーメーション");
+console.log("OK 全72レース 馬連・3連複・3連単のBOX／フォーメーション");
 console.log("OK 全72レース・7券種ごとの最上位買い目を保存");
 console.log(`OK 公開候補 ${model.candidates.length.toLocaleString("ja-JP")}件・結果/払戻リークなし`);

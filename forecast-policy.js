@@ -3,7 +3,7 @@
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   root.KEIBA_FORECAST_POLICY = api;
 }(typeof window !== "undefined" ? window : globalThis, () => {
-  const BET_TYPES = ["単勝", "複勝", "馬連", "ワイド", "3連複", "3連単"];
+  const BET_TYPES = ["単勝", "馬連", "3連複", "3連単"];
 
   function buildForecastTickets(prediction, unitStakeYen = 100) {
     const marks = uniqueMarks(prediction?.marks ?? []);
@@ -11,9 +11,7 @@
     const [first, second, third, fourth = third] = marks.map((row) => Number(row.horseNumber));
     const definitions = [
       ["単勝", [[first]]],
-      ["複勝", [[first]]],
       ["馬連", [[first, second]]],
-      ["ワイド", [[first, second], [first, third]]],
       ["3連複", uniqueKeys([[first, second, third], [first, second, fourth], [first, third, fourth]], false)],
       ["3連単", uniqueKeys([[first, second, third], [first, third, second], [second, first, third], [second, third, first], [third, first, second]], true)],
     ];
@@ -64,7 +62,7 @@
   }
 
   function primaryForecastTicket(tickets, volatility) {
-    const preferred = volatility.level <= 2 ? "単勝" : volatility.level === 3 ? "ワイド" : "3連複";
+    const preferred = volatility.level <= 2 ? "単勝" : volatility.level === 3 ? "馬連" : "3連複";
     return tickets.find((row) => row.betType === preferred) ?? tickets[0] ?? null;
   }
 

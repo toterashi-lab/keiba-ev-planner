@@ -78,7 +78,7 @@ function snapshotPayload(prediction, candidates, publishedAt) {
       marks: row?.marks ?? [], opinion: row?.opinion ?? "必要データ待ち" };
   });
   const tickets = [];
-  for (const betType of ["単勝", "複勝", "馬連", "ワイド", "3連複", "3連単"]) {
+  for (const betType of ["単勝", "馬連", "3連複", "3連単"]) {
     const rows = candidates.filter((row) => row.betType === betType).sort((a, b) => adoptedReturn(b) - adoptedReturn(a)).slice(0, 5);
     rows.forEach((row, index) => tickets.push({ rank: index + 1, betType, method: row.method ?? "1点", selection: row.selection,
       ticketKeys: (row.componentSelectionKeys ?? row.ticketKeys ?? [row.selection]).slice(0, 5), points: Math.min(5, row.points ?? 1),

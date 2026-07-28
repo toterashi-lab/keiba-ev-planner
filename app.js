@@ -13,7 +13,9 @@ const savedPerformance = window.KEIBA_AGENT_PERFORMANCE ?? { records: [] };
 const currentEdition = liveEdition.meetings?.length ? liveEdition : referenceMeetings;
 const results = [...(referenceResults.results ?? []), ...(liveEdition.results ?? [])];
 const predictions = dedupeBy([...referenceModel.predictions ?? [], ...liveModel.predictions ?? []], predictionKey);
-const candidates = dedupeBy([...referenceModel.candidates ?? [], ...liveModel.candidates ?? []], candidateKey);
+const SUPPORTED_BET_TYPES = Object.freeze(["単勝", "馬連", "3連複", "3連単"]);
+const candidates = dedupeBy([...referenceModel.candidates ?? [], ...liveModel.candidates ?? []], candidateKey)
+  .filter((row) => SUPPORTED_BET_TYPES.includes(row.betType));
 const auditRows = referenceAudit?.recommendations ?? referenceModel.logic?.referenceWeekExternalAudit?.recommendations ?? [];
 const unitStake = Number(liveModel.unitStakeYen ?? referenceModel.unitStakeYen ?? ticketEngine?.UNIT_STAKE ?? 100);
 
@@ -32,7 +34,7 @@ const AGENT_PERSONAS = Object.freeze({
   contrarian: { name: "逆張り派 コントラリアン", symbol: "逆", role: "過熱監視", focus: "過剰人気・評価集中", voice: "評価が集中しても、オッズの妙味は別に確認します。" },
 });
 const PERIODS = [{ id: "today", label: "今日", days: 0 }, { id: "7d", label: "直近7日", days: 7 }, { id: "30d", label: "直近30日", days: 30 }, { id: "all", label: "全期間", days: null }];
-const BET_TYPES = ["単勝", "複勝", "馬連", "ワイド", "3連複", "3連単"];
+const BET_TYPES = SUPPORTED_BET_TYPES;
 
 const state = {
   route: routeFromHash(),
@@ -299,7 +301,7 @@ function betsHtml(raceNo, track, top) {
     return empty(failures.length ? `買い目なし：${failures.join("、")}` : "購入基準を満たす保存済み買い目はありません。");
   }
   const cards = BET_TYPES.map((type) => betCardHtml(type, raceCandidates.filter((row) => row.betType === type))).filter(Boolean).join("");
-  return `<div class="bet-section-head"><div><h3>AI推奨買い目</h3><p>すべて1点${unitStake}円。3連系・フォーメーションは最大5点です。</p></div><span class="status-badge ready">発走前保存</span></div><div class="bet-card-list">${cards}</div>`;
+  return `<div class="bet-section-head"><div><h3>AI推奨買い目</h3><p>単勝・馬連・3連複・3連単のみ。すべて1点${unitStake}円、BOX・フォーメーションは最大5点です。</p></div><span class="status-badge ready">発走前保存</span></div><div class="bet-card-list">${cards}</div>`;
 }
 
 function betCardHtml(type, rows) {
@@ -468,7 +470,7 @@ function displayedTopTicket(race, track, prediction, consensus, volatility) {
     ?? null;
 }
 function agentRecommendationRows(prediction) {
-  const labels = { win: "単勝", place: "複勝", quinella: "馬連", wide: "ワイド", trio: "3連複", trifecta: "3連単" };
+  const labels = { win: "単勝", quinella: "馬連", trio: "3連複", trifecta: "3連単" };
   const names = new Map(AGENTS.map((agent) => [agent.id, agent.name]));
   return (prediction?.agentPredictions ?? []).flatMap((agent) => (agent.recommended_bets ?? []).flatMap((bet) =>
     (bet.combinations ?? []).slice(0, ["trio", "trifecta"].includes(bet.bet_type) ? 5 : undefined).map((selection) => ({
@@ -485,7 +487,7 @@ function agentRecommendationRows(prediction) {
       agentId: agent.agent_id,
       agentName: names.get(agent.agent_id) ?? agent.agent_id,
       comment: bet.reason,
-    }))));
+    })))).filter((row) => SUPPORTED_BET_TYPES.includes(row.betType));
 }
 function expectedReturn(row) { for (const key of ["expected_value_ratio", "conservativeExpectedReturn", "adoptedExpectedReturn", "abilityExpectedReturn", "marketExpectedReturn"]) { const value = Number(row?.[key]); if (Number.isFinite(value)) return value; } return null; }
 

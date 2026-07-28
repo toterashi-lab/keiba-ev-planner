@@ -16,8 +16,9 @@ import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
 await import(pathToFileURL(path.resolve("ticket-engine.js")).href);
 const engine = globalThis.KEIBA_TICKET_ENGINE;
-const TYPES = { win: "単勝", place: "複勝", quinella: "馬連", wide: "ワイド", exacta: "馬単", trio: "3連複", trifecta: "3連単" };
-const ORDERED = new Set(["win", "place", "exacta", "trifecta"]);
+// 公開する買い目はこの4券種だけ。BOX／フォーメーションは馬連・3連系の買い方として生成する。
+const TYPES = { win: "単勝", quinella: "馬連", trio: "3連複", trifecta: "3連単" };
+const ORDERED = new Set(["win", "trifecta"]);
 const ROOT = path.resolve(import.meta.dirname, "..");
 const PRIVATE_DIR = resolvePrivateDataDir(ROOT);
 const OUTPUT = path.join(PRIVATE_DIR, "models", "live-market-ev.json");
@@ -231,7 +232,7 @@ function resolveRaceBatchIds(rows) {
 }
 
 function structured(race, type, label, rows, marketHorse, abilityHorse, marketBook, abilityBook, names, artifact, hasModel, batchIds) {
-  if (type === "win" || type === "place") return [];
+  if (type === "win") return [];
   const definitions = buildStructuredDefinitions({ legs: engine.SPECS[label].legs, rows, marketHorse, abilityHorse, abilityBook })
     .map((definition) => ({ ...definition, method: definition.method === "formation" ? "フォーメーション" : definition.method }));
   const rowMap = new Map(rows.map((row) => [row.selection_key, row]));
