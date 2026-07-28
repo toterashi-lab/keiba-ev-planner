@@ -6,7 +6,8 @@ import { generateLiveMarketEv, loadLatestCompleteLiveOdds, persistCandidateLedge
 
 const fixtureOutputDirectory = fs.mkdtempSync(path.join(os.tmpdir(), "keiba-live-check-output-"));
 const fixtureOutputPath = path.join(fixtureOutputDirectory, "live-market-ev.json");
-const model = generateLiveMarketEv({ allowFixture: true, outputPath: fixtureOutputPath });
+const completeFixture = createCompleteModelFixture(fixtureOutputPath);
+const model = completeFixture.model;
 const noOddsFixture = createNoOddsModelFixture();
 const betTypes = ["単勝", "馬連", "3連複", "3連単"];
 const structuredTypes = ["馬連", "3連複", "3連単"];
@@ -116,6 +117,47 @@ console.log(JSON.stringify({
   resultLeakage: "pass",
 }, null, 2));
 fs.rmSync(fixtureOutputDirectory, { recursive: true, force: true });
+fs.rmSync(completeFixture.directory, { recursive: true, force: true });
+
+function createCompleteModelFixture(outputPath) {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "keiba-live-complete-"));
+  const databasePath = path.join(directory, "fixture.sqlite");
+  const fixture = new DatabaseSync(databasePath);
+  try {
+    fixture.exec(`
+      create table odds_ingestion_batches(id integer primary key,status text,source text,snapshot_kind text,target_dates text);
+      create table live_racecard_batches(id integer primary key,status text,race_count integer,target_dates text);
+      create table live_races(race_id text primary key,batch_id integer,race_date text,venue_code text,race_number integer,meeting_name text,start_time text);
+      create table live_entries(race_id text,horse_id text,horse_number integer,horse_name text);
+      create table live_predictions(race_id text,horse_id text,model_version text,win_probability real,history_starts integer,features_json text);
+      create table live_odds_snapshots(batch_id integer,race_id text,bet_type text,selection_key text,odds_low real,odds_high real,observed_at text);
+      insert into odds_ingestion_batches values(1,'complete','JRA official live odds fixture','pre_race','2099-01-03'),
+        (2,'complete','JRA official live exotic odds fixture','pre_race','2099-01-03');
+      insert into live_racecard_batches values(1,'complete',1,'2099-01-03');
+      insert into live_races values('r1',1,'2099-01-03','05',1,'テスト開催','12:00');
+    `);
+    const entry = fixture.prepare("insert into live_entries values('r1',?,?,?)");
+    const prediction = fixture.prepare("insert into live_predictions values('r1',?,'fixture-model',?,?,?)");
+    const odds = fixture.prepare("insert into live_odds_snapshots values(?,?,?,?,?,?,?)");
+    const probabilities = [0.25, 0.21, 0.18, 0.14, 0.12, 0.10];
+    probabilities.forEach((probability, index) => {
+      const number = index + 1;
+      entry.run(`h${number}`, number, `テスト馬${number}`);
+      prediction.run(`h${number}`, probability, 40, "{}");
+      odds.run(1, 'r1', 'win', String(number), 2 + index, 2 + index, '2099-01-03T02:00:00.000Z');
+    });
+    for (let first = 1; first <= 6; first += 1) for (let second = first + 1; second <= 6; second += 1) {
+      odds.run(2, 'r1', 'quinella', `${first}-${second}`, 12, 12, '2099-01-03T02:00:00.000Z');
+    }
+    for (let first = 1; first <= 6; first += 1) for (let second = first + 1; second <= 6; second += 1) for (let third = second + 1; third <= 6; third += 1) {
+      odds.run(2, 'r1', 'trio', `${first}-${second}-${third}`, 45, 45, '2099-01-03T02:00:00.000Z');
+      for (const order of [[first, second, third], [first, third, second], [second, first, third], [second, third, first], [third, first, second], [third, second, first]]) {
+        odds.run(2, 'r1', 'trifecta', order.join('-'), 120, 120, '2099-01-03T02:00:00.000Z');
+      }
+    }
+  } finally { fixture.close(); }
+  return { directory, model: generateLiveMarketEv({ databasePath, outputPath, allowFixture: true, artifact: { modelVersion: 'fixture-model', researchProbabilityStatus: 'research_pass' } }) };
+}
 
 function createNoOddsModelFixture() {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), "keiba-live-no-odds-"));

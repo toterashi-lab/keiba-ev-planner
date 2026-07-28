@@ -3,6 +3,8 @@ import { DatabaseSync } from "node:sqlite";
 
 const db = new DatabaseSync(path.join("data", "jra-free-private", "keiba.sqlite"), { readOnly: true });
 try {
+  const liveOddsTable = db.prepare("select 1 from sqlite_master where type='table' and name='live_odds_snapshots'").get();
+  if (!liveOddsTable) throw new Error("ライブオッズはまだ取得されていません");
   const base = db.prepare(`select * from odds_ingestion_batches where status='complete'
     and source in ('JRA official live odds','JRA official live odds fixture') order by id desc limit 1`).get();
   if (!base) throw new Error("ライブ単複オッズの完了バッチがありません");

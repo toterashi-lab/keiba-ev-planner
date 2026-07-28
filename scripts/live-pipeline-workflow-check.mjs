@@ -2,6 +2,7 @@ import fs from "node:fs";
 
 checkOrder("scripts/sync-jra-live-racecards.ps1", [
   '"scripts\\jra-live-racecards.mjs" capture',
+  'No upcoming live races; waiting for official racecards.',
   '"scripts\\predict-live-racecards.mjs"',
   '"scripts\\generate-live-market-ev.mjs"',
   '"scripts\\prediction-snapshot.mjs"',
@@ -9,6 +10,7 @@ checkOrder("scripts/sync-jra-live-racecards.ps1", [
   '"publish-live-web.ps1"',
 ]);
 checkOrder("scripts/capture-jra-live-odds.ps1", [
+  'No live races today; waiting for race day.',
   '"scripts\\predict-live-racecards.mjs"',
   '"scripts\\generate-live-market-ev.mjs"',
   '"publish-live-web.ps1"',
@@ -33,7 +35,7 @@ checkOrder("scripts/publish-live-web.ps1", [
 ]);
 
 const liveCheck = fs.readFileSync("scripts/live-market-ev-check.mjs", "utf8");
-for (const token of ["fixtureOutputDirectory", "fixtureOutputPath", "outputPath: fixtureOutputPath"]) {
+for (const token of ["fixtureOutputDirectory", "fixtureOutputPath", "createCompleteModelFixture(fixtureOutputPath)", "databasePath, outputPath, allowFixture: true"]) {
   if (!liveCheck.includes(token)) throw new Error(`Live fixture output isolation is missing: ${token}`);
 }
 const racecardSource = fs.readFileSync("scripts/jra-live-racecards.mjs", "utf8");

@@ -201,6 +201,10 @@ export function resolveStoredRacecardTargetDates(database, batch) {
 
 export function loadLatestCompleteLiveOdds(database, raceIds, options = {}) {
   if (!raceIds.length) return [];
+  // 開催前や初回起動では、オッズ取得側がまだライブ用テーブルを作っていない。
+  // その状態は異常ではなく「オッズ待ち」として後続の品質ゲートへ渡す。
+  const liveOddsTable = database.prepare("select 1 from sqlite_master where type='table' and name='live_odds_snapshots'").get();
+  if (!liveOddsTable) return [];
   const baseSources = options.allowFixture
     ? ["JRA official live odds", "JRA official live odds fixture"] : ["JRA official live odds"];
   const exoticSources = options.allowFixture
@@ -328,8 +332,8 @@ function initializeLedgerSchema(db) {
 }
 
 export function persistCandidateLedger(db, result) {
-  if (result.status !== "ready" || !result.candidates.length) return;
   initializeLedgerSchema(db);
+  if (result.status !== "ready" || !result.candidates.length) return;
   const insert = db.prepare(`insert into live_ev_candidates(
     race_id,snapshot_kind,base_batch_id,exotic_batch_id,model_version,calibration_status,bet_type,method,selection_display,ticket_key,
     component_selection_keys_json,component_odds_json,component_market_probabilities_json,component_ability_probabilities_json,
