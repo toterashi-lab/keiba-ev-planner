@@ -135,6 +135,7 @@ function renderHome() {
   renderVenueTabs("#home-venue-tabs");
   renderRaceCards(track);
   renderNextRace(track);
+  renderHomeForecastBoard(track);
 }
 
 function renderDateTabs(selector) {
@@ -178,6 +179,21 @@ function raceCardHtml(race, track) {
   </button>`;
 }
 
+function renderHomeForecastBoard(track) {
+  const root = document.querySelector("#home-forecast-board");
+  const rows = (track?.races ?? []).map((race) => {
+    const prediction = findPrediction(race.no, track);
+    const consensus = buildConsensus(prediction);
+    const volatility = forecastPolicy.volatilityProfile({ race, prediction, consensus, candidates: readyCandidates(race.no, track) });
+    return { race, consensus, top: displayedTopTicket(race, track, prediction, consensus, volatility) };
+  }).filter((row) => row.consensus.top).sort((left, right) => Number(right.consensus.top.index ?? 0) - Number(left.consensus.top.index ?? 0) || left.race.no - right.race.no).slice(0, 3);
+  root.innerHTML = rows.length ? rows.map(({ race, consensus, top }) => {
+    const marks = consensus.ranked.slice(0, 3).map((mark, index) => `${["◎", "○", "▲"][index]}${mark.horseNumber}`).join(" ");
+    return `<button type="button" class="home-forecast-card" data-home-race="${race.no}" aria-label="${race.no}レースのAI予想を詳しく見る"><header><span>${race.no}R ${escapeHtml(race.name)}</span><small>${escapeHtml(race.surface)}${number(race.distanceM)}m・${escapeHtml(race.start)}</small></header><div class="home-forecast-main"><div><span>総合本命</span><strong>${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}</strong><small class="home-forecast-marks">${marks}</small></div><div class="home-index-score"><span>総合AI指数</span><strong>${Number(consensus.top.index ?? 0).toFixed(1)}</strong><small>2番手差 +${Math.max(0, Number(consensus.top.index ?? 0) - Number(consensus.ranked[1]?.index ?? 0)).toFixed(1)}</small></div></div><footer><span>AI予想買い目</span><strong>${top ? `${escapeHtml(top.betType)} ${escapeHtml(displayTicket(top.betType, top.ticketKeys?.[0] ?? top.selection, top))}・${unitStake}円` : "見送り"}</strong></footer></button>`;
+  }).join("") : empty("この開催のAI予想は公開前です");
+  root.querySelectorAll("button[data-home-race]").forEach((button) => button.addEventListener("click", () => openRace(Number(button.dataset.homeRace))));
+}
+
 function renderNextRace(track) {
   const root = document.querySelector("#next-race-card");
   const raceNo = nextRaceNumber(track);
@@ -192,7 +208,10 @@ function renderNextRace(track) {
   }
   const prediction = findPrediction(race.no, track);
   const consensus = buildConsensus(prediction);
-  root.innerHTML = `<span class="time">次の発走 ${escapeHtml(race.start)}</span><strong>${escapeHtml(track.venueName)}${race.no}R ${escapeHtml(race.name)}</strong><small>${consensus.top ? `総合本命 ${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}・一致度 ${consensus.agreement}/5` : "予想公開前"}</small>`;
+  const index = consensus.top ? consensusIndexSummary(consensus) : "--";
+  const volatility = forecastPolicy.volatilityProfile({ race, prediction, consensus, candidates: readyCandidates(race.no, track) });
+  const top = displayedTopTicket(race, track, prediction, consensus, volatility);
+  root.innerHTML = `<span class="time">次の発走 ${escapeHtml(race.start)}</span><strong>${escapeHtml(track.venueName)}${race.no}R ${escapeHtml(race.name)}</strong><small>${consensus.top ? `総合本命 ${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}・一致度 ${consensus.agreement}/5` : "予想公開前"}</small><div class="next-race-prediction"><span>総合AI指数 <b>${escapeHtml(index)}</b></span><span>${top ? `${escapeHtml(top.betType)} ${escapeHtml(displayTicket(top.betType, top.ticketKeys?.[0] ?? top.selection, top))}・${unitStake}円` : "見送り"}</span></div>`;
 }
 
 function renderRaceWorkspace() {

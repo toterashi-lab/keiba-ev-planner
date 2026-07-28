@@ -35,6 +35,7 @@
         <div id="home-date-tabs" class="chip-row" aria-label="開催日"></div>
         <div id="home-venue-tabs" class="segmented-scroll" aria-label="競馬場"></div>
         <p class="home-flow" aria-label="予想の見方"><strong>1. 開催を選ぶ</strong><span aria-hidden="true">→</span><strong>2. レースを選ぶ</strong><span aria-hidden="true">→</span><strong>3. 印と買い目を見る</strong></p>
+        <section class="home-forecast-section" aria-labelledby="home-forecast-title"><header class="section-heading"><div><span>結論を先に確認</span><h2 id="home-forecast-title">AI予想・総合指数</h2></div><span class="count-badge">総合AI</span></header><div id="home-forecast-board" class="home-forecast-grid"></div></section>
         <section class="section-block" aria-labelledby="featured-title">
           <header class="section-heading"><div><span>結論を先に表示</span><h2 id="featured-title">開催レース一覧</h2></div><span id="race-list-count" class="count-badge"></span></header>
           <div id="home-race-list" class="race-card-list"></div>
@@ -106,6 +107,6 @@
     <script src="data/agent-performance.js?v=20260719-1605"></script>
     <script src="ticket-engine.js"></script>
     <script src="forecast-policy.js?v=all-races-20260720-1"></script>
-    <script src="app.js?v=all-race-audit-20260728"></script>
+    <script src="app.js?v=home-forecast-board-20260728"></script>
   </body>
 </html>

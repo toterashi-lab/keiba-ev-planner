@@ -78,6 +78,8 @@ main { width: min(100%, var(--content)); min-height: calc(100vh - 160px); margin
 .next-race-card .time { color: var(--gold); font-weight: 900; }
 .next-race-card strong { display: block; margin: 5px 0; font-size: 19px; }
 .next-race-card small { color: var(--muted); }
+.next-race-prediction { margin-top: 10px; padding-top: 9px; display: flex; justify-content: space-between; gap: 10px; border-top: 1px solid var(--line); color: var(--text); font-size: 11px; font-weight: 800; }
+.next-race-prediction b { color: var(--green); }
 .next-race-link { width: 100%; padding: 0; border: 0; background: transparent; color: inherit; text-align: left; cursor: pointer; }
 .next-race-link:hover strong { color: var(--green); }
 .home-flow { margin: 0 0 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 7px; color: var(--muted); font-size: 11px; }
@@ -93,6 +95,22 @@ main { width: min(100%, var(--content)); min-height: calc(100vh - 160px); margin
 .race-number-strip small { margin-top: 2px; font-size: 9px; font-weight: 500; }
 
 .section-block { margin-top: 16px; }
+.home-forecast-section { margin-top: 6px; }
+.home-forecast-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.home-forecast-card { min-width: 0; padding: 14px; border: 1px solid var(--line); border-top: 3px solid var(--green); border-radius: var(--radius); background: var(--surface); color: var(--text); text-align: left; cursor: pointer; box-shadow: 0 4px 12px rgba(0, 0, 0, .08); }
+.home-forecast-card:hover { border-color: var(--green); }
+.home-forecast-card header span, .home-forecast-card header small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.home-forecast-card header span { font-size: 12px; font-weight: 900; }
+.home-forecast-card header small { margin-top: 3px; color: var(--muted); font-size: 10px; }
+.home-forecast-main { margin: 13px 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: end; }
+.home-forecast-main > div:first-child > span, .home-index-score span, .home-forecast-card footer span { display: block; color: var(--muted); font-size: 9px; }
+.home-forecast-main > div:first-child > strong { display: block; margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 16px; }
+.home-forecast-marks { display: block; margin-top: 6px; color: var(--gold); font-size: 12px; font-weight: 900; }
+.home-index-score { min-width: 78px; padding-left: 10px; border-left: 1px solid var(--line); text-align: right; }
+.home-index-score strong { display: block; margin-top: 2px; color: var(--green); font-size: 23px; line-height: 1; }
+.home-index-score small { display: block; margin-top: 5px; color: var(--muted); font-size: 9px; }
+.home-forecast-card footer { padding-top: 10px; border-top: 1px solid var(--line); }
+.home-forecast-card footer strong { display: block; margin-top: 4px; color: var(--gold); font-size: 12px; }
 .section-heading { margin-bottom: 12px; display: flex; align-items: end; justify-content: space-between; }
 .section-heading span:first-child { color: var(--muted); font-size: 10px; }
 .section-heading h2 { margin: 2px 0 0; font-size: 20px; }
@@ -311,6 +329,7 @@ footer { padding: 22px 20px 34px; border-top: 1px solid var(--line); color: var(
   .brand { min-width: 0; }
   main { padding: 20px 14px 90px; }
   .home-lead { grid-template-columns: 1fr; }
+  .home-forecast-grid { grid-template-columns: 1fr; }
   .home-flow { margin-top: 2px; }
   .race-card-list, .finder-list, .agent-grid, .bet-card-list { grid-template-columns: 1fr; }
   .performance-grid { grid-template-columns: repeat(2, 1fr); }
