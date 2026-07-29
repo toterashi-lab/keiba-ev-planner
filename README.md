@@ -4,14 +4,22 @@ JRA公式データを発走前スナップショットとして保存し、5人�
 
 ## 収録範囲
 
-- 画面の参考データ: 2026年7月18日・19日の72レース
-- 長期DB: 1996年1月から再取得中。正確な進捗は`node scripts/jra-free-db.mjs status`で確認する。
+- 最新予想画面: 2026年7月18日・19日の72レース
+- 結果アーカイブ: 1996年1月5日から2026年7月26日までの完全レース105,524件（3,271開催日）
+- 長期DB: 1996年1月から継続更新中。正確な進捗は`node scripts/jra-free-db.mjs status`で確認する。
 - 正本データ: 公開リポジトリに含めないローカルSQLiteと原本HTML
 
 出典はJRA公式番組・結果ページです。JRAおよびnetkeibaの公式サービスではありません。
 無課金の長期蓄積コードは `scripts/jra-free-db.mjs`、公式単勝・複勝オッズ収集は `scripts/jra-free-odds.mjs`、検査仕様は `docs/free-data-pipeline.md` に収録しています。
 期待値の研究根拠、4シナリオ、校正・時系列検証ゲートは `docs/expectancy-methodology.md` に収録しています。
 原本HTMLとSQLite本体は個人利用のローカルDBにのみ保存し、この公開リポジトリには収録しません。
+
+結果アーカイブは、実際の購入履歴ではなく、各レースより前の履歴だけで5人の順位を再現し、単勝1点、馬連5点、3連複5頭BOXを各100円として公式払戻と照合した参考成績です。公開用JSONは`data/historical-agent-archive/`へ月別に生成します。
+
+```powershell
+node --max-old-space-size=8192 scripts/generate-historical-agent-archive.mjs
+node scripts/historical-agent-archive-check.mjs
+```
 
 期待値候補は、全馬オッズ履歴、確率校正、時系列検証、オッズ鮮度、ドローダウンの全ゲートが合格するまで購入適格として扱いません。利益や回収率100%超を保証しません。
 

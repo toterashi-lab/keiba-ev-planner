@@ -5,3 +5,4 @@ data/jra-free-private/
 .public-stage-*/
 .tools/
 .vercel/
+.playwright-cli/

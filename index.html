@@ -26,7 +26,7 @@
     <script type="application/ld+json">
       {"@context":"https://schema.org","@type":"WebSite","name":"ウマヨミ","alternateName":"無料AI競馬予想 ウマヨミ","url":"https://umayomi-keiba.vercel.app/","inLanguage":"ja","description":"考え方の違う5人のAI予想家による全レースの指数、買い目、確定結果を掲載する無料競馬予想サイト"}
     </script>
-    <link rel="stylesheet" href="styles.css?v=paper-ticket-20260730-1" />
+    <link rel="stylesheet" href="styles.css?v=visual-ranking-20260730-4" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">本文へ移動</a>
@@ -46,17 +46,17 @@
 
     <main id="main-content">
       <section id="page-home" class="page" data-page="home" aria-labelledby="home-title">
-        <header class="page-heading ranking-hero"><div><span class="eyebrow">今日の予想</span><h1 id="home-title">どのレースを見る？</h1><p id="home-summary">開催データを読み込んでいます。</p></div></header>
+        <header class="page-heading ranking-hero"><div><span class="eyebrow">今日の予想</span><h1 id="home-title">注目レース TOP 10</h1><p id="home-summary">開催データを読み込んでいます。</p></div></header>
         <div id="home-date-tabs" class="chip-row" aria-label="開催日"></div>
         <section id="home-arena" class="arena-board" aria-label="5人の予想"></section>
         <section class="section-block" aria-labelledby="featured-title">
-          <header class="section-heading"><div><span>注目度の高い順</span><h2 id="featured-title">レースを選ぶ</h2></div><span id="race-list-count" class="count-badge"></span></header>
+          <header class="section-heading"><div><span>指数の高い順</span><h2 id="featured-title">全レースランキング</h2></div><span id="race-list-count" class="count-badge"></span></header>
           <div id="home-race-list" class="race-card-list"></div>
         </section>
       </section>
 
       <section id="page-races" class="page" data-page="races" aria-labelledby="races-title">
-        <header class="page-heading"><div><span class="eyebrow">レース一覧</span><h1 id="races-title">予想と結果を見る</h1></div><p>日、場所、レース番号を選んでください。</p></header>
+        <header class="page-heading"><div><span class="eyebrow">レース一覧</span><h1 id="races-title">レースを選ぶ</h1></div></header>
         <div id="race-date-tabs" class="chip-row" aria-label="開催日"></div>
         <div id="race-venue-tabs" class="segmented-scroll" aria-label="競馬場"></div>
         <div id="race-number-tabs" class="race-number-strip" aria-label="レース番号"></div>
@@ -64,18 +64,18 @@
       </section>
 
       <section id="page-results" class="page" data-page="results" aria-labelledby="results-title">
-        <header class="page-heading"><div><span class="eyebrow">過去の結果</span><h1 id="results-title">前のレースを見る</h1></div><p>終わったレースの予想と結果を見られます。</p></header>
+        <header class="page-heading"><div><span class="eyebrow">過去の結果</span><h1 id="results-title">日別 成績アーカイブ</h1></div><span class="heading-note">全期間</span></header>
         <div id="result-filter" class="chip-row" aria-label="結果期間"></div>
         <div id="result-list" class="result-list"></div>
       </section>
 
       <section id="page-performance" class="page" data-page="performance" aria-labelledby="performance-title">
-        <header class="page-heading"><div><span class="eyebrow">5人の予想家</span><h1 id="performance-title">だれの予想を見る？</h1></div><p>考え方のちがう5人が、それぞれ予想します。</p></header>
+        <header class="page-heading"><div><span class="eyebrow">5人の予想家</span><h1 id="performance-title">予想家ランキング</h1></div><span class="heading-note">参考成績</span></header>
         <section class="agent-hero-grid" aria-label="5人の予想家"><img src="assets/agent-safety.png" alt="しっかり派 セーフティ" /><img src="assets/agent-sniper.png" alt="穴狙い スナイパー" /><img src="assets/agent-pace.png" alt="流れ読み ペースメーカー" /><img src="assets/agent-analyst.png" alt="数字読み アナリスト" /><img src="assets/agent-contrarian.png" alt="別目線 コントラリアン" /></section>
         <div id="performance-filter" class="chip-row" aria-label="成績期間"></div>
         <div id="all-race-audit"></div>
         <div id="performance-summary" class="performance-grid"></div>
-        <p class="disclosure">レース前に保存した予想だけを成績に入れます。あとから作った予想は、参考として分けて表示します。</p>
+        <p class="disclosure">※ 後日再現の参考成績です。本番成績とは分けています。</p>
       </section>
     </main>
 
@@ -87,7 +87,7 @@
     </nav>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
-    <footer><div class="footer-about"><strong>無料AI競馬予想 ウマヨミ</strong><p>能力、穴馬、展開、データ、別目線の5人のAI予想家が、全レースの指数と買い目を別々に作ります。単勝1点、馬連5点、3連複5頭BOXを1点100円として表示し、確定後は同じ買い目と公式払戻を照合します。</p></div><p>JRAなどの公式サイトではありません。予想は的中や利益を約束するものではありません。馬券を買う機能はありません。20歳未満の方は馬券を購入できません。</p></footer>
+    <footer><div class="footer-about"><strong>無料AI競馬予想 ウマヨミ</strong><p>5人の予想・買い目・結果を掲載。</p></div><p>非公式サイトです。予想は的中や利益を保証しません。購入機能はありません。20歳未満は馬券を購入できません。</p></footer>
 
     <script src="data/meet-2026-07-11-2026-07-12.js"></script>
     <script src="data/results-2026-07-11-2026-07-12.js"></script>
@@ -106,6 +106,6 @@
     <script src="agent-forecast-engine.js?v=five-methods-20260729-1"></script>
     <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
     <script defer src="/_vercel/insights/script.js"></script>
-    <script src="app.js?v=paper-ticket-20260730-1"></script>
+    <script src="app.js?v=visual-ranking-20260730-4"></script>
   </body>
 </html>
