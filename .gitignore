@@ -4,3 +4,4 @@ data/historical-payout-patterns.json
 data/jra-free-private/
 .public-stage-*/
 .tools/
+.vercel/
