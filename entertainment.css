@@ -1,0 +1,391 @@
+/* Entertainment layer: the prediction engine stays unchanged; this file owns presentation. */
+:root {
+  --bg: #09111c;
+  --surface: #111d2a;
+  --surface-2: #172535;
+  --surface-3: #223348;
+  --text: #f7fafc;
+  --muted: #aab7c5;
+  --line: #304359;
+  --green: #39d98a;
+  --green-soft: #143c2d;
+  --gold: #f2c14e;
+  --gold-soft: #493b17;
+  --blue: #64a4ff;
+  --blue-soft: #17375e;
+  --red: #ff6b75;
+  --red-soft: #4a2028;
+  --purple: #b693ff;
+  --purple-soft: #352753;
+  --shadow: 0 16px 34px rgba(0, 0, 0, .26);
+  --agent-safety: #39c77a;
+  --agent-sniper: #e95868;
+  --agent-pace: #4f8ff7;
+  --agent-analyst: #9c73e6;
+  --agent-contrarian: #e8b93f;
+}
+
+html[data-theme="light"] {
+  --bg: #edf2f6;
+  --surface: #ffffff;
+  --surface-2: #f5f8fb;
+  --surface-3: #e6edf3;
+  --text: #122033;
+  --muted: #637387;
+  --line: #cfdae4;
+  --green: #0b8f58;
+  --green-soft: #ddf5e8;
+  --gold: #9b6b00;
+  --gold-soft: #fff0bc;
+  --blue: #1766c2;
+  --blue-soft: #deecff;
+  --red: #bd3340;
+  --red-soft: #ffe0e4;
+  --purple: #6f42b5;
+  --purple-soft: #ede3fb;
+  --shadow: 0 14px 30px rgba(25, 43, 63, .12);
+}
+
+body {
+  background: var(--bg);
+  font-family: "Yu Gothic UI", "Hiragino Sans", Meiryo, sans-serif;
+}
+
+.topbar {
+  height: 68px;
+  border-bottom-color: #24364a;
+  background: rgba(8, 17, 29, .96);
+  color: #f7fafc;
+  backdrop-filter: blur(18px);
+}
+
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #f2c14e;
+  background: #f2c14e;
+  color: #1b1607;
+  box-shadow: inset 0 0 0 3px #0b1422;
+  font-size: 17px;
+}
+
+.brand strong { font-size: 17px; }
+.brand small { color: #8fa0b3; font-family: ui-monospace, "Cascadia Mono", monospace; font-size: 8px; }
+.desktop-nav a { color: #92a2b5; }
+.desktop-nav a.active { color: #fff; }
+.desktop-nav a.active::after { height: 4px; background: #f2c14e; }
+.icon-button { border-color: #34485f; background: #132235; color: #fff; }
+
+main { padding-top: 22px; }
+.page-heading h1 { font-weight: 1000; }
+.eyebrow, .section-heading > div > span, .bet-section-head span {
+  font-family: ui-monospace, "Cascadia Mono", monospace;
+  font-weight: 900;
+}
+
+/* Home hero */
+.ranking-hero {
+  position: relative;
+  min-height: 340px;
+  margin: -22px calc((min(100vw, var(--content)) - 100%) / -2) 16px;
+  padding: 44px max(24px, calc((100vw - var(--content)) / 2 + 20px));
+  align-items: flex-start;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background-color: #111827;
+  background-image: url("assets/agent-chibi-sprite.png");
+  background-repeat: no-repeat;
+  background-position: center 44%;
+  background-size: cover;
+  box-shadow: none;
+  color: #fff;
+}
+
+.ranking-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 12, 22, .58);
+}
+
+.ranking-hero .hero-copy {
+  position: relative;
+  z-index: 1;
+  width: min(470px, 100%);
+  padding-top: 12px;
+}
+
+.hero-kicker {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  padding: 4px 10px;
+  border: 1px solid rgba(255, 255, 255, .5);
+  background: rgba(6, 12, 22, .62);
+  color: #f2c14e;
+  font-family: ui-monospace, "Cascadia Mono", monospace;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.ranking-hero h1 {
+  max-width: 440px;
+  margin-top: 14px;
+  color: #fff;
+  font-size: 46px;
+  line-height: 1.12;
+  text-shadow: 0 3px 16px rgba(0, 0, 0, .58);
+}
+
+.ranking-hero p { margin-top: 12px; color: #e2e8f0; font-size: 17px; font-weight: 800; }
+.hero-status { margin-top: 22px; display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 900; }
+.hero-status i { width: 10px; height: 10px; border: 2px solid #c9ffe2; border-radius: 50%; background: #39d98a; box-shadow: 0 0 0 4px rgba(57, 217, 138, .2); }
+
+#home-date-tabs { position: relative; z-index: 3; margin-top: -38px; padding: 10px 0 12px; justify-content: center; }
+#home-date-tabs button { min-width: 150px; border-color: #42556b; background: #152436; color: #c7d1dd; box-shadow: 0 8px 20px rgba(0, 0, 0, .2); }
+#home-date-tabs button.active { border-color: #f2c14e; background: #f2c14e; color: #201a08; }
+
+/* Main race stage */
+.arena-board { margin: 8px 0 26px; overflow: visible; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.arena-command {
+  position: relative;
+  min-height: 260px;
+  padding: 26px;
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) 116px 172px auto;
+  align-items: end;
+  gap: 18px;
+  overflow: hidden;
+  border: 1px solid #33475d;
+  border-radius: 8px 8px 0 0;
+  background-color: #101a28;
+  background-image: url("assets/race-hero-v1.png");
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+}
+
+.arena-command::before { content: ""; position: absolute; inset: 0; background: rgba(5, 12, 20, .62); }
+.arena-command > * { position: relative; z-index: 1; }
+.arena-rank { display: inline-flex; padding: 5px 8px; border-left: 4px solid #f2c14e; background: rgba(6, 12, 22, .72); color: #f2c14e; font: 900 10px ui-monospace, "Cascadia Mono", monospace; }
+.arena-command h2 { margin: 10px 0 0; font-size: 32px; }
+.arena-command h3 { margin: 2px 0 0; font-size: 20px; }
+.arena-command p { color: #cbd5e1; }
+.arena-power, .arena-difficulty { min-height: 112px; padding: 13px; border: 1px solid rgba(255, 255, 255, .28); background: rgba(7, 16, 28, .78); }
+.arena-power > span, .arena-difficulty > span { display: block; color: #a9b8c8; font-size: 9px; font-weight: 900; }
+.arena-power > strong { display: block; margin-top: 3px; color: #f2c14e; font-size: 43px; line-height: 1; }
+.arena-power > i { height: 7px; margin-top: 15px; display: block; overflow: hidden; background: #34465a; }
+.arena-power > i b { width: calc(var(--score) * 1%); height: 100%; display: block; background: #f2c14e; }
+.arena-difficulty > strong { display: block; margin-top: 7px; font-size: 18px; }
+.arena-difficulty .volatility-meter { margin-top: 13px; }
+.arena-difficulty .volatility-label { display: none; }
+.arena-command button { min-height: 52px; padding: 10px 16px; border-color: #f2c14e; background: #f2c14e; color: #211b08; font-size: 13px; }
+.arena-command button span { margin-left: 8px; font-size: 22px; line-height: 0; }
+
+.arena-team-title { padding: 14px 16px 5px; display: flex; align-items: baseline; gap: 10px; border-inline: 1px solid var(--line); background: var(--surface); }
+.arena-team-title span { color: var(--muted); font: 900 9px ui-monospace, "Cascadia Mono", monospace; }
+.arena-team-title strong { font-size: 17px; }
+.arena-agents { padding: 10px 12px 14px; border: 1px solid var(--line); border-top: 0; border-radius: 0 0 8px 8px; background: var(--surface); }
+.arena-agent { position: relative; min-height: 92px; padding: 10px; border: 1px solid var(--line); border-top-width: 4px; background: var(--surface-2); }
+.arena-agent.safety { border-top-color: var(--agent-safety); }
+.arena-agent.sniper { border-top-color: var(--agent-sniper); }
+.arena-agent.pace { border-top-color: var(--agent-pace); }
+.arena-agent.analyst { border-top-color: var(--agent-analyst); }
+.arena-agent.contrarian { border-top-color: var(--agent-contrarian); }
+.arena-avatar { position: relative; flex: 0 0 58px; overflow: visible !important; }
+.arena-avatar img { width: 58px; height: 58px; display: block; border: 2px solid var(--line); object-fit: cover; object-position: center 18%; }
+.arena-avatar i { position: absolute; right: -3px; bottom: -3px; width: 20px; height: 20px; display: grid; place-items: center; border: 2px solid var(--surface-2); border-radius: 50%; background: var(--text); color: var(--bg); font-size: 9px; font-style: normal; }
+.arena-agent strong { font-size: 12px; }
+.arena-agent p { color: var(--text); font-size: 10px; }
+
+/* Ranking cards */
+.section-heading { margin: 24px 0 14px; }
+.section-heading > div > span { color: var(--gold); }
+.section-heading h2 { font-size: 25px; }
+.count-badge { border-color: var(--gold); background: var(--gold-soft); color: var(--gold); }
+.race-card-list { gap: 14px; }
+.home-ranking-card { position: relative; border: 1px solid var(--line); border-top: 4px solid #6f8194; border-radius: 8px; box-shadow: var(--shadow); }
+.home-ranking-card.rank-card-1 { border-top-color: var(--gold); }
+.home-ranking-card.rank-card-2 { border-top-color: #aab8c5; }
+.home-ranking-card.rank-card-3 { border-top-color: #c77b4f; }
+.race-card-top { min-height: 86px; }
+.race-card-no { width: 54px; height: 54px; flex-basis: 54px; display: flex; flex-direction: column; border-radius: 5px; font-size: 23px; line-height: 1; }
+.race-card-no small { display: block; margin-bottom: 3px; font: 900 7px ui-monospace, "Cascadia Mono", monospace; }
+.race-card-title strong { font-size: 16px; }
+.home-index-score { min-width: 92px; padding-left: 12px; }
+.home-index-score span { color: var(--muted); font: 900 8px ui-monospace, "Cascadia Mono", monospace; }
+.home-index-score strong { color: var(--gold); font-size: 30px; }
+.home-index-score i { width: 72px; height: 5px; margin: 7px 0 0 auto; display: block; overflow: hidden; background: var(--surface-3); }
+.home-index-score i b { width: calc(var(--score) * 1%); height: 100%; display: block; background: var(--gold); }
+.race-card-body { min-height: 116px; align-content: start; }
+.race-card-pick strong { font-size: 20px; }
+.race-rank-picks { padding-top: 10px; border-top: 1px solid var(--line); }
+.race-rank-picks b { min-height: 30px; background: var(--surface-2); }
+.race-rank-picks b:first-child { border-color: var(--gold); background: var(--gold-soft); color: var(--gold); }
+.home-agent-tickets > summary { min-height: 58px; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; color: var(--text); }
+.home-agent-tickets > summary > span { float: none; }
+.home-agent-tickets > summary b, .home-agent-tickets > summary small { display: block; }
+.home-agent-tickets > summary b { font-size: 13px; }
+.home-agent-tickets > summary small { margin-top: 1px; color: var(--muted); font-size: 9px; }
+.home-agent-tickets > summary > i { width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; font-style: normal; }
+.home-agent-tickets[open] > summary > i { transform: rotate(45deg); }
+.home-agent-tickets article { padding-left: 8px; border-left: 3px solid var(--line); }
+.home-agent-tickets article.safety { border-left-color: var(--agent-safety); }
+.home-agent-tickets article.sniper { border-left-color: var(--agent-sniper); }
+.home-agent-tickets article.pace { border-left-color: var(--agent-pace); }
+.home-agent-tickets article.analyst { border-left-color: var(--agent-analyst); }
+.home-agent-tickets article.contrarian { border-left-color: var(--agent-contrarian); }
+
+/* Shared game page heading and race detail */
+.game-page-heading { min-height: 116px; padding: 22px 24px; align-items: center; overflow: hidden; border: 1px solid var(--line); border-left: 5px solid var(--gold); border-radius: 8px; background: #111d2a; color: #fff; box-shadow: var(--shadow); }
+.game-page-heading .eyebrow { color: #f2c14e; }
+.heading-emblem { width: 64px; height: 64px; display: grid; place-items: center; border: 2px solid #f2c14e; border-radius: 50%; background: #26374a; color: #f2c14e; font-size: 28px; font-weight: 1000; }
+.detail-shell { border-radius: 8px; }
+.detail-head { position: relative; min-height: 180px; padding: 28px; overflow: hidden; background-color: #101a28; background-image: url("assets/race-hero-v1.png"); background-position: center 48%; background-size: cover; color: #fff; }
+.detail-head::before { content: ""; position: absolute; inset: 0; background: rgba(5, 12, 20, .66); }
+.detail-head > * { position: relative; z-index: 1; }
+.detail-head .race-card-no { background: #f2c14e; color: #211b08; }
+.stage-label { color: #f2c14e; font-family: ui-monospace, "Cascadia Mono", monospace; }
+.detail-title h2 { font-size: 28px; }
+.detail-title p { color: #d5dee8; }
+.detail-tabs button { background: var(--surface-2); }
+.detail-tabs button.active { color: var(--gold); box-shadow: inset 0 -4px var(--gold); }
+.consensus-card { border-left: 4px solid var(--gold); }
+.consensus-top h3 { font-size: 27px; }
+.recommend-card { border-top-color: var(--red); }
+.recommend-card h3 { color: var(--red); }
+
+.agent-card { position: relative; overflow: hidden; border-top: 4px solid var(--line); }
+.agent-card.safety { border-top-color: var(--agent-safety); }
+.agent-card.sniper { border-top-color: var(--agent-sniper); }
+.agent-card.pace { border-top-color: var(--agent-pace); }
+.agent-card.analyst { border-top-color: var(--agent-analyst); }
+.agent-card.contrarian { border-top-color: var(--agent-contrarian); }
+.agent-card-avatar { object-fit: cover; object-position: center 18%; }
+.agent-card .agent-card-avatar { width: 54px; height: 54px; flex-basis: 54px; border: 2px solid var(--line); }
+.agent-mark { border: 1px solid var(--line); border-radius: 5px; }
+.agent-mark:first-child { border-color: var(--gold); background: var(--gold-soft); }
+
+.agent-ticket-group { padding: 0; overflow: hidden; border-radius: 8px; background: var(--surface-2); }
+.agent-ticket-group > header { min-height: 78px; margin: 0; padding: 12px 15px; border-bottom: 1px solid var(--line); background: var(--surface); }
+.agent-ticket-group > header > div > span { color: var(--muted); font: 900 8px ui-monospace, "Cascadia Mono", monospace; }
+.agent-ticket-group.safety > header { border-left: 5px solid var(--agent-safety); }
+.agent-ticket-group.sniper > header { border-left: 5px solid var(--agent-sniper); }
+.agent-ticket-group.pace > header { border-left: 5px solid var(--agent-pace); }
+.agent-ticket-group.analyst > header { border-left: 5px solid var(--agent-analyst); }
+.agent-ticket-group.contrarian > header { border-left: 5px solid var(--agent-contrarian); }
+.agent-ticket-group .bet-card-list { padding: 12px; }
+
+/* Battle log */
+.archive-overview { border-top: 4px solid var(--gold); box-shadow: var(--shadow); }
+.archive-overview > div { min-height: 82px; padding: 16px; }
+.archive-overview strong { font-size: 18px; }
+.result-day-archive { border-radius: 8px; }
+.result-day-archive > header { min-height: 82px; background: #142235; color: #fff; }
+.result-day-archive > header > div span, .result-day-archive dt { color: #aab7c5; }
+.result-card { min-height: 78px; }
+.result-rank { width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: var(--surface-3); font-weight: 1000; }
+.historical-race[open] > summary { background: var(--gold-soft); }
+.historical-race[open] .result-rank { background: var(--gold); color: #211b08; }
+.archive-agent { border-top: 4px solid var(--line); }
+.archive-agent.safety { border-top-color: var(--agent-safety); }
+.archive-agent.sniper { border-top-color: var(--agent-sniper); }
+.archive-agent.pace { border-top-color: var(--agent-pace); }
+.archive-agent.analyst { border-top-color: var(--agent-analyst); }
+.archive-agent.contrarian { border-top-color: var(--agent-contrarian); }
+.archive-agent header img { object-fit: cover; object-position: center 18%; }
+.archive-ticket.hit { background: var(--green-soft); }
+
+/* Character book */
+.character-heading { margin-bottom: 0; border-radius: 8px 8px 0 0; }
+.agent-hero-grid { height: 330px; margin: 0 0 18px; padding: 0; display: block; overflow: hidden; border: 1px solid var(--line); border-top: 0; border-radius: 0 0 8px 8px; background: #e8ddff; box-shadow: var(--shadow); }
+.agent-hero-grid img { width: 100%; height: 100%; border: 0; border-radius: 0; object-fit: cover; object-position: center 43%; }
+.agent-rank-board { border-top: 4px solid var(--gold); border-radius: 8px; }
+.agent-rank-row { min-height: 78px; }
+.agent-rank-row > img { width: 54px; height: 54px; object-fit: cover; object-position: center 18%; border: 2px solid var(--line); }
+.agent-profile { position: relative; grid-template-columns: 160px 1fr; border-radius: 8px; box-shadow: var(--shadow); }
+.agent-profile::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 5px; background: var(--line); }
+.agent-profile.safety::before { background: var(--agent-safety); }
+.agent-profile.sniper::before { background: var(--agent-sniper); }
+.agent-profile.pace::before { background: var(--agent-pace); }
+.agent-profile.analyst::before { background: var(--agent-analyst); }
+.agent-profile.contrarian::before { background: var(--agent-contrarian); }
+.agent-profile-portrait { min-height: 250px; object-fit: cover; object-position: center 18%; }
+.agent-profile-body { padding: 18px; }
+.agent-profile-body h2 { font-size: 20px; }
+.agent-profile-body blockquote { border-left-color: var(--gold); }
+.agent-profile-metrics div { border: 1px solid var(--line); }
+
+footer { background: #08111d; color: #8999aa; }
+footer .footer-about strong { color: #fff; }
+
+@media (max-width: 900px) {
+  .topbar { height: 60px; }
+  main { padding-top: 14px; }
+  .ranking-hero { margin-top: -14px; }
+  .arena-command { grid-template-columns: minmax(0, 1fr) 112px 160px; }
+  .arena-command button { grid-column: 1 / -1; }
+  .arena-agents { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .arena-agent:last-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 760px) {
+  .ranking-hero {
+    min-height: 330px;
+    margin-inline: -14px;
+    padding: 28px 20px;
+    background-position: center bottom;
+    background-size: 100% auto;
+  }
+  .ranking-hero::before { background: rgba(6, 12, 22, .64); }
+  .ranking-hero .hero-copy { width: 82%; padding-top: 4px; }
+  .ranking-hero h1 { margin-top: 12px; font-size: 36px; }
+  .ranking-hero p { font-size: 14px; }
+  .hero-status { margin-top: 17px; }
+  #home-date-tabs { margin-top: -36px; justify-content: flex-start; }
+  #home-date-tabs button { min-width: 138px; }
+  .arena-command { min-height: 370px; padding: 18px; grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: end; background-position: 58% center; }
+  .arena-race-copy { grid-column: 1 / -1; }
+  .arena-command h2 { font-size: 27px; }
+  .arena-command h3 { font-size: 18px; }
+  .arena-power, .arena-difficulty { min-height: 108px; }
+  .arena-command button { grid-column: 1 / -1; width: 100%; }
+  .arena-team-title { display: block; }
+  .arena-team-title strong { display: block; margin-top: 2px; }
+  .arena-agents { grid-template-columns: 1fr; }
+  .arena-agent, .arena-agent:last-child { grid-column: auto; min-height: 76px; }
+  .arena-avatar { flex-basis: 48px; }
+  .arena-avatar img { width: 48px; height: 48px; }
+  .section-heading h2 { font-size: 21px; }
+  .race-card-top { min-height: 78px; padding-inline: 10px; }
+  .race-card-no { width: 48px; height: 48px; flex-basis: 48px; }
+  .race-card-title strong { font-size: 14px; }
+  .home-index-score { min-width: 70px; padding-left: 7px; }
+  .home-index-score strong { font-size: 25px; }
+  .home-index-score i { width: 53px; }
+  .race-card-pick strong { font-size: 17px; }
+  .race-rank-picks { gap: 3px; }
+  .race-rank-picks b { padding: 4px; font-size: 10px; }
+  .game-page-heading { min-height: 96px; padding: 17px; }
+  .game-page-heading h1 { font-size: 27px; }
+  .heading-emblem { width: 50px; height: 50px; font-size: 22px; }
+  .detail-head { min-height: 156px; padding: 20px 15px; align-items: flex-end; }
+  .detail-head .race-card-no { width: 46px; height: 46px; flex-basis: 46px; }
+  .detail-title h2 { font-size: 21px; }
+  .detail-panel { padding: 12px 8px; }
+  .conclusion-grid { grid-template-columns: 1fr; }
+  .agent-card .agent-card-avatar { width: 46px; height: 46px; flex-basis: 46px; }
+  .agent-ticket-group .bet-card-list { padding: 7px 3px; }
+  .archive-overview strong { font-size: 15px; }
+  .result-day-archive > header { min-height: 92px; }
+  .agent-hero-grid { height: 210px; }
+  .agent-profile { grid-template-columns: 112px minmax(0, 1fr); }
+  .agent-profile-portrait { min-height: 245px; object-position: center 18%; }
+  .agent-profile-body { padding: 12px; }
+  .agent-profile-body h2 { font-size: 17px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+}

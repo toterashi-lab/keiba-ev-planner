@@ -170,13 +170,15 @@ function renderHomeArena(meeting) {
   const featured = rows[0];
   if (!featured) { root.innerHTML = empty("今日の予想を準備しています。"); return; }
   const agents = normalizedAgents(featured.prediction);
-  const agentCards = AGENTS.map((definition) => {
+  const volatility = forecastPolicy.volatilityProfile({ race: featured.race, prediction: featured.prediction, consensus: featured.consensus, candidates: readyCandidates(featured.race.no, featured.track) });
+  const featuredScore = Math.max(0, Math.min(100, Math.round(Number(featured.consensus.top.index ?? 0))));
+  const agentCards = AGENTS.map((definition, index) => {
     const persona = agentPersona(definition);
     const agent = agents.get(definition.id);
     const mark = agent?.status === "available" ? agent.marks?.[0] : null;
-    return `<article class="arena-agent ${mark ? "ready" : "waiting"}"><img src="${agentImagePath(definition.id)}" alt="${escapeHtml(persona.name)}" /><div><span>${escapeHtml(persona.role)}</span><strong>${escapeHtml(persona.name)}</strong><p>${mark ? `◎ ${number(mark.horseNumber)}番 ${escapeHtml(mark.horseName)}` : "準備中"}</p></div></article>`;
+    return `<article class="arena-agent ${definition.id} ${mark ? "ready" : "waiting"}"><span class="arena-avatar"><img src="${agentImagePath(definition.id)}" alt="${escapeHtml(persona.name)}" /><i>${index + 1}</i></span><div><span>${escapeHtml(persona.role)}</span><strong>${escapeHtml(persona.name)}</strong><p>${mark ? `◎ ${number(mark.horseNumber)}番 ${escapeHtml(mark.horseName)}` : "準備中"}</p></div></article>`;
   }).join("");
-  root.innerHTML = `<header class="arena-command"><div><span class="eyebrow">ランキング 1位</span><h2>${escapeHtml(featured.track.venueName)} ${featured.race.no}R ${escapeHtml(featured.race.name)}</h2></div><button type="button" data-arena-race="true" data-arena-date="${escapeHtml(meeting.date)}" data-arena-venue="${escapeHtml(featured.track.venueCode)}" data-arena-no="${featured.race.no}">予想を見る</button></header><div class="arena-agents">${agentCards}</div>`;
+  root.innerHTML = `<header class="arena-command"><div class="arena-race-copy"><span class="arena-rank">MAIN RACE・RANK 1</span><h2>${escapeHtml(featured.track.venueName)} ${featured.race.no}R</h2><h3>${escapeHtml(featured.race.name)}</h3><p>${escapeHtml(featured.race.surface)} ${number(featured.race.distanceM)}m・${escapeHtml(featured.race.start)}発走</p></div><div class="arena-power" style="--score:${featuredScore}"><span>注目指数</span><strong>${featuredScore}</strong><i><b></b></i></div><div class="arena-difficulty"><span>荒れ具合</span><strong>${escapeHtml(volatility.label)}</strong>${volatilityMeterHtml(volatility, true)}</div><button type="button" data-arena-race="true" data-arena-date="${escapeHtml(meeting.date)}" data-arena-venue="${escapeHtml(featured.track.venueCode)}" data-arena-no="${featured.race.no}">5人の作戦を見る <span aria-hidden="true">›</span></button></header><div class="arena-team-title"><span>FORECASTER TEAM</span><strong>5人の本命</strong></div><div class="arena-agents">${agentCards}</div>`;
   root.querySelector("button[data-arena-race]")?.addEventListener("click", (event) => {
     const button = event.currentTarget;
     state.date = button.dataset.arenaDate;
@@ -217,15 +219,16 @@ function rankingRaceCardHtml({ track, race, prediction, consensus, result }, ran
   const marks = consensus.ranked.slice(0, 5).map((mark, index) => `<b><i>${index + 1}</i>${mark.horseNumber}番</b>`).join("");
   const resultSummary = raceResultSummary(result);
   const rankClass = rank <= 3 ? ` rank-${rank}` : "";
-  return `<article class="race-card home-ranking-card"><button type="button" class="race-card-open" data-home-ranking="true" data-home-date="${escapeHtml(state.date)}" data-home-venue="${escapeHtml(track.venueCode)}" data-home-race="${race.no}"><div class="race-card-top"><span class="race-card-no${rankClass}">${rank}</span><span class="race-card-title"><strong>${escapeHtml(track.venueName)} ${race.no}R ${escapeHtml(race.name)}</strong><small>${escapeHtml(race.surface)} ${number(race.distanceM)}m・${escapeHtml(race.start)}</small></span><span class="home-index-score"><span>指数</span><strong>${Number(consensus.top.index ?? 0).toFixed(0)}</strong></span></div><div class="race-card-body"><span class="race-card-pick"><span>◎ 1番手</span><strong>${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}</strong></span><span class="race-rank-picks" aria-label="上位5頭">${marks}</span>${resultSummary ? `<span class="race-card-result"><span>結果</span><strong>${escapeHtml(resultSummary)}</strong></span>` : ""}</div></button>${homeAgentTicketsHtml(prediction)}</article>`;
+  const score = Math.max(0, Math.min(100, Math.round(Number(consensus.top.index ?? 0))));
+  return `<article class="race-card home-ranking-card rank-card-${Math.min(rank, 4)}" style="--score:${score}"><button type="button" class="race-card-open" data-home-ranking="true" data-home-date="${escapeHtml(state.date)}" data-home-venue="${escapeHtml(track.venueCode)}" data-home-race="${race.no}"><div class="race-card-top"><span class="race-card-no${rankClass}"><small>RANK</small>${rank}</span><span class="race-card-title"><strong>${escapeHtml(track.venueName)} ${race.no}R ${escapeHtml(race.name)}</strong><small>${escapeHtml(race.surface)} ${number(race.distanceM)}m・${escapeHtml(race.start)}</small></span><span class="home-index-score"><span>POWER</span><strong>${score}</strong><i><b></b></i></span></div><div class="race-card-body"><span class="race-card-pick"><span>◎ 本命</span><strong>${consensus.top.horseNumber}番 ${escapeHtml(consensus.top.horseName)}</strong></span><span class="race-rank-picks" aria-label="上位5頭">${marks}</span>${resultSummary ? `<span class="race-card-result"><span>RESULT</span><strong>${escapeHtml(resultSummary)}</strong></span>` : ""}</div></button>${homeAgentTicketsHtml(prediction)}</article>`;
 }
 
 function homeAgentTicketsHtml(prediction) {
   const groups = agentTicketGroups(prediction);
   if (!groups.length) return `<div class="home-agent-tickets empty-tickets">買い目を準備しています。</div>`;
-  return `<details class="home-agent-tickets"><summary>5人の買い目 <span>開く</span></summary><div>${groups.map((group) => {
+  return `<details class="home-agent-tickets"><summary><span><b>5人の作戦</b><small>買い目を表示</small></span><i aria-hidden="true">＋</i></summary><div>${groups.map((group) => {
     const persona = agentPersona(group.definition);
-    return `<article><header><img class="agent-card-avatar" src="${agentImagePath(group.definition.id)}" alt="" /><strong>${escapeHtml(persona.name)}</strong></header>${group.tickets.map((ticket) => `<p><span>${escapeHtml(ticket.betType)} ${escapeHtml(ticket.method)}</span><b>${escapeHtml(ticket.selection)}</b><small>${ticket.points}点・各${unitStake}円</small></p>`).join("")}</article>`;
+    return `<article class="${group.definition.id}"><header><img class="agent-card-avatar" src="${agentImagePath(group.definition.id)}" alt="" /><strong>${escapeHtml(persona.name)}</strong></header>${group.tickets.map((ticket) => `<p><span>${escapeHtml(ticket.betType)} ${escapeHtml(ticket.method)}</span><b>${escapeHtml(ticket.selection)}</b><small>${ticket.points}点・各${unitStake}円</small></p>`).join("")}</article>`;
   }).join("")}</div></details>`;
 }
 
@@ -362,14 +365,14 @@ function agentsHtml(prediction, result, consensus) {
 function agentCardHtml(definition, agent, result, predictionContext = "pre_race") {
   const persona = agentPersona(definition);
   const heading = `<span class="agent-name"><img class="agent-card-avatar" src="${agentImagePath(definition.id)}" alt="" /><span><h3>${persona.name}</h3><small>${persona.role}</small></span></span>`;
-  if (!agent || agent.status !== "available") return `<article class="agent-card unavailable"><header>${heading}<span class="status-badge waiting">準備中</span></header><p>${persona.voice}</p></article>`;
+  if (!agent || agent.status !== "available") return `<article class="agent-card ${definition.id} unavailable"><header>${heading}<span class="status-badge waiting">準備中</span></header><p>${persona.voice}</p></article>`;
   const marks = (agent.marks ?? []).slice(0, 3);
   const top = marks[0];
   const positions = resultPositionMap(result);
   const finishLabels = resultFinishLabelMap(result);
   const hit = marks.some((mark) => positions.get(Number(mark.horseNumber)) === 1);
   const verified = predictionContext === "pre_race";
-  return `<article class="agent-card"><header>${heading}${isFinalResult(result) && verified ? `<span class="hit-badge ${hit ? "hit" : "miss"}">${hit ? "✓ 的中" : "× 不的中"}</span>` : `<span class="status-badge ${verified ? "ready" : "waiting"}">${verified ? "予想あり" : "参考"}</span>`}</header>
+  return `<article class="agent-card ${definition.id}"><header>${heading}${isFinalResult(result) && verified ? `<span class="hit-badge ${hit ? "hit" : "miss"}">${hit ? "✓ 的中" : "× 不的中"}</span>` : `<span class="status-badge ${verified ? "ready" : "waiting"}">${verified ? "予想あり" : "参考"}</span>`}</header>
     <div class="agent-marks">${marks.map((mark, index) => `<div class="agent-mark"><span>${["◎", "○", "▲"][index]}</span><strong>${number(mark.horseNumber)}番 ${escapeHtml(mark.horseName)}</strong>${isFinalResult(result) ? `<small>${escapeHtml(finishLabels.get(Number(mark.horseNumber)) ?? "結果なし")}</small>` : ""}</div>`).join("")}</div>
     <p><b>${escapeHtml(agent.opinion ?? persona.voice)}</b></p></article>`;
 }
@@ -392,7 +395,7 @@ function agentTicketGroupHtml(group) {
   const persona = agentPersona(group.definition);
   const cards = group.tickets.map((ticket) => `<article class="bet-card">${paperTicketHtml(ticket, group.prediction, false, group.agent.marks)}<p class="ticket-help"><b>理由：</b>${escapeHtml(ticketReason(group.agent, ticket))}</p></article>`).join("");
   const total = group.tickets.reduce((sum, ticket) => sum + ticket.totalInvestmentYen, 0);
-  return `<section class="agent-ticket-group"><header><img class="agent-card-avatar" src="${agentImagePath(group.definition.id)}" alt="" /><div><h3>${escapeHtml(persona.name)}</h3><p>${escapeHtml(persona.type)}</p></div><strong>この予想家の合計 ${yen(total)}</strong></header><div class="bet-card-list">${cards}</div></section>`;
+  return `<section class="agent-ticket-group ${group.definition.id}"><header><img class="agent-card-avatar" src="${agentImagePath(group.definition.id)}" alt="" /><div><span>STRATEGY</span><h3>${escapeHtml(persona.name)}</h3><p>${escapeHtml(persona.type)}</p></div><strong>合計 ${yen(total)}</strong></header><div class="bet-card-list">${cards}</div></section>`;
 }
 function agentTicketGroups(prediction) {
   const agents = normalizedAgents(prediction);
@@ -593,7 +596,7 @@ function archiveRaceDetailsHtml({ date, venueCode, raceNo, raceName, podium, hor
       const netYen = payoutYen - ticket.totalInvestmentYen;
       return `<div class="archive-ticket ${payoutYen > 0 ? "hit" : "miss"}"><span>${payoutYen > 0 ? "✓ 的中" : "× 不的中"}・${escapeHtml(ticket.betType)}</span><strong>${escapeHtml(ticket.selection)}</strong><small>投資額 ${yen(ticket.totalInvestmentYen)} / 払戻額 ${yen(payoutYen)} / 収支 ${signedYen(netYen)}</small></div>`;
     }).join("");
-    return `<article class="archive-agent"><header><img src="${agentImagePath(definition.id)}" alt="" /><div><strong>${escapeHtml(persona.name)}</strong><small>${escapeHtml(persona.role)}</small></div><span>${["◎", "○", "▲"].map((mark, markIndex) => `${mark}${markNumbers[markIndex] ?? "-"}`).join(" ")}</span></header><p>${escapeHtml(persona.type)}</p><div class="archive-ticket-list">${ticketHtml}</div></article>`;
+    return `<article class="archive-agent ${definition.id}"><header><img src="${agentImagePath(definition.id)}" alt="" /><div><strong>${escapeHtml(persona.name)}</strong><small>${escapeHtml(persona.role)}</small></div><span>${["◎", "○", "▲"].map((mark, markIndex) => `${mark}${markNumbers[markIndex] ?? "-"}`).join(" ")}</span></header><p>${escapeHtml(persona.type)}</p><div class="archive-ticket-list">${ticketHtml}</div></article>`;
   }).join("");
   return `<div class="historical-race-detail"><div class="archive-race-meta"><span>${formatDate(date)}・${escapeHtml(venueName(venueCode))} ${raceNo}R</span><strong>${escapeHtml(raceName)}</strong></div><div class="finish-podium">${podiumHtml}</div><div class="archive-agent-list">${agentsHtml}</div><p class="archive-note">時系列再現の参考値です。実際に購入した記録ではありません。</p></div>`;
 }

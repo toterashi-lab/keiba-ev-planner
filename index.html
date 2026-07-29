@@ -3,10 +3,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#f2f5f3" />
+    <meta name="theme-color" content="#0b1422" />
     <meta name="description" content="無料AI競馬予想ウマヨミ。考え方の違う5人のAI予想家が、全レースの指数・印・単勝・馬連・3連複の買い目を公開し、確定結果と照合します。" />
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
     <link rel="canonical" href="https://umayomi-keiba.vercel.app/" />
+    <link rel="icon" type="image/png" href="assets/agent-analyst.png" />
     <link rel="manifest" href="site.webmanifest" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ja_JP" />
@@ -27,36 +28,37 @@
       {"@context":"https://schema.org","@type":"WebSite","name":"ウマヨミ","alternateName":"無料AI競馬予想 ウマヨミ","url":"https://umayomi-keiba.vercel.app/","inLanguage":"ja","description":"考え方の違う5人のAI予想家による全レースの指数、買い目、確定結果を掲載する無料競馬予想サイト"}
     </script>
     <link rel="stylesheet" href="styles.css?v=visual-ranking-20260730-4" />
+    <link rel="stylesheet" href="entertainment.css?v=entertainment-20260730-2" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">本文へ移動</a>
     <header class="topbar">
       <a class="brand" href="#home" aria-label="ウマヨミ ホーム">
-        <span class="brand-mark" aria-hidden="true">AI</span>
-        <span><strong>ウマヨミ</strong><small>5人の予想を、かんたんに。</small></span>
+        <span class="brand-mark" aria-hidden="true">U</span>
+        <span><strong>ウマヨミ</strong><small>AI FORECAST LEAGUE</small></span>
       </a>
       <nav class="desktop-nav" aria-label="サイト全体">
-        <a href="#home" data-route="home">今日の予想</a>
-        <a href="#races" data-route="races">レース一覧</a>
-        <a href="#results" data-route="results">過去の結果</a>
-        <a href="#performance" data-route="performance">5人の予想家</a>
+        <a href="#home" data-route="home">ホーム</a>
+        <a href="#races" data-route="races">レース</a>
+        <a href="#results" data-route="results">勝敗ログ</a>
+        <a href="#performance" data-route="performance">予想家</a>
       </nav>
       <button id="theme-toggle" class="icon-button" type="button" title="表示テーマを切り替える" aria-label="表示テーマを切り替える">◐</button>
     </header>
 
     <main id="main-content">
       <section id="page-home" class="page" data-page="home" aria-labelledby="home-title">
-        <header class="page-heading ranking-hero"><div><span class="eyebrow">今日の予想</span><h1 id="home-title">注目レース TOP 10</h1><p id="home-summary">開催データを読み込んでいます。</p></div></header>
+        <header class="page-heading ranking-hero"><div class="hero-copy"><span class="hero-kicker">TODAY'S FORECAST</span><h1 id="home-title">5人の予想バトル</h1><p id="home-summary">開催データを読み込んでいます。</p><span class="hero-status"><i aria-hidden="true"></i>予想公開中</span></div></header>
         <div id="home-date-tabs" class="chip-row" aria-label="開催日"></div>
         <section id="home-arena" class="arena-board" aria-label="5人の予想"></section>
         <section class="section-block" aria-labelledby="featured-title">
-          <header class="section-heading"><div><span>指数の高い順</span><h2 id="featured-title">全レースランキング</h2></div><span id="race-list-count" class="count-badge"></span></header>
+          <header class="section-heading"><div><span>POWER RANKING</span><h2 id="featured-title">注目レースランキング</h2></div><span id="race-list-count" class="count-badge"></span></header>
           <div id="home-race-list" class="race-card-list"></div>
         </section>
       </section>
 
       <section id="page-races" class="page" data-page="races" aria-labelledby="races-title">
-        <header class="page-heading"><div><span class="eyebrow">レース一覧</span><h1 id="races-title">レースを選ぶ</h1></div></header>
+        <header class="page-heading game-page-heading"><div><span class="eyebrow">RACE SELECT</span><h1 id="races-title">レースを選ぶ</h1></div><span class="heading-emblem" aria-hidden="true">R</span></header>
         <div id="race-date-tabs" class="chip-row" aria-label="開催日"></div>
         <div id="race-venue-tabs" class="segmented-scroll" aria-label="競馬場"></div>
         <div id="race-number-tabs" class="race-number-strip" aria-label="レース番号"></div>
@@ -64,14 +66,14 @@
       </section>
 
       <section id="page-results" class="page" data-page="results" aria-labelledby="results-title">
-        <header class="page-heading"><div><span class="eyebrow">過去の結果</span><h1 id="results-title">日別 成績アーカイブ</h1></div><span class="heading-note">全期間</span></header>
+        <header class="page-heading game-page-heading"><div><span class="eyebrow">BATTLE LOG</span><h1 id="results-title">日別 勝敗ログ</h1></div><span class="heading-emblem" aria-hidden="true">✓</span></header>
         <div id="result-filter" class="chip-row" aria-label="結果期間"></div>
         <div id="result-list" class="result-list"></div>
       </section>
 
       <section id="page-performance" class="page" data-page="performance" aria-labelledby="performance-title">
-        <header class="page-heading"><div><span class="eyebrow">5人の予想家</span><h1 id="performance-title">予想家ランキング</h1></div><span class="heading-note">参考成績</span></header>
-        <section class="agent-hero-grid" aria-label="5人の予想家"><img src="assets/agent-safety.png" alt="しっかり派 セーフティ" /><img src="assets/agent-sniper.png" alt="穴狙い スナイパー" /><img src="assets/agent-pace.png" alt="流れ読み ペースメーカー" /><img src="assets/agent-analyst.png" alt="数字読み アナリスト" /><img src="assets/agent-contrarian.png" alt="別目線 コントラリアン" /></section>
+        <header class="page-heading game-page-heading character-heading"><div><span class="eyebrow">FORECASTER BOOK</span><h1 id="performance-title">予想家図鑑</h1></div><span class="heading-emblem" aria-hidden="true">5</span></header>
+        <section class="agent-hero-grid" aria-label="5人の予想家"><img src="assets/agent-chibi-sprite.png" alt="5人のAI予想家" /></section>
         <div id="performance-filter" class="chip-row" aria-label="成績期間"></div>
         <div id="all-race-audit"></div>
         <div id="performance-summary" class="performance-grid"></div>
@@ -82,7 +84,7 @@
     <nav class="mobile-nav" aria-label="モバイルナビゲーション">
       <a href="#home" data-route="home"><span aria-hidden="true">⌂</span>今日</a>
       <a href="#races" data-route="races"><span aria-hidden="true">馬</span>レース</a>
-      <a href="#results" data-route="results"><span aria-hidden="true">✓</span>結果</a>
+      <a href="#results" data-route="results"><span aria-hidden="true">✓</span>勝敗</a>
       <a href="#performance" data-route="performance"><span aria-hidden="true">人</span>予想家</a>
     </nav>
 
@@ -106,6 +108,6 @@
     <script src="agent-forecast-engine.js?v=five-methods-20260729-1"></script>
     <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
     <script defer src="/_vercel/insights/script.js"></script>
-    <script src="app.js?v=visual-ranking-20260730-4"></script>
+    <script src="app.js?v=entertainment-20260730-2"></script>
   </body>
 </html>
