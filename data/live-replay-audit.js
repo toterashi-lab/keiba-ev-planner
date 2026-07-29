@@ -1,6 +1,6 @@
 window.KEIBA_LIVE_REPLAY_AUDIT = {
   "status": "replay_only",
-  "calculatedAt": "2026-07-29T00:16:06.803Z",
+  "calculatedAt": "2026-07-29T13:57:00.766Z",
   "label": "後日再現（本番成績に含めない）",
   "policy": {
     "source": "画面で表示する総合AI指数の買い目とJRA公式払戻の照合",
@@ -183,10 +183,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 3,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 3,
+              "horseName": "アートオブブライト",
+              "probability": 0.09210745342812852,
+              "score": 5,
+              "finish": 3
+            },
+            {
+              "mark": "○",
+              "horseNumber": 8,
+              "horseName": "ガーシュウィン",
+              "probability": 0.017979006681303686,
+              "score": 4,
+              "finish": 4
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 6,
+              "horseName": "イッペイ",
+              "probability": 0.152707533358581,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -248,10 +273,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 6,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "horseNumber": 6,
+              "horseName": "イッペイ",
+              "score": 15,
+              "first": 0,
+              "mark": "◎",
+              "finish": 2
+            },
+            {
+              "horseNumber": 8,
+              "horseName": "ガーシュウィン",
+              "score": 7,
+              "first": 0,
+              "mark": "○",
+              "finish": 4
+            },
+            {
+              "horseNumber": 4,
+              "horseName": "ロードレスポンス",
+              "score": 6,
+              "first": 0,
+              "mark": "▲",
+              "finish": 5
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -293,8 +343,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-8-6-4-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 130,
+              "netYen": -870,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-8-6-4-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 290,
+              "netYen": -710,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -370,8 +451,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-8-4-7-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-8-4-7-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -537,10 +649,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 5,
+          "topPickFinish": 6,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 5,
+              "horseName": "チュラヴェール",
+              "probability": 0.08016484272511311,
+              "score": 5,
+              "finish": 6
+            },
+            {
+              "mark": "○",
+              "horseNumber": 12,
+              "horseName": "ペイシャクロス",
+              "probability": 0.06818242021137362,
+              "score": 4,
+              "finish": 3
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 7,
+              "horseName": "ドリームガッサン",
+              "probability": 0.17253960884664477,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -602,10 +739,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 7,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "horseNumber": 7,
+              "horseName": "ドリームガッサン",
+              "score": 8,
+              "first": 0,
+              "mark": "◎",
+              "finish": 2
+            },
+            {
+              "horseNumber": 12,
+              "horseName": "ペイシャクロス",
+              "score": 7,
+              "first": 0,
+              "mark": "○",
+              "finish": 3
+            },
+            {
+              "horseNumber": 10,
+              "horseName": "コシタンタン",
+              "score": 5,
+              "first": 0,
+              "mark": "▲",
+              "finish": 4
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -647,8 +809,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-12-7-10-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1050,
+              "netYen": 50,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-12-7-10-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 9850,
+              "netYen": 8850,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -724,8 +917,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "7",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "7-12-10-1-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "7-12-10-1-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -891,10 +1115,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 11,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 11,
+              "horseName": "ポップアップ",
+              "probability": 0.18786409017861688,
+              "score": 5,
+              "finish": 3
+            },
+            {
+              "mark": "○",
+              "horseNumber": 5,
+              "horseName": "ハイランダー",
+              "probability": 0.06423210025358111,
+              "score": 4,
+              "finish": 5
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 4,
+              "horseName": "ウインガネーシャ",
+              "probability": 0.2001017284236775,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -956,10 +1205,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 2,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "horseNumber": 2,
+              "horseName": "ザンテソーロ",
+              "score": 9,
+              "first": 0,
+              "mark": "◎",
+              "finish": 4
+            },
+            {
+              "horseNumber": 4,
+              "horseName": "ウインガネーシャ",
+              "score": 7,
+              "first": 0,
+              "mark": "○",
+              "finish": 2
+            },
+            {
+              "horseNumber": 5,
+              "horseName": "ハイランダー",
+              "score": 6,
+              "first": 0,
+              "mark": "▲",
+              "finish": 5
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -1001,8 +1275,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "11",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "11-5-4-2-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 880,
+              "netYen": -120,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "11-5-4-2-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1190,
+              "netYen": 190,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -1078,8 +1383,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-4-5-9-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-4-5-9-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -1249,10 +1585,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 5,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 5,
+              "horseName": "レッドアイスピア",
+              "probability": 0.08296286273304229,
+              "score": 5,
+              "finish": 2
+            },
+            {
+              "mark": "○",
+              "horseNumber": 6,
+              "horseName": "ガルフコースト",
+              "probability": 0.060174829597069365,
+              "score": 4,
+              "finish": 5
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 3,
+              "horseName": "スッサンエア",
+              "probability": 0.09687322929695817,
+              "score": 3,
+              "finish": 3
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -1314,10 +1675,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 1,
+          "topPickFinish": 7,
+          "marks": [
+            {
+              "horseNumber": 1,
+              "horseName": "ニシノオールワン",
+              "score": 8,
+              "first": 0,
+              "mark": "◎",
+              "finish": 7
+            },
+            {
+              "horseNumber": 6,
+              "horseName": "ガルフコースト",
+              "score": 8,
+              "first": 0,
+              "mark": "○",
+              "finish": 5
+            },
+            {
+              "horseNumber": 9,
+              "horseName": "エコロデュラン",
+              "score": 3,
+              "first": 0,
+              "mark": "▲",
+              "finish": 14
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -1359,8 +1745,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-6-3-1-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2920,
+              "netYen": 1920,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-6-3-1-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 4860,
+              "netYen": 3860,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -1436,8 +1853,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-6-9-10-16 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-6-9-10-16 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -1605,10 +2053,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 9,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 9,
+              "horseName": "ペガサスウィンド",
+              "probability": 0.11213086594646755,
+              "score": 5,
+              "finish": 4
+            },
+            {
+              "mark": "○",
+              "horseNumber": 14,
+              "horseName": "メイショウセンドウ",
+              "probability": 0.0474050313402209,
+              "score": 4,
+              "finish": 7
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 6,
+              "horseName": "イトシサ",
+              "probability": 0.2676910892687165,
+              "score": 3,
+              "finish": 3
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -1670,10 +2143,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 6,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "horseNumber": 6,
+              "horseName": "イトシサ",
+              "score": 14,
+              "first": 0,
+              "mark": "◎",
+              "finish": 3
+            },
+            {
+              "horseNumber": 2,
+              "horseName": "バンダムソレール",
+              "score": 5,
+              "first": 0,
+              "mark": "○",
+              "finish": 2
+            },
+            {
+              "horseNumber": 14,
+              "horseName": "メイショウセンドウ",
+              "score": 5,
+              "first": 0,
+              "mark": "▲",
+              "finish": 7
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -1715,8 +2213,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "9",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "9-14-6-2-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 26010,
+              "netYen": 25010,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "9-14-6-2-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 74210,
+              "netYen": 73210,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -1792,8 +2321,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-2-14-3-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-2-14-3-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -1959,10 +2519,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 6,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 6,
+              "horseName": "コスモクラシック",
+              "probability": 0.10616214841447373,
+              "score": 5,
+              "finish": 3
+            },
+            {
+              "mark": "○",
+              "horseNumber": 10,
+              "horseName": "グローリーバローズ",
+              "probability": 0.030763100718433398,
+              "score": 4,
+              "finish": 5
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 2,
+              "horseName": "トリニタリオ",
+              "probability": 0.17693631609301025,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -2024,10 +2609,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 11,
+          "topPickFinish": 6,
+          "marks": [
+            {
+              "horseNumber": 11,
+              "horseName": "ジュラトリー",
+              "score": 12,
+              "first": 0,
+              "mark": "◎",
+              "finish": 6
+            },
+            {
+              "horseNumber": 2,
+              "horseName": "トリニタリオ",
+              "score": 9,
+              "first": 0,
+              "mark": "○",
+              "finish": 2
+            },
+            {
+              "horseNumber": 10,
+              "horseName": "グローリーバローズ",
+              "score": 8,
+              "first": 0,
+              "mark": "▲",
+              "finish": 5
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -2069,8 +2679,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-10-2-11-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 330,
+              "netYen": -670,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-10-2-11-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2460,
+              "netYen": 1460,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -2146,8 +2787,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "11",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "11-2-10-5-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "11-2-10-5-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -2315,10 +2987,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 7,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 7,
+              "horseName": "グランセレスト",
+              "probability": 0.11553387893452878,
+              "score": 5,
+              "finish": 4
+            },
+            {
+              "mark": "○",
+              "horseNumber": 2,
+              "horseName": "タイセイデクスター",
+              "probability": 0.0409771587277402,
+              "score": 4,
+              "finish": 3
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 11,
+              "horseName": "ストロングボーイ",
+              "probability": 0.27056211348013753,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -2380,10 +3077,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 11,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "horseNumber": 11,
+              "horseName": "ストロングボーイ",
+              "score": 14,
+              "first": 0,
+              "mark": "◎",
+              "finish": 2
+            },
+            {
+              "horseNumber": 2,
+              "horseName": "タイセイデクスター",
+              "score": 7,
+              "first": 0,
+              "mark": "○",
+              "finish": 3
+            },
+            {
+              "horseNumber": 4,
+              "horseName": "ディアスポラ",
+              "score": 5,
+              "first": 0,
+              "mark": "▲",
+              "finish": 5
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -2425,8 +3147,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "7",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "7-2-11-1-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 530,
+              "netYen": -470,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "7-2-11-1-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 17700,
+              "netYen": 16700,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -2502,8 +3255,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "11",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "11-2-4-5-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "11-2-4-5-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -2669,10 +3453,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 6,
+          "topPickFinish": 1,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 6,
+              "horseName": "マイネルゼウス",
+              "probability": 0.20391699264244473,
+              "score": 5,
+              "finish": 1
+            },
+            {
+              "mark": "○",
+              "horseNumber": 12,
+              "horseName": "マテンロウオリジン",
+              "probability": 0.08833563195552524,
+              "score": 4,
+              "finish": 5
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 1,
+              "horseName": "ワンダフルデイズ",
+              "probability": 0.22934084131601853,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -2734,10 +3543,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 5,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "horseNumber": 5,
+              "horseName": "アーレムアレス",
+              "score": 8,
+              "first": 0,
+              "mark": "◎",
+              "finish": 4
+            },
+            {
+              "horseNumber": 12,
+              "horseName": "マテンロウオリジン",
+              "score": 7,
+              "first": 0,
+              "mark": "○",
+              "finish": 5
+            },
+            {
+              "horseNumber": 7,
+              "horseName": "アスクファイアモア",
+              "score": 3,
+              "first": 0,
+              "mark": "▲",
+              "finish": 7
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -2779,8 +3613,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 2460,
+              "netYen": 2360,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-12-1-3-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 9910,
+              "netYen": 8910,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-12-1-3-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 39440,
+              "netYen": 38440,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -2856,8 +3721,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-12-7-10-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-12-7-10-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -3024,10 +3920,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 2,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 2,
+              "horseName": "アドミラルシップ",
+              "probability": 0.1303383142834271,
+              "score": 5,
+              "finish": 4
+            },
+            {
+              "mark": "○",
+              "horseNumber": 10,
+              "horseName": "ディーリライズ",
+              "probability": 0.07194331041452894,
+              "score": 4,
+              "finish": 5
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 7,
+              "horseName": "マイネルシンベリン",
+              "probability": 0.16598324866892827,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -3089,10 +4010,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 7,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "horseNumber": 7,
+              "horseName": "マイネルシンベリン",
+              "score": 11,
+              "first": 0,
+              "mark": "◎",
+              "finish": 2
+            },
+            {
+              "horseNumber": 4,
+              "horseName": "グランセゾン",
+              "score": 8,
+              "first": 0,
+              "mark": "○",
+              "finish": 3
+            },
+            {
+              "horseNumber": 10,
+              "horseName": "ディーリライズ",
+              "score": 5,
+              "first": 0,
+              "mark": "▲",
+              "finish": 5
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -3134,8 +4080,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-10-7-4-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 720,
+              "netYen": -280,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-10-7-4-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2420,
+              "netYen": 1420,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -3211,8 +4188,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "7",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "7-4-10-3-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "7-4-10-3-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -3376,10 +4384,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 5,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 5,
+              "horseName": "フードマン",
+              "probability": 0.11424232327237072,
+              "score": 5,
+              "finish": 3
+            },
+            {
+              "mark": "○",
+              "horseNumber": 6,
+              "horseName": "バシレウスシチー",
+              "probability": 0.017040181969171578,
+              "score": 4,
+              "finish": 4
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 4,
+              "horseName": "マナボニート",
+              "probability": 0.32095154319559677,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -3441,10 +4474,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 8,
+          "topPickFinish": 5,
+          "marks": [
+            {
+              "horseNumber": 8,
+              "horseName": "マジカルフェアリー",
+              "score": 9,
+              "first": 0,
+              "mark": "◎",
+              "finish": 5
+            },
+            {
+              "horseNumber": 6,
+              "horseName": "バシレウスシチー",
+              "score": 8,
+              "first": 0,
+              "mark": "○",
+              "finish": 4
+            },
+            {
+              "horseNumber": 1,
+              "horseName": "フミサウンド",
+              "score": 4,
+              "first": 0,
+              "mark": "▲",
+              "finish": 9
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -3486,8 +4544,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-6-4-8-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 560,
+              "netYen": -440,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-6-4-8-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1020,
+              "netYen": 20,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -3563,8 +4652,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-6-1-7-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-6-1-7-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -3731,10 +4851,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 11,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 11,
+              "horseName": "ヒルノハンブルク",
+              "probability": 0.19379601673793456,
+              "score": 5,
+              "finish": 3
+            },
+            {
+              "mark": "○",
+              "horseNumber": 8,
+              "horseName": "ハグ",
+              "probability": 0.03314543559966551,
+              "score": 4,
+              "finish": 7
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 12,
+              "horseName": "レヴォントゥレット",
+              "probability": 0.2117803234763462,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -3796,10 +4941,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 12,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "horseNumber": 12,
+              "horseName": "レヴォントゥレット",
+              "score": 9,
+              "first": 0,
+              "mark": "◎",
+              "finish": 2
+            },
+            {
+              "horseNumber": 7,
+              "horseName": "ラタフォレスト",
+              "score": 7,
+              "first": 0,
+              "mark": "○",
+              "finish": 8
+            },
+            {
+              "horseNumber": 8,
+              "horseName": "ハグ",
+              "score": 6,
+              "first": 0,
+              "mark": "▲",
+              "finish": 7
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -3841,8 +5011,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "11",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "11-8-12-7-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1610,
+              "netYen": 610,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "11-8-12-7-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2190,
+              "netYen": 1190,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -3918,8 +5119,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "12",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "12-7-8-6-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "12-7-8-6-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -4085,10 +5317,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 6,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 6,
+              "horseName": "バレンタインビスタ",
+              "probability": 0.18637665772322654,
+              "score": 5,
+              "finish": 4
+            },
+            {
+              "mark": "○",
+              "horseNumber": 10,
+              "horseName": "ランプローグ",
+              "probability": 0.05638437022989632,
+              "score": 4,
+              "finish": 7
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 3,
+              "horseName": "ハーモニーソング",
+              "probability": 0.2132577423021172,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -4150,10 +5407,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 10,
+          "topPickFinish": 7,
+          "marks": [
+            {
+              "horseNumber": 10,
+              "horseName": "ランプローグ",
+              "score": 12,
+              "first": 0,
+              "mark": "◎",
+              "finish": 7
+            },
+            {
+              "horseNumber": 3,
+              "horseName": "ハーモニーソング",
+              "score": 10,
+              "first": 0,
+              "mark": "○",
+              "finish": 2
+            },
+            {
+              "horseNumber": 7,
+              "horseName": "ルージュベルベット",
+              "score": 6,
+              "first": 0,
+              "mark": "▲",
+              "finish": 2
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -4195,8 +5477,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-10-3-7-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2860,
+              "netYen": 1860,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-10-3-7-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 7180,
+              "netYen": 6180,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -4272,8 +5585,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-3-7-9-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-3-7-9-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -4440,10 +5784,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 8,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 8,
+              "horseName": "シュネーバレン",
+              "probability": 0.10156872787223319,
+              "score": 5,
+              "finish": 3
+            },
+            {
+              "mark": "○",
+              "horseNumber": 3,
+              "horseName": "ウインリスノアール",
+              "probability": 0.03662784211225946,
+              "score": 4,
+              "finish": 4
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 5,
+              "horseName": "エーアイクワイ",
+              "probability": 0.21379661289685828,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -4505,10 +5874,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 5,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "horseNumber": 5,
+              "horseName": "エーアイクワイ",
+              "score": 13,
+              "first": 0,
+              "mark": "◎",
+              "finish": 2
+            },
+            {
+              "horseNumber": 3,
+              "horseName": "ウインリスノアール",
+              "score": 5,
+              "first": 0,
+              "mark": "○",
+              "finish": 4
+            },
+            {
+              "horseNumber": 2,
+              "horseName": "エーオープリマ",
+              "score": 4,
+              "first": 0,
+              "mark": "▲",
+              "finish": 8
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -4550,8 +5944,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-3-5-4-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1510,
+              "netYen": 510,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-3-5-4-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1860,
+              "netYen": 860,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -4627,8 +6052,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-3-2-11-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-3-2-11-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -4791,10 +6247,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 9,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 9,
+              "horseName": "スクリプトール",
+              "probability": 0.08167945079308712,
+              "score": 5,
+              "finish": 4
+            },
+            {
+              "mark": "○",
+              "horseNumber": 4,
+              "horseName": "カペラテソーロ",
+              "probability": 0.03248386131237395,
+              "score": 4,
+              "finish": 5
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 1,
+              "horseName": "サノノキセキ",
+              "probability": 0.33166607641658624,
+              "score": 3,
+              "finish": 3
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -4856,10 +6337,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 3,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "horseNumber": 3,
+              "horseName": "ウィナーズチェック",
+              "score": 6,
+              "first": 0,
+              "mark": "◎",
+              "finish": 2
+            },
+            {
+              "horseNumber": 8,
+              "horseName": "ファウナード",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 7
+            },
+            {
+              "horseNumber": 4,
+              "horseName": "カペラテソーロ",
+              "score": 5,
+              "first": 0,
+              "mark": "▲",
+              "finish": 5
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -4901,8 +6407,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "9",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "9-4-1-3-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 870,
+              "netYen": -130,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "9-4-1-3-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 420,
+              "netYen": -580,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -4978,8 +6515,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-8-4-6-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-8-4-6-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -5149,10 +6717,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 9,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 9,
+              "horseName": "ハングローズ",
+              "probability": 0.0809141882558138,
+              "score": 5,
+              "finish": 3
+            },
+            {
+              "mark": "○",
+              "horseNumber": 5,
+              "horseName": "ジャガーライズ",
+              "probability": 0.03807766306043493,
+              "score": 4,
+              "finish": 6
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 6,
+              "horseName": "ニンジャトットリ",
+              "probability": 0.1106137191705313,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -5214,10 +6807,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 6,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "horseNumber": 6,
+              "horseName": "ニンジャトットリ",
+              "score": 11,
+              "first": 0,
+              "mark": "◎",
+              "finish": 2
+            },
+            {
+              "horseNumber": 3,
+              "horseName": "エクスペクタント",
+              "score": 7,
+              "first": 0,
+              "mark": "○",
+              "finish": 4
+            },
+            {
+              "horseNumber": 5,
+              "horseName": "ジャガーライズ",
+              "score": 7,
+              "first": 0,
+              "mark": "▲",
+              "finish": 6
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -5259,8 +6877,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "9",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "9-5-6-3-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 690,
+              "netYen": -310,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "9-5-6-3-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 490,
+              "netYen": -510,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -5336,8 +6985,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-3-5-2-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-3-5-2-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -5507,10 +7187,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 11,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 11,
+              "horseName": "ラウンドヒル",
+              "probability": 0.12234631103096903,
+              "score": 5,
+              "finish": 4
+            },
+            {
+              "mark": "○",
+              "horseNumber": 10,
+              "horseName": "ウインドオブヘヴン",
+              "probability": 0.08166869485086874,
+              "score": 4,
+              "finish": 6
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 4,
+              "horseName": "オンナキュヌヴィ",
+              "probability": 0.15325136609277956,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -5572,10 +7277,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 4,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "horseNumber": 4,
+              "horseName": "オンナキュヌヴィ",
+              "score": 10,
+              "first": 0,
+              "mark": "◎",
+              "finish": 2
+            },
+            {
+              "horseNumber": 3,
+              "horseName": "ハイティー",
+              "score": 8,
+              "first": 0,
+              "mark": "○",
+              "finish": 14
+            },
+            {
+              "horseNumber": 10,
+              "horseName": "ウインドオブヘヴン",
+              "score": 5,
+              "first": 0,
+              "mark": "▲",
+              "finish": 6
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -5617,8 +7347,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "11",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "11-10-4-9-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1770,
+              "netYen": 770,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "11-10-4-9-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 11320,
+              "netYen": 10320,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -5694,8 +7455,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-3-10-5-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-3-10-5-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -5864,10 +7656,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 9,
+          "topPickFinish": 5,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 9,
+              "horseName": "マリナーヴァレイ",
+              "probability": 0.10464852003582452,
+              "score": 5,
+              "finish": 5
+            },
+            {
+              "mark": "○",
+              "horseNumber": 3,
+              "horseName": "フェリシタル",
+              "probability": 0.04394806842065042,
+              "score": 4,
+              "finish": 6
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 1,
+              "horseName": "サウンズオーサム",
+              "probability": 0.15663846902731182,
+              "score": 3,
+              "finish": 3
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -5929,10 +7746,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 3,
+          "topPickFinish": 6,
+          "marks": [
+            {
+              "horseNumber": 3,
+              "horseName": "フェリシタル",
+              "score": 12,
+              "first": 0,
+              "mark": "◎",
+              "finish": 6
+            },
+            {
+              "horseNumber": 1,
+              "horseName": "サウンズオーサム",
+              "score": 7,
+              "first": 0,
+              "mark": "○",
+              "finish": 3
+            },
+            {
+              "horseNumber": 11,
+              "horseName": "クレイターレイク",
+              "score": 3,
+              "first": 0,
+              "mark": "▲",
+              "finish": 7
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -5974,8 +7816,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "9",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "9-3-1-13-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1510,
+              "netYen": 510,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "9-3-1-13-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 3740,
+              "netYen": 2740,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -6051,8 +7924,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-1-11-7-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-1-11-7-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -6221,10 +8125,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 1,
+          "topPickFinish": 6,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 1,
+              "horseName": "テンオンスゴールド",
+              "probability": 0.09098602230568786,
+              "score": 5,
+              "finish": 6
+            },
+            {
+              "mark": "○",
+              "horseNumber": 3,
+              "horseName": "サンタピア",
+              "probability": 0.06076037411768267,
+              "score": 4,
+              "finish": 3
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 15,
+              "horseName": "アラビアンドリーム",
+              "probability": 0.2776358196242834,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -6286,10 +8215,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 15,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "horseNumber": 15,
+              "horseName": "アラビアンドリーム",
+              "score": 10,
+              "first": 0,
+              "mark": "◎",
+              "finish": 2
+            },
+            {
+              "horseNumber": 3,
+              "horseName": "サンタピア",
+              "score": 7,
+              "first": 0,
+              "mark": "○",
+              "finish": 3
+            },
+            {
+              "horseNumber": 10,
+              "horseName": "ベイツリー",
+              "score": 4,
+              "first": 0,
+              "mark": "▲",
+              "finish": 14
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -6331,8 +8285,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-3-15-5-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 5010,
+              "netYen": 4010,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-3-15-5-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 132910,
+              "netYen": 131910,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -6408,8 +8393,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "15",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "15-3-10-5-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "15-3-10-5-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -6579,10 +8595,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 13,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 13,
+              "horseName": "マイネルリーヒム",
+              "probability": 0.06584724659246334,
+              "score": 5,
+              "finish": 2
+            },
+            {
+              "mark": "○",
+              "horseNumber": 12,
+              "horseName": "ベルトラッキ",
+              "probability": 0.05285622293210181,
+              "score": 4,
+              "finish": 7
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 8,
+              "horseName": "スチールギターラグ",
+              "probability": 0.07868481986583396,
+              "score": 3,
+              "finish": 5
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -6644,10 +8685,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 8,
+          "topPickFinish": 5,
+          "marks": [
+            {
+              "horseNumber": 8,
+              "horseName": "スチールギターラグ",
+              "score": 13,
+              "first": 0,
+              "mark": "◎",
+              "finish": 5
+            },
+            {
+              "horseNumber": 12,
+              "horseName": "ベルトラッキ",
+              "score": 7,
+              "first": 0,
+              "mark": "○",
+              "finish": 7
+            },
+            {
+              "horseNumber": 7,
+              "horseName": "ブライトエアリー",
+              "score": 4,
+              "first": 0,
+              "mark": "▲",
+              "finish": 3
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -6689,8 +8755,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-12-8-1-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 8160,
+              "netYen": 7160,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-12-8-1-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -6766,8 +8863,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-12-7-5-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-12-7-5-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -6937,10 +9065,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 11,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 11,
+              "horseName": "ブライティアブーケ",
+              "probability": 0.1223017780623515,
+              "score": 5,
+              "finish": 2
+            },
+            {
+              "mark": "○",
+              "horseNumber": 10,
+              "horseName": "ダノンゴーイチ",
+              "probability": 0.0657513282571815,
+              "score": 4,
+              "finish": 4
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 1,
+              "horseName": "サムハラ",
+              "probability": 0.12861741134555174,
+              "score": 3,
+              "finish": 5
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -7002,10 +9155,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 1,
+          "topPickFinish": 5,
+          "marks": [
+            {
+              "horseNumber": 1,
+              "horseName": "サムハラ",
+              "score": 7,
+              "first": 0,
+              "mark": "◎",
+              "finish": 5
+            },
+            {
+              "horseNumber": 2,
+              "horseName": "ブルズアイプリンス",
+              "score": 4,
+              "first": 0,
+              "mark": "○",
+              "finish": 10
+            },
+            {
+              "horseNumber": 10,
+              "horseName": "ダノンゴーイチ",
+              "score": 4,
+              "first": 0,
+              "mark": "▲",
+              "finish": 4
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -7047,8 +9225,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "11",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "11-10-1-13-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 3430,
+              "netYen": 2430,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "11-10-1-13-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -7124,8 +9333,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-2-10-7-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-2-10-7-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -7291,10 +9531,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 11,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 11,
+              "horseName": "ノリマル",
+              "probability": 0.20704876677572664,
+              "score": 5,
+              "finish": 2
+            },
+            {
+              "mark": "○",
+              "horseNumber": 10,
+              "horseName": "オブラプリーマ",
+              "probability": 0.0672284211782839,
+              "score": 4,
+              "finish": 5
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 8,
+              "horseName": "リュクスパトロール",
+              "probability": 0.2126551954595476,
+              "score": 3,
+              "finish": 1
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -7356,10 +9621,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 10,
+          "topPickFinish": 5,
+          "marks": [
+            {
+              "horseNumber": 10,
+              "horseName": "オブラプリーマ",
+              "score": 8,
+              "first": 0,
+              "mark": "◎",
+              "finish": 5
+            },
+            {
+              "horseNumber": 2,
+              "horseName": "パッセージピーク",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 9
+            },
+            {
+              "horseNumber": 7,
+              "horseName": "オメガストリーム",
+              "score": 4,
+              "first": 0,
+              "mark": "▲",
+              "finish": 6
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -7401,8 +9691,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "11",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "11-10-8-2-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2940,
+              "netYen": 1940,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "11-10-8-2-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1870,
+              "netYen": 870,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -7478,8 +9799,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-2-7-9-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-2-7-9-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -7648,10 +10000,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 14,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 14,
+              "horseName": "オーケーマヒナ",
+              "probability": 0.18018712289597816,
+              "score": 5,
+              "finish": 2
+            },
+            {
+              "mark": "○",
+              "horseNumber": 12,
+              "horseName": "タケルハーロック",
+              "probability": 0.08989857800394385,
+              "score": 4,
+              "finish": 4
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 15,
+              "horseName": "モリノアミーゴ",
+              "probability": 0.19067115067359713,
+              "score": 3,
+              "finish": 1
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -7713,10 +10090,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 3,
+          "topPickFinish": 11,
+          "marks": [
+            {
+              "horseNumber": 3,
+              "horseName": "グロスビーク",
+              "score": 8,
+              "first": 0,
+              "mark": "◎",
+              "finish": 11
+            },
+            {
+              "horseNumber": 12,
+              "horseName": "タケルハーロック",
+              "score": 5,
+              "first": 0,
+              "mark": "○",
+              "finish": 4
+            },
+            {
+              "horseNumber": 10,
+              "horseName": "ヴァルドルチャ",
+              "score": 3,
+              "first": 0,
+              "mark": "▲",
+              "finish": 14
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -7758,8 +10160,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "14",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "14-12-15-3-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 12210,
+              "netYen": 11210,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "14-12-15-3-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 19870,
+              "netYen": 18870,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -7835,8 +10268,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-12-10-1-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-12-10-1-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -8006,10 +10470,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 5,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 5,
+              "horseName": "コスモアンソロジー",
+              "probability": 0.13548319409562343,
+              "score": 5,
+              "finish": 4
+            },
+            {
+              "mark": "○",
+              "horseNumber": 9,
+              "horseName": "コンドゥイア",
+              "probability": 0.05847533253845804,
+              "score": 4,
+              "finish": 5
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 4,
+              "horseName": "ワイドアラジン",
+              "probability": 0.1445467527026194,
+              "score": 3,
+              "finish": 3
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -8071,10 +10560,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 4,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "horseNumber": 4,
+              "horseName": "ワイドアラジン",
+              "score": 8,
+              "first": 0,
+              "mark": "◎",
+              "finish": 3
+            },
+            {
+              "horseNumber": 8,
+              "horseName": "ホウオウスーペリア",
+              "score": 8,
+              "first": 0,
+              "mark": "○",
+              "finish": 2
+            },
+            {
+              "horseNumber": 9,
+              "horseName": "コンドゥイア",
+              "score": 8,
+              "first": 0,
+              "mark": "▲",
+              "finish": 5
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -8116,8 +10630,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-9-4-8-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 4940,
+              "netYen": 3940,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-9-4-8-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 16060,
+              "netYen": 15060,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -8193,8 +10738,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-8-9-16-15 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-8-9-16-15 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -8364,10 +10940,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 8,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 8,
+              "horseName": "アンプイットアップ",
+              "probability": 0.132874414813743,
+              "score": 5,
+              "finish": 3
+            },
+            {
+              "mark": "○",
+              "horseNumber": 3,
+              "horseName": "ディヴァインスカイ",
+              "probability": 0.045083680625318444,
+              "score": 4,
+              "finish": 7
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 2,
+              "horseName": "ソニックブレイカー",
+              "probability": 0.24445613640818697,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -8429,10 +11030,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 3,
+          "topPickFinish": 7,
+          "marks": [
+            {
+              "horseNumber": 3,
+              "horseName": "ディヴァインスカイ",
+              "score": 9,
+              "first": 0,
+              "mark": "◎",
+              "finish": 7
+            },
+            {
+              "horseNumber": 13,
+              "horseName": "ベルゼビュート",
+              "score": 4,
+              "first": 0,
+              "mark": "○",
+              "finish": 4
+            },
+            {
+              "horseNumber": 14,
+              "horseName": "エコロカディス",
+              "score": 3,
+              "first": 0,
+              "mark": "▲",
+              "finish": 12
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -8474,8 +11100,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-3-2-13-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 500,
+              "netYen": -500,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-3-2-13-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2590,
+              "netYen": 1590,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -8551,8 +11208,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-13-14-4-16 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-13-14-4-16 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -8718,10 +11406,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 9,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 9,
+              "horseName": "セイフウサツキ",
+              "probability": 0.20660678799554255,
+              "score": 5,
+              "finish": 3
+            },
+            {
+              "mark": "○",
+              "horseNumber": 7,
+              "horseName": "コイヌール",
+              "probability": 0.05298755881380675,
+              "score": 4,
+              "finish": 5
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 11,
+              "horseName": "タイセイレスポンス",
+              "probability": 0.22866044806415337,
+              "score": 3,
+              "finish": 4
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -8783,10 +11496,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 11,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "horseNumber": 11,
+              "horseName": "タイセイレスポンス",
+              "score": 10,
+              "first": 0,
+              "mark": "◎",
+              "finish": 4
+            },
+            {
+              "horseNumber": 7,
+              "horseName": "コイヌール",
+              "score": 7,
+              "first": 0,
+              "mark": "○",
+              "finish": 5
+            },
+            {
+              "horseNumber": 3,
+              "horseName": "アドアプローズ",
+              "score": 3,
+              "first": 0,
+              "mark": "▲",
+              "finish": 6
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -8828,8 +11566,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "9",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "9-7-11-6-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1630,
+              "netYen": 630,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "9-7-11-6-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2990,
+              "netYen": 1990,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -8905,8 +11674,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "11",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "11-7-3-5-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "11-7-3-5-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -9071,10 +11871,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 10,
+          "topPickFinish": 1,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 10,
+              "horseName": "ニシノフランケン",
+              "probability": 0.2095567203199967,
+              "score": 5,
+              "finish": 1
+            },
+            {
+              "mark": "○",
+              "horseNumber": 2,
+              "horseName": "イザベル",
+              "probability": 0.05885731457932746,
+              "score": 4,
+              "finish": 4
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 4,
+              "horseName": "プリメラエストレラ",
+              "probability": 0.2375590583506217,
+              "score": 3,
+              "finish": 3
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -9136,10 +11961,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 2,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "horseNumber": 2,
+              "horseName": "イザベル",
+              "score": 8,
+              "first": 0,
+              "mark": "◎",
+              "finish": 4
+            },
+            {
+              "horseNumber": 9,
+              "horseName": "プリマアルバ",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 6
+            },
+            {
+              "horseNumber": 7,
+              "horseName": "アシャカブラーヴ",
+              "score": 5,
+              "first": 0,
+              "mark": "▲",
+              "finish": 7
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -9181,8 +12031,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 460,
+              "netYen": 360,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-2-4-7-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 350,
+              "netYen": -650,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-2-4-7-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2000,
+              "netYen": 1000,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -9258,8 +12139,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-9-7-6-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-9-7-6-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -9427,10 +12339,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 5,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 5,
+              "horseName": "モズオサキニ",
+              "probability": 0.08906550512410716,
+              "score": 5,
+              "finish": 2
+            },
+            {
+              "mark": "○",
+              "horseNumber": 1,
+              "horseName": "シュタルク",
+              "probability": 0.04642888219171734,
+              "score": 4,
+              "finish": 6
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 14,
+              "horseName": "メイワキラリ",
+              "probability": 0.16389652418890222,
+              "score": 3,
+              "finish": 3
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -9492,10 +12429,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 14,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "horseNumber": 14,
+              "horseName": "メイワキラリ",
+              "score": 11,
+              "first": 0,
+              "mark": "◎",
+              "finish": 3
+            },
+            {
+              "horseNumber": 3,
+              "horseName": "スズカローズキング",
+              "score": 7,
+              "first": 0,
+              "mark": "○",
+              "finish": 12
+            },
+            {
+              "horseNumber": 1,
+              "horseName": "シュタルク",
+              "score": 5,
+              "first": 0,
+              "mark": "▲",
+              "finish": 6
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -9537,8 +12499,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-1-14-7-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1750,
+              "netYen": 750,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-1-14-7-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 3510,
+              "netYen": 2510,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -9614,8 +12607,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "14",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "14-3-1-7-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "14-3-1-7-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -9777,10 +12801,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 5,
+          "topPickFinish": 1,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 5,
+              "horseName": "ヴァレッタカズマ",
+              "probability": 0.19562240290696076,
+              "score": 5,
+              "finish": 1
+            },
+            {
+              "mark": "○",
+              "horseNumber": 3,
+              "horseName": "トーアモルペウス",
+              "probability": 0.03779973816250873,
+              "score": 4,
+              "finish": 6
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 4,
+              "horseName": "スマイルスルー",
+              "probability": 0.2496403708503059,
+              "score": 3,
+              "finish": 3
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -9842,10 +12891,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 4,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "horseNumber": 4,
+              "horseName": "スマイルスルー",
+              "score": 11,
+              "first": 0,
+              "mark": "◎",
+              "finish": 3
+            },
+            {
+              "horseNumber": 3,
+              "horseName": "トーアモルペウス",
+              "score": 9,
+              "first": 0,
+              "mark": "○",
+              "finish": 6
+            },
+            {
+              "horseNumber": 2,
+              "horseName": "コンテナワールド",
+              "score": 8,
+              "first": 0,
+              "mark": "▲",
+              "finish": 4
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -9887,8 +12961,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 8260,
+              "netYen": 8160,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-3-4-2-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 29400,
+              "netYen": 28400,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-3-4-2-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 10340,
+              "netYen": 9340,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -9964,8 +13069,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-3-2-6-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-3-2-6-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -10126,10 +13262,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 5,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 5,
+              "horseName": "ナムラメアリー",
+              "probability": 0.044355307894467906,
+              "score": 5,
+              "finish": 3
+            },
+            {
+              "mark": "○",
+              "horseNumber": 4,
+              "horseName": "キシュウマミー",
+              "probability": 0.012408469852025976,
+              "score": 4,
+              "finish": 4
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 3,
+              "horseName": "ハマナスノサクコロ",
+              "probability": 0.1164702886402419,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -10191,10 +13352,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 3,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "horseNumber": 3,
+              "horseName": "ハマナスノサクコロ",
+              "score": 13,
+              "first": 0,
+              "mark": "◎",
+              "finish": 2
+            },
+            {
+              "horseNumber": 2,
+              "horseName": "タナコクシテンホウ",
+              "score": 7,
+              "first": 0,
+              "mark": "○",
+              "finish": 5
+            },
+            {
+              "horseNumber": 6,
+              "horseName": "マルモタワー",
+              "score": 3,
+              "first": 0,
+              "mark": "▲",
+              "finish": 7
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -10236,8 +13422,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-4-3-2-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 220,
+              "netYen": -780,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-4-3-2-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 390,
+              "netYen": -610,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -10313,8 +13530,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-2-6-5-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-2-6-5-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -10481,10 +13729,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 13,
+          "topPickFinish": 11,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 13,
+              "horseName": "ラクホマレ",
+              "probability": 0.08909910512005152,
+              "score": 5,
+              "finish": 11
+            },
+            {
+              "mark": "○",
+              "horseNumber": 9,
+              "horseName": "ルクスドリーム",
+              "probability": 0.06519780703726179,
+              "score": 4,
+              "finish": 5
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 12,
+              "horseName": "キングズテイル",
+              "probability": 0.13811683978406633,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -10546,10 +13819,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 12,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "horseNumber": 12,
+              "horseName": "キングズテイル",
+              "score": 11,
+              "first": 0,
+              "mark": "◎",
+              "finish": 2
+            },
+            {
+              "horseNumber": 9,
+              "horseName": "ルクスドリーム",
+              "score": 7,
+              "first": 0,
+              "mark": "○",
+              "finish": 5
+            },
+            {
+              "horseNumber": 10,
+              "horseName": "コパノルーカス",
+              "score": 3,
+              "first": 0,
+              "mark": "▲",
+              "finish": null
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -10591,8 +13889,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-9-12-3-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 400,
+              "netYen": -600,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-9-12-3-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2570,
+              "netYen": 1570,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -10668,8 +13997,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "12",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "12-9-10-8-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "12-9-10-8-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -10837,10 +14197,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 8,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 8,
+              "horseName": "ゴールデンテティス",
+              "probability": 0.11157379367959007,
+              "score": 5,
+              "finish": 2
+            },
+            {
+              "mark": "○",
+              "horseNumber": 9,
+              "horseName": "ヒロウッドテール",
+              "probability": 0.04633852668206855,
+              "score": 4,
+              "finish": 5
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 12,
+              "horseName": "ネッカーズルム",
+              "probability": 0.15801119630228733,
+              "score": 3,
+              "finish": 3
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -10902,10 +14287,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 12,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "horseNumber": 12,
+              "horseName": "ネッカーズルム",
+              "score": 11,
+              "first": 0,
+              "mark": "◎",
+              "finish": 3
+            },
+            {
+              "horseNumber": 6,
+              "horseName": "ジリアート",
+              "score": 7,
+              "first": 0,
+              "mark": "○",
+              "finish": 9
+            },
+            {
+              "horseNumber": 9,
+              "horseName": "ヒロウッドテール",
+              "score": 6,
+              "first": 0,
+              "mark": "▲",
+              "finish": 5
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -10947,8 +14357,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-9-12-2-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 990,
+              "netYen": -10,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-9-12-2-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1350,
+              "netYen": 350,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -11024,8 +14465,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "12",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "12-6-9-2-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "12-6-9-2-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -11189,10 +14661,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 5,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 5,
+              "horseName": "ノンブルドール",
+              "probability": 0.1245152603201263,
+              "score": 5,
+              "finish": 2
+            },
+            {
+              "mark": "○",
+              "horseNumber": 1,
+              "horseName": "ダノンアトラス",
+              "probability": 0.025248603723553743,
+              "score": 4,
+              "finish": 5
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 4,
+              "horseName": "ワンダフルボンド",
+              "probability": 0.2210603174126365,
+              "score": 3,
+              "finish": 4
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -11254,10 +14751,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 4,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "horseNumber": 4,
+              "horseName": "ワンダフルボンド",
+              "score": 13,
+              "first": 0,
+              "mark": "◎",
+              "finish": 4
+            },
+            {
+              "horseNumber": 1,
+              "horseName": "ダノンアトラス",
+              "score": 8,
+              "first": 0,
+              "mark": "○",
+              "finish": 5
+            },
+            {
+              "horseNumber": 9,
+              "horseName": "ゴールドアクセス",
+              "score": 5,
+              "first": 0,
+              "mark": "▲",
+              "finish": 3
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -11299,8 +14821,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-1-4-9-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 670,
+              "netYen": -330,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-1-4-9-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 3650,
+              "netYen": 2650,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -11376,8 +14929,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-1-9-7-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-1-9-7-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -11549,10 +15133,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 8,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 8,
+              "horseName": "タカヨシ",
+              "probability": 0.10327886257702243,
+              "score": 5,
+              "finish": 2
+            },
+            {
+              "mark": "○",
+              "horseNumber": 17,
+              "horseName": "スイトーヨ",
+              "probability": 0.04478540215445659,
+              "score": 4,
+              "finish": 13
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 10,
+              "horseName": "タカモリ",
+              "probability": 0.17569249765090336,
+              "score": 3,
+              "finish": 3
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -11614,10 +15223,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 10,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "horseNumber": 10,
+              "horseName": "タカモリ",
+              "score": 10,
+              "first": 0,
+              "mark": "◎",
+              "finish": 3
+            },
+            {
+              "horseNumber": 17,
+              "horseName": "スイトーヨ",
+              "score": 9,
+              "first": 0,
+              "mark": "○",
+              "finish": 13
+            },
+            {
+              "horseNumber": 3,
+              "horseName": "リエーヴェ",
+              "score": 4,
+              "first": 0,
+              "mark": "▲",
+              "finish": 6
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -11659,8 +15293,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-17-10-3-16 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 3710,
+              "netYen": 2710,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-17-10-3-16 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 12490,
+              "netYen": 11490,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -11736,8 +15401,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-17-3-11-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-17-3-11-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -11903,10 +15599,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 5,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 5,
+              "horseName": "タマモジャスミン",
+              "probability": 0.09912832821621548,
+              "score": 5,
+              "finish": 4
+            },
+            {
+              "mark": "○",
+              "horseNumber": 12,
+              "horseName": "タガノヘラクレス",
+              "probability": 0.07793283428346519,
+              "score": 4,
+              "finish": 6
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 1,
+              "horseName": "コスモストーム",
+              "probability": 0.15994267245705227,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -11968,10 +15689,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 1,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "horseNumber": 1,
+              "horseName": "コスモストーム",
+              "score": 11,
+              "first": 0,
+              "mark": "◎",
+              "finish": 2
+            },
+            {
+              "horseNumber": 12,
+              "horseName": "タガノヘラクレス",
+              "score": 8,
+              "first": 0,
+              "mark": "○",
+              "finish": 6
+            },
+            {
+              "horseNumber": 3,
+              "horseName": "メイショウザンゲツ",
+              "score": 2,
+              "first": 0,
+              "mark": "▲",
+              "finish": 11
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -12013,8 +15759,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-12-1-7-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 810,
+              "netYen": -190,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-12-1-7-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 4360,
+              "netYen": 3360,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -12090,8 +15867,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-12-3-6-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-12-3-6-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -12257,10 +16065,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 1,
+          "topPickFinish": 5,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 1,
+              "horseName": "ロードトレイル",
+              "probability": 0.060178927423721953,
+              "score": 5,
+              "finish": 5
+            },
+            {
+              "mark": "○",
+              "horseNumber": 2,
+              "horseName": "トーラスシャイン",
+              "probability": 0.03391608911915342,
+              "score": 4,
+              "finish": 8
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 10,
+              "horseName": "ベイビーキッス",
+              "probability": 0.08818966818986035,
+              "score": 3,
+              "finish": 3
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -12322,10 +16155,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 10,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "horseNumber": 10,
+              "horseName": "ベイビーキッス",
+              "score": 11,
+              "first": 0,
+              "mark": "◎",
+              "finish": 3
+            },
+            {
+              "horseNumber": 2,
+              "horseName": "トーラスシャイン",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 8
+            },
+            {
+              "horseNumber": 3,
+              "horseName": "アイルシャイン",
+              "score": 5,
+              "first": 0,
+              "mark": "▲",
+              "finish": 2
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -12367,8 +16225,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-2-10-3-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2260,
+              "netYen": 1260,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-2-10-3-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 4720,
+              "netYen": 3720,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -12444,8 +16333,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-2-3-11-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-2-3-11-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -12613,10 +16533,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 6,
+          "topPickFinish": 5,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 6,
+              "horseName": "ジューンセクレタ",
+              "probability": 0.06424090591116288,
+              "score": 5,
+              "finish": 5
+            },
+            {
+              "mark": "○",
+              "horseNumber": 13,
+              "horseName": "ヨカオウ",
+              "probability": 0.04128323548208549,
+              "score": 4,
+              "finish": 4
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 7,
+              "horseName": "ブラックレジェンド",
+              "probability": 0.15717659834310874,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -12678,10 +16623,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 7,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "horseNumber": 7,
+              "horseName": "ブラックレジェンド",
+              "score": 10,
+              "first": 0,
+              "mark": "◎",
+              "finish": 2
+            },
+            {
+              "horseNumber": 8,
+              "horseName": "アメリカンスタイル",
+              "score": 7,
+              "first": 0,
+              "mark": "○",
+              "finish": 6
+            },
+            {
+              "horseNumber": 1,
+              "horseName": "ミッキーコンドル",
+              "score": 5,
+              "first": 0,
+              "mark": "▲",
+              "finish": 14
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -12723,8 +16693,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-13-7-8-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 550,
+              "netYen": -450,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-13-7-8-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
@@ -12800,8 +16801,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "7",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "7-8-1-13-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "7-8-1-13-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -12963,17 +16995,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 3,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 3,
+              "horseName": "リアルジャパン",
+              "probability": 0.16052405256554478,
+              "score": 5,
+              "finish": 3
+            },
+            {
+              "mark": "○",
+              "horseNumber": 5,
+              "horseName": "タイフーンナイン",
+              "probability": 0.10623067700811044,
+              "score": 4,
+              "finish": 2
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 2,
+              "horseName": "リーゼントエース",
+              "probability": 0.21117566583849626,
+              "score": 3,
+              "finish": 8
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 2,
+          "topPickFinish": 8,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 2,
+              "horseName": "リーゼントエース",
+              "probability": 0.21117566583849626,
+              "score": 5,
+              "finish": 8
+            },
+            {
+              "mark": "○",
+              "horseNumber": 3,
+              "horseName": "リアルジャパン",
+              "probability": 0.16052405256554478,
+              "score": 4,
+              "finish": 3
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 1,
+              "horseName": "ステラトップガン",
+              "probability": 0.21606023590766243,
+              "score": 3,
+              "finish": 1
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -13006,10 +17088,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 5,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "horseNumber": 5,
+              "horseName": "タイフーンナイン",
+              "score": 10,
+              "first": 0,
+              "mark": "◎",
+              "finish": 2
+            },
+            {
+              "horseNumber": 4,
+              "horseName": "ショパンコンクール",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 5
+            },
+            {
+              "horseNumber": 7,
+              "horseName": "アイルドフルール",
+              "score": 1,
+              "first": 0,
+              "mark": "▲",
+              "finish": 7
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -13051,13 +17158,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-5-2-4-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 510,
+              "netYen": -490,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-5-2-4-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1260,
+              "netYen": 260,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-3-1-4-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 510,
+              "netYen": -490,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-3-1-4-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1260,
+              "netYen": 260,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -13097,8 +17266,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-4-7-3-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 510,
+              "netYen": -490,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-4-7-3-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1260,
+              "netYen": 260,
+              "hit": true
+            }
+          ]
         }
       ]
     },
@@ -13262,17 +17462,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 8,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 8,
+              "horseName": "エコロセレナ",
+              "probability": 0.11599503564307832,
+              "score": 5,
+              "finish": 4
+            },
+            {
+              "mark": "○",
+              "horseNumber": 7,
+              "horseName": "ミスチヴマリアンヌ",
+              "probability": 0.0952170275418086,
+              "score": 4,
+              "finish": 1
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 10,
+              "horseName": "トルークマクト",
+              "probability": 0.11877762480322394,
+              "score": 3,
+              "finish": 6
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 10,
+          "topPickFinish": 6,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 10,
+              "horseName": "トルークマクト",
+              "probability": 0.11877762480322394,
+              "score": 5,
+              "finish": 6
+            },
+            {
+              "mark": "○",
+              "horseNumber": 8,
+              "horseName": "エコロセレナ",
+              "probability": 0.11599503564307832,
+              "score": 4,
+              "finish": 4
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 4,
+              "horseName": "ジャーナーリア",
+              "probability": 0.2079430064196972,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -13305,10 +17555,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 7,
+          "topPickFinish": 1,
+          "marks": [
+            {
+              "horseNumber": 7,
+              "horseName": "ミスチヴマリアンヌ",
+              "score": 8,
+              "first": 0,
+              "mark": "◎",
+              "finish": 1
+            },
+            {
+              "horseNumber": 6,
+              "horseName": "ホワイトラバーズ",
+              "score": 7,
+              "first": 0,
+              "mark": "○",
+              "finish": 7
+            },
+            {
+              "horseNumber": 10,
+              "horseName": "トルークマクト",
+              "score": 16,
+              "first": 1,
+              "mark": "▲",
+              "finish": 6
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -13350,13 +17625,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-7-10-6-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 880,
+              "netYen": -120,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-7-10-6-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-8-4-6-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 880,
+              "netYen": -120,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-8-4-6-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -13396,8 +17733,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "7",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 1280,
+              "netYen": 1180,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "7-6-10-8-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 880,
+              "netYen": -120,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "7-6-10-8-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -13565,17 +17933,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 1,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 1,
+              "horseName": "サクセスゴールド",
+              "probability": 0.0959510618987251,
+              "score": 5,
+              "finish": 4
+            },
+            {
+              "mark": "○",
+              "horseNumber": 12,
+              "horseName": "スマートコーラル",
+              "probability": 0.0815749088183316,
+              "score": 4,
+              "finish": 7
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 11,
+              "horseName": "ホウオウファラオ",
+              "probability": 0.1053700753634897,
+              "score": 3,
+              "finish": 3
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 11,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 11,
+              "horseName": "ホウオウファラオ",
+              "probability": 0.1053700753634897,
+              "score": 5,
+              "finish": 3
+            },
+            {
+              "mark": "○",
+              "horseNumber": 1,
+              "horseName": "サクセスゴールド",
+              "probability": 0.0959510618987251,
+              "score": 4,
+              "finish": 4
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 13,
+              "horseName": "ニシノモリミチ",
+              "probability": 0.10679380760435737,
+              "score": 3,
+              "finish": 11
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -13608,10 +18026,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 12,
+          "topPickFinish": 7,
+          "marks": [
+            {
+              "horseNumber": 12,
+              "horseName": "スマートコーラル",
+              "score": 8,
+              "first": 0,
+              "mark": "◎",
+              "finish": 7
+            },
+            {
+              "horseNumber": 7,
+              "horseName": "キセログラフィカ",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 10
+            },
+            {
+              "horseNumber": 3,
+              "horseName": "ルージュリヴィエラ",
+              "score": 1,
+              "first": 0,
+              "mark": "▲",
+              "finish": 2
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -13653,13 +18096,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-12-11-7-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-12-11-7-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "11",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "11-1-13-7-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "11-1-13-7-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -13699,8 +18204,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "12",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "12-7-3-11-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "12-7-3-11-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -13867,17 +18403,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 9,
+          "topPickFinish": 9,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 9,
+              "horseName": "コスモブラック",
+              "probability": 0.09642000098935977,
+              "score": 5,
+              "finish": 9
+            },
+            {
+              "mark": "○",
+              "horseNumber": 12,
+              "horseName": "フローレンスフーガ",
+              "probability": 0.08093243730382216,
+              "score": 4,
+              "finish": 11
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 7,
+              "horseName": "ギオンバヤシ",
+              "probability": 0.1262748559498974,
+              "score": 3,
+              "finish": 4
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 7,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 7,
+              "horseName": "ギオンバヤシ",
+              "probability": 0.1262748559498974,
+              "score": 5,
+              "finish": 4
+            },
+            {
+              "mark": "○",
+              "horseNumber": 9,
+              "horseName": "コスモブラック",
+              "probability": 0.09642000098935977,
+              "score": 4,
+              "finish": 9
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 3,
+              "horseName": "ウインカトリーヌ",
+              "probability": 0.12794978365169693,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -13910,10 +18496,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 13,
+          "topPickFinish": 13,
+          "marks": [
+            {
+              "horseNumber": 13,
+              "horseName": "コティノス",
+              "score": 9,
+              "first": 0,
+              "mark": "◎",
+              "finish": 13
+            },
+            {
+              "horseNumber": 12,
+              "horseName": "フローレンスフーガ",
+              "score": 8,
+              "first": 0,
+              "mark": "○",
+              "finish": 11
+            },
+            {
+              "horseNumber": 3,
+              "horseName": "ウインカトリーヌ",
+              "score": 13,
+              "first": 1,
+              "mark": "▲",
+              "finish": 2
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -13955,13 +18566,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "9",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "9-12-7-13-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "9-12-7-13-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "7",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "7-9-3-13-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "7-9-3-13-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -14001,8 +18674,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-12-3-9-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-12-3-9-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -14170,17 +18874,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 8,
+          "topPickFinish": 14,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 8,
+              "horseName": "エコロルーク",
+              "probability": 0.08988862642233653,
+              "score": 5,
+              "finish": 14
+            },
+            {
+              "mark": "○",
+              "horseNumber": 10,
+              "horseName": "エコロヴァルド",
+              "probability": 0.08470680661200256,
+              "score": 4,
+              "finish": 13
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 14,
+              "horseName": "ヒアカムズザサン",
+              "probability": 0.10633526168502101,
+              "score": 3,
+              "finish": 12
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 14,
+          "topPickFinish": 12,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 14,
+              "horseName": "ヒアカムズザサン",
+              "probability": 0.10633526168502101,
+              "score": 5,
+              "finish": 12
+            },
+            {
+              "mark": "○",
+              "horseNumber": 8,
+              "horseName": "エコロルーク",
+              "probability": 0.08988862642233653,
+              "score": 4,
+              "finish": 14
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 6,
+              "horseName": "ロジアコース",
+              "probability": 0.12379533941336578,
+              "score": 3,
+              "finish": 7
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -14213,10 +18967,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 13,
+          "topPickFinish": 5,
+          "marks": [
+            {
+              "horseNumber": 13,
+              "horseName": "サルトヴェローチェ",
+              "score": 9,
+              "first": 0,
+              "mark": "◎",
+              "finish": 5
+            },
+            {
+              "horseNumber": 10,
+              "horseName": "エコロヴァルド",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 13
+            },
+            {
+              "horseNumber": 3,
+              "horseName": "フィオリアーモ",
+              "score": 1,
+              "first": 0,
+              "mark": "▲",
+              "finish": 10
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -14258,13 +19037,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-10-14-13-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-10-14-13-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "14",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "14-8-6-13-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "14-8-6-13-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -14304,8 +19145,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-10-3-8-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-10-3-8-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -14475,17 +19347,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 14,
+          "topPickFinish": 14,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 14,
+              "horseName": "トゥルージョワ",
+              "probability": 0.08351210198334261,
+              "score": 5,
+              "finish": 14
+            },
+            {
+              "mark": "○",
+              "horseNumber": 15,
+              "horseName": "チェサピークベイ",
+              "probability": 0.07318474764816263,
+              "score": 4,
+              "finish": 15
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 3,
+              "horseName": "ライトオブジアース",
+              "probability": 0.08491724677877811,
+              "score": 3,
+              "finish": 8
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 3,
+          "topPickFinish": 8,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 3,
+              "horseName": "ライトオブジアース",
+              "probability": 0.08491724677877811,
+              "score": 5,
+              "finish": 8
+            },
+            {
+              "mark": "○",
+              "horseNumber": 14,
+              "horseName": "トゥルージョワ",
+              "probability": 0.08351210198334261,
+              "score": 4,
+              "finish": 14
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 11,
+              "horseName": "リアライズブルーム",
+              "probability": 0.0855405443477587,
+              "score": 3,
+              "finish": 11
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -14518,10 +19440,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 1,
+          "topPickFinish": 1,
+          "marks": [
+            {
+              "horseNumber": 1,
+              "horseName": "コスモファーブロス",
+              "score": 9,
+              "first": 0,
+              "mark": "◎",
+              "finish": 1
+            },
+            {
+              "horseNumber": 9,
+              "horseName": "リネアベルタ",
+              "score": 2,
+              "first": 0,
+              "mark": "○",
+              "finish": 2
+            },
+            {
+              "horseNumber": 12,
+              "horseName": "クープグラッセ",
+              "score": 1,
+              "first": 0,
+              "mark": "▲",
+              "finish": 7
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -14563,13 +19510,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "14",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "14-15-3-1-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "14-15-3-1-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-14-11-1-15 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-14-11-1-15 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -14609,8 +19618,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 340,
+              "netYen": 240,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-9-12-11-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 2000,
+              "netYen": 1000,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-9-12-11-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -14778,17 +19818,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 14,
+          "topPickFinish": 5,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 14,
+              "horseName": "ヴァレンティーニ",
+              "probability": 0.10121361357706317,
+              "score": 5,
+              "finish": 5
+            },
+            {
+              "mark": "○",
+              "horseNumber": 3,
+              "horseName": "ゴールドヴィーナス",
+              "probability": 0.07780660796232518,
+              "score": 4,
+              "finish": 13
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 7,
+              "horseName": "ジーティーアリア",
+              "probability": 0.10511502582950338,
+              "score": 3,
+              "finish": 7
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 7,
+          "topPickFinish": 7,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 7,
+              "horseName": "ジーティーアリア",
+              "probability": 0.10511502582950338,
+              "score": 5,
+              "finish": 7
+            },
+            {
+              "mark": "○",
+              "horseNumber": 14,
+              "horseName": "ヴァレンティーニ",
+              "probability": 0.10121361357706317,
+              "score": 4,
+              "finish": 5
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 10,
+              "horseName": "ゴールドドレッサ",
+              "probability": 0.10580590465507479,
+              "score": 3,
+              "finish": 3
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -14821,10 +19911,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 3,
+          "topPickFinish": 13,
+          "marks": [
+            {
+              "horseNumber": 3,
+              "horseName": "ゴールドヴィーナス",
+              "score": 7,
+              "first": 0,
+              "mark": "◎",
+              "finish": 13
+            },
+            {
+              "horseNumber": 4,
+              "horseName": "プリンセスアツコ",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 1
+            },
+            {
+              "horseNumber": 11,
+              "horseName": "ストラニエーロ",
+              "score": 3,
+              "first": 0,
+              "mark": "▲",
+              "finish": 11
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -14866,13 +19981,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "14",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "14-3-7-4-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "14-3-7-4-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "7",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "7-14-10-4-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "7-14-10-4-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -14912,8 +20089,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-4-11-14-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-4-11-14-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -15077,17 +20285,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 6,
+          "topPickFinish": 9,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 6,
+              "horseName": "キャンドルマス",
+              "probability": 0.13768853856383062,
+              "score": 5,
+              "finish": 9
+            },
+            {
+              "mark": "○",
+              "horseNumber": 2,
+              "horseName": "プレザントトーン",
+              "probability": 0.10518038061206073,
+              "score": 4,
+              "finish": 8
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 3,
+              "horseName": "イングラム",
+              "probability": 0.14145936758705044,
+              "score": 3,
+              "finish": 5
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 3,
+          "topPickFinish": 5,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 3,
+              "horseName": "イングラム",
+              "probability": 0.14145936758705044,
+              "score": 5,
+              "finish": 5
+            },
+            {
+              "mark": "○",
+              "horseNumber": 6,
+              "horseName": "キャンドルマス",
+              "probability": 0.13768853856383062,
+              "score": 4,
+              "finish": 9
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 4,
+              "horseName": "ワイドデコラシオン",
+              "probability": 0.15089301858966117,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -15120,10 +20378,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 10,
+          "topPickFinish": 10,
+          "marks": [
+            {
+              "horseNumber": 10,
+              "horseName": "タイセイモノリス",
+              "score": 9,
+              "first": 0,
+              "mark": "◎",
+              "finish": 10
+            },
+            {
+              "horseNumber": 2,
+              "horseName": "プレザントトーン",
+              "score": 7,
+              "first": 0,
+              "mark": "○",
+              "finish": 8
+            },
+            {
+              "horseNumber": 3,
+              "horseName": "イングラム",
+              "score": 14,
+              "first": 1,
+              "mark": "▲",
+              "finish": 5
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -15165,13 +20448,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-2-3-10-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-2-3-10-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-6-4-10-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-6-4-10-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -15211,8 +20556,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-2-3-4-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-2-3-4-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -15379,17 +20755,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 9,
+          "topPickFinish": 1,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 9,
+              "horseName": "モンローウォーク",
+              "probability": 0.10845649033066644,
+              "score": 5,
+              "finish": 1
+            },
+            {
+              "mark": "○",
+              "horseNumber": 4,
+              "horseName": "アストリル",
+              "probability": 0.09240057053841305,
+              "score": 4,
+              "finish": 2
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 2,
+              "horseName": "マイスターヴェルク",
+              "probability": 0.129478421277698,
+              "score": 3,
+              "finish": 5
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 2,
+          "topPickFinish": 5,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 2,
+              "horseName": "マイスターヴェルク",
+              "probability": 0.129478421277698,
+              "score": 5,
+              "finish": 5
+            },
+            {
+              "mark": "○",
+              "horseNumber": 9,
+              "horseName": "モンローウォーク",
+              "probability": 0.10845649033066644,
+              "score": 4,
+              "finish": 1
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 10,
+              "horseName": "マドモアゼルアスク",
+              "probability": 0.1335716164172816,
+              "score": 3,
+              "finish": 7
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -15422,10 +20848,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 1,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "horseNumber": 1,
+              "horseName": "レーヴドロペラ",
+              "score": 6,
+              "first": 0,
+              "mark": "◎",
+              "finish": 4
+            },
+            {
+              "horseNumber": 4,
+              "horseName": "アストリル",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 2
+            },
+            {
+              "horseNumber": 6,
+              "horseName": "ロートホルン",
+              "score": 2,
+              "first": 0,
+              "mark": "▲",
+              "finish": 3
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -15467,13 +20918,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "9",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 150,
+              "netYen": 50,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "9-4-2-1-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 480,
+              "netYen": -520,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "9-4-2-1-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-9-10-1-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 480,
+              "netYen": -520,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-9-10-1-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -15513,8 +21026,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-4-6-8-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 480,
+              "netYen": -520,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-4-6-8-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1920,
+              "netYen": 920,
+              "hit": true
+            }
+          ]
         }
       ]
     },
@@ -15682,17 +21226,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 3,
+          "topPickFinish": 12,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 3,
+              "horseName": "テルアスワッド",
+              "probability": 0.087654479216119,
+              "score": 5,
+              "finish": 12
+            },
+            {
+              "mark": "○",
+              "horseNumber": 11,
+              "horseName": "メイショウタイピン",
+              "probability": 0.0740851995363771,
+              "score": 4,
+              "finish": 7
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 14,
+              "horseName": "プライベートアイズ",
+              "probability": 0.09329078286241031,
+              "score": 3,
+              "finish": 3
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 14,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 14,
+              "horseName": "プライベートアイズ",
+              "probability": 0.09329078286241031,
+              "score": 5,
+              "finish": 3
+            },
+            {
+              "mark": "○",
+              "horseNumber": 3,
+              "horseName": "テルアスワッド",
+              "probability": 0.087654479216119,
+              "score": 4,
+              "finish": 12
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 9,
+              "horseName": "シーズザスローン",
+              "probability": 0.18001123130006738,
+              "score": 3,
+              "finish": 1
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -15725,10 +21319,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 11,
+          "topPickFinish": 7,
+          "marks": [
+            {
+              "horseNumber": 11,
+              "horseName": "メイショウタイピン",
+              "score": 6,
+              "first": 0,
+              "mark": "◎",
+              "finish": 7
+            },
+            {
+              "horseNumber": 12,
+              "horseName": "タガノエルー",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 2
+            },
+            {
+              "horseNumber": 1,
+              "horseName": "ウインシャーガス",
+              "score": 2,
+              "first": 0,
+              "mark": "▲",
+              "finish": 6
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -15770,13 +21389,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-11-14-12-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 440,
+              "netYen": -560,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-11-14-12-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1050,
+              "netYen": 50,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "14",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "14-3-9-12-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 440,
+              "netYen": -560,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "14-3-9-12-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1050,
+              "netYen": 50,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -15816,8 +21497,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "11",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "11-12-1-7-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "11-12-1-7-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -15984,17 +21696,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 12,
+          "topPickFinish": 10,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 12,
+              "horseName": "ダイメイビッグボス",
+              "probability": 0.09379607488275252,
+              "score": 5,
+              "finish": 10
+            },
+            {
+              "mark": "○",
+              "horseNumber": 4,
+              "horseName": "アルテクィーン",
+              "probability": 0.07687766969928302,
+              "score": 4,
+              "finish": 8
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 10,
+              "horseName": "ノリヤンモーニン",
+              "probability": 0.100369192257571,
+              "score": 3,
+              "finish": 4
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 10,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 10,
+              "horseName": "ノリヤンモーニン",
+              "probability": 0.100369192257571,
+              "score": 5,
+              "finish": 4
+            },
+            {
+              "mark": "○",
+              "horseNumber": 12,
+              "horseName": "ダイメイビッグボス",
+              "probability": 0.09379607488275252,
+              "score": 4,
+              "finish": 10
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 11,
+              "horseName": "シグレ",
+              "probability": 0.10622108209189696,
+              "score": 3,
+              "finish": 5
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -16027,10 +21789,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 4,
+          "topPickFinish": 8,
+          "marks": [
+            {
+              "horseNumber": 4,
+              "horseName": "アルテクィーン",
+              "score": 8,
+              "first": 0,
+              "mark": "◎",
+              "finish": 8
+            },
+            {
+              "horseNumber": 2,
+              "horseName": "ダイシンドラゴン",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 3
+            },
+            {
+              "horseNumber": 9,
+              "horseName": "イモージェン",
+              "score": 1,
+              "first": 0,
+              "mark": "▲",
+              "finish": 2
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -16072,13 +21859,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "12",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "12-4-10-2-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "12-4-10-2-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-12-11-2-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-12-11-2-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -16118,8 +21967,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-2-9-12-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-2-9-12-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -16287,17 +22167,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 5,
+          "topPickFinish": 7,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 5,
+              "horseName": "ロードクラシコ",
+              "probability": 0.09475018046924444,
+              "score": 5,
+              "finish": 7
+            },
+            {
+              "mark": "○",
+              "horseNumber": 1,
+              "horseName": "ザカリナン",
+              "probability": 0.08387361591385376,
+              "score": 4,
+              "finish": 2
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 8,
+              "horseName": "ロードヴェルテクス",
+              "probability": 0.10436341614407661,
+              "score": 3,
+              "finish": 8
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 8,
+          "topPickFinish": 8,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 8,
+              "horseName": "ロードヴェルテクス",
+              "probability": 0.10436341614407661,
+              "score": 5,
+              "finish": 8
+            },
+            {
+              "mark": "○",
+              "horseNumber": 5,
+              "horseName": "ロードクラシコ",
+              "probability": 0.09475018046924444,
+              "score": 4,
+              "finish": 7
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 4,
+              "horseName": "ホウオウヘッセン",
+              "probability": 0.12791744559750906,
+              "score": 3,
+              "finish": 1
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -16330,10 +22260,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 3,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "horseNumber": 3,
+              "horseName": "マグネシアブリック",
+              "score": 10,
+              "first": 0,
+              "mark": "◎",
+              "finish": 3
+            },
+            {
+              "horseNumber": 1,
+              "horseName": "ザカリナン",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 2
+            },
+            {
+              "horseNumber": 2,
+              "horseName": "コモンスナイプ",
+              "score": 2,
+              "first": 0,
+              "mark": "▲",
+              "finish": 5
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -16375,13 +22330,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-1-8-3-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1600,
+              "netYen": 600,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-1-8-3-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1890,
+              "netYen": 890,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-5-4-3-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1600,
+              "netYen": 600,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-5-4-3-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1890,
+              "netYen": 890,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -16421,8 +22438,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-1-2-9-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-1-2-9-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -16586,17 +22634,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 3,
+          "topPickFinish": 5,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 3,
+              "horseName": "スウィット",
+              "probability": 0.11939278776240185,
+              "score": 5,
+              "finish": 5
+            },
+            {
+              "mark": "○",
+              "horseNumber": 9,
+              "horseName": "レオライジング",
+              "probability": 0.08383248260715565,
+              "score": 4,
+              "finish": 7
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 1,
+              "horseName": "ムーンベリル",
+              "probability": 0.1355285161125187,
+              "score": 3,
+              "finish": 1
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 1,
+          "topPickFinish": 1,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 1,
+              "horseName": "ムーンベリル",
+              "probability": 0.1355285161125187,
+              "score": 5,
+              "finish": 1
+            },
+            {
+              "mark": "○",
+              "horseNumber": 3,
+              "horseName": "スウィット",
+              "probability": 0.11939278776240185,
+              "score": 4,
+              "finish": 5
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 2,
+              "horseName": "ケンシロウワールド",
+              "probability": 0.1927021439024554,
+              "score": 3,
+              "finish": 9
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -16629,10 +22727,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 9,
+          "topPickFinish": 7,
+          "marks": [
+            {
+              "horseNumber": 9,
+              "horseName": "レオライジング",
+              "score": 6,
+              "first": 0,
+              "mark": "◎",
+              "finish": 7
+            },
+            {
+              "horseNumber": 10,
+              "horseName": "ユイノキャッツアイ",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 3
+            },
+            {
+              "horseNumber": 6,
+              "horseName": "ドナビッグベン",
+              "score": 3,
+              "first": 0,
+              "mark": "▲",
+              "finish": 2
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -16674,13 +22797,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-9-1-10-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-9-1-10-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 110,
+              "netYen": 10,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-3-2-10-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-3-2-10-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -16720,8 +22905,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "9",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "9-10-6-4-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "9-10-6-4-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -16891,17 +23107,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 13,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 13,
+              "horseName": "アマンヘセル",
+              "probability": 0.08565351737039503,
+              "score": 5,
+              "finish": 3
+            },
+            {
+              "mark": "○",
+              "horseNumber": 11,
+              "horseName": "ジャストマイウェイ",
+              "probability": 0.07370760467837463,
+              "score": 4,
+              "finish": 13
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 8,
+              "horseName": "サトノスターライト",
+              "probability": 0.08710221158435483,
+              "score": 3,
+              "finish": 8
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 8,
+          "topPickFinish": 8,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 8,
+              "horseName": "サトノスターライト",
+              "probability": 0.08710221158435483,
+              "score": 5,
+              "finish": 8
+            },
+            {
+              "mark": "○",
+              "horseNumber": 13,
+              "horseName": "アマンヘセル",
+              "probability": 0.08565351737039503,
+              "score": 4,
+              "finish": 3
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 2,
+              "horseName": "ジャストビコーズ",
+              "probability": 0.10530240335083123,
+              "score": 3,
+              "finish": 9
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -16934,10 +23200,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 11,
+          "topPickFinish": 13,
+          "marks": [
+            {
+              "horseNumber": 11,
+              "horseName": "ジャストマイウェイ",
+              "score": 6,
+              "first": 0,
+              "mark": "◎",
+              "finish": 13
+            },
+            {
+              "horseNumber": 5,
+              "horseName": "フジサン",
+              "score": 1,
+              "first": 0,
+              "mark": "○",
+              "finish": 4
+            },
+            {
+              "horseNumber": 8,
+              "horseName": "サトノスターライト",
+              "score": 16,
+              "first": 1,
+              "mark": "▲",
+              "finish": 8
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -16979,13 +23270,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-11-8-16-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-11-8-16-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-13-2-16-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-13-2-16-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -17025,8 +23378,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "11",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "11-5-8-13-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "11-5-8-13-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -17196,17 +23580,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 10,
+          "topPickFinish": 9,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 10,
+              "horseName": "レッドフリーマン",
+              "probability": 0.07039939036265881,
+              "score": 5,
+              "finish": 9
+            },
+            {
+              "mark": "○",
+              "horseNumber": 7,
+              "horseName": "チャチャット",
+              "probability": 0.059394566856899055,
+              "score": 4,
+              "finish": 16
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 8,
+              "horseName": "ペプチドドリーム",
+              "probability": 0.08811506795689839,
+              "score": 3,
+              "finish": 1
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 8,
+          "topPickFinish": 1,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 8,
+              "horseName": "ペプチドドリーム",
+              "probability": 0.08811506795689839,
+              "score": 5,
+              "finish": 1
+            },
+            {
+              "mark": "○",
+              "horseNumber": 10,
+              "horseName": "レッドフリーマン",
+              "probability": 0.07039939036265881,
+              "score": 4,
+              "finish": 9
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 6,
+              "horseName": "グランマエストロ",
+              "probability": 0.18035085223261318,
+              "score": 3,
+              "finish": 8
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -17239,10 +23673,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 7,
+          "topPickFinish": 16,
+          "marks": [
+            {
+              "horseNumber": 7,
+              "horseName": "チャチャット",
+              "score": 10,
+              "first": 0,
+              "mark": "◎",
+              "finish": 16
+            },
+            {
+              "horseNumber": 14,
+              "horseName": "シャルムグリーン",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 5
+            },
+            {
+              "horseNumber": 4,
+              "horseName": "ランウェイミューズ",
+              "score": 3,
+              "first": 0,
+              "mark": "▲",
+              "finish": 4
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -17284,13 +23743,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-7-8-14-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-7-8-14-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 190,
+              "netYen": 90,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-10-6-14-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-10-6-14-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -17330,8 +23851,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "7",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "7-14-4-16-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "7-14-4-16-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -17500,17 +24052,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 3,
+          "topPickFinish": 9,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 3,
+              "horseName": "フェスティヴハート",
+              "probability": 0.07275112949012869,
+              "score": 5,
+              "finish": 9
+            },
+            {
+              "mark": "○",
+              "horseNumber": 4,
+              "horseName": "トラストレガート",
+              "probability": 0.07061557753073767,
+              "score": 4,
+              "finish": 4
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 9,
+              "horseName": "ユニバーサルラヴ",
+              "probability": 0.08151866257775532,
+              "score": 3,
+              "finish": 3
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 9,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 9,
+              "horseName": "ユニバーサルラヴ",
+              "probability": 0.08151866257775532,
+              "score": 5,
+              "finish": 3
+            },
+            {
+              "mark": "○",
+              "horseNumber": 3,
+              "horseName": "フェスティヴハート",
+              "probability": 0.07275112949012869,
+              "score": 4,
+              "finish": 9
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 12,
+              "horseName": "ウィッシュリスト",
+              "probability": 0.0851026392310627,
+              "score": 3,
+              "finish": 15
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -17543,10 +24145,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 4,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "horseNumber": 4,
+              "horseName": "トラストレガート",
+              "score": 8,
+              "first": 0,
+              "mark": "◎",
+              "finish": 4
+            },
+            {
+              "horseNumber": 14,
+              "horseName": "マッドヘッドラブ",
+              "score": 7,
+              "first": 0,
+              "mark": "○",
+              "finish": 11
+            },
+            {
+              "horseNumber": 13,
+              "horseName": "アルティソナンテ",
+              "score": 3,
+              "first": 0,
+              "mark": "▲",
+              "finish": 5
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -17588,13 +24215,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-4-9-14-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-4-9-14-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "9",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "9-3-12-14-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "9-3-12-14-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -17634,8 +24323,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-14-13-9-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-14-13-9-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -17802,17 +24522,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 11,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 11,
+              "horseName": "エンルートフライト",
+              "probability": 0.09109750916502563,
+              "score": 5,
+              "finish": 2
+            },
+            {
+              "mark": "○",
+              "horseNumber": 4,
+              "horseName": "グランオギュール",
+              "probability": 0.07648621497882307,
+              "score": 4,
+              "finish": 1
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 5,
+              "horseName": "ロワデュモンド",
+              "probability": 0.10383080491834426,
+              "score": 3,
+              "finish": 4
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 5,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 5,
+              "horseName": "ロワデュモンド",
+              "probability": 0.10383080491834426,
+              "score": 5,
+              "finish": 4
+            },
+            {
+              "mark": "○",
+              "horseNumber": 11,
+              "horseName": "エンルートフライト",
+              "probability": 0.09109750916502563,
+              "score": 4,
+              "finish": 2
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 9,
+              "horseName": "ヴェルバーニア",
+              "probability": 0.17615728148031246,
+              "score": 3,
+              "finish": 3
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -17845,10 +24615,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 2,
+          "topPickFinish": 5,
+          "marks": [
+            {
+              "horseNumber": 2,
+              "horseName": "サンタンヌ",
+              "score": 10,
+              "first": 0,
+              "mark": "◎",
+              "finish": 5
+            },
+            {
+              "horseNumber": 4,
+              "horseName": "グランオギュール",
+              "score": 8,
+              "first": 0,
+              "mark": "○",
+              "finish": 1
+            },
+            {
+              "horseNumber": 6,
+              "horseName": "マハロハ",
+              "score": 1,
+              "first": 0,
+              "mark": "▲",
+              "finish": 7
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -17890,13 +24685,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "11",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "11-4-5-2-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1320,
+              "netYen": 320,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "11-4-5-2-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1010,
+              "netYen": 10,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-11-9-2-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1320,
+              "netYen": 320,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-11-9-2-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1010,
+              "netYen": 10,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -17936,8 +24793,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-4-6-11-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1320,
+              "netYen": 320,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-4-6-11-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -18107,17 +24995,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 6,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 6,
+              "horseName": "グルーヴェンス",
+              "probability": 0.08466834932718798,
+              "score": 5,
+              "finish": 2
+            },
+            {
+              "mark": "○",
+              "horseNumber": 1,
+              "horseName": "エリンヘラクレス",
+              "probability": 0.07673812068491671,
+              "score": 4,
+              "finish": 14
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 14,
+              "horseName": "チャランダマルツ",
+              "probability": 0.09038460042778895,
+              "score": 3,
+              "finish": 1
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 14,
+          "topPickFinish": 1,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 14,
+              "horseName": "チャランダマルツ",
+              "probability": 0.09038460042778895,
+              "score": 5,
+              "finish": 1
+            },
+            {
+              "mark": "○",
+              "horseNumber": 6,
+              "horseName": "グルーヴェンス",
+              "probability": 0.08466834932718798,
+              "score": 4,
+              "finish": 2
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 2,
+              "horseName": "トランサルピナ",
+              "probability": 0.11071230047307536,
+              "score": 3,
+              "finish": 9
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -18150,10 +25088,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 13,
+          "topPickFinish": 13,
+          "marks": [
+            {
+              "horseNumber": 13,
+              "horseName": "アイアムキレマスネ",
+              "score": 7,
+              "first": 0,
+              "mark": "◎",
+              "finish": 13
+            },
+            {
+              "horseNumber": 1,
+              "horseName": "エリンヘラクレス",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 14
+            },
+            {
+              "horseNumber": 11,
+              "horseName": "ヴァンデエス",
+              "score": 2,
+              "first": 0,
+              "mark": "▲",
+              "finish": 16
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -18195,13 +25158,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-1-14-13-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 980,
+              "netYen": -20,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-1-14-13-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "14",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 270,
+              "netYen": 170,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "14-6-2-13-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 980,
+              "netYen": -20,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "14-6-2-13-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -18241,8 +25266,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-1-11-6-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-1-11-6-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -18411,17 +25467,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 7,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 7,
+              "horseName": "ユイノサダハル",
+              "probability": 0.08093278593267152,
+              "score": 5,
+              "finish": 2
+            },
+            {
+              "mark": "○",
+              "horseNumber": 14,
+              "horseName": "スルーザゴールド",
+              "probability": 0.07910160773158129,
+              "score": 4,
+              "finish": null
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 4,
+              "horseName": "イントゥザウインド",
+              "probability": 0.08902610879049516,
+              "score": 3,
+              "finish": 13
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 4,
+          "topPickFinish": 13,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 4,
+              "horseName": "イントゥザウインド",
+              "probability": 0.08902610879049516,
+              "score": 5,
+              "finish": 13
+            },
+            {
+              "mark": "○",
+              "horseNumber": 7,
+              "horseName": "ユイノサダハル",
+              "probability": 0.08093278593267152,
+              "score": 4,
+              "finish": 2
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 15,
+              "horseName": "テキサスバローズ",
+              "probability": 0.09639698677207563,
+              "score": 3,
+              "finish": 11
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -18454,10 +25560,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 13,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "horseNumber": 13,
+              "horseName": "ファイアリービート",
+              "score": 8,
+              "first": 0,
+              "mark": "◎",
+              "finish": 3
+            },
+            {
+              "horseNumber": 14,
+              "horseName": "スルーザゴールド",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": null
+            },
+            {
+              "horseNumber": 11,
+              "horseName": "リアルパラダイス",
+              "score": 1,
+              "first": 0,
+              "mark": "▲",
+              "finish": 8
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -18499,13 +25630,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "7",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "7-14-4-13-15 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "7-14-4-13-15 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-7-15-13-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-7-15-13-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -18545,8 +25738,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-14-11-7-15 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-14-11-7-15 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -18716,17 +25940,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 12,
+          "topPickFinish": 14,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 12,
+              "horseName": "ミエノストロング",
+              "probability": 0.08566111150110105,
+              "score": 5,
+              "finish": 14
+            },
+            {
+              "mark": "○",
+              "horseNumber": 5,
+              "horseName": "ポッドロルフ",
+              "probability": 0.06038751300001026,
+              "score": 4,
+              "finish": 9
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 8,
+              "horseName": "アメテュストス",
+              "probability": 0.13437913620463973,
+              "score": 3,
+              "finish": 11
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 8,
+          "topPickFinish": 11,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 8,
+              "horseName": "アメテュストス",
+              "probability": 0.13437913620463973,
+              "score": 5,
+              "finish": 11
+            },
+            {
+              "mark": "○",
+              "horseNumber": 12,
+              "horseName": "ミエノストロング",
+              "probability": 0.08566111150110105,
+              "score": 4,
+              "finish": 14
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 2,
+              "horseName": "ロスパレドネス",
+              "probability": 0.17162054320931647,
+              "score": 3,
+              "finish": 12
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -18759,10 +26033,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 5,
+          "topPickFinish": 9,
+          "marks": [
+            {
+              "horseNumber": 5,
+              "horseName": "ポッドロルフ",
+              "score": 7,
+              "first": 0,
+              "mark": "◎",
+              "finish": 9
+            },
+            {
+              "horseNumber": 15,
+              "horseName": "トーセンブリラーレ",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 10
+            },
+            {
+              "horseNumber": 13,
+              "horseName": "ピエナフェーヴル",
+              "score": 2,
+              "first": 0,
+              "mark": "▲",
+              "finish": 1
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -18804,13 +26103,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "12",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "12-5-8-15-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "12-5-8-15-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-12-2-15-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-12-2-15-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -18850,8 +26211,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-15-13-8-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-15-13-8-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -19021,17 +26413,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 14,
+          "topPickFinish": 16,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 14,
+              "horseName": "ポッドデスペア",
+              "probability": 0.08158391603569642,
+              "score": 5,
+              "finish": 16
+            },
+            {
+              "mark": "○",
+              "horseNumber": 13,
+              "horseName": "ハッピーエンジェル",
+              "probability": 0.07505134398398712,
+              "score": 4,
+              "finish": 1
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 10,
+              "horseName": "プリティディーヴァ",
+              "probability": 0.09040500179818117,
+              "score": 3,
+              "finish": 13
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 10,
+          "topPickFinish": 13,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 10,
+              "horseName": "プリティディーヴァ",
+              "probability": 0.09040500179818117,
+              "score": 5,
+              "finish": 13
+            },
+            {
+              "mark": "○",
+              "horseNumber": 14,
+              "horseName": "ポッドデスペア",
+              "probability": 0.08158391603569642,
+              "score": 4,
+              "finish": 16
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 3,
+              "horseName": "ヴァンヴィーヴ",
+              "probability": 0.10428858164655604,
+              "score": 3,
+              "finish": 6
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -19064,10 +26506,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 1,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "horseNumber": 1,
+              "horseName": "ガラベイヤ",
+              "score": 6,
+              "first": 0,
+              "mark": "◎",
+              "finish": 3
+            },
+            {
+              "horseNumber": 13,
+              "horseName": "ハッピーエンジェル",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 1
+            },
+            {
+              "horseNumber": 6,
+              "horseName": "ヴェントゥーラ",
+              "score": 3,
+              "first": 0,
+              "mark": "▲",
+              "finish": 11
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -19109,13 +26576,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "14",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "14-13-10-1-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "14-13-10-1-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-14-3-1-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-14-3-1-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -19155,8 +26684,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-13-6-2-15 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-13-6-2-15 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -19322,17 +26882,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 1,
+          "topPickFinish": 10,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 1,
+              "horseName": "ジェットブレード",
+              "probability": 0.08847811278801135,
+              "score": 5,
+              "finish": 10
+            },
+            {
+              "mark": "○",
+              "horseNumber": 2,
+              "horseName": "ゴーソーファー",
+              "probability": 0.07602600459456092,
+              "score": 4,
+              "finish": 12
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 10,
+              "horseName": "クラヴァンス",
+              "probability": 0.15552537696957652,
+              "score": 3,
+              "finish": 4
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 10,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 10,
+              "horseName": "クラヴァンス",
+              "probability": 0.15552537696957652,
+              "score": 5,
+              "finish": 4
+            },
+            {
+              "mark": "○",
+              "horseNumber": 1,
+              "horseName": "ジェットブレード",
+              "probability": 0.08847811278801135,
+              "score": 4,
+              "finish": 10
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 4,
+              "horseName": "アロンズロッド",
+              "probability": 0.2041752608008377,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -19365,10 +26975,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 7,
+          "topPickFinish": 1,
+          "marks": [
+            {
+              "horseNumber": 7,
+              "horseName": "ルールーリマ",
+              "score": 9,
+              "first": 0,
+              "mark": "◎",
+              "finish": 1
+            },
+            {
+              "horseNumber": 2,
+              "horseName": "ゴーソーファー",
+              "score": 7,
+              "first": 0,
+              "mark": "○",
+              "finish": 12
+            },
+            {
+              "horseNumber": 12,
+              "horseName": "バードウォッチャー",
+              "score": 2,
+              "first": 0,
+              "mark": "▲",
+              "finish": 5
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -19410,13 +27045,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-2-10-7-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 550,
+              "netYen": -450,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-2-10-7-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-1-4-7-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 550,
+              "netYen": -450,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-1-4-7-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -19456,8 +27153,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "7",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 360,
+              "netYen": 260,
+              "hit": true
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "7-2-12-10-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "7-2-12-10-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -19627,17 +27355,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 14,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 14,
+              "horseName": "ファムエレガンテ",
+              "probability": 0.0821654355334154,
+              "score": 5,
+              "finish": 3
+            },
+            {
+              "mark": "○",
+              "horseNumber": 10,
+              "horseName": "ゲッティヴィラ",
+              "probability": 0.07841197229771393,
+              "score": 4,
+              "finish": 6
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 7,
+              "horseName": "ガビーズシスター",
+              "probability": 0.09185217331445719,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 7,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 7,
+              "horseName": "ガビーズシスター",
+              "probability": 0.09185217331445719,
+              "score": 5,
+              "finish": 2
+            },
+            {
+              "mark": "○",
+              "horseNumber": 14,
+              "horseName": "ファムエレガンテ",
+              "probability": 0.0821654355334154,
+              "score": 4,
+              "finish": 3
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 5,
+              "horseName": "エコロアゼル",
+              "probability": 0.09491654981843885,
+              "score": 3,
+              "finish": 9
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -19670,10 +27448,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 1,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "horseNumber": 1,
+              "horseName": "メイショウホウレン",
+              "score": 10,
+              "first": 0,
+              "mark": "◎",
+              "finish": 4
+            },
+            {
+              "horseNumber": 10,
+              "horseName": "ゲッティヴィラ",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 6
+            },
+            {
+              "horseNumber": 3,
+              "horseName": "ロードアウォード",
+              "score": 3,
+              "first": 0,
+              "mark": "▲",
+              "finish": 8
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -19715,13 +27518,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "14",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "14-10-7-1-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "14-10-7-1-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "7",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "7-14-5-1-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "7-14-5-1-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -19761,8 +27626,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-10-3-11-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-10-3-11-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -19931,17 +27827,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 15,
+          "topPickFinish": 5,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 15,
+              "horseName": "ヘルヴェティオス",
+              "probability": 0.09276602698709288,
+              "score": 5,
+              "finish": 5
+            },
+            {
+              "mark": "○",
+              "horseNumber": 7,
+              "horseName": "イサチルシーキング",
+              "probability": 0.07919032845354723,
+              "score": 4,
+              "finish": 15
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 10,
+              "horseName": "ノーウェアマン",
+              "probability": 0.10599755815427184,
+              "score": 3,
+              "finish": 4
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 10,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 10,
+              "horseName": "ノーウェアマン",
+              "probability": 0.10599755815427184,
+              "score": 5,
+              "finish": 4
+            },
+            {
+              "mark": "○",
+              "horseNumber": 15,
+              "horseName": "ヘルヴェティオス",
+              "probability": 0.09276602698709288,
+              "score": 4,
+              "finish": 5
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 1,
+              "horseName": "アルデキングダム",
+              "probability": 0.1310940512399767,
+              "score": 3,
+              "finish": 14
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -19974,10 +27920,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 6,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "horseNumber": 6,
+              "horseName": "サムシングニュー",
+              "score": 7,
+              "first": 0,
+              "mark": "◎",
+              "finish": 3
+            },
+            {
+              "horseNumber": 7,
+              "horseName": "イサチルシーキング",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 15
+            },
+            {
+              "horseNumber": 11,
+              "horseName": "エアトベーレ",
+              "score": 2,
+              "first": 0,
+              "mark": "▲",
+              "finish": 1
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -20019,13 +27990,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "15",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "15-7-10-6-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "15-7-10-6-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "10",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "10-15-1-6-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "10-15-1-6-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -20065,8 +28098,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-7-11-15-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-7-11-15-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -20231,17 +28295,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 3,
+          "topPickFinish": 8,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 3,
+              "horseName": "ブルーセルリアン",
+              "probability": 0.10255576425243093,
+              "score": 5,
+              "finish": 8
+            },
+            {
+              "mark": "○",
+              "horseNumber": 5,
+              "horseName": "ブランフォルテ",
+              "probability": 0.08993812706372176,
+              "score": 4,
+              "finish": 2
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 8,
+              "horseName": "メイショウソウセキ",
+              "probability": 0.12230607703071097,
+              "score": 3,
+              "finish": 3
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 8,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 8,
+              "horseName": "メイショウソウセキ",
+              "probability": 0.12230607703071097,
+              "score": 5,
+              "finish": 3
+            },
+            {
+              "mark": "○",
+              "horseNumber": 3,
+              "horseName": "ブルーセルリアン",
+              "probability": 0.10255576425243093,
+              "score": 4,
+              "finish": 8
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 10,
+              "horseName": "バニーラビット",
+              "probability": 0.21126052592888273,
+              "score": 3,
+              "finish": 1
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -20274,10 +28388,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 1,
+          "topPickFinish": 7,
+          "marks": [
+            {
+              "horseNumber": 1,
+              "horseName": "ニシノクードクール",
+              "score": 7,
+              "first": 0,
+              "mark": "◎",
+              "finish": 7
+            },
+            {
+              "horseNumber": 5,
+              "horseName": "ブランフォルテ",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 2
+            },
+            {
+              "horseNumber": 9,
+              "horseName": "アウスヴァール",
+              "score": 4,
+              "first": 0,
+              "mark": "▲",
+              "finish": 4
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -20319,13 +28458,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-5-8-1-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 7480,
+              "netYen": 6480,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-5-8-1-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 5380,
+              "netYen": 4380,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-3-10-1-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 7480,
+              "netYen": 6480,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-3-10-1-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 5380,
+              "netYen": 4380,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -20365,8 +28566,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-5-9-11-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-5-9-11-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -20538,17 +28770,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 1,
+          "topPickFinish": 13,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 1,
+              "horseName": "トウカイジーク",
+              "probability": 0.07265206808496137,
+              "score": 5,
+              "finish": 13
+            },
+            {
+              "mark": "○",
+              "horseNumber": 9,
+              "horseName": "ナデシコザクラ",
+              "probability": 0.0636186764794258,
+              "score": 4,
+              "finish": 5
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 5,
+              "horseName": "ルナフィオーレ",
+              "probability": 0.0802040324418711,
+              "score": 3,
+              "finish": 3
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 5,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 5,
+              "horseName": "ルナフィオーレ",
+              "probability": 0.0802040324418711,
+              "score": 5,
+              "finish": 3
+            },
+            {
+              "mark": "○",
+              "horseNumber": 1,
+              "horseName": "トウカイジーク",
+              "probability": 0.07265206808496137,
+              "score": 4,
+              "finish": 13
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 6,
+              "horseName": "カルロット",
+              "probability": 0.1206071733778967,
+              "score": 3,
+              "finish": 6
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -20581,10 +28863,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 9,
+          "topPickFinish": 5,
+          "marks": [
+            {
+              "horseNumber": 9,
+              "horseName": "ナデシコザクラ",
+              "score": 10,
+              "first": 0,
+              "mark": "◎",
+              "finish": 5
+            },
+            {
+              "horseNumber": 4,
+              "horseName": "ショウナンライラ",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 4
+            },
+            {
+              "horseNumber": 3,
+              "horseName": "グレンセロース",
+              "score": 3,
+              "first": 0,
+              "mark": "▲",
+              "finish": 2
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -20626,13 +28933,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-9-5-4-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-9-5-4-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-1-6-4-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-1-6-4-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -20672,8 +29041,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "9",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "9-4-3-5-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "9-4-3-5-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -20843,17 +29243,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 16,
+          "topPickFinish": 11,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 16,
+              "horseName": "エイシンキタールン",
+              "probability": 0.08441420028127324,
+              "score": 5,
+              "finish": 11
+            },
+            {
+              "mark": "○",
+              "horseNumber": 14,
+              "horseName": "エレーデサンライズ",
+              "probability": 0.07137505544744627,
+              "score": 4,
+              "finish": 2
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 1,
+              "horseName": "ブライトベリル",
+              "probability": 0.08759633024311185,
+              "score": 3,
+              "finish": 15
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 1,
+          "topPickFinish": 15,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 1,
+              "horseName": "ブライトベリル",
+              "probability": 0.08759633024311185,
+              "score": 5,
+              "finish": 15
+            },
+            {
+              "mark": "○",
+              "horseNumber": 16,
+              "horseName": "エイシンキタールン",
+              "probability": 0.08441420028127324,
+              "score": 4,
+              "finish": 11
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 13,
+              "horseName": "スマイルガーデン",
+              "probability": 0.08772178716200671,
+              "score": 3,
+              "finish": 12
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -20886,10 +29336,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 7,
+          "topPickFinish": 5,
+          "marks": [
+            {
+              "horseNumber": 7,
+              "horseName": "ヤマニンエルファバ",
+              "score": 6,
+              "first": 0,
+              "mark": "◎",
+              "finish": 5
+            },
+            {
+              "horseNumber": 14,
+              "horseName": "エレーデサンライズ",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 2
+            },
+            {
+              "horseNumber": 3,
+              "horseName": "ルージュマデイラ",
+              "score": 4,
+              "first": 0,
+              "mark": "▲",
+              "finish": 4
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -20931,13 +29406,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "16",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "16-14-1-7-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "16-14-1-7-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-16-13-7-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-16-13-7-14 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -20977,8 +29514,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "7",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "7-14-3-15-16 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "7-14-3-15-16 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -21146,17 +29714,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 1,
+          "topPickFinish": 13,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 1,
+              "horseName": "アクティブヘイロー",
+              "probability": 0.0982897163594635,
+              "score": 5,
+              "finish": 13
+            },
+            {
+              "mark": "○",
+              "horseNumber": 12,
+              "horseName": "ブルーザー",
+              "probability": 0.07016799816418272,
+              "score": 4,
+              "finish": 4
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 14,
+              "horseName": "アイスフォーク",
+              "probability": 0.12633085689468385,
+              "score": 3,
+              "finish": null
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
+          "status": "available",
+          "topPick": 14,
           "topPickFinish": null,
-          "marks": []
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 14,
+              "horseName": "アイスフォーク",
+              "probability": 0.12633085689468385,
+              "score": 5,
+              "finish": null
+            },
+            {
+              "mark": "○",
+              "horseNumber": 1,
+              "horseName": "アクティブヘイロー",
+              "probability": 0.0982897163594635,
+              "score": 4,
+              "finish": 13
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 11,
+              "horseName": "アラムシャピラス",
+              "probability": 0.14470281734657162,
+              "score": 3,
+              "finish": 3
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -21189,10 +29807,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 3,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "horseNumber": 3,
+              "horseName": "ホウオウモチーヴ",
+              "score": 9,
+              "first": 0,
+              "mark": "◎",
+              "finish": 2
+            },
+            {
+              "horseNumber": 12,
+              "horseName": "ブルーザー",
+              "score": 8,
+              "first": 0,
+              "mark": "○",
+              "finish": 4
+            },
+            {
+              "horseNumber": 13,
+              "horseName": "ルクスディグニティ",
+              "score": 1,
+              "first": 0,
+              "mark": "▲",
+              "finish": 5
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -21234,13 +29877,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-12-14-3-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-12-14-3-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "14",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "14-1-11-3-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "14-1-11-3-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -21280,8 +29985,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-12-13-14-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-12-13-14-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -21443,17 +30179,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 4,
+          "topPickFinish": 8,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 4,
+              "horseName": "レアアース",
+              "probability": 0.13059503864081803,
+              "score": 5,
+              "finish": 8
+            },
+            {
+              "mark": "○",
+              "horseNumber": 8,
+              "horseName": "ビエントゾンダ",
+              "probability": 0.09661423305863771,
+              "score": 4,
+              "finish": 4
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 2,
+              "horseName": "ツーハーツ",
+              "probability": 0.15456056153816805,
+              "score": 3,
+              "finish": 7
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 2,
+          "topPickFinish": 7,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 2,
+              "horseName": "ツーハーツ",
+              "probability": 0.15456056153816805,
+              "score": 5,
+              "finish": 7
+            },
+            {
+              "mark": "○",
+              "horseNumber": 4,
+              "horseName": "レアアース",
+              "probability": 0.13059503864081803,
+              "score": 4,
+              "finish": 8
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 1,
+              "horseName": "カローナ",
+              "probability": 0.2829810734945677,
+              "score": 3,
+              "finish": 6
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -21486,10 +30272,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 8,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "horseNumber": 8,
+              "horseName": "ビエントゾンダ",
+              "score": 10,
+              "first": 0,
+              "mark": "◎",
+              "finish": 4
+            },
+            {
+              "horseNumber": 3,
+              "horseName": "メイショウジェード",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 2
+            },
+            {
+              "horseNumber": 7,
+              "horseName": "ユーダブルワン",
+              "score": 3,
+              "first": 0,
+              "mark": "▲",
+              "finish": 1
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -21531,13 +30342,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-8-2-3-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-8-2-3-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-4-1-3-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-4-1-3-8 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -21577,8 +30450,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-3-7-6-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 3710,
+              "netYen": 2710,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-3-7-6-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 3770,
+              "netYen": 2770,
+              "hit": true
+            }
+          ]
         }
       ]
     },
@@ -21746,17 +30650,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 4,
+          "topPickFinish": 9,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 4,
+              "horseName": "フレアオブセンス",
+              "probability": 0.09435800670099173,
+              "score": 5,
+              "finish": 9
+            },
+            {
+              "mark": "○",
+              "horseNumber": 11,
+              "horseName": "レッドフレーザー",
+              "probability": 0.07710523691863001,
+              "score": 4,
+              "finish": 3
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 5,
+              "horseName": "アイアン",
+              "probability": 0.10339085985390123,
+              "score": 3,
+              "finish": 7
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 5,
+          "topPickFinish": 7,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 5,
+              "horseName": "アイアン",
+              "probability": 0.10339085985390123,
+              "score": 5,
+              "finish": 7
+            },
+            {
+              "mark": "○",
+              "horseNumber": 4,
+              "horseName": "フレアオブセンス",
+              "probability": 0.09435800670099173,
+              "score": 4,
+              "finish": 9
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 10,
+              "horseName": "サトノライトニング",
+              "probability": 0.10386036145202324,
+              "score": 3,
+              "finish": 11
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -21789,10 +30743,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 1,
+          "topPickFinish": 6,
+          "marks": [
+            {
+              "horseNumber": 1,
+              "horseName": "テーオータウンズ",
+              "score": 8,
+              "first": 0,
+              "mark": "◎",
+              "finish": 6
+            },
+            {
+              "horseNumber": 11,
+              "horseName": "レッドフレーザー",
+              "score": 7,
+              "first": 0,
+              "mark": "○",
+              "finish": 3
+            },
+            {
+              "horseNumber": 4,
+              "horseName": "フレアオブセンス",
+              "score": 15,
+              "first": 1,
+              "mark": "▲",
+              "finish": 9
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -21834,13 +30813,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-11-5-1-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-11-5-1-10 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-4-10-1-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-4-10-1-11 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -21880,8 +30921,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-11-4-10-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-11-4-10-5 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -22052,17 +31124,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 5,
+          "topPickFinish": 6,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 5,
+              "horseName": "アーリントンロウ",
+              "probability": 0.09419897182622317,
+              "score": 5,
+              "finish": 6
+            },
+            {
+              "mark": "○",
+              "horseNumber": 3,
+              "horseName": "アスクザアメリカン",
+              "probability": 0.07155620082727246,
+              "score": 4,
+              "finish": 8
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 2,
+              "horseName": "ウェルカムソング",
+              "probability": 0.10247459410158268,
+              "score": 3,
+              "finish": 4
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 2,
+          "topPickFinish": 4,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 2,
+              "horseName": "ウェルカムソング",
+              "probability": 0.10247459410158268,
+              "score": 5,
+              "finish": 4
+            },
+            {
+              "mark": "○",
+              "horseNumber": 5,
+              "horseName": "アーリントンロウ",
+              "probability": 0.09419897182622317,
+              "score": 4,
+              "finish": 6
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 13,
+              "horseName": "マウンテンバローズ",
+              "probability": 0.14915894444356823,
+              "score": 3,
+              "finish": 3
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -22095,10 +31217,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 3,
+          "topPickFinish": 8,
+          "marks": [
+            {
+              "horseNumber": 3,
+              "horseName": "アスクザアメリカン",
+              "score": 6,
+              "first": 0,
+              "mark": "◎",
+              "finish": 8
+            },
+            {
+              "horseNumber": 4,
+              "horseName": "ヒットザグラウンド",
+              "score": 2,
+              "first": 0,
+              "mark": "○",
+              "finish": 12
+            },
+            {
+              "horseNumber": 6,
+              "horseName": "ラブアイミー",
+              "score": 1,
+              "first": 0,
+              "mark": "▲",
+              "finish": 11
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -22140,13 +31287,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-3-2-16-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-3-2-16-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-5-13-16-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-5-13-16-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -22186,8 +31395,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "3",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "3-4-6-5-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "3-4-6-5-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -22355,17 +31595,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 6,
+          "topPickFinish": 8,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 6,
+              "horseName": "サンライズジュピタ",
+              "probability": 0.09319263909175107,
+              "score": 5,
+              "finish": 8
+            },
+            {
+              "mark": "○",
+              "horseNumber": 4,
+              "horseName": "アメリカンビヨンド",
+              "probability": 0.08732066715399857,
+              "score": 4,
+              "finish": 5
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 9,
+              "horseName": "ドラムメジャー",
+              "probability": 0.1002278164569182,
+              "score": 3,
+              "finish": 14
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 9,
+          "topPickFinish": 14,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 9,
+              "horseName": "ドラムメジャー",
+              "probability": 0.1002278164569182,
+              "score": 5,
+              "finish": 14
+            },
+            {
+              "mark": "○",
+              "horseNumber": 6,
+              "horseName": "サンライズジュピタ",
+              "probability": 0.09319263909175107,
+              "score": 4,
+              "finish": 8
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 12,
+              "horseName": "ジャンシ",
+              "probability": 0.13508716216620478,
+              "score": 3,
+              "finish": 1
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -22398,10 +31688,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 13,
+          "topPickFinish": 11,
+          "marks": [
+            {
+              "horseNumber": 13,
+              "horseName": "ミヤフロント",
+              "score": 10,
+              "first": 0,
+              "mark": "◎",
+              "finish": 11
+            },
+            {
+              "horseNumber": 6,
+              "horseName": "サンライズジュピタ",
+              "score": 14,
+              "first": 1,
+              "mark": "○",
+              "finish": 8
+            },
+            {
+              "horseNumber": 9,
+              "horseName": "ドラムメジャー",
+              "score": 13,
+              "first": 1,
+              "mark": "▲",
+              "finish": 14
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -22443,13 +31758,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-4-9-13-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-4-9-13-12 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "9",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "9-6-12-13-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "9-6-12-13-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -22489,8 +31866,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-6-9-12-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-6-9-12-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -22652,17 +32060,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 5,
+          "topPickFinish": 8,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 5,
+              "horseName": "ハイディージェン",
+              "probability": 0.14698973905354268,
+              "score": 5,
+              "finish": 8
+            },
+            {
+              "mark": "○",
+              "horseNumber": 2,
+              "horseName": "ヤマニンループ",
+              "probability": 0.10218912961344997,
+              "score": 4,
+              "finish": 4
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 1,
+              "horseName": "キーウェーブ",
+              "probability": 0.15076333440834588,
+              "score": 3,
+              "finish": 5
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 1,
+          "topPickFinish": 5,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 1,
+              "horseName": "キーウェーブ",
+              "probability": 0.15076333440834588,
+              "score": 5,
+              "finish": 5
+            },
+            {
+              "mark": "○",
+              "horseNumber": 5,
+              "horseName": "ハイディージェン",
+              "probability": 0.14698973905354268,
+              "score": 4,
+              "finish": 8
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 3,
+              "horseName": "タンテドヴィーヴル",
+              "probability": 0.20705136804523042,
+              "score": 3,
+              "finish": 2
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -22695,10 +32153,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 8,
+          "topPickFinish": 6,
+          "marks": [
+            {
+              "horseNumber": 8,
+              "horseName": "ユメハハテシナク",
+              "score": 10,
+              "first": 0,
+              "mark": "◎",
+              "finish": 6
+            },
+            {
+              "horseNumber": 2,
+              "horseName": "ヤマニンループ",
+              "score": 9,
+              "first": 0,
+              "mark": "○",
+              "finish": 4
+            },
+            {
+              "horseNumber": 6,
+              "horseName": "ゼンノインヴォーク",
+              "score": 2,
+              "first": 0,
+              "mark": "▲",
+              "finish": 3
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -22740,13 +32223,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-2-1-8-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-2-1-8-3 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-5-3-8-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-5-3-8-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -22786,8 +32331,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "8",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "8-2-6-7-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "8-2-6-7-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -22957,17 +32533,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 1,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 1,
+              "horseName": "ジューンエオス",
+              "probability": 0.07733812531479752,
+              "score": 5,
+              "finish": 2
+            },
+            {
+              "mark": "○",
+              "horseNumber": 6,
+              "horseName": "カミノレアル",
+              "probability": 0.07449234819552047,
+              "score": 4,
+              "finish": 11
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 12,
+              "horseName": "サイモンシュバリエ",
+              "probability": 0.07826381648314394,
+              "score": 3,
+              "finish": 7
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 12,
+          "topPickFinish": 7,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 12,
+              "horseName": "サイモンシュバリエ",
+              "probability": 0.07826381648314394,
+              "score": 5,
+              "finish": 7
+            },
+            {
+              "mark": "○",
+              "horseNumber": 1,
+              "horseName": "ジューンエオス",
+              "probability": 0.07733812531479752,
+              "score": 4,
+              "finish": 2
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 13,
+              "horseName": "レヴァンテシチー",
+              "probability": 0.10139424918321238,
+              "score": 3,
+              "finish": 5
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -23000,10 +32626,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 6,
+          "topPickFinish": 11,
+          "marks": [
+            {
+              "horseNumber": 6,
+              "horseName": "カミノレアル",
+              "score": 6,
+              "first": 0,
+              "mark": "◎",
+              "finish": 11
+            },
+            {
+              "horseNumber": 10,
+              "horseName": "ナヴォーナ",
+              "score": 2,
+              "first": 0,
+              "mark": "○",
+              "finish": 16
+            },
+            {
+              "horseNumber": 14,
+              "horseName": "カルパ",
+              "score": 1,
+              "first": 0,
+              "mark": "▲",
+              "finish": 9
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -23045,13 +32696,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "1-6-12-15-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "1-6-12-15-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "12",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "12-1-13-15-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "12-1-13-15-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -23091,8 +32804,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "6",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "6-10-14-1-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "6-10-14-1-13 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -23264,17 +33008,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 9,
+          "topPickFinish": 6,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 9,
+              "horseName": "ジーティーアダマン",
+              "probability": 0.09004519376375102,
+              "score": 5,
+              "finish": 6
+            },
+            {
+              "mark": "○",
+              "horseNumber": 1,
+              "horseName": "ゼンダンハヤブサ",
+              "probability": 0.06214254044635645,
+              "score": 4,
+              "finish": 1
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 13,
+              "horseName": "カエルム",
+              "probability": 0.09095226230646063,
+              "score": 3,
+              "finish": 15
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 13,
+          "topPickFinish": 15,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 13,
+              "horseName": "カエルム",
+              "probability": 0.09095226230646063,
+              "score": 5,
+              "finish": 15
+            },
+            {
+              "mark": "○",
+              "horseNumber": 9,
+              "horseName": "ジーティーアダマン",
+              "probability": 0.09004519376375102,
+              "score": 4,
+              "finish": 6
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 6,
+              "horseName": "ガイアメンテ",
+              "probability": 0.11137693973808359,
+              "score": 3,
+              "finish": 4
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -23307,10 +33101,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 17,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "horseNumber": 17,
+              "horseName": "ジョバンニ",
+              "score": 8,
+              "first": 0,
+              "mark": "◎",
+              "finish": 2
+            },
+            {
+              "horseNumber": 1,
+              "horseName": "ゼンダンハヤブサ",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 1
+            },
+            {
+              "horseNumber": 8,
+              "horseName": "サフィラ",
+              "score": 1,
+              "first": 0,
+              "mark": "▲",
+              "finish": 11
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -23352,13 +33171,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "9",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "9-1-13-17-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 5650,
+              "netYen": 4650,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "9-1-13-17-6 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "13",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "13-9-6-17-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 5650,
+              "netYen": 4650,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "13-9-6-17-1 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -23398,8 +33279,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "17",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "17-1-8-13-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 5650,
+              "netYen": 4650,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "17-1-8-13-9 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     },
@@ -23562,17 +33474,67 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 5,
+          "topPickFinish": 8,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 5,
+              "horseName": "フレイムスター",
+              "probability": 0.13643770097455346,
+              "score": 5,
+              "finish": 8
+            },
+            {
+              "mark": "○",
+              "horseNumber": 2,
+              "horseName": "ヴィーナスバブル",
+              "probability": 0.08927861076457627,
+              "score": 4,
+              "finish": 2
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 4,
+              "horseName": "ロングトールサリー",
+              "probability": 0.16817716907155925,
+              "score": 3,
+              "finish": 3
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 4,
+          "topPickFinish": 3,
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 4,
+              "horseName": "ロングトールサリー",
+              "probability": 0.16817716907155925,
+              "score": 5,
+              "finish": 3
+            },
+            {
+              "mark": "○",
+              "horseNumber": 5,
+              "horseName": "フレイムスター",
+              "probability": 0.13643770097455346,
+              "score": 4,
+              "finish": 8
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 7,
+              "horseName": "ミッキージャンプ",
+              "probability": 0.17292355755125036,
+              "score": 3,
+              "finish": 1
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -23605,10 +33567,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "topPick": null,
-          "topPickFinish": null,
-          "marks": []
+          "status": "available",
+          "topPick": 2,
+          "topPickFinish": 2,
+          "marks": [
+            {
+              "horseNumber": 2,
+              "horseName": "ヴィーナスバブル",
+              "score": 6,
+              "first": 0,
+              "mark": "◎",
+              "finish": 2
+            },
+            {
+              "horseNumber": 3,
+              "horseName": "ブリッツアロング",
+              "score": 6,
+              "first": 0,
+              "mark": "○",
+              "finish": 9
+            },
+            {
+              "horseNumber": 8,
+              "horseName": "グラスベルグ",
+              "score": 3,
+              "first": 0,
+              "mark": "▲",
+              "finish": 7
+            }
+          ]
         }
       ],
       "agentTickets": [
@@ -23650,13 +33637,75 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "5",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "5-2-4-3-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 3570,
+              "netYen": 2570,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "5-2-4-3-7 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1170,
+              "netYen": 170,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "pace",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "4",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "4-5-7-3-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 3570,
+              "netYen": 2570,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "4-5-7-3-2 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 1170,
+              "netYen": 170,
+              "hit": true
+            }
+          ]
         },
         {
           "agentId": "analyst",
@@ -23696,8 +33745,39 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "contrarian",
-          "status": "unavailable",
-          "tickets": []
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "2",
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "BOX",
+              "selection": "2-3-8-6-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "BOX",
+              "selection": "2-3-8-6-4 BOX",
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
         }
       ]
     }

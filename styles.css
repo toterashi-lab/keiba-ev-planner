@@ -317,7 +317,7 @@ main { width: min(100%, var(--content)); min-height: calc(100vh - 160px); margin
 .performance-main span { color: var(--muted); font-size: 9px; }
 .performance-main strong { margin-top: 4px; font-size: 28px; }
 .performance-metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
-.disclosure { margin-top: 14px; color: var(--muted); font-size: 10px; }
+.disclosure { margin-top: 14px; color: var(--muted); font-size: 12px; }
 
 .research-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; }
 .research-card { padding: 15px; }
@@ -339,55 +339,106 @@ main { width: min(100%, var(--content)); min-height: calc(100vh - 160px); margin
 .toast { position: fixed; right: 18px; bottom: 24px; z-index: 50; max-width: 300px; padding: 11px 14px; background: var(--text); color: var(--bg); border-radius: 6px; font-size: 11px; font-weight: 800; opacity: 0; transform: translateY(10px); pointer-events: none; transition: .2s ease; }
 .toast.show { opacity: 1; transform: translateY(0); }
 .mobile-nav { display: none; }
-footer { padding: 22px 20px 34px; border-top: 1px solid var(--line); color: var(--muted); text-align: center; font-size: 9px; }
+footer { padding: 22px 20px 34px; border-top: 1px solid var(--line); color: var(--muted); text-align: center; font-size: 12px; }
 
-/* 2D anime presentation layer for the five racing agents. */
-body { background: radial-gradient(circle at 8% 0%, #353064 0, transparent 28%), radial-gradient(circle at 94% 14%, #234766 0, transparent 25%), #121326; }
-.brand-mark { background: linear-gradient(135deg, var(--gold), #ff8ca7); color: #311a35; border-radius: 50% 50% 42% 50%; transform: rotate(-8deg); }
-.race-card { background: linear-gradient(135deg, var(--surface), var(--surface-2)); transition: transform .18s ease, border-color .18s ease; }
-.race-card:hover { transform: translateY(-2px); border-color: var(--gold); }
+/* Simple visual layer for readers of every age. */
+body { background: var(--bg); font-size: 15px; line-height: 1.55; }
+.eyebrow { font-size: 12px; }
+.page-heading p { font-size: 14px; }
+.chip-row button, .segmented-scroll button, .race-number-strip button { min-height: 44px; font-size: 14px; }
+.arena-board { border-radius: 12px; background: var(--surface); }
+.arena-command { align-items: center; padding: 20px; }
+.arena-command p { font-size: 13px; }
+.arena-command button { min-height: 48px; font-size: 14px; }
+.arena-agent { min-height: 74px; padding: 10px; }
+.arena-agent img { width: 54px; height: 54px; flex-basis: 54px; }
+.arena-agent span { font-size: 10px; }
+.arena-agent strong { font-size: 12px; }
+.arena-agent p { font-size: 11px; }
+.race-card-title strong { font-size: 16px; }
+.race-card-title small { font-size: 12px; }
+.race-card-pick span, .race-card-ticket span, .race-card-marks span, .race-card-index span, .race-card-result span { font-size: 11px; }
+.race-card-pick strong { font-size: 18px; }
+.race-card-marks strong, .race-card-result strong { font-size: 14px; }
+.home-index-score span { font-size: 11px; }
+.status-badge, .hit-badge, .count-badge { min-height: 32px; font-size: 11px; }
+.detail-title p { font-size: 12px; }
+.detail-tabs button { min-height: 52px; font-size: 14px; }
+.decision-banner span { font-size: 12px; }
+.decision-banner strong { font-size: 24px; }
+.decision-banner p, .plain-explanation { font-size: 13px; }
+.agent-card h3 { font-size: 16px; }
+.agent-card header small { font-size: 11px; }
+.agent-card p { font-size: 13px; }
+.derived-note { display: block; margin-top: 8px; color: var(--muted); font-size: 11px; }
+.agent-mark strong { font-size: 12px; }
+.result-card { grid-template-columns: minmax(220px, 1fr) repeat(2, minmax(100px, auto)) auto; }
+.result-card h3 { font-size: 16px; }
+.result-card p, .result-stat span { font-size: 12px; }
+.performance-grid { display: block; }
+.brand-mark { background: var(--gold); color: #2b2206; border-radius: 8px; transform: none; }
+.race-card { background: var(--surface); transition: border-color .15s ease; }
+.race-card:hover { transform: none; border-color: var(--green); }
 .agent-hero-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 0 0 18px; padding: 10px; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); }
 .agent-hero-grid img { width: 100%; height: 180px; display: block; object-fit: contain; border: 1px solid var(--line); border-radius: 6px; background: #eee6ff; }
-.ranking-hero { position: relative; min-height: 180px; overflow: hidden; align-items: end; padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(135deg, #222653, #264b65); box-shadow: var(--shadow); }
+.ranking-hero { position: relative; min-height: 132px; overflow: hidden; align-items: center; padding: 24px; border: 1px solid var(--line); border-left: 6px solid var(--green); border-radius: 12px; background: var(--surface); box-shadow: var(--shadow); }
 .ranking-hero > div { position: relative; z-index: 1; }
-.ranking-hero .eyebrow { color: var(--gold); }
-.agent-profile { display: grid; grid-template-columns: 160px 1fr; overflow: hidden; margin-bottom: 12px; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(110deg, var(--surface-2), var(--surface)); box-shadow: var(--shadow); }
+.ranking-hero .eyebrow { color: var(--green); }
+.agent-profile { display: grid; grid-template-columns: 180px 1fr; overflow: hidden; margin-bottom: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); box-shadow: var(--shadow); }
 .agent-profile-portrait { width: 100%; height: 100%; min-height: 250px; display: block; object-fit: contain; background: #eee6ff; }
 .agent-profile-body { padding: 18px; }
 .agent-profile-body header { display: flex; align-items: start; justify-content: space-between; gap: 10px; }
 .agent-profile-body h2 { margin: 2px 0 0; font-size: 21px; }
 .agent-profile-body header p { margin: 5px 0 0; color: var(--muted); font-size: 12px; }
-.agent-profile-body blockquote { margin: 14px 0; padding: 10px 12px; border-left: 3px solid var(--gold); background: rgba(255,255,255,.04); color: var(--text); font-size: 13px; }
+.agent-profile-body blockquote { margin: 14px 0; padding: 12px; border-left: 3px solid var(--gold); background: var(--gold-soft); color: var(--text); font-size: 14px; }
 .agent-focus { display: flex; gap: 10px; align-items: baseline; color: var(--muted); font-size: 11px; }
 .agent-focus strong { color: var(--text); }
 .agent-profile-metrics { margin: 14px 0 8px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
-.agent-profile-metrics div { padding: 10px; background: rgba(0,0,0,.14); }
+.agent-profile-metrics div { padding: 12px; background: var(--surface-2); }
 .agent-profile-metrics span, .agent-profile-metrics strong { display: block; }
-.agent-profile-metrics span { color: var(--muted); font-size: 9px; }
+.agent-profile-metrics span { color: var(--muted); font-size: 11px; }
 .agent-profile-metrics strong { margin-top: 4px; color: var(--gold); font-size: 17px; }
-.agent-profile-body > small { color: var(--muted); font-size: 10px; }
+.agent-profile-body > small { color: var(--muted); font-size: 11px; }
 .agent-card-avatar { width: 42px; height: 42px; flex: 0 0 42px; display: inline-block; object-fit: contain; border: 1px solid var(--line); border-radius: 50%; background: #eee6ff; }
 .agent-ticket-groups { display: grid; gap: 14px; }
-.agent-ticket-group { padding: 14px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(0,0,0,.1); }
+.agent-ticket-group { padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-2); }
 .agent-ticket-group > header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
 .agent-ticket-group > header h3 { margin: 0; font-size: 16px; }
 .agent-ticket-group > header p { margin: 2px 0 0; color: var(--muted); font-size: 10px; }
 .agent-ticket-group > header > strong { margin-left: auto; color: var(--gold); font-size: 12px; }
 .home-ranking-card { cursor: default; }
 .race-card-open { width: 100%; padding: 0; border: 0; background: transparent; color: inherit; text-align: left; cursor: pointer; }
-.race-card-open:hover { background: rgba(255,255,255,.025); }
-.home-agent-tickets { padding: 12px 14px 14px; border-top: 1px solid var(--line); background: rgba(0,0,0,.1); }
-.home-agent-tickets > h3 { margin: 0 0 10px; font-size: 12px; color: var(--gold); }
+.race-card-open:hover { background: var(--surface-2); }
+.home-agent-tickets { padding: 0; border-top: 1px solid var(--line); background: var(--surface-2); }
+.home-agent-tickets > summary { min-height: 48px; padding: 13px 14px; color: var(--green); font-size: 13px; font-weight: 900; cursor: pointer; }
 .home-agent-tickets > div { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-.home-agent-tickets article { min-width: 0; padding: 9px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); }
+.home-agent-tickets > div { padding: 0 14px 14px; }
+.home-agent-tickets article { min-width: 0; padding: 10px 0; border: 0; border-top: 1px solid var(--line); background: transparent; }
 .home-agent-tickets article header { display: flex; align-items: center; gap: 6px; margin-bottom: 7px; font-size: 10px; }
 .home-agent-tickets .agent-card-avatar { width: 27px; height: 27px; flex-basis: 27px; }
 .home-agent-tickets p { display: grid; gap: 2px; margin: 6px 0 0; padding-top: 6px; border-top: 1px dashed var(--line); }
-.home-agent-tickets p span, .home-agent-tickets p small { color: var(--muted); font-size: 9px; }
-.home-agent-tickets p b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text); font-size: 11px; }
+.home-agent-tickets p span, .home-agent-tickets p small { color: var(--muted); font-size: 11px; }
+.home-agent-tickets p b { overflow-wrap: anywhere; color: var(--text); font-size: 13px; }
 .empty-tickets { color: var(--muted); font-size: 11px; }
+.bet-section-head span { display: block; color: var(--green); font-size: 12px; font-weight: 900; }
+.bet-section-head h2 { margin: 2px 0 0; font-size: 21px; }
+.bet-section-head p { font-size: 12px; }
+.bet-card { padding: 12px; background: var(--surface); }
+.digital-ticket { overflow: hidden; border: 2px dashed #2b7651; border-radius: 10px; background: #fffdf2; color: #15241a; box-shadow: 0 4px 12px rgba(26, 66, 45, .1); }
+.digital-ticket header { padding: 12px 14px; display: block; border: 0; border-bottom: 1px solid #cdd9cf; background: #e8f5ec; }
+.digital-ticket header span, .digital-ticket header strong { display: block; }
+.digital-ticket header span { color: #45624f; font-size: 11px; }
+.digital-ticket header strong { margin-top: 2px; font-size: 17px; }
+.ticket-numbers { padding: 16px 14px; }
+.ticket-numbers span { display: block; color: #587062; font-size: 11px; }
+.ticket-numbers b { display: block; margin-top: 4px; overflow-wrap: anywhere; color: #102d1d; font-size: 24px; line-height: 1.35; }
+.ticket-cost { padding: 10px 14px; display: grid; grid-template-columns: auto auto 1fr; gap: 10px; align-items: center; border-top: 1px solid #cdd9cf; background: #f4f7f4; font-size: 12px; }
+.ticket-cost strong { justify-self: end; font-size: 15px; }
+.ticket-help { min-height: 0 !important; margin: 10px 0 !important; font-size: 12px !important; }
+.ticket-result { min-height: 0 !important; margin: 10px 0 0 !important; font-size: 15px !important; font-weight: 900; }
+.copy-button { min-height: 44px; width: 100%; font-size: 13px; }
 .runner-details { margin-top: 14px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
-.runner-details summary { padding: 13px 14px; color: var(--text); font-weight: 900; cursor: pointer; }
+.runner-details summary { min-height: 48px; padding: 13px 14px; color: var(--text); font-weight: 900; cursor: pointer; }
 .runner-details .table-scroll { padding: 0 10px 10px; }
 @media (max-width: 760px) {
   .arena-command { align-items: stretch; flex-direction: column; gap: 12px; }
@@ -396,15 +447,18 @@ body { background: radial-gradient(circle at 8% 0%, #353064 0, transparent 28%),
   .arena-agents { grid-template-columns: 1fr; }
   .arena-agent { min-height: 62px; }
   .mobile-nav { grid-template-columns: repeat(4, 1fr); }
-  .agent-profile { grid-template-columns: 104px 1fr; }
+  .agent-profile { display: block; }
   .agent-hero-grid { grid-template-columns: repeat(5, 116px); overflow-x: auto; }
   .agent-hero-grid img { height: 140px; }
-  .agent-profile-portrait { min-height: 100%; }
+  .agent-profile-portrait { height: 220px; min-height: 0; border-bottom: 1px solid var(--line); }
   .agent-profile-body { padding: 14px; }
   .agent-profile-body h2 { font-size: 18px; }
   .agent-profile-metrics { grid-template-columns: 1fr; }
   .agent-ticket-group { padding: 11px; }
   .home-agent-tickets > div { grid-template-columns: 1fr; }
+  .ticket-numbers b { font-size: 21px; }
+  .ticket-cost { grid-template-columns: 1fr 1fr; }
+  .ticket-cost strong { grid-column: 1 / -1; justify-self: stretch; padding-top: 8px; border-top: 1px solid #cdd9cf; }
 }
 
 @media (max-width: 900px) {
@@ -416,11 +470,11 @@ body { background: radial-gradient(circle at 8% 0%, #353064 0, transparent 28%),
   .home-forecast-grid { grid-template-columns: 1fr; }
   .home-flow { margin-top: 2px; }
   .race-card-list, .finder-list, .agent-grid, .bet-card-list { grid-template-columns: 1fr; }
-  .performance-grid { grid-template-columns: repeat(2, 1fr); }
+  .performance-grid { display: block; }
   .all-race-metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .research-grid { grid-template-columns: repeat(2, 1fr); }
-  .mobile-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; min-height: 62px; padding-bottom: env(safe-area-inset-bottom); display: grid; grid-template-columns: repeat(6, 1fr); border-top: 1px solid var(--line); background: color-mix(in srgb, var(--bg) 95%, transparent); backdrop-filter: blur(14px); }
-  .mobile-nav a { min-width: 0; padding: 8px 2px 6px; display: grid; place-items: center; gap: 3px; color: var(--muted); font-size: 9px; font-weight: 800; text-decoration: none; }
+  .mobile-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; min-height: 64px; padding-bottom: env(safe-area-inset-bottom); display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); background: color-mix(in srgb, var(--bg) 95%, transparent); backdrop-filter: blur(14px); }
+  .mobile-nav a { min-width: 0; padding: 8px 2px 6px; display: grid; place-items: center; gap: 3px; color: var(--muted); font-size: 11px; font-weight: 800; text-decoration: none; }
   .mobile-nav a span { font-size: 16px; }
   .mobile-nav a.active { color: var(--green); }
   footer { padding-bottom: 90px; }

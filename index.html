@@ -1,90 +1,73 @@
 <!doctype html>
-<html lang="ja" data-theme="dark">
+<html lang="ja" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#111512" />
-    <meta name="description" content="ウマヨミ。5人のAI予想家が印、買い目、結果を分かりやすく届ける競馬予想サイト" />
-    <title>ウマヨミ｜5人のAI予想家と読む競馬</title>
-    <link rel="stylesheet" href="styles.css?v=anime-agent-world-20260729" />
+    <meta name="description" content="ウマヨミ。5人の予想家が選んだ馬、買い目、結果をかんたんに見られる競馬予想サイト" />
+    <title>ウマヨミ｜5人の予想をかんたんに</title>
+  <link rel="stylesheet" href="styles.css?v=simple-ticket-20260729-2" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">本文へ移動</a>
     <header class="topbar">
       <a class="brand" href="#home" aria-label="ウマヨミ ホーム">
         <span class="brand-mark" aria-hidden="true">AI</span>
-        <span><strong>ウマヨミ</strong><small>5人のAI予想家と、レースを読む。</small></span>
+        <span><strong>ウマヨミ</strong><small>5人の予想を、かんたんに。</small></span>
       </a>
       <nav class="desktop-nav" aria-label="サイト全体">
-        <a href="#home" data-route="home">アリーナ</a>
-        <a href="#races" data-route="races">レースボード</a>
-        <a href="#results" data-route="results">リプレイ</a>
-        <a href="#performance" data-route="performance">メンバー</a>
+        <a href="#home" data-route="home">今日の予想</a>
+        <a href="#races" data-route="races">レース一覧</a>
+        <a href="#results" data-route="results">過去の結果</a>
+        <a href="#performance" data-route="performance">5人の予想家</a>
       </nav>
       <button id="theme-toggle" class="icon-button" type="button" title="表示テーマを切り替える" aria-label="表示テーマを切り替える">◐</button>
     </header>
 
     <main id="main-content">
       <section id="page-home" class="page" data-page="home" aria-labelledby="home-title">
-        <header class="page-heading ranking-hero"><div><span class="eyebrow">UMAYOMI RACE ARENA</span><h1 id="home-title">今週のレースアリーナ</h1><p id="home-summary">開催データを読み込んでいます。</p></div></header>
+        <header class="page-heading ranking-hero"><div><span class="eyebrow">今日の予想</span><h1 id="home-title">どのレースを見る？</h1><p id="home-summary">開催データを読み込んでいます。</p></div></header>
         <div id="home-date-tabs" class="chip-row" aria-label="開催日"></div>
         <section id="home-arena" class="arena-board" aria-label="今週の予想家対決"></section>
         <section class="section-block" aria-labelledby="featured-title">
-          <header class="section-heading"><div><span>STAGE SELECT</span><h2 id="featured-title">レースを選ぶ</h2></div><span id="race-list-count" class="count-badge"></span></header>
+          <header class="section-heading"><div><span>注目度の高い順</span><h2 id="featured-title">レースを選ぶ</h2></div><span id="race-list-count" class="count-badge"></span></header>
           <div id="home-race-list" class="race-card-list"></div>
         </section>
       </section>
 
       <section id="page-races" class="page" data-page="races" aria-labelledby="races-title">
-        <header class="page-heading"><div><span class="eyebrow">RACE BOARD</span><h1 id="races-title">レースボード</h1></div><p>ステージごとに、AI予想と確定後のリプレイを同じ画面で確認します。</p></header>
+        <header class="page-heading"><div><span class="eyebrow">レース一覧</span><h1 id="races-title">予想と結果を見る</h1></div><p>日、場所、レース番号を選んでください。</p></header>
         <div id="race-date-tabs" class="chip-row" aria-label="開催日"></div>
         <div id="race-venue-tabs" class="segmented-scroll" aria-label="競馬場"></div>
         <div id="race-number-tabs" class="race-number-strip" aria-label="レース番号"></div>
         <div id="race-detail"></div>
       </section>
 
-      <section id="page-discover" class="page" data-page="discover" aria-labelledby="discover-title">
-        <header class="page-heading"><div><span class="eyebrow">RACE FINDER</span><h1 id="discover-title">データから探す</h1></div><p>条件に合うレースを選び、AI予想を見比べます。</p></header>
-        <div id="discover-filters" class="finder-filters" aria-label="レースの絞り込み"></div>
-        <section class="section-block" aria-labelledby="discover-list-title">
-          <header class="section-heading"><div><span>条件に合うレース</span><h2 id="discover-list-title">レースを選ぶ</h2></div><span id="discover-count" class="count-badge"></span></header>
-          <div id="discover-list" class="finder-list"></div>
-        </section>
-      </section>
-
       <section id="page-results" class="page" data-page="results" aria-labelledby="results-title">
-        <header class="page-heading"><div><span class="eyebrow">RACE REPLAY</span><h1 id="results-title">リプレイアーカイブ</h1></div><p>確定したレースを振り返り、予想と買い目の照合結果を確認します。</p></header>
+        <header class="page-heading"><div><span class="eyebrow">過去の結果</span><h1 id="results-title">前のレースを見る</h1></div><p>終わったレースの予想と結果を見られます。</p></header>
         <div id="result-filter" class="chip-row" aria-label="結果期間"></div>
         <div id="result-list" class="result-list"></div>
       </section>
 
       <section id="page-performance" class="page" data-page="performance" aria-labelledby="performance-title">
-        <header class="page-heading"><div><span class="eyebrow">MEMBER SELECT</span><h1 id="performance-title">予想家メンバー</h1></div><p>5人の役割と、保存済み予想の成績を確認します。</p></header>
-        <section class="agent-hero-grid" aria-label="5人のAIエージェント"><img src="assets/agent-safety.png" alt="堅実派セーフティ" /><img src="assets/agent-sniper.png" alt="穴狙いスナイパー" /><img src="assets/agent-pace.png" alt="展開派ペースメーカー" /><img src="assets/agent-analyst.png" alt="数理派アナリスト" /><img src="assets/agent-contrarian.png" alt="逆張り派コントラリアン" /></section>
+        <header class="page-heading"><div><span class="eyebrow">5人の予想家</span><h1 id="performance-title">だれの予想を見る？</h1></div><p>考え方のちがう5人が、それぞれ予想します。</p></header>
+        <section class="agent-hero-grid" aria-label="5人の予想家"><img src="assets/agent-safety.png" alt="しっかり派 セーフティ" /><img src="assets/agent-sniper.png" alt="穴狙い スナイパー" /><img src="assets/agent-pace.png" alt="流れ読み ペースメーカー" /><img src="assets/agent-analyst.png" alt="数字読み アナリスト" /><img src="assets/agent-contrarian.png" alt="別目線 コントラリアン" /></section>
         <div id="performance-filter" class="chip-row" aria-label="成績期間"></div>
         <div id="all-race-audit"></div>
         <div id="performance-summary" class="performance-grid"></div>
-        <p class="disclosure">成績は保存済み予想だけを対象に集計します。後から生成した予想を過去時点の実績として扱いません。</p>
-      </section>
-
-      <section id="page-research" class="page" data-page="research" aria-labelledby="research-title">
-        <header class="page-heading"><div><span class="eyebrow">BEHIND THE PREDICTIONS</span><h1 id="research-title">裏側・研究室</h1></div><p>データの収録状況と、AI予想を支える仕組みです。</p></header>
-        <div id="research-overview" class="research-grid"></div>
-        <details class="research-details"><summary>モデルと期待値の計算方法</summary><div id="model-methodology"></div></details>
-        <details class="research-details"><summary>データ品質・不足項目</summary><div id="data-quality"></div></details>
-        <details class="research-details"><summary>監査・参照資料</summary><div class="source-links"><a href="docs/expectancy-research-v5.md">期待値ロジック</a><a href="docs/free-data-pipeline.md">データ取得仕様</a><a href="docs/model-feature-research.md">特徴量調査</a></div></details>
+        <p class="disclosure">レース前に保存した予想だけを成績に入れます。あとから作った予想は、参考として分けて表示します。</p>
       </section>
     </main>
 
     <nav class="mobile-nav" aria-label="モバイルナビゲーション">
-      <a href="#home" data-route="home"><span aria-hidden="true">⌂</span>アリーナ</a>
+      <a href="#home" data-route="home"><span aria-hidden="true">⌂</span>今日</a>
       <a href="#races" data-route="races"><span aria-hidden="true">馬</span>レース</a>
-      <a href="#results" data-route="results"><span aria-hidden="true">✓</span>リプレイ</a>
-      <a href="#performance" data-route="performance"><span aria-hidden="true">AI</span>メンバー</a>
+      <a href="#results" data-route="results"><span aria-hidden="true">✓</span>結果</a>
+      <a href="#performance" data-route="performance"><span aria-hidden="true">人</span>予想家</a>
     </nav>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
-    <footer><p>本サービスはJRA・netkeibaの公式サービスではありません。予想を参考に、購入判断は利用者自身で行ってください。購入・自動投票機能はありません。</p></footer>
+    <footer><p>JRAなどの公式サイトではありません。予想は当たりを約束するものではありません。馬券を買う機能はありません。</p></footer>
 
     <script src="data/meet-2026-07-11-2026-07-12.js"></script>
     <script src="data/results-2026-07-11-2026-07-12.js"></script>
@@ -100,6 +83,6 @@
     <script src="data/agent-performance.js?v=20260719-1605"></script>
     <script src="ticket-engine.js"></script>
     <script src="forecast-policy.js?v=all-races-20260720-1"></script>
-    <script src="app.js?v=ranking-unified-anime-20260729"></script>
+  <script src="app.js?v=simple-ticket-20260729-2"></script>
   </body>
 </html>
