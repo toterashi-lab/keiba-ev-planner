@@ -276,6 +276,38 @@ main { padding-top: 22px; }
 .agent-ticket-group.analyst > header { border-left: 5px solid var(--agent-analyst); }
 .agent-ticket-group.contrarian > header { border-left: 5px solid var(--agent-contrarian); }
 .agent-ticket-group .bet-card-list { padding: 12px; }
+.digital-ticket {
+  min-height: 212px;
+  grid-template-columns: minmax(82px, 28%) minmax(50px, 13%) minmax(0, 1fr);
+  border-width: 2px;
+  box-shadow: 0 5px 0 rgba(0, 0, 0, .12);
+}
+.ticket-main { container-type: inline-size; }
+.ticket-main > *:not(.ticket-brand-watermark) { position: relative; z-index: 1; }
+.ticket-brand-watermark {
+  position: absolute;
+  z-index: 0;
+  top: 42px;
+  right: 8px;
+  color: #d78b22;
+  font-family: ui-monospace, "Cascadia Mono", monospace;
+  font-size: 26px;
+  font-weight: 1000;
+  opacity: .13;
+}
+.ticket-stub > small { font-weight: 1000; }
+.ticket-stub > strong { font-size: 19px; }
+.bet-card .ticket-print-head strong { font-size: 19px; }
+.ticket-numbers > span { font-weight: 900; }
+.bet-card .ticket-combination-list.is-box-summary li b {
+  max-width: 100%;
+  overflow: visible;
+  text-overflow: clip;
+  font-size: clamp(11px, 8cqi, 18px);
+  white-space: nowrap;
+}
+.bet-card .ticket-cost strong { display: flex; align-items: baseline; gap: 5px; color: #111; }
+.bet-card .ticket-cost strong small { color: #42574e; font-size: 8px; }
 
 /* Battle log */
 .archive-overview { border-top: 4px solid var(--gold); box-shadow: var(--shadow); }
@@ -377,6 +409,13 @@ footer .footer-about strong { color: #fff; }
   .conclusion-grid { grid-template-columns: 1fr; }
   .agent-card .agent-card-avatar { width: 46px; height: 46px; flex-basis: 46px; }
   .agent-ticket-group .bet-card-list { padding: 7px 3px; }
+  .digital-ticket {
+    min-height: 204px;
+    grid-template-columns: minmax(75px, 27%) minmax(47px, 13%) minmax(0, 1fr);
+  }
+  .ticket-stub > strong { font-size: 15px; }
+  .ticket-brand-watermark { top: 44px; font-size: 20px; }
+  .bet-card .ticket-combination-list.is-box-summary li b { font-size: clamp(11px, 8cqi, 15px); }
   .archive-overview strong { font-size: 15px; }
   .result-day-archive > header { min-height: 92px; }
   .agent-hero-grid { height: 210px; }

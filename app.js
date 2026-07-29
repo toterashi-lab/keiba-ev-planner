@@ -418,7 +418,7 @@ function paperTicketHtml(ticket, prediction, resultMode = false, agentMarks = []
   return `<div class="digital-ticket paper-ticket ticket-points-${ticket.points} ${resultMode ? "paper-ticket--result" : ""}">${resultStamp}<span class="ticket-security-stripe" aria-hidden="true"></span>
     <section class="ticket-stub"><small>${escapeHtml(meeting.session)}</small><strong>${escapeHtml(meeting.venue)}</strong><div class="ticket-race-number"><b>${number(prediction?.raceNo)}</b><span>レース</span></div><div class="ticket-checks" aria-hidden="true"><i></i><i></i></div><span class="ticket-serial">${escapeHtml(serial)}</span></section>
     <section class="ticket-type-panel" aria-label="${escapeHtml(ticket.betType)}"><small>UMAYOMI</small><b>${escapeHtml(typeParts[0])}</b><strong>${escapeHtml(typeParts[1])}</strong><span>AI</span></section>
-    <section class="ticket-main"><header class="ticket-print-head"><span>ウマヨミ予想券 <em>購入不可</em></span><strong>${escapeHtml(ticket.betType)}</strong><small>${escapeHtml(ticket.method)}</small></header><div class="ticket-numbers"><span>${combinationLabel}</span><ol class="ticket-combination-list ${ticket.betType === "3連複" ? "is-box-summary" : displayKeys.length > 5 ? "is-dense" : ""}">${displayKeys.map((key, index) => { const horseName = ticket.betType === "単勝" ? horseNames.get(Number(key)) : ""; const selection = horseName ? `<b class="win-selection"><span>${escapeHtml(key)}</span><em>${escapeHtml(horseName)}</em></b>` : `<b>${escapeHtml(key)}</b>`; return `<li><i>${index + 1}</i>${selection}<small>${yen(unitStake)}</small></li>`; }).join("")}</ol></div><footer class="ticket-cost"><span>1点 ${yen(unitStake)}</span><span>合計 ${ticket.points}点</span><strong>投資額 ${yen(investment)}</strong></footer>${resultMode ? `<div class="ticket-settlement"><span>払戻額 ${yen(ticket.payoutYen)}</span><strong>収支 ${signedYen(ticket.netYen)}</strong></div>` : ""}<div class="ticket-barcode" aria-hidden="true"></div></section>
+    <section class="ticket-main"><span class="ticket-brand-watermark" aria-hidden="true">UMAYOMI</span><header class="ticket-print-head"><span>ウマヨミ予想券 <em>購入不可</em></span><strong>${escapeHtml(ticket.betType)}</strong><small>${escapeHtml(ticket.method)}</small></header><div class="ticket-numbers"><span>${combinationLabel}</span><ol class="ticket-combination-list ${ticket.betType === "3連複" ? "is-box-summary" : displayKeys.length > 5 ? "is-dense" : ""}">${displayKeys.map((key, index) => { const horseName = ticket.betType === "単勝" ? horseNames.get(Number(key)) : ""; const selection = horseName ? `<b class="win-selection"><span>${escapeHtml(key)}</span><em>${escapeHtml(horseName)}</em></b>` : `<b>${escapeHtml(key)}</b>`; return `<li><i>${index + 1}</i>${selection}<small>${yen(unitStake)}</small></li>`; }).join("")}</ol></div><footer class="ticket-cost"><span>各 ${yen(unitStake)}</span><span>${ticket.points}点</span><strong><small>合計</small>${yen(investment)}</strong></footer>${resultMode ? `<div class="ticket-settlement"><span>払戻額 ${yen(ticket.payoutYen)}</span><strong>収支 ${signedYen(ticket.netYen)}</strong></div>` : ""}<div class="ticket-barcode" aria-hidden="true"></div></section>
   </div>`;
 }
 
@@ -426,7 +426,7 @@ function trioBoxLabel(ticket, keys) {
   const numbers = [...new Set([String(ticket.selection ?? ""), ...keys]
     .flatMap((value) => String(value).match(/\d+/g) ?? []).map(Number))]
     .filter(Number.isFinite).sort((left, right) => left - right).slice(0, 5);
-  return `${numbers.join("-")} BOX`;
+  return numbers.join("-");
 }
 
 function ticketMeetingDetails(prediction) {
