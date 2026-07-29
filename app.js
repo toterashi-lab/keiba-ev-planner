@@ -343,10 +343,11 @@ function agentCardHtml(definition, agent, result, predictionContext = "pre_race"
   const marks = (agent.marks ?? []).slice(0, 3);
   const top = marks[0];
   const positions = resultPositionMap(result);
+  const finishLabels = resultFinishLabelMap(result);
   const hit = marks.some((mark) => positions.get(Number(mark.horseNumber)) === 1);
   const verified = predictionContext === "pre_race";
   return `<article class="agent-card"><header>${heading}${isFinalResult(result) && verified ? `<span class="hit-badge ${hit ? "hit" : "miss"}">${hit ? "✓ 1着" : "× はずれ"}</span>` : `<span class="status-badge ${verified ? "ready" : "waiting"}">${verified ? "予想あり" : "参考"}</span>`}</header>
-    <div class="agent-marks">${marks.map((mark, index) => `<div class="agent-mark"><span>${index + 1}</span><strong>${number(mark.horseNumber)}番 ${escapeHtml(mark.horseName)}</strong>${isFinalResult(result) ? `<small>${positions.get(Number(mark.horseNumber)) ?? "--"}着</small>` : ""}</div>`).join("")}</div>
+    <div class="agent-marks">${marks.map((mark, index) => `<div class="agent-mark"><span>${index + 1}</span><strong>${number(mark.horseNumber)}番 ${escapeHtml(mark.horseName)}</strong>${isFinalResult(result) ? `<small>${escapeHtml(finishLabels.get(Number(mark.horseNumber)) ?? "結果なし")}</small>` : ""}</div>`).join("")}</div>
     <p><b>${escapeHtml(persona.voice)}</b></p>${agent.derived ? `<small class="derived-note">3人の予想を、この人の見方で並べ直しました。</small>` : ""}</article>`;
 }
 
@@ -393,10 +394,12 @@ function comparisonHtml(race, track, prediction, result) {
   const replay = findReplayAudit(result?.raceId ?? prediction?.raceId);
   const published = replay?.eligibleForActualPerformance === true;
   const audit = replay;
+  const totals = settledRaceTotals(audit);
   if (!prediction && !isFinalResult(result)) return empty("結果を待っています。");
   return `<div class="snapshot-band"><div><strong>${published ? "レース前に出した予想" : "結果とくらべた参考予想"}</strong><small>${snapshotTime ? formatDateTime(snapshotTime) : "時刻の記録はありません"}</small></div><span class="status-badge ${published ? "ready" : "waiting"}">${published ? "保存済み" : prediction ? "参考" : "記録なし"}</span></div>
     ${!published && replay ? `<p class="plain-explanation">この予想はレース後に作った参考です。予想家の成績には入れません。</p>` : ""}
     <div class="finish-podium">${[0, 1, 2].map((index) => `<div><span>${index + 1}着</span><strong>${podium[index] ? `${podium[index].horseNumber}番 ${escapeHtml(podium[index].horseName)}` : "結果待ち"}</strong></div>`).join("")}</div>
+    ${totals.tickets ? settledRaceSummaryHtml(totals) : ""}
     ${audit?.agentTickets?.length ? `<div class="agent-ticket-groups" style="margin-top:10px">${audit.agentTickets.filter((group) => group.status === "available").map(agentSettledTicketGroupHtml).join("")}</div>` : ""}
     ${isFinalResult(result) ? `<div class="agent-grid" style="margin-top:10px">${AGENTS.map((agent) => agentCardHtml(agent, normalizedAgents(prediction).get(agent.id), result, prediction?.predictionContext)).join("")}</div>` : `<p class="plain-explanation">レースが終わると、5人の予想と結果をここでくらべられます。</p>`}`;
 }
@@ -405,7 +408,12 @@ function agentSettledTicketGroupHtml(group) {
   const definition = AGENTS.find((agent) => agent.id === group.agentId);
   if (!definition) return "";
   const persona = agentPersona(definition);
-  return `<section class="agent-ticket-group"><header><img class="agent-card-avatar" src="${agentImagePath(definition.id)}" alt="" /><div><h3>${escapeHtml(persona.name)}の結果</h3><p>買い目ごとに確認</p></div></header><div class="bet-card-list">${group.tickets.map((ticket) => `<article class="bet-card"><div class="digital-ticket result-ticket"><header><span>${ticket.hit ? "あたり" : "はずれ"}</span><strong>${escapeHtml(ticket.betType)} ${escapeHtml(ticket.method)}</strong></header><div class="ticket-numbers"><span>組み合わせ</span><b>${escapeHtml(ticket.selection)}</b></div><div class="ticket-cost"><span>${ticket.points}点</span><span>使った金額 ${yen(ticket.investmentYen)}</span><strong>もどった金額 ${yen(ticket.payoutYen)}</strong></div></div><p class="ticket-result ${ticket.hit ? "positive" : "negative"}">${ticket.hit ? `✓ あたり ${signedYen(ticket.netYen)}` : `× はずれ ${signedYen(ticket.netYen)}`}</p></article>`).join("")}</div></section>`;
+  const totals = settledTicketTotals(group.tickets);
+  return `<section class="agent-ticket-group"><header><img class="agent-card-avatar" src="${agentImagePath(definition.id)}" alt="" /><div><h3>${escapeHtml(persona.name)}の結果</h3><p>買い目ごとに確認</p></div><strong>${yen(totals.investmentYen)} → ${yen(totals.payoutYen)}・${signedYen(totals.netYen)}</strong></header><div class="bet-card-list">${group.tickets.map((ticket) => `<article class="bet-card"><div class="digital-ticket result-ticket"><header><span>${ticket.hit ? "あたり" : "はずれ"}</span><strong>${escapeHtml(ticket.betType)} ${escapeHtml(ticket.method)}</strong></header><div class="ticket-numbers"><span>組み合わせ</span><b>${escapeHtml(ticket.selection)}</b></div><div class="ticket-cost"><span>${ticket.points}点</span><span>使った金額 ${yen(ticket.investmentYen)}</span><strong>もどった金額 ${yen(ticket.payoutYen)}</strong></div></div><p class="ticket-result ${ticket.hit ? "positive" : "negative"}">${ticket.hit ? `✓ あたり ${signedYen(ticket.netYen)}` : `× はずれ ${signedYen(ticket.netYen)}`}</p></article>`).join("")}</div></section>`;
+}
+
+function settledRaceSummaryHtml(totals) {
+  return `<section class="settled-race-summary"><header><span>5人分をすべて買った場合</span><strong>${totals.hitTickets} / ${totals.tickets}枚があたり</strong></header><div class="result-finance result-finance--five"><div class="metric"><span>使った金額</span><strong>${yen(totals.investmentYen)}</strong></div><div class="metric"><span>もどった金額</span><strong>${yen(totals.payoutYen)}</strong></div><div class="metric"><span>差額</span><strong class="${totals.netYen >= 0 ? "positive" : "negative"}">${signedYen(totals.netYen)}</strong></div><div class="metric"><span>回収率</span><strong>${percent(totals.recoveryRate)}</strong></div><div class="metric"><span>買い目</span><strong>${totals.tickets}枚</strong></div></div></section>`;
 }
 
 function bindRaceDetailEvents() {
@@ -421,8 +429,8 @@ function bindRaceDetailEvents() {
 
 function renderResultsPage() {
   renderPeriodTabs("#result-filter", state.resultPeriod, (value) => { state.resultPeriod = value; renderResultsPage(); });
-  const currentDate = currentEdition.meetings?.at(-1)?.date ?? "";
-  const completed = results.filter(isFinalResult).filter((result) => resultDate(result) < currentDate).filter((result) => inPeriod(resultDate(result), state.resultPeriod));
+  const auditedRaceIds = new Set((replayAudit.records ?? []).map((record) => record.raceId));
+  const completed = results.filter(isFinalResult).filter((result) => auditedRaceIds.has(result.raceId)).filter((result) => inPeriod(resultDate(result), state.resultPeriod));
   document.querySelector("#result-list").innerHTML = completed.length ? completed.sort((a, b) => resultDate(b).localeCompare(resultDate(a)) || b.raceNo - a.raceNo).map(resultListCard).join("") : empty("指定期間の確定結果がありません");
   document.querySelectorAll("button[data-result-race]").forEach((button) => button.addEventListener("click", () => {
     const result = completed.find((row) => resultIdentity(row) === button.dataset.resultRace);
@@ -436,30 +444,46 @@ function resultListCard(result) {
   const prediction = findPrediction(result.raceNo, track, resultDate(result));
   const replay = findReplayAudit(result.raceId);
   const consensus = buildConsensus(prediction);
-  const verified = replay?.eligibleForActualPerformance === true;
   const audit = replay;
   const agentCount = audit?.agentTickets?.filter((group) => group.status === "available").length ?? 0;
-  return `<button type="button" class="result-card" data-result-race="${escapeHtml(resultIdentity(result))}"><div><h3>${escapeHtml(result.meetingName)} ${result.raceNo}R ${escapeHtml(result.raceTitle)}</h3><p>${formatDate(resultDate(result))}・${prediction ? `いちばん注目 ${consensus.top?.horseNumber ?? "--"}番` : "予想の記録なし"}</p></div><div class="result-stat"><span>予想家</span><strong>${agentCount ? `${agentCount}人` : "記録なし"}</strong></div><div class="result-stat"><span>見られるもの</span><strong>予想と結果</strong></div><span class="status-badge ready">見る</span></button>`;
+  const totals = settledRaceTotals(audit);
+  return `<button type="button" class="result-card" data-result-race="${escapeHtml(resultIdentity(result))}"><div><h3>${escapeHtml(result.meetingName)} ${result.raceNo}R ${escapeHtml(result.raceTitle)}</h3><p>${formatDate(resultDate(result))}・いちばん注目 ${consensus.top?.horseNumber}番・${agentCount}人分を照合</p></div><div class="result-stat"><span>使った金額</span><strong>${yen(totals.investmentYen)}</strong></div><div class="result-stat"><span>もどった金額</span><strong>${yen(totals.payoutYen)}</strong></div><div class="result-stat"><span>差額</span><strong class="${totals.netYen >= 0 ? "positive" : "negative"}">${signedYen(totals.netYen)}</strong></div><div class="result-stat"><span>回収率</span><strong>${percent(totals.recoveryRate)}</strong></div><span class="status-badge ready">見る</span></button>`;
 }
 
 function renderPerformancePage() {
   renderPeriodTabs("#performance-filter", state.performancePeriod, (value) => { state.performancePeriod = value; renderPerformancePage(); });
-  const actualCount = savedPerformance.records.length;
+  const coverage = replayAudit.coverage ?? {};
   document.querySelector("#all-race-audit").innerHTML = "";
-  document.querySelector("#performance-summary").innerHTML = `<p class="plain-explanation">5人は、ちがう考え方で馬を選びます。レース前に保存した予想は${actualCount}件です。</p>${AGENTS.map(agentProfileHtml).join("")}`;
+  document.querySelector("#performance-summary").innerHTML = `<p class="plain-explanation">5人は、ちがう考え方で馬を選びます。現在の${coverage.confirmedResults ?? 0}レースについて、予想と公式払戻を照合しました。後から同じ条件で再計算した参考成績は、本番成績と分けています。</p>${AGENTS.map(agentProfileHtml).join("")}`;
 }
 
 function agentProfileHtml(agent) {
   const persona = agentPersona(agent);
   const replay = agentReplayMetrics(agent.id);
-  return `<article class="agent-profile ${agent.id}"><img class="agent-profile-portrait" src="${agentImagePath(agent.id)}" alt="${escapeHtml(persona.name)}" /><div class="agent-profile-body"><header><div><span class="eyebrow">${escapeHtml(persona.role)}</span><h2>${escapeHtml(persona.name)}</h2><p>${escapeHtml(persona.type)}</p></div><span class="agent-icon ${agent.id}">${escapeHtml(persona.symbol)}</span></header><blockquote>「${escapeHtml(persona.voice)}」</blockquote><div class="agent-focus"><span>よく見るところ</span><strong>${escapeHtml(persona.focus)}</strong></div><div class="agent-profile-metrics"><div><span>くらべたレース</span><strong>${replay.races || "--"}</strong></div><div><span>1番目の馬が1着</span><strong>${replay.races ? percent(replay.winRate) : "--"}</strong></div><div><span>1番目の馬が3着以内</span><strong>${replay.races ? percent(replay.placeRate) : "--"}</strong></div></div><small>レース後に作った参考の数字です。レース前の成績とは分けています。</small></div></article>`;
+  return `<article class="agent-profile ${agent.id}"><img class="agent-profile-portrait" src="${agentImagePath(agent.id)}" alt="${escapeHtml(persona.name)}" /><div class="agent-profile-body"><header><div><span class="eyebrow">${escapeHtml(persona.role)}</span><h2>${escapeHtml(persona.name)}</h2><p>${escapeHtml(persona.type)}</p></div><span class="agent-icon ${agent.id}">${escapeHtml(persona.symbol)}</span></header><blockquote>「${escapeHtml(persona.voice)}」</blockquote><div class="agent-focus"><span>よく見るところ</span><strong>${escapeHtml(persona.focus)}</strong></div><div class="agent-profile-metrics"><div><span>くらべたレース</span><strong>${replay.races}レース</strong></div><div><span>1番目の馬が1着</span><strong>${replay.races ? percent(replay.winRate) : "対象なし"}</strong></div><div><span>1番目の馬が3着以内</span><strong>${replay.races ? percent(replay.placeRate) : "対象なし"}</strong></div><div><span>馬券が1つ以上あたり</span><strong>${replay.races ? percent(replay.raceHitRate) : "対象なし"}</strong></div><div><span>使った金額</span><strong>${yen(replay.investmentYen)}</strong></div><div><span>もどった金額</span><strong>${yen(replay.payoutYen)}</strong></div><div><span>差額</span><strong class="${replay.netYen >= 0 ? "positive" : "negative"}">${signedYen(replay.netYen)}</strong></div><div><span>回収率</span><strong>${replay.investmentYen ? percent(replay.recoveryRate) : "対象なし"}</strong></div></div><small>レース後に作った参考の数字です。レース前の成績とは分けています。</small></div></article>`;
 }
 
 function agentReplayMetrics(agentId) {
-  const rows = (replayAudit.records ?? []).flatMap((record) => (record.agents ?? []).filter((agent) => agent.agentId === agentId && agent.status === "available"));
+  const records = (replayAudit.records ?? []).filter((record) => inPeriod(record.date, state.performancePeriod));
+  const rows = records.flatMap((record) => (record.agents ?? []).filter((agent) => agent.agentId === agentId && agent.status === "available"));
+  const groups = records.flatMap((record) => (record.agentTickets ?? []).filter((group) => group.agentId === agentId && group.status === "available"));
+  const totals = settledTicketTotals(groups.flatMap((group) => group.tickets ?? []));
   const races = rows.length;
   return { races, winRate: races ? rows.filter((row) => row.topPickFinish === 1).length / races : null,
-    placeRate: races ? rows.filter((row) => row.topPickFinish > 0 && row.topPickFinish <= 3).length / races : null };
+    placeRate: races ? rows.filter((row) => row.topPickFinish > 0 && row.topPickFinish <= 3).length / races : null,
+    raceHitRate: groups.length ? groups.filter((group) => group.tickets?.some((ticket) => ticket.hit)).length / groups.length : null,
+    ...totals };
+}
+
+function settledTicketTotals(tickets = []) {
+  const investmentYen = tickets.reduce((sum, ticket) => sum + Number(ticket.investmentYen || 0), 0);
+  const payoutYen = tickets.reduce((sum, ticket) => sum + Number(ticket.payoutYen || 0), 0);
+  return { tickets: tickets.length, hitTickets: tickets.filter((ticket) => ticket.hit === true).length, investmentYen, payoutYen,
+    netYen: payoutYen - investmentYen, recoveryRate: investmentYen ? payoutYen / investmentYen : 0 };
+}
+
+function settledRaceTotals(audit) {
+  return settledTicketTotals((audit?.agentTickets ?? []).filter((group) => group.status === "available").flatMap((group) => group.tickets ?? []));
 }
 
 function liveReplaySummary() {
@@ -657,6 +681,10 @@ function renderPeriodTabs(selector, active, onSelect) { const root = document.qu
 function inPeriod(date, periodId) { const period = PERIODS.find((row) => row.id === periodId); if (!date || period?.days == null) return true; const now = new Date(); const target = new Date(`${date}T00:00:00+09:00`); const diff = Math.floor((now - target) / 86400000); return diff >= 0 && diff <= period.days; }
 function isFinalResult(result) { return Boolean(result && result.status !== "pre_race" && (result.runners ?? []).some((row) => Number(row.finishPosition) === 1)); }
 function resultPositionMap(result) { return new Map((result?.runners ?? []).map((row) => [Number(row.horseNumber), Number(row.finishPosition) || null])); }
+function resultFinishLabelMap(result) { return new Map((result?.runners ?? []).map((row) => {
+  const position = Number(row.finishPosition);
+  return [Number(row.horseNumber), Number.isInteger(position) && position > 0 ? `${position}着` : String(row.finishText || "結果なし")];
+})); }
 function raceResultSummary(result) {
   if (!isFinalResult(result)) return "";
   return [...(result.runners ?? [])]

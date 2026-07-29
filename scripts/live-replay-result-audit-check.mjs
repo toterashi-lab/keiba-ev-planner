@@ -18,6 +18,10 @@ assert.ok(records.every((record) => record.tickets.every((ticket) => ticket.unit
 assert.ok(records.every((record) => record.tickets.every((ticket) => ticket.investmentYen === ticket.points * 100)));
 assert.ok(records.every((record) => record.agentTickets?.filter((group) => group.status === "available").every((group) => group.tickets.length === 3)));
 assert.ok(records.every((record) => record.agentTickets?.filter((group) => group.status === "available").length === 5), "全レースで5人分の買い目が必要です");
+assert.ok(records.every((record) => record.agents?.length === 5 && record.agents.every((agent) =>
+  agent.status === "available" && agent.marks?.length === 3 && agent.marks.every((mark) =>
+    (Number.isInteger(mark.finish) && mark.finish > 0) || (typeof mark.finishText === "string" && mark.finishText.length > 0)))),
+"全予想家の印に着順または中止・取消等の確定結果が必要です");
 assert.ok(records.every((record) => Number.isFinite(record.payoutYen) && record.payoutYen >= 0));
 assert.ok(records.filter((record) => record.sourceClassification === "as_of_replay").every((record) => record.predictionContext === "as_of_replay"));
 assert.equal(audit.coverage.immutableSnapshots, 0, "不変スナップショットなしの公開データを本番成績に混ぜてはいけません");

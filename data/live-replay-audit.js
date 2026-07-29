@@ -1,6 +1,6 @@
 window.KEIBA_LIVE_REPLAY_AUDIT = {
   "status": "replay_only",
-  "calculatedAt": "2026-07-29T13:57:00.766Z",
+  "calculatedAt": "2026-07-29T14:16:17.546Z",
   "label": "後日再現（本番成績に含めない）",
   "policy": {
     "source": "画面で表示する総合AI指数の買い目とJRA公式払戻の照合",
@@ -71,6 +71,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -151,33 +152,47 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "7": 6,
         "8": 4
       },
+      "finishTextByHorseNumber": {
+        "1": "8着",
+        "2": "1着",
+        "3": "3着",
+        "4": "5着",
+        "5": "7着",
+        "6": "2着",
+        "7": "6着",
+        "8": "4着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 2,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "ロジクラウン",
               "score": 0.706106785699089,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "イッペイ",
               "score": 0.34092656334974425,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "アートオブブライト",
               "score": 0.30153651139495014,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -186,6 +201,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
@@ -193,7 +209,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アートオブブライト",
               "probability": 0.09210745342812852,
               "score": 5,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
@@ -201,7 +218,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ガーシュウィン",
               "probability": 0.017979006681303686,
               "score": 4,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
@@ -209,7 +227,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "イッペイ",
               "probability": 0.152707533358581,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -218,27 +237,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 3,
               "horseName": "アートオブブライト",
               "score": 0.3333333333333333,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "イッペイ",
               "score": 0.32738095238095233,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 2,
               "horseName": "ロジクラウン",
               "score": 0.2916666666666667,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -247,27 +270,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 2,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "ロジクラウン",
               "score": 0.13304437825168294,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "イッペイ",
               "score": 0.08350771321858175,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 7,
               "horseName": "ハイビスカス",
               "score": 0.07190333430693012,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         },
@@ -276,6 +303,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "horseNumber": 6,
@@ -283,7 +311,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 15,
               "first": 0,
               "mark": "◎",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 8,
@@ -291,7 +320,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "○",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "horseNumber": 4,
@@ -299,7 +329,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "▲",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         }
@@ -533,6 +564,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -617,33 +649,51 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "11": 10,
         "12": 3
       },
+      "finishTextByHorseNumber": {
+        "1": "12着",
+        "2": "1着",
+        "3": "7着",
+        "4": "11着",
+        "5": "6着",
+        "6": "8着",
+        "7": "2着",
+        "8": "9着",
+        "9": "5着",
+        "10": "4着",
+        "11": "10着",
+        "12": "3着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 2,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "メモリーデイズ",
               "score": 0.5329262034959681,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 7,
               "horseName": "ドリームガッサン",
               "score": 0.3538174124169857,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 12,
               "horseName": "ペイシャクロス",
               "score": 0.2859852398040595,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -652,6 +702,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
@@ -659,7 +710,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "チュラヴェール",
               "probability": 0.08016484272511311,
               "score": 5,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "○",
@@ -667,7 +719,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ペイシャクロス",
               "probability": 0.06818242021137362,
               "score": 4,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
@@ -675,7 +728,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ドリームガッサン",
               "probability": 0.17253960884664477,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -684,27 +738,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 2,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "メモリーデイズ",
               "score": 0.3333333333333333,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 5,
               "horseName": "チュラヴェール",
               "score": 0.3106060606060606,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "ジェッディンデデン",
               "score": 0.2424242424242425,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -713,27 +771,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 2,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "メモリーデイズ",
               "score": 0.09847432287886183,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 1,
               "horseName": "レディリリス",
               "score": 0.07436289260741773,
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             },
             {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "クリーンブーケ",
               "score": 0.07267626205089804,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             }
           ]
         },
@@ -742,6 +804,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 7,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "horseNumber": 7,
@@ -749,7 +812,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "◎",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 12,
@@ -757,7 +821,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "○",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "horseNumber": 10,
@@ -765,7 +830,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 5,
               "first": 0,
               "mark": "▲",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         }
@@ -999,6 +1065,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 8,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -1083,33 +1150,51 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "11": 3,
         "12": 9
       },
+      "finishTextByHorseNumber": {
+        "1": "8着",
+        "2": "4着",
+        "3": "6着",
+        "4": "2着",
+        "5": "5着",
+        "6": "12着",
+        "7": "10着",
+        "8": "1着",
+        "9": "7着",
+        "10": "11着",
+        "11": "3着",
+        "12": "9着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 8,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 8,
               "horseName": "リバーソニック",
               "score": 0.39840647577483335,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 4,
               "horseName": "ウインガネーシャ",
               "score": 0.37173279014205696,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 11,
               "horseName": "ポップアップ",
               "score": 0.3637783252827676,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -1118,6 +1203,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 11,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
@@ -1125,7 +1211,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ポップアップ",
               "probability": 0.18786409017861688,
               "score": 5,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
@@ -1133,7 +1220,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ハイランダー",
               "probability": 0.06423210025358111,
               "score": 4,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
@@ -1141,7 +1229,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ウインガネーシャ",
               "probability": 0.2001017284236775,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -1150,27 +1239,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 8,
               "horseName": "リバーソニック",
               "score": 0.5871212121212122,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 3,
               "horseName": "マーゴットデウス",
               "score": 0.35606060606060597,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
               "horseNumber": 2,
               "horseName": "ザンテソーロ",
               "score": 0.3333333333333333,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -1179,27 +1272,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 8,
               "horseName": "リバーソニック",
               "score": 0.10977239380219654,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "ゴールデンボブ",
               "score": 0.08327241964571397,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "▲",
               "horseNumber": 9,
               "horseName": "フェンリル",
               "score": 0.0805306747197921,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -1208,6 +1305,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 2,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "horseNumber": 2,
@@ -1215,7 +1313,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 9,
               "first": 0,
               "mark": "◎",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "horseNumber": 4,
@@ -1223,7 +1322,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "○",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 5,
@@ -1231,7 +1331,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "▲",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         }
@@ -1465,6 +1566,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 8,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -1553,33 +1655,55 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "15": 4,
         "16": 16
       },
+      "finishTextByHorseNumber": {
+        "1": "7着",
+        "2": "6着",
+        "3": "3着",
+        "4": "8着",
+        "5": "2着",
+        "6": "5着",
+        "7": "10着",
+        "8": "1着",
+        "9": "14着",
+        "10": "9着",
+        "11": "13着",
+        "12": "11着",
+        "13": "15着",
+        "14": "12着",
+        "15": "4着",
+        "16": "16着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 8,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 8,
               "horseName": "ホウオウザロイヤル",
               "score": 0.6235559215210759,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 3,
               "horseName": "スッサンエア",
               "score": 0.30463426570968943,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 5,
               "horseName": "レッドアイスピア",
               "score": 0.2955925274431441,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -1588,6 +1712,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
@@ -1595,7 +1720,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "レッドアイスピア",
               "probability": 0.08296286273304229,
               "score": 5,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
@@ -1603,7 +1729,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ガルフコースト",
               "probability": 0.060174829597069365,
               "score": 4,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
@@ -1611,7 +1738,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "スッサンエア",
               "probability": 0.09687322929695817,
               "score": 3,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -1620,27 +1748,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 3,
               "horseName": "スッサンエア",
               "score": 0.375,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
               "horseNumber": 8,
               "horseName": "ホウオウザロイヤル",
               "score": 0.3333333333333333,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "▲",
               "horseNumber": 9,
               "horseName": "エコロデュラン",
               "score": 0.31666666666666665,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             }
           ]
         },
@@ -1649,27 +1781,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 8,
               "horseName": "ホウオウザロイヤル",
               "score": 0.12015319147641641,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 1,
               "horseName": "ニシノオールワン",
               "score": 0.09735927894023962,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "ガルフコースト",
               "score": 0.0811339782245727,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -1678,6 +1814,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 7,
+          "topPickFinishText": "7着",
           "marks": [
             {
               "horseNumber": 1,
@@ -1685,7 +1822,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "◎",
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "horseNumber": 6,
@@ -1693,7 +1831,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "○",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "horseNumber": 9,
@@ -1701,7 +1840,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 3,
               "first": 0,
               "mark": "▲",
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             }
           ]
         }
@@ -1935,6 +2075,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 8,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -2021,33 +2162,53 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "13": 9,
         "14": 7
       },
+      "finishTextByHorseNumber": {
+        "1": "8着",
+        "2": "2着",
+        "3": "11着",
+        "4": "10着",
+        "5": "12着",
+        "6": "3着",
+        "7": "5着",
+        "8": "1着",
+        "9": "4着",
+        "10": "14着",
+        "11": "13着",
+        "12": "6着",
+        "13": "9着",
+        "14": "7着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 8,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 8,
               "horseName": "ホウオウライセンス",
               "score": 0.47191913186360424,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "イトシサ",
               "score": 0.4156658746913323,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 2,
               "horseName": "バンダムソレール",
               "score": 0.292471354016105,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -2056,6 +2217,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 9,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
@@ -2063,7 +2225,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ペガサスウィンド",
               "probability": 0.11213086594646755,
               "score": 5,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
@@ -2071,7 +2234,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "メイショウセンドウ",
               "probability": 0.0474050313402209,
               "score": 4,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "▲",
@@ -2079,7 +2243,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "イトシサ",
               "probability": 0.2676910892687165,
               "score": 3,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -2088,27 +2253,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 12,
           "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 12,
               "horseName": "モンロワイヤル",
               "score": 0.4455128205128205,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "イトシサ",
               "score": 0.3525641025641026,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 13,
               "horseName": "レースクイーン",
               "score": 0.3525641025641026,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             }
           ]
         },
@@ -2117,27 +2286,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 8,
               "horseName": "ホウオウライセンス",
               "score": 0.11682278738315431,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 3,
               "horseName": "チャーチルデュース",
               "score": 0.09576139129666972,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "イトシサ",
               "score": 0.0860244588171886,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -2146,6 +2319,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "horseNumber": 6,
@@ -2153,7 +2327,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 14,
               "first": 0,
               "mark": "◎",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "horseNumber": 2,
@@ -2161,7 +2336,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 5,
               "first": 0,
               "mark": "○",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 14,
@@ -2169,7 +2345,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 5,
               "first": 0,
               "mark": "▲",
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         }
@@ -2403,6 +2580,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 12,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -2487,33 +2665,51 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "11": 6,
         "12": 1
       },
+      "finishTextByHorseNumber": {
+        "1": "10着",
+        "2": "2着",
+        "3": "12着",
+        "4": "7着",
+        "5": "9着",
+        "6": "3着",
+        "7": "4着",
+        "8": "8着",
+        "9": "11着",
+        "10": "5着",
+        "11": "6着",
+        "12": "1着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 12,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 12,
               "horseName": "ショウナンマルチ",
               "score": 0.5847583048978735,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 2,
               "horseName": "トリニタリオ",
               "score": 0.35667527212712324,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "コスモクラシック",
               "score": 0.31067206313607454,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -2522,6 +2718,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
@@ -2529,7 +2726,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "コスモクラシック",
               "probability": 0.10616214841447373,
               "score": 5,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
@@ -2537,7 +2735,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "グローリーバローズ",
               "probability": 0.030763100718433398,
               "score": 4,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
@@ -2545,7 +2744,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "トリニタリオ",
               "probability": 0.17693631609301025,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -2554,27 +2754,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 6,
               "horseName": "コスモクラシック",
               "score": 0.3333333333333333,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "ジュラトリー",
               "score": 0.3106060606060606,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
               "horseNumber": 12,
               "horseName": "ショウナンマルチ",
               "score": 0.2878787878787879,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -2583,27 +2787,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 12,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 12,
               "horseName": "ショウナンマルチ",
               "score": 0.11615552967133369,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "ジュラトリー",
               "score": 0.0796490391575768,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
               "horseNumber": 10,
               "horseName": "グローリーバローズ",
               "score": 0.07958648302511635,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -2612,6 +2820,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 11,
           "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "horseNumber": 11,
@@ -2619,7 +2828,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 12,
               "first": 0,
               "mark": "◎",
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "horseNumber": 2,
@@ -2627,7 +2837,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 9,
               "first": 0,
               "mark": "○",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 10,
@@ -2635,7 +2846,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "▲",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         }
@@ -2869,6 +3081,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 8,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -2955,33 +3168,53 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "13": 14,
         "14": 8
       },
+      "finishTextByHorseNumber": {
+        "1": "6着",
+        "2": "3着",
+        "3": "9着",
+        "4": "5着",
+        "5": "12着",
+        "6": "10着",
+        "7": "4着",
+        "8": "1着",
+        "9": "13着",
+        "10": "7着",
+        "11": "2着",
+        "12": "11着",
+        "13": "14着",
+        "14": "8着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 8,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 8,
               "horseName": "パラダイスフェイス",
               "score": 0.5238934607034925,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "ストロングボーイ",
               "score": 0.417532040428756,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 2,
               "horseName": "タイセイデクスター",
               "score": 0.26830181983969775,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -2990,6 +3223,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 7,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
@@ -2997,7 +3231,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "グランセレスト",
               "probability": 0.11553387893452878,
               "score": 5,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
@@ -3005,7 +3240,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "タイセイデクスター",
               "probability": 0.0409771587277402,
               "score": 4,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
@@ -3013,7 +3249,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ストロングボーイ",
               "probability": 0.27056211348013753,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -3022,27 +3259,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "エンダードラゴン",
               "score": 0.40705128205128205,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "○",
               "horseNumber": 4,
               "horseName": "ディアスポラ",
               "score": 0.34935897435897434,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
               "horseNumber": 11,
               "horseName": "ストロングボーイ",
               "score": 0.34935897435897434,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -3051,27 +3292,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 8,
               "horseName": "パラダイスフェイス",
               "score": 0.10425020945156861,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "ストロングボーイ",
               "score": 0.0949254143956831,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 1,
               "horseName": "エンダードラゴン",
               "score": 0.09050170066580955,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         },
@@ -3080,6 +3325,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 11,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "horseNumber": 11,
@@ -3087,7 +3333,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 14,
               "first": 0,
               "mark": "◎",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 2,
@@ -3095,7 +3342,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "○",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "horseNumber": 4,
@@ -3103,7 +3351,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 5,
               "first": 0,
               "mark": "▲",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         }
@@ -3337,6 +3586,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 5,
       "topPickFinish": 4,
+      "topPickFinishText": "4着",
       "tickets": [
         {
           "betType": "単勝",
@@ -3421,33 +3671,51 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "11": 12,
         "12": 5
       },
+      "finishTextByHorseNumber": {
+        "1": "2着",
+        "2": "9着",
+        "3": "3着",
+        "4": "6着",
+        "5": "4着",
+        "6": "1着",
+        "7": "7着",
+        "8": "11着",
+        "9": "8着",
+        "10": "10着",
+        "11": "12着",
+        "12": "5着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 1,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "ワンダフルデイズ",
               "score": 0.39073821352207866,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "マイネルゼウス",
               "score": 0.38254604521758906,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "バルドル",
               "score": 0.33013546150621875,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -3456,6 +3724,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
@@ -3463,7 +3732,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "マイネルゼウス",
               "probability": 0.20391699264244473,
               "score": 5,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
@@ -3471,7 +3741,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "マテンロウオリジン",
               "probability": 0.08833563195552524,
               "score": 4,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
@@ -3479,7 +3750,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ワンダフルデイズ",
               "probability": 0.22934084131601853,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -3488,27 +3760,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 3,
               "horseName": "バルドル",
               "score": 0.35606060606060597,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "マイネルゼウス",
               "score": 0.3333333333333333,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "▲",
               "horseNumber": 10,
               "horseName": "メイショウテンク",
               "score": 0.31439393939393934,
-              "finish": 10
+              "finish": 10,
+              "finishText": "10着"
             }
           ]
         },
@@ -3517,27 +3793,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 6,
               "horseName": "マイネルゼウス",
               "score": 0.10652033625548947,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 5,
               "horseName": "アーレムアレス",
               "score": 0.09364385765229277,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
               "horseNumber": 7,
               "horseName": "アスクファイアモア",
               "score": 0.07895756167443255,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -3546,6 +3826,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "horseNumber": 5,
@@ -3553,7 +3834,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "◎",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "horseNumber": 12,
@@ -3561,7 +3843,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "○",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "horseNumber": 7,
@@ -3569,7 +3852,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 3,
               "first": 0,
               "mark": "▲",
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         }
@@ -3803,6 +4087,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 5,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -3888,33 +4173,52 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "12": 6,
         "13": 9
       },
+      "finishTextByHorseNumber": {
+        "1": "8着",
+        "2": "4着",
+        "3": "10着",
+        "4": "3着",
+        "5": "1着",
+        "6": "11着",
+        "7": "2着",
+        "8": "13着",
+        "9": "12着",
+        "10": "5着",
+        "11": "7着",
+        "12": "6着",
+        "13": "9着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 5,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "ドッグウッド",
               "score": 0.5011115976731031,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 7,
               "horseName": "マイネルシンベリン",
               "score": 0.34955577830147,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "グランセゾン",
               "score": 0.2994587927931265,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -3923,6 +4227,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 2,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
@@ -3930,7 +4235,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アドミラルシップ",
               "probability": 0.1303383142834271,
               "score": 5,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
@@ -3938,7 +4244,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ディーリライズ",
               "probability": 0.07194331041452894,
               "score": 4,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
@@ -3946,7 +4253,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "マイネルシンベリン",
               "probability": 0.16598324866892827,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -3955,27 +4263,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 13,
           "topPickFinish": 9,
+          "topPickFinishText": "9着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 13,
               "horseName": "ゴーゴータカシ",
               "score": 0.5,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "○",
               "horseNumber": 7,
               "horseName": "マイネルシンベリン",
               "score": 0.4166666666666667,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "グランセゾン",
               "score": 0.33333333333333337,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -3984,27 +4296,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "ドッグウッド",
               "score": 0.10936476607300265,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 3,
               "horseName": "ホウオウペトリュス",
               "score": 0.08620072665031474,
-              "finish": 10
+              "finish": 10,
+              "finishText": "10着"
             },
             {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "ハミルトン",
               "score": 0.0808707145187364,
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             }
           ]
         },
@@ -4013,6 +4329,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 7,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "horseNumber": 7,
@@ -4020,7 +4337,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 11,
               "first": 0,
               "mark": "◎",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 4,
@@ -4028,7 +4346,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "○",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "horseNumber": 10,
@@ -4036,7 +4355,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 5,
               "first": 0,
               "mark": "▲",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         }
@@ -4270,6 +4590,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 10,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -4352,33 +4673,49 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "9": 7,
         "10": 1
       },
+      "finishTextByHorseNumber": {
+        "1": "9着",
+        "2": "10着",
+        "3": "8着",
+        "4": "2着",
+        "5": "3着",
+        "6": "4着",
+        "7": "6着",
+        "8": "5着",
+        "9": "7着",
+        "10": "1着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 10,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 10,
               "horseName": "アパッシメント",
               "score": 0.5496629966114968,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 4,
               "horseName": "マナボニート",
               "score": 0.4502851697438045,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 5,
               "horseName": "フードマン",
               "score": 0.3159241767937076,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -4387,6 +4724,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
@@ -4394,7 +4732,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "フードマン",
               "probability": 0.11424232327237072,
               "score": 5,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
@@ -4402,7 +4741,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "バシレウスシチー",
               "probability": 0.017040181969171578,
               "score": 4,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
@@ -4410,7 +4750,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "マナボニート",
               "probability": 0.32095154319559677,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -4419,27 +4760,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 4,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "マナボニート",
               "score": 0.3333333333333333,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "アパッシメント",
               "score": 0.3055555555555555,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "バシレウスシチー",
               "score": 0.2361111111111111,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -4448,27 +4793,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 10,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 10,
               "horseName": "アパッシメント",
               "score": 0.12523089044345,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 1,
               "horseName": "フミサウンド",
               "score": 0.08240301022905322,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "マジカルフェアリー",
               "score": 0.0771225448862057,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -4477,6 +4826,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "horseNumber": 8,
@@ -4484,7 +4834,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 9,
               "first": 0,
               "mark": "◎",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "horseNumber": 6,
@@ -4492,7 +4843,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "○",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "horseNumber": 1,
@@ -4500,7 +4852,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 4,
               "first": 0,
               "mark": "▲",
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             }
           ]
         }
@@ -4734,6 +5087,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 10,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -4819,33 +5173,52 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "12": 2,
         "13": 12
       },
+      "finishTextByHorseNumber": {
+        "1": "9着",
+        "2": "13着",
+        "3": "4着",
+        "4": "5着",
+        "5": "10着",
+        "6": "6着",
+        "7": "8着",
+        "8": "7着",
+        "9": "11着",
+        "10": "1着",
+        "11": "3着",
+        "12": "2着",
+        "13": "12着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 10,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 10,
               "horseName": "ウェイワードアクト",
               "score": 0.5282698749171133,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 12,
               "horseName": "レヴォントゥレット",
               "score": 0.37932387692629166,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 11,
               "horseName": "ヒルノハンブルク",
               "score": 0.36763407754632405,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -4854,6 +5227,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 11,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
@@ -4861,7 +5235,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ヒルノハンブルク",
               "probability": 0.19379601673793456,
               "score": 5,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
@@ -4869,7 +5244,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ハグ",
               "probability": 0.03314543559966551,
               "score": 4,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "▲",
@@ -4877,7 +5253,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "レヴォントゥレット",
               "probability": 0.2117803234763462,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -4886,27 +5263,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 3,
               "horseName": "オウギノカナメ",
               "score": 0.3958333333333333,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "ヒルノハンブルク",
               "score": 0.35416666666666663,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 10,
               "horseName": "ウェイワードアクト",
               "score": 0.3333333333333333,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -4915,27 +5296,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 10,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 10,
               "horseName": "ウェイワードアクト",
               "score": 0.1217387445314743,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "ヒルノハンブルク",
               "score": 0.09227313565131266,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 7,
               "horseName": "ラタフォレスト",
               "score": 0.08752026692168513,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         },
@@ -4944,6 +5329,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 12,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "horseNumber": 12,
@@ -4951,7 +5337,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 9,
               "first": 0,
               "mark": "◎",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 7,
@@ -4959,7 +5346,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "○",
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "horseNumber": 8,
@@ -4967,7 +5355,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "▲",
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         }
@@ -5201,6 +5590,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 1,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -5285,33 +5675,51 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "11": 6,
         "12": 12
       },
+      "finishTextByHorseNumber": {
+        "1": "1着",
+        "2": "8着",
+        "3": "2着",
+        "4": "9着",
+        "5": "10着",
+        "6": "4着",
+        "7": "2着",
+        "8": "11着",
+        "9": "5着",
+        "10": "7着",
+        "11": "6着",
+        "12": "12着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 1,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "ラミアメンテ",
               "score": 0.5119765249802402,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 3,
               "horseName": "ハーモニーソング",
               "score": 0.3802841991630428,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 7,
               "horseName": "ルージュベルベット",
               "score": 0.28740160215535404,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -5320,6 +5728,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
@@ -5327,7 +5736,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "バレンタインビスタ",
               "probability": 0.18637665772322654,
               "score": 5,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
@@ -5335,7 +5745,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ランプローグ",
               "probability": 0.05638437022989632,
               "score": 4,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "▲",
@@ -5343,7 +5754,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ハーモニーソング",
               "probability": 0.2132577423021172,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -5352,27 +5764,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 6,
               "horseName": "バレンタインビスタ",
               "score": 0.3333333333333333,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "ランプローグ",
               "score": 0.3106060606060606,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "ハーモニーソング",
               "score": 0.2424242424242425,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -5381,27 +5797,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "ラミアメンテ",
               "score": 0.12015319147641641,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 9,
               "horseName": "エコロハート",
               "score": 0.08024939631400703,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
               "horseNumber": 10,
               "horseName": "ランプローグ",
               "score": 0.0798549455173898,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -5410,6 +5830,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 10,
           "topPickFinish": 7,
+          "topPickFinishText": "7着",
           "marks": [
             {
               "horseNumber": 10,
@@ -5417,7 +5838,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 12,
               "first": 0,
               "mark": "◎",
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "horseNumber": 3,
@@ -5425,7 +5847,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 10,
               "first": 0,
               "mark": "○",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 7,
@@ -5433,7 +5856,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "▲",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         }
@@ -5667,6 +6091,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 12,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -5752,33 +6177,52 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "12": 1,
         "13": 12
       },
+      "finishTextByHorseNumber": {
+        "1": "9着",
+        "2": "8着",
+        "3": "4着",
+        "4": "6着",
+        "5": "2着",
+        "6": "7着",
+        "7": "除外",
+        "8": "3着",
+        "9": "5着",
+        "10": "11着",
+        "11": "10着",
+        "12": "1着",
+        "13": "12着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 12,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 12,
               "horseName": "ショウナンハーヴェ",
               "score": 0.5569252316724471,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 5,
               "horseName": "エーアイクワイ",
               "score": 0.3806344650496245,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "シュネーバレン",
               "score": 0.3076863397836182,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -5787,6 +6231,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
@@ -5794,7 +6239,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "シュネーバレン",
               "probability": 0.10156872787223319,
               "score": 5,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
@@ -5802,7 +6248,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ウインリスノアール",
               "probability": 0.03662784211225946,
               "score": 4,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
@@ -5810,7 +6257,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "エーアイクワイ",
               "probability": 0.21379661289685828,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -5819,27 +6267,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 4,
           "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "サリードゥ",
               "score": 0.375,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "○",
               "horseNumber": 5,
               "horseName": "エーアイクワイ",
               "score": 0.2916666666666667,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 12,
               "horseName": "ショウナンハーヴェ",
               "score": 0.2916666666666667,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -5848,27 +6300,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 12,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 12,
               "horseName": "ショウナンハーヴェ",
               "score": 0.11681024812982983,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 2,
               "horseName": "エーオープリマ",
               "score": 0.07029564784369226,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "サリードゥ",
               "score": 0.07026295257619587,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         },
@@ -5877,6 +6333,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "horseNumber": 5,
@@ -5884,7 +6341,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 13,
               "first": 0,
               "mark": "◎",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 3,
@@ -5892,7 +6350,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 5,
               "first": 0,
               "mark": "○",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "horseNumber": 2,
@@ -5900,7 +6359,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 4,
               "first": 0,
               "mark": "▲",
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         }
@@ -6134,6 +6594,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -6215,33 +6676,48 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "8": 7,
         "9": 4
       },
+      "finishTextByHorseNumber": {
+        "1": "3着",
+        "2": "1着",
+        "3": "2着",
+        "4": "5着",
+        "5": "6着",
+        "6": "8着",
+        "7": "9着",
+        "8": "7着",
+        "9": "4着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 2,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "ビップヴィーナス",
               "score": 0.5389744618777437,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 1,
               "horseName": "サノノキセキ",
               "score": 0.45724961633744765,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "ウィナーズチェック",
               "score": 0.28631490153450434,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -6250,6 +6726,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 9,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
@@ -6257,7 +6734,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "スクリプトール",
               "probability": 0.08167945079308712,
               "score": 5,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
@@ -6265,7 +6743,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "カペラテソーロ",
               "probability": 0.03248386131237395,
               "score": 4,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
@@ -6273,7 +6752,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "サノノキセキ",
               "probability": 0.33166607641658624,
               "score": 3,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -6282,27 +6762,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "サノノキセキ",
               "score": 0.3333333333333333,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
               "horseNumber": 9,
               "horseName": "スクリプトール",
               "score": 0.3020833333333333,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "ファウナード",
               "score": 0.29166666666666663,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -6311,27 +6795,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 2,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "ビップヴィーナス",
               "score": 0.11155276985944529,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 1,
               "horseName": "サノノキセキ",
               "score": 0.0821681423852831,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "ファウナード",
               "score": 0.07842616855482003,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -6340,6 +6828,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "horseNumber": 3,
@@ -6347,7 +6836,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "◎",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 8,
@@ -6355,7 +6845,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "horseNumber": 4,
@@ -6363,7 +6854,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 5,
               "first": 0,
               "mark": "▲",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         }
@@ -6597,6 +7089,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 13,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -6685,33 +7178,55 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "15": 5,
         "16": 10
       },
+      "finishTextByHorseNumber": {
+        "1": "8着",
+        "2": "12着",
+        "3": "4着",
+        "4": "11着",
+        "5": "6着",
+        "6": "2着",
+        "7": "13着",
+        "8": "16着",
+        "9": "3着",
+        "10": "14着",
+        "11": "15着",
+        "12": "7着",
+        "13": "1着",
+        "14": "9着",
+        "15": "5着",
+        "16": "10着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 13,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 13,
               "horseName": "ゲンテン",
               "score": 0.6404876664022398,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "ニンジャトットリ",
               "score": 0.31356558412751195,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 9,
               "horseName": "ハングローズ",
               "score": 0.29426088903294556,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -6720,6 +7235,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 9,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
@@ -6727,7 +7243,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ハングローズ",
               "probability": 0.0809141882558138,
               "score": 5,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
@@ -6735,7 +7252,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ジャガーライズ",
               "probability": 0.03807766306043493,
               "score": 4,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
@@ -6743,7 +7261,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ニンジャトットリ",
               "probability": 0.1106137191705313,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -6752,27 +7271,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 8,
+          "topPickFinishText": "8着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "プリンセスダーコ",
               "score": 0.3416666666666667,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "ニンジャトットリ",
               "score": 0.3333333333333333,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 13,
               "horseName": "ゲンテン",
               "score": 0.31666666666666665,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -6781,27 +7304,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 13,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 13,
               "horseName": "ゲンテン",
               "score": 0.12270372289786773,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 2,
               "horseName": "サクラボーベル",
               "score": 0.07754440805109349,
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "エクスペクタント",
               "score": 0.07608455095539966,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -6810,6 +7337,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "horseNumber": 6,
@@ -6817,7 +7345,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 11,
               "first": 0,
               "mark": "◎",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 3,
@@ -6825,7 +7354,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "○",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "horseNumber": 5,
@@ -6833,7 +7363,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "▲",
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         }
@@ -7067,6 +7598,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 12,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -7155,33 +7687,55 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "15": 5,
         "16": 16
       },
+      "finishTextByHorseNumber": {
+        "1": "13着",
+        "2": "10着",
+        "3": "14着",
+        "4": "2着",
+        "5": "15着",
+        "6": "11着",
+        "7": "7着",
+        "8": "9着",
+        "9": "3着",
+        "10": "6着",
+        "11": "4着",
+        "12": "1着",
+        "13": "8着",
+        "14": "12着",
+        "15": "5着",
+        "16": "16着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 12,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 12,
               "horseName": "リーデレクオーレ",
               "score": 0.45165883483154035,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 4,
               "horseName": "オンナキュヌヴィ",
               "score": 0.3412800546269733,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 9,
               "horseName": "エンジェルサン",
               "score": 0.32000855365644,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -7190,6 +7744,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 11,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
@@ -7197,7 +7752,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ラウンドヒル",
               "probability": 0.12234631103096903,
               "score": 5,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
@@ -7205,7 +7761,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ウインドオブヘヴン",
               "probability": 0.08166869485086874,
               "score": 4,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
@@ -7213,7 +7770,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "オンナキュヌヴィ",
               "probability": 0.15325136609277956,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -7222,27 +7780,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 9,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 9,
               "horseName": "エンジェルサン",
               "score": 0.35,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
               "horseNumber": 3,
               "horseName": "ハイティー",
               "score": 0.3333333333333333,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "▲",
               "horseNumber": 12,
               "horseName": "リーデレクオーレ",
               "score": 0.31666666666666665,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -7251,27 +7813,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 12,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 12,
               "horseName": "リーデレクオーレ",
               "score": 0.10051554722179053,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 3,
               "horseName": "ハイティー",
               "score": 0.09736769413718142,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "オンナキュヌヴィ",
               "score": 0.07389920174425661,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -7280,6 +7846,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 4,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "horseNumber": 4,
@@ -7287,7 +7854,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 10,
               "first": 0,
               "mark": "◎",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 3,
@@ -7295,7 +7863,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "○",
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "horseNumber": 10,
@@ -7303,7 +7872,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 5,
               "first": 0,
               "mark": "▲",
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         }
@@ -7537,6 +8107,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -7624,33 +8195,54 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "14": 8,
         "15": 15
       },
+      "finishTextByHorseNumber": {
+        "1": "3着",
+        "2": "1着",
+        "3": "6着",
+        "4": "13着",
+        "5": "12着",
+        "6": "4着",
+        "7": "9着",
+        "8": "10着",
+        "9": "5着",
+        "10": "11着",
+        "11": "7着",
+        "12": "14着",
+        "13": "2着",
+        "14": "8着",
+        "15": "15着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 2,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "シルクドマルス",
               "score": 0.5817901808309167,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 1,
               "horseName": "サウンズオーサム",
               "score": 0.34348167153441933,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 13,
               "horseName": "ドナリー",
               "score": 0.2917467011859088,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -7659,6 +8251,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 9,
           "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "mark": "◎",
@@ -7666,7 +8259,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "マリナーヴァレイ",
               "probability": 0.10464852003582452,
               "score": 5,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "○",
@@ -7674,7 +8268,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "フェリシタル",
               "probability": 0.04394806842065042,
               "score": 4,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
@@ -7682,7 +8277,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "サウンズオーサム",
               "probability": 0.15663846902731182,
               "score": 3,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -7691,27 +8287,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 13,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 13,
               "horseName": "ドナリー",
               "score": 0.3333333333333333,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
               "horseNumber": 3,
               "horseName": "フェリシタル",
               "score": 0.32738095238095233,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
               "horseNumber": 2,
               "horseName": "シルクドマルス",
               "score": 0.31547619047619047,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -7720,27 +8320,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 2,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "シルクドマルス",
               "score": 0.1097887611496523,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 9,
               "horseName": "マリナーヴァレイ",
               "score": 0.08721219922558894,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "フェリシタル",
               "score": 0.08150870697512488,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         },
@@ -7749,6 +8353,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "horseNumber": 3,
@@ -7756,7 +8361,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 12,
               "first": 0,
               "mark": "◎",
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "horseNumber": 1,
@@ -7764,7 +8370,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "○",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "horseNumber": 11,
@@ -7772,7 +8379,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 3,
               "first": 0,
               "mark": "▲",
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         }
@@ -8006,6 +8614,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -8093,33 +8702,54 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "14": 13,
         "15": 2
       },
+      "finishTextByHorseNumber": {
+        "1": "6着",
+        "2": "1着",
+        "3": "3着",
+        "4": "7着",
+        "5": "5着",
+        "6": "9着",
+        "7": "4着",
+        "8": "15着",
+        "9": "12着",
+        "10": "14着",
+        "11": "11着",
+        "12": "10着",
+        "13": "8着",
+        "14": "13着",
+        "15": "2着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 2,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "スクイーズアウト",
               "score": 0.43867393275233724,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 15,
               "horseName": "アラビアンドリーム",
               "score": 0.42212994942245086,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "サンタピア",
               "score": 0.28116090984316033,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -8128,6 +8758,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
@@ -8135,7 +8766,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "テンオンスゴールド",
               "probability": 0.09098602230568786,
               "score": 5,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "○",
@@ -8143,7 +8775,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "サンタピア",
               "probability": 0.06076037411768267,
               "score": 4,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
@@ -8151,7 +8784,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アラビアンドリーム",
               "probability": 0.2776358196242834,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -8160,27 +8794,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 12,
           "topPickFinish": 10,
+          "topPickFinishText": "10着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 12,
               "horseName": "アデルフィー",
               "score": 0.3511904761904762,
-              "finish": 10
+              "finish": 10,
+              "finishText": "10着"
             },
             {
               "mark": "○",
               "horseNumber": 1,
               "horseName": "テンオンスゴールド",
               "score": 0.3333333333333333,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
               "horseNumber": 2,
               "horseName": "スクイーズアウト",
               "score": 0.31547619047619047,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -8189,27 +8827,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 2,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "スクイーズアウト",
               "score": 0.10111579090290246,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "ベイツリー",
               "score": 0.08064911551996422,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "▲",
               "horseNumber": 15,
               "horseName": "アラビアンドリーム",
               "score": 0.08023110697736491,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -8218,6 +8860,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 15,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "horseNumber": 15,
@@ -8225,7 +8868,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 10,
               "first": 0,
               "mark": "◎",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 3,
@@ -8233,7 +8877,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "○",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "horseNumber": 10,
@@ -8241,7 +8886,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 4,
               "first": 0,
               "mark": "▲",
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             }
           ]
         }
@@ -8475,6 +9121,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 11,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -8563,33 +9210,55 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "15": 13,
         "16": 8
       },
+      "finishTextByHorseNumber": {
+        "1": "4着",
+        "2": "10着",
+        "3": "14着",
+        "4": "11着",
+        "5": "6着",
+        "6": "16着",
+        "7": "3着",
+        "8": "5着",
+        "9": "9着",
+        "10": "15着",
+        "11": "1着",
+        "12": "7着",
+        "13": "2着",
+        "14": "12着",
+        "15": "13着",
+        "16": "8着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 11,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 11,
               "horseName": "アッシズオブローズ",
               "score": 0.6096327316134962,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 13,
               "horseName": "マイネルリーヒム",
               "score": 0.28446737695176777,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 7,
               "horseName": "ブライトエアリー",
               "score": 0.27374460149974,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -8598,6 +9267,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 13,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
@@ -8605,7 +9275,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "マイネルリーヒム",
               "probability": 0.06584724659246334,
               "score": 5,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
@@ -8613,7 +9284,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ベルトラッキ",
               "probability": 0.05285622293210181,
               "score": 4,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "▲",
@@ -8621,7 +9293,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "スチールギターラグ",
               "probability": 0.07868481986583396,
               "score": 3,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -8630,27 +9303,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "セキテイリノ",
               "score": 0.475,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
               "horseNumber": 8,
               "horseName": "スチールギターラグ",
               "score": 0.3333333333333333,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
               "horseNumber": 11,
               "horseName": "アッシズオブローズ",
               "score": 0.31666666666666665,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -8659,27 +9336,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 11,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 11,
               "horseName": "アッシズオブローズ",
               "score": 0.12270372289786773,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 8,
               "horseName": "スチールギターラグ",
               "score": 0.07949821603375952,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
               "horseNumber": 12,
               "horseName": "ベルトラッキ",
               "score": 0.07928069085562213,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -8688,6 +9369,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "horseNumber": 8,
@@ -8695,7 +9377,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 13,
               "first": 0,
               "mark": "◎",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "horseNumber": 12,
@@ -8703,7 +9386,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "○",
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "horseNumber": 7,
@@ -8711,7 +9395,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 4,
               "first": 0,
               "mark": "▲",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         }
@@ -8945,6 +9630,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 12,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -9033,33 +9719,55 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "15": 15,
         "16": 14
       },
+      "finishTextByHorseNumber": {
+        "1": "5着",
+        "2": "10着",
+        "3": "12着",
+        "4": "除外",
+        "5": "7着",
+        "6": "11着",
+        "7": "3着",
+        "8": "9着",
+        "9": "13着",
+        "10": "4着",
+        "11": "2着",
+        "12": "1着",
+        "13": "6着",
+        "14": "8着",
+        "15": "15着",
+        "16": "14着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 12,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 12,
               "horseName": "コックオーヴァン",
               "score": 0.5222761113462,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "ブライティアブーケ",
               "score": 0.32116282240719507,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 7,
               "horseName": "ココボロ",
               "score": 0.26124513956176,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -9068,6 +9776,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 11,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
@@ -9075,7 +9784,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ブライティアブーケ",
               "probability": 0.1223017780623515,
               "score": 5,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
@@ -9083,7 +9793,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ダノンゴーイチ",
               "probability": 0.0657513282571815,
               "score": 4,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
@@ -9091,7 +9802,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "サムハラ",
               "probability": 0.12861741134555174,
               "score": 3,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -9100,27 +9812,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 13,
           "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 13,
               "horseName": "ルシェロアズーリ",
               "score": 0.3333333333333333,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "ブライティアブーケ",
               "score": 0.31666666666666665,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 12,
               "horseName": "コックオーヴァン",
               "score": 0.31666666666666665,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -9129,27 +9845,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 12,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 12,
               "horseName": "コックオーヴァン",
               "score": 0.1024816669158699,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 2,
               "horseName": "ブルズアイプリンス",
               "score": 0.08749981849084287,
-              "finish": 10
+              "finish": 10,
+              "finishText": "10着"
             },
             {
               "mark": "▲",
               "horseNumber": 14,
               "horseName": "ミセスリリー",
               "score": 0.07273174678082654,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         },
@@ -9158,6 +9878,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "horseNumber": 1,
@@ -9165,7 +9886,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "◎",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "horseNumber": 2,
@@ -9173,7 +9895,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 4,
               "first": 0,
               "mark": "○",
-              "finish": 10
+              "finish": 10,
+              "finishText": "10着"
             },
             {
               "horseNumber": 10,
@@ -9181,7 +9904,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 4,
               "first": 0,
               "mark": "▲",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         }
@@ -9415,6 +10139,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 5,
       "topPickFinish": 3,
+      "topPickFinishText": "3着",
       "tickets": [
         {
           "betType": "単勝",
@@ -9499,33 +10224,51 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "11": 2,
         "12": 12
       },
+      "finishTextByHorseNumber": {
+        "1": "11着",
+        "2": "9着",
+        "3": "10着",
+        "4": "4着",
+        "5": "3着",
+        "6": "7着",
+        "7": "6着",
+        "8": "1着",
+        "9": "8着",
+        "10": "5着",
+        "11": "2着",
+        "12": "12着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 5,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "ドリームプレミア",
               "score": 0.45157297644127925,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
               "horseNumber": 8,
               "horseName": "リュクスパトロール",
               "score": 0.3882258770487059,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "▲",
               "horseNumber": 11,
               "horseName": "ノリマル",
               "score": 0.37624836507088893,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -9534,6 +10277,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 11,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
@@ -9541,7 +10285,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ノリマル",
               "probability": 0.20704876677572664,
               "score": 5,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
@@ -9549,7 +10294,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "オブラプリーマ",
               "probability": 0.0672284211782839,
               "score": 4,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
@@ -9557,7 +10303,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "リュクスパトロール",
               "probability": 0.2126551954595476,
               "score": 3,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -9566,27 +10313,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 11,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 11,
               "horseName": "ノリマル",
               "score": 0.4962121212121212,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
               "horseNumber": 7,
               "horseName": "オメガストリーム",
               "score": 0.3787878787878788,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "リュクスパトロール",
               "score": 0.33712121212121215,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -9595,27 +10346,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 8,
               "horseName": "リュクスパトロール",
               "score": 0.10473674896204914,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 5,
               "horseName": "ドリームプレミア",
               "score": 0.09122434622997351,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 10,
               "horseName": "オブラプリーマ",
               "score": 0.07861145823621592,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -9624,6 +10379,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 10,
           "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "horseNumber": 10,
@@ -9631,7 +10387,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "◎",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "horseNumber": 2,
@@ -9639,7 +10396,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "horseNumber": 7,
@@ -9647,7 +10405,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 4,
               "first": 0,
               "mark": "▲",
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         }
@@ -9881,6 +10640,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 6,
       "topPickFinish": 3,
+      "topPickFinishText": "3着",
       "tickets": [
         {
           "betType": "単勝",
@@ -9968,33 +10728,54 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "14": 2,
         "15": 1
       },
+      "finishTextByHorseNumber": {
+        "1": "5着",
+        "2": "13着",
+        "3": "11着",
+        "4": "12着",
+        "5": "10着",
+        "6": "3着",
+        "7": "6着",
+        "8": "8着",
+        "9": "9着",
+        "10": "14着",
+        "11": "15着",
+        "12": "4着",
+        "13": "7着",
+        "14": "2着",
+        "15": "1着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 15,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 15,
               "horseName": "モリノアミーゴ",
               "score": 0.37393624793783814,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "レッドベルダンス",
               "score": 0.3684660320045181,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 14,
               "horseName": "オーケーマヒナ",
               "score": 0.3587882965490524,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -10003,6 +10784,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 14,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
@@ -10010,7 +10792,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "オーケーマヒナ",
               "probability": 0.18018712289597816,
               "score": 5,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
@@ -10018,7 +10801,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "タケルハーロック",
               "probability": 0.08989857800394385,
               "score": 4,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
@@ -10026,7 +10810,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "モリノアミーゴ",
               "probability": 0.19067115067359713,
               "score": 3,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -10035,27 +10820,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 6,
               "horseName": "レッドベルダンス",
               "score": 0.34523809523809523,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
               "horseNumber": 15,
               "horseName": "モリノアミーゴ",
               "score": 0.34523809523809523,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "▲",
               "horseNumber": 14,
               "horseName": "オーケーマヒナ",
               "score": 0.3333333333333333,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -10064,27 +10853,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 15,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 15,
               "horseName": "モリノアミーゴ",
               "score": 0.10491369249028747,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 3,
               "horseName": "グロスビーク",
               "score": 0.09625753615873626,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "▲",
               "horseNumber": 10,
               "horseName": "ヴァルドルチャ",
               "score": 0.0794538358508548,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             }
           ]
         },
@@ -10093,6 +10886,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 11,
+          "topPickFinishText": "11着",
           "marks": [
             {
               "horseNumber": 3,
@@ -10100,7 +10894,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "◎",
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "horseNumber": 12,
@@ -10108,7 +10903,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 5,
               "first": 0,
               "mark": "○",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "horseNumber": 10,
@@ -10116,7 +10912,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 3,
               "first": 0,
               "mark": "▲",
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             }
           ]
         }
@@ -10350,6 +11147,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 13,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -10438,33 +11236,55 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "15": 16,
         "16": 15
       },
+      "finishTextByHorseNumber": {
+        "1": "9着",
+        "2": "14着",
+        "3": "11着",
+        "4": "3着",
+        "5": "4着",
+        "6": "12着",
+        "7": "10着",
+        "8": "2着",
+        "9": "5着",
+        "10": "13着",
+        "11": "7着",
+        "12": "6着",
+        "13": "1着",
+        "14": "8着",
+        "15": "16着",
+        "16": "15着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 13,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 13,
               "horseName": "ミラビリスマジック",
               "score": 0.517844237111341,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 4,
               "horseName": "ワイドアラジン",
               "score": 0.33562205592336924,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "ホウオウスーペリア",
               "score": 0.2916145205765449,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -10473,6 +11293,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
@@ -10480,7 +11301,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "コスモアンソロジー",
               "probability": 0.13548319409562343,
               "score": 5,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
@@ -10488,7 +11310,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "コンドゥイア",
               "probability": 0.05847533253845804,
               "score": 4,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
@@ -10496,7 +11319,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ワイドアラジン",
               "probability": 0.1445467527026194,
               "score": 3,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -10505,27 +11329,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 11,
+          "topPickFinishText": "11着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 3,
               "horseName": "アマイ",
               "score": 0.35,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "○",
               "horseNumber": 5,
               "horseName": "コスモアンソロジー",
               "score": 0.3333333333333333,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
               "horseNumber": 9,
               "horseName": "コンドゥイア",
               "score": 0.3333333333333333,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -10534,27 +11362,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 13,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 13,
               "horseName": "ミラビリスマジック",
               "score": 0.11981335192766679,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 16,
               "horseName": "フォルラニーニ",
               "score": 0.08353496868014447,
-              "finish": 15
+              "finish": 15,
+              "finishText": "15着"
             },
             {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "ホウオウスーペリア",
               "score": 0.08243365354585827,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -10563,6 +11395,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 4,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "horseNumber": 4,
@@ -10570,7 +11403,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "◎",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "horseNumber": 8,
@@ -10578,7 +11412,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "○",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 9,
@@ -10586,7 +11421,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "▲",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         }
@@ -10820,6 +11656,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 6,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -10908,33 +11745,55 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "15": 16,
         "16": 11
       },
+      "finishTextByHorseNumber": {
+        "1": "14着",
+        "2": "2着",
+        "3": "7着",
+        "4": "5着",
+        "5": "6着",
+        "6": "1着",
+        "7": "10着",
+        "8": "3着",
+        "9": "8着",
+        "10": "15着",
+        "11": "13着",
+        "12": "9着",
+        "13": "4着",
+        "14": "12着",
+        "15": "16着",
+        "16": "11着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 6,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 6,
               "horseName": "ロイヤルスパイア",
               "score": 0.5335540046604539,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 2,
               "horseName": "ソニックブレイカー",
               "score": 0.40056315533198816,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "アンプイットアップ",
               "score": 0.3280350362955996,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -10943,6 +11802,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
@@ -10950,7 +11810,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アンプイットアップ",
               "probability": 0.132874414813743,
               "score": 5,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
@@ -10958,7 +11819,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ディヴァインスカイ",
               "probability": 0.045083680625318444,
               "score": 4,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "▲",
@@ -10966,7 +11828,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ソニックブレイカー",
               "probability": 0.24445613640818697,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -10975,27 +11838,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 2,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "ソニックブレイカー",
               "score": 0.3333333333333333,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
               "horseNumber": 3,
               "horseName": "ディヴァインスカイ",
               "score": 0.3333333333333333,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "ロイヤルスパイア",
               "score": 0.31666666666666665,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -11004,27 +11871,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 6,
               "horseName": "ロイヤルスパイア",
               "score": 0.11594539269165065,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 2,
               "horseName": "ソニックブレイカー",
               "score": 0.08527642892091619,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 14,
               "horseName": "エコロカディス",
               "score": 0.07637631032927993,
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             }
           ]
         },
@@ -11033,6 +11904,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 7,
+          "topPickFinishText": "7着",
           "marks": [
             {
               "horseNumber": 3,
@@ -11040,7 +11912,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 9,
               "first": 0,
               "mark": "◎",
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "horseNumber": 13,
@@ -11048,7 +11921,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 4,
               "first": 0,
               "mark": "○",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "horseNumber": 14,
@@ -11056,7 +11930,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 3,
               "first": 0,
               "mark": "▲",
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             }
           ]
         }
@@ -11290,6 +12165,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -11374,33 +12250,51 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "11": 4,
         "12": 11
       },
+      "finishTextByHorseNumber": {
+        "1": "12着",
+        "2": "1着",
+        "3": "6着",
+        "4": "7着",
+        "5": "8着",
+        "6": "2着",
+        "7": "5着",
+        "8": "10着",
+        "9": "3着",
+        "10": "9着",
+        "11": "4着",
+        "12": "11着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 2,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "セイウンパシュート",
               "score": 0.4088387831255379,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 9,
               "horseName": "セイフウサツキ",
               "score": 0.3759610788637693,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "メイショウトム",
               "score": 0.3497386955722776,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -11409,6 +12303,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 9,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
@@ -11416,7 +12311,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "セイフウサツキ",
               "probability": 0.20660678799554255,
               "score": 5,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
@@ -11424,7 +12320,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "コイヌール",
               "probability": 0.05298755881380675,
               "score": 4,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
@@ -11432,7 +12329,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "タイセイレスポンス",
               "probability": 0.22866044806415337,
               "score": 3,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -11441,27 +12339,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 6,
               "horseName": "メイショウトム",
               "score": 0.35606060606060597,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
               "horseNumber": 2,
               "horseName": "セイウンパシュート",
               "score": 0.3333333333333333,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "アドアプローズ",
               "score": 0.31439393939393934,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         },
@@ -11470,27 +12372,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 2,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "セイウンパシュート",
               "score": 0.09687043084330384,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "タイセイレスポンス",
               "score": 0.08798570771849291,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
               "horseNumber": 9,
               "horseName": "セイフウサツキ",
               "score": 0.08178818122848285,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -11499,6 +12405,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 11,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "horseNumber": 11,
@@ -11506,7 +12413,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 10,
               "first": 0,
               "mark": "◎",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "horseNumber": 7,
@@ -11514,7 +12422,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "○",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "horseNumber": 3,
@@ -11522,7 +12431,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 3,
               "first": 0,
               "mark": "▲",
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         }
@@ -11756,6 +12666,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 5,
       "topPickFinish": 2,
+      "topPickFinishText": "2着",
       "tickets": [
         {
           "betType": "単勝",
@@ -11839,33 +12750,50 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "10": 1,
         "11": 9
       },
+      "finishTextByHorseNumber": {
+        "1": "5着",
+        "2": "4着",
+        "3": "10着",
+        "4": "3着",
+        "5": "2着",
+        "6": "11着",
+        "7": "7着",
+        "8": "8着",
+        "9": "6着",
+        "10": "1着",
+        "11": "9着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 5,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "ブレイクガール",
               "score": 0.41330492145671044,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
               "horseNumber": 4,
               "horseName": "プリメラエストレラ",
               "score": 0.39608005459457074,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 10,
               "horseName": "ニシノフランケン",
               "score": 0.38621186820799785,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -11874,6 +12802,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 10,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
@@ -11881,7 +12810,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ニシノフランケン",
               "probability": 0.2095567203199967,
               "score": 5,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
@@ -11889,7 +12819,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "イザベル",
               "probability": 0.05885731457932746,
               "score": 4,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
@@ -11897,7 +12828,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "プリメラエストレラ",
               "probability": 0.2375590583506217,
               "score": 3,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -11906,27 +12838,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 4,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "プリメラエストレラ",
               "score": 0.3666666666666667,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
               "horseNumber": 9,
               "horseName": "プリマアルバ",
               "score": 0.3416666666666667,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
               "horseNumber": 2,
               "horseName": "イザベル",
               "score": 0.3333333333333333,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -11935,27 +12871,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 10,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 10,
               "horseName": "ニシノフランケン",
               "score": 0.10285725364182045,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 5,
               "horseName": "ブレイクガール",
               "score": 0.08256996449817555,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "フランヴィア",
               "score": 0.07748139285062622,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             }
           ]
         },
@@ -11964,6 +12904,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 2,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "horseNumber": 2,
@@ -11971,7 +12912,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "◎",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "horseNumber": 9,
@@ -11979,7 +12921,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "horseNumber": 7,
@@ -11987,7 +12930,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 5,
               "first": 0,
               "mark": "▲",
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         }
@@ -12221,6 +13165,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -12307,33 +13252,53 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "13": 5,
         "14": 3
       },
+      "finishTextByHorseNumber": {
+        "1": "6着",
+        "2": "1着",
+        "3": "12着",
+        "4": "11着",
+        "5": "2着",
+        "6": "13着",
+        "7": "4着",
+        "8": "8着",
+        "9": "10着",
+        "10": "14着",
+        "11": "9着",
+        "12": "7着",
+        "13": "5着",
+        "14": "3着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 2,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "サトノロザリー",
               "score": 0.5659761095794911,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 14,
               "horseName": "メイワキラリ",
               "score": 0.34819940738945304,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 5,
               "horseName": "モズオサキニ",
               "score": 0.29955924499733627,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -12342,6 +13307,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
@@ -12349,7 +13315,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "モズオサキニ",
               "probability": 0.08906550512410716,
               "score": 5,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
@@ -12357,7 +13324,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "シュタルク",
               "probability": 0.04642888219171734,
               "score": 4,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
@@ -12365,7 +13333,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "メイワキラリ",
               "probability": 0.16389652418890222,
               "score": 3,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -12374,27 +13343,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 2,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "サトノロザリー",
               "score": 0.37179487179487175,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 14,
               "horseName": "メイワキラリ",
               "score": 0.3525641025641026,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "スズカローズキング",
               "score": 0.27564102564102566,
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             }
           ]
         },
@@ -12403,27 +13376,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 2,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "サトノロザリー",
               "score": 0.11608302598559718,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 3,
               "horseName": "スズカローズキング",
               "score": 0.07246642246642246,
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             },
             {
               "mark": "▲",
               "horseNumber": 13,
               "horseName": "ディアデムドール",
               "score": 0.07240958691208989,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -12432,6 +13409,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 14,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "horseNumber": 14,
@@ -12439,7 +13417,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 11,
               "first": 0,
               "mark": "◎",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "horseNumber": 3,
@@ -12447,7 +13426,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "○",
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             },
             {
               "horseNumber": 1,
@@ -12455,7 +13435,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 5,
               "first": 0,
               "mark": "▲",
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         }
@@ -12689,6 +13670,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 7,
       "topPickFinish": 2,
+      "topPickFinishText": "2着",
       "tickets": [
         {
           "betType": "単勝",
@@ -12769,33 +13751,47 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "7": 2,
         "8": 7
       },
+      "finishTextByHorseNumber": {
+        "1": "8着",
+        "2": "4着",
+        "3": "6着",
+        "4": "3着",
+        "5": "1着",
+        "6": "5着",
+        "7": "2着",
+        "8": "7着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 7,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "アトラクティーボ",
               "score": 0.46392115130254297,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
               "horseNumber": 4,
               "horseName": "スマイルスルー",
               "score": 0.40393290771936546,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 5,
               "horseName": "ヴァレッタカズマ",
               "score": 0.3771545618895245,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -12804,6 +13800,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
@@ -12811,7 +13808,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ヴァレッタカズマ",
               "probability": 0.19562240290696076,
               "score": 5,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
@@ -12819,7 +13817,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "トーアモルペウス",
               "probability": 0.03779973816250873,
               "score": 4,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
@@ -12827,7 +13826,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "スマイルスルー",
               "probability": 0.2496403708503059,
               "score": 3,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -12836,27 +13836,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "ヴァレッタカズマ",
               "score": 0.43452380952380953,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 2,
               "horseName": "コンテナワールド",
               "score": 0.3988095238095238,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
               "horseNumber": 7,
               "horseName": "アトラクティーボ",
               "score": 0.3333333333333333,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -12865,27 +13869,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "ヴァレッタカズマ",
               "score": 0.10213599016365531,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 4,
               "horseName": "スマイルスルー",
               "score": 0.08405305291901081,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "オールザワールド",
               "score": 0.0767341976488179,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -12894,6 +13902,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 4,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "horseNumber": 4,
@@ -12901,7 +13910,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 11,
               "first": 0,
               "mark": "◎",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "horseNumber": 3,
@@ -12909,7 +13919,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 9,
               "first": 0,
               "mark": "○",
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "horseNumber": 2,
@@ -12917,7 +13928,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "▲",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         }
@@ -13151,6 +14163,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 1,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -13230,33 +14243,46 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "6": 7,
         "7": 6
       },
+      "finishTextByHorseNumber": {
+        "1": "1着",
+        "2": "5着",
+        "3": "2着",
+        "4": "4着",
+        "5": "3着",
+        "6": "7着",
+        "7": "6着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 1,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "ウインガラハッド",
               "score": 0.7579867130905873,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 3,
               "horseName": "ハマナスノサクコロ",
               "score": 0.31737235428282384,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 5,
               "horseName": "ナムラメアリー",
               "score": 0.03716428346473747,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -13265,6 +14291,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
@@ -13272,7 +14299,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ナムラメアリー",
               "probability": 0.044355307894467906,
               "score": 5,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
@@ -13280,7 +14308,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "キシュウマミー",
               "probability": 0.012408469852025976,
               "score": 4,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
@@ -13288,7 +14317,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ハマナスノサクコロ",
               "probability": 0.1164702886402419,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -13297,27 +14327,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 4,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "キシュウマミー",
               "score": 0.33333333333333337,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
               "horseNumber": 1,
               "horseName": "ウインガラハッド",
               "score": 0.3333333333333333,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "▲",
               "horseNumber": 5,
               "horseName": "ナムラメアリー",
               "score": 0.2916666666666667,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -13326,27 +14360,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "ウインガラハッド",
               "score": 0.11218493847055268,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 3,
               "horseName": "ハマナスノサクコロ",
               "score": 0.073012527414357,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "マルモタワー",
               "score": 0.07009926299567469,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -13355,6 +14393,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "horseNumber": 3,
@@ -13362,7 +14401,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 13,
               "first": 0,
               "mark": "◎",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 2,
@@ -13370,7 +14410,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "○",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "horseNumber": 6,
@@ -13378,7 +14419,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 3,
               "first": 0,
               "mark": "▲",
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         }
@@ -13612,6 +14654,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 6,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -13697,33 +14740,52 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "12": 2,
         "13": 11
       },
+      "finishTextByHorseNumber": {
+        "1": "7着",
+        "2": "6着",
+        "3": "3着",
+        "4": "9着",
+        "5": "12着",
+        "6": "1着",
+        "7": "8着",
+        "8": "4着",
+        "9": "5着",
+        "10": "中止",
+        "11": "10着",
+        "12": "2着",
+        "13": "11着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 6,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 6,
               "horseName": "キープシャイニング",
               "score": 0.5828279208055542,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 12,
               "horseName": "キングズテイル",
               "score": 0.33144261252630974,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "リテラシー",
               "score": 0.2903582224624511,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -13732,6 +14794,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 13,
           "topPickFinish": 11,
+          "topPickFinishText": "11着",
           "marks": [
             {
               "mark": "◎",
@@ -13739,7 +14802,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ラクホマレ",
               "probability": 0.08909910512005152,
               "score": 5,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "○",
@@ -13747,7 +14811,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ルクスドリーム",
               "probability": 0.06519780703726179,
               "score": 4,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
@@ -13755,7 +14820,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "キングズテイル",
               "probability": 0.13811683978406633,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -13764,27 +14830,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 3,
               "horseName": "リテラシー",
               "score": 0.41666666666666663,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
               "horseNumber": 12,
               "horseName": "キングズテイル",
               "score": 0.35416666666666663,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "キープシャイニング",
               "score": 0.3333333333333333,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -13793,27 +14863,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 6,
               "horseName": "キープシャイニング",
               "score": 0.11222383038504934,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 13,
               "horseName": "ラクホマレ",
               "score": 0.0984263870001656,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "▲",
               "horseNumber": 10,
               "horseName": "コパノルーカス",
               "score": 0.08462443524496686,
-              "finish": null
+              "finish": null,
+              "finishText": "中止"
             }
           ]
         },
@@ -13822,6 +14896,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 12,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "horseNumber": 12,
@@ -13829,7 +14904,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 11,
               "first": 0,
               "mark": "◎",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 9,
@@ -13837,7 +14913,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "○",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "horseNumber": 10,
@@ -13845,7 +14922,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 3,
               "first": 0,
               "mark": "▲",
-              "finish": null
+              "finish": null,
+              "finishText": "中止"
             }
           ]
         }
@@ -14079,6 +15157,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 13,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -14165,33 +15244,53 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "13": 1,
         "14": 7
       },
+      "finishTextByHorseNumber": {
+        "1": "14着",
+        "2": "4着",
+        "3": "12着",
+        "4": "6着",
+        "5": "13着",
+        "6": "9着",
+        "7": "8着",
+        "8": "2着",
+        "9": "5着",
+        "10": "11着",
+        "11": "10着",
+        "12": "3着",
+        "13": "1着",
+        "14": "7着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 13,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 13,
               "horseName": "シュプリームレルム",
               "score": 0.5726760589875102,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 12,
               "horseName": "ネッカーズルム",
               "score": 0.3443739442631534,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "ゴールデンテティス",
               "score": 0.31418963255840016,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -14200,6 +15299,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
@@ -14207,7 +15307,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ゴールデンテティス",
               "probability": 0.11157379367959007,
               "score": 5,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
@@ -14215,7 +15316,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ヒロウッドテール",
               "probability": 0.04633852668206855,
               "score": 4,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
@@ -14223,7 +15325,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ネッカーズルム",
               "probability": 0.15801119630228733,
               "score": 3,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -14232,27 +15335,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 8,
               "horseName": "ゴールデンテティス",
               "score": 0.34935897435897434,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "ジリアート",
               "score": 0.3333333333333333,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "▲",
               "horseNumber": 12,
               "horseName": "ネッカーズルム",
               "score": 0.2948717948717949,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -14261,27 +15368,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 13,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 13,
               "horseName": "シュプリームレルム",
               "score": 0.11701339222007077,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "エイシンミスリル",
               "score": 0.07877039141646872,
-              "finish": 10
+              "finish": 10,
+              "finishText": "10着"
             },
             {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "ジリアート",
               "score": 0.07525261468743653,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             }
           ]
         },
@@ -14290,6 +15401,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 12,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "horseNumber": 12,
@@ -14297,7 +15409,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 11,
               "first": 0,
               "mark": "◎",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "horseNumber": 6,
@@ -14305,7 +15418,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "○",
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "horseNumber": 9,
@@ -14313,7 +15427,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "▲",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         }
@@ -14547,6 +15662,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 3,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -14629,33 +15745,49 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "9": 3,
         "10": 6
       },
+      "finishTextByHorseNumber": {
+        "1": "5着",
+        "2": "9着",
+        "3": "1着",
+        "4": "4着",
+        "5": "2着",
+        "6": "8着",
+        "7": "10着",
+        "8": "7着",
+        "9": "3着",
+        "10": "6着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 3,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 3,
               "horseName": "フウセン",
               "score": 0.5874089961504987,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 5,
               "horseName": "ノンブルドール",
               "score": 0.32260158587474874,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 9,
               "horseName": "ゴールドアクセス",
               "score": 0.2749534721596077,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -14664,6 +15796,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
@@ -14671,7 +15804,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ノンブルドール",
               "probability": 0.1245152603201263,
               "score": 5,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
@@ -14679,7 +15813,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ダノンアトラス",
               "probability": 0.025248603723553743,
               "score": 4,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
@@ -14687,7 +15822,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ワンダフルボンド",
               "probability": 0.2210603174126365,
               "score": 3,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -14696,27 +15832,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "ノンブルドール",
               "score": 0.48611111111111105,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
               "horseNumber": 4,
               "horseName": "ワンダフルボンド",
               "score": 0.3888888888888889,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "フウセン",
               "score": 0.375,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -14725,27 +15865,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 3,
               "horseName": "フウセン",
               "score": 0.11924657096458045,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 4,
               "horseName": "ワンダフルボンド",
               "score": 0.10102483734996258,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
               "horseNumber": 1,
               "horseName": "ダノンアトラス",
               "score": 0.08916535592941328,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -14754,6 +15898,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 4,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "horseNumber": 4,
@@ -14761,7 +15906,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 13,
               "first": 0,
               "mark": "◎",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "horseNumber": 1,
@@ -14769,7 +15915,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "○",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "horseNumber": 9,
@@ -14777,7 +15924,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 5,
               "first": 0,
               "mark": "▲",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         }
@@ -15011,6 +16159,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 16,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -15101,33 +16250,57 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "17": 13,
         "18": 16
       },
+      "finishTextByHorseNumber": {
+        "1": "18着",
+        "2": "9着",
+        "3": "6着",
+        "4": "14着",
+        "5": "7着",
+        "6": "4着",
+        "7": "10着",
+        "8": "2着",
+        "9": "5着",
+        "10": "3着",
+        "11": "15着",
+        "12": "11着",
+        "13": "8着",
+        "14": "17着",
+        "15": "12着",
+        "16": "1着",
+        "17": "13着",
+        "18": "16着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 16,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 16,
               "horseName": "カエリールークス",
               "score": 0.5184876412592312,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "タカモリ",
               "score": 0.3558667901397538,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "タカヨシ",
               "score": 0.30879792734173117,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -15136,6 +16309,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
@@ -15143,7 +16317,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "タカヨシ",
               "probability": 0.10327886257702243,
               "score": 5,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
@@ -15151,7 +16326,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "スイトーヨ",
               "probability": 0.04478540215445659,
               "score": 4,
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             },
             {
               "mark": "▲",
@@ -15159,7 +16335,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "タカモリ",
               "probability": 0.17569249765090336,
               "score": 3,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -15168,27 +16345,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 8,
               "horseName": "タカヨシ",
               "score": 0.3357843137254901,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "トシミチ",
               "score": 0.3333333333333333,
-              "finish": 15
+              "finish": 15,
+              "finishText": "15着"
             },
             {
               "mark": "▲",
               "horseNumber": 10,
               "horseName": "タカモリ",
               "score": 0.31862745098039214,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -15197,27 +16378,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 16,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 16,
               "horseName": "カエリールークス",
               "score": 0.11726870343284286,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 17,
               "horseName": "スイトーヨ",
               "score": 0.0905907695538124,
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             },
             {
               "mark": "▲",
               "horseNumber": 1,
               "horseName": "バミューダボーイ",
               "score": 0.07417582417582418,
-              "finish": 18
+              "finish": 18,
+              "finishText": "18着"
             }
           ]
         },
@@ -15226,6 +16411,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 10,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "horseNumber": 10,
@@ -15233,7 +16419,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 10,
               "first": 0,
               "mark": "◎",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "horseNumber": 17,
@@ -15241,7 +16428,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 9,
               "first": 0,
               "mark": "○",
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             },
             {
               "horseNumber": 3,
@@ -15249,7 +16437,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 4,
               "first": 0,
               "mark": "▲",
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         }
@@ -15483,6 +16672,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -15567,33 +16757,51 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "11": 12,
         "12": 6
       },
+      "finishTextByHorseNumber": {
+        "1": "2着",
+        "2": "1着",
+        "3": "11着",
+        "4": "8着",
+        "5": "4着",
+        "6": "7着",
+        "7": "3着",
+        "8": "9着",
+        "9": "10着",
+        "10": "5着",
+        "11": "12着",
+        "12": "6着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 2,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "ワイドクリーガー",
               "score": 0.5513506653273418,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 1,
               "horseName": "コスモストーム",
               "score": 0.3456294037637506,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 7,
               "horseName": "ワンダーカモン",
               "score": 0.30312384722214863,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -15602,6 +16810,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
@@ -15609,7 +16818,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "タマモジャスミン",
               "probability": 0.09912832821621548,
               "score": 5,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
@@ -15617,7 +16827,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "タガノヘラクレス",
               "probability": 0.07793283428346519,
               "score": 4,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
@@ -15625,7 +16836,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "コスモストーム",
               "probability": 0.15994267245705227,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -15634,27 +16846,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 7,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "ワンダーカモン",
               "score": 0.678030303030303,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
               "horseNumber": 1,
               "horseName": "コスモストーム",
               "score": 0.45075757575757575,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 5,
               "horseName": "タマモジャスミン",
               "score": 0.3787878787878788,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -15663,27 +16879,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 2,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "ワイドクリーガー",
               "score": 0.11053053336137074,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 7,
               "horseName": "ワンダーカモン",
               "score": 0.0887225144247581,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 12,
               "horseName": "タガノヘラクレス",
               "score": 0.07447421992175407,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         },
@@ -15692,6 +16912,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "horseNumber": 1,
@@ -15699,7 +16920,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 11,
               "first": 0,
               "mark": "◎",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 12,
@@ -15707,7 +16929,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "○",
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "horseNumber": 3,
@@ -15715,7 +16938,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 2,
               "first": 0,
               "mark": "▲",
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             }
           ]
         }
@@ -15949,6 +17173,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 5,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -16033,33 +17258,51 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "11": 9,
         "12": 12
       },
+      "finishTextByHorseNumber": {
+        "1": "5着",
+        "2": "8着",
+        "3": "2着",
+        "4": "6着",
+        "5": "1着",
+        "6": "4着",
+        "7": "10着",
+        "8": "11着",
+        "9": "7着",
+        "10": "3着",
+        "11": "9着",
+        "12": "12着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 5,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "コウセキ",
               "score": 0.6970115868767781,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "ベイビーキッス",
               "score": 0.29898995099007586,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "アイルシャイン",
               "score": 0.2760092876748732,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -16068,6 +17311,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "mark": "◎",
@@ -16075,7 +17319,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ロードトレイル",
               "probability": 0.060178927423721953,
               "score": 5,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "○",
@@ -16083,7 +17328,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "トーラスシャイン",
               "probability": 0.03391608911915342,
               "score": 4,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "▲",
@@ -16091,7 +17337,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ベイビーキッス",
               "probability": 0.08818966818986035,
               "score": 3,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -16100,27 +17347,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "コウセキ",
               "score": 0.3333333333333333,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "ベイビーキッス",
               "score": 0.3106060606060606,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 1,
               "horseName": "ロードトレイル",
               "score": 0.2878787878787879,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -16129,27 +17380,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "コウセキ",
               "score": 0.11556876772275487,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "リチャードバローズ",
               "score": 0.08439291119945708,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "▲",
               "horseNumber": 1,
               "horseName": "ロードトレイル",
               "score": 0.0812283798840271,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -16158,6 +17413,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 10,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "horseNumber": 10,
@@ -16165,7 +17421,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 11,
               "first": 0,
               "mark": "◎",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "horseNumber": 2,
@@ -16173,7 +17430,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "horseNumber": 3,
@@ -16181,7 +17439,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 5,
               "first": 0,
               "mark": "▲",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         }
@@ -16415,6 +17674,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 5,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -16501,33 +17761,53 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "13": 4,
         "14": 3
       },
+      "finishTextByHorseNumber": {
+        "1": "14着",
+        "2": "12着",
+        "3": "13着",
+        "4": "8着",
+        "5": "1着",
+        "6": "5着",
+        "7": "2着",
+        "8": "6着",
+        "9": "10着",
+        "10": "7着",
+        "11": "9着",
+        "12": "11着",
+        "13": "4着",
+        "14": "3着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 5,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "バートラガッツ",
               "score": 0.6243513634293286,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 7,
               "horseName": "ブラックレジェンド",
               "score": 0.3438314555896873,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 14,
               "horseName": "モズプリヴェール",
               "score": 0.2677843495497191,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -16536,6 +17816,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "mark": "◎",
@@ -16543,7 +17824,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ジューンセクレタ",
               "probability": 0.06424090591116288,
               "score": 5,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "○",
@@ -16551,7 +17833,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ヨカオウ",
               "probability": 0.04128323548208549,
               "score": 4,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
@@ -16559,7 +17842,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ブラックレジェンド",
               "probability": 0.15717659834310874,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -16568,27 +17852,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 6,
               "horseName": "ジューンセクレタ",
               "score": 0.4455128205128205,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "○",
               "horseNumber": 5,
               "horseName": "バートラガッツ",
               "score": 0.3333333333333333,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "▲",
               "horseNumber": 7,
               "horseName": "ブラックレジェンド",
               "score": 0.3141025641025641,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -16597,27 +17885,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "バートラガッツ",
               "score": 0.11983236800946868,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 1,
               "horseName": "ミッキーコンドル",
               "score": 0.09270596729779235,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "▲",
               "horseNumber": 10,
               "horseName": "フランキーバローズ",
               "score": 0.08438850084920957,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -16626,6 +17918,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 7,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "horseNumber": 7,
@@ -16633,7 +17926,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 10,
               "first": 0,
               "mark": "◎",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 8,
@@ -16641,7 +17935,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "○",
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "horseNumber": 1,
@@ -16649,7 +17944,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 5,
               "first": 0,
               "mark": "▲",
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             }
           ]
         }
@@ -16883,6 +18179,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 1,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -16963,33 +18260,47 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "7": 7,
         "8": 4
       },
+      "finishTextByHorseNumber": {
+        "1": "1着",
+        "2": "8着",
+        "3": "3着",
+        "4": "5着",
+        "5": "2着",
+        "6": "6着",
+        "7": "7着",
+        "8": "4着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 1,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "ステラトップガン",
               "score": 0.14941351231433955,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 2,
               "horseName": "リーゼントエース",
               "score": 0.14623854176938153,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "リアルジャパン",
               "score": 0.11331499314196308,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -16998,6 +18309,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
@@ -17005,7 +18317,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "リアルジャパン",
               "probability": 0.16052405256554478,
               "score": 5,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
@@ -17013,7 +18326,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "タイフーンナイン",
               "probability": 0.10623067700811044,
               "score": 4,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
@@ -17021,7 +18335,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "リーゼントエース",
               "probability": 0.21117566583849626,
               "score": 3,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         },
@@ -17030,6 +18345,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 2,
           "topPickFinish": 8,
+          "topPickFinishText": "8着",
           "marks": [
             {
               "mark": "◎",
@@ -17037,7 +18353,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "リーゼントエース",
               "probability": 0.21117566583849626,
               "score": 5,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "○",
@@ -17045,7 +18362,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "リアルジャパン",
               "probability": 0.16052405256554478,
               "score": 4,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
@@ -17053,7 +18371,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ステラトップガン",
               "probability": 0.21606023590766243,
               "score": 3,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -17062,27 +18381,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 2,
           "topPickFinish": 8,
+          "topPickFinishText": "8着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "リーゼントエース",
               "score": 0.08304142258127904,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "○",
               "horseNumber": 5,
               "horseName": "タイフーンナイン",
               "score": 0.08090386654680258,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 1,
               "horseName": "ステラトップガン",
               "score": 0.07947184526575186,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -17091,6 +18414,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "horseNumber": 5,
@@ -17098,7 +18422,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 10,
               "first": 0,
               "mark": "◎",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 4,
@@ -17106,7 +18431,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "horseNumber": 7,
@@ -17114,7 +18440,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 1,
               "first": 0,
               "mark": "▲",
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         }
@@ -17348,6 +18675,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 4,
       "topPickFinish": 2,
+      "topPickFinishText": "2着",
       "tickets": [
         {
           "betType": "単勝",
@@ -17430,33 +18758,49 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "9": 9,
         "10": 6
       },
+      "finishTextByHorseNumber": {
+        "1": "3着",
+        "2": "5着",
+        "3": "10着",
+        "4": "2着",
+        "5": "8着",
+        "6": "7着",
+        "7": "1着",
+        "8": "4着",
+        "9": "9着",
+        "10": "6着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 4,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "ジャーナーリア",
               "score": 0.14413731314716216,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "トルークマクト",
               "score": 0.08617981509645453,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "エコロセレナ",
               "score": 0.08437113214235989,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -17465,6 +18809,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
@@ -17472,7 +18817,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "エコロセレナ",
               "probability": 0.11599503564307832,
               "score": 5,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
@@ -17480,7 +18826,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ミスチヴマリアンヌ",
               "probability": 0.0952170275418086,
               "score": 4,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "▲",
@@ -17488,7 +18835,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "トルークマクト",
               "probability": 0.11877762480322394,
               "score": 3,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         },
@@ -17497,6 +18845,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 10,
           "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
@@ -17504,7 +18853,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "トルークマクト",
               "probability": 0.11877762480322394,
               "score": 5,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "○",
@@ -17512,7 +18862,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "エコロセレナ",
               "probability": 0.11599503564307832,
               "score": 4,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
@@ -17520,7 +18871,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ジャーナーリア",
               "probability": 0.2079430064196972,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -17529,27 +18881,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 4,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "ジャーナーリア",
               "score": 0.0785890012820849,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "トルークマクト",
               "score": 0.07839448904489753,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "エコロセレナ",
               "score": 0.07639773310596969,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -17558,6 +18914,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 7,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "horseNumber": 7,
@@ -17565,7 +18922,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "◎",
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "horseNumber": 6,
@@ -17573,7 +18931,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "○",
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "horseNumber": 10,
@@ -17581,7 +18940,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 16,
               "first": 1,
               "mark": "▲",
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         }
@@ -17815,6 +19175,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 13,
       "topPickFinish": 11,
+      "topPickFinishText": "11着",
       "tickets": [
         {
           "betType": "単勝",
@@ -17901,33 +19262,53 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "13": 11,
         "14": 13
       },
+      "finishTextByHorseNumber": {
+        "1": "4着",
+        "2": "5着",
+        "3": "2着",
+        "4": "6着",
+        "5": "8着",
+        "6": "14着",
+        "7": "10着",
+        "8": "9着",
+        "9": "1着",
+        "10": "12着",
+        "11": "3着",
+        "12": "7着",
+        "13": "11着",
+        "14": "13着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 13,
           "topPickFinish": 11,
+          "topPickFinishText": "11着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 13,
               "horseName": "ニシノモリミチ",
               "score": 0.07839033391719126,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "ホウオウファラオ",
               "score": 0.07746490796062729,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 1,
               "horseName": "サクセスゴールド",
               "score": 0.0713425492085303,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -17936,6 +19317,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
@@ -17943,7 +19325,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "サクセスゴールド",
               "probability": 0.0959510618987251,
               "score": 5,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
@@ -17951,7 +19334,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "スマートコーラル",
               "probability": 0.0815749088183316,
               "score": 4,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "▲",
@@ -17959,7 +19343,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ホウオウファラオ",
               "probability": 0.1053700753634897,
               "score": 3,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -17968,6 +19353,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 11,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
@@ -17975,7 +19361,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ホウオウファラオ",
               "probability": 0.1053700753634897,
               "score": 5,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
@@ -17983,7 +19370,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "サクセスゴールド",
               "probability": 0.0959510618987251,
               "score": 4,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
@@ -17991,7 +19379,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ニシノモリミチ",
               "probability": 0.10679380760435737,
               "score": 3,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             }
           ]
         },
@@ -18000,27 +19389,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 13,
           "topPickFinish": 11,
+          "topPickFinishText": "11着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 13,
               "horseName": "ニシノモリミチ",
               "score": 0.08456828133557283,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "ホウオウファラオ",
               "score": 0.08369775068123214,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 1,
               "horseName": "サクセスゴールド",
               "score": 0.08168825682006968,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -18029,6 +19422,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 12,
           "topPickFinish": 7,
+          "topPickFinishText": "7着",
           "marks": [
             {
               "horseNumber": 12,
@@ -18036,7 +19430,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "◎",
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "horseNumber": 7,
@@ -18044,7 +19439,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 10
+              "finish": 10,
+              "finishText": "10着"
             },
             {
               "horseNumber": 3,
@@ -18052,7 +19448,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 1,
               "first": 0,
               "mark": "▲",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         }
@@ -18286,6 +19683,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 3,
       "topPickFinish": 2,
+      "topPickFinishText": "2着",
       "tickets": [
         {
           "betType": "単勝",
@@ -18371,33 +19769,52 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "12": 11,
         "13": 13
       },
+      "finishTextByHorseNumber": {
+        "1": "5着",
+        "2": "6着",
+        "3": "2着",
+        "4": "12着",
+        "5": "7着",
+        "6": "8着",
+        "7": "4着",
+        "8": "1着",
+        "9": "9着",
+        "10": "10着",
+        "11": "3着",
+        "12": "11着",
+        "13": "13着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 3,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 3,
               "horseName": "ウインカトリーヌ",
               "score": 0.09214171834796198,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
               "horseNumber": 7,
               "horseName": "ギオンバヤシ",
               "score": 0.09105301534179229,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
               "horseNumber": 9,
               "horseName": "コスモブラック",
               "score": 0.07164735961744283,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             }
           ]
         },
@@ -18406,6 +19823,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 9,
           "topPickFinish": 9,
+          "topPickFinishText": "9着",
           "marks": [
             {
               "mark": "◎",
@@ -18413,7 +19831,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "コスモブラック",
               "probability": 0.09642000098935977,
               "score": 5,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "○",
@@ -18421,7 +19840,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "フローレンスフーガ",
               "probability": 0.08093243730382216,
               "score": 4,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "▲",
@@ -18429,7 +19849,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ギオンバヤシ",
               "probability": 0.1262748559498974,
               "score": 3,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -18438,6 +19859,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 7,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
@@ -18445,7 +19867,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ギオンバヤシ",
               "probability": 0.1262748559498974,
               "score": 5,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
@@ -18453,7 +19876,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "コスモブラック",
               "probability": 0.09642000098935977,
               "score": 4,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "▲",
@@ -18461,7 +19885,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ウインカトリーヌ",
               "probability": 0.12794978365169693,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -18470,27 +19895,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 7,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "ギオンバヤシ",
               "score": 0.09290570182261852,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
               "horseNumber": 3,
               "horseName": "ウインカトリーヌ",
               "score": 0.08584600953137646,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 13,
               "horseName": "コティノス",
               "score": 0.08417318317659543,
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             }
           ]
         },
@@ -18499,6 +19928,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 13,
           "topPickFinish": 13,
+          "topPickFinishText": "13着",
           "marks": [
             {
               "horseNumber": 13,
@@ -18506,7 +19936,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 9,
               "first": 0,
               "mark": "◎",
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             },
             {
               "horseNumber": 12,
@@ -18514,7 +19945,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "○",
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "horseNumber": 3,
@@ -18522,7 +19954,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 13,
               "first": 1,
               "mark": "▲",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         }
@@ -18756,6 +20189,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 6,
       "topPickFinish": 7,
+      "topPickFinishText": "7着",
       "tickets": [
         {
           "betType": "単勝",
@@ -18842,33 +20276,53 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "13": 5,
         "14": 12
       },
+      "finishTextByHorseNumber": {
+        "1": "2着",
+        "2": "9着",
+        "3": "10着",
+        "4": "1着",
+        "5": "3着",
+        "6": "7着",
+        "7": "11着",
+        "8": "14着",
+        "9": "8着",
+        "10": "13着",
+        "11": "4着",
+        "12": "6着",
+        "13": "5着",
+        "14": "12着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 6,
           "topPickFinish": 7,
+          "topPickFinishText": "7着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 6,
               "horseName": "ロジアコース",
               "score": 0.08944132959304672,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "○",
               "horseNumber": 14,
               "horseName": "ヒアカムズザサン",
               "score": 0.07809227906962263,
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             },
             {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "エコロルーク",
               "score": 0.06740196614887772,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             }
           ]
         },
@@ -18877,6 +20331,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 14,
+          "topPickFinishText": "14着",
           "marks": [
             {
               "mark": "◎",
@@ -18884,7 +20339,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "エコロルーク",
               "probability": 0.08988862642233653,
               "score": 5,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "○",
@@ -18892,7 +20348,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "エコロヴァルド",
               "probability": 0.08470680661200256,
               "score": 4,
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             },
             {
               "mark": "▲",
@@ -18900,7 +20357,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ヒアカムズザサン",
               "probability": 0.10633526168502101,
               "score": 3,
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             }
           ]
         },
@@ -18909,6 +20367,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 14,
           "topPickFinish": 12,
+          "topPickFinishText": "12着",
           "marks": [
             {
               "mark": "◎",
@@ -18916,7 +20375,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ヒアカムズザサン",
               "probability": 0.10633526168502101,
               "score": 5,
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             },
             {
               "mark": "○",
@@ -18924,7 +20384,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "エコロルーク",
               "probability": 0.08988862642233653,
               "score": 4,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "▲",
@@ -18932,7 +20393,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ロジアコース",
               "probability": 0.12379533941336578,
               "score": 3,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -18941,27 +20403,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 14,
           "topPickFinish": 12,
+          "topPickFinishText": "12着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 14,
               "horseName": "ヒアカムズザサン",
               "score": 0.09563500672967541,
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             },
             {
               "mark": "○",
               "horseNumber": 8,
               "horseName": "エコロルーク",
               "score": 0.08955038779288356,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "▲",
               "horseNumber": 13,
               "horseName": "サルトヴェローチェ",
               "score": 0.08931779730752774,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -18970,6 +20436,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 13,
           "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "horseNumber": 13,
@@ -18977,7 +20444,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 9,
               "first": 0,
               "mark": "◎",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "horseNumber": 10,
@@ -18985,7 +20453,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             },
             {
               "horseNumber": 3,
@@ -18993,7 +20462,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 1,
               "first": 0,
               "mark": "▲",
-              "finish": 10
+              "finish": 10,
+              "finishText": "10着"
             }
           ]
         }
@@ -19227,6 +20697,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 11,
       "topPickFinish": 11,
+      "topPickFinishText": "11着",
       "tickets": [
         {
           "betType": "単勝",
@@ -19315,33 +20786,55 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "15": 15,
         "16": 12
       },
+      "finishTextByHorseNumber": {
+        "1": "1着",
+        "2": "4着",
+        "3": "8着",
+        "4": "10着",
+        "5": "5着",
+        "6": "9着",
+        "7": "13着",
+        "8": "6着",
+        "9": "2着",
+        "10": "3着",
+        "11": "11着",
+        "12": "7着",
+        "13": "16着",
+        "14": "14着",
+        "15": "15着",
+        "16": "12着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 11,
           "topPickFinish": 11,
+          "topPickFinishText": "11着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 11,
               "horseName": "リアライズブルーム",
               "score": 0.06457571280040214,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "○",
               "horseNumber": 3,
               "horseName": "ライトオブジアース",
               "score": 0.06417056938056474,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "▲",
               "horseNumber": 14,
               "horseName": "トゥルージョワ",
               "score": 0.06325722526353167,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             }
           ]
         },
@@ -19350,6 +20843,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 14,
           "topPickFinish": 14,
+          "topPickFinishText": "14着",
           "marks": [
             {
               "mark": "◎",
@@ -19357,7 +20851,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "トゥルージョワ",
               "probability": 0.08351210198334261,
               "score": 5,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "○",
@@ -19365,7 +20860,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "チェサピークベイ",
               "probability": 0.07318474764816263,
               "score": 4,
-              "finish": 15
+              "finish": 15,
+              "finishText": "15着"
             },
             {
               "mark": "▲",
@@ -19373,7 +20869,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ライトオブジアース",
               "probability": 0.08491724677877811,
               "score": 3,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         },
@@ -19382,6 +20879,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 8,
+          "topPickFinishText": "8着",
           "marks": [
             {
               "mark": "◎",
@@ -19389,7 +20887,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ライトオブジアース",
               "probability": 0.08491724677877811,
               "score": 5,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "○",
@@ -19397,7 +20896,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "トゥルージョワ",
               "probability": 0.08351210198334261,
               "score": 4,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "▲",
@@ -19405,7 +20905,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "リアライズブルーム",
               "probability": 0.0855405443477587,
               "score": 3,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             }
           ]
         },
@@ -19414,27 +20915,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 15,
           "topPickFinish": 15,
+          "topPickFinishText": "15着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 15,
               "horseName": "チェサピークベイ",
               "score": 0.08759702936237791,
-              "finish": 15
+              "finish": 15,
+              "finishText": "15着"
             },
             {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "リアライズブルーム",
               "score": 0.08417318317659543,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "▲",
               "horseNumber": 1,
               "horseName": "コスモファーブロス",
               "score": 0.08294163084017443,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -19443,6 +20948,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "horseNumber": 1,
@@ -19450,7 +20956,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 9,
               "first": 0,
               "mark": "◎",
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "horseNumber": 9,
@@ -19458,7 +20965,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 2,
               "first": 0,
               "mark": "○",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 12,
@@ -19466,7 +20974,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 1,
               "first": 0,
               "mark": "▲",
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         }
@@ -19700,6 +21209,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 10,
       "topPickFinish": 3,
+      "topPickFinishText": "3着",
       "tickets": [
         {
           "betType": "単勝",
@@ -19786,33 +21296,53 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "13": 14,
         "14": 5
       },
+      "finishTextByHorseNumber": {
+        "1": "9着",
+        "2": "6着",
+        "3": "13着",
+        "4": "1着",
+        "5": "8着",
+        "6": "2着",
+        "7": "7着",
+        "8": "12着",
+        "9": "4着",
+        "10": "3着",
+        "11": "11着",
+        "12": "10着",
+        "13": "14着",
+        "14": "5着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 10,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 10,
               "horseName": "ゴールドドレッサ",
               "score": 0.07774819700015759,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
               "horseNumber": 7,
               "horseName": "ジーティーアリア",
               "score": 0.07729912576353618,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "▲",
               "horseNumber": 14,
               "horseName": "ヴァレンティーニ",
               "score": 0.07476320779945003,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -19821,6 +21351,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 14,
           "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "mark": "◎",
@@ -19828,7 +21359,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ヴァレンティーニ",
               "probability": 0.10121361357706317,
               "score": 5,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "○",
@@ -19836,7 +21368,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ゴールドヴィーナス",
               "probability": 0.07780660796232518,
               "score": 4,
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             },
             {
               "mark": "▲",
@@ -19844,7 +21377,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ジーティーアリア",
               "probability": 0.10511502582950338,
               "score": 3,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -19853,6 +21387,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 7,
           "topPickFinish": 7,
+          "topPickFinishText": "7着",
           "marks": [
             {
               "mark": "◎",
@@ -19860,7 +21395,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ジーティーアリア",
               "probability": 0.10511502582950338,
               "score": 5,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "○",
@@ -19868,7 +21404,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ヴァレンティーニ",
               "probability": 0.10121361357706317,
               "score": 4,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
@@ -19876,7 +21413,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ゴールドドレッサ",
               "probability": 0.10580590465507479,
               "score": 3,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -19885,27 +21423,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 7,
           "topPickFinish": 7,
+          "topPickFinishText": "7着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "ジーティーアリア",
               "score": 0.08531986513217621,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "ゴールドドレッサ",
               "score": 0.08199976896638589,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 11,
               "horseName": "ストラニエーロ",
               "score": 0.07921166038451712,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             }
           ]
         },
@@ -19914,6 +21456,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 13,
+          "topPickFinishText": "13着",
           "marks": [
             {
               "horseNumber": 3,
@@ -19921,7 +21464,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "◎",
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             },
             {
               "horseNumber": 4,
@@ -19929,7 +21473,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "horseNumber": 11,
@@ -19937,7 +21482,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 3,
               "first": 0,
               "mark": "▲",
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             }
           ]
         }
@@ -20171,6 +21717,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 4,
       "topPickFinish": 2,
+      "topPickFinishText": "2着",
       "tickets": [
         {
           "betType": "単勝",
@@ -20253,33 +21800,49 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "9": 7,
         "10": 10
       },
+      "finishTextByHorseNumber": {
+        "1": "4着",
+        "2": "8着",
+        "3": "5着",
+        "4": "2着",
+        "5": "3着",
+        "6": "9着",
+        "7": "6着",
+        "8": "1着",
+        "9": "7着",
+        "10": "10着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 4,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "ワイドデコラシオン",
               "score": 0.10705482105763874,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
               "horseNumber": 3,
               "horseName": "イングラム",
               "score": 0.10092294790594177,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "キャンドルマス",
               "score": 0.09847190904084888,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             }
           ]
         },
@@ -20288,6 +21851,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 9,
+          "topPickFinishText": "9着",
           "marks": [
             {
               "mark": "◎",
@@ -20295,7 +21859,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "キャンドルマス",
               "probability": 0.13768853856383062,
               "score": 5,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "○",
@@ -20303,7 +21868,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "プレザントトーン",
               "probability": 0.10518038061206073,
               "score": 4,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "▲",
@@ -20311,7 +21877,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "イングラム",
               "probability": 0.14145936758705044,
               "score": 3,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -20320,6 +21887,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "mark": "◎",
@@ -20327,7 +21895,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "イングラム",
               "probability": 0.14145936758705044,
               "score": 5,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "○",
@@ -20335,7 +21904,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "キャンドルマス",
               "probability": 0.13768853856383062,
               "score": 4,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "▲",
@@ -20343,7 +21913,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ワイドデコラシオン",
               "probability": 0.15089301858966117,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -20352,27 +21923,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 9,
+          "topPickFinishText": "9着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 6,
               "horseName": "キャンドルマス",
               "score": 0.09278649587598153,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "○",
               "horseNumber": 4,
               "horseName": "ワイドデコラシオン",
               "score": 0.08957541997720482,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 10,
               "horseName": "タイセイモノリス",
               "score": 0.0774030672958417,
-              "finish": 10
+              "finish": 10,
+              "finishText": "10着"
             }
           ]
         },
@@ -20381,6 +21956,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 10,
           "topPickFinish": 10,
+          "topPickFinishText": "10着",
           "marks": [
             {
               "horseNumber": 10,
@@ -20388,7 +21964,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 9,
               "first": 0,
               "mark": "◎",
-              "finish": 10
+              "finish": 10,
+              "finishText": "10着"
             },
             {
               "horseNumber": 2,
@@ -20396,7 +21973,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "○",
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "horseNumber": 3,
@@ -20404,7 +21982,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 14,
               "first": 1,
               "mark": "▲",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         }
@@ -20638,6 +22217,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 10,
       "topPickFinish": 7,
+      "topPickFinishText": "7着",
       "tickets": [
         {
           "betType": "単勝",
@@ -20723,33 +22303,52 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "12": 8,
         "13": 9
       },
+      "finishTextByHorseNumber": {
+        "1": "4着",
+        "2": "5着",
+        "3": "6着",
+        "4": "2着",
+        "5": "13着",
+        "6": "3着",
+        "7": "12着",
+        "8": "11着",
+        "9": "1着",
+        "10": "7着",
+        "11": "10着",
+        "12": "8着",
+        "13": "9着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 10,
           "topPickFinish": 7,
+          "topPickFinishText": "7着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 10,
               "horseName": "マドモアゼルアスク",
               "score": 0.09579590964559201,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "○",
               "horseNumber": 2,
               "horseName": "マイスターヴェルク",
               "score": 0.09313533280486268,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
               "horseNumber": 9,
               "horseName": "モンローウォーク",
               "score": 0.07947107768929217,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -20758,6 +22357,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 9,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
@@ -20765,7 +22365,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "モンローウォーク",
               "probability": 0.10845649033066644,
               "score": 5,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
@@ -20773,7 +22374,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アストリル",
               "probability": 0.09240057053841305,
               "score": 4,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
@@ -20781,7 +22383,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "マイスターヴェルク",
               "probability": 0.129478421277698,
               "score": 3,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -20790,6 +22393,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 2,
           "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "mark": "◎",
@@ -20797,7 +22401,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "マイスターヴェルク",
               "probability": 0.129478421277698,
               "score": 5,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "○",
@@ -20805,7 +22410,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "モンローウォーク",
               "probability": 0.10845649033066644,
               "score": 4,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "▲",
@@ -20813,7 +22419,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "マドモアゼルアスク",
               "probability": 0.1335716164172816,
               "score": 3,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -20822,27 +22429,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 10,
           "topPickFinish": 7,
+          "topPickFinishText": "7着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 10,
               "horseName": "マドモアゼルアスク",
               "score": 0.10574650210570807,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "○",
               "horseNumber": 9,
               "horseName": "モンローウォーク",
               "score": 0.0876913617198961,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "▲",
               "horseNumber": 2,
               "horseName": "マイスターヴェルク",
               "score": 0.08312785785650144,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -20851,6 +22462,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "horseNumber": 1,
@@ -20858,7 +22470,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "◎",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "horseNumber": 4,
@@ -20866,7 +22479,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 6,
@@ -20874,7 +22488,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 2,
               "first": 0,
               "mark": "▲",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         }
@@ -21108,6 +22723,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 9,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -21194,33 +22810,53 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "13": 10,
         "14": 3
       },
+      "finishTextByHorseNumber": {
+        "1": "6着",
+        "2": "8着",
+        "3": "12着",
+        "4": "14着",
+        "5": "13着",
+        "6": "11着",
+        "7": "9着",
+        "8": "5着",
+        "9": "1着",
+        "10": "4着",
+        "11": "7着",
+        "12": "2着",
+        "13": "10着",
+        "14": "3着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 9,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 9,
               "horseName": "シーズザスローン",
               "score": 0.12598165931940278,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 14,
               "horseName": "プライベートアイズ",
               "score": 0.06961336783492568,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "テルアスワッド",
               "score": 0.06594977046483633,
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             }
           ]
         },
@@ -21229,6 +22865,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 12,
+          "topPickFinishText": "12着",
           "marks": [
             {
               "mark": "◎",
@@ -21236,7 +22873,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "テルアスワッド",
               "probability": 0.087654479216119,
               "score": 5,
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             },
             {
               "mark": "○",
@@ -21244,7 +22882,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "メイショウタイピン",
               "probability": 0.0740851995363771,
               "score": 4,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "▲",
@@ -21252,7 +22891,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "プライベートアイズ",
               "probability": 0.09329078286241031,
               "score": 3,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -21261,6 +22901,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 14,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
@@ -21268,7 +22909,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "プライベートアイズ",
               "probability": 0.09329078286241031,
               "score": 5,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
@@ -21276,7 +22918,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "テルアスワッド",
               "probability": 0.087654479216119,
               "score": 4,
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             },
             {
               "mark": "▲",
@@ -21284,7 +22927,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "シーズザスローン",
               "probability": 0.18001123130006738,
               "score": 3,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -21293,27 +22937,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 9,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 9,
               "horseName": "シーズザスローン",
               "score": 0.09850864404392247,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 14,
               "horseName": "プライベートアイズ",
               "score": 0.08515164929944397,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "テルアスワッド",
               "score": 0.08459745592958166,
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             }
           ]
         },
@@ -21322,6 +22970,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 11,
           "topPickFinish": 7,
+          "topPickFinishText": "7着",
           "marks": [
             {
               "horseNumber": 11,
@@ -21329,7 +22978,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "◎",
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "horseNumber": 12,
@@ -21337,7 +22987,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 1,
@@ -21345,7 +22996,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 2,
               "first": 0,
               "mark": "▲",
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         }
@@ -21579,6 +23231,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 11,
       "topPickFinish": 5,
+      "topPickFinishText": "5着",
       "tickets": [
         {
           "betType": "単勝",
@@ -21664,33 +23317,52 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "12": 10,
         "13": 12
       },
+      "finishTextByHorseNumber": {
+        "1": "9着",
+        "2": "3着",
+        "3": "7着",
+        "4": "8着",
+        "5": "1着",
+        "6": "13着",
+        "7": "6着",
+        "8": "11着",
+        "9": "2着",
+        "10": "4着",
+        "11": "5着",
+        "12": "10着",
+        "13": "12着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 11,
           "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 11,
               "horseName": "シグレ",
               "score": 0.07801806233409199,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "ノリヤンモーニン",
               "score": 0.07421433394178012,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
               "horseNumber": 12,
               "horseName": "ダイメイビッグボス",
               "score": 0.06994180764814811,
-              "finish": 10
+              "finish": 10,
+              "finishText": "10着"
             }
           ]
         },
@@ -21699,6 +23371,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 12,
           "topPickFinish": 10,
+          "topPickFinishText": "10着",
           "marks": [
             {
               "mark": "◎",
@@ -21706,7 +23379,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ダイメイビッグボス",
               "probability": 0.09379607488275252,
               "score": 5,
-              "finish": 10
+              "finish": 10,
+              "finishText": "10着"
             },
             {
               "mark": "○",
@@ -21714,7 +23388,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アルテクィーン",
               "probability": 0.07687766969928302,
               "score": 4,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "▲",
@@ -21722,7 +23397,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ノリヤンモーニン",
               "probability": 0.100369192257571,
               "score": 3,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -21731,6 +23407,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 10,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
@@ -21738,7 +23415,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ノリヤンモーニン",
               "probability": 0.100369192257571,
               "score": 5,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
@@ -21746,7 +23424,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ダイメイビッグボス",
               "probability": 0.09379607488275252,
               "score": 4,
-              "finish": 10
+              "finish": 10,
+              "finishText": "10着"
             },
             {
               "mark": "▲",
@@ -21754,7 +23433,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "シグレ",
               "probability": 0.10622108209189696,
               "score": 3,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -21763,27 +23443,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 11,
           "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 11,
               "horseName": "シグレ",
               "score": 0.09502038839856541,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "○",
               "horseNumber": 12,
               "horseName": "ダイメイビッグボス",
               "score": 0.08534338418174987,
-              "finish": 10
+              "finish": 10,
+              "finishText": "10着"
             },
             {
               "mark": "▲",
               "horseNumber": 10,
               "horseName": "ノリヤンモーニン",
               "score": 0.08513127918193096,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -21792,6 +23476,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 4,
           "topPickFinish": 8,
+          "topPickFinishText": "8着",
           "marks": [
             {
               "horseNumber": 4,
@@ -21799,7 +23484,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "◎",
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "horseNumber": 2,
@@ -21807,7 +23493,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "horseNumber": 9,
@@ -21815,7 +23502,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 1,
               "first": 0,
               "mark": "▲",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         }
@@ -22049,6 +23737,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 4,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -22135,33 +23824,53 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "13": 9,
         "14": 10
       },
+      "finishTextByHorseNumber": {
+        "1": "2着",
+        "2": "5着",
+        "3": "3着",
+        "4": "1着",
+        "5": "7着",
+        "6": "12着",
+        "7": "6着",
+        "8": "8着",
+        "9": "4着",
+        "10": "11着",
+        "11": "13着",
+        "12": "14着",
+        "13": "9着",
+        "14": "10着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 4,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "ホウオウヘッセン",
               "score": 0.09212069861273986,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 8,
               "horseName": "ロードヴェルテクス",
               "score": 0.07681057946800877,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "▲",
               "horseNumber": 5,
               "horseName": "ロードクラシコ",
               "score": 0.07056197627936786,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -22170,6 +23879,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 7,
+          "topPickFinishText": "7着",
           "marks": [
             {
               "mark": "◎",
@@ -22177,7 +23887,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ロードクラシコ",
               "probability": 0.09475018046924444,
               "score": 5,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "○",
@@ -22185,7 +23896,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ザカリナン",
               "probability": 0.08387361591385376,
               "score": 4,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
@@ -22193,7 +23905,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ロードヴェルテクス",
               "probability": 0.10436341614407661,
               "score": 3,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         },
@@ -22202,6 +23915,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 8,
+          "topPickFinishText": "8着",
           "marks": [
             {
               "mark": "◎",
@@ -22209,7 +23923,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ロードヴェルテクス",
               "probability": 0.10436341614407661,
               "score": 5,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "○",
@@ -22217,7 +23932,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ロードクラシコ",
               "probability": 0.09475018046924444,
               "score": 4,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "▲",
@@ -22225,7 +23941,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ホウオウヘッセン",
               "probability": 0.12791744559750906,
               "score": 3,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -22234,27 +23951,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 4,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "ホウオウヘッセン",
               "score": 0.08027775738778185,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 3,
               "horseName": "マグネシアブリック",
               "score": 0.07989435832165255,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "ロードヴェルテクス",
               "score": 0.07814032688683381,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         },
@@ -22263,6 +23984,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "horseNumber": 3,
@@ -22270,7 +23992,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 10,
               "first": 0,
               "mark": "◎",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "horseNumber": 1,
@@ -22278,7 +24001,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 2,
@@ -22286,7 +24010,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 2,
               "first": 0,
               "mark": "▲",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         }
@@ -22520,6 +24245,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 9,
+      "topPickFinishText": "9着",
       "tickets": [
         {
           "betType": "単勝",
@@ -22602,33 +24328,49 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "9": 7,
         "10": 3
       },
+      "finishTextByHorseNumber": {
+        "1": "1着",
+        "2": "9着",
+        "3": "5着",
+        "4": "6着",
+        "5": "4着",
+        "6": "2着",
+        "7": "10着",
+        "8": "8着",
+        "9": "7着",
+        "10": "3着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 2,
           "topPickFinish": 9,
+          "topPickFinishText": "9着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "ケンシロウワールド",
               "score": 0.13423075251095498,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "○",
               "horseNumber": 1,
               "horseName": "ムーンベリル",
               "score": 0.09706789444749613,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "スウィット",
               "score": 0.08657967101992017,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -22637,6 +24379,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "mark": "◎",
@@ -22644,7 +24387,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "スウィット",
               "probability": 0.11939278776240185,
               "score": 5,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "○",
@@ -22652,7 +24396,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "レオライジング",
               "probability": 0.08383248260715565,
               "score": 4,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "▲",
@@ -22660,7 +24405,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ムーンベリル",
               "probability": 0.1355285161125187,
               "score": 3,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -22669,6 +24415,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
@@ -22676,7 +24423,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ムーンベリル",
               "probability": 0.1355285161125187,
               "score": 5,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
@@ -22684,7 +24432,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "スウィット",
               "probability": 0.11939278776240185,
               "score": 4,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
@@ -22692,7 +24441,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ケンシロウワールド",
               "probability": 0.1927021439024554,
               "score": 3,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             }
           ]
         },
@@ -22701,27 +24451,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "ムーンベリル",
               "score": 0.08344388841406382,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 2,
               "horseName": "ケンシロウワールド",
               "score": 0.07826063328871628,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "ドナビッグベン",
               "score": 0.0713828508200158,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -22730,6 +24484,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 9,
           "topPickFinish": 7,
+          "topPickFinishText": "7着",
           "marks": [
             {
               "horseNumber": 9,
@@ -22737,7 +24492,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "◎",
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "horseNumber": 10,
@@ -22745,7 +24501,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "horseNumber": 6,
@@ -22753,7 +24510,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 3,
               "first": 0,
               "mark": "▲",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         }
@@ -22987,6 +24745,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 9,
+      "topPickFinishText": "9着",
       "tickets": [
         {
           "betType": "単勝",
@@ -23075,33 +24834,55 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "15": 2,
         "16": 1
       },
+      "finishTextByHorseNumber": {
+        "1": "6着",
+        "2": "9着",
+        "3": "12着",
+        "4": "14着",
+        "5": "4着",
+        "6": "11着",
+        "7": "5着",
+        "8": "8着",
+        "9": "7着",
+        "10": "15着",
+        "11": "13着",
+        "12": "16着",
+        "13": "3着",
+        "14": "10着",
+        "15": "2着",
+        "16": "1着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 2,
           "topPickFinish": 9,
+          "topPickFinishText": "9着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "ジャストビコーズ",
               "score": 0.07742092115239928,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "○",
               "horseNumber": 8,
               "horseName": "サトノスターライト",
               "score": 0.06559079650418961,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "▲",
               "horseNumber": 13,
               "horseName": "アマンヘセル",
               "score": 0.06464914526511574,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -23110,6 +24891,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 13,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
@@ -23117,7 +24899,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アマンヘセル",
               "probability": 0.08565351737039503,
               "score": 5,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
@@ -23125,7 +24908,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ジャストマイウェイ",
               "probability": 0.07370760467837463,
               "score": 4,
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             },
             {
               "mark": "▲",
@@ -23133,7 +24917,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "サトノスターライト",
               "probability": 0.08710221158435483,
               "score": 3,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         },
@@ -23142,6 +24927,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 8,
+          "topPickFinishText": "8着",
           "marks": [
             {
               "mark": "◎",
@@ -23149,7 +24935,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "サトノスターライト",
               "probability": 0.08710221158435483,
               "score": 5,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "○",
@@ -23157,7 +24944,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アマンヘセル",
               "probability": 0.08565351737039503,
               "score": 4,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
@@ -23165,7 +24953,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ジャストビコーズ",
               "probability": 0.10530240335083123,
               "score": 3,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             }
           ]
         },
@@ -23174,27 +24963,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 16,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 16,
               "horseName": "クレアノア",
               "score": 0.09195249069202611,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 8,
               "horseName": "サトノスターライト",
               "score": 0.09123541335881058,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "▲",
               "horseNumber": 13,
               "horseName": "アマンヘセル",
               "score": 0.08107392041226458,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -23203,6 +24996,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 11,
           "topPickFinish": 13,
+          "topPickFinishText": "13着",
           "marks": [
             {
               "horseNumber": 11,
@@ -23210,7 +25004,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "◎",
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             },
             {
               "horseNumber": 5,
@@ -23218,7 +25013,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 1,
               "first": 0,
               "mark": "○",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "horseNumber": 8,
@@ -23226,7 +25022,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 16,
               "first": 1,
               "mark": "▲",
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         }
@@ -23460,6 +25257,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 6,
       "topPickFinish": 8,
+      "topPickFinishText": "8着",
       "tickets": [
         {
           "betType": "単勝",
@@ -23548,33 +25346,55 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "15": 15,
         "16": 7
       },
+      "finishTextByHorseNumber": {
+        "1": "13着",
+        "2": "3着",
+        "3": "6着",
+        "4": "4着",
+        "5": "10着",
+        "6": "8着",
+        "7": "16着",
+        "8": "1着",
+        "9": "11着",
+        "10": "9着",
+        "11": "12着",
+        "12": "14着",
+        "13": "2着",
+        "14": "5着",
+        "15": "15着",
+        "16": "7着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 6,
           "topPickFinish": 8,
+          "topPickFinishText": "8着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 6,
               "horseName": "グランマエストロ",
               "score": 0.12620241292555756,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "○",
               "horseNumber": 8,
               "horseName": "ペプチドドリーム",
               "score": 0.06624915314634293,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "▲",
               "horseNumber": 10,
               "horseName": "レッドフリーマン",
               "score": 0.05473396271008721,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             }
           ]
         },
@@ -23583,6 +25403,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 10,
           "topPickFinish": 9,
+          "topPickFinishText": "9着",
           "marks": [
             {
               "mark": "◎",
@@ -23590,7 +25411,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "レッドフリーマン",
               "probability": 0.07039939036265881,
               "score": 5,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "○",
@@ -23598,7 +25420,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "チャチャット",
               "probability": 0.059394566856899055,
               "score": 4,
-              "finish": 16
+              "finish": 16,
+              "finishText": "16着"
             },
             {
               "mark": "▲",
@@ -23606,7 +25429,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ペプチドドリーム",
               "probability": 0.08811506795689839,
               "score": 3,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -23615,6 +25439,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
@@ -23622,7 +25447,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ペプチドドリーム",
               "probability": 0.08811506795689839,
               "score": 5,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
@@ -23630,7 +25456,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "レッドフリーマン",
               "probability": 0.07039939036265881,
               "score": 4,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "▲",
@@ -23638,7 +25465,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "グランマエストロ",
               "probability": 0.18035085223261318,
               "score": 3,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         },
@@ -23647,27 +25475,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 8,
+          "topPickFinishText": "8着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 6,
               "horseName": "グランマエストロ",
               "score": 0.10011494688443418,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "○",
               "horseNumber": 7,
               "horseName": "チャチャット",
               "score": 0.08159889771974643,
-              "finish": 16
+              "finish": 16,
+              "finishText": "16着"
             },
             {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "ランウェイミューズ",
               "score": 0.0800118714703722,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -23676,6 +25508,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 7,
           "topPickFinish": 16,
+          "topPickFinishText": "16着",
           "marks": [
             {
               "horseNumber": 7,
@@ -23683,7 +25516,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 10,
               "first": 0,
               "mark": "◎",
-              "finish": 16
+              "finish": 16,
+              "finishText": "16着"
             },
             {
               "horseNumber": 14,
@@ -23691,7 +25525,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "horseNumber": 4,
@@ -23699,7 +25534,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 3,
               "first": 0,
               "mark": "▲",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         }
@@ -23933,6 +25769,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 12,
       "topPickFinish": 15,
+      "topPickFinishText": "15着",
       "tickets": [
         {
           "betType": "単勝",
@@ -24020,33 +25857,54 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "14": 11,
         "15": 6
       },
+      "finishTextByHorseNumber": {
+        "1": "12着",
+        "2": "1着",
+        "3": "9着",
+        "4": "4着",
+        "5": "2着",
+        "6": "10着",
+        "7": "7着",
+        "8": "14着",
+        "9": "3着",
+        "10": "8着",
+        "11": "13着",
+        "12": "15着",
+        "13": "5着",
+        "14": "11着",
+        "15": "6着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 12,
           "topPickFinish": 15,
+          "topPickFinishText": "15着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 12,
               "horseName": "ウィッシュリスト",
               "score": 0.06429107447454974,
-              "finish": 15
+              "finish": 15,
+              "finishText": "15着"
             },
             {
               "mark": "○",
               "horseNumber": 9,
               "horseName": "ユニバーサルラヴ",
               "score": 0.06196148964989994,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "フェスティヴハート",
               "score": 0.05626259314294262,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             }
           ]
         },
@@ -24055,6 +25913,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 9,
+          "topPickFinishText": "9着",
           "marks": [
             {
               "mark": "◎",
@@ -24062,7 +25921,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "フェスティヴハート",
               "probability": 0.07275112949012869,
               "score": 5,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "○",
@@ -24070,7 +25930,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "トラストレガート",
               "probability": 0.07061557753073767,
               "score": 4,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
@@ -24078,7 +25939,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ユニバーサルラヴ",
               "probability": 0.08151866257775532,
               "score": 3,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -24087,6 +25949,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 9,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
@@ -24094,7 +25957,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ユニバーサルラヴ",
               "probability": 0.08151866257775532,
               "score": 5,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
@@ -24102,7 +25966,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "フェスティヴハート",
               "probability": 0.07275112949012869,
               "score": 4,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "▲",
@@ -24110,7 +25975,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ウィッシュリスト",
               "probability": 0.0851026392310627,
               "score": 3,
-              "finish": 15
+              "finish": 15,
+              "finishText": "15着"
             }
           ]
         },
@@ -24119,27 +25985,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 10,
           "topPickFinish": 8,
+          "topPickFinishText": "8着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 10,
               "horseName": "ハピネスドリーム",
               "score": 0.08214314885473915,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "○",
               "horseNumber": 9,
               "horseName": "ユニバーサルラヴ",
               "score": 0.08024930242395996,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 13,
               "horseName": "アルティソナンテ",
               "score": 0.07680139273662766,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -24148,6 +26018,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 4,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "horseNumber": 4,
@@ -24155,7 +26026,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "◎",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "horseNumber": 14,
@@ -24163,7 +26035,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "○",
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "horseNumber": 13,
@@ -24171,7 +26044,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 3,
               "first": 0,
               "mark": "▲",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         }
@@ -24405,6 +26279,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 9,
       "topPickFinish": 3,
+      "topPickFinishText": "3着",
       "tickets": [
         {
           "betType": "単勝",
@@ -24490,33 +26365,52 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "12": 11,
         "13": 12
       },
+      "finishTextByHorseNumber": {
+        "1": "6着",
+        "2": "5着",
+        "3": "10着",
+        "4": "1着",
+        "5": "4着",
+        "6": "7着",
+        "7": "8着",
+        "8": "13着",
+        "9": "3着",
+        "10": "9着",
+        "11": "2着",
+        "12": "11着",
+        "13": "12着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 9,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 9,
               "horseName": "ヴェルバーニア",
               "score": 0.12347659193656207,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
               "horseNumber": 5,
               "horseName": "ロワデュモンド",
               "score": 0.07646438217128274,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
               "horseNumber": 11,
               "horseName": "エンルートフライト",
               "score": 0.06818773993162563,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -24525,6 +26419,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 11,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
@@ -24532,7 +26427,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "エンルートフライト",
               "probability": 0.09109750916502563,
               "score": 5,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
@@ -24540,7 +26436,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "グランオギュール",
               "probability": 0.07648621497882307,
               "score": 4,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "▲",
@@ -24548,7 +26445,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ロワデュモンド",
               "probability": 0.10383080491834426,
               "score": 3,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -24557,6 +26455,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
@@ -24564,7 +26463,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ロワデュモンド",
               "probability": 0.10383080491834426,
               "score": 5,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
@@ -24572,7 +26472,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "エンルートフライト",
               "probability": 0.09109750916502563,
               "score": 4,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
@@ -24580,7 +26481,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ヴェルバーニア",
               "probability": 0.17615728148031246,
               "score": 3,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -24589,27 +26491,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 9,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 9,
               "horseName": "ヴェルバーニア",
               "score": 0.09214216917481437,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
               "horseNumber": 2,
               "horseName": "サンタンヌ",
               "score": 0.08216373392075182,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
               "horseNumber": 11,
               "horseName": "エンルートフライト",
               "score": 0.08002635319029623,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -24618,6 +26524,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 2,
           "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "horseNumber": 2,
@@ -24625,7 +26532,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 10,
               "first": 0,
               "mark": "◎",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "horseNumber": 4,
@@ -24633,7 +26541,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "○",
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "horseNumber": 6,
@@ -24641,7 +26550,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 1,
               "first": 0,
               "mark": "▲",
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         }
@@ -24875,6 +26785,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 9,
+      "topPickFinishText": "9着",
       "tickets": [
         {
           "betType": "単勝",
@@ -24963,33 +26874,55 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "15": 6,
         "16": 12
       },
+      "finishTextByHorseNumber": {
+        "1": "14着",
+        "2": "9着",
+        "3": "7着",
+        "4": "11着",
+        "5": "8着",
+        "6": "2着",
+        "7": "15着",
+        "8": "4着",
+        "9": "10着",
+        "10": "3着",
+        "11": "16着",
+        "12": "5着",
+        "13": "13着",
+        "14": "1着",
+        "15": "6着",
+        "16": "12着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 2,
           "topPickFinish": 9,
+          "topPickFinishText": "9着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "トランサルピナ",
               "score": 0.08093735428185796,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "○",
               "horseNumber": 14,
               "horseName": "チャランダマルツ",
               "score": 0.0677243492524218,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "グルーヴェンス",
               "score": 0.06400878603703115,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -24998,6 +26931,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
@@ -25005,7 +26939,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "グルーヴェンス",
               "probability": 0.08466834932718798,
               "score": 5,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
@@ -25013,7 +26948,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "エリンヘラクレス",
               "probability": 0.07673812068491671,
               "score": 4,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "▲",
@@ -25021,7 +26957,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "チャランダマルツ",
               "probability": 0.09038460042778895,
               "score": 3,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -25030,6 +26967,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 14,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
@@ -25037,7 +26975,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "チャランダマルツ",
               "probability": 0.09038460042778895,
               "score": 5,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
@@ -25045,7 +26984,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "グルーヴェンス",
               "probability": 0.08466834932718798,
               "score": 4,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
@@ -25053,7 +26993,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "トランサルピナ",
               "probability": 0.11071230047307536,
               "score": 3,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             }
           ]
         },
@@ -25062,27 +27003,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 14,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 14,
               "horseName": "チャランダマルツ",
               "score": 0.08888775491626964,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "グルーヴェンス",
               "score": 0.07903236930467902,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 2,
               "horseName": "トランサルピナ",
               "score": 0.0763141712299959,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             }
           ]
         },
@@ -25091,6 +27036,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 13,
           "topPickFinish": 13,
+          "topPickFinishText": "13着",
           "marks": [
             {
               "horseNumber": 13,
@@ -25098,7 +27044,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "◎",
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             },
             {
               "horseNumber": 1,
@@ -25106,7 +27053,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "horseNumber": 11,
@@ -25114,7 +27062,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 2,
               "first": 0,
               "mark": "▲",
-              "finish": 16
+              "finish": 16,
+              "finishText": "16着"
             }
           ]
         }
@@ -25348,6 +27297,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 15,
       "topPickFinish": 11,
+      "topPickFinishText": "11着",
       "tickets": [
         {
           "betType": "単勝",
@@ -25435,33 +27385,54 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "14": null,
         "15": 11
       },
+      "finishTextByHorseNumber": {
+        "1": "14着",
+        "2": "10着",
+        "3": "1着",
+        "4": "13着",
+        "5": "4着",
+        "6": "9着",
+        "7": "2着",
+        "8": "5着",
+        "9": "7着",
+        "10": "6着",
+        "11": "8着",
+        "12": "12着",
+        "13": "3着",
+        "14": "中止",
+        "15": "11着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 15,
           "topPickFinish": 11,
+          "topPickFinishText": "11着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 15,
               "horseName": "テキサスバローズ",
               "score": 0.07163240037620813,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "○",
               "horseNumber": 4,
               "horseName": "イントゥザウインド",
               "score": 0.06684132968818084,
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             },
             {
               "mark": "▲",
               "horseNumber": 7,
               "horseName": "ユイノサダハル",
               "score": 0.061580669830595465,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -25470,6 +27441,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 7,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
@@ -25477,7 +27449,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ユイノサダハル",
               "probability": 0.08093278593267152,
               "score": 5,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
@@ -25485,7 +27458,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "スルーザゴールド",
               "probability": 0.07910160773158129,
               "score": 4,
-              "finish": null
+              "finish": null,
+              "finishText": "中止"
             },
             {
               "mark": "▲",
@@ -25493,7 +27467,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "イントゥザウインド",
               "probability": 0.08902610879049516,
               "score": 3,
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             }
           ]
         },
@@ -25502,6 +27477,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 4,
           "topPickFinish": 13,
+          "topPickFinishText": "13着",
           "marks": [
             {
               "mark": "◎",
@@ -25509,7 +27485,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "イントゥザウインド",
               "probability": 0.08902610879049516,
               "score": 5,
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             },
             {
               "mark": "○",
@@ -25517,7 +27494,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ユイノサダハル",
               "probability": 0.08093278593267152,
               "score": 4,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
@@ -25525,7 +27503,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "テキサスバローズ",
               "probability": 0.09639698677207563,
               "score": 3,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             }
           ]
         },
@@ -25534,27 +27513,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 4,
           "topPickFinish": 13,
+          "topPickFinishText": "13着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "イントゥザウインド",
               "score": 0.08387674218341762,
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             },
             {
               "mark": "○",
               "horseNumber": 15,
               "horseName": "テキサスバローズ",
               "score": 0.07282900220621334,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "▲",
               "horseNumber": 7,
               "horseName": "ユイノサダハル",
               "score": 0.07213366844475008,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -25563,6 +27546,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 13,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "horseNumber": 13,
@@ -25570,7 +27554,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "◎",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "horseNumber": 14,
@@ -25578,7 +27563,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": null
+              "finish": null,
+              "finishText": "中止"
             },
             {
               "horseNumber": 11,
@@ -25586,7 +27572,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 1,
               "first": 0,
               "mark": "▲",
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         }
@@ -25820,6 +27807,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 2,
       "topPickFinish": 12,
+      "topPickFinishText": "12着",
       "tickets": [
         {
           "betType": "単勝",
@@ -25908,33 +27896,55 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "15": 10,
         "16": 8
       },
+      "finishTextByHorseNumber": {
+        "1": "15着",
+        "2": "12着",
+        "3": "2着",
+        "4": "13着",
+        "5": "9着",
+        "6": "3着",
+        "7": "5着",
+        "8": "11着",
+        "9": "4着",
+        "10": "16着",
+        "11": "7着",
+        "12": "14着",
+        "13": "1着",
+        "14": "6着",
+        "15": "10着",
+        "16": "8着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 2,
           "topPickFinish": 12,
+          "topPickFinishText": "12着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "ロスパレドネス",
               "score": 0.12052771206041468,
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             },
             {
               "mark": "○",
               "horseNumber": 8,
               "horseName": "アメテュストス",
               "score": 0.0963207975073748,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "▲",
               "horseNumber": 12,
               "horseName": "ミエノストロング",
               "score": 0.06465408145007466,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             }
           ]
         },
@@ -25943,6 +27953,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 12,
           "topPickFinish": 14,
+          "topPickFinishText": "14着",
           "marks": [
             {
               "mark": "◎",
@@ -25950,7 +27961,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ミエノストロング",
               "probability": 0.08566111150110105,
               "score": 5,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "○",
@@ -25958,7 +27970,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ポッドロルフ",
               "probability": 0.06038751300001026,
               "score": 4,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "▲",
@@ -25966,7 +27979,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アメテュストス",
               "probability": 0.13437913620463973,
               "score": 3,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             }
           ]
         },
@@ -25975,6 +27989,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 11,
+          "topPickFinishText": "11着",
           "marks": [
             {
               "mark": "◎",
@@ -25982,7 +27997,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アメテュストス",
               "probability": 0.13437913620463973,
               "score": 5,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "○",
@@ -25990,7 +28006,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ミエノストロング",
               "probability": 0.08566111150110105,
               "score": 4,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "▲",
@@ -25998,7 +28015,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ロスパレドネス",
               "probability": 0.17162054320931647,
               "score": 3,
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             }
           ]
         },
@@ -26007,27 +28025,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 2,
           "topPickFinish": 12,
+          "topPickFinishText": "12着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "ロスパレドネス",
               "score": 0.09425499913701703,
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             },
             {
               "mark": "○",
               "horseNumber": 8,
               "horseName": "アメテュストス",
               "score": 0.08788789135029203,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "▲",
               "horseNumber": 12,
               "horseName": "ミエノストロング",
               "score": 0.07953162012187082,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             }
           ]
         },
@@ -26036,6 +28058,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 9,
+          "topPickFinishText": "9着",
           "marks": [
             {
               "horseNumber": 5,
@@ -26043,7 +28066,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "◎",
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "horseNumber": 15,
@@ -26051,7 +28075,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 10
+              "finish": 10,
+              "finishText": "10着"
             },
             {
               "horseNumber": 13,
@@ -26059,7 +28084,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 2,
               "first": 0,
               "mark": "▲",
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         }
@@ -26293,6 +28319,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 3,
       "topPickFinish": 6,
+      "topPickFinishText": "6着",
       "tickets": [
         {
           "betType": "単勝",
@@ -26381,33 +28408,55 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "15": 5,
         "16": 8
       },
+      "finishTextByHorseNumber": {
+        "1": "3着",
+        "2": "4着",
+        "3": "6着",
+        "4": "15着",
+        "5": "10着",
+        "6": "11着",
+        "7": "9着",
+        "8": "2着",
+        "9": "12着",
+        "10": "13着",
+        "11": "7着",
+        "12": "14着",
+        "13": "1着",
+        "14": "16着",
+        "15": "5着",
+        "16": "8着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 3,
           "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 3,
               "horseName": "ヴァンヴィーヴ",
               "score": 0.07676193704462039,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "プリティディーヴァ",
               "score": 0.06773761014317674,
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             },
             {
               "mark": "▲",
               "horseNumber": 14,
               "horseName": "ポッドデスペア",
               "score": 0.062003904397561656,
-              "finish": 16
+              "finish": 16,
+              "finishText": "16着"
             }
           ]
         },
@@ -26416,6 +28465,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 14,
           "topPickFinish": 16,
+          "topPickFinishText": "16着",
           "marks": [
             {
               "mark": "◎",
@@ -26423,7 +28473,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ポッドデスペア",
               "probability": 0.08158391603569642,
               "score": 5,
-              "finish": 16
+              "finish": 16,
+              "finishText": "16着"
             },
             {
               "mark": "○",
@@ -26431,7 +28482,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ハッピーエンジェル",
               "probability": 0.07505134398398712,
               "score": 4,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "▲",
@@ -26439,7 +28491,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "プリティディーヴァ",
               "probability": 0.09040500179818117,
               "score": 3,
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             }
           ]
         },
@@ -26448,6 +28501,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 10,
           "topPickFinish": 13,
+          "topPickFinishText": "13着",
           "marks": [
             {
               "mark": "◎",
@@ -26455,7 +28509,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "プリティディーヴァ",
               "probability": 0.09040500179818117,
               "score": 5,
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             },
             {
               "mark": "○",
@@ -26463,7 +28518,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ポッドデスペア",
               "probability": 0.08158391603569642,
               "score": 4,
-              "finish": 16
+              "finish": 16,
+              "finishText": "16着"
             },
             {
               "mark": "▲",
@@ -26471,7 +28527,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ヴァンヴィーヴ",
               "probability": 0.10428858164655604,
               "score": 3,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         },
@@ -26480,27 +28537,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 10,
           "topPickFinish": 13,
+          "topPickFinishText": "13着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 10,
               "horseName": "プリティディーヴァ",
               "score": 0.0931448411585719,
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             },
             {
               "mark": "○",
               "horseNumber": 3,
               "horseName": "ヴァンヴィーヴ",
               "score": 0.08754970856513554,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "ヴェントゥーラ",
               "score": 0.07949585859240516,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             }
           ]
         },
@@ -26509,6 +28570,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "horseNumber": 1,
@@ -26516,7 +28578,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "◎",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "horseNumber": 13,
@@ -26524,7 +28587,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "horseNumber": 6,
@@ -26532,7 +28596,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 3,
               "first": 0,
               "mark": "▲",
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             }
           ]
         }
@@ -26766,6 +28831,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 4,
       "topPickFinish": 2,
+      "topPickFinishText": "2着",
       "tickets": [
         {
           "betType": "単勝",
@@ -26850,33 +28916,51 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "11": 11,
         "12": 5
       },
+      "finishTextByHorseNumber": {
+        "1": "10着",
+        "2": "12着",
+        "3": "7着",
+        "4": "2着",
+        "5": "6着",
+        "6": "3着",
+        "7": "1着",
+        "8": "8着",
+        "9": "9着",
+        "10": "4着",
+        "11": "11着",
+        "12": "5着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 4,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "アロンズロッド",
               "score": 0.14168827849490348,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "クラヴァンス",
               "score": 0.11006585400458371,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
               "horseNumber": 1,
               "horseName": "ジェットブレード",
               "score": 0.06648513228656636,
-              "finish": 10
+              "finish": 10,
+              "finishText": "10着"
             }
           ]
         },
@@ -26885,6 +28969,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 10,
+          "topPickFinishText": "10着",
           "marks": [
             {
               "mark": "◎",
@@ -26892,7 +28977,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ジェットブレード",
               "probability": 0.08847811278801135,
               "score": 5,
-              "finish": 10
+              "finish": 10,
+              "finishText": "10着"
             },
             {
               "mark": "○",
@@ -26900,7 +28986,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ゴーソーファー",
               "probability": 0.07602600459456092,
               "score": 4,
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             },
             {
               "mark": "▲",
@@ -26908,7 +28995,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "クラヴァンス",
               "probability": 0.15552537696957652,
               "score": 3,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -26917,6 +29005,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 10,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
@@ -26924,7 +29013,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "クラヴァンス",
               "probability": 0.15552537696957652,
               "score": 5,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
@@ -26932,7 +29022,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ジェットブレード",
               "probability": 0.08847811278801135,
               "score": 4,
-              "finish": 10
+              "finish": 10,
+              "finishText": "10着"
             },
             {
               "mark": "▲",
@@ -26940,7 +29031,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アロンズロッド",
               "probability": 0.2041752608008377,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -26949,27 +29041,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 4,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "アロンズロッド",
               "score": 0.09717788394737124,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "クラヴァンス",
               "score": 0.09397159897722628,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
               "horseNumber": 7,
               "horseName": "ルールーリマ",
               "score": 0.07872713073644534,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -26978,6 +29074,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 7,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "horseNumber": 7,
@@ -26985,7 +29082,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 9,
               "first": 0,
               "mark": "◎",
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "horseNumber": 2,
@@ -26993,7 +29091,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "○",
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             },
             {
               "horseNumber": 12,
@@ -27001,7 +29100,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 2,
               "first": 0,
               "mark": "▲",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         }
@@ -27235,6 +29335,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 5,
       "topPickFinish": 9,
+      "topPickFinishText": "9着",
       "tickets": [
         {
           "betType": "単勝",
@@ -27323,33 +29424,55 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "15": 14,
         "16": 11
       },
+      "finishTextByHorseNumber": {
+        "1": "4着",
+        "2": "1着",
+        "3": "8着",
+        "4": "12着",
+        "5": "9着",
+        "6": "15着",
+        "7": "2着",
+        "8": "16着",
+        "9": "13着",
+        "10": "6着",
+        "11": "7着",
+        "12": "10着",
+        "13": "5着",
+        "14": "3着",
+        "15": "14着",
+        "16": "11着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 5,
           "topPickFinish": 9,
+          "topPickFinishText": "9着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "エコロアゼル",
               "score": 0.07067011635634422,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "○",
               "horseNumber": 7,
               "horseName": "ガビーズシスター",
               "score": 0.06867827162875614,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 14,
               "horseName": "ファムエレガンテ",
               "score": 0.06238189207107899,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -27358,6 +29481,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 14,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
@@ -27365,7 +29489,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ファムエレガンテ",
               "probability": 0.0821654355334154,
               "score": 5,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
@@ -27373,7 +29498,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ゲッティヴィラ",
               "probability": 0.07841197229771393,
               "score": 4,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
@@ -27381,7 +29507,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ガビーズシスター",
               "probability": 0.09185217331445719,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -27390,6 +29517,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 7,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
@@ -27397,7 +29525,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ガビーズシスター",
               "probability": 0.09185217331445719,
               "score": 5,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
@@ -27405,7 +29534,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ファムエレガンテ",
               "probability": 0.0821654355334154,
               "score": 4,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
@@ -27413,7 +29543,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "エコロアゼル",
               "probability": 0.09491654981843885,
               "score": 3,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             }
           ]
         },
@@ -27422,27 +29553,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 7,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "ガビーズシスター",
               "score": 0.0970953611062277,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
               "horseNumber": 1,
               "horseName": "メイショウホウレン",
               "score": 0.08042976539366296,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "ロードアウォード",
               "score": 0.08041710992014417,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         },
@@ -27451,6 +29586,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "horseNumber": 1,
@@ -27458,7 +29594,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 10,
               "first": 0,
               "mark": "◎",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "horseNumber": 10,
@@ -27466,7 +29603,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "horseNumber": 3,
@@ -27474,7 +29612,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 3,
               "first": 0,
               "mark": "▲",
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         }
@@ -27708,6 +29847,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 1,
       "topPickFinish": 14,
+      "topPickFinishText": "14着",
       "tickets": [
         {
           "betType": "単勝",
@@ -27795,33 +29935,54 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "14": 11,
         "15": 5
       },
+      "finishTextByHorseNumber": {
+        "1": "14着",
+        "2": "7着",
+        "3": "10着",
+        "4": "2着",
+        "5": "8着",
+        "6": "3着",
+        "7": "15着",
+        "8": "13着",
+        "9": "9着",
+        "10": "4着",
+        "11": "1着",
+        "12": "6着",
+        "13": "12着",
+        "14": "11着",
+        "15": "5着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 1,
           "topPickFinish": 14,
+          "topPickFinishText": "14着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "アルデキングダム",
               "score": 0.09418549228034383,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "ノーウェアマン",
               "score": 0.07787277177463567,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
               "horseNumber": 15,
               "horseName": "ヘルヴェティオス",
               "score": 0.06927227651596934,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -27830,6 +29991,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 15,
           "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "mark": "◎",
@@ -27837,7 +29999,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ヘルヴェティオス",
               "probability": 0.09276602698709288,
               "score": 5,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "○",
@@ -27845,7 +30008,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "イサチルシーキング",
               "probability": 0.07919032845354723,
               "score": 4,
-              "finish": 15
+              "finish": 15,
+              "finishText": "15着"
             },
             {
               "mark": "▲",
@@ -27853,7 +30017,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ノーウェアマン",
               "probability": 0.10599755815427184,
               "score": 3,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -27862,6 +30027,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 10,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
@@ -27869,7 +30035,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ノーウェアマン",
               "probability": 0.10599755815427184,
               "score": 5,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
@@ -27877,7 +30044,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ヘルヴェティオス",
               "probability": 0.09276602698709288,
               "score": 4,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
@@ -27885,7 +30053,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アルデキングダム",
               "probability": 0.1310940512399767,
               "score": 3,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             }
           ]
         },
@@ -27894,27 +30063,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 14,
+          "topPickFinishText": "14着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "アルデキングダム",
               "score": 0.08339636826721697,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "○",
               "horseNumber": 15,
               "horseName": "ヘルヴェティオス",
               "score": 0.08070246756154718,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
               "horseNumber": 10,
               "horseName": "ノーウェアマン",
               "score": 0.07361712288953957,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -27923,6 +30096,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "horseNumber": 6,
@@ -27930,7 +30104,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "◎",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "horseNumber": 7,
@@ -27938,7 +30113,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 15
+              "finish": 15,
+              "finishText": "15着"
             },
             {
               "horseNumber": 11,
@@ -27946,7 +30122,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 2,
               "first": 0,
               "mark": "▲",
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         }
@@ -28180,6 +30357,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 10,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -28263,33 +30441,50 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "10": 1,
         "11": 9
       },
+      "finishTextByHorseNumber": {
+        "1": "7着",
+        "2": "11着",
+        "3": "8着",
+        "4": "5着",
+        "5": "2着",
+        "6": "10着",
+        "7": "6着",
+        "8": "3着",
+        "9": "4着",
+        "10": "1着",
+        "11": "9着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 10,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 10,
               "horseName": "バニーラビット",
               "score": 0.14629370082813276,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 8,
               "horseName": "メイショウソウセキ",
               "score": 0.0884733090443211,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "ブルーセルリアン",
               "score": 0.07563560573843908,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         },
@@ -28298,6 +30493,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 8,
+          "topPickFinishText": "8着",
           "marks": [
             {
               "mark": "◎",
@@ -28305,7 +30501,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ブルーセルリアン",
               "probability": 0.10255576425243093,
               "score": 5,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "○",
@@ -28313,7 +30510,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ブランフォルテ",
               "probability": 0.08993812706372176,
               "score": 4,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
@@ -28321,7 +30519,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "メイショウソウセキ",
               "probability": 0.12230607703071097,
               "score": 3,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -28330,6 +30529,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
@@ -28337,7 +30537,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "メイショウソウセキ",
               "probability": 0.12230607703071097,
               "score": 5,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
@@ -28345,7 +30546,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ブルーセルリアン",
               "probability": 0.10255576425243093,
               "score": 4,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "▲",
@@ -28353,7 +30555,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "バニーラビット",
               "probability": 0.21126052592888273,
               "score": 3,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -28362,27 +30565,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 10,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 10,
               "horseName": "バニーラビット",
               "score": 0.09029192720900825,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 9,
               "horseName": "アウスヴァール",
               "score": 0.07957563075344948,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "メイショウソウセキ",
               "score": 0.07761618397410196,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -28391,6 +30598,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 7,
+          "topPickFinishText": "7着",
           "marks": [
             {
               "horseNumber": 1,
@@ -28398,7 +30606,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "◎",
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "horseNumber": 5,
@@ -28406,7 +30615,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 9,
@@ -28414,7 +30624,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 4,
               "first": 0,
               "mark": "▲",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         }
@@ -28648,6 +30859,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 6,
       "topPickFinish": 6,
+      "topPickFinishText": "6着",
       "tickets": [
         {
           "betType": "単勝",
@@ -28738,33 +30950,57 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "17": 11,
         "18": 16
       },
+      "finishTextByHorseNumber": {
+        "1": "13着",
+        "2": "1着",
+        "3": "2着",
+        "4": "4着",
+        "5": "3着",
+        "6": "6着",
+        "7": "9着",
+        "8": "14着",
+        "9": "5着",
+        "10": "18着",
+        "11": "15着",
+        "12": "17着",
+        "13": "10着",
+        "14": "12着",
+        "15": "8着",
+        "16": "7着",
+        "17": "11着",
+        "18": "16着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 6,
           "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 6,
               "horseName": "カルロット",
               "score": 0.08736902166999183,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "○",
               "horseNumber": 5,
               "horseName": "ルナフィオーレ",
               "score": 0.061106980061575195,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 1,
               "horseName": "トウカイジーク",
               "score": 0.05619820322958387,
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             }
           ]
         },
@@ -28773,6 +31009,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 13,
+          "topPickFinishText": "13着",
           "marks": [
             {
               "mark": "◎",
@@ -28780,7 +31017,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "トウカイジーク",
               "probability": 0.07265206808496137,
               "score": 5,
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             },
             {
               "mark": "○",
@@ -28788,7 +31026,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ナデシコザクラ",
               "probability": 0.0636186764794258,
               "score": 4,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
@@ -28796,7 +31035,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ルナフィオーレ",
               "probability": 0.0802040324418711,
               "score": 3,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -28805,6 +31045,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
@@ -28812,7 +31053,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ルナフィオーレ",
               "probability": 0.0802040324418711,
               "score": 5,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
@@ -28820,7 +31062,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "トウカイジーク",
               "probability": 0.07265206808496137,
               "score": 4,
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             },
             {
               "mark": "▲",
@@ -28828,7 +31071,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "カルロット",
               "probability": 0.1206071733778967,
               "score": 3,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         },
@@ -28837,27 +31081,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 6,
               "horseName": "カルロット",
               "score": 0.0853172172454283,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "○",
               "horseNumber": 9,
               "horseName": "ナデシコザクラ",
               "score": 0.08396213022972067,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "グレンセロース",
               "score": 0.08038960194463037,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -28866,6 +31114,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 9,
           "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "horseNumber": 9,
@@ -28873,7 +31122,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 10,
               "first": 0,
               "mark": "◎",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "horseNumber": 4,
@@ -28881,7 +31131,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "horseNumber": 3,
@@ -28889,7 +31140,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 3,
               "first": 0,
               "mark": "▲",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         }
@@ -29123,6 +31375,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 13,
       "topPickFinish": 12,
+      "topPickFinishText": "12着",
       "tickets": [
         {
           "betType": "単勝",
@@ -29211,33 +31464,55 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "15": 6,
         "16": 11
       },
+      "finishTextByHorseNumber": {
+        "1": "15着",
+        "2": "9着",
+        "3": "4着",
+        "4": "14着",
+        "5": "16着",
+        "6": "3着",
+        "7": "5着",
+        "8": "10着",
+        "9": "13着",
+        "10": "8着",
+        "11": "7着",
+        "12": "1着",
+        "13": "12着",
+        "14": "2着",
+        "15": "6着",
+        "16": "11着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 13,
           "topPickFinish": 12,
+          "topPickFinishText": "12着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 13,
               "horseName": "スマイルガーデン",
               "score": 0.06599352062966334,
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             },
             {
               "mark": "○",
               "horseNumber": 1,
               "horseName": "ブライトベリル",
               "score": 0.06591197363238167,
-              "finish": 15
+              "finish": 15,
+              "finishText": "15着"
             },
             {
               "mark": "▲",
               "horseNumber": 16,
               "horseName": "エイシンキタールン",
               "score": 0.06384358915718658,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             }
           ]
         },
@@ -29246,6 +31521,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 16,
           "topPickFinish": 11,
+          "topPickFinishText": "11着",
           "marks": [
             {
               "mark": "◎",
@@ -29253,7 +31529,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "エイシンキタールン",
               "probability": 0.08441420028127324,
               "score": 5,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "○",
@@ -29261,7 +31538,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "エレーデサンライズ",
               "probability": 0.07137505544744627,
               "score": 4,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
@@ -29269,7 +31547,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ブライトベリル",
               "probability": 0.08759633024311185,
               "score": 3,
-              "finish": 15
+              "finish": 15,
+              "finishText": "15着"
             }
           ]
         },
@@ -29278,6 +31557,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 15,
+          "topPickFinishText": "15着",
           "marks": [
             {
               "mark": "◎",
@@ -29285,7 +31565,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ブライトベリル",
               "probability": 0.08759633024311185,
               "score": 5,
-              "finish": 15
+              "finish": 15,
+              "finishText": "15着"
             },
             {
               "mark": "○",
@@ -29293,7 +31574,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "エイシンキタールン",
               "probability": 0.08441420028127324,
               "score": 4,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "▲",
@@ -29301,7 +31583,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "スマイルガーデン",
               "probability": 0.08772178716200671,
               "score": 3,
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             }
           ]
         },
@@ -29310,27 +31593,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 15,
+          "topPickFinishText": "15着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "ブライトベリル",
               "score": 0.08710573283464289,
-              "finish": 15
+              "finish": 15,
+              "finishText": "15着"
             },
             {
               "mark": "○",
               "horseNumber": 3,
               "horseName": "ルージュマデイラ",
               "score": 0.08288198686314434,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
               "horseNumber": 13,
               "horseName": "スマイルガーデン",
               "score": 0.07992342355996816,
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             }
           ]
         },
@@ -29339,6 +31626,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 7,
           "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "horseNumber": 7,
@@ -29346,7 +31634,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "◎",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "horseNumber": 14,
@@ -29354,7 +31643,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 3,
@@ -29362,7 +31652,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 4,
               "first": 0,
               "mark": "▲",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         }
@@ -29596,6 +31887,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 11,
       "topPickFinish": 3,
+      "topPickFinishText": "3着",
       "tickets": [
         {
           "betType": "単勝",
@@ -29682,33 +31974,53 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "13": 5,
         "14": null
       },
+      "finishTextByHorseNumber": {
+        "1": "13着",
+        "2": "9着",
+        "3": "2着",
+        "4": "10着",
+        "5": "6着",
+        "6": "11着",
+        "7": "7着",
+        "8": "1着",
+        "9": "8着",
+        "10": "12着",
+        "11": "3着",
+        "12": "4着",
+        "13": "5着",
+        "14": "中止"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 11,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 11,
               "horseName": "アラムシャピラス",
               "score": 0.10303119024963052,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
               "horseNumber": 14,
               "horseName": "アイスフォーク",
               "score": 0.09108941595590347,
-              "finish": null
+              "finish": null,
+              "finishText": "中止"
             },
             {
               "mark": "▲",
               "horseNumber": 1,
               "horseName": "アクティブヘイロー",
               "score": 0.07286267460801024,
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             }
           ]
         },
@@ -29717,6 +32029,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 13,
+          "topPickFinishText": "13着",
           "marks": [
             {
               "mark": "◎",
@@ -29724,7 +32037,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アクティブヘイロー",
               "probability": 0.0982897163594635,
               "score": 5,
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             },
             {
               "mark": "○",
@@ -29732,7 +32046,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ブルーザー",
               "probability": 0.07016799816418272,
               "score": 4,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
@@ -29740,7 +32055,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アイスフォーク",
               "probability": 0.12633085689468385,
               "score": 3,
-              "finish": null
+              "finish": null,
+              "finishText": "中止"
             }
           ]
         },
@@ -29749,6 +32065,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 14,
           "topPickFinish": null,
+          "topPickFinishText": "中止",
           "marks": [
             {
               "mark": "◎",
@@ -29756,7 +32073,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アイスフォーク",
               "probability": 0.12633085689468385,
               "score": 5,
-              "finish": null
+              "finish": null,
+              "finishText": "中止"
             },
             {
               "mark": "○",
@@ -29764,7 +32082,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アクティブヘイロー",
               "probability": 0.0982897163594635,
               "score": 4,
-              "finish": 13
+              "finish": 13,
+              "finishText": "13着"
             },
             {
               "mark": "▲",
@@ -29772,7 +32091,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アラムシャピラス",
               "probability": 0.14470281734657162,
               "score": 3,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -29781,27 +32101,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 11,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 11,
               "horseName": "アラムシャピラス",
               "score": 0.1030627349184136,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
               "horseNumber": 14,
               "horseName": "アイスフォーク",
               "score": 0.09392200231675785,
-              "finish": null
+              "finish": null,
+              "finishText": "中止"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "ホウオウモチーヴ",
               "score": 0.08455684626593961,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -29810,6 +32134,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "horseNumber": 3,
@@ -29817,7 +32142,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 9,
               "first": 0,
               "mark": "◎",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 12,
@@ -29825,7 +32151,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "○",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "horseNumber": 13,
@@ -29833,7 +32160,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 1,
               "first": 0,
               "mark": "▲",
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         }
@@ -30067,6 +32395,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 1,
       "topPickFinish": 6,
+      "topPickFinishText": "6着",
       "tickets": [
         {
           "betType": "単勝",
@@ -30147,33 +32476,47 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "7": 1,
         "8": 4
       },
+      "finishTextByHorseNumber": {
+        "1": "6着",
+        "2": "7着",
+        "3": "2着",
+        "4": "8着",
+        "5": "5着",
+        "6": "3着",
+        "7": "1着",
+        "8": "4着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 1,
           "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "カローナ",
               "score": 0.19291205674582798,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "○",
               "horseNumber": 2,
               "horseName": "ツーハーツ",
               "score": 0.1094387239741682,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "レアアース",
               "score": 0.0938611340908907,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         },
@@ -30182,6 +32525,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 4,
           "topPickFinish": 8,
+          "topPickFinishText": "8着",
           "marks": [
             {
               "mark": "◎",
@@ -30189,7 +32533,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "レアアース",
               "probability": 0.13059503864081803,
               "score": 5,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "○",
@@ -30197,7 +32542,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ビエントゾンダ",
               "probability": 0.09661423305863771,
               "score": 4,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
@@ -30205,7 +32551,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ツーハーツ",
               "probability": 0.15456056153816805,
               "score": 3,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -30214,6 +32561,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 2,
           "topPickFinish": 7,
+          "topPickFinishText": "7着",
           "marks": [
             {
               "mark": "◎",
@@ -30221,7 +32569,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ツーハーツ",
               "probability": 0.15456056153816805,
               "score": 5,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "○",
@@ -30229,7 +32578,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "レアアース",
               "probability": 0.13059503864081803,
               "score": 4,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "▲",
@@ -30237,7 +32587,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "カローナ",
               "probability": 0.2829810734945677,
               "score": 3,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         },
@@ -30246,27 +32597,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "カローナ",
               "score": 0.09084418996080514,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "○",
               "horseNumber": 8,
               "horseName": "ビエントゾンダ",
               "score": 0.07996889103054576,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
               "horseNumber": 7,
               "horseName": "ユーダブルワン",
               "score": 0.07915782607715621,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -30275,6 +32630,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "horseNumber": 8,
@@ -30282,7 +32638,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 10,
               "first": 0,
               "mark": "◎",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "horseNumber": 3,
@@ -30290,7 +32647,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 7,
@@ -30298,7 +32656,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 3,
               "first": 0,
               "mark": "▲",
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         }
@@ -30532,6 +32891,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 10,
       "topPickFinish": 11,
+      "topPickFinishText": "11着",
       "tickets": [
         {
           "betType": "単勝",
@@ -30618,33 +32978,53 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "13": 1,
         "14": 10
       },
+      "finishTextByHorseNumber": {
+        "1": "6着",
+        "2": "8着",
+        "3": "5着",
+        "4": "9着",
+        "5": "7着",
+        "6": "2着",
+        "7": "14着",
+        "8": "13着",
+        "9": "4着",
+        "10": "11着",
+        "11": "3着",
+        "12": "12着",
+        "13": "1着",
+        "14": "10着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 10,
           "topPickFinish": 11,
+          "topPickFinishText": "11着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 10,
               "horseName": "サトノライトニング",
               "score": 0.07648359391817408,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "○",
               "horseNumber": 5,
               "horseName": "アイアン",
               "score": 0.07617841787939478,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "フレアオブセンス",
               "score": 0.0703070633300036,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             }
           ]
         },
@@ -30653,6 +33033,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 4,
           "topPickFinish": 9,
+          "topPickFinishText": "9着",
           "marks": [
             {
               "mark": "◎",
@@ -30660,7 +33041,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "フレアオブセンス",
               "probability": 0.09435800670099173,
               "score": 5,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "○",
@@ -30668,7 +33050,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "レッドフレーザー",
               "probability": 0.07710523691863001,
               "score": 4,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
@@ -30676,7 +33059,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アイアン",
               "probability": 0.10339085985390123,
               "score": 3,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -30685,6 +33069,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 7,
+          "topPickFinishText": "7着",
           "marks": [
             {
               "mark": "◎",
@@ -30692,7 +33077,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アイアン",
               "probability": 0.10339085985390123,
               "score": 5,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "○",
@@ -30700,7 +33086,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "フレアオブセンス",
               "probability": 0.09435800670099173,
               "score": 4,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "▲",
@@ -30708,7 +33095,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "サトノライトニング",
               "probability": 0.10386036145202324,
               "score": 3,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             }
           ]
         },
@@ -30717,27 +33105,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 7,
+          "topPickFinishText": "7着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "アイアン",
               "score": 0.09493593027287982,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "サトノライトニング",
               "score": 0.0859228137453944,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "フレアオブセンス",
               "score": 0.08404635925303781,
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             }
           ]
         },
@@ -30746,6 +33138,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "horseNumber": 1,
@@ -30753,7 +33146,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "◎",
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "horseNumber": 11,
@@ -30761,7 +33155,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 7,
               "first": 0,
               "mark": "○",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "horseNumber": 4,
@@ -30769,7 +33164,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 15,
               "first": 1,
               "mark": "▲",
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             }
           ]
         }
@@ -31003,6 +33399,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 13,
       "topPickFinish": 3,
+      "topPickFinishText": "3着",
       "tickets": [
         {
           "betType": "単勝",
@@ -31092,33 +33489,56 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "16": 15,
         "17": 14
       },
+      "finishTextByHorseNumber": {
+        "1": "1着",
+        "2": "4着",
+        "3": "8着",
+        "4": "12着",
+        "5": "6着",
+        "6": "11着",
+        "7": "7着",
+        "8": "除外",
+        "9": "5着",
+        "10": "2着",
+        "11": "9着",
+        "12": "13着",
+        "13": "3着",
+        "14": "10着",
+        "15": "16着",
+        "16": "15着",
+        "17": "14着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 13,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 13,
               "horseName": "マウンテンバローズ",
               "score": 0.10592767286267832,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
               "horseNumber": 2,
               "horseName": "ウェルカムソング",
               "score": 0.07558284514038771,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
               "horseNumber": 5,
               "horseName": "アーリントンロウ",
               "score": 0.07020369066140403,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         },
@@ -31127,6 +33547,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
@@ -31134,7 +33555,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アーリントンロウ",
               "probability": 0.09419897182622317,
               "score": 5,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "○",
@@ -31142,7 +33564,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アスクザアメリカン",
               "probability": 0.07155620082727246,
               "score": 4,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "▲",
@@ -31150,7 +33573,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ウェルカムソング",
               "probability": 0.10247459410158268,
               "score": 3,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -31159,6 +33583,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 2,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
@@ -31166,7 +33591,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ウェルカムソング",
               "probability": 0.10247459410158268,
               "score": 5,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
@@ -31174,7 +33600,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アーリントンロウ",
               "probability": 0.09419897182622317,
               "score": 4,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
@@ -31182,7 +33609,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "マウンテンバローズ",
               "probability": 0.14915894444356823,
               "score": 3,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -31191,27 +33619,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 16,
           "topPickFinish": 15,
+          "topPickFinishText": "15着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 16,
               "horseName": "バーケンティン",
               "score": 0.09081237481841593,
-              "finish": 15
+              "finish": 15,
+              "finishText": "15着"
             },
             {
               "mark": "○",
               "horseNumber": 13,
               "horseName": "マウンテンバローズ",
               "score": 0.07949437324134369,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 5,
               "horseName": "アーリントンロウ",
               "score": 0.07872197844566435,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         },
@@ -31220,6 +33652,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 8,
+          "topPickFinishText": "8着",
           "marks": [
             {
               "horseNumber": 3,
@@ -31227,7 +33660,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "◎",
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "horseNumber": 4,
@@ -31235,7 +33669,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 2,
               "first": 0,
               "mark": "○",
-              "finish": 12
+              "finish": 12,
+              "finishText": "12着"
             },
             {
               "horseNumber": 6,
@@ -31243,7 +33678,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 1,
               "first": 0,
               "mark": "▲",
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             }
           ]
         }
@@ -31477,6 +33913,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 12,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -31563,33 +34000,53 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "13": 11,
         "14": 2
       },
+      "finishTextByHorseNumber": {
+        "1": "4着",
+        "2": "12着",
+        "3": "13着",
+        "4": "5着",
+        "5": "6着",
+        "6": "8着",
+        "7": "3着",
+        "8": "9着",
+        "9": "14着",
+        "10": "10着",
+        "11": "7着",
+        "12": "1着",
+        "13": "11着",
+        "14": "2着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 12,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 12,
               "horseName": "ジャンシ",
               "score": 0.09678101438239209,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 9,
               "horseName": "ドラムメジャー",
               "score": 0.0741224396713558,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "サンライズジュピタ",
               "score": 0.06954957438399717,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         },
@@ -31598,6 +34055,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 8,
+          "topPickFinishText": "8着",
           "marks": [
             {
               "mark": "◎",
@@ -31605,7 +34063,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "サンライズジュピタ",
               "probability": 0.09319263909175107,
               "score": 5,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "○",
@@ -31613,7 +34072,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "アメリカンビヨンド",
               "probability": 0.08732066715399857,
               "score": 4,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
@@ -31621,7 +34081,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ドラムメジャー",
               "probability": 0.1002278164569182,
               "score": 3,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             }
           ]
         },
@@ -31630,6 +34091,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 9,
           "topPickFinish": 14,
+          "topPickFinishText": "14着",
           "marks": [
             {
               "mark": "◎",
@@ -31637,7 +34099,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ドラムメジャー",
               "probability": 0.1002278164569182,
               "score": 5,
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "○",
@@ -31645,7 +34108,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "サンライズジュピタ",
               "probability": 0.09319263909175107,
               "score": 4,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "▲",
@@ -31653,7 +34117,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ジャンシ",
               "probability": 0.13508716216620478,
               "score": 3,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -31662,27 +34127,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 4,
           "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "アメリカンビヨンド",
               "score": 0.08662579256102092,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "○",
               "horseNumber": 13,
               "horseName": "ミヤフロント",
               "score": 0.08235943813024733,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "▲",
               "horseNumber": 12,
               "horseName": "ジャンシ",
               "score": 0.08104121526275238,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -31691,6 +34160,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 13,
           "topPickFinish": 11,
+          "topPickFinishText": "11着",
           "marks": [
             {
               "horseNumber": 13,
@@ -31698,7 +34168,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 10,
               "first": 0,
               "mark": "◎",
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "horseNumber": 6,
@@ -31706,7 +34177,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 14,
               "first": 1,
               "mark": "○",
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "horseNumber": 9,
@@ -31714,7 +34186,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 13,
               "first": 1,
               "mark": "▲",
-              "finish": 14
+              "finish": 14,
+              "finishText": "14着"
             }
           ]
         }
@@ -31948,6 +34421,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 3,
       "topPickFinish": 2,
+      "topPickFinishText": "2着",
       "tickets": [
         {
           "betType": "単勝",
@@ -32028,33 +34502,47 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "7": 1,
         "8": 6
       },
+      "finishTextByHorseNumber": {
+        "1": "5着",
+        "2": "4着",
+        "3": "2着",
+        "4": "7着",
+        "5": "8着",
+        "6": "3着",
+        "7": "1着",
+        "8": "6着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 3,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 3,
               "horseName": "タンテドヴィーヴル",
               "score": 0.14355774820375874,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
               "horseNumber": 1,
               "horseName": "キーウェーブ",
               "score": 0.1069705263397838,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
               "horseNumber": 5,
               "horseName": "ハイディージェン",
               "score": 0.10451768935916171,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         },
@@ -32063,6 +34551,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 8,
+          "topPickFinishText": "8着",
           "marks": [
             {
               "mark": "◎",
@@ -32070,7 +34559,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ハイディージェン",
               "probability": 0.14698973905354268,
               "score": 5,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "○",
@@ -32078,7 +34568,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ヤマニンループ",
               "probability": 0.10218912961344997,
               "score": 4,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
@@ -32086,7 +34577,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "キーウェーブ",
               "probability": 0.15076333440834588,
               "score": 3,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -32095,6 +34587,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "mark": "◎",
@@ -32102,7 +34595,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "キーウェーブ",
               "probability": 0.15076333440834588,
               "score": 5,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "○",
@@ -32110,7 +34604,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ハイディージェン",
               "probability": 0.14698973905354268,
               "score": 4,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "▲",
@@ -32118,7 +34613,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "タンテドヴィーヴル",
               "probability": 0.20705136804523042,
               "score": 3,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -32127,27 +34623,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 3,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 3,
               "horseName": "タンテドヴィーヴル",
               "score": 0.07908380794591514,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
               "horseNumber": 8,
               "horseName": "ユメハハテシナク",
               "score": 0.07636992850239292,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
               "horseNumber": 2,
               "horseName": "ヤマニンループ",
               "score": 0.07446625693592941,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -32156,6 +34656,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 8,
           "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "horseNumber": 8,
@@ -32163,7 +34664,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 10,
               "first": 0,
               "mark": "◎",
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "horseNumber": 2,
@@ -32171,7 +34673,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 9,
               "first": 0,
               "mark": "○",
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "horseNumber": 6,
@@ -32179,7 +34682,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 2,
               "first": 0,
               "mark": "▲",
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         }
@@ -32413,6 +34917,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 13,
       "topPickFinish": 5,
+      "topPickFinishText": "5着",
       "tickets": [
         {
           "betType": "単勝",
@@ -32501,33 +35006,55 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "15": 6,
         "16": 8
       },
+      "finishTextByHorseNumber": {
+        "1": "2着",
+        "2": "4着",
+        "3": "14着",
+        "4": "1着",
+        "5": "12着",
+        "6": "11着",
+        "7": "3着",
+        "8": "10着",
+        "9": "13着",
+        "10": "16着",
+        "11": "15着",
+        "12": "7着",
+        "13": "5着",
+        "14": "9着",
+        "15": "6着",
+        "16": "8着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 13,
           "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 13,
               "horseName": "レヴァンテシチー",
               "score": 0.07488062094344702,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "○",
               "horseNumber": 12,
               "horseName": "サイモンシュバリエ",
               "score": 0.05984583968840254,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "▲",
               "horseNumber": 1,
               "horseName": "ジューンエオス",
               "score": 0.05924414042897736,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -32536,6 +35063,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 1,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
@@ -32543,7 +35071,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ジューンエオス",
               "probability": 0.07733812531479752,
               "score": 5,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
@@ -32551,7 +35080,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "カミノレアル",
               "probability": 0.07449234819552047,
               "score": 4,
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "▲",
@@ -32559,7 +35089,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "サイモンシュバリエ",
               "probability": 0.07826381648314394,
               "score": 3,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -32568,6 +35099,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 12,
           "topPickFinish": 7,
+          "topPickFinishText": "7着",
           "marks": [
             {
               "mark": "◎",
@@ -32575,7 +35107,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "サイモンシュバリエ",
               "probability": 0.07826381648314394,
               "score": 5,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "○",
@@ -32583,7 +35116,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ジューンエオス",
               "probability": 0.07733812531479752,
               "score": 4,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
@@ -32591,7 +35125,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "レヴァンテシチー",
               "probability": 0.10139424918321238,
               "score": 3,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -32600,27 +35135,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 15,
           "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 15,
               "horseName": "インザモーメント",
               "score": 0.08616775740835192,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "○",
               "horseNumber": 13,
               "horseName": "レヴァンテシチー",
               "score": 0.08401669406541808,
-              "finish": 5
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
               "horseNumber": 1,
               "horseName": "ジューンエオス",
               "score": 0.07996889103054576,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -32629,6 +35168,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 11,
+          "topPickFinishText": "11着",
           "marks": [
             {
               "horseNumber": 6,
@@ -32636,7 +35176,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "◎",
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "horseNumber": 10,
@@ -32644,7 +35185,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 2,
               "first": 0,
               "mark": "○",
-              "finish": 16
+              "finish": 16,
+              "finishText": "16着"
             },
             {
               "horseNumber": 14,
@@ -32652,7 +35194,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 1,
               "first": 0,
               "mark": "▲",
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             }
           ]
         }
@@ -32886,6 +35429,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 6,
       "topPickFinish": 4,
+      "topPickFinishText": "4着",
       "tickets": [
         {
           "betType": "単勝",
@@ -32976,33 +35520,57 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "17": 2,
         "18": 3
       },
+      "finishTextByHorseNumber": {
+        "1": "1着",
+        "2": "9着",
+        "3": "5着",
+        "4": "14着",
+        "5": "中止",
+        "6": "4着",
+        "7": "7着",
+        "8": "11着",
+        "9": "6着",
+        "10": "10着",
+        "11": "13着",
+        "12": "12着",
+        "13": "15着",
+        "14": "8着",
+        "15": "17着",
+        "16": "16着",
+        "17": "2着",
+        "18": "3着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 6,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 6,
               "horseName": "ガイアメンテ",
               "score": 0.0813693698041133,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
               "horseNumber": 13,
               "horseName": "カエルム",
               "score": 0.06809332947355838,
-              "finish": 15
+              "finish": 15,
+              "finishText": "15着"
             },
             {
               "mark": "▲",
               "horseNumber": 9,
               "horseName": "ジーティーアダマン",
               "score": 0.06750373492079714,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         },
@@ -33011,6 +35579,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 9,
           "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
@@ -33018,7 +35587,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ジーティーアダマン",
               "probability": 0.09004519376375102,
               "score": 5,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "○",
@@ -33026,7 +35596,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ゼンダンハヤブサ",
               "probability": 0.06214254044635645,
               "score": 4,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "▲",
@@ -33034,7 +35605,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "カエルム",
               "probability": 0.09095226230646063,
               "score": 3,
-              "finish": 15
+              "finish": 15,
+              "finishText": "15着"
             }
           ]
         },
@@ -33043,6 +35615,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 13,
           "topPickFinish": 15,
+          "topPickFinishText": "15着",
           "marks": [
             {
               "mark": "◎",
@@ -33050,7 +35623,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "カエルム",
               "probability": 0.09095226230646063,
               "score": 5,
-              "finish": 15
+              "finish": 15,
+              "finishText": "15着"
             },
             {
               "mark": "○",
@@ -33058,7 +35632,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ジーティーアダマン",
               "probability": 0.09004519376375102,
               "score": 4,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
@@ -33066,7 +35641,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ガイアメンテ",
               "probability": 0.11137693973808359,
               "score": 3,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -33075,27 +35651,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 6,
           "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 6,
               "horseName": "ガイアメンテ",
               "score": 0.09834680389071503,
-              "finish": 4
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
               "horseNumber": 13,
               "horseName": "カエルム",
               "score": 0.09344728465774434,
-              "finish": 15
+              "finish": 15,
+              "finishText": "15着"
             },
             {
               "mark": "▲",
               "horseNumber": 9,
               "horseName": "ジーティーアダマン",
               "score": 0.09171439986838703,
-              "finish": 6
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         },
@@ -33104,6 +35684,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 17,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "horseNumber": 17,
@@ -33111,7 +35692,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 8,
               "first": 0,
               "mark": "◎",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 1,
@@ -33119,7 +35701,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "horseNumber": 8,
@@ -33127,7 +35710,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 1,
               "first": 0,
               "mark": "▲",
-              "finish": 11
+              "finish": 11,
+              "finishText": "11着"
             }
           ]
         }
@@ -33361,6 +35945,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       ],
       "topPick": 7,
       "topPickFinish": 1,
+      "topPickFinishText": "1着",
       "tickets": [
         {
           "betType": "単勝",
@@ -33442,33 +36027,48 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         "8": 7,
         "9": 5
       },
+      "finishTextByHorseNumber": {
+        "1": "6着",
+        "2": "2着",
+        "3": "9着",
+        "4": "3着",
+        "5": "8着",
+        "6": "4着",
+        "7": "1着",
+        "8": "7着",
+        "9": "5着"
+      },
       "agents": [
         {
           "agentId": "safety",
           "status": "available",
           "topPick": 7,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "ミッキージャンプ",
               "score": 0.1213746713826717,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 4,
               "horseName": "ロングトールサリー",
               "score": 0.11828951887087248,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 5,
               "horseName": "フレイムスター",
               "score": 0.09765886460781872,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         },
@@ -33477,6 +36077,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 5,
           "topPickFinish": 8,
+          "topPickFinishText": "8着",
           "marks": [
             {
               "mark": "◎",
@@ -33484,7 +36085,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "フレイムスター",
               "probability": 0.13643770097455346,
               "score": 5,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "○",
@@ -33492,7 +36094,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ヴィーナスバブル",
               "probability": 0.08927861076457627,
               "score": 4,
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
@@ -33500,7 +36103,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ロングトールサリー",
               "probability": 0.16817716907155925,
               "score": 3,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -33509,6 +36113,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 4,
           "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
@@ -33516,7 +36121,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ロングトールサリー",
               "probability": 0.16817716907155925,
               "score": 5,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
@@ -33524,7 +36130,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "フレイムスター",
               "probability": 0.13643770097455346,
               "score": 4,
-              "finish": 8
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "▲",
@@ -33532,7 +36139,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "horseName": "ミッキージャンプ",
               "probability": 0.17292355755125036,
               "score": 3,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -33541,27 +36149,31 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 7,
           "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "ミッキージャンプ",
               "score": 0.09016127923345596,
-              "finish": 1
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
               "horseNumber": 4,
               "horseName": "ロングトールサリー",
               "score": 0.08785268377333365,
-              "finish": 3
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "グラスベルグ",
               "score": 0.07908380794591514,
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -33570,6 +36182,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
           "status": "available",
           "topPick": 2,
           "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "horseNumber": 2,
@@ -33577,7 +36190,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "◎",
-              "finish": 2
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "horseNumber": 3,
@@ -33585,7 +36199,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 6,
               "first": 0,
               "mark": "○",
-              "finish": 9
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "horseNumber": 8,
@@ -33593,7 +36208,8 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "score": 3,
               "first": 0,
               "mark": "▲",
-              "finish": 7
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         }

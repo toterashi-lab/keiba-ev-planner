@@ -62,6 +62,7 @@ function evaluateResult(result, prediction) {
   const investmentYen = settledTickets.length ? settledTickets.reduce((total, ticket) => total + ticket.investmentYen, 0) : null;
   const payoutYen = settledTickets.length ? settledTickets.reduce((total, ticket) => total + ticket.payoutYen, 0) : null;
   const finishByHorseNumber = Object.fromEntries((result.runners ?? []).map((runner) => [runner.horseNumber, Number(runner.finishPosition) || null]));
+  const finishTextByHorseNumber = Object.fromEntries((result.runners ?? []).map((runner) => [runner.horseNumber, finishLabel(runner)]));
   return {
     raceId: result.raceId,
     date: result.raceDate,
@@ -77,6 +78,7 @@ function evaluateResult(result, prediction) {
     marks: prediction?.marks ?? [],
     topPick: prediction?.marks?.[0]?.horseNumber ?? null,
     topPickFinish: finishByHorseNumber[prediction?.marks?.[0]?.horseNumber] ?? null,
+    topPickFinishText: finishTextByHorseNumber[prediction?.marks?.[0]?.horseNumber] ?? null,
     tickets: settledTickets,
     investmentYen,
     payoutYen,
@@ -84,7 +86,8 @@ function evaluateResult(result, prediction) {
     recoveryRate: investmentYen ? payoutYen / investmentYen : null,
     hit: Number(payoutYen) > 0,
     finishByHorseNumber,
-    agents: agentResults(panels, finishByHorseNumber),
+    finishTextByHorseNumber,
+    agents: agentResults(panels, finishByHorseNumber, finishTextByHorseNumber),
     agentTickets: agentTicketResults(panels, payoutByKey),
   };
 }
@@ -147,7 +150,7 @@ function buildTickets(prediction, result) {
   return tickets;
 }
 
-function agentResults(panels, finishByHorseNumber) {
+function agentResults(panels, finishByHorseNumber, finishTextByHorseNumber) {
   const aliases = {
     safety: ["agent_ability", "ability", "persona_orthodox"],
     sniper: ["agent_value", "value", "persona_value"],
@@ -163,7 +166,9 @@ function agentResults(panels, finishByHorseNumber) {
       status: panel?.status ?? "unavailable",
       topPick: marks[0]?.horseNumber ?? null,
       topPickFinish: finishByHorseNumber[marks[0]?.horseNumber] ?? null,
-      marks: marks.slice(0, 3).map((mark) => ({ ...mark, finish: finishByHorseNumber[mark.horseNumber] ?? null })),
+      topPickFinishText: finishTextByHorseNumber[marks[0]?.horseNumber] ?? null,
+      marks: marks.slice(0, 3).map((mark) => ({ ...mark, finish: finishByHorseNumber[mark.horseNumber] ?? null,
+        finishText: finishTextByHorseNumber[mark.horseNumber] ?? null })),
     };
   });
 }
@@ -210,4 +215,10 @@ function canonical(value, betType) {
 
 function isComplete(result) {
   return result?.status !== "pre_race" && (result.runners ?? []).some((runner) => Number(runner.finishPosition) === 1);
+}
+
+function finishLabel(runner) {
+  const position = Number(runner?.finishPosition);
+  if (Number.isInteger(position) && position > 0) return `${position}着`;
+  return String(runner?.finishText || "結果なし");
 }
