@@ -4,9 +4,29 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#f2f5f3" />
-    <meta name="description" content="ウマヨミ。5人の予想家が選んだ馬、買い目、結果をかんたんに見られる競馬予想サイト" />
-    <title>ウマヨミ｜5人の予想をかんたんに</title>
-  <link rel="stylesheet" href="styles.css?v=result-sync-20260729-4" />
+    <meta name="description" content="無料AI競馬予想ウマヨミ。考え方の違う5人のAI予想家が、全レースの指数・印・単勝・馬連・3連複の買い目を公開し、確定結果と照合します。" />
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+    <link rel="canonical" href="https://umayomi-keiba.vercel.app/" />
+    <link rel="manifest" href="site.webmanifest" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:site_name" content="ウマヨミ" />
+    <meta property="og:title" content="無料AI競馬予想 ウマヨミ｜5人の予想家" />
+    <meta property="og:description" content="5人のAI予想家が全レースを別々の方法で予想。指数・買い目・確定結果をかんたんに見比べられます。" />
+    <meta property="og:url" content="https://umayomi-keiba.vercel.app/" />
+    <meta property="og:image" content="https://umayomi-keiba.vercel.app/assets/og-umayomi.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="ウマヨミの5人のAI予想家" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="無料AI競馬予想 ウマヨミ｜5人の予想家" />
+    <meta name="twitter:description" content="全レースの指数・買い目・結果を、5人のAI予想家ごとに公開。" />
+    <meta name="twitter:image" content="https://umayomi-keiba.vercel.app/assets/og-umayomi.png" />
+    <title>無料AI競馬予想 ウマヨミ｜5人の予想と買い目・結果</title>
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"WebSite","name":"ウマヨミ","alternateName":"無料AI競馬予想 ウマヨミ","url":"https://umayomi-keiba.vercel.app/","inLanguage":"ja","description":"考え方の違う5人のAI予想家による全レースの指数、買い目、確定結果を掲載する無料競馬予想サイト"}
+    </script>
+    <link rel="stylesheet" href="styles.css?v=five-methods-20260729-1" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">本文へ移動</a>
@@ -67,7 +87,7 @@
     </nav>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
-    <footer><p>JRAなどの公式サイトではありません。予想は当たりを約束するものではありません。馬券を買う機能はありません。</p></footer>
+    <footer><div class="footer-about"><strong>無料AI競馬予想 ウマヨミ</strong><p>能力、穴馬、展開、データ、別目線の5人のAI予想家が、全レースの指数と買い目を別々に作ります。単勝1点、馬連5点、3連複5頭BOXを1点100円として表示し、確定後は同じ買い目と公式払戻を照合します。</p></div><p>JRAなどの公式サイトではありません。予想は的中や利益を約束するものではありません。馬券を買う機能はありません。20歳未満の方は馬券を購入できません。</p></footer>
 
     <script src="data/meet-2026-07-11-2026-07-12.js"></script>
     <script src="data/results-2026-07-11-2026-07-12.js"></script>
@@ -79,10 +99,13 @@
     <script src="data/reference-ev-audit.js?v=20260728"></script>
     <script src="data/live-racecards.js?v=20260719-1605"></script>
     <script src="data/live-model-outputs.js?v=20260719-1605"></script>
-    <script src="data/live-replay-audit.js?v=result-sync-20260729-4"></script>
+    <script src="data/live-replay-audit.js?v=five-methods-20260729-1"></script>
     <script src="data/agent-performance.js?v=20260719-1605"></script>
     <script src="ticket-engine.js"></script>
-    <script src="forecast-policy.js?v=all-races-20260720-1"></script>
-  <script src="app.js?v=result-sync-20260729-4"></script>
+    <script src="forecast-policy.js?v=five-methods-20260729-1"></script>
+    <script src="agent-forecast-engine.js?v=five-methods-20260729-1"></script>
+    <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script src="app.js?v=five-methods-20260729-1"></script>
   </body>
 </html>

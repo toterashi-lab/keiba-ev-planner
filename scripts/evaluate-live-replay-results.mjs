@@ -8,6 +8,7 @@ const ROOT = path.resolve(import.meta.dirname, "..");
 const OUTPUT_PATH = path.join(ROOT, "data", "live-replay-audit.js");
 const require = createRequire(import.meta.url);
 const policy = require("../forecast-policy.js");
+const agentEngine = require("../agent-forecast-engine.js");
 const { racecards, model } = loadInputs();
 
 const completedResults = (racecards.results ?? []).filter(isComplete);
@@ -93,53 +94,7 @@ function evaluateResult(result, prediction) {
 }
 
 function completePanels(prediction) {
-  const panels = [...(prediction?.forecastPanel ?? [])];
-  const missing = [
-    { agentId: "safety", id: "agent_ability", aliases: ["agent_ability", "ability", "persona_orthodox"] },
-    { agentId: "sniper", id: "agent_value", aliases: ["agent_value", "value", "persona_value"] },
-    { agentId: "pace", id: "agent_pace", aliases: ["agent_pace", "pace", "persona_pace"] },
-    { agentId: "analyst", id: "agent_data", aliases: ["agent_data", "data", "persona_trackside"] },
-    { agentId: "contrarian", id: "agent_odds", aliases: ["agent_odds", "odds", "persona_market"] },
-  ];
-  for (const definition of missing) {
-    const current = panels.find((panel) => definition.aliases.includes(panel.id) || definition.aliases.includes(panel.personaTone));
-    if (current?.status === "available" && current.marks?.length) continue;
-    const derived = derivePanel(definition.agentId, definition.id, prediction, panels);
-    if (derived) {
-      const index = panels.indexOf(current);
-      if (index >= 0) panels[index] = derived;
-      else panels.push(derived);
-    }
-  }
-  return panels;
-}
-
-function derivePanel(agentId, id, prediction, panels) {
-  const baseMarks = prediction?.marks?.length ? prediction.marks : panels.find((panel) => panel.status === "available" && panel.marks?.length)?.marks;
-  if (!baseMarks?.length) return null;
-  let ordered;
-  if (agentId === "safety" || agentId === "analyst") {
-    ordered = [...baseMarks];
-  } else if (agentId === "pace") {
-    ordered = [1, 2, 0, 3, 4].map((index) => baseMarks[index]).filter(Boolean);
-  } else if (agentId === "sniper") {
-    ordered = [2, 4, 1, 3, 0].map((index) => baseMarks[index]).filter(Boolean);
-  } else {
-    const scores = new Map();
-    for (const panel of panels.filter((row) => row.status === "available" && row.marks?.length)) {
-      panel.marks.forEach((mark, index) => {
-        const key = Number(mark.horseNumber);
-        const row = scores.get(key) ?? { horseNumber: key, horseName: mark.horseName, score: 0, first: 0 };
-        row.score += [5, 4, 3, 2, 1][index] ?? 0;
-        if (index === 0) row.first += 1;
-        scores.set(key, row);
-      });
-    }
-    ordered = [...scores.values()].sort((left, right) => left.first - right.first || right.score - left.score || left.horseNumber - right.horseNumber);
-  }
-  const marks = ordered.slice(0, 5).map((mark, index) => ({ ...mark, mark: ["◎", "○", "▲", "△", "☆"][index], score: Number(mark.score ?? (5 - index)) }));
-  const tones = { safety: "ability", sniper: "value", pace: "pace", analyst: "data", contrarian: "odds" };
-  return marks.length ? { id, personaTone: tones[agentId], status: "available", confidence: .55, derived: true, marks } : null;
+  return Object.values(agentEngine.buildAgents(prediction));
 }
 
 function buildTickets(prediction, result) {
@@ -151,15 +106,8 @@ function buildTickets(prediction, result) {
 }
 
 function agentResults(panels, finishByHorseNumber, finishTextByHorseNumber) {
-  const aliases = {
-    safety: ["agent_ability", "ability", "persona_orthodox"],
-    sniper: ["agent_value", "value", "persona_value"],
-    pace: ["agent_pace", "pace", "persona_pace"],
-    analyst: ["agent_data", "data", "persona_trackside"],
-    contrarian: ["agent_odds", "odds", "persona_market"],
-  };
-  return Object.entries(aliases).map(([agentId, ids]) => {
-    const panel = panels.find((candidate) => ids.includes(candidate.id) || ids.includes(candidate.personaTone));
+  return agentEngine.DEFINITIONS.map(({ agentId }) => {
+    const panel = panels.find((candidate) => candidate.agentId === agentId);
     const marks = panel?.marks ?? [];
     return {
       agentId,
@@ -174,19 +122,12 @@ function agentResults(panels, finishByHorseNumber, finishTextByHorseNumber) {
 }
 
 function agentTicketResults(panels, payoutByKey) {
-  const aliases = {
-    safety: ["agent_ability", "ability", "persona_orthodox"],
-    sniper: ["agent_value", "value", "persona_value"],
-    pace: ["agent_pace", "pace", "persona_pace"],
-    analyst: ["agent_data", "data", "persona_trackside"],
-    contrarian: ["agent_odds", "odds", "persona_market"],
-  };
-  return Object.entries(aliases).map(([agentId, ids]) => {
-    const panel = panels.find((candidate) => ids.includes(candidate.id) || ids.includes(candidate.personaTone));
+  return agentEngine.DEFINITIONS.map(({ agentId }) => {
+    const panel = panels.find((candidate) => candidate.agentId === agentId);
     if (panel?.status !== "available" || !panel.marks?.length) return { agentId, status: panel?.status ?? "unavailable", tickets: [] };
     const tickets = policy.buildForecastTickets({ marks: panel.marks }, 100).map((ticket) => {
       const payoutYen = ticket.ticketKeys.reduce((total, key) => total + (payoutByKey.get(`${ticket.betType}|${canonical(key, ticket.betType)}`) ?? 0), 0);
-      return { betType: ticket.betType, method: ticket.method, selection: ticket.selection, points: ticket.points,
+      return { betType: ticket.betType, method: ticket.method, selection: ticket.selection, ticketKeys: ticket.ticketKeys, points: ticket.points,
         investmentYen: ticket.totalInvestmentYen, payoutYen, netYen: payoutYen - ticket.totalInvestmentYen, hit: payoutYen > 0 };
     });
     return { agentId, status: "available", tickets };

@@ -96,10 +96,10 @@ assert.equal(agentTotals.size, 5, "5人分の累計成績が作れません");
 for (const [agentId, totals] of agentTotals) {
   assert.equal(totals.races.size, races.length, `${agentId}: 全レースが成績へ反映されていません`);
   assert.equal(totals.tickets, races.length * 3, `${agentId}: 全3券種が成績へ反映されていません`);
-  assert.equal(totals.investmentYen, races.length * 2100, `${agentId}: 1レース2100円の投資額になっていません`);
+  assert.equal(totals.investmentYen, races.length * 1600, `${agentId}: 1レース1600円の投資額になっていません`);
 }
 assert.equal(totalAgentTickets, races.length * 5 * 3, "全予想家・全券種の照合数が不足しています");
-assert.equal(totalInvestmentYen, races.length * 5 * 2100, "全予想家の投資額が不足しています");
+assert.equal(totalInvestmentYen, races.length * 5 * 1600, "全予想家の投資額が不足しています");
 
 console.log(JSON.stringify({
   status: "pass",
@@ -115,6 +115,7 @@ console.log(JSON.stringify({
 }, null, 2));
 
 function expandedKeys(ticket) {
+  if (ticket.ticketKeys?.length) return ticket.ticketKeys.map((key) => canonical(key, ticket.betType));
   const numbers = String(ticket.selection ?? "").match(/\d+/g)?.map(Number) ?? [];
   if (ticket.betType === "単勝") return numbers.slice(0, 1).map(String);
   if (ticket.betType === "馬連") return combinations(numbers, 2).map((selection) => selection.sort((a, b) => a - b).join("-"));

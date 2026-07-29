@@ -10,15 +10,17 @@
     if (!marks.length) return [];
     const numbers = marks.slice(0, 5).map((row) => Number(row.horseNumber));
     const [first] = numbers;
+    const quinellaSelections = rankedQuinellaSelections(marks.slice(0, 5), 5);
     const definitions = [
       ["単勝", [first], [[first]]],
-      ["馬連", numbers, combinations(numbers, 2)],
+      ["馬連", numbers, quinellaSelections],
       ["3連複", numbers, combinations(numbers, 3)],
     ].filter(([, , selections]) => selections.length);
     return definitions.map(([betType, horses, selections]) => ({
       betType,
-      method: betType === "単勝" ? "1点" : "BOX",
-      selection: betType === "単勝" ? ticketKey(selections[0]) : `${horses.join("-")} BOX`,
+      method: betType === "単勝" ? "1点" : betType === "馬連" ? "期待順5点" : "5頭BOX",
+      selection: betType === "単勝" ? ticketKey(selections[0]) : betType === "馬連"
+        ? selections.map(ticketKey).join(" / ") : `${horses.join("-")} BOX`,
       ticketKeys: selections.map(ticketKey),
       points: selections.length,
       totalInvestmentYen: selections.length * unitStakeYen,
@@ -26,8 +28,31 @@
       forecastOnly: true,
       recommendationEligible: false,
       calculationMode: "ability_forecast_without_market_ev",
-      comment: betType === "単勝" ? "総合◎を100円で購入する共通予想です。" : `総合印の上位${horses.length}頭による${betType}BOXです。各点100円で購入します。`,
+      expectationStatus: betType === "馬連" ? "agent_score_without_quinella_odds" : "forecast_score",
+      comment: betType === "単勝" ? "1番目の馬を100円で選びます。" : betType === "馬連"
+        ? "発走前の馬連オッズがないため、エージェントの独立スコアで上位5組を選びます。金額期待値ではありません。"
+        : `上位${horses.length}頭の3連複BOXです。各点100円で購入します。`,
     }));
+  }
+
+  function rankedQuinellaSelections(marks, limit = 5) {
+    const maximum = Math.max(...marks.map((mark, index) => markStrength(mark, index)), 0);
+    return combinations(marks.map((mark) => Number(mark.horseNumber)), 2).map((selection) => {
+      const leftIndex = marks.findIndex((mark) => Number(mark.horseNumber) === selection[0]);
+      const rightIndex = marks.findIndex((mark) => Number(mark.horseNumber) === selection[1]);
+      const left = markStrength(marks[leftIndex], leftIndex) / (maximum || 1);
+      const right = markStrength(marks[rightIndex], rightIndex) / (maximum || 1);
+      return { selection, score: left * right + .08 * (left + right) };
+    }).sort((left, right) => right.score - left.score || ticketKey(left.selection).localeCompare(ticketKey(right.selection)))
+      .slice(0, limit).map((row) => row.selection);
+  }
+
+  function markStrength(mark, index) {
+    const score = Number(mark?.score);
+    if (Number.isFinite(score) && score > 0) return score;
+    const probability = Number(mark?.probability);
+    if (Number.isFinite(probability) && probability > 0) return probability;
+    return Math.max(1, 5 - Number(index || 0));
   }
 
   function volatilityProfile({ race, prediction, consensus, candidates = [] }) {
@@ -89,5 +114,5 @@
   }
   function clamp(value) { return Math.max(0, Math.min(1, Number(value) || 0)); }
 
-  return { BET_TYPES, buildForecastTickets, volatilityProfile, primaryForecastTicket };
+  return { BET_TYPES, buildForecastTickets, rankedQuinellaSelections, volatilityProfile, primaryForecastTicket };
 }));

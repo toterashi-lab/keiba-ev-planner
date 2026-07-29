@@ -345,6 +345,9 @@ main { width: min(100%, var(--content)); min-height: calc(100vh - 160px); margin
 .toast.show { opacity: 1; transform: translateY(0); }
 .mobile-nav { display: none; }
 footer { padding: 22px 20px 34px; border-top: 1px solid var(--line); color: var(--muted); text-align: center; font-size: 12px; }
+.footer-about { width: min(100%, 720px); margin: 0 auto 12px; }
+.footer-about strong { color: var(--text); font-size: 13px; }
+.footer-about p, footer > p { margin: 7px auto 0; line-height: 1.75; }
 
 /* Simple visual layer for readers of every age. */
 body { background: var(--bg); font-size: 15px; line-height: 1.55; }
@@ -429,16 +432,31 @@ body { background: var(--bg); font-size: 15px; line-height: 1.55; }
 .bet-section-head h2 { margin: 2px 0 0; font-size: 21px; }
 .bet-section-head p { font-size: 12px; }
 .bet-card { padding: 12px; background: var(--surface); }
-.digital-ticket { overflow: hidden; border: 2px dashed #2b7651; border-radius: 10px; background: #fffdf2; color: #15241a; box-shadow: 0 4px 12px rgba(26, 66, 45, .1); }
-.digital-ticket header { padding: 12px 14px; display: block; border: 0; border-bottom: 1px solid #cdd9cf; background: #e8f5ec; }
+.digital-ticket { position: relative; overflow: hidden; border: 2px solid #337052; border-radius: 5px; background: #fffef2; color: #15241a; box-shadow: 0 6px 16px rgba(26, 66, 45, .13), inset 0 0 0 3px #eef3df; }
+.digital-ticket::before, .digital-ticket::after { position: absolute; z-index: 2; top: 50%; width: 16px; height: 16px; border: 1px solid #337052; border-radius: 50%; background: var(--surface); content: ""; transform: translateY(-50%); }
+.digital-ticket::before { left: -10px; }
+.digital-ticket::after { right: -10px; }
+.digital-ticket header { padding: 11px 14px 10px; display: block; border: 0; border-bottom: 2px dotted #86a58d; background: #dcebd8; }
 .digital-ticket header span, .digital-ticket header strong { display: block; }
-.digital-ticket header span { color: #45624f; font-size: 11px; }
+.digital-ticket header span { color: #365b45; font-size: 11px; font-weight: 900; }
+.digital-ticket header span em { margin-left: 5px; padding: 1px 4px; border: 1px solid currentColor; font-size: 9px; font-style: normal; }
+.digital-ticket header small { display: block; margin-top: 3px; color: #587062; font-size: 10px; }
 .digital-ticket header strong { margin-top: 2px; font-size: 17px; }
 .ticket-numbers { padding: 16px 14px; }
 .ticket-numbers span { display: block; color: #587062; font-size: 11px; }
-.ticket-numbers b { display: block; margin-top: 4px; overflow-wrap: anywhere; color: #102d1d; font-size: 24px; line-height: 1.35; }
+.ticket-combination-list { margin: 9px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px 12px; list-style: none; }
+.ticket-combination-list li { min-width: 0; padding: 5px 7px; display: grid; grid-template-columns: 20px 1fr auto; gap: 6px; align-items: center; border-bottom: 1px dotted #a9b9a2; }
+.ticket-combination-list i { width: 19px; height: 19px; display: grid; place-items: center; border: 1px solid #6f8c76; border-radius: 50%; color: #476653; font-size: 9px; font-style: normal; font-weight: 900; }
+.ticket-combination-list b { overflow-wrap: anywhere; color: #102d1d; font-family: ui-monospace, "Cascadia Mono", monospace; font-size: 17px; line-height: 1.25; letter-spacing: 0; }
+.ticket-combination-list small { color: #476653; font-size: 10px; }
 .ticket-cost { padding: 10px 14px; display: grid; grid-template-columns: auto auto 1fr; gap: 10px; align-items: center; border-top: 1px solid #cdd9cf; background: #f4f7f4; font-size: 12px; }
 .ticket-cost strong { justify-self: end; font-size: 15px; }
+.ticket-barcode { width: 72%; height: 12px; margin: 6px auto 10px; opacity: .58; background: repeating-linear-gradient(90deg, #183627 0 1px, transparent 1px 3px, #183627 3px 5px, transparent 5px 7px); }
+.ticket-result-stamp { position: absolute; z-index: 4; top: 54px; right: 13px; padding: 5px 9px; border: 3px double currentColor; background: rgba(255, 254, 242, .9); font-size: 16px; font-weight: 1000; transform: rotate(-8deg); }
+.ticket-result-stamp.hit { color: #b42318; }
+.ticket-result-stamp.miss { color: #59636d; }
+.ticket-settlement { padding: 9px 14px; display: flex; justify-content: space-between; border-top: 1px dotted #86a58d; background: #fffbed; font-size: 12px; }
+.ticket-settlement strong { font-size: 15px; }
 .ticket-help { min-height: 0 !important; margin: 10px 0 !important; font-size: 12px !important; }
 .ticket-result { min-height: 0 !important; margin: 10px 0 0 !important; font-size: 15px !important; font-weight: 900; }
 .copy-button { min-height: 44px; width: 100%; font-size: 13px; }
@@ -472,7 +490,8 @@ body { background: var(--bg); font-size: 15px; line-height: 1.55; }
   .agent-ticket-group { padding: 11px; }
   .home-agent-tickets > div { grid-template-columns: 1fr; }
   .digital-ticket { border-radius: 8px; }
-  .ticket-numbers b { font-size: 22px; }
+  .ticket-combination-list { grid-template-columns: 1fr; }
+  .ticket-combination-list b { font-size: 16px; }
   .ticket-cost { grid-template-columns: 1fr 1fr; }
   .ticket-cost strong { grid-column: 1 / -1; justify-self: stretch; padding-top: 8px; border-top: 1px solid #cdd9cf; }
 }

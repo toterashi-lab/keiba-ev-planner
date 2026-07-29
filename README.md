@@ -4,7 +4,7 @@ JRA公式データを発走前スナップショットとして保存し、5人�
 
 ## 収録範囲
 
-- 画面の参考データ: 2026年7月11日・12日の72レース
+- 画面の参考データ: 2026年7月18日・19日の72レース
 - 長期DB: 1996年1月から再取得中。正確な進捗は`node scripts/jra-free-db.mjs status`で確認する。
 - 正本データ: 公開リポジトリに含めないローカルSQLiteと原本HTML
 
@@ -15,6 +15,13 @@ JRA公式データを発走前スナップショットとして保存し、5人�
 
 期待値候補は、全馬オッズ履歴、確率校正、時系列検証、オッズ鮮度、ドローダウンの全ゲートが合格するまで購入適格として扱いません。利益や回収率100%超を保証しません。
 
+## 公開サイト
+
+- 本番URL: https://umayomi-keiba.vercel.app/
+- 一般閲覧: ログイン不要
+- PV・訪問者・参照元: Vercel Web Analytics（プロジェクト所有者だけが管理画面で閲覧）
+- SEO: canonical、OGP、JSON-LD、`robots.txt`、`sitemap.xml`、Web App Manifestを収録
+
 ## 5エージェント
 
 - 堅実派 セーフティ
@@ -24,5 +31,7 @@ JRA公式データを発走前スナップショットとして保存し、5人�
 - 逆張り派 コントラリアン
 
 予測、買い目、オッズ、根拠は公開時点で追記保存し、結果確定後にだけ精算・採点します。詳細は`docs/agent-system-audit.md`、`docs/agent-architecture.md`、`docs/prediction-calculation.md`、`docs/learning-methodology.md`、`docs/data-leak-prevention.md`を参照してください。
+
+各エージェントは共通データを使いますが、`agent-forecast-engine.js`で別々の特徴量配分と順位式を持ちます。画面の買い目は各人の印と連動し、単勝1点、馬連の予想スコア上位5点、3連複5頭BOXの10点を各100円で表示します。発走前の馬連オッズがない開催では、馬連を金額期待値とは表示しません。
 
 GitHub Pagesは `main` ブランチ直下を公開します。

@@ -16,6 +16,8 @@ assert.ok(records.every((record) => record.tickets?.length === 3));
 assert.ok(records.every((record) => record.tickets.map((ticket) => ticket.betType).join("|") === "単勝|馬連|3連複"));
 assert.ok(records.every((record) => record.tickets.every((ticket) => ticket.unitStakeYen === 100)));
 assert.ok(records.every((record) => record.tickets.every((ticket) => ticket.investmentYen === ticket.points * 100)));
+assert.ok(records.every((record) => record.tickets.map((ticket) => ticket.points).join("|") === "1|5|10"));
+assert.ok(records.every((record) => record.tickets.map((ticket) => ticket.method).join("|") === "1点|期待順5点|5頭BOX"));
 assert.ok(records.every((record) => record.agentTickets?.filter((group) => group.status === "available").every((group) => group.tickets.length === 3)));
 assert.ok(records.every((record) => record.agentTickets?.filter((group) => group.status === "available").length === 5), "全レースで5人分の買い目が必要です");
 assert.ok(records.every((record) => record.agents?.length === 5 && record.agents.every((agent) =>
