@@ -19,9 +19,9 @@
     return definitions.map(([betType, horses, selections]) => ({
       betType,
       method: betType === "単勝" ? "1点" : betType === "馬連" ? "期待順5点" : "5頭BOX",
-      selection: betType === "単勝" ? ticketKey(selections[0]) : betType === "馬連"
-        ? selections.map(ticketKey).join(" / ") : `${horses.join("-")} BOX`,
-      ticketKeys: selections.map(ticketKey),
+      selection: betType === "単勝" ? ticketKey(selections[0], betType) : betType === "馬連"
+        ? selections.map((selection) => ticketKey(selection, betType)).join(" / ") : `${[...horses].sort((left, right) => left - right).join("-")} BOX`,
+      ticketKeys: selections.map((selection) => ticketKey(selection, betType)),
       points: selections.length,
       totalInvestmentYen: selections.length * unitStakeYen,
       status: "forecast",
@@ -43,7 +43,7 @@
       const left = markStrength(marks[leftIndex], leftIndex) / (maximum || 1);
       const right = markStrength(marks[rightIndex], rightIndex) / (maximum || 1);
       return { selection, score: left * right + .08 * (left + right) };
-    }).sort((left, right) => right.score - left.score || ticketKey(left.selection).localeCompare(ticketKey(right.selection)))
+    }).sort((left, right) => right.score - left.score || ticketKey(left.selection, "馬連").localeCompare(ticketKey(right.selection, "馬連")))
       .slice(0, limit).map((row) => row.selection);
   }
 
@@ -103,7 +103,11 @@
     visit(0, []);
     return output;
   }
-  function ticketKey(selection) { return selection.join("-"); }
+  function ticketKey(selection, betType) {
+    const values = [...selection];
+    if (["馬連", "3連複"].includes(betType)) values.sort((left, right) => left - right);
+    return values.join("-");
+  }
   function fieldSizeFromComment(comment) { return Number(String(comment ?? "").match(/全(\d+)頭/)?.[1]) || 0; }
   function normalizedEntropy(values) {
     if (values.length < 2) return 0;

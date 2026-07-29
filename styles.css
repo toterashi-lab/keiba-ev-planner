@@ -432,32 +432,53 @@ body { background: var(--bg); font-size: 15px; line-height: 1.55; }
 .bet-section-head h2 { margin: 2px 0 0; font-size: 21px; }
 .bet-section-head p { font-size: 12px; }
 .bet-card { padding: 12px; background: var(--surface); }
-.digital-ticket { position: relative; overflow: hidden; border: 2px solid #337052; border-radius: 5px; background: #fffef2; color: #15241a; box-shadow: 0 6px 16px rgba(26, 66, 45, .13), inset 0 0 0 3px #eef3df; }
-.digital-ticket::before, .digital-ticket::after { position: absolute; z-index: 2; top: 50%; width: 16px; height: 16px; border: 1px solid #337052; border-radius: 50%; background: var(--surface); content: ""; transform: translateY(-50%); }
-.digital-ticket::before { left: -10px; }
-.digital-ticket::after { right: -10px; }
-.digital-ticket header { padding: 11px 14px 10px; display: block; border: 0; border-bottom: 2px dotted #86a58d; background: #dcebd8; }
-.digital-ticket header span, .digital-ticket header strong { display: block; }
-.digital-ticket header span { color: #365b45; font-size: 11px; font-weight: 900; }
-.digital-ticket header span em { margin-left: 5px; padding: 1px 4px; border: 1px solid currentColor; font-size: 9px; font-style: normal; }
-.digital-ticket header small { display: block; margin-top: 3px; color: #587062; font-size: 10px; }
-.digital-ticket header strong { margin-top: 2px; font-size: 17px; }
-.ticket-numbers { padding: 16px 14px; }
-.ticket-numbers span { display: block; color: #587062; font-size: 11px; }
-.ticket-combination-list { margin: 9px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px 12px; list-style: none; }
-.ticket-combination-list li { min-width: 0; padding: 5px 7px; display: grid; grid-template-columns: 20px 1fr auto; gap: 6px; align-items: center; border-bottom: 1px dotted #a9b9a2; }
-.ticket-combination-list i { width: 19px; height: 19px; display: grid; place-items: center; border: 1px solid #6f8c76; border-radius: 50%; color: #476653; font-size: 9px; font-style: normal; font-weight: 900; }
-.ticket-combination-list b { overflow-wrap: anywhere; color: #102d1d; font-family: ui-monospace, "Cascadia Mono", monospace; font-size: 17px; line-height: 1.25; letter-spacing: 0; }
-.ticket-combination-list small { color: #476653; font-size: 10px; }
-.ticket-cost { padding: 10px 14px; display: grid; grid-template-columns: auto auto 1fr; gap: 10px; align-items: center; border-top: 1px solid #cdd9cf; background: #f4f7f4; font-size: 12px; }
-.ticket-cost strong { justify-self: end; font-size: 15px; }
-.ticket-barcode { width: 72%; height: 12px; margin: 6px auto 10px; opacity: .58; background: repeating-linear-gradient(90deg, #183627 0 1px, transparent 1px 3px, #183627 3px 5px, transparent 5px 7px); }
-.ticket-result-stamp { position: absolute; z-index: 4; top: 54px; right: 13px; padding: 5px 9px; border: 3px double currentColor; background: rgba(255, 254, 242, .9); font-size: 16px; font-weight: 1000; transform: rotate(-8deg); }
+.digital-ticket { position: relative; min-height: 226px; overflow: hidden; display: grid; grid-template-columns: minmax(88px, 27%) minmax(56px, 14%) 1fr; border: 2px solid #111; border-radius: 2px; background: #fff; color: #090909; box-shadow: 0 5px 14px rgba(0, 0, 0, .13); font-family: "Yu Gothic UI", Meiryo, sans-serif; }
+.ticket-security-stripe { position: absolute; z-index: 0; inset: 0 auto 0 21%; width: 12%; background: #b9e4d3; }
+.ticket-stub, .ticket-type-panel, .ticket-main { position: relative; z-index: 1; min-width: 0; }
+.ticket-stub { padding: 13px 9px 9px; display: flex; flex-direction: column; align-items: flex-start; }
+.ticket-stub > small { font-size: 9px; font-weight: 800; white-space: nowrap; }
+.ticket-stub > strong { margin-top: 3px; max-width: 100%; overflow-wrap: anywhere; font-size: 18px; line-height: 1.05; }
+.ticket-race-number { margin-top: 8px; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+.ticket-race-number b { min-width: 43px; padding: 2px 5px; display: grid; place-items: center; background: #111; color: #fff; font-family: ui-monospace, "Cascadia Mono", monospace; font-size: 27px; line-height: 1.05; }
+.ticket-race-number span { font-size: 12px; font-weight: 900; }
+.ticket-checks { margin: auto 0 5px; display: flex; gap: 6px; }
+.ticket-checks i { width: 30px; height: 30px; border: 2px solid #111; background: repeating-conic-gradient(#111 0 25%, transparent 0 50%) 0 0 / 8px 8px; }
+.ticket-checks i:last-child { background-position: 4px 0; }
+.ticket-serial { max-width: 100%; overflow: hidden; font-family: ui-monospace, "Cascadia Mono", monospace; font-size: 8px; white-space: nowrap; }
+.ticket-type-panel { margin: 10px 5px; padding: 4px; display: grid; grid-template-rows: auto 1fr 1fr auto; place-items: center; border: 2px solid #111; background: rgba(255, 255, 255, .78); }
+.ticket-type-panel small, .ticket-type-panel span { font-family: ui-monospace, "Cascadia Mono", monospace; font-size: 7px; font-weight: 900; }
+.ticket-type-panel b, .ticket-type-panel strong { font-size: 29px; line-height: 1; }
+.ticket-main { min-height: 222px; display: flex; flex-direction: column; border-left: 1px solid #111; }
+.bet-card .ticket-print-head { padding: 9px 11px 6px; display: block; border: 0; border-bottom: 1px solid #111; background: transparent; }
+.bet-card .ticket-print-head span, .bet-card .ticket-print-head strong { display: block; }
+.bet-card .ticket-print-head span { color: #264f3f; font-size: 9px; font-weight: 900; }
+.bet-card .ticket-print-head span em { margin-left: 4px; padding: 1px 3px; border: 1px solid currentColor; font-size: 7px; font-style: normal; }
+.bet-card .ticket-print-head strong { margin-top: 2px; display: inline-block; font-size: 18px; }
+.bet-card .ticket-print-head > small { margin-left: 5px; color: #42574e; font-size: 8px; white-space: nowrap; }
+.ticket-numbers { flex: 1; padding: 8px 11px 5px; }
+.ticket-numbers > span { display: block; color: #42574e; font-size: 8px; }
+.bet-card .ticket-combination-list { margin: 5px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px 8px; list-style: none; }
+.bet-card .ticket-combination-list li { min-width: 0; min-height: 23px; padding: 2px 3px; display: grid; grid-template-columns: 16px 1fr auto; gap: 4px; align-items: center; border-bottom: 1px dotted #8a958f; font-size: inherit; }
+.bet-card .ticket-combination-list i { width: 15px; height: 15px; display: grid; place-items: center; border: 1px solid #52675c; border-radius: 50%; color: #243b30; font-size: 7px; font-style: normal; font-weight: 900; }
+.bet-card .ticket-combination-list b { overflow-wrap: normal; font-family: ui-monospace, "Cascadia Mono", monospace; font-size: 15px; line-height: 1.1; letter-spacing: 0; white-space: nowrap; }
+.bet-card .ticket-combination-list small { color: #3d4d45; font-size: 8px; }
+.bet-card .ticket-combination-list:not(.is-dense) li:first-child:last-child { grid-column: 1 / -1; min-height: 48px; grid-template-columns: 1fr; }
+.bet-card .ticket-combination-list:not(.is-dense) li:first-child:last-child i,
+.bet-card .ticket-combination-list:not(.is-dense) li:first-child:last-child small { display: none; }
+.bet-card .ticket-combination-list:not(.is-dense) li:first-child:last-child b:not(.win-selection) { font-size: 29px; }
+.win-selection { display: flex; align-items: center; gap: 6px; font-family: "Yu Gothic UI", Meiryo, sans-serif !important; }
+.win-selection span { flex: 0 0 auto; font-family: ui-monospace, "Cascadia Mono", monospace; font-size: 28px; }
+.win-selection em { min-width: 0; overflow-wrap: anywhere; font-size: 13px; font-style: normal; line-height: 1.25; }
+.bet-card .ticket-cost { padding: 6px 11px; display: grid; grid-template-columns: auto auto 1fr; gap: 7px; align-items: center; border-top: 1px solid #111; background: transparent; font-size: 9px; }
+.bet-card .ticket-cost strong { justify-self: end; font-size: 17px; }
+.ticket-barcode { width: 76%; height: 8px; margin: 3px auto 6px; opacity: .72; background: repeating-linear-gradient(90deg, #111 0 1px, transparent 1px 3px, #111 3px 5px, transparent 5px 7px); }
+.ticket-result-stamp { position: absolute; z-index: 4; top: 42px; right: 9px; padding: 4px 8px; border: 3px double currentColor; background: rgba(255, 255, 255, .88); font-size: 15px; font-weight: 1000; transform: rotate(-8deg); }
 .ticket-result-stamp.hit { color: #b42318; }
 .ticket-result-stamp.miss { color: #59636d; }
-.ticket-settlement { padding: 9px 14px; display: flex; justify-content: space-between; border-top: 1px dotted #86a58d; background: #fffbed; font-size: 12px; }
-.ticket-settlement strong { font-size: 15px; }
-.ticket-help { min-height: 0 !important; margin: 10px 0 !important; font-size: 12px !important; }
+.ticket-settlement { padding: 4px 11px; display: flex; justify-content: space-between; border-top: 1px dotted #59665f; background: #fff; font-size: 9px; }
+.ticket-settlement strong { font-size: 13px; }
+.ticket-help { min-height: 0 !important; margin: 10px 0 !important; color: var(--muted); font-size: 12px !important; line-height: 1.65; }
+.ticket-help b { color: var(--text); }
 .ticket-result { min-height: 0 !important; margin: 10px 0 0 !important; font-size: 15px !important; font-weight: 900; }
 .copy-button { min-height: 44px; width: 100%; font-size: 13px; }
 .runner-details { margin-top: 14px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
@@ -488,12 +509,34 @@ body { background: var(--bg); font-size: 15px; line-height: 1.55; }
   .agent-profile-body h2 { font-size: 18px; }
   .agent-profile-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .agent-ticket-group { padding: 11px; }
+  .agent-ticket-group { padding-inline: 5px; }
+  .bet-card { padding-inline: 4px; }
   .home-agent-tickets > div { grid-template-columns: 1fr; }
-  .digital-ticket { border-radius: 8px; }
-  .ticket-combination-list { grid-template-columns: 1fr; }
-  .ticket-combination-list b { font-size: 16px; }
-  .ticket-cost { grid-template-columns: 1fr 1fr; }
-  .ticket-cost strong { grid-column: 1 / -1; justify-self: stretch; padding-top: 8px; border-top: 1px solid #cdd9cf; }
+  .digital-ticket { min-height: 214px; grid-template-columns: minmax(75px, 27%) minmax(49px, 15%) 1fr; }
+  .ticket-stub { padding: 10px 4px 7px; }
+  .ticket-stub > small { font-size: 7px; }
+  .ticket-stub > strong { font-size: 14px; }
+  .ticket-race-number b { min-width: 36px; font-size: 22px; }
+  .ticket-race-number span { font-size: 9px; }
+  .ticket-checks i { width: 25px; height: 25px; background-size: 7px 7px; }
+  .ticket-type-panel { margin: 8px 3px; }
+  .ticket-type-panel b, .ticket-type-panel strong { font-size: 24px; }
+  .ticket-main { min-height: 210px; }
+  .bet-card .ticket-print-head { padding-inline: 8px; }
+  .bet-card .ticket-print-head strong { font-size: 15px; }
+  .bet-card .ticket-print-head > small { margin-left: 3px; font-size: 7px; }
+  .ticket-numbers { padding-inline: 8px; }
+  .bet-card .ticket-combination-list { gap: 0 4px; }
+  .bet-card .ticket-combination-list li { grid-template-columns: 14px 1fr; min-height: 21px; gap: 3px; }
+  .bet-card .ticket-combination-list li small { display: none; }
+  .bet-card .ticket-combination-list b { font-size: 13px; }
+  .bet-card .ticket-combination-list.is-dense b { font-size: 10px; }
+  .bet-card .ticket-combination-list:not(.is-dense) li:first-child:last-child b:not(.win-selection) { font-size: 24px; }
+  .win-selection { gap: 4px; }
+  .win-selection span { font-size: 24px; }
+  .win-selection em { font-size: 11px; }
+  .bet-card .ticket-cost { padding: 6px 8px; }
+  .bet-card .ticket-cost strong { font-size: 14px; }
 }
 
 @media (max-width: 900px) {

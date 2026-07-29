@@ -385,7 +385,7 @@ function agentTicketGroupHtml(group) {
   const persona = agentPersona(group.definition);
   const cards = group.tickets.map((ticket) => {
     const copyText = `${ticket.betType} ${ticket.method}\n${ticket.selection}\n${ticket.points}点 x ${unitStake}円\n合計${ticket.totalInvestmentYen}円`;
-    return `<article class="bet-card">${paperTicketHtml(ticket, group.prediction)}<p class="ticket-help">${escapeHtml(persona.name)}が選んだ馬から作りました。</p><button type="button" class="copy-button" data-copy="${escapeHtml(copyText)}">この買い目をコピー</button></article>`;
+    return `<article class="bet-card">${paperTicketHtml(ticket, group.prediction, false, group.agent.marks)}<p class="ticket-help"><b>選定理由：</b>${escapeHtml(ticketReason(group.agent, ticket))}</p><button type="button" class="copy-button" data-copy="${escapeHtml(copyText)}">この買い目をコピー</button></article>`;
   }).join("");
   const total = group.tickets.reduce((sum, ticket) => sum + ticket.totalInvestmentYen, 0);
   return `<section class="agent-ticket-group"><header><img class="agent-card-avatar" src="${agentImagePath(group.definition.id)}" alt="" /><div><h3>${escapeHtml(persona.name)}</h3><p>${escapeHtml(persona.type)}</p></div><strong>この予想家の合計 ${yen(total)}</strong></header><div class="bet-card-list">${cards}</div></section>`;
@@ -397,11 +397,38 @@ function agentTicketGroups(prediction) {
     .map((group) => ({ ...group, prediction, tickets: forecastPolicy.buildForecastTickets({ marks: group.agent.marks }, unitStake).map((ticket) => ({ ...ticket, comment: `${agentPersona(group.definition).name}の印から作成した${ticket.betType}${ticket.method}です。` })) }));
 }
 
-function paperTicketHtml(ticket, prediction, resultMode = false) {
+function paperTicketHtml(ticket, prediction, resultMode = false, agentMarks = []) {
   const keys = ticket.ticketKeys?.length ? ticket.ticketKeys : String(ticket.selection ?? "").split("/").map((row) => row.trim()).filter(Boolean);
   const combinationLabel = ticket.betType === "馬連" ? "期待順（予想スコア）" : ticket.betType === "3連複" ? "5頭BOX" : "組み合わせ";
   const resultStamp = resultMode ? `<span class="ticket-result-stamp ${ticket.hit ? "hit" : "miss"}">${ticket.hit ? "的中" : "不的中"}</span>` : "";
-  return `<div class="digital-ticket paper-ticket ${resultMode ? "paper-ticket--result" : ""}">${resultStamp}<header><span>ウマヨミ予想券 <em>参考用</em></span><small>${escapeHtml(formatDate(prediction?.date))}・${escapeHtml(prediction?.meetingName ?? "")} ${number(prediction?.raceNo)}R</small><strong>${escapeHtml(ticket.betType)} ${escapeHtml(ticket.method)}</strong></header><div class="ticket-numbers"><span>${combinationLabel}</span><ol class="ticket-combination-list">${keys.map((key, index) => `<li><i>${index + 1}</i><b>${escapeHtml(key)}</b><small>${yen(unitStake)}</small></li>`).join("")}</ol></div><div class="ticket-cost"><span>1点 ${yen(unitStake)}</span><span>${ticket.points}点</span><strong>合計 ${yen(ticket.totalInvestmentYen ?? ticket.investmentYen)}</strong></div>${resultMode ? `<div class="ticket-settlement"><span>払戻 ${yen(ticket.payoutYen)}</span><strong>${signedYen(ticket.netYen)}</strong></div>` : ""}<div class="ticket-barcode" aria-hidden="true"></div></div>`;
+  const typeParts = ({ 単勝: ["単", "勝"], 馬連: ["馬", "連"], "3連複": ["3", "複"] })[ticket.betType] ?? [ticket.betType, "券"];
+  const meeting = ticketMeetingDetails(prediction);
+  const horseNames = new Map([...(prediction?.marks ?? []), ...(agentMarks ?? [])].map((mark) => [Number(mark.horseNumber), mark.horseName]));
+  const dateDigits = String(prediction?.date ?? "").replace(/\D/g, "").slice(-6) || "000000";
+  const serial = `${dateDigits}-${String(number(prediction?.raceNo)).padStart(2, "0")}-${String(ticket.points).padStart(2, "0")}`;
+  const investment = ticket.totalInvestmentYen ?? ticket.investmentYen;
+  return `<div class="digital-ticket paper-ticket ticket-points-${ticket.points} ${resultMode ? "paper-ticket--result" : ""}">${resultStamp}<span class="ticket-security-stripe" aria-hidden="true"></span>
+    <section class="ticket-stub"><small>${escapeHtml(meeting.session)}</small><strong>${escapeHtml(meeting.venue)}</strong><div class="ticket-race-number"><b>${number(prediction?.raceNo)}</b><span>レース</span></div><div class="ticket-checks" aria-hidden="true"><i></i><i></i></div><span class="ticket-serial">${escapeHtml(serial)}</span></section>
+    <section class="ticket-type-panel" aria-label="${escapeHtml(ticket.betType)}"><small>UMAYOMI</small><b>${escapeHtml(typeParts[0])}</b><strong>${escapeHtml(typeParts[1])}</strong><span>AI</span></section>
+    <section class="ticket-main"><header class="ticket-print-head"><span>ウマヨミ予想券 <em>購入不可</em></span><strong>${escapeHtml(ticket.betType)}</strong><small>${escapeHtml(ticket.method)}</small></header><div class="ticket-numbers"><span>${combinationLabel}</span><ol class="ticket-combination-list ${keys.length > 5 ? "is-dense" : ""}">${keys.map((key, index) => { const horseName = ticket.betType === "単勝" ? horseNames.get(Number(key)) : ""; const selection = horseName ? `<b class="win-selection"><span>${escapeHtml(key)}</span><em>${escapeHtml(horseName)}</em></b>` : `<b>${escapeHtml(key)}</b>`; return `<li><i>${index + 1}</i>${selection}<small>${yen(unitStake)}</small></li>`; }).join("")}</ol></div><footer class="ticket-cost"><span>各 ${yen(unitStake)}</span><span>合計 ${ticket.points}枚</span><strong>${yen(investment)}</strong></footer>${resultMode ? `<div class="ticket-settlement"><span>払戻 ${yen(ticket.payoutYen)}</span><strong>${signedYen(ticket.netYen)}</strong></div>` : ""}<div class="ticket-barcode" aria-hidden="true"></div></section>
+  </div>`;
+}
+
+function ticketMeetingDetails(prediction) {
+  const date = String(prediction?.date ?? "");
+  const meetingName = String(prediction?.meetingName ?? "開催");
+  const match = meetingName.match(/(\d+)回(.+?)(\d+)日/);
+  const year = date.slice(0, 4) || "----";
+  return match ? { session: `${year}年${match[1]}回${match[3]}日`, venue: match[2] }
+    : { session: formatDate(date), venue: meetingName };
+}
+
+function ticketReason(agent, ticket) {
+  const focus = ({ safety: "能力と安定性を重視", sniper: "低評価でも実力が残る馬を重視", pace: "展開と位置取りを重視",
+    analyst: "コース・距離・騎手の数字を重視", contrarian: "評価集中を割り引き別候補を重視" })[agent?.agentId] ?? "予想スコアを重視";
+  if (ticket.betType === "単勝") return `${focus}。最上位を単勝で選択。`;
+  if (ticket.betType === "馬連") return `${focus}。上位組み合わせ5点。`;
+  return `${focus}。上位5頭の3連複BOX。`;
 }
 
 function runnersHtml(result, prediction) {
@@ -432,7 +459,8 @@ function agentSettledTicketGroupHtml(group, record) {
   if (!definition) return "";
   const persona = agentPersona(definition);
   const totals = settledTicketTotals(group.tickets);
-  return `<section class="agent-ticket-group"><header><img class="agent-card-avatar" src="${agentImagePath(definition.id)}" alt="" /><div><h3>${escapeHtml(persona.name)}の結果</h3><p>買い目ごとに確認</p></div><strong>${yen(totals.investmentYen)} → ${yen(totals.payoutYen)}・${signedYen(totals.netYen)}</strong></header><div class="bet-card-list">${group.tickets.map((ticket) => `<article class="bet-card">${paperTicketHtml(ticket, record, true)}<p class="ticket-result ${ticket.hit ? "positive" : "negative"}">${ticket.hit ? `✓ 的中 ${signedYen(ticket.netYen)}` : `× 不的中 ${signedYen(ticket.netYen)}`}</p></article>`).join("")}</div></section>`;
+  const agentRecord = record?.agents?.find((agent) => agent.agentId === group.agentId);
+  return `<section class="agent-ticket-group"><header><img class="agent-card-avatar" src="${agentImagePath(definition.id)}" alt="" /><div><h3>${escapeHtml(persona.name)}の結果</h3><p>買い目ごとに確認</p></div><strong>${yen(totals.investmentYen)} → ${yen(totals.payoutYen)}・${signedYen(totals.netYen)}</strong></header><div class="bet-card-list">${group.tickets.map((ticket) => `<article class="bet-card">${paperTicketHtml(ticket, record, true, agentRecord?.marks)}<p class="ticket-result ${ticket.hit ? "positive" : "negative"}">${ticket.hit ? `✓ 的中 ${signedYen(ticket.netYen)}` : `× 不的中 ${signedYen(ticket.netYen)}`}</p></article>`).join("")}</div></section>`;
 }
 
 function settledRaceSummaryHtml(totals) {
