@@ -129,10 +129,40 @@ function finderRaceHtml(row) {
 function renderHome() {
   const meeting = selectedMeeting();
   document.querySelector("#home-summary").textContent = meeting
-    ? `${formatDate(meeting.date)}・${meeting.tracks.reduce((sum, row) => sum + row.races.length, 0)}レースをAI指数の高い順に表示`
+    ? `${formatDate(meeting.date)}・5人のAI予想家と、注目ステージを攻略`
     : "開催データがありません。";
   renderDateTabs("#home-date-tabs");
+  renderHomeArena(meeting);
   renderHomeRanking(meeting);
+}
+
+function renderHomeArena(meeting) {
+  const root = document.querySelector("#home-arena");
+  const rows = (meeting?.tracks ?? []).flatMap((track) => (track.races ?? []).map((race) => {
+    const prediction = findPrediction(race.no, track, meeting.date);
+    const consensus = buildConsensus(prediction);
+    return { track, race, prediction, consensus };
+  })).filter((row) => row.consensus.top).sort((left, right) => Number(right.consensus.top.index ?? 0) - Number(left.consensus.top.index ?? 0));
+  const featured = rows[0];
+  if (!featured) { root.innerHTML = empty("アリーナを準備しています。"); return; }
+  const agents = normalizedAgents(featured.prediction);
+  const agentCards = AGENTS.map((definition) => {
+    const persona = agentPersona(definition);
+    const agent = agents.get(definition.id);
+    const mark = agent?.status === "available" ? agent.marks?.[0] : null;
+    return `<article class="arena-agent ${mark ? "ready" : "waiting"}"><img src="${agentImagePath(definition.id)}" alt="${escapeHtml(persona.name)}" /><div><span>${escapeHtml(persona.role)}</span><strong>${escapeHtml(persona.name)}</strong><p>${mark ? `本命 ${number(mark.horseNumber)}番 ${escapeHtml(mark.horseName)}` : "対戦データを確認中"}</p></div></article>`;
+  }).join("");
+  root.innerHTML = `<header class="arena-command"><div><span class="eyebrow">FEATURED MATCH</span><h2>${escapeHtml(featured.track.venueName)} ${featured.race.no}R ${escapeHtml(featured.race.name)}</h2><p>5人の予想家が同じレースをどう読むか。予想と確定結果は同じレース画面で見比べられます。</p></div><button type="button" data-arena-race="true" data-arena-date="${escapeHtml(meeting.date)}" data-arena-venue="${escapeHtml(featured.track.venueCode)}" data-arena-no="${featured.race.no}">対決を見る</button></header><div class="arena-agents">${agentCards}</div><p class="arena-note">これは予想をエンターテインメントとして見やすく整理する画面です。購入を促す機能や連続購入を促す仕組みはありません。</p>`;
+  root.querySelector("button[data-arena-race]")?.addEventListener("click", (event) => {
+    const button = event.currentTarget;
+    state.date = button.dataset.arenaDate;
+    state.venueCode = button.dataset.arenaVenue;
+    state.raceNo = Number(button.dataset.arenaNo);
+    state.detailTab = "prediction";
+    state.route = "races";
+    location.hash = "#races";
+    renderAll();
+  });
 }
 
 function renderHomeRanking(meeting) {
@@ -267,7 +297,7 @@ function raceDetailHtml(race, track) {
   const top = displayedTopTicket(race, track, prediction, consensus, volatility);
   const status = raceStatus(result, prediction, top, race);
   return `<article class="detail-shell">
-    <header class="detail-head"><span class="race-card-no">${race.no}R</span><div class="detail-title"><h2>${escapeHtml(race.name)}</h2><p>${escapeHtml(track.venueName)}・${escapeHtml(race.start)}発走・${escapeHtml(race.surface)}${number(race.distanceM)}m・${escapeHtml(race.condition)}</p></div>${statusBadge(status)}</header>
+    <header class="detail-head"><span class="race-card-no">${race.no}R</span><div class="detail-title"><span class="stage-label">STAGE ${race.no}</span><h2>${escapeHtml(race.name)}</h2><p>${escapeHtml(track.venueName)}・${escapeHtml(race.start)}発走・${escapeHtml(race.surface)}${number(race.distanceM)}m・${escapeHtml(race.condition)}</p></div>${statusBadge(status)}</header>
     <nav class="detail-tabs" aria-label="レース詳細"><button type="button" data-tab="prediction">予想</button><button type="button" data-tab="result">結果</button></nav>
     ${detailPanel("prediction", predictionTabHtml(race, track, prediction, result, consensus, top, volatility))}
     ${detailPanel("result", resultTabHtml(race, track, prediction, result))}

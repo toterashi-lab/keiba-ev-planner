@@ -56,7 +56,7 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
 
 .topbar { position: sticky; top: 0; z-index: 30; height: 64px; padding: 0 max(16px, calc((100vw - var(--content)) / 2)); display: flex; align-items: center; gap: 28px; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(14px); }
 .brand { min-width: 240px; display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.brand-mark { width: 36px; height: 36px; display: grid; place-items: center; background: var(--green); color: #07130c; font-size: 14px; font-weight: 900; border-radius: 4px; }
+.brand-mark { width: 36px; height: 36px; display: grid; place-items: center; background: var(--green); color: #07130c; font-size: 14px; font-weight: 900; border-radius: 50% 50% 42% 50%; transform: rotate(-8deg); }
 .brand strong, .brand small { display: block; }
 .brand strong { font-size: 15px; }
 .brand small { margin-top: 1px; color: var(--muted); font-size: 9px; }
@@ -95,6 +95,23 @@ main { width: min(100%, var(--content)); min-height: calc(100vh - 160px); margin
 .race-number-strip small { margin-top: 2px; font-size: 9px; font-weight: 500; }
 
 .section-block { margin-top: 16px; }
+.arena-board { margin: 4px 0 18px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: linear-gradient(125deg, var(--surface), var(--purple-soft)); box-shadow: var(--shadow); }
+.arena-command { padding: 18px; display: flex; align-items: end; justify-content: space-between; gap: 18px; border-bottom: 1px solid var(--line); }
+.arena-command h2 { margin: 0; font-size: 21px; }
+.arena-command p { margin: 6px 0 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
+.arena-command button { min-height: 42px; flex: 0 0 auto; padding: 9px 14px; border: 1px solid var(--gold); border-radius: 6px; background: var(--gold); color: #2b2206; font-weight: 900; cursor: pointer; }
+.arena-agents { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; padding: 12px; }
+.arena-agent { min-width: 0; padding: 8px; display: flex; align-items: center; gap: 7px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+.arena-agent.ready { border-top: 3px solid var(--green); }
+.arena-agent.waiting { opacity: .72; border-top: 3px solid var(--muted); }
+.arena-agent img { width: 45px; height: 45px; flex: 0 0 45px; object-fit: contain; border-radius: 50%; background: #eee6ff; }
+.arena-agent div { min-width: 0; }
+.arena-agent span, .arena-agent strong, .arena-agent p { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.arena-agent span { color: var(--muted); font-size: 8px; font-weight: 900; }
+.arena-agent strong { margin-top: 2px; font-size: 10px; }
+.arena-agent p { margin: 4px 0 0; color: var(--gold); font-size: 9px; }
+.arena-agent.waiting p { color: var(--muted); }
+.arena-note { margin: 0; padding: 0 14px 12px; color: var(--muted); font-size: 9px; line-height: 1.5; }
 .home-forecast-section { margin-top: 6px; }
 .home-forecast-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .home-forecast-card { min-width: 0; padding: 14px; border: 1px solid var(--line); border-top: 3px solid var(--green); border-radius: var(--radius); background: var(--surface); color: var(--text); text-align: left; cursor: pointer; box-shadow: 0 4px 12px rgba(0, 0, 0, .08); }
@@ -172,9 +189,10 @@ main { width: min(100%, var(--content)); min-height: calc(100vh - 160px); margin
 .detail-head { padding: 18px 20px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid var(--line); }
 .detail-head .race-card-no { background: var(--green); color: #07130c; }
 .detail-title { min-width: 0; flex: 1; }
+.stage-label { display: block; margin-bottom: 3px; color: var(--gold); font-size: 9px; font-weight: 900; }
 .detail-title h2 { margin: 0; font-size: 22px; }
 .detail-title p { margin: 4px 0 0; color: var(--muted); font-size: 11px; }
-.detail-tabs { display: grid; grid-template-columns: repeat(5, 1fr); border-bottom: 1px solid var(--line); }
+.detail-tabs { display: grid; grid-template-columns: repeat(2, 1fr); border-bottom: 1px solid var(--line); }
 .detail-tabs button { min-height: 48px; border: 0; border-right: 1px solid var(--line); background: var(--surface-2); color: var(--muted); font-size: 11px; font-weight: 900; cursor: pointer; }
 .detail-tabs button:last-child { border-right: 0; }
 .detail-tabs button.active { background: var(--surface); color: var(--text); box-shadow: inset 0 -3px var(--green); }
@@ -372,6 +390,11 @@ body { background: radial-gradient(circle at 8% 0%, #353064 0, transparent 28%),
 .runner-details summary { padding: 13px 14px; color: var(--text); font-weight: 900; cursor: pointer; }
 .runner-details .table-scroll { padding: 0 10px 10px; }
 @media (max-width: 760px) {
+  .arena-command { align-items: stretch; flex-direction: column; gap: 12px; }
+  .arena-command h2 { font-size: 18px; }
+  .arena-command button { width: 100%; }
+  .arena-agents { grid-template-columns: 1fr; }
+  .arena-agent { min-height: 62px; }
   .mobile-nav { grid-template-columns: repeat(4, 1fr); }
   .agent-profile { grid-template-columns: 104px 1fr; }
   .agent-hero-grid { grid-template-columns: repeat(5, 116px); overflow-x: auto; }

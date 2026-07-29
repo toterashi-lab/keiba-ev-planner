@@ -16,26 +16,27 @@
         <span><strong>ウマヨミ</strong><small>5人のAI予想家と、レースを読む。</small></span>
       </a>
       <nav class="desktop-nav" aria-label="サイト全体">
-        <a href="#home" data-route="home">ホーム</a>
-        <a href="#races" data-route="races">予想・結果</a>
-        <a href="#results" data-route="results">結果アーカイブ</a>
-        <a href="#performance" data-route="performance">AIエージェント</a>
+        <a href="#home" data-route="home">アリーナ</a>
+        <a href="#races" data-route="races">レースボード</a>
+        <a href="#results" data-route="results">リプレイ</a>
+        <a href="#performance" data-route="performance">メンバー</a>
       </nav>
       <button id="theme-toggle" class="icon-button" type="button" title="表示テーマを切り替える" aria-label="表示テーマを切り替える">◐</button>
     </header>
 
     <main id="main-content">
       <section id="page-home" class="page" data-page="home" aria-labelledby="home-title">
-        <header class="page-heading ranking-hero"><div><span class="eyebrow">RACE INDEX RANKING</span><h1 id="home-title">AI指数ランキング</h1><p id="home-summary">開催データを読み込んでいます。</p></div></header>
+        <header class="page-heading ranking-hero"><div><span class="eyebrow">UMAYOMI RACE ARENA</span><h1 id="home-title">今週のレースアリーナ</h1><p id="home-summary">開催データを読み込んでいます。</p></div></header>
         <div id="home-date-tabs" class="chip-row" aria-label="開催日"></div>
+        <section id="home-arena" class="arena-board" aria-label="今週の予想家対決"></section>
         <section class="section-block" aria-labelledby="featured-title">
-          <header class="section-heading"><div><span>指数の高い順</span><h2 id="featured-title">注目レース</h2></div><span id="race-list-count" class="count-badge"></span></header>
+          <header class="section-heading"><div><span>STAGE SELECT</span><h2 id="featured-title">レースを選ぶ</h2></div><span id="race-list-count" class="count-badge"></span></header>
           <div id="home-race-list" class="race-card-list"></div>
         </section>
       </section>
 
       <section id="page-races" class="page" data-page="races" aria-labelledby="races-title">
-        <header class="page-heading"><div><span class="eyebrow">PREDICTION AND RESULT</span><h1 id="races-title">予想・結果</h1></div><p>AI印、3種類の共通買い目、確定後の結果を同じ画面で確認します。</p></header>
+        <header class="page-heading"><div><span class="eyebrow">RACE BOARD</span><h1 id="races-title">レースボード</h1></div><p>ステージごとに、AI予想と確定後のリプレイを同じ画面で確認します。</p></header>
         <div id="race-date-tabs" class="chip-row" aria-label="開催日"></div>
         <div id="race-venue-tabs" class="segmented-scroll" aria-label="競馬場"></div>
         <div id="race-number-tabs" class="race-number-strip" aria-label="レース番号"></div>
@@ -52,13 +53,13 @@
       </section>
 
       <section id="page-results" class="page" data-page="results" aria-labelledby="results-title">
-        <header class="page-heading"><div><span class="eyebrow">RESULT ARCHIVE</span><h1 id="results-title">結果アーカイブ</h1></div><p>確定したレースを日付順に探し、予想と買い目の照合結果を確認します。</p></header>
+        <header class="page-heading"><div><span class="eyebrow">RACE REPLAY</span><h1 id="results-title">リプレイアーカイブ</h1></div><p>確定したレースを振り返り、予想と買い目の照合結果を確認します。</p></header>
         <div id="result-filter" class="chip-row" aria-label="結果期間"></div>
         <div id="result-list" class="result-list"></div>
       </section>
 
       <section id="page-performance" class="page" data-page="performance" aria-labelledby="performance-title">
-        <header class="page-heading"><div><span class="eyebrow">FIVE RACING AGENTS</span><h1 id="performance-title">AIエージェント</h1></div><p>5人の予想タイプと、買い目の成績を確認します。</p></header>
+        <header class="page-heading"><div><span class="eyebrow">MEMBER SELECT</span><h1 id="performance-title">予想家メンバー</h1></div><p>5人の役割と、保存済み予想の成績を確認します。</p></header>
         <section class="agent-hero-grid" aria-label="5人のAIエージェント"><img src="assets/agent-safety.png" alt="堅実派セーフティ" /><img src="assets/agent-sniper.png" alt="穴狙いスナイパー" /><img src="assets/agent-pace.png" alt="展開派ペースメーカー" /><img src="assets/agent-analyst.png" alt="数理派アナリスト" /><img src="assets/agent-contrarian.png" alt="逆張り派コントラリアン" /></section>
         <div id="performance-filter" class="chip-row" aria-label="成績期間"></div>
         <div id="all-race-audit"></div>
@@ -76,10 +77,10 @@
     </main>
 
     <nav class="mobile-nav" aria-label="モバイルナビゲーション">
-      <a href="#home" data-route="home"><span aria-hidden="true">⌂</span>ホーム</a>
-      <a href="#races" data-route="races"><span aria-hidden="true">馬</span>予想</a>
-      <a href="#results" data-route="results"><span aria-hidden="true">✓</span>履歴</a>
-      <a href="#performance" data-route="performance"><span aria-hidden="true">AI</span>エージェント</a>
+      <a href="#home" data-route="home"><span aria-hidden="true">⌂</span>アリーナ</a>
+      <a href="#races" data-route="races"><span aria-hidden="true">馬</span>レース</a>
+      <a href="#results" data-route="results"><span aria-hidden="true">✓</span>リプレイ</a>
+      <a href="#performance" data-route="performance"><span aria-hidden="true">AI</span>メンバー</a>
     </nav>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
