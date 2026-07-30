@@ -47,10 +47,36 @@
     const previousRanks = new Map(previous.map((row) => [row.agentId, row.rank]));
     const standings = current.map((row) => ({ ...row, rankDelta: (previousRanks.get(row.agentId) || row.rank) - row.rank }));
     const latestRecord = records.at(-1) || null;
+    const roundHistory = buildRoundHistory(records);
+    const winningStreak = [...standings].sort((left, right) => right.streak - left.streak || left.rank - right.rank)[0] || null;
+    const losingStreak = [...standings].sort((left, right) => left.streak - right.streak || left.rank - right.rank)[0] || null;
     return {
       id: "2026", name: "2026 AI FORECAST LEAGUE", round: records.length || 1, latestDate,
       standings, latestRecord, drama: raceDrama(latestRecord), totalRaces: records.length,
+      roundHistory, rivalry: standings.slice(0, 2), winningStreak, losingStreak,
     };
+  }
+
+  function buildRoundHistory(records) {
+    let previousRanks = new Map();
+    return records.map((record, index) => {
+      const standings = standingsFromRecords(records.slice(0, index + 1));
+      const ranked = standings.map((row) => ({
+        ...row,
+        rankDelta: (previousRanks.get(row.agentId) || row.rank) - row.rank,
+      }));
+      previousRanks = new Map(ranked.map((row) => [row.agentId, row.rank]));
+      return {
+        round: index + 1,
+        date: record.date,
+        raceId: record.raceId,
+        meetingName: record.meetingName || record.venueName || "開催",
+        raceNo: Number(record.raceNo) || 0,
+        raceTitle: record.raceTitle || "レース",
+        standings: ranked,
+        drama: raceDrama(record),
+      };
+    });
   }
 
   function standingsFromRecords(records) {
@@ -154,6 +180,6 @@
   }
   function sum(rows, key) { return rows.reduce((total, row) => total + Number(row?.[key] || 0), 0); }
 
-  root.UMAYOMI_LEAGUE = Object.freeze({ STARTING_FUNDS_YEN, STATES, PERSONAS, derive, standingsFromRecords,
+  root.UMAYOMI_LEAGUE = Object.freeze({ STARTING_FUNDS_YEN, STATES, PERSONAS, derive, standingsFromRecords, buildRoundHistory,
     raceDrama, meetingDialogue, raceSlug, resultComment, characterImage });
 }(typeof window !== "undefined" ? window : globalThis));

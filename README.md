@@ -38,8 +38,9 @@ node scripts/historical-agent-archive-check.mjs
 - 本番URL: https://umayomi-keiba.vercel.app/
 - 一般閲覧: ログイン不要
 - PV・訪問者・参照元: Vercel Web Analytics（プロジェクト所有者だけが管理画面で閲覧）
-- SEO: 72レースの予想URL、72レースの結果URL、5人のプロフィールURL、4本の初心者ガイド、canonical、OGP、Twitter Card、SportsEvent／Article JSON-LD、`robots.txt`、158 URLの`sitemap.xml`を収録
+- SEO: 72レースの予想URL、72レースの結果URL、5人のプロフィールURL、4本の初心者ガイド、スポンサー方針、canonical、OGP、Twitter Card、SportsEvent／Article JSON-LD、`robots.txt`、159 URLの`sitemap.xml`を収録
 - 静的ページ再生成: `node scripts/generate-static-pages.mjs`
+- 36項目完了監査: `node scripts/entertainment-requirements-check.mjs`
 
 ## 5人のAI予想家
 
@@ -50,6 +51,8 @@ node scripts/historical-agent-archive-check.mjs
 - ミカ: 常識を疑う逆張りクイーン。評価集中と市場の偏りを重視
 
 各キャラクターは通常、勝利、敗北、怒り、覚醒の5状態を持ち、予想結果と直近成績から表示状態を決めます。
+
+ホームには首位対決、連勝・連敗、波乱警報を表示し、シーズンページでは直近8節の順位変動とSNS共有画像を確認できます。結果ページは勝利時の短い紙吹雪、全敗時の敗北演出を持ち、動きを減らす設定では停止します。
 
 予測、買い目、オッズ、根拠は公開時点で追記保存し、結果確定後にだけ精算・採点します。詳細は`docs/agent-system-audit.md`、`docs/agent-architecture.md`、`docs/prediction-calculation.md`、`docs/learning-methodology.md`、`docs/data-leak-prevention.md`を参照してください。
 

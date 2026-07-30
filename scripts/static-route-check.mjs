@@ -5,7 +5,7 @@ import path from "node:path";
 const html = fs.readFileSync("index.html", "utf8");
 for (const route of ["/races/", "/results/", "/season/", "/agents/"]) assert.ok(html.includes(`href="${route}"`), `${route}への内部リンク`);
 assert.ok(!html.match(/href="#(?:home|races|results|performance|season)/), "主要ナビはハッシュに依存しない");
-for (const file of ["races/index.html", "results/index.html", "season/index.html", "agents/index.html", "guides/ai-keiba/index.html", "guides/keiba-index/index.html", "guides/expected-value/index.html", "guides/betting/index.html"]) {
+for (const file of ["races/index.html", "results/index.html", "season/index.html", "agents/index.html", "guides/ai-keiba/index.html", "guides/keiba-index/index.html", "guides/expected-value/index.html", "guides/betting/index.html", "partners/index.html"]) {
   assert.ok(fs.existsSync(file), `${file} が存在すること`);
   const page = fs.readFileSync(file, "utf8");
   assert.match(page, /<link rel="canonical" href="https:\/\/umayomi-keiba\.vercel\.app\//, `${file} canonical`);
@@ -24,5 +24,5 @@ for (const agent of ["safety", "sniper", "pace", "analyst", "contrarian"]) {
   for (const state of ["normal", "happy", "defeat", "angry", "awakened"]) assert.ok(fs.existsSync(`assets/characters/${agent}-${state}.webp`), `${agent}-${state}画像`);
 }
 const sitemap = fs.readFileSync("sitemap.xml", "utf8");
-assert.equal((sitemap.match(/<url>/g) || []).length, 158, "サイトマップ件数");
-console.log("static-route-check: PASS (153 app pages, 4 guides, 25 character states)");
+assert.equal((sitemap.match(/<url>/g) || []).length, 159, "サイトマップ件数");
+console.log("static-route-check: PASS (153 app pages, 4 guides, partner policy, 25 character states)");

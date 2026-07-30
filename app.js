@@ -214,7 +214,8 @@ function renderLeagueLobby(meeting) {
   const culprit = personaForId(drama.culprit?.agentId);
   const awakened = leagueSeason.standings.find((row) => row.state === "awakened") || leagueSeason.standings[0];
   const awakenedPersona = personaForId(awakened?.agentId);
-  dramaRoot.innerHTML = `<section class="lobby-panel weekly-drama"><header><div><span>LAST ROUND</span><h2>前節のドラマ</h2></div><button type="button" class="share-icon-button" data-share-latest aria-label="前節の結果を共有">共有</button></header><div class="drama-cards"><article class="drama-card mvp"><span>MVP</span>${characterImageHtml(drama.mvp?.agentId, "happy", "drama-character")}<div><strong>${escapeHtml(mvp.displayName)}</strong><small>${signedYen(drama.mvp?.netYen)}</small></div></article><article class="drama-card culprit"><span>戦犯</span>${characterImageHtml(drama.culprit?.agentId, "defeat", "drama-character")}<div><strong>${escapeHtml(culprit.displayName)}</strong><small>${signedYen(drama.culprit?.netYen)}</small></div></article></div><div class="awakening-strip">${characterImageHtml(awakened?.agentId, "awakened", "awakening-character")}<span><b>覚醒中</b><strong>${escapeHtml(awakenedPersona.displayName)}</strong><small>直近の走りが上向いています</small></span></div></section>`;
+  const mvpWon = Number(drama.mvp?.netYen || 0) > 0;
+  dramaRoot.innerHTML = `<section class="lobby-panel weekly-drama"><header><div><span>LAST ROUND</span><h2>前節のドラマ</h2></div><button type="button" class="share-icon-button" data-share-latest aria-label="前節の結果を共有">共有</button></header><div class="drama-cards"><article class="drama-card mvp ${mvpWon ? "won" : "lost"}"><span>MVP</span>${characterImageHtml(drama.mvp?.agentId, mvpWon ? "happy" : "defeat", "drama-character")}<div><strong>${escapeHtml(mvp.displayName)}</strong><small>${signedYen(drama.mvp?.netYen)}</small></div></article><article class="drama-card culprit"><span>戦犯</span>${characterImageHtml(drama.culprit?.agentId, "defeat", "drama-character")}<div><strong>${escapeHtml(culprit.displayName)}</strong><small>${signedYen(drama.culprit?.netYen)}</small></div></article></div><div class="awakening-strip">${characterImageHtml(awakened?.agentId, "awakened", "awakening-character")}<span><b>覚醒中</b><strong>${escapeHtml(awakenedPersona.displayName)}</strong><small>直近の走りが上向いています</small></span></div></section>`;
   dramaRoot.querySelector("[data-share-latest]")?.addEventListener("click", () => shareLeagueResult(leagueSeason.latestRecord, drama));
 }
 
@@ -226,8 +227,10 @@ function renderHomeArena(meeting) {
     return { track, race, prediction, consensus };
   })).filter((row) => row.consensus.top).sort((left, right) => Number(right.consensus.top.index ?? 0) - Number(left.consensus.top.index ?? 0));
   const featured = rows[0];
+  renderSeasonEvents(meeting, featured);
   if (!featured) { root.innerHTML = empty("今日の予想を準備しています。"); return; }
   const agents = normalizedAgents(featured.prediction);
+  const strategyMeeting = leagueSystem.meetingDialogue(featured.prediction, agents);
   const volatility = forecastPolicy.volatilityProfile({ race: featured.race, prediction: featured.prediction, consensus: featured.consensus, candidates: readyCandidates(featured.race.no, featured.track) });
   const featuredScore = Math.max(0, Math.min(100, Math.round(Number(featured.consensus.top.index ?? 0))));
   const agentCards = AGENTS.map((definition, index) => {
@@ -237,7 +240,7 @@ function renderHomeArena(meeting) {
     const standing = leagueSeason.standings.find((row) => row.agentId === definition.id);
     return `<article class="arena-agent ${definition.id} ${mark ? "ready" : "waiting"}"><span class="arena-avatar">${characterImageHtml(definition.id, standing?.state || "normal", "arena-character")}<i>${index + 1}</i></span><div><span>${escapeHtml(persona.epithet)}</span><strong>${escapeHtml(persona.displayName)}</strong><p>${mark ? `エース ${number(mark.horseNumber)}番 ${escapeHtml(mark.horseName)}` : "作戦準備中"}</p></div></article>`;
   }).join("");
-  root.innerHTML = `<header class="arena-command"><div class="arena-race-copy"><span class="arena-rank">第${leagueSeason.round + 1}節・MAIN BATTLE</span><h2>${escapeHtml(featured.track.venueName)} ${featured.race.no}R</h2><h3>${escapeHtml(featured.race.name)}</h3><p>${escapeHtml(featured.race.surface)} ${number(featured.race.distanceM)}m・${escapeHtml(featured.race.start)}発走</p></div><div class="arena-power" style="--score:${featuredScore}"><span>戦闘力 <small>競馬指数</small></span><strong>${featuredScore}</strong><i><b></b></i></div><div class="arena-difficulty"><span>波乱警報 <small>荒れる可能性</small></span><strong>${escapeHtml(volatility.label)}</strong>${volatilityMeterHtml(volatility, true)}</div><button type="button" data-arena-race="true" data-arena-date="${escapeHtml(meeting.date)}" data-arena-venue="${escapeHtml(featured.track.venueCode)}" data-arena-no="${featured.race.no}">作戦会議へ <span aria-hidden="true">›</span></button></header><div class="arena-team-title"><span>ACE PICKS</span><strong>5人のエース指名</strong></div><div class="arena-agents">${agentCards}</div>`;
+  root.innerHTML = `<header class="arena-command"><div class="arena-race-copy"><span class="arena-rank">第${leagueSeason.round + 1}節・MAIN BATTLE</span><h2>${escapeHtml(featured.track.venueName)} ${featured.race.no}R</h2><h3>${escapeHtml(featured.race.name)}</h3><p>${escapeHtml(featured.race.surface)} ${number(featured.race.distanceM)}m・${escapeHtml(featured.race.start)}発走</p><blockquote>「${escapeHtml(strategyMeeting.lines[0]?.text || "5人が作戦を確認しています。") }」</blockquote></div><div class="arena-power" style="--score:${featuredScore}"><span>戦闘力 <small>競馬指数</small></span><strong>${featuredScore}</strong><i><b></b></i></div><div class="arena-difficulty"><span>波乱警報 <small>荒れる可能性</small></span><strong>${escapeHtml(volatility.label)}</strong>${volatilityMeterHtml(volatility, true)}</div><button type="button" data-arena-race="true" data-arena-date="${escapeHtml(state.date)}" data-arena-venue="${escapeHtml(featured.track.venueCode)}" data-arena-no="${featured.race.no}">作戦会議へ <span aria-hidden="true">›</span></button></header><div class="arena-team-title"><span>ACE PICKS</span><strong>5人のエース指名</strong></div><div class="arena-agents">${agentCards}</div>`;
   root.querySelector("button[data-arena-race]")?.addEventListener("click", (event) => {
     const button = event.currentTarget;
     state.date = button.dataset.arenaDate;
@@ -246,6 +249,22 @@ function renderHomeArena(meeting) {
     state.detailTab = "prediction";
     navigateToRace(state.date, state.venueCode, state.raceNo, "prediction");
   });
+}
+
+function renderSeasonEvents(currentMeeting, featured) {
+  const root = document.querySelector("#home-season-events");
+  if (!root) return;
+  const [leader, challenger] = leagueSeason.rivalry || [];
+  const leaderPersona = personaForId(leader?.agentId);
+  const challengerPersona = personaForId(challenger?.agentId);
+  const winning = leagueSeason.winningStreak;
+  const losing = leagueSeason.losingStreak;
+  const volatility = featured ? forecastPolicy.volatilityProfile({ race: featured.race, prediction: featured.prediction,
+    consensus: featured.consensus, candidates: readyCandidates(featured.race.no, featured.track) }) : null;
+  const gap = leader && challenger ? leader.virtualFundsYen - challenger.virtualFundsYen : 0;
+  root.innerHTML = `<article class="season-event rivalry-event"><header><span>今週のAI対決</span><strong>首位攻防</strong></header><div class="rivalry-pair">${characterImageHtml(leader?.agentId, leader?.state || "normal", "event-character")}<b>VS</b>${characterImageHtml(challenger?.agentId, challenger?.state || "normal", "event-character")}</div><p>${escapeHtml(leaderPersona.displayName)} vs ${escapeHtml(challengerPersona.displayName)}<small>資金差 ${yen(Math.abs(gap))}</small></p></article>
+    <article class="season-event streak-event"><header><span>調子</span><strong>連勝・連敗</strong></header><div class="streak-row good">${characterImageHtml(winning?.agentId, "happy", "event-mini-character")}<p><b>${escapeHtml(personaForId(winning?.agentId).displayName)}</b><small>${winning?.streak > 0 ? `${winning.streak}戦連続プラス` : "連勝待ち"}</small></p></div><div class="streak-row bad">${characterImageHtml(losing?.agentId, "defeat", "event-mini-character")}<p><b>${escapeHtml(personaForId(losing?.agentId).displayName)}</b><small>${losing?.streak < 0 ? `${Math.abs(losing.streak)}戦連続マイナス` : "連敗なし"}</small></p></div></article>
+    <article class="season-event warning-event"><header><span>今日の波乱警報</span><strong>${escapeHtml(volatility?.label || "判定待ち")}</strong></header><div class="warning-gauge" style="--warning:${volatility?.score || 0}"><i><b></b></i><span>${volatility ? `${volatility.level}/5` : "-"}</span></div><p>${featured ? `${escapeHtml(featured.track.venueName)} ${featured.race.no}R ${escapeHtml(featured.race.name)}` : "対象レースがありません"}<small>${escapeHtml(currentMeeting?.date ? formatDate(currentMeeting.date) : "開催日未選択")}</small></p></article>`;
 }
 
 function renderHomeRanking(meeting) {
@@ -548,13 +567,18 @@ function resultDramaHtml(race, track, prediction, result) {
   const replay = findReplayAudit(result?.raceId ?? prediction?.raceId);
   const drama = leagueSystem?.raceDrama(replay);
   if (!drama) return "";
+  const hasWinner = Number(drama.mvp?.netYen || 0) > 0;
+  const hasAwakened = drama.awakened?.hit === true;
   const roles = [
-    ["MVP", drama.mvp, "happy", "mvp"],
+    ["MVP", drama.mvp, hasWinner ? "happy" : "defeat", "mvp"],
     ["戦犯", drama.culprit, "defeat", "culprit"],
-    ["覚醒AI", drama.awakened, "awakened", "awakened"],
+    [hasAwakened ? "覚醒AI" : "覚醒AIなし", drama.awakened, hasAwakened ? "awakened" : "defeat", "awakened"],
     ["逆神AI", drama.jinx, "angry", "jinx"],
   ];
-  return `<section class="result-drama ${Number(drama.mvp?.netYen || 0) > 0 ? "has-winner" : "all-defeated"}"><header><div><span>RACE AFTER</span><h2>勝敗ドラマ</h2></div><button type="button" class="share-result-button" data-share-race="${escapeHtml(replay?.raceId || "")}">結果を共有</button></header><div class="result-role-grid">${roles.map(([label, row, stateName, className]) => {
+  const effect = hasWinner
+    ? `<div class="victory-confetti" aria-hidden="true">${Array.from({ length: 12 }, (_, index) => `<i style="--i:${index}"></i>`).join("")}</div>`
+    : `<div class="defeat-crack" aria-hidden="true"><i></i><i></i><i></i></div>`;
+  return `<section class="result-drama ${hasWinner ? "has-winner" : "all-defeated"}">${effect}<header><div><span>RACE AFTER</span><h2>勝敗ドラマ</h2></div><button type="button" class="share-result-button" data-share-race="${escapeHtml(replay?.raceId || "")}">結果を共有</button></header><div class="result-role-grid">${roles.map(([label, row, stateName, className]) => {
     const persona = personaForId(row?.agentId);
     return `<article class="result-role-card ${className}"><span>${label}</span>${characterImageHtml(row?.agentId, stateName, "result-role-character")}<strong>${escapeHtml(persona.displayName)}</strong><small>${signedYen(row?.netYen)}</small></article>`;
   }).join("")}</div><div class="rank-change-strip">${leagueSeason.standings.map((row) => `<span class="${row.agentId}"><b>${row.rank}位</b>${escapeHtml(personaForId(row.agentId).displayName)}<i>${row.rankDelta > 0 ? `▲${row.rankDelta}` : row.rankDelta < 0 ? `▼${Math.abs(row.rankDelta)}` : "－"}</i></span>`).join("")}</div></section>`;
@@ -652,7 +676,8 @@ function renderLatestResultShowcase() {
     const track = currentEdition.meetings?.find((meeting) => meeting.date === record.date)?.tracks?.find((row) => row.meetingName === record.meetingName);
     const venueCode = track?.venueCode || record.venueCode;
     const slug = leagueSystem.raceSlug(record.date, venueCode, record.raceNo);
-    return `<a class="latest-result-card ${index === 0 ? "featured" : ""}" href="/result/${escapeHtml(slug)}/"><div><span>${escapeHtml(formatDate(record.date))}・${escapeHtml(record.meetingName)} ${record.raceNo}R</span><strong>${escapeHtml(record.raceTitle)}</strong></div>${characterImageHtml(drama?.mvp?.agentId, "happy", "latest-result-character", index === 0)}<p><small>MVP</small><b>${escapeHtml(mvp.displayName)}</b><em>${signedYen(drama?.mvp?.netYen)}</em></p><i>反省会を見る ›</i></a>`;
+    const mvpWon = Number(drama?.mvp?.netYen || 0) > 0;
+    return `<a class="latest-result-card ${index === 0 ? "featured" : ""} ${mvpWon ? "won" : "lost"}" href="/result/${escapeHtml(slug)}/"><div><span>${escapeHtml(formatDate(record.date))}・${escapeHtml(record.meetingName)} ${record.raceNo}R</span><strong>${escapeHtml(record.raceTitle)}</strong></div>${characterImageHtml(drama?.mvp?.agentId, mvpWon ? "happy" : "defeat", "latest-result-character", index === 0)}<p><small>MVP</small><b>${escapeHtml(mvp.displayName)}</b><em class="${mvpWon ? "positive" : "negative"}">${signedYen(drama?.mvp?.netYen)}</em></p><i>反省会を見る ›</i></a>`;
   }).join("")}</div></section>`;
 }
 
@@ -782,13 +807,21 @@ function agentProfileHtml(agent, replay = agentReplayMetrics(agent.id)) {
 function renderSeasonPage() {
   const summary = document.querySelector("#season-summary");
   const standings = document.querySelector("#season-standings");
-  if (!summary || !standings) return;
+  const history = document.querySelector("#season-round-history");
+  if (!summary || !standings || !history) return;
   const leader = leagueSeason.standings[0];
-  summary.innerHTML = `<section class="season-summary-grid"><div><span>CURRENT ROUND</span><strong>第${leagueSeason.round}節終了</strong></div><div><span>LEADER</span><strong>${escapeHtml(personaForId(leader?.agentId).displayName)}</strong></div><div><span>RACES</span><strong>${number(leagueSeason.totalRaces)}</strong></div><div><span>START FUND</span><strong>${yen(leagueSystem.STARTING_FUNDS_YEN)}</strong></div></section>`;
+  summary.innerHTML = `<section class="season-summary-grid"><div><span>CURRENT ROUND</span><strong>第${leagueSeason.round}節終了</strong></div><div><span>LEADER</span><strong>${escapeHtml(personaForId(leader?.agentId).displayName)}</strong></div><div><span>RACES</span><strong>${number(leagueSeason.totalRaces)}</strong></div><div><span>START FUND</span><strong>${yen(leagueSystem.STARTING_FUNDS_YEN)}</strong></div></section><button type="button" class="share-season-button" data-share-season>順位表を共有</button>`;
   standings.innerHTML = `<section class="season-table"><header><span>2026 STANDINGS</span><h2>現在のリーグ順位</h2></header>${leagueSeason.standings.map((row) => {
     const persona = personaForId(row.agentId);
     return `<a class="season-row ${row.agentId}" href="/agents/${row.agentId}/"><b>${row.rank}</b>${characterImageHtml(row.agentId, row.state, "season-character")}<span><strong>${escapeHtml(persona.displayName)}</strong><small>${escapeHtml(persona.epithet)}</small></span><div><small>仮想資金</small><strong>${yen(row.virtualFundsYen)}</strong></div><div><small>獲得資金率</small><strong>${percent(row.recoveryRate)}</strong></div><em>${row.rankDelta > 0 ? `▲ ${row.rankDelta}` : row.rankDelta < 0 ? `▼ ${Math.abs(row.rankDelta)}` : "－"}</em></a>`;
   }).join("")}</section>`;
+  const latestRounds = [...(leagueSeason.roundHistory || [])].reverse().slice(0, 8);
+  history.innerHTML = `<header><div><span>ROUND HISTORY</span><h2>直近8節の順位変動</h2></div><small>確定結果から更新</small></header><div class="round-history-list">${latestRounds.map((round) => {
+    const mvp = round.drama?.mvp;
+    const leaderRow = round.standings?.[0];
+    return `<article class="round-history-card"><span>第${round.round}節</span><div><strong>${escapeHtml(round.meetingName)} ${round.raceNo}R</strong><small>${escapeHtml(round.raceTitle)}</small></div><p>${characterImageHtml(mvp?.agentId, mvp?.netYen > 0 ? "happy" : "defeat", "round-character")}<span><small>MVP</small><b>${escapeHtml(personaForId(mvp?.agentId).displayName)}</b></span></p><em>首位 ${escapeHtml(personaForId(leaderRow?.agentId).displayName)}</em></article>`;
+  }).join("")}</div>`;
+  summary.querySelector("[data-share-season]")?.addEventListener("click", shareSeasonStandings);
 }
 
 function agentReplayMetrics(agentId) {
@@ -1159,6 +1192,60 @@ async function shareLeagueResult(record, drama = leagueSystem?.raceDrama(record)
   link.click();
   setTimeout(() => URL.revokeObjectURL(link.href), 1000);
   showToast("SNS共有用の結果画像を保存しました");
+}
+
+async function shareSeasonStandings() {
+  const standings = leagueSeason.standings || [];
+  if (!standings.length) { showToast("共有できる順位がありません"); return; }
+  const canvas = document.createElement("canvas");
+  canvas.width = 1200;
+  canvas.height = 630;
+  const context = canvas.getContext("2d");
+  context.fillStyle = "#08111f";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  context.fillStyle = "#101d2e";
+  context.fillRect(36, 36, 1128, 558);
+  context.fillStyle = "#f4c95d";
+  context.fillRect(36, 36, 12, 558);
+  context.font = "800 24px 'Yu Gothic UI', sans-serif";
+  context.fillText("UMAYOMI / AI FORECAST LEAGUE 2026", 82, 90);
+  context.fillStyle = "#ffffff";
+  context.font = "900 48px 'Yu Gothic UI', sans-serif";
+  context.fillText(`第${leagueSeason.round}節終了 現在の順位`, 82, 158);
+  standings.forEach((row, index) => {
+    const y = 225 + index * 66;
+    const persona = personaForId(row.agentId);
+    context.fillStyle = persona.color || "#f4c95d";
+    context.font = "900 34px 'Yu Gothic UI', sans-serif";
+    context.fillText(`${row.rank}`, 88, y);
+    context.fillStyle = "#ffffff";
+    context.font = "800 27px 'Yu Gothic UI', sans-serif";
+    context.fillText(persona.displayName, 145, y);
+    context.textAlign = "right";
+    context.fillText(yen(row.virtualFundsYen), 1080, y);
+    context.textAlign = "left";
+  });
+  context.fillStyle = "#93a4b8";
+  context.font = "700 19px 'Yu Gothic UI', sans-serif";
+  context.fillText("照合済み結果を各100円の仮想資金ルールで集計", 82, 570);
+  const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+  if (!blob) { showToast("共有画像を作れませんでした"); return; }
+  const filename = `umayomi-season-round-${leagueSeason.round}.png`;
+  const file = new File([blob], filename, { type: "image/png" });
+  if (navigator.share && (!navigator.canShare || navigator.canShare({ files: [file] }))) {
+    try {
+      await navigator.share({ title: "ウマヨミ AIリーグ順位", text: `第${leagueSeason.round}節終了。首位は${personaForId(standings[0].agentId).displayName}`, files: [file] });
+      return;
+    } catch (error) {
+      if (error?.name === "AbortError") return;
+    }
+  }
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = filename;
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+  showToast("SNS共有用の順位画像を保存しました");
 }
 
 function loadCanvasImage(src) {
