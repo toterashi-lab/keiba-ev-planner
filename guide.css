@@ -1,0 +1,12 @@
+.guide-main { width:min(100%,860px); }
+.guide-article { padding:clamp(20px,5vw,48px); border:1px solid #2d3e54; border-radius:8px; background:#101b2b; }
+.guide-article h1 { margin:8px 0 12px; font-size:clamp(30px,6vw,48px); line-height:1.15; }
+.guide-lead { margin:0 0 30px; color:#cbd6e3; font-size:16px; line-height:1.9; }
+.guide-article section { margin-top:28px; padding-top:26px; border-top:1px solid #2a3b50; }
+.guide-article h2 { margin:0 0 10px; font-size:21px; }
+.guide-article section p,.guide-article aside p { margin:0; color:#aebed0; font-size:14px; line-height:2; }
+.guide-article aside { margin-top:30px; padding:18px; border-left:4px solid #f4c95d; background:#172438; }
+.guide-article aside strong { display:block; margin-bottom:6px; color:#f4c95d; }
+.guide-links { margin-top:12px; display:grid; grid-template-columns:repeat(4,1fr); gap:7px; }
+.guide-links a { padding:13px; border:1px solid #304158; background:#101b2b; font-size:11px; font-weight:900; text-align:center; text-decoration:none; }
+@media(max-width:640px){.guide-main{padding:16px 14px 80px}.guide-article{padding:20px 16px}.guide-links{grid-template-columns:1fr 1fr}.desktop-nav{display:none}}
