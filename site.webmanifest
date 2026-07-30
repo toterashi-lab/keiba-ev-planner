@@ -1,12 +1,12 @@
 {
-  "name": "無料AI競馬予想 ウマヨミ",
+  "name": "ウマヨミ AI予想家リーグ",
   "short_name": "ウマヨミ",
-  "description": "5人のAI予想家による競馬予想、買い目、結果比較",
+  "description": "5人のAI予想家を選び、作戦会議と競馬予想の勝敗を楽しむAI競馬エンターテインメント",
   "lang": "ja",
-  "start_url": "/#home",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#f2f5f3",
-  "theme_color": "#17643a",
+  "background_color": "#08111f",
+  "theme_color": "#0b1422",
   "icons": [
     { "src": "/assets/agent-safety.png", "sizes": "1254x1254", "type": "image/png", "purpose": "any" }
   ]

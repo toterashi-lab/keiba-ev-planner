@@ -1,0 +1,165 @@
+:root {
+  --league-bg: #08111f;
+  --league-panel: #101b2b;
+  --league-panel-2: #172438;
+  --league-gold: #f4c95d;
+  --league-red: #ff5968;
+  --league-blue: #4d9dff;
+  --league-green: #43d994;
+  --league-text: #f8fbff;
+  --league-muted: #9dadc2;
+}
+
+html[data-theme="dark"] body {
+  background: radial-gradient(circle at 50% -20%, #192943 0, var(--league-bg) 42%, #070d16 100%);
+}
+
+.league-lobby-hero {
+  position: relative;
+  min-height: 410px;
+  margin: -28px calc(50% - 50vw) 24px;
+  padding: 62px max(20px, calc((100vw - var(--content)) / 2));
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  border-bottom: 1px solid rgba(244, 201, 93, .3);
+  background: linear-gradient(90deg, rgba(5, 12, 23, .97) 0 35%, rgba(8, 17, 31, .6) 64%, rgba(8, 17, 31, .92) 100%), url("assets/agent-chibi-sprite.png") 75% 42% / min(720px, 58vw) auto no-repeat, #08111f;
+}
+
+.league-lobby-hero::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  z-index: -1;
+  height: 46%;
+  opacity: .3;
+  background: repeating-linear-gradient(90deg, transparent 0 48px, rgba(255,255,255,.06) 49px 50px), linear-gradient(0deg, rgba(244,201,93,.14), transparent);
+  clip-path: polygon(0 36%, 100% 0, 100% 100%, 0 100%);
+}
+
+.league-hero-copy { width: min(520px, 48vw); }
+.hero-kicker, .arena-command span, .lobby-panel header span, .strategy-meeting > header span,
+.game-metrics > header span, .result-drama > header span, .reflection-meeting > header span,
+.profile-ability > span, .league-rules > span {
+  color: var(--league-gold);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+.league-hero-copy h1 { margin: 10px 0 8px; max-width: 460px; font-size: clamp(34px, 5vw, 62px); line-height: 1.03; }
+.league-hero-copy p { color: #c5d1df; font-weight: 700; }
+.season-meta { margin: 24px 0 18px; display: flex; gap: 8px; }
+.season-meta > span { min-width: 90px; padding: 9px 12px; border: 1px solid rgba(255,255,255,.15); background: rgba(5,12,23,.72); }
+.season-meta b, .season-meta strong { display: block; }
+.season-meta b { color: var(--league-muted); font-size: 8px; }
+.season-meta strong { margin-top: 3px; font-size: 14px; }
+.league-primary-link { display: inline-flex; align-items: center; gap: 14px; padding: 11px 15px; border: 1px solid var(--league-gold); color: #111722; background: var(--league-gold); font-size: 12px; font-weight: 900; text-decoration: none; }
+
+.lobby-overview { margin-bottom: 26px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 14px; }
+.lobby-panel { height: 100%; padding: 18px; border: 1px solid #28374a; border-radius: 8px; background: linear-gradient(145deg, #111d2e, #0d1725); box-shadow: 0 18px 40px rgba(0,0,0,.25); }
+.lobby-panel > header, .strategy-meeting > header, .game-metrics > header, .result-drama > header, .reflection-meeting > header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.lobby-panel h2, .strategy-meeting h2, .game-metrics h2, .result-drama h2, .reflection-meeting h2 { margin: 3px 0 0; font-size: 19px; }
+.lobby-panel > header a, .share-icon-button, .share-result-button { border: 1px solid #3a4a60; padding: 7px 10px; border-radius: 4px; background: #172438; color: #f5f8fc; font-size: 10px; font-weight: 900; text-decoration: none; cursor: pointer; }
+.mini-standings { margin-top: 13px; display: grid; gap: 5px; }
+.mini-standing-row { min-height: 58px; display: grid; grid-template-columns: 30px 44px minmax(0,1fr) 36px 90px; align-items: center; gap: 8px; padding: 5px 9px; border-left: 3px solid var(--agent-color, #fff); background: rgba(255,255,255,.035); color: inherit; text-decoration: none; }
+.mini-standing-row.safety { --agent-color: #35d58a; }.mini-standing-row.sniper { --agent-color: #ff6573; }.mini-standing-row.pace { --agent-color: #58a3ff; }.mini-standing-row.analyst { --agent-color: #ad86ff; }.mini-standing-row.contrarian { --agent-color: #f3c44f; }
+.mini-standing-row > b { color: var(--league-gold); font: 900 20px/1 system-ui; text-align: center; }
+.mini-standing-row > span { min-width: 0; }
+.mini-standing-row > span strong, .mini-standing-row > span small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mini-standing-row > span small { color: var(--league-muted); font-size: 9px; }
+.mini-standing-row > i { font-style: normal; font-size: 12px; font-weight: 900; text-align: right; }
+.mini-character { width: 44px; height: 50px; object-fit: contain; object-position: center top; }
+.rank-delta { font-size: 10px; font-style: normal; text-align: center; }.rank-delta.up { color: #4fe39b; }.rank-delta.down { color: #ff7884; }
+
+.drama-cards { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.drama-card { position: relative; min-height: 150px; overflow: hidden; border: 1px solid #314158; background: #152136; }
+.drama-card > span { position: absolute; top: 9px; left: 9px; z-index: 2; padding: 3px 6px; background: #07101d; color: var(--league-gold); font-size: 9px; font-weight: 900; }
+.drama-character { position: absolute; right: -4px; bottom: -54px; width: 116px; height: 210px; object-fit: contain; }
+.drama-card > div { position: absolute; left: 10px; right: 76px; bottom: 12px; z-index: 2; }
+.drama-card strong, .drama-card small { display: block; }.drama-card small { margin-top: 3px; color: #4fe39b; font-weight: 900; }
+.drama-card.culprit { filter: saturate(.65); }.drama-card.culprit small { color: #ff7884; }
+.awakening-strip { height: 67px; margin-top: 8px; display: flex; align-items: center; gap: 10px; overflow: hidden; border: 1px solid rgba(244,201,93,.4); background: rgba(244,201,93,.08); }
+.awakening-character { width: 66px; height: 100px; align-self: flex-start; object-fit: contain; }
+.awakening-strip span > * { display: block; }.awakening-strip b { color: var(--league-gold); font-size: 9px; }.awakening-strip small { color: var(--league-muted); font-size: 9px; }
+
+.lobby-battle-heading { margin-top: 30px; }.live-chip { display: inline-flex; align-items: center; gap: 6px; color: #cfe8dc; font-size: 10px; }.live-chip i { width: 7px; height: 7px; border-radius: 50%; background: var(--league-green); box-shadow: 0 0 10px var(--league-green); }
+.arena-board { overflow: hidden; border: 1px solid #33445c; border-radius: 8px; background: #0e1928; box-shadow: 0 22px 56px rgba(0,0,0,.32); }
+.arena-command { position: relative; min-height: 172px; padding: 22px; display: grid; grid-template-columns: minmax(220px,1fr) 130px 180px auto; align-items: center; gap: 18px; background: linear-gradient(120deg, rgba(23,36,56,.98), rgba(12,24,39,.95)); }
+.arena-command::after { content:""; position:absolute; inset:auto 0 0; height:3px; background:linear-gradient(90deg,#35d58a,#58a3ff,#ad86ff,#ff6573,#f3c44f); }
+.arena-race-copy h2 { margin: 6px 0 0; font-size: 28px; }.arena-race-copy h3 { margin: 3px 0; font-size: 16px; }.arena-race-copy p { margin: 0; color: var(--league-muted); font-size: 11px; }
+.arena-power, .arena-difficulty { padding: 13px; border: 1px solid #34465e; background: rgba(5,13,23,.5); }
+.arena-power > span, .arena-difficulty > span { color: var(--league-muted); }.arena-power small, .arena-difficulty small { color: #72849a; font-size: 8px; }
+.arena-power > strong { display:block; color:var(--league-gold); font-size:38px; }.arena-power > i { height:5px; display:block; background:#26364b; }.arena-power > i b { width:calc(var(--score) * 1%); height:100%; display:block; background:var(--league-gold); }
+.arena-difficulty > strong { display:block; margin:7px 0; font-size:16px; }
+.arena-command > button { min-height: 48px; padding: 0 16px; border: 0; border-radius: 4px; background: var(--league-red); color: white; font-size: 12px; font-weight: 900; cursor: pointer; }
+.arena-team-title { padding: 12px 18px 5px; display:flex; gap:9px; align-items:center; }.arena-team-title span { color:var(--league-gold); font-size:9px; font-weight:900; }
+.arena-agents { padding: 8px 14px 16px; display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 7px; }
+.arena-agent { min-height: 120px; padding: 8px; display: grid; grid-template-columns: 64px minmax(0,1fr); align-items: end; overflow: hidden; border: 1px solid #2c3d52; background: #142136; }
+.arena-avatar { position: relative; height: 104px; }.arena-character { position:absolute; inset:-8px 0 auto; width:68px; height:132px; object-fit:contain; }.arena-avatar i { position:absolute; left:0; bottom:0; width:20px; height:20px; display:grid; place-items:center; background:#070f1b; color:var(--league-gold); font-style:normal; font-size:9px; font-weight:900; }
+.arena-agent div { min-width:0; position:relative; z-index:1; }.arena-agent div > span { display:block; color:var(--league-muted); font-size:8px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }.arena-agent div > strong { display:block; font-size:14px; }.arena-agent p { margin:5px 0 0; color:#e6edf6; font-size:9px; line-height:1.45; }
+
+.strategy-meeting, .game-metrics, .result-drama, .reflection-meeting { margin: 14px 0; padding: 18px; border: 1px solid #2b3b51; border-radius: 8px; background: #0e1928; }
+.meeting-status { padding: 5px 8px; border: 1px solid #51627a; color: #dce7f4; font-size: 9px; font-weight: 900; }.meeting-status.split { border-color: var(--league-red); color:#ff9ba3; }
+.strategy-dialogue { margin-top: 14px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; }
+.strategy-speaker { min-height: 112px; padding: 10px; display:grid; grid-template-columns: 70px minmax(0,1fr); align-items:center; overflow:hidden; border:1px solid #2b3e56; background:#142136; }
+.strategy-speaker:last-child { grid-column: 1 / -1; width: calc(50% - 4px); }
+.strategy-speaker.agrees { border-left:3px solid var(--league-gold); }.strategy-speaker.challenges { border-left:3px solid var(--league-red); }
+.strategy-character { width:68px; height:112px; object-fit:contain; align-self:end; }.strategy-speaker header { display:flex; justify-content:space-between; gap:8px; }.strategy-speaker header span { color:var(--league-gold); font-size:9px; }.strategy-speaker p { margin:7px 0 0; color:#dbe5f1; font-size:11px; line-height:1.65; }
+
+.agent-card-avatar { width:48px !important; height:62px !important; flex:0 0 auto; object-fit:contain !important; border-radius:0 !important; background:transparent !important; }
+.agent-card { border-top: 3px solid var(--agent-color, var(--league-gold)); }
+.agent-card.safety { --agent-color:#35d58a; }.agent-card.sniper { --agent-color:#ff6573; }.agent-card.pace { --agent-color:#58a3ff; }.agent-card.analyst { --agent-color:#ad86ff; }.agent-card.contrarian { --agent-color:#f3c44f; }
+.agent-name { display:flex; align-items:center; gap:7px; }.agent-name h3, .agent-name small { display:block; margin:0; }.agent-name small { color:var(--league-muted); font-size:9px; }
+
+.metric-card-grid { margin-top:13px; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:7px; }
+.game-meter-card { padding:13px; border:1px solid #2e4057; background:#142136; }.game-meter-card > span,.game-meter-card > small { display:block; color:var(--league-muted); font-size:9px; }.game-meter-card > strong { display:block; margin:5px 0; font-size:22px; }.game-meter-card > i { height:6px; display:block; background:#26364b; }.game-meter-card > i b { width:calc(var(--meter) * 1%); height:100%; display:block; background:var(--meter-color,var(--league-gold)); }
+.formal-metrics { margin:12px 0; border:1px solid #2b3b51; background:#0d1725; }.formal-metrics summary { padding:13px 15px; cursor:pointer; font-size:11px; font-weight:900; }.formal-metrics > div { padding:0 15px 15px; color:var(--league-muted); font-size:11px; line-height:1.7; }
+.battle-meter-card.unavailable strong { font-size:15px; }.battle-meter-card.unavailable em { display:block; margin-top:5px; color:var(--league-muted); font-size:8px; font-style:normal; }
+.archive-character { width:48px !important; height:64px !important; object-fit:contain !important; border-radius:0 !important; background:transparent !important; }
+
+.result-drama.has-winner { position:relative; overflow:hidden; border-color:rgba(244,201,93,.6); }.result-drama.has-winner::after { content:""; position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(115deg,transparent 0 68px,rgba(244,201,93,.08) 69px 71px); animation:result-shine 1.2s ease-out both; }
+.result-role-grid { margin-top:14px; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:7px; }.result-role-card { position:relative; min-height:190px; padding:12px; overflow:hidden; border:1px solid #304158; background:#142136; }.result-role-card > span { position:relative; z-index:2; color:var(--league-gold); font-size:10px; font-weight:900; }.result-role-character { position:absolute; right:-8px; bottom:-55px; width:148px; height:245px; object-fit:contain; }.result-role-card strong,.result-role-card small { position:absolute; z-index:2; left:12px; display:block; }.result-role-card strong { bottom:34px; font-size:17px; }.result-role-card small { bottom:14px; color:#4fe39b; font-weight:900; }.result-role-card.culprit,.result-role-card.jinx { filter:saturate(.65); }.result-role-card.culprit small,.result-role-card.jinx small { color:#ff7e86; }
+.rank-change-strip { margin-top:8px; display:flex; overflow-x:auto; gap:5px; }.rank-change-strip span { min-width:132px; padding:8px; display:flex; gap:6px; border:1px solid #2d3d52; background:#111d2e; font-size:10px; }.rank-change-strip i { margin-left:auto; font-style:normal; }
+.reflection-meeting > div { margin-top:12px; display:grid; gap:6px; }.reflection-line { min-height:90px; padding:8px 12px; display:grid; grid-template-columns:64px minmax(0,1fr); align-items:center; border:1px solid #2b3c51; background:#142136; }.reflection-line.lost { filter:saturate(.65); }.reflection-character { width:60px; height:90px; object-fit:contain; }.reflection-line header { display:flex; justify-content:space-between; gap:8px; }.reflection-line header span { color:var(--league-muted); font-size:9px; }.reflection-line p { margin:5px 0 0; font-size:11px; }.next-episode { margin-top:10px; padding:13px; display:grid; grid-template-columns:auto 1fr auto; gap:10px; align-items:center; border:1px solid var(--league-gold); text-decoration:none; }.next-episode span,.next-episode small { color:var(--league-gold); font-size:9px; font-weight:900; }
+
+.season-summary-grid { margin-bottom:12px; display:grid; grid-template-columns:repeat(4,1fr); gap:7px; }.season-summary-grid > div { padding:14px; border:1px solid #2c3d53; background:#101b2b; }.season-summary-grid span,.season-summary-grid strong { display:block; }.season-summary-grid span { color:var(--league-muted); font-size:9px; }.season-summary-grid strong { margin-top:5px; font-size:18px; }
+.season-table { display:grid; gap:6px; }.season-row { min-height:88px; padding:6px 12px; display:grid; grid-template-columns:40px 64px minmax(140px,1fr) 130px 100px 32px; gap:10px; align-items:center; border:1px solid #2b3d52; border-left:4px solid var(--agent-color,#fff); background:#101b2b; text-decoration:none; }.season-row.safety{--agent-color:#35d58a}.season-row.sniper{--agent-color:#ff6573}.season-row.pace{--agent-color:#58a3ff}.season-row.analyst{--agent-color:#ad86ff}.season-row.contrarian{--agent-color:#f3c44f}.season-row > b { color:var(--league-gold); font-size:26px; text-align:center; }.season-character { width:62px; height:82px; object-fit:contain; }.season-row > span strong,.season-row > span small,.season-row > div strong,.season-row > div small { display:block; }.season-row small { color:var(--league-muted); font-size:9px; }.season-row em { font-style:normal; font-weight:900; }.league-rules { margin-top:14px; padding:18px; border:1px solid #2c3d52; background:#0e1928; }.league-rules h2 { margin:5px 0; }.league-rules p { margin:0; color:var(--league-muted); font-size:11px; line-height:1.8; }
+
+.agent-rank-row { min-height:92px; grid-template-columns:42px 70px minmax(110px,1fr) 120px 120px !important; border-left:4px solid var(--agent-color,#fff); }.agent-rank-row.safety{--agent-color:#35d58a}.agent-rank-row.sniper{--agent-color:#ff6573}.agent-rank-row.pace{--agent-color:#58a3ff}.agent-rank-row.analyst{--agent-color:#ad86ff}.agent-rank-row.contrarian{--agent-color:#f3c44f}.rank-character { width:66px; height:88px; object-fit:contain; }.agent-profile { overflow:hidden; border-color:#2b3c52; background:#101b2b; }.profile-character-stage { position:relative; min-height:410px; overflow:hidden; background:linear-gradient(180deg,#1d2d46,#0b1422); }.agent-profile-portrait { position:absolute; inset:12px 0 auto; width:100%; height:430px; object-fit:contain; }.profile-character-stage > span { position:absolute; left:14px; bottom:14px; padding:6px 9px; background:#07101c; color:var(--league-gold); font-size:10px; font-weight:900; }.agent-profile-body blockquote { border-left:3px solid var(--league-gold); }.profile-ability { margin:12px 0; padding:13px; border:1px solid rgba(244,201,93,.4); background:rgba(244,201,93,.06); }.profile-ability strong,.profile-ability small { display:block; }.profile-ability small { margin-top:4px; color:var(--league-muted); }.condition-grid { display:grid; grid-template-columns:1fr 1fr; gap:7px; }.condition-grid > div { padding:11px; border:1px solid #2b3c52; }.condition-grid span,.condition-grid strong { display:block; }.condition-grid span { color:var(--league-muted); font-size:9px; }.condition-grid strong { margin-top:4px; font-size:11px; }.character-state-gallery { margin-top:14px; display:grid; grid-template-columns:repeat(5,1fr); gap:5px; }.character-state-gallery figure { margin:0; padding:5px; text-align:center; border:1px solid #2b3c52; background:#0d1725; }.state-character { width:100%; height:125px; object-fit:contain; }.character-state-gallery figcaption { color:var(--league-muted); font-size:9px; }
+
+.sponsor-slot { min-height:88px; margin-top:22px; padding:18px; display:grid; align-content:center; border:1px dashed #43546a; background:#0d1725; }.sponsor-slot span,.sponsor-slot strong,.sponsor-slot small { display:block; }.sponsor-slot span { color:var(--league-gold); font-size:9px; font-weight:900; }.sponsor-slot strong { margin:4px 0; }.sponsor-slot small { color:var(--league-muted); }
+
+.latest-results-panel { margin-bottom:18px; padding:16px; border:1px solid #2d3e54; border-radius:8px; background:#0e1928; }.latest-results-panel > header { display:flex; align-items:end; justify-content:space-between; gap:10px; }.latest-results-panel > header span { color:var(--league-gold); font-size:9px; font-weight:900; }.latest-results-panel h2 { margin:3px 0 0; font-size:19px; }.latest-results-panel > header small { color:var(--league-muted); font-size:9px; }.latest-result-cards { margin-top:12px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; }.latest-result-card { position:relative; min-height:154px; padding:13px; overflow:hidden; border:1px solid #304158; background:#142136; color:inherit; text-decoration:none; }.latest-result-card.featured { border-color:rgba(244,201,93,.65); }.latest-result-card > div { max-width:65%; }.latest-result-card > div span,.latest-result-card > div strong { display:block; }.latest-result-card > div span { color:var(--league-muted); font-size:9px; }.latest-result-card > div strong { margin-top:3px; font-size:13px; }.latest-result-character { position:absolute; right:-5px; bottom:-44px; width:116px; height:196px; object-fit:contain; }.latest-result-card p { position:absolute; left:13px; bottom:30px; margin:0; }.latest-result-card p > * { display:block; }.latest-result-card p small { color:var(--league-gold); font-size:8px; }.latest-result-card p b { font-size:17px; }.latest-result-card p em { color:#4fe39b; font-size:10px; font-style:normal; font-weight:900; }.latest-result-card > i { position:absolute; left:13px; bottom:10px; color:var(--league-muted); font-size:8px; font-style:normal; }
+
+@keyframes result-shine { from { opacity:0; transform:translateX(-8%); } to { opacity:1; transform:translateX(0); } }
+
+@media (max-width: 820px) {
+  main { padding-top: 14px; }
+  .league-lobby-hero { min-height: 460px; margin-top:-14px; padding:28px 18px 250px; align-items:flex-start; background:linear-gradient(180deg,rgba(5,12,23,.96) 0 43%,rgba(8,17,31,.34) 66%,#08111f 100%),url("assets/agent-chibi-sprite.png") center 93% / 430px auto no-repeat,#08111f; }
+  .league-hero-copy { width:100%; }.league-hero-copy h1 { font-size:36px; }.league-hero-copy p { margin:7px 0; font-size:11px; }
+  .season-meta { margin:15px 0 13px; }.season-meta > span { min-width:0; flex:1; padding:7px; }.league-primary-link { min-height:42px; }
+  .lobby-overview { grid-template-columns:1fr; }.mini-standing-row { grid-template-columns:26px 40px minmax(0,1fr) 30px 72px; }.mini-standing-row > i { font-size:10px; }
+  .arena-command { grid-template-columns:1fr 92px; gap:8px; padding:16px; }.arena-race-copy { grid-column:1 / -1; }.arena-race-copy h2 { font-size:22px; }.arena-difficulty { padding:9px; }.arena-command > button { grid-column:1 / -1; }
+  .arena-agents { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:14px; }.arena-agent { flex:0 0 210px; scroll-snap-align:start; }
+  .strategy-dialogue { grid-template-columns:1fr; }.strategy-speaker:last-child { grid-column:auto; width:auto; }
+  .metric-card-grid { grid-template-columns:1fr 1fr; }.game-meter-card > strong { font-size:19px; }
+  .result-role-grid { grid-template-columns:1fr 1fr; }.result-role-card { min-height:165px; }.result-role-character { height:215px; }
+  .reflection-line { grid-template-columns:58px minmax(0,1fr); }.reflection-line header { display:block; }.next-episode { grid-template-columns:1fr auto; }.next-episode span { grid-column:1 / -1; }
+  .season-summary-grid { grid-template-columns:1fr 1fr; }.season-row { grid-template-columns:28px 50px minmax(0,1fr) 28px; }.season-row > div { display:none; }.season-character { width:50px; height:72px; }
+  .agent-rank-row { grid-template-columns:32px 56px minmax(0,1fr) 82px !important; }.agent-rank-row > p:first-of-type { display:none; }.rank-character { width:54px; height:76px; }
+  .profile-character-stage { min-height:330px; }.agent-profile-portrait { height:355px; }.character-state-gallery { overflow-x:auto; display:flex; }.character-state-gallery figure { flex:0 0 105px; }.state-character { height:135px; }
+  .latest-result-cards { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; }.latest-result-card { flex:0 0 270px; scroll-snap-align:start; }
+}
+
+@media (max-width: 390px) {
+  .league-lobby-hero { min-height:445px; background-size:390px auto; }
+  .league-hero-copy h1 { font-size:31px; }
+  .season-meta strong { font-size:11px; }
+  .drama-card { min-height:138px; }.drama-character { width:102px; }
+  .result-role-card { min-height:150px; }.result-role-character { width:120px; height:190px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior:auto !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+}
