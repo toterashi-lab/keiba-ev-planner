@@ -45,6 +45,8 @@ try {
     recommendations: auditedRecommendations,
     strategies,
   };
+  const previous = fs.existsSync(OUTPUT_PATH) ? JSON.parse(fs.readFileSync(OUTPUT_PATH, "utf8")) : null;
+  if (previous && sameAudit(previous, report)) report.checkedAt = previous.checkedAt;
   fs.writeFileSync(OUTPUT_PATH, `${JSON.stringify(report, null, 2)}\n`, "utf8");
   fs.writeFileSync(PUBLIC_OUTPUT_PATH, `window.KEIBA_REFERENCE_EV_AUDIT = ${JSON.stringify(report, null, 2)};\n`, "utf8");
   console.log(JSON.stringify({
@@ -59,6 +61,15 @@ try {
   }, null, 2));
 } finally {
   db.close();
+}
+
+function sameAudit(left, right) {
+  const normalize = (value) => {
+    const copy = { ...value };
+    delete copy.checkedAt;
+    return JSON.stringify(copy);
+  };
+  return normalize(left) === normalize(right);
 }
 
 function loadModel() {

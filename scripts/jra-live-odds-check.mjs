@@ -5,11 +5,15 @@ import { resolvePrivateDataDir } from "./private-data-path.mjs";
 const root = path.resolve(import.meta.dirname, "..");
 const db = new DatabaseSync(path.join(resolvePrivateDataDir(root), "keiba.sqlite"), { readOnly: true });
 try {
+  console.log(JSON.stringify(auditLiveOdds(db), null, 2));
+} finally { db.close(); }
+
+function auditLiveOdds(db) {
   const liveOddsTable = db.prepare("select 1 from sqlite_master where type='table' and name='live_odds_snapshots'").get();
-  if (!liveOddsTable) throw new Error("ライブオッズはまだ取得されていません");
+  if (!liveOddsTable) return { status: "unavailable", reason: "live_odds_not_captured", policy: "model_only_no_fabricated_odds" };
   const base = db.prepare(`select * from odds_ingestion_batches where status='complete'
     and source in ('JRA official live odds','JRA official live odds fixture') order by id desc limit 1`).get();
-  if (!base) throw new Error("ライブ単複オッズの完了バッチがありません");
+  if (!base) return { status: "unavailable", reason: "complete_live_odds_batch_missing", policy: "model_only_no_fabricated_odds" };
   const exotic = db.prepare(`select * from odds_ingestion_batches where status='complete'
     and source in ('JRA official live exotic odds','JRA official live exotic odds fixture')
     and snapshot_kind=? and target_dates=? order by id desc limit 1`).get(base.snapshot_kind, base.target_dates);
@@ -30,5 +34,6 @@ try {
       if (!(observed < start && start - observed <= 20 * 60000)) throw new Error(`${raceId}の発走前時刻条件が不正です`);
     }
   }
-  console.log(JSON.stringify({ status: "pass", snapshotKind: base.snapshot_kind, baseBatchId: base.id, exoticBatchId: exotic.id, races: raceIds.length, prices: rows.length, betTypes: required.length }, null, 2));
-} finally { db.close(); }
+  return { status: "pass", snapshotKind: base.snapshot_kind, baseBatchId: base.id, exoticBatchId: exotic.id,
+    races: raceIds.length, prices: rows.length, betTypes: required.length };
+}
