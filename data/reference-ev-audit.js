@@ -1,7 +1,7 @@
 window.KEIBA_REFERENCE_EV_AUDIT = {
   "status": "evaluation_only",
-  "checkedAt": "2026-08-02T15:53:04.951Z",
-  "modelVersion": "ability-softmax-v2-asof-2026-07-11-38ce1d9ff7df",
+  "checkedAt": "2026-08-02T16:20:01.732Z",
+  "modelVersion": "ability-softmax-v2-asof-2026-07-11-43ff654fb309",
   "targetDates": [
     "2026-07-11",
     "2026-07-12"
@@ -10,7 +10,7 @@ window.KEIBA_REFERENCE_EV_AUDIT = {
   "recommendationCoverage": {
     "predictions": 72,
     "auditedRecommendations": 72,
-    "excludedCandidateRows": 10387
+    "excludedCandidateRows": 10405
   },
   "leakagePolicy": "AI予想時点で確定した各レース1件のtopTicketだけを、予想生成後に結果・払戻と照合する。候補ランキングや券種別上位は購入想定に含めない。",
   "sampleWarning": "72レースのみの外部監査であり、購入適格判定には使用しない。",
