@@ -1,14 +1,14 @@
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import crypto from "node:crypto";
 import { DatabaseSync } from "node:sqlite";
 import { auditFeatureRegistry } from "../model/feature-registry.mjs";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
-const outDir = path.resolve(process.cwd(), "public");
 const sourceDir = path.resolve(import.meta.dirname, "..");
-if (outDir === sourceDir) {
-  throw new Error("公開生成の出力先がソース直下を指しています。作業ディレクトリを確認してください。");
-}
+const outDir = sourceDir;
+const privateDir = resolvePrivateDataDir(sourceDir);
 const dataDir = path.join(outDir, "data");
 const programmeRaw = fs.readFileSync("data/meet-2026-07-11-2026-07-12.json", "utf8");
 const resultsRaw = fs.readFileSync("data/results-2026-07-11-2026-07-12.json", "utf8");
@@ -18,9 +18,9 @@ const resultsData = JSON.parse(resultsRaw);
 const resultLinksData = JSON.parse(resultLinksRaw);
 const modelOutputs = JSON.parse(fs.readFileSync("data/model-outputs-2026-07-11-2026-07-12.json", "utf8"));
 const payoutPatterns = JSON.parse(fs.readFileSync("data/historical-payout-patterns.json", "utf8"));
-const abilityArtifactPath = [path.join("data", "jra-free-private", "models", "reference-asof-model.json"),
-  path.join("data", "jra-free-private", "models", "ability-softmax-v1.json")].find((candidate) => fs.existsSync(candidate));
-const abilityArtifact = fs.existsSync(abilityArtifactPath) ? JSON.parse(fs.readFileSync(abilityArtifactPath, "utf8")) : null;
+const abilityArtifactPath = [path.join(privateDir, "models", "reference-asof-model.json"),
+  path.join(privateDir, "models", "ability-softmax-v1.json")].find((candidate) => fs.existsSync(candidate));
+const abilityArtifact = abilityArtifactPath ? JSON.parse(fs.readFileSync(abilityArtifactPath, "utf8")) : null;
 const databaseExport = exportDatabaseStatus();
 const liveExport = exportLiveEdition();
 const liveRacecardsText = browserDataText("KEIBA_LIVE_RACECARDS", liveExport.racecards);
@@ -56,7 +56,7 @@ if (resultLinksData.raceCount !== resultsData.results.length || !sameSet(resultL
   throw new Error("公開停止: 結果URL一覧と取得結果が一致しないため、前回正常版を保持します");
 }
 
-const stageDir = fs.mkdtempSync(path.join(process.cwd(), ".public-stage-"));
+const stageDir = fs.mkdtempSync(path.join(os.tmpdir(), "keiba-public-stage-"));
 const stageDataDir = path.join(stageDir, "data");
 fs.mkdirSync(stageDataDir, { recursive: true });
 for (const file of ["AGENTS.md", "index.html", "styles.css", "ticket-engine.js", "app.js"]) copy(file, path.join(stageDir, file));
@@ -98,6 +98,9 @@ for (const file of [
   "expectancy-agent-ensemble-check.mjs",
   "audit-reference-market-benchmark.mjs",
   "reference-market-benchmark-check.mjs",
+  "materialize-reference-json.mjs",
+  "rehydrate-reference-odds.mjs",
+  "sync-reference-browser-data.mjs",
   "jra-free-odds.mjs",
   "jra-free-exotic-odds.mjs",
   "jra-free-exotic-odds-check.mjs",
@@ -197,41 +200,9 @@ const stagedIndex = fs.readFileSync(stagedIndexPath, "utf8").replace(
 fs.writeFileSync(stagedIndexPath, stagedIndex, "utf8");
 
 fs.writeFileSync(path.join(stageDir, ".nojekyll"), "", "utf8");
-fs.writeFileSync(path.join(stageDir, ".gitignore"), ".DS_Store\nThumbs.db\n", "utf8");
-fs.writeFileSync(path.join(stageDir, "README.md"), `# ウマヨミ
-
-先週のJRA中央競馬72レースを使った、過去データ蓄積・期待値検証画面です。
-
-## 収録範囲
-
-- 2026年7月11日・12日
-- 福島・小倉・函館
-- 開催番組 72レース
-- 勝馬 72レース
-- 出走馬 ${resultsData.runnerCount}頭
-- 払戻 ${resultsData.refundLineCount}件
-- 締切後単勝・複勝オッズ ${databaseExport.odds.snapshotCount}件
-- 長期DB ${databaseExport.status.completeMonths} / ${databaseExport.status.totalMonths}か月完了
-
-出典はJRA公式番組・結果ページです。JRAおよびnetkeibaの公式サービスではありません。
-無課金の長期蓄積コードは \`scripts/jra-free-db.mjs\`、公式単勝・複勝オッズ収集は \`scripts/jra-free-odds.mjs\`、検査仕様は \`docs/free-data-pipeline.md\` に収録しています。
-期待値の研究根拠、3シナリオ、校正・時系列検証ゲートは \`docs/expectancy-research-v5.md\` に収録しています。
-原本HTMLとSQLite本体は個人利用のローカルDBにのみ保存し、この公開リポジトリには収録しません。
-
-期待値候補は、全馬オッズ履歴、確率校正、時系列検証、オッズ鮮度、ドローダウンの全ゲートが合格するまで生成を停止します。
-
-GitHub Pagesは \`main\` ブランチ直下を公開します。
-`, "utf8");
-
-if (fs.existsSync(outDir)) {
-  for (const entry of fs.readdirSync(outDir)) {
-    if (entry === ".git") continue;
-    fs.rmSync(path.join(outDir, entry), { recursive: true, force: true });
-  }
-}
 
 fs.mkdirSync(dataDir, { recursive: true });
-fs.cpSync(stageDir, outDir, { recursive: true });
+fs.cpSync(stageDir, outDir, { recursive: true, force: true });
 fs.rmSync(stageDir, { recursive: true, force: true });
 
 console.log(`Built public real-data edition in ${outDir}`);
@@ -255,7 +226,7 @@ function sameSet(left, right) {
 }
 
 function exportFeatureCoverage(generatedAt) {
-  const database = new DatabaseSync(path.join("data", "jra-free-private", "keiba.sqlite"), { readOnly: true });
+  const database = new DatabaseSync(path.join(privateDir, "keiba.sqlite"), { readOnly: true });
   try {
     const report = auditFeatureRegistry(database);
     report.generatedAt = generatedAt;
@@ -264,7 +235,7 @@ function exportFeatureCoverage(generatedAt) {
 }
 
 function exportDatabaseStatus() {
-  const databasePath = path.join("data", "jra-free-private", "keiba.sqlite");
+  const databasePath = path.join(privateDir, "keiba.sqlite");
   if (!fs.existsSync(databasePath)) throw new Error("公開停止: 検証済みSQLiteがありません");
   const db = new DatabaseSync(databasePath, { readOnly: true });
   try {
@@ -316,11 +287,11 @@ function exportDatabaseStatus() {
         .all().map((row) => [row.status, row.count]))
       : {};
     const workerHeartbeatAgeSeconds = activeJob ? (Date.now() - new Date(activeJob.updated_at).getTime()) / 1000 : null;
-    const preflightPath = path.join("data", "jra-free-private", "models", "training-preflight.json");
+    const preflightPath = path.join(privateDir, "models", "training-preflight.json");
     const preflight = fs.existsSync(preflightPath) ? JSON.parse(fs.readFileSync(preflightPath, "utf8")) : null;
-    const liveValidationPath = path.join("data", "jra-free-private", "models", "live-ev-validation.json");
+    const liveValidationPath = path.join(privateDir, "models", "live-ev-validation.json");
     const liveValidation = fs.existsSync(liveValidationPath) ? JSON.parse(fs.readFileSync(liveValidationPath, "utf8")) : null;
-    const fieldAuditPath = path.join("data", "jra-free-private", "models", "field-availability-audit.json");
+    const fieldAuditPath = path.join(privateDir, "models", "field-availability-audit.json");
     const fieldAudit = fs.existsSync(fieldAuditPath) ? JSON.parse(fs.readFileSync(fieldAuditPath, "utf8")) : null;
     const status = {
       asOf: new Date().toISOString(),
@@ -445,38 +416,22 @@ function exportDatabaseStatus() {
 }
 
 function exportLiveEdition() {
-  const databasePath = path.join("data", "jra-free-private", "keiba.sqlite");
-  const db = new DatabaseSync(databasePath, { readOnly: true });
-  try {
-    const today = new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(new Date());
-    const races = db.prepare("select * from live_races where race_date>=? order by race_date,venue_code,race_number").all(today);
-    const entries = races.length ? db.prepare(`select * from live_entries where race_id in (${races.map(() => "?").join(",")}) order by race_id,horse_number`).all(...races.map((race) => race.race_id)) : [];
-    const venueNames = { "01": ["SAPPORO", "札幌"], "02": ["HAKODATE", "函館"], "03": ["FUKUSHIMA", "福島"], "04": ["NIIGATA", "新潟"], "05": ["TOKYO", "東京"], "06": ["NAKAYAMA", "中山"], "07": ["CHUKYO", "中京"], "08": ["KYOTO", "京都"], "09": ["HANSHIN", "阪神"], "10": ["KOKURA", "小倉"] };
-    const meetings = [];
-    const results = [];
-    for (const race of races) {
-      let meeting = meetings.find((item) => item.date === race.race_date);
-      if (!meeting) { meeting = { date: race.race_date, weekday: new Intl.DateTimeFormat("ja-JP", { weekday: "short", timeZone: "Asia/Tokyo" }).format(new Date(`${race.race_date}T00:00:00+09:00`)), tracks: [] }; meetings.push(meeting); }
-      const [venueCode, venueName] = venueNames[race.venue_code] ?? [race.venue_code, race.venue_code];
-      let track = meeting.tracks.find((item) => item.venueCode === venueCode);
-      if (!track) { track = { venueCode, venueName, meetingName: race.meeting_name, races: [] }; meeting.tracks.push(track); }
-      track.races.push({ no: race.race_number, name: race.race_name, condition: race.race_class, surface: race.surface, distanceM: race.distance_m, start: race.start_time });
-      const runners = entries.filter((entry) => entry.race_id === race.race_id).map((entry) => ({
-        finishPosition: null, finishText: "出走予定", gateNumber: entry.gate_number, horseNumber: entry.horse_number, horseName: entry.horse_name,
-        sexAge: entry.sex_age, carriedWeight: entry.carried_weight, jockeyName: entry.jockey_name, officialTime: "", margin: "",
-        cornerPositions: [], finalSectional: null, bodyWeight: entry.body_weight, bodyWeightDelta: entry.body_weight_delta,
-        trainerName: entry.trainer_name, popularity: null,
-      }));
-      results.push({ status: "pre_race", meetingName: race.meeting_name, raceNo: race.race_number, raceTitle: race.race_name,
-        startTime: race.start_time, course: `${race.surface}${race.distance_m}m`, weather: null, turfGoing: null, dirtGoing: null,
-        winner: null, runners, refunds: [], url: "https://www.jra.go.jp/JRADB/accessD.html" });
-    }
-    const modelPath = path.join("data", "jra-free-private", "models", "live-market-ev.json");
-    let liveModel = { status: "waiting", candidates: [], predictions: [] };
-    if (fs.existsSync(modelPath)) {
-      const parsed = JSON.parse(fs.readFileSync(modelPath, "utf8"));
-      if (parsed.snapshotKind === "pre_race" && parsed.targetDates?.some((date) => date >= today)) liveModel = parsed;
-    }
-    return { racecards: { meetings, results, generatedAt: new Date().toISOString() }, modelOutputs: liveModel };
-  } finally { db.close(); }
+  const racecards = readBrowserData(path.join(sourceDir, "data", "live-racecards.js"), "KEIBA_LIVE_RACECARDS");
+  const modelOutputs = readBrowserData(path.join(sourceDir, "data", "live-model-outputs.js"), "KEIBA_LIVE_MODEL_OUTPUTS");
+  const raceCount = racecards.results?.length ?? 0;
+  const predictionCount = modelOutputs.predictions?.length ?? 0;
+  if (raceCount < 1 || predictionCount !== raceCount) {
+    throw new Error(`公開停止: 現在の合格済み週データが不完全です races=${raceCount} predictions=${predictionCount}`);
+  }
+  return { racecards, modelOutputs };
+}
+
+function readBrowserData(file, globalName) {
+  if (!fs.existsSync(file)) throw new Error(`公開停止: ${path.basename(file)}がありません`);
+  const text = fs.readFileSync(file, "utf8");
+  const assignment = text.indexOf("=");
+  if (assignment < 0 || !text.slice(0, assignment).includes(globalName)) {
+    throw new Error(`公開停止: ${path.basename(file)}の形式が不正です`);
+  }
+  return JSON.parse(text.slice(assignment + 1).trim().replace(/;\s*$/, ""));
 }

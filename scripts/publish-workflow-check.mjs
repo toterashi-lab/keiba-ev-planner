@@ -3,12 +3,14 @@ import fs from "node:fs";
 const source = fs.readFileSync("scripts/publish-web-status.ps1", "utf8");
 const ordered = [
   '"scripts\\materialize-reference-json.mjs"',
+  '"scripts\\rehydrate-reference-odds.mjs"',
   '"scripts\\model-training-preflight-freshness.mjs"',
   '"scripts\\model-artifact-compatibility-check.mjs"',
   '"scripts\\reference-ev-scope-check.mjs"',
   '"scripts\\goal-completion-audit-check.mjs"',
   '"scripts\\horse-racing-ev-agent-check.mjs"',
   '"scripts\\expectancy-agent-ensemble-check.mjs"',
+  '"scripts\\sync-reference-browser-data.mjs"',
   '"scripts\\audit-automation-tasks.ps1"',
   '"scripts\\jra-free-db.mjs" audit',
   '"scripts\\audit-field-availability.mjs"',
@@ -38,6 +40,9 @@ if (!source.includes("$public = $root") || source.includes('Join-Path $root "pub
 }
 for (const token of ["if ($LASTEXITCODE -eq 10)", "--max-old-space-size=8192", '"scripts\\model-training-preflight.mjs"']) {
   if (!source.includes(token)) throw new Error(`Model preflight freshness fallback is missing: ${token}`);
+}
+if (!source.includes('& $node --max-old-space-size=8192 --no-warnings "scripts\\jra-live-racecards-check.mjs"')) {
+  throw new Error("Live racecard validation must use the large historical-feature heap");
 }
 console.log(JSON.stringify({
   status: "pass",

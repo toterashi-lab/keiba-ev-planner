@@ -108,7 +108,7 @@ export function generateMarketEv() {
       status: "ready",
       modelVersion: VALIDATION_ARTIFACT?.researchProbabilityStatus === "research_pass" ? VALIDATION_ARTIFACT.modelVersion : "expectancy-v2-market-baseline",
       calculationMode: VALIDATION_ARTIFACT?.researchProbabilityStatus === "research_pass" ? "oos_ability_model_with_market_benchmark" : "closing_market_validation",
-      generatedAt: new Date().toISOString(),
+      generatedAt: VALIDATION_ARTIFACT?.generatedAt ?? new Date().toISOString(),
       unitStakeYen: 100,
       logic: {
         engineVersion: EXPECTANCY_ENGINE_VERSION,
@@ -152,6 +152,14 @@ function makeAiPrediction(race, horseProbabilities, names, raceCandidates, abili
     [...raceCandidates].filter((candidate) => candidate.betType === betType).sort(byExpectedReturn)[0] ?? null).filter(Boolean);
   const topTicket = [...bestByBetType].sort(byExpectedReturn)[0] ?? null;
   const forecastPanel = buildForecastPanel({ horseProbabilities, marketProbabilities, modelRows, names });
+  const rawAbilityByHorse = new Map(modelRows.map((row) => [row.horse_number, row.win_probability]));
+  const allHorseProbabilities = ranked.map((row) => ({
+    horseNumber: row.horseNumber,
+    horseName: row.horseName,
+    marketProbability: marketProbabilities[row.horseNumber] ?? null,
+    rawAbilityProbability: rawAbilityByHorse.get(row.horseNumber) ?? null,
+    pooledProbability: row.probability,
+  }));
   return {
     date: race.race_date,
     meetingName: meetingName(race),
@@ -163,6 +171,7 @@ function makeAiPrediction(race, horseProbabilities, names, raceCandidates, abili
     confidence,
     confidenceScore,
     scenario,
+    allHorseProbabilities,
     forecastPanel,
     masterConsensus: {
       agent: "chief-expectancy-agent",

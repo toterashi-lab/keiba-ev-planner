@@ -56,6 +56,8 @@ Start-Transcript -Path $logPath | Out-Null
 try {
   & $node --no-warnings "scripts\materialize-reference-json.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Reference JSON materialization failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\rehydrate-reference-odds.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Reference odds rehydration failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\validate-reference-dataset.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Reference dataset validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\ev-logic-check.mjs"
@@ -93,7 +95,7 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Market expectancy validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\reference-ev-scope-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "AI recommendation evaluation scope failed: $LASTEXITCODE" }
-  & $node --no-warnings "scripts\jra-live-racecards-check.mjs"
+  & $node --max-old-space-size=8192 --no-warnings "scripts\jra-live-racecards-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Live racecard validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\jra-live-odds-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Live odds validation failed: $LASTEXITCODE" }
@@ -115,6 +117,8 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Expectancy agent ensemble validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\reference-market-benchmark-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Reference market benchmark validation failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\sync-reference-browser-data.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Reference browser data synchronization failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\publish-workflow-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Publication workflow validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\post-backfill-workflow-check.mjs"

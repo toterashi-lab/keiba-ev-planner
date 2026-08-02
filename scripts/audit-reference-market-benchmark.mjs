@@ -27,22 +27,18 @@ try {
     `${row.raceId}|${horseNumbers.get(`${row.raceId}|${row.horseId}`)}`,
     row.probability,
   ]));
-  const winType = model.candidates.find((row) => row.odds != null)?.betType;
-  const onePointMethod = model.candidates.find((row) => row.odds != null)?.method;
   const losses = { market: 0, pooled: 0, ability: 0 };
   let races = 0;
 
   for (const prediction of model.predictions) {
     const winner = winners.get(prediction.raceId);
-    const candidate = model.candidates.find((row) =>
-      row.raceId === prediction.raceId
-      && row.betType === winType
-      && row.method === onePointMethod
-      && Number(row.ticketKeys?.[0]) === winner?.horse_number);
+    const winnerProbability = prediction.allHorseProbabilities?.find((row) =>
+      row.horseNumber === winner?.horse_number);
     const probabilities = {
-      market: candidate?.marketExpectedReturn / candidate?.odds,
-      pooled: candidate?.abilityProbability,
-      ability: rawProbabilities.get(`${prediction.raceId}|${winner?.horse_number}`),
+      market: winnerProbability?.marketProbability,
+      pooled: winnerProbability?.pooledProbability,
+      ability: winnerProbability?.rawAbilityProbability
+        ?? rawProbabilities.get(`${prediction.raceId}|${winner?.horse_number}`),
     };
     if (!Object.values(probabilities).every((value) => Number.isFinite(value) && value > 0)) {
       throw new Error(`${prediction.raceId}: probability benchmark input missing`);

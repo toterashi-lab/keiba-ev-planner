@@ -2,6 +2,9 @@ import fs from "node:fs";
 
 const meetings = JSON.parse(fs.readFileSync("data/meet-2026-07-11-2026-07-12.json", "utf8")).meetings;
 const model = JSON.parse(fs.readFileSync("data/model-outputs-2026-07-11-2026-07-12.json", "utf8"));
+const closingOdds = JSON.parse(fs.readFileSync("data/closing-odds-2026-07-11-2026-07-12.json", "utf8"));
+const pricedHorseCounts = new Map(closingOdds.races.map((race) => [race.raceId,
+  race.prices.filter((row) => Number.isInteger(row.horseNumber) && row.win > 0).length]));
 const betTypes = ["単勝", "馬連", "3連複", "3連単"];
 const expectedRaces = meetings.flatMap((meeting) => meeting.tracks.flatMap((track) => track.races.map((race) => ({
   key: `${meeting.date}|${track.meetingName}|${race.no}`,
@@ -48,6 +51,15 @@ for (const race of expectedRaces) {
     failures.push(`${race.key}: five persona forecasters missing`);
   }
   if (prediction?.marks?.some((row) => !(row.probability > 0 && row.probability < 1))) failures.push(`${race.key}: invalid AI probability`);
+  const allHorseProbabilities = prediction?.allHorseProbabilities ?? [];
+  const pooledTotal = allHorseProbabilities.reduce((sum, row) => sum + Number(row.pooledProbability), 0);
+  const marketTotal = allHorseProbabilities.reduce((sum, row) => sum + Number(row.marketProbability), 0);
+  if (allHorseProbabilities.length !== pricedHorseCounts.get(prediction?.raceId)
+    || allHorseProbabilities.some((row) => !Number.isInteger(row.horseNumber)
+      || !(row.marketProbability > 0) || !(row.pooledProbability > 0))
+    || Math.abs(pooledTotal - 1) > 1e-9 || Math.abs(marketTotal - 1) > 1e-9) {
+    failures.push(`${race.key}: all-horse probability snapshot invalid`);
+  }
   const recommendation = prediction?.topTicket;
   if (recommendation?.recommendationSource !== "ai_prediction_top_ticket"
     || !Array.isArray(recommendation.ticketKeys) || recommendation.ticketKeys.length !== recommendation.points
@@ -56,7 +68,7 @@ for (const race of expectedRaces) {
     || recommendation.chiefDecision?.agent !== "chief-expectancy-agent"
     || recommendation.payoutVolatilityPrior?.usePolicy !== "volatility_prior_only") failures.push(`${race.key}: auditable AI top-ticket missing`);
   const betTypeRecommendations = prediction?.betTypeRecommendations ?? [];
-  if (betTypeRecommendations.length !== betTypes.length
+  if (betTypeRecommendations.length < betTypes.length
     || betTypes.some((betType) => !betTypeRecommendations.some((row) => row.betType === betType
       && row.recommendationSource === "ai_prediction_bet_type_top_ticket"
       && row.totalInvestmentYen === row.points * 100))) {

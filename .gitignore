@@ -3,8 +3,10 @@ Thumbs.db
 data/historical-payout-patterns.json
 data/meet-2026-07-11-2026-07-12.json
 data/results-2026-07-11-2026-07-12.json
+data/result-links-2026-07-11-2026-07-12.json
 data/closing-odds-2026-07-11-2026-07-12.json
 data/model-outputs-2026-07-11-2026-07-12.json
+data/quality-report-2026-07-11-2026-07-12.json
 data/jra-free-private/
 .public-stage-*/
 .tools/

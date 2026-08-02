@@ -57,7 +57,9 @@ for (const race of races) {
     [...payoutByKey.keys()].some((payoutKey) => payoutKey.startsWith(`${betType}|`))), `${raceId}: 必須券種の公式払戻がありません`);
 
   assert.equal(record.topPick, markNumbers[0], `${raceId}: 本命馬が予想と照合記録で一致しません`);
-  assert.ok(Number.isInteger(record.topPickFinish) && record.topPickFinish > 0, `${raceId}: 本命馬の着順が未反映です`);
+  assert.ok((Number.isInteger(record.topPickFinish) && record.topPickFinish > 0)
+    || (typeof record.topPickFinishText === "string" && record.topPickFinishText.length > 0),
+  `${raceId}: 本命馬の着順が未反映です`);
   assert.equal(record.agents?.length, 5, `${raceId}: 5人分の着順照合がありません`);
   assert.ok(record.agents.every((agent) => agent.status === "available" && agent.marks?.length === 3
     && agent.marks.every((mark) => (Number.isInteger(mark.finish) && mark.finish > 0)

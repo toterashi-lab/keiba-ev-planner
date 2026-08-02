@@ -5,6 +5,7 @@ const root = path.resolve(import.meta.dirname, "..");
 const names = [
   "meet-2026-07-11-2026-07-12",
   "results-2026-07-11-2026-07-12",
+  "result-links-2026-07-11-2026-07-12",
   "closing-odds-2026-07-11-2026-07-12",
   "model-outputs-2026-07-11-2026-07-12",
 ];
