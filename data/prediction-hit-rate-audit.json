@@ -1,6 +1,6 @@
 {
   "version": "prediction-hit-rate-audit-v1",
-  "generatedAt": "2026-08-02T23:11:23.746Z",
+  "generatedAt": "2026-08-02T22:58:46.943Z",
   "archiveVersion": "historical-agent-replay-v2",
   "coverage": {
     "databaseRaces": 105596,

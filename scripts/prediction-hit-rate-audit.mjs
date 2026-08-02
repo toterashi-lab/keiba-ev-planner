@@ -36,7 +36,7 @@ export function auditPredictionHitRate(options = {}) {
     holdoutHasRaces: metrics.holdout.races > 0,
     archiveComplete: index.integrity?.allCompleteRacesArchived === true,
   };
-  const result = { version: "prediction-hit-rate-audit-v1", generatedAt: new Date().toISOString(), archiveVersion: index.version,
+  const result = { version: "prediction-hit-rate-audit-v1", generatedAt: index.generatedAt, archiveVersion: index.version,
     coverage: index.coverage, split: { discovery: "through 2024-12-31", validation: "2025-01-01 through 2025-12-31", holdout: "from 2026-01-01" },
     v1Baseline: V1_BASELINE, metrics, improvements, acceptance, status: Object.values(acceptance).every(Boolean) ? "pass" : "fail" };
   if (options.write !== false) fs.writeFileSync(options.outputPath ?? OUTPUT, `${JSON.stringify(result, null, 2)}\n`, "utf8");
