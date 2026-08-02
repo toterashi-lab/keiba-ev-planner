@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
 import { createRequire } from "node:module";
+import { execFileSync } from "node:child_process";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const OUTPUT_PATH = path.join(ROOT, "data", "live-replay-audit.js");
@@ -13,7 +14,11 @@ const { racecards, model } = loadInputs();
 
 const completedResults = (racecards.results ?? []).filter(isComplete);
 const predictionsByRaceId = new Map((model.predictions ?? []).map((prediction) => [prediction.raceId, prediction]));
-const records = completedResults.map((result) => evaluateResult(result, predictionsByRaceId.get(result.raceId)));
+const currentRecords = completedResults.map((result) => evaluateResult(result, predictionsByRaceId.get(result.raceId)));
+const recordsByRace = new Map(loadPreviousRecords().map((record) => [record.raceId, record]));
+for (const record of currentRecords) recordsByRace.set(record.raceId, record);
+const records = [...recordsByRace.values()].sort((left, right) => String(left.date).localeCompare(String(right.date))
+  || Number(left.raceNo) - Number(right.raceNo) || String(left.raceId).localeCompare(String(right.raceId)));
 const summary = summarize(records);
 const output = {
   status: "replay_only",
@@ -26,7 +31,8 @@ const output = {
     actualPerformance: "公開時点の不変スナップショットが保存・ロック・精算された記録のみ。今回の公開データには該当なし",
   },
   coverage: {
-    confirmedResults: completedResults.length,
+    confirmedResults: records.length,
+    currentConfirmedResults: completedResults.length,
     matchedPredictions: records.filter((record) => record.predictionFound).length,
     evaluatedTickets: records.filter((record) => record.tickets?.length === 3).length,
     preRaceTimestamped: records.filter((record) => record.sourceClassification === "pre_race_timestamp_only").length,
@@ -37,8 +43,8 @@ const output = {
   records,
 };
 
-assert.equal(output.coverage.confirmedResults, output.coverage.matchedPredictions, "確定結果と予想の件数が一致しません");
-assert.equal(output.coverage.confirmedResults, output.coverage.evaluatedTickets, "全確定結果に買い目を生成できませんでした");
+assert.equal(completedResults.length, currentRecords.filter((record) => record.predictionFound).length, "今回の確定結果と予想の件数が一致しません");
+assert.equal(completedResults.length, currentRecords.filter((record) => record.tickets?.length === 3).length, "今回の全確定結果に買い目を生成できませんでした");
 fs.writeFileSync(OUTPUT_PATH, `window.KEIBA_LIVE_REPLAY_AUDIT = ${JSON.stringify(output, null, 2)};\n`, "utf8");
 console.log(JSON.stringify({ status: "ready", output: OUTPUT_PATH, coverage: output.coverage, summary }, null, 2));
 
@@ -48,6 +54,21 @@ function loadInputs() {
     vm.runInNewContext(fs.readFileSync(path.join(ROOT, "data", name), "utf8"), sandbox, { filename: name });
   }
   return { racecards: sandbox.window.KEIBA_LIVE_RACECARDS ?? {}, model: sandbox.window.KEIBA_LIVE_MODEL_OUTPUTS ?? {} };
+}
+
+function loadPreviousRecords() {
+  const parse = (source, filename) => {
+    const sandbox = { window: {} };
+    vm.runInNewContext(source, sandbox, { filename });
+    return sandbox.window.KEIBA_LIVE_REPLAY_AUDIT?.records ?? [];
+  };
+  try {
+    const current = parse(fs.readFileSync(OUTPUT_PATH, "utf8"), "live-replay-audit.js");
+    if (current.length) return current;
+  } catch {}
+  try {
+    return parse(execFileSync("git", ["show", "HEAD:data/live-replay-audit.js"], { cwd: ROOT, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 }), "HEAD:data/live-replay-audit.js");
+  } catch { return []; }
 }
 
 function evaluateResult(result, prediction) {

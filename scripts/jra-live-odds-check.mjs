@@ -1,7 +1,9 @@
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
-const db = new DatabaseSync(path.join("data", "jra-free-private", "keiba.sqlite"), { readOnly: true });
+const root = path.resolve(import.meta.dirname, "..");
+const db = new DatabaseSync(path.join(resolvePrivateDataDir(root), "keiba.sqlite"), { readOnly: true });
 try {
   const liveOddsTable = db.prepare("select 1 from sqlite_master where type='table' and name='live_odds_snapshots'").get();
   if (!liveOddsTable) throw new Error("ライブオッズはまだ取得されていません");

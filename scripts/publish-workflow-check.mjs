@@ -2,6 +2,7 @@ import fs from "node:fs";
 
 const source = fs.readFileSync("scripts/publish-web-status.ps1", "utf8");
 const ordered = [
+  '"scripts\\materialize-reference-json.mjs"',
   '"scripts\\model-training-preflight-freshness.mjs"',
   '"scripts\\model-artifact-compatibility-check.mjs"',
   '"scripts\\reference-ev-scope-check.mjs"',

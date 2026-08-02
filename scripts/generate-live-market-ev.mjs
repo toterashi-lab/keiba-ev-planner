@@ -147,7 +147,7 @@ export function resolveLiveRaceProbability({ artifact, raceEntries, trainedRows,
   const marketHorse = winRows.length
     ? normalize(Object.fromEntries(winRows.map((row) => [row.selection_key, 1 / row.odds_low])))
     : null;
-  const hasModel = artifact?.researchProbabilityStatus === "research_pass"
+  const hasModel = ["research_pass", "recent_window_benchmark"].includes(artifact?.researchProbabilityStatus)
     && raceEntries.length > 1 && trainedRows.length === raceEntries.length;
   const abilityHorse = hasModel
     ? credibilityPoolHorseProbabilities(marketHorse, trainedRows)

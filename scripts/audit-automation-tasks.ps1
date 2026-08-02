@@ -13,6 +13,7 @@ $specs = @(
   @{ Name = "KeibaEV-JRA-Live-Racecards"; Script = "scripts\sync-jra-live-racecards.ps1" },
   @{ Name = "KeibaEV-JRA-Live-Odds"; Script = "scripts\capture-jra-live-odds.ps1"; MinTriggers = 48; RequiredArgument = "-WindowMinutes 7" },
   @{ Name = "KeibaEV-JRA-Live-Odds-Offset"; Script = "scripts\capture-jra-live-odds.ps1"; MinTriggers = 48; RequiredArgument = "-WindowMinutes 7" },
+  @{ Name = "KeibaEV-Latest-Week-Refresh"; Script = "scripts\refresh-latest-week.ps1"; MinTriggers = 2; RequiredArgument = "-WaitMs 120000" },
   @{ Name = "KeibaEV-Web-Publish"; Script = "scripts\publish-web-status.ps1" }
 )
 
@@ -27,18 +28,20 @@ $tasks = foreach ($spec in $specs) {
   $arguments = [string]$task.Actions.Arguments
   $enabled = $task.State -ne "Disabled" -and $task.Settings.Enabled
   $actionMatches = $arguments.IndexOf($expectedScript, [StringComparison]::OrdinalIgnoreCase) -ge 0
+  $headless = [IO.Path]::GetFileName([string]$task.Actions.Execute) -ieq "wscript.exe"
   $triggerCount = @($task.Triggers).Count
   $minimumTriggers = if ($spec.MinTriggers) { [int]$spec.MinTriggers } else { 1 }
   $argumentMatches = -not $spec.RequiredArgument -or $arguments.IndexOf([string]$spec.RequiredArgument, [StringComparison]::OrdinalIgnoreCase) -ge 0
   [ordered]@{
     name = $spec.Name
-    pass = [bool]($enabled -and $actionMatches -and $argumentMatches -and $triggerCount -ge $minimumTriggers)
+    pass = [bool]($enabled -and $headless -and $actionMatches -and $argumentMatches -and $triggerCount -ge $minimumTriggers)
     exists = $true
     enabled = [bool]$enabled
     state = [string]$task.State
     actionExecute = [string]$task.Actions.Execute
     actionArguments = $arguments
     actionMatches = [bool]$actionMatches
+    headless = [bool]$headless
     requiredArgument = [string]$spec.RequiredArgument
     argumentMatches = [bool]$argumentMatches
     triggerCount = $triggerCount

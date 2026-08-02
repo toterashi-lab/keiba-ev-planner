@@ -12,7 +12,8 @@ const model = window.KEIBA_LIVE_MODEL_OUTPUTS ?? {};
 const audit = window.KEIBA_LIVE_REPLAY_AUDIT ?? {};
 const races = (racecards.meetings ?? []).flatMap((meeting) => (meeting.tracks ?? []).flatMap((track) =>
   (track.races ?? []).map((race) => ({ ...race, date: meeting.date, meetingName: track.meetingName, venueCode: track.venueCode }))));
-const results = (racecards.results ?? []).filter(isComplete);
+const results = racecards.results ?? [];
+const completeResults = results.filter(isComplete);
 const predictions = model.predictions ?? [];
 const records = audit.records ?? [];
 const predictionByKey = new Map(predictions.map((prediction) => [raceKey(prediction.date, prediction.meetingName, prediction.raceNo), prediction]));
@@ -25,8 +26,7 @@ assert.equal(new Set(results.map((result) => result.raceId)).size, results.lengt
 assert.equal(new Set(predictions.map((prediction) => prediction.raceId)).size, predictions.length, "予想レースIDが重複しています");
 assert.equal(new Set(records.map((record) => record.raceId)).size, records.length, "照合レースIDが重複しています");
 assert.equal(predictions.length, races.length, "全開催レースに予想が必要です");
-assert.equal(results.length, races.length, "全開催レースに確定結果が必要です");
-assert.equal(records.length, races.length, "全開催レースに結果照合が必要です");
+assert.equal(results.length, races.length, "全開催レースに発走前または確定結果の状態が必要です");
 
 const agentTotals = new Map();
 let totalAgentTickets = 0;
@@ -37,10 +37,8 @@ for (const race of races) {
   const key = raceKey(race.date, race.meetingName, race.no);
   const prediction = predictionByKey.get(key);
   const result = resultByKey.get(key);
-  const record = recordById.get(result?.raceId);
   assert.ok(prediction, `${key}: 予想がありません`);
-  assert.ok(result, `${key}: 結果がありません`);
-  assert.ok(record, `${key}: 照合記録がありません`);
+  assert.ok(result, `${key}: レース状態がありません`);
   const raceId = result.raceId;
 
   const runnerNumbers = new Set((result.runners ?? []).map((runner) => Number(runner.horseNumber)));
@@ -48,6 +46,10 @@ for (const race of races) {
   assert.ok(markNumbers.length >= 5, `${raceId}: 上位5頭の予想がありません`);
   assert.equal(new Set(markNumbers).size, markNumbers.length, `${raceId}: 予想馬が重複しています`);
   assert.ok(markNumbers.every((number) => runnerNumbers.has(number)), `${raceId}: 出走馬以外が予想に含まれています`);
+  if (!isComplete(result)) continue;
+
+  const record = recordById.get(result.raceId);
+  assert.ok(record, `${key}: 照合記録がありません`);
 
   const payoutByKey = new Map((result.refunds ?? []).map((refund) =>
     [`${refund.betType}|${canonical(refund.selection, refund.betType)}`, Number(refund.payoutYen)]));
@@ -92,25 +94,27 @@ for (const race of races) {
   }
 }
 
-assert.equal(agentTotals.size, 5, "5人分の累計成績が作れません");
+assert.equal(agentTotals.size, completeResults.length ? 5 : 0, "確定レースの5人分累計成績が作れません");
 for (const [agentId, totals] of agentTotals) {
-  assert.equal(totals.races.size, races.length, `${agentId}: 全レースが成績へ反映されていません`);
-  assert.equal(totals.tickets, races.length * 3, `${agentId}: 全3券種が成績へ反映されていません`);
-  assert.equal(totals.investmentYen, races.length * 1600, `${agentId}: 1レース1600円の投資額になっていません`);
+  assert.equal(totals.races.size, completeResults.length, `${agentId}: 全確定レースが成績へ反映されていません`);
+  assert.equal(totals.tickets, completeResults.length * 3, `${agentId}: 全3券種が成績へ反映されていません`);
+  assert.equal(totals.investmentYen, completeResults.length * 1600, `${agentId}: 1レース1600円の投資額になっていません`);
 }
-assert.equal(totalAgentTickets, races.length * 5 * 3, "全予想家・全券種の照合数が不足しています");
-assert.equal(totalInvestmentYen, races.length * 5 * 1600, "全予想家の投資額が不足しています");
+assert.equal(totalAgentTickets, completeResults.length * 5 * 3, "確定レースの全予想家・全券種の照合数が不足しています");
+assert.equal(totalInvestmentYen, completeResults.length * 5 * 1600, "確定レースの全予想家の投資額が不足しています");
 
 console.log(JSON.stringify({
   status: "pass",
   races: races.length,
+  predictedRaces: predictions.length,
+  settledRaces: completeResults.length,
   agents: agentTotals.size,
   ticketTypes: 3,
   settledAgentTickets: totalAgentTickets,
   totalInvestmentYen,
   totalPayoutYen,
   netYen: totalPayoutYen - totalInvestmentYen,
-  recoveryRate: totalPayoutYen / totalInvestmentYen,
+  recoveryRate: totalInvestmentYen ? totalPayoutYen / totalInvestmentYen : null,
   reflectedResults: records.length,
 }, null, 2));
 

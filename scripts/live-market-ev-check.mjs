@@ -27,11 +27,13 @@ if (rollingBatchCoverage !== "r1:3/4,r2:5/6") failures.push(`rolling batch aggre
 const entries = [{ horse_number: 1 }, { horse_number: 2 }, { horse_number: 3 }];
 const trained = [{ horse_number: 1, win_probability: 0.5 }, { horse_number: 2, win_probability: 0.3 }, { horse_number: 3, win_probability: 0.2 }];
 const modelOnly = resolveLiveRaceProbability({ artifact: { researchProbabilityStatus: "research_pass" }, raceEntries: entries, trainedRows: trained, winRows: [] });
+const benchmarkOnly = resolveLiveRaceProbability({ artifact: { researchProbabilityStatus: "recent_window_benchmark" }, raceEntries: entries, trainedRows: trained, winRows: [] });
 const unavailable = resolveLiveRaceProbability({ artifact: null, raceEntries: entries, trainedRows: [], winRows: [] });
 const marketOnly = resolveLiveRaceProbability({ artifact: null, raceEntries: entries, trainedRows: [], winRows: [
   { selection_key: "1", odds_low: 2 }, { selection_key: "2", odds_low: 4 }, { selection_key: "3", odds_low: 5 },
 ] });
 if (!modelOnly.hasModel || !modelOnly.abilityHorse || modelOnly.marketHorse !== null) failures.push("model-only prediction path failed");
+if (!benchmarkOnly.hasModel || !benchmarkOnly.abilityHorse) failures.push("current-data benchmark prediction path failed");
 if (unavailable.hasModel || unavailable.abilityHorse !== null) failures.push("missing probability gate failed");
 if (marketOnly.hasModel || !marketOnly.marketHorse || !marketOnly.abilityHorse) failures.push("market-only prediction path failed");
 if (Math.abs(Object.values(modelOnly.abilityHorse ?? {}).reduce((sum, value) => sum + value, 0) - 1) > 1e-9) failures.push("model-only probability sum failed");

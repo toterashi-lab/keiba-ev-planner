@@ -18,7 +18,7 @@ const pages = [];
 for (const page of [
   ["races", "全レースのAI競馬予想・競馬指数・買い目", "開催日と競馬場から、5人のAI予想家の競馬指数、単勝、馬連、3連複の買い目を確認できます。"],
   ["results", "AI競馬予想の結果・回収率アーカイブ", "AI予想と確定結果を比較し、的中、払戻、収支、回収率を日別に確認できます。"],
-  ["season", "2026 AI競馬リーグ順位", "5人のAI予想家が仮想資金で競うシーズン順位と獲得資金率を公開します。"],
+  ["season", "AI競馬予想の週ごとの結果", "5人のAI予想家について、週ごとの使った額、払戻、収支、回収率と順位を公開します。"],
   ["agents", "5人のAI競馬予想家", "能力、穴馬、展開、数理、逆張りの5人のAI予想家と予想スタイルを紹介します。"],
 ]) await writeAppPage(page[0], `${page[1]}｜ウマヨミ`, page[2]);
 
@@ -49,7 +49,9 @@ const guides = [
 for (const guide of guides) await writeGuide(guide);
 await writePartnerPage();
 
-const sitemapEntries = ["/", ...pages.map((page) => `/${page.path}/`), ...guides.map((guide) => `/guides/${guide.slug}/`), "/partners/"];
+const archivedRaceRoutes = [...await staticRoutes("race"), ...await staticRoutes("result")];
+const sitemapEntries = [...new Set(["/", ...pages.map((page) => `/${page.path}/`), ...archivedRaceRoutes,
+  ...guides.map((guide) => `/guides/${guide.slug}/`), "/partners/"])];
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapEntries.map((url) => `  <url><loc>${origin}${url}</loc><changefreq>${url === "/" ? "daily" : "weekly"}</changefreq><priority>${url === "/" ? "1.0" : url.startsWith("/race/") ? "0.8" : "0.7"}</priority></url>`).join("\n")}\n</urlset>\n`;
 await fs.writeFile(path.join(root, "sitemap.xml"), sitemap, "utf8");
 console.log(JSON.stringify({ appPages: pages.length, guides: guides.length, sitemapEntries: sitemapEntries.length }, null, 2));
@@ -98,5 +100,12 @@ async function write(relativePath, html) {
   const directory = path.join(root, relativePath);
   await fs.mkdir(directory, { recursive: true });
   await fs.writeFile(path.join(directory, "index.html"), html, "utf8");
+}
+async function staticRoutes(directoryName) {
+  const directory = path.join(root, directoryName);
+  try {
+    const entries = await fs.readdir(directory, { withFileTypes: true });
+    return entries.filter((entry) => entry.isDirectory()).map((entry) => `/${directoryName}/${entry.name}/`);
+  } catch { return []; }
 }
 function escapeHtml(value) { return String(value).replace(/[&<>\"]/g, (character) => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" })[character]); }

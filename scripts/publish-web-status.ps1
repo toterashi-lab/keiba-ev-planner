@@ -3,7 +3,7 @@ param([switch]$DryRun)
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
 $public = $root
-$privateDir = Join-Path $root "data\jra-free-private"
+$privateDir = if ($env:KEIBA_PRIVATE_DIR) { $env:KEIBA_PRIVATE_DIR } else { Join-Path (Split-Path $root -Parent) "data\jra-free-private" }
 $lockPath = Join-Path $privateDir "web-publish.lock"
 $node = Get-Command node -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source -First 1
 if (-not $node) {
@@ -54,6 +54,8 @@ if (-not $lock) { throw "Web publication lock could not be acquired." }
 
 Start-Transcript -Path $logPath | Out-Null
 try {
+  & $node --no-warnings "scripts\materialize-reference-json.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Reference JSON materialization failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\validate-reference-dataset.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Reference dataset validation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\ev-logic-check.mjs"

@@ -1,12 +1,15 @@
 import { DatabaseSync } from "node:sqlite";
+import path from "node:path";
 import { FEATURE_GROUPS, FORBIDDEN_TARGET_FIELDS, auditFeatureRegistry } from "../model/feature-registry.mjs";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
 const ids = FEATURE_GROUPS.map((group) => group.id);
 if (new Set(ids).size !== ids.length) throw new Error("特徴量グループIDが重複しています");
 if (FEATURE_GROUPS.length < 12) throw new Error("特徴量グループが不足しています");
 if (!FORBIDDEN_TARGET_FIELDS.every((field) => field.startsWith("target."))) throw new Error("禁止特徴量の名前空間が不正です");
 
-const database = new DatabaseSync("data/jra-free-private/keiba.sqlite", { readOnly: true });
+const root = path.resolve(import.meta.dirname, "..");
+const database = new DatabaseSync(path.join(resolvePrivateDataDir(root), "keiba.sqlite"), { readOnly: true });
 try {
   const report = auditFeatureRegistry(database);
   if (!report.groups.some((group) => group.id === "pace_shape" && group.status === "ready")) {

@@ -47,7 +47,7 @@ html[data-theme="dark"] body {
   font-weight: 900;
   letter-spacing: .08em;
 }
-.league-hero-copy h1 { margin: 10px 0 8px; max-width: 460px; font-size: clamp(34px, 5vw, 62px); line-height: 1.03; }
+.league-hero-copy h1 { margin: 10px 0 8px; max-width: 520px; font-size: clamp(34px, 4vw, 52px); line-height: 1.08; text-wrap: balance; }
 .league-hero-copy p { color: #c5d1df; font-weight: 700; }
 .season-meta { margin: 24px 0 18px; display: flex; gap: 8px; }
 .season-meta > span { min-width: 90px; padding: 9px 12px; border: 1px solid rgba(255,255,255,.15); background: rgba(5,12,23,.72); }

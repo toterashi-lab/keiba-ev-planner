@@ -1,5 +1,4 @@
 (function attachLeagueSystem(root) {
-  const STARTING_FUNDS_YEN = 1_000_000;
   const STATES = Object.freeze(["normal", "happy", "defeat", "angry", "awakened"]);
   const PERSONAS = Object.freeze({
     safety: {
@@ -41,42 +40,53 @@
 
   function derive(replayAudit = {}) {
     const records = [...(replayAudit.records || [])].sort(compareRecords);
-    const current = standingsFromRecords(records);
+    const weeklyHistory = buildWeeklyHistory(records);
+    const latestWeek = weeklyHistory.at(-1) || emptyWeek();
+    const previousWeek = weeklyHistory.at(-2) || null;
+    const standings = latestWeek.standings;
     const latestDate = records.at(-1)?.date || "";
-    const previous = standingsFromRecords(records.filter((record) => record.date !== latestDate));
-    const previousRanks = new Map(previous.map((row) => [row.agentId, row.rank]));
-    const standings = current.map((row) => ({ ...row, rankDelta: (previousRanks.get(row.agentId) || row.rank) - row.rank }));
     const latestRecord = records.at(-1) || null;
-    const roundHistory = buildRoundHistory(records);
     const winningStreak = [...standings].sort((left, right) => right.streak - left.streak || left.rank - right.rank)[0] || null;
     const losingStreak = [...standings].sort((left, right) => left.streak - right.streak || left.rank - right.rank)[0] || null;
     return {
-      id: "2026", name: "2026 AI FORECAST LEAGUE", round: records.length || 1, latestDate,
-      standings, latestRecord, drama: raceDrama(latestRecord), totalRaces: records.length,
-      roundHistory, rivalry: standings.slice(0, 2), winningStreak, losingStreak,
+      id: "2026", name: "2026 AI FORECAST LEAGUE", week: weeklyHistory.length || 1,
+      round: weeklyHistory.length || 1, latestDate, standings, latestRecord,
+      latestWeek, previousWeek, drama: latestWeek.drama, totalRaces: records.length,
+      latestWeekRaceCount: latestWeek.raceCount, weeklyHistory,
+      rivalry: standings.slice(0, 2), winningStreak, losingStreak,
     };
   }
 
-  function buildRoundHistory(records) {
+  function buildWeeklyHistory(records) {
+    const groups = new Map();
+    for (const record of [...records].sort(compareRecords)) {
+      const key = weekStart(record.date);
+      groups.set(key, [...(groups.get(key) || []), record]);
+    }
     let previousRanks = new Map();
-    return records.map((record, index) => {
-      const standings = standingsFromRecords(records.slice(0, index + 1));
+    return [...groups.entries()].map(([dateFrom, weekRecords], index) => {
+      const standings = standingsFromRecords(weekRecords);
       const ranked = standings.map((row) => ({
         ...row,
         rankDelta: (previousRanks.get(row.agentId) || row.rank) - row.rank,
       }));
       previousRanks = new Map(ranked.map((row) => [row.agentId, row.rank]));
       return {
-        round: index + 1,
-        date: record.date,
-        raceId: record.raceId,
-        meetingName: record.meetingName || record.venueName || "開催",
-        raceNo: Number(record.raceNo) || 0,
-        raceTitle: record.raceTitle || "レース",
+        week: index + 1,
+        key: dateFrom,
+        dateFrom,
+        dateTo: addDays(dateFrom, 6),
+        raceCount: weekRecords.length,
+        dates: [...new Set(weekRecords.map((record) => record.date))],
         standings: ranked,
-        drama: raceDrama(record),
+        drama: periodDrama(weekRecords),
       };
     });
+  }
+
+  function emptyWeek() {
+    return { week: 1, key: "", dateFrom: "", dateTo: "", raceCount: 0,
+      dates: [], standings: standingsFromRecords([]), drama: periodDrama([]) };
   }
 
   function standingsFromRecords(records) {
@@ -98,9 +108,8 @@
       const state = recentGroups.length >= 3 && recentRecovery > recoveryRate + .2 ? "awakened"
         : streak >= 1 ? "happy" : streak <= -3 ? "angry" : streak < 0 ? "defeat" : "normal";
       return { agentId, races: groups.length, raceHits, hitRate: groups.length ? raceHits / groups.length : 0,
-        investmentYen, payoutYen, netYen, recoveryRate, recentRecovery, streak, state,
-        virtualFundsYen: STARTING_FUNDS_YEN + netYen };
-    }).sort((left, right) => right.virtualFundsYen - left.virtualFundsYen || right.hitRate - left.hitRate);
+        investmentYen, payoutYen, netYen, recoveryRate, recentRecovery, streak, state };
+    }).sort((left, right) => right.netYen - left.netYen || right.recoveryRate - left.recoveryRate || right.raceHits - left.raceHits);
     return rows.map((row, index) => ({ ...row, rank: index + 1 }));
   }
 
@@ -119,12 +128,20 @@
 
   function raceDrama(record) {
     if (!record) return null;
-    const rows = (record.agentTickets || []).filter((group) => group.status === "available").map((group) => {
-      const investmentYen = sum(group.tickets || [], "investmentYen");
-      const payoutYen = sum(group.tickets || [], "payoutYen");
-      const agent = (record.agents || []).find((row) => row.agentId === group.agentId);
-      return { agentId: group.agentId, investmentYen, payoutYen, netYen: payoutYen - investmentYen,
-        hit: (group.tickets || []).some((ticket) => ticket.hit), topPickFinish: Number(agent?.topPickFinish) || null };
+    return periodDrama([record]);
+  }
+
+  function periodDrama(records) {
+    const rows = Object.keys(PERSONAS).map((agentId) => {
+      const groups = records.flatMap((record) => (record.agentTickets || [])
+        .filter((group) => group.agentId === agentId && group.status === "available")
+        .map((group) => ({ ...group, agent: (record.agents || []).find((row) => row.agentId === group.agentId) })));
+      const tickets = groups.flatMap((group) => group.tickets || []);
+      const investmentYen = sum(tickets, "investmentYen");
+      const payoutYen = sum(tickets, "payoutYen");
+      const finishes = groups.map((group) => Number(group.agent?.topPickFinish)).filter(Number.isFinite);
+      return { agentId, investmentYen, payoutYen, netYen: payoutYen - investmentYen,
+        hit: tickets.some((ticket) => ticket.hit), topPickFinish: finishes.length ? Math.min(...finishes) : null };
     });
     const mvp = [...rows].sort((a, b) => b.netYen - a.netYen || (a.topPickFinish || 99) - (b.topPickFinish || 99))[0] || null;
     const culprit = [...rows].sort((a, b) => a.netYen - b.netYen || (b.topPickFinish || 0) - (a.topPickFinish || 0))[0] || null;
@@ -178,8 +195,21 @@
     return String(left.date).localeCompare(String(right.date)) || Number(left.raceNo) - Number(right.raceNo)
       || String(left.raceId).localeCompare(String(right.raceId));
   }
+  function weekStart(value) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(value || ""))) return "";
+    const date = new Date(`${value}T12:00:00Z`);
+    const daysSinceMonday = (date.getUTCDay() + 6) % 7;
+    date.setUTCDate(date.getUTCDate() - daysSinceMonday);
+    return date.toISOString().slice(0, 10);
+  }
+  function addDays(value, days) {
+    if (!value) return "";
+    const date = new Date(`${value}T12:00:00Z`);
+    date.setUTCDate(date.getUTCDate() + days);
+    return date.toISOString().slice(0, 10);
+  }
   function sum(rows, key) { return rows.reduce((total, row) => total + Number(row?.[key] || 0), 0); }
 
-  root.UMAYOMI_LEAGUE = Object.freeze({ STARTING_FUNDS_YEN, STATES, PERSONAS, derive, standingsFromRecords, buildRoundHistory,
-    raceDrama, meetingDialogue, raceSlug, resultComment, characterImage });
+  root.UMAYOMI_LEAGUE = Object.freeze({ STATES, PERSONAS, derive, standingsFromRecords, buildWeeklyHistory,
+    raceDrama, periodDrama, meetingDialogue, raceSlug, resultComment, characterImage, weekStart });
 }(typeof window !== "undefined" ? window : globalThis));

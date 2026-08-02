@@ -14,7 +14,7 @@ check("01 5人の独立したAI予想家", (league.match(/displayName:/g) || [])
 check("02 性格・口調・得意・苦手・必殺技", ["personality", "shortLine", "strength", "weakness", "ultimate"].every((key) => league.includes(`${key}:`)));
 check("03 5種類の状態画像", ["normal", "happy", "defeat", "angry", "awakened"].every((state) => fs.existsSync(`assets/characters/safety-${state}.webp`)));
 check("04 ゲームロビー", index.includes("5人のAI予想家リーグ") && index.includes("home-season-meta"));
-check("05 シーズンと節", app.includes("CURRENT ROUND") && app.includes("leagueSeason.round"));
+check("05 シーズンと週", app.includes("LATEST WEEK") && app.includes("leagueSeason.week"));
 check("06 AIリーグ順位", index.includes("home-league-standings") && index.includes("season-standings"));
 check("07 今日の注目レース", app.includes("MAIN BATTLE") && app.includes("renderHomeRanking"));
 check("08 今週のAI対決", app.includes("今週のAI対決") && app.includes("rivalry-pair"));
@@ -34,11 +34,11 @@ check("21 覚醒AI・逆神AI", app.includes('"覚醒AI"') && app.includes('"逆
 check("22 レース後の反省会", app.includes("レース後の反省会") && app.includes("resultComment"));
 check("23 順位変動", app.includes("rank-change-strip") && league.includes("rankDelta"));
 check("24 次回予告", app.includes("NEXT BATTLE") && app.includes("nextRacePreview"));
-check("25 SNS共有画像", app.includes("shareLeagueResult") && app.includes("shareSeasonStandings"));
+check("25 SNS共有画像", app.includes("shareLeagueResult") && app.includes("shareWeeklyResults"));
 check("26 AIプロフィールページ", fs.existsSync("agents/safety/index.html") && app.includes("character-state-gallery"));
 check("27 レース個別URL", fs.existsSync("race") && generator.includes("race/${slug}"));
 check("28 結果個別URL", fs.existsSync("result") && generator.includes("result/${slug}"));
-check("29 シーズン順位URL", fs.existsSync("season/index.html") && index.includes('href="/season/"'));
+check("29 週別結果URL", fs.existsSync("season/index.html") && index.includes("週ごとの結果"));
 check("30 title・description・canonical・OGP", ["<title>", 'name="description"', 'rel="canonical"', 'property="og:title"'].every((tag) => index.includes(tag)) && (index.match(/<h1(?:\s|>)/g) || []).length === 1);
 check("31 sitemap・robots", fs.existsSync("sitemap.xml") && read("robots.txt").includes("Sitemap:"));
 check("32 JSON-LD・パンくず", index.includes("application/ld+json") && index.includes("breadcrumb"));

@@ -116,7 +116,7 @@ function renderRoute() {
     races: "開催日、競馬場、レース番号から、5人のAI予想家の指数・印・買い目・出馬表・確定結果を確認できます。",
     results: "過去レースのAI予想と公式払戻を照合。買い目ごとの投資額、払戻額、収支、回収率を日別に表示します。",
     performance: "能力、穴馬、展開、データ、別目線の5人のAI予想家について、予想方法と後日再現の参考成績を確認できます。",
-    season: "5人のAI予想家が仮想資金で競う2026シーズン順位。獲得資金率、的中レース、連勝・連敗と順位変動を公開します。",
+    season: "5人のAI予想家の週ごとの競馬予想結果。使った額、払戻、収支、回収率と順位を確定結果から公開します。",
   };
   let pageTitle = titles[route];
   let pageDescription = descriptions[route];
@@ -190,7 +190,7 @@ function finderRaceHtml(row) {
 function renderHome() {
   const meeting = selectedMeeting();
   document.querySelector("#home-summary").textContent = meeting
-    ? `${formatDate(meeting.date)}・第${leagueSeason.round + 1}節・全${meeting.tracks.reduce((sum, row) => sum + row.races.length, 0)}レース`
+    ? `${formatDate(meeting.date)}・最新週・全${meeting.tracks.reduce((sum, row) => sum + row.races.length, 0)}レース`
     : "開催データがありません。";
   renderLeagueLobby(meeting);
   renderDateTabs("#home-date-tabs");
@@ -200,23 +200,23 @@ function renderHome() {
 
 function renderLeagueLobby(meeting) {
   const meta = document.querySelector("#home-season-meta");
-  if (meta) meta.innerHTML = `<span><b>SEASON</b><strong>2026</strong></span><span><b>ROUND</b><strong>第${leagueSeason.round + 1}節</strong></span><span><b>RACES</b><strong>${meeting?.tracks?.reduce((sum, track) => sum + track.races.length, 0) || 0}</strong></span>`;
+  if (meta) meta.innerHTML = `<span><b>SEASON</b><strong>2026</strong></span><span><b>WEEK</b><strong>第${leagueSeason.week + 1}週</strong></span><span><b>RACES</b><strong>${meeting?.tracks?.reduce((sum, track) => sum + track.races.length, 0) || 0}</strong></span>`;
   const standingsRoot = document.querySelector("#home-league-standings");
-  if (standingsRoot) standingsRoot.innerHTML = `<section class="lobby-panel standings-panel"><header><div><span>LEAGUE TABLE</span><h2>AIリーグ順位</h2></div><a href="/season/">全順位</a></header><div class="mini-standings">${leagueSeason.standings.map((row) => {
+  if (standingsRoot) standingsRoot.innerHTML = `<section class="lobby-panel standings-panel"><header><div><span>THIS WEEK</span><h2>最新週のAI結果</h2></div><a href="/season/">週別履歴</a></header><div class="mini-standings">${leagueSeason.standings.map((row) => {
     const persona = agentPersona(AGENTS.find((agent) => agent.id === row.agentId));
-    return `<a class="mini-standing-row ${row.agentId}" href="/agents/${row.agentId}/"><b>${row.rank}</b>${characterImageHtml(row.agentId, row.state, "mini-character")}<span><strong>${escapeHtml(persona.displayName)}</strong><small>${escapeHtml(persona.epithet)}</small></span><em class="rank-delta ${row.rankDelta > 0 ? "up" : row.rankDelta < 0 ? "down" : "stay"}">${row.rankDelta > 0 ? `▲${row.rankDelta}` : row.rankDelta < 0 ? `▼${Math.abs(row.rankDelta)}` : "－"}</em><i>${yen(row.virtualFundsYen)}</i></a>`;
+    return `<a class="mini-standing-row ${row.agentId}" href="/agents/${row.agentId}/"><b>${row.rank}</b>${characterImageHtml(row.agentId, row.state, "mini-character")}<span><strong>${escapeHtml(persona.displayName)}</strong><small>${escapeHtml(persona.epithet)}</small></span><em class="rank-delta ${row.rankDelta > 0 ? "up" : row.rankDelta < 0 ? "down" : "stay"}">${row.rankDelta > 0 ? `▲${row.rankDelta}` : row.rankDelta < 0 ? `▼${Math.abs(row.rankDelta)}` : "－"}</em><i>${signedYen(row.netYen)}</i></a>`;
   }).join("")}</div></section>`;
   const dramaRoot = document.querySelector("#home-weekly-drama");
   const drama = leagueSeason.drama;
   if (!dramaRoot) return;
-  if (!drama) { dramaRoot.innerHTML = empty("前節の結果を集計しています。"); return; }
+  if (!drama) { dramaRoot.innerHTML = empty("最新週の結果を集計しています。"); return; }
   const mvp = personaForId(drama.mvp?.agentId);
   const culprit = personaForId(drama.culprit?.agentId);
   const awakened = leagueSeason.standings.find((row) => row.state === "awakened") || leagueSeason.standings[0];
   const awakenedPersona = personaForId(awakened?.agentId);
   const mvpWon = Number(drama.mvp?.netYen || 0) > 0;
-  dramaRoot.innerHTML = `<section class="lobby-panel weekly-drama"><header><div><span>LAST ROUND</span><h2>前節のドラマ</h2></div><button type="button" class="share-icon-button" data-share-latest aria-label="前節の結果を共有">共有</button></header><div class="drama-cards"><article class="drama-card mvp ${mvpWon ? "won" : "lost"}"><span>MVP</span>${characterImageHtml(drama.mvp?.agentId, mvpWon ? "happy" : "defeat", "drama-character")}<div><strong>${escapeHtml(mvp.displayName)}</strong><small>${signedYen(drama.mvp?.netYen)}</small></div></article><article class="drama-card culprit"><span>戦犯</span>${characterImageHtml(drama.culprit?.agentId, "defeat", "drama-character")}<div><strong>${escapeHtml(culprit.displayName)}</strong><small>${signedYen(drama.culprit?.netYen)}</small></div></article></div><div class="awakening-strip">${characterImageHtml(awakened?.agentId, "awakened", "awakening-character")}<span><b>覚醒中</b><strong>${escapeHtml(awakenedPersona.displayName)}</strong><small>直近の走りが上向いています</small></span></div></section>`;
-  dramaRoot.querySelector("[data-share-latest]")?.addEventListener("click", () => shareLeagueResult(leagueSeason.latestRecord, drama));
+  dramaRoot.innerHTML = `<section class="lobby-panel weekly-drama"><header><div><span>LATEST WEEK</span><h2>最新週のドラマ</h2></div><button type="button" class="share-icon-button" data-share-latest aria-label="最新週の結果を共有">共有</button></header><div class="drama-cards"><article class="drama-card mvp ${mvpWon ? "won" : "lost"}"><span>MVP</span>${characterImageHtml(drama.mvp?.agentId, mvpWon ? "happy" : "defeat", "drama-character")}<div><strong>${escapeHtml(mvp.displayName)}</strong><small>${signedYen(drama.mvp?.netYen)}</small></div></article><article class="drama-card culprit"><span>戦犯</span>${characterImageHtml(drama.culprit?.agentId, "defeat", "drama-character")}<div><strong>${escapeHtml(culprit.displayName)}</strong><small>${signedYen(drama.culprit?.netYen)}</small></div></article></div><div class="awakening-strip">${characterImageHtml(awakened?.agentId, "awakened", "awakening-character")}<span><b>覚醒中</b><strong>${escapeHtml(awakenedPersona.displayName)}</strong><small>最新週の成績が上向いています</small></span></div></section>`;
+  dramaRoot.querySelector("[data-share-latest]")?.addEventListener("click", () => shareWeeklyResults(leagueSeason.latestWeek));
 }
 
 function renderHomeArena(meeting) {
@@ -240,7 +240,7 @@ function renderHomeArena(meeting) {
     const standing = leagueSeason.standings.find((row) => row.agentId === definition.id);
     return `<article class="arena-agent ${definition.id} ${mark ? "ready" : "waiting"}"><span class="arena-avatar">${characterImageHtml(definition.id, standing?.state || "normal", "arena-character")}<i>${index + 1}</i></span><div><span>${escapeHtml(persona.epithet)}</span><strong>${escapeHtml(persona.displayName)}</strong><p>${mark ? `エース ${number(mark.horseNumber)}番 ${escapeHtml(mark.horseName)}` : "作戦準備中"}</p></div></article>`;
   }).join("");
-  root.innerHTML = `<header class="arena-command"><div class="arena-race-copy"><span class="arena-rank">第${leagueSeason.round + 1}節・MAIN BATTLE</span><h2>${escapeHtml(featured.track.venueName)} ${featured.race.no}R</h2><h3>${escapeHtml(featured.race.name)}</h3><p>${escapeHtml(featured.race.surface)} ${number(featured.race.distanceM)}m・${escapeHtml(featured.race.start)}発走</p><blockquote>「${escapeHtml(strategyMeeting.lines[0]?.text || "5人が作戦を確認しています。") }」</blockquote></div><div class="arena-power" style="--score:${featuredScore}"><span>戦闘力 <small>競馬指数</small></span><strong>${featuredScore}</strong><i><b></b></i></div><div class="arena-difficulty"><span>波乱警報 <small>荒れる可能性</small></span><strong>${escapeHtml(volatility.label)}</strong>${volatilityMeterHtml(volatility, true)}</div><button type="button" data-arena-race="true" data-arena-date="${escapeHtml(state.date)}" data-arena-venue="${escapeHtml(featured.track.venueCode)}" data-arena-no="${featured.race.no}">作戦会議へ <span aria-hidden="true">›</span></button></header><div class="arena-team-title"><span>ACE PICKS</span><strong>5人のエース指名</strong></div><div class="arena-agents">${agentCards}</div>`;
+  root.innerHTML = `<header class="arena-command"><div class="arena-race-copy"><span class="arena-rank">第${leagueSeason.week + 1}週・MAIN BATTLE</span><h2>${escapeHtml(featured.track.venueName)} ${featured.race.no}R</h2><h3>${escapeHtml(featured.race.name)}</h3><p>${escapeHtml(featured.race.surface)} ${number(featured.race.distanceM)}m・${escapeHtml(featured.race.start)}発走</p><blockquote>「${escapeHtml(strategyMeeting.lines[0]?.text || "5人が作戦を確認しています。") }」</blockquote></div><div class="arena-power" style="--score:${featuredScore}"><span>戦闘力 <small>競馬指数</small></span><strong>${featuredScore}</strong><i><b></b></i></div><div class="arena-difficulty"><span>波乱警報 <small>荒れる可能性</small></span><strong>${escapeHtml(volatility.label)}</strong>${volatilityMeterHtml(volatility, true)}</div><button type="button" data-arena-race="true" data-arena-date="${escapeHtml(state.date)}" data-arena-venue="${escapeHtml(featured.track.venueCode)}" data-arena-no="${featured.race.no}">作戦会議へ <span aria-hidden="true">›</span></button></header><div class="arena-team-title"><span>ACE PICKS</span><strong>5人のエース指名</strong></div><div class="arena-agents">${agentCards}</div>`;
   root.querySelector("button[data-arena-race]")?.addEventListener("click", (event) => {
     const button = event.currentTarget;
     state.date = button.dataset.arenaDate;
@@ -261,8 +261,8 @@ function renderSeasonEvents(currentMeeting, featured) {
   const losing = leagueSeason.losingStreak;
   const volatility = featured ? forecastPolicy.volatilityProfile({ race: featured.race, prediction: featured.prediction,
     consensus: featured.consensus, candidates: readyCandidates(featured.race.no, featured.track) }) : null;
-  const gap = leader && challenger ? leader.virtualFundsYen - challenger.virtualFundsYen : 0;
-  root.innerHTML = `<article class="season-event rivalry-event"><header><span>今週のAI対決</span><strong>首位攻防</strong></header><div class="rivalry-pair">${characterImageHtml(leader?.agentId, leader?.state || "normal", "event-character")}<b>VS</b>${characterImageHtml(challenger?.agentId, challenger?.state || "normal", "event-character")}</div><p>${escapeHtml(leaderPersona.displayName)} vs ${escapeHtml(challengerPersona.displayName)}<small>資金差 ${yen(Math.abs(gap))}</small></p></article>
+  const gap = leader && challenger ? leader.netYen - challenger.netYen : 0;
+  root.innerHTML = `<article class="season-event rivalry-event"><header><span>今週のAI対決</span><strong>首位攻防</strong></header><div class="rivalry-pair">${characterImageHtml(leader?.agentId, leader?.state || "normal", "event-character")}<b>VS</b>${characterImageHtml(challenger?.agentId, challenger?.state || "normal", "event-character")}</div><p>${escapeHtml(leaderPersona.displayName)} vs ${escapeHtml(challengerPersona.displayName)}<small>収支差 ${yen(Math.abs(gap))}</small></p></article>
     <article class="season-event streak-event"><header><span>調子</span><strong>連勝・連敗</strong></header><div class="streak-row good">${characterImageHtml(winning?.agentId, "happy", "event-mini-character")}<p><b>${escapeHtml(personaForId(winning?.agentId).displayName)}</b><small>${winning?.streak > 0 ? `${winning.streak}戦連続プラス` : "連勝待ち"}</small></p></div><div class="streak-row bad">${characterImageHtml(losing?.agentId, "defeat", "event-mini-character")}<p><b>${escapeHtml(personaForId(losing?.agentId).displayName)}</b><small>${losing?.streak < 0 ? `${Math.abs(losing.streak)}戦連続マイナス` : "連敗なし"}</small></p></div></article>
     <article class="season-event warning-event"><header><span>今日の波乱警報</span><strong>${escapeHtml(volatility?.label || "判定待ち")}</strong></header><div class="warning-gauge" style="--warning:${volatility?.score || 0}"><i><b></b></i><span>${volatility ? `${volatility.level}/5` : "-"}</span></div><p>${featured ? `${escapeHtml(featured.track.venueName)} ${featured.race.no}R ${escapeHtml(featured.race.name)}` : "対象レースがありません"}<small>${escapeHtml(currentMeeting?.date ? formatDate(currentMeeting.date) : "開催日未選択")}</small></p></article>`;
 }
@@ -810,18 +810,20 @@ function renderSeasonPage() {
   const history = document.querySelector("#season-round-history");
   if (!summary || !standings || !history) return;
   const leader = leagueSeason.standings[0];
-  summary.innerHTML = `<section class="season-summary-grid"><div><span>CURRENT ROUND</span><strong>第${leagueSeason.round}節終了</strong></div><div><span>LEADER</span><strong>${escapeHtml(personaForId(leader?.agentId).displayName)}</strong></div><div><span>RACES</span><strong>${number(leagueSeason.totalRaces)}</strong></div><div><span>START FUND</span><strong>${yen(leagueSystem.STARTING_FUNDS_YEN)}</strong></div></section><button type="button" class="share-season-button" data-share-season>順位表を共有</button>`;
-  standings.innerHTML = `<section class="season-table"><header><span>2026 STANDINGS</span><h2>現在のリーグ順位</h2></header>${leagueSeason.standings.map((row) => {
+  const latestWeek = leagueSeason.latestWeek;
+  const weekLabel = latestWeek?.dateFrom ? `${formatDate(latestWeek.dateFrom)}〜${formatDate(latestWeek.dateTo)}` : "結果待ち";
+  summary.innerHTML = `<section class="season-summary-grid"><div><span>LATEST WEEK</span><strong>${escapeHtml(weekLabel)}</strong></div><div><span>1位</span><strong>${escapeHtml(personaForId(leader?.agentId).displayName)}</strong></div><div><span>RACES</span><strong>${number(latestWeek?.raceCount || 0)}</strong></div><div><span>RECOVERY</span><strong>${leader?.investmentYen ? percent(leader.recoveryRate) : "-"}</strong></div></section><button type="button" class="share-season-button" data-share-season>最新週を共有</button>`;
+  standings.innerHTML = `<section class="season-table"><header><span>LATEST WEEK</span><h2>最新週の結果</h2></header>${leagueSeason.standings.map((row) => {
     const persona = personaForId(row.agentId);
-    return `<a class="season-row ${row.agentId}" href="/agents/${row.agentId}/"><b>${row.rank}</b>${characterImageHtml(row.agentId, row.state, "season-character")}<span><strong>${escapeHtml(persona.displayName)}</strong><small>${escapeHtml(persona.epithet)}</small></span><div><small>仮想資金</small><strong>${yen(row.virtualFundsYen)}</strong></div><div><small>獲得資金率</small><strong>${percent(row.recoveryRate)}</strong></div><em>${row.rankDelta > 0 ? `▲ ${row.rankDelta}` : row.rankDelta < 0 ? `▼ ${Math.abs(row.rankDelta)}` : "－"}</em></a>`;
+    return `<a class="season-row ${row.agentId}" href="/agents/${row.agentId}/"><b>${row.rank}</b>${characterImageHtml(row.agentId, row.state, "season-character")}<span><strong>${escapeHtml(persona.displayName)}</strong><small>${number(row.raceHits)}/${number(row.races)}レース的中</small></span><div><small>収支</small><strong class="${row.netYen >= 0 ? "positive" : "negative"}">${signedYen(row.netYen)}</strong></div><div><small>回収率</small><strong>${row.investmentYen ? percent(row.recoveryRate) : "-"}</strong></div><em>${row.rankDelta > 0 ? `▲ ${row.rankDelta}` : row.rankDelta < 0 ? `▼ ${Math.abs(row.rankDelta)}` : "－"}</em></a>`;
   }).join("")}</section>`;
-  const latestRounds = [...(leagueSeason.roundHistory || [])].reverse().slice(0, 8);
-  history.innerHTML = `<header><div><span>ROUND HISTORY</span><h2>直近8節の順位変動</h2></div><small>確定結果から更新</small></header><div class="round-history-list">${latestRounds.map((round) => {
-    const mvp = round.drama?.mvp;
-    const leaderRow = round.standings?.[0];
-    return `<article class="round-history-card"><span>第${round.round}節</span><div><strong>${escapeHtml(round.meetingName)} ${round.raceNo}R</strong><small>${escapeHtml(round.raceTitle)}</small></div><p>${characterImageHtml(mvp?.agentId, mvp?.netYen > 0 ? "happy" : "defeat", "round-character")}<span><small>MVP</small><b>${escapeHtml(personaForId(mvp?.agentId).displayName)}</b></span></p><em>首位 ${escapeHtml(personaForId(leaderRow?.agentId).displayName)}</em></article>`;
+  const latestWeeks = [...(leagueSeason.weeklyHistory || [])].reverse().slice(0, 8);
+  history.innerHTML = `<header><div><span>WEEKLY HISTORY</span><h2>直近8週の結果</h2></div><small>確定結果から自動更新</small></header><div class="round-history-list">${latestWeeks.map((week) => {
+    const winner = week.standings?.[0];
+    const winnerPersona = personaForId(winner?.agentId);
+    return `<article class="round-history-card"><span>第${week.week}週</span><div><strong>${escapeHtml(formatDate(week.dateFrom))}〜${escapeHtml(formatDate(week.dateTo))}</strong><small>${number(week.raceCount)}レースを集計</small></div><p>${characterImageHtml(winner?.agentId, winner?.netYen >= 0 ? "happy" : "defeat", "round-character")}<span><small>1位</small><b>${escapeHtml(winnerPersona.displayName)}</b></span></p><em>${signedYen(winner?.netYen)}・${winner?.investmentYen ? percent(winner.recoveryRate) : "-"}</em></article>`;
   }).join("")}</div>`;
-  summary.querySelector("[data-share-season]")?.addEventListener("click", shareSeasonStandings);
+  summary.querySelector("[data-share-season]")?.addEventListener("click", () => shareWeeklyResults(latestWeek));
 }
 
 function agentReplayMetrics(agentId) {
@@ -1168,7 +1170,7 @@ async function shareLeagueResult(record, drama = leagueSystem?.raceDrama(record)
   context.fillStyle = "#9cabbc";
   context.font = "700 22px 'Yu Gothic UI', sans-serif";
   context.fillText(`戦犯 ${culprit.displayName}  ${signedYen(drama.culprit?.netYen)}`, 88, 468);
-  context.fillText("5人のAI予想家が仮想資金で戦う競馬リーグ", 88, 535);
+  context.fillText("5人のAI予想家を各100円の買い目で結果比較", 88, 535);
   try {
     const portrait = await loadCanvasImage(`/${leagueSystem.characterImage(drama.mvp.agentId, "happy")}`);
     const scale = Math.min(470 / portrait.width, 500 / portrait.height);
@@ -1194,8 +1196,8 @@ async function shareLeagueResult(record, drama = leagueSystem?.raceDrama(record)
   showToast("SNS共有用の結果画像を保存しました");
 }
 
-async function shareSeasonStandings() {
-  const standings = leagueSeason.standings || [];
+async function shareWeeklyResults(week = leagueSeason.latestWeek) {
+  const standings = week?.standings || [];
   if (!standings.length) { showToast("共有できる順位がありません"); return; }
   const canvas = document.createElement("canvas");
   canvas.width = 1200;
@@ -1211,7 +1213,7 @@ async function shareSeasonStandings() {
   context.fillText("UMAYOMI / AI FORECAST LEAGUE 2026", 82, 90);
   context.fillStyle = "#ffffff";
   context.font = "900 48px 'Yu Gothic UI', sans-serif";
-  context.fillText(`第${leagueSeason.round}節終了 現在の順位`, 82, 158);
+  context.fillText(`${formatDate(week.dateFrom)}〜${formatDate(week.dateTo)} 週間結果`, 82, 158);
   standings.forEach((row, index) => {
     const y = 225 + index * 66;
     const persona = personaForId(row.agentId);
@@ -1222,19 +1224,19 @@ async function shareSeasonStandings() {
     context.font = "800 27px 'Yu Gothic UI', sans-serif";
     context.fillText(persona.displayName, 145, y);
     context.textAlign = "right";
-    context.fillText(yen(row.virtualFundsYen), 1080, y);
+    context.fillText(`${signedYen(row.netYen)} / ${row.investmentYen ? percent(row.recoveryRate) : "-"}`, 1080, y);
     context.textAlign = "left";
   });
   context.fillStyle = "#93a4b8";
   context.font = "700 19px 'Yu Gothic UI', sans-serif";
-  context.fillText("照合済み結果を各100円の仮想資金ルールで集計", 82, 570);
+  context.fillText(`確定した${week.raceCount}レースを各100円の買い目で集計`, 82, 570);
   const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
   if (!blob) { showToast("共有画像を作れませんでした"); return; }
-  const filename = `umayomi-season-round-${leagueSeason.round}.png`;
+  const filename = `umayomi-week-${week.key || "latest"}.png`;
   const file = new File([blob], filename, { type: "image/png" });
   if (navigator.share && (!navigator.canShare || navigator.canShare({ files: [file] }))) {
     try {
-      await navigator.share({ title: "ウマヨミ AIリーグ順位", text: `第${leagueSeason.round}節終了。首位は${personaForId(standings[0].agentId).displayName}`, files: [file] });
+      await navigator.share({ title: "ウマヨミ 週間AI予想結果", text: `${formatDate(week.dateFrom)}週の1位は${personaForId(standings[0].agentId).displayName}`, files: [file] });
       return;
     } catch (error) {
       if (error?.name === "AbortError") return;

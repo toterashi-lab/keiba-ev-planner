@@ -12,8 +12,8 @@ for (const file of ["races/index.html", "results/index.html", "season/index.html
 }
 const racePages = fs.readdirSync("race", { withFileTypes: true }).filter((entry) => entry.isDirectory());
 const resultPages = fs.readdirSync("result", { withFileTypes: true }).filter((entry) => entry.isDirectory());
-assert.equal(racePages.length, 72, "72レースの予想URL");
-assert.equal(resultPages.length, 72, "72レースの結果URL");
+assert.ok(racePages.length > 0, "予想URLが必要");
+assert.equal(resultPages.length, racePages.length, "予想URLと結果URLを同数保存すること");
 for (const entry of [...racePages, ...resultPages]) assert.ok(fs.existsSync(path.join(entry === racePages.find((row) => row.name === entry.name) ? "race" : "result", entry.name, "index.html")) || fs.existsSync(path.join("race", entry.name, "index.html")) || fs.existsSync(path.join("result", entry.name, "index.html")));
 for (const file of [`race/${racePages[0].name}/index.html`, `result/${resultPages[0].name}/index.html`, "agents/safety/index.html"]) {
   const page = fs.readFileSync(file, "utf8");
@@ -24,5 +24,6 @@ for (const agent of ["safety", "sniper", "pace", "analyst", "contrarian"]) {
   for (const state of ["normal", "happy", "defeat", "angry", "awakened"]) assert.ok(fs.existsSync(`assets/characters/${agent}-${state}.webp`), `${agent}-${state}画像`);
 }
 const sitemap = fs.readFileSync("sitemap.xml", "utf8");
-assert.equal((sitemap.match(/<url>/g) || []).length, 159, "サイトマップ件数");
-console.log("static-route-check: PASS (153 app pages, 4 guides, partner policy, 25 character states)");
+for (const entry of racePages) assert.ok(sitemap.includes(`/race/${entry.name}/`), `${entry.name}の予想URLをサイトマップへ保持`);
+for (const entry of resultPages) assert.ok(sitemap.includes(`/result/${entry.name}/`), `${entry.name}の結果URLをサイトマップへ保持`);
+console.log(`static-route-check: PASS (${racePages.length} race archives, 4 guides, partner policy, 25 character states)`);

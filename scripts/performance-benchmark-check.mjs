@@ -1,9 +1,12 @@
 import fs from "node:fs";
+import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
+import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
 const meetings = JSON.parse(fs.readFileSync("data/meet-2026-07-11-2026-07-12.json", "utf8")).meetings;
 const results = JSON.parse(fs.readFileSync("data/results-2026-07-11-2026-07-12.json", "utf8")).results;
-const db = new DatabaseSync("data/jra-free-private/keiba.sqlite", { readOnly: true });
+const root = path.resolve(import.meta.dirname, "..");
+const db = new DatabaseSync(path.join(resolvePrivateDataDir(root), "keiba.sqlite"), { readOnly: true });
 
 try {
   const batch = db.prepare("select id from odds_ingestion_batches where status='complete' and source='JRA official odds' order by id desc limit 1").get();
