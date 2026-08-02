@@ -33,6 +33,20 @@ export function initializeAgentSystemSchema(db) {
 
 export function registerAgents(db, definitions, now = new Date().toISOString()) { initializeAgentSystemSchema(db); const agent = db.prepare("insert or ignore into agents values(?,?,?,?,?)"); const version = db.prepare("insert or ignore into agent_versions values(?,?,?,?,?)"); const config = db.prepare("insert or ignore into agent_configs values(?,?,?,?)"); for (const row of definitions) { const json = stableJson(row); agent.run(row.id, row.name, row.voice, 1, now); version.run(row.id, row.version, sha(json), now, null); config.run(row.id, row.version, json, now); } }
 
+export function loadRuntimeAgentDefinitions(db, definitions) {
+  initializeAgentSystemSchema(db);
+  const active = db.prepare("select agent_id,model_version,artifact_json from model_versions where status='active' order by created_at desc").all();
+  const artifacts = new Map();
+  for (const row of active) if (!artifacts.has(row.agent_id)) {
+    try { artifacts.set(row.agent_id, { ...JSON.parse(row.artifact_json), modelVersion: row.model_version }); }
+    catch { /* 破損した候補は実行時へ混ぜず、固定定義へ戻す。 */ }
+  }
+  return definitions.map((definition) => {
+    const artifact = artifacts.get(definition.id);
+    return artifact?.weights ? { ...definition, weights: Object.freeze({ ...artifact.weights }), modelVersion: artifact.modelVersion } : definition;
+  });
+}
+
 export function persistPredictionRun(db, input, result, now = new Date().toISOString()) {
   initializeAgentSystemSchema(db); if (result.status !== "published" || result.dataQuality?.status === "fail") throw new Error("品質ゲートを通過した公開予想だけ保存できます");
   const inputJson = stableJson(sanitize(input)); const inputHash = sha(inputJson); const existing = db.prepare("select data_snapshot_id from data_snapshots where input_hash=?").get(inputHash);

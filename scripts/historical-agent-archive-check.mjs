@@ -16,7 +16,9 @@ const payoutStatement = database.prepare("select bet_type,selection_key,payout_y
 
 assert.equal(index.integrity.allCompleteRacesArchived, true);
 assert.equal(index.integrity.investmentMatchesPolicy, true);
-assert.equal(index.months.length, 367);
+assert.equal(index.version, "historical-agent-replay-v2");
+assert.equal(index.months.length, inclusiveMonthCount(index.coverage.from, index.coverage.to));
+assert.ok(index.coverage.marketReferenceRaces > 0);
 
 let races = 0;
 let days = 0;
@@ -78,4 +80,10 @@ function canonical(value, betType) {
   const numbers = String(value).match(/\d+/g)?.map(Number) ?? [];
   if (["馬連", "3連複"].includes(betType)) numbers.sort((left, right) => left - right);
   return numbers.join("-");
+}
+
+function inclusiveMonthCount(from, to) {
+  const [fromYear, fromMonth] = from.slice(0, 7).split("-").map(Number);
+  const [toYear, toMonth] = to.slice(0, 7).split("-").map(Number);
+  return (toYear - fromYear) * 12 + toMonth - fromMonth + 1;
 }

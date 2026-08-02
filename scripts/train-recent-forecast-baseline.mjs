@@ -135,6 +135,8 @@ function aggregateMetrics(folds) {
     meanLogLoss: mean(metrics.map((row) => row.logLoss)),
     meanUniformLogLoss: mean(metrics.map((row) => row.uniformLogLoss)),
     meanBrier: mean(metrics.map((row) => row.brier)),
+    meanTop1Rate: mean(metrics.map((row) => row.top1Rate)),
+    meanTop3Rate: mean(metrics.map((row) => row.top3Rate)),
     meanEce: mean(metrics.map((row) => row.ece)),
     meanMaxCalibrationBinError: mean(metrics.map((row) => row.maxCalibrationBinError)),
     maxProbabilitySumError: Math.max(...metrics.map((row) => row.maxProbabilitySumError)),

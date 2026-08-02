@@ -14,8 +14,8 @@
 
 ## 収録範囲
 
-- 最新予想画面: 2026年7月18日・19日の72レース
-- 結果アーカイブ: 1996年1月5日から2026年7月26日までの完全レース105,524件（3,271開催日）
+- 最新予想・結果画面: 2026年8月2日の36レース
+- 結果アーカイブ: 1996年1月5日から2026年8月2日までの完全レース105,596件（3,273開催日）
 - 長期DB: 1996年1月から継続更新中。正確な進捗は`node scripts/jra-free-db.mjs status`で確認する。
 - 正本データ: 公開リポジトリに含めないローカルSQLiteと原本HTML
 
@@ -29,7 +29,10 @@
 ```powershell
 node --max-old-space-size=8192 scripts/generate-historical-agent-archive.mjs
 node scripts/historical-agent-archive-check.mjs
+node scripts/prediction-hit-rate-audit.mjs
 ```
+
+的中率監査は全期間、2025年検証、2026年ホールドアウトを分け、5人の本命1着率・本命複勝率・予想の多様性を`data/prediction-hit-rate-audit.json`へ保存します。
 
 期待値候補は、全馬オッズ履歴、確率校正、時系列検証、オッズ鮮度、ドローダウンの全ゲートが合格するまで購入適格として扱いません。利益や回収率100%超を保証しません。
 

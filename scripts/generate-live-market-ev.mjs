@@ -10,7 +10,7 @@ import { buildStructuredDefinitions } from "../model/structured-ticket-search.mj
 import { buildFinishOrderProbabilityBooks, calibrateFinishOrderProbabilityBooks } from "../model/finish-order-probabilities.mjs";
 import { AGENT_DEFINITIONS, inspectAgentFeatureCoverage, runFiveAgentPrediction } from "../model/agent-system.mjs";
 import { isPreRaceObservation } from "./race-time.mjs";
-import { initializeAgentSystemSchema, persistPredictionRun, registerAgents } from "./agent-system-store.mjs";
+import { initializeAgentSystemSchema, loadRuntimeAgentDefinitions, persistPredictionRun, registerAgents } from "./agent-system-store.mjs";
 import { FEATURE_KEYS } from "./train-expectancy-model.mjs";
 import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
@@ -31,6 +31,7 @@ export function generateLiveMarketEv(options = {}) {
     initializeLedgerSchema(db);
     initializeAgentSystemSchema(db);
     registerAgents(db, AGENT_DEFINITIONS);
+    const runtimeAgentDefinitions = loadRuntimeAgentDefinitions(db, AGENT_DEFINITIONS);
     const base = db.prepare(`select * from odds_ingestion_batches where status='complete' and source in (${options.allowFixture ? "'JRA official live odds','JRA official live odds fixture'" : "'JRA official live odds'"}) order by id desc limit 1`).get();
     const exotic = base ? db.prepare(`select * from odds_ingestion_batches where status='complete' and source in (${options.allowFixture ? "'JRA official live exotic odds','JRA official live exotic odds fixture'" : "'JRA official live exotic odds'"})
       and snapshot_kind=? and target_dates=? order by id desc limit 1`).get(base.snapshot_kind, base.target_dates) : null;
@@ -74,12 +75,12 @@ export function generateLiveMarketEv(options = {}) {
       const names = new Map(raceEntries.map((row) => [row.horse_number, row.horse_name]));
       const winRows = byType.get("win") ?? [];
       const trainedRows = modelByRace.get(race.race_id) ?? [];
-      const { hasModel, marketHorse, abilityHorse } = resolveLiveRaceProbability({ artifact, raceEntries, trainedRows, winRows });
+      const { hasModel, modelValidated, marketHorse, abilityHorse } = resolveLiveRaceProbability({ artifact, raceEntries, trainedRows, winRows });
       if (!abilityHorse) continue;
       const hasCompleteOdds = Object.keys(TYPES).every((type) => byType.get(type)?.length);
       if (!hasCompleteOdds) {
-        predictions.push(finalizeAgentPrediction(db, aiPrediction(race, abilityHorse, names, [], artifact, hasModel, trainedRows,
-          marketHorse, generatedAt, options.allowFixture === true, raceOdds), options.allowFixture === true));
+        predictions.push(finalizeAgentPrediction(db, aiPrediction(race, abilityHorse, names, [], artifact, hasModel, modelValidated, trainedRows,
+          marketHorse, generatedAt, options.allowFixture === true, raceOdds, runtimeAgentDefinitions), options.allowFixture === true));
         continue;
       }
       const marketBooks = buildFinishOrderProbabilityBooks(marketHorse);
@@ -107,8 +108,8 @@ export function generateLiveMarketEv(options = {}) {
       }
       evaluatedByRace[race.race_id] = evaluated;
       candidates.push(...raceCandidates);
-      predictions.push(finalizeAgentPrediction(db, aiPrediction(race, abilityHorse, names, raceCandidates, artifact, hasModel, trainedRows,
-        marketHorse, generatedAt, options.allowFixture === true, raceOdds), options.allowFixture === true));
+      predictions.push(finalizeAgentPrediction(db, aiPrediction(race, abilityHorse, names, raceCandidates, artifact, hasModel, modelValidated, trainedRows,
+        marketHorse, generatedAt, options.allowFixture === true, raceOdds, runtimeAgentDefinitions), options.allowFixture === true));
     }
     const result = {
       status: predictions.length ? "ready" : "waiting",
@@ -149,10 +150,22 @@ export function resolveLiveRaceProbability({ artifact, raceEntries, trainedRows,
     : null;
   const hasModel = ["research_pass", "recent_window_benchmark"].includes(artifact?.researchProbabilityStatus)
     && raceEntries.length > 1 && trainedRows.length === raceEntries.length;
+  const modelValidated = hasModel && isPredictionModelQualified(artifact);
   const abilityHorse = hasModel
     ? credibilityPoolHorseProbabilities(marketHorse, trainedRows)
     : marketHorse;
-  return { hasModel, marketHorse, abilityHorse };
+  return { hasModel, modelValidated, marketHorse, abilityHorse };
+}
+
+export function isPredictionModelQualified(artifact) {
+  if (!artifact || artifact.noTargetLeakage !== true) return false;
+  if (artifact.deploymentStatus === "eligible") return true;
+  const market = artifact.targetAudit?.historicalMarket;
+  const modelLoss = Number(artifact.targetAudit?.metrics?.logLoss);
+  const marketLoss = Number(market?.rawMarket?.logLoss ?? market?.market?.logLoss);
+  return artifact.researchProbabilityStatus === "research_pass"
+    && artifact.historicalMarketStatus === "research_pass"
+    && Number.isFinite(modelLoss) && Number.isFinite(marketLoss) && modelLoss <= marketLoss;
 }
 
 function credibilityPoolHorseProbabilities(marketProbabilities, modelRows) {
@@ -357,37 +370,50 @@ export function persistCandidateLedger(db, result) {
   }
 }
 
-function aiPrediction(race, probabilities, names, raceCandidates, artifact, hasModel, trainedRows = [], marketHorse = null,
-  generatedAt = new Date().toISOString(), allowFixture = false, raceOdds = []) {
+function aiPrediction(race, probabilities, names, raceCandidates, artifact, hasModel, modelValidated, trainedRows = [], marketHorse = null,
+  generatedAt = new Date().toISOString(), allowFixture = false, raceOdds = [], agentDefinitions = AGENT_DEFINITIONS) {
   const marks = ["◎", "○", "▲", "△", "☆"];
   const ranked = Object.entries(probabilities).map(([horseNumber, probability]) => ({ horseNumber: Number(horseNumber), horseName: names.get(Number(horseNumber)) ?? "", probability }))
     .sort((left, right) => right.probability - left.probability || left.horseNumber - right.horseNumber);
   const top = [...raceCandidates].sort(byAbilityEv)[0];
   const predictionContext = allowFixture || isPreRaceObservation(race.race_date, race.start_time, generatedAt) ? "pre_race" : "as_of_replay";
-  const agentInput = buildAgentInput(race, probabilities, names, trainedRows, artifact, generatedAt, allowFixture, raceOdds);
-  const agentRun = runFiveAgentPrediction(agentInput, { maximumMissingRate: allowFixture ? 1 : 0.35, maximumOddsAgeMinutes: 10 });
-  const specialistForecasts = agentForecastPanel(agentRun);
+  const agentInput = buildAgentInput(race, probabilities, names, trainedRows, artifact, modelValidated, generatedAt, allowFixture, raceOdds);
+  const agentRun = runFiveAgentPrediction(agentInput, { maximumMissingRate: allowFixture ? 1 : 0.35, maximumOddsAgeMinutes: 10,
+    agentDefinitions });
+  const fallbackForecasts = buildLiveForecastPanel(probabilities, names, trainedRows, marketHorse);
+  const specialistForecasts = agentRun.status === "published" ? agentForecastPanel(agentRun) : fallbackForecasts;
+  const chiefRanking = agentRun.consensus?.ranking?.length
+    ? agentRun.consensus.ranking.map((row) => ({ horseNumber: row.horse_number, horseName: row.horse_name, probability: row.probability,
+      marketProbability: row.market_probability, votes: row.votes, disagreement: row.disagreement }))
+    : ranked;
+  const chiefTop = chiefRanking[0];
   return { date: race.race_date, meetingName: race.meeting_name, raceNo: race.race_number, raceId: race.race_id, modelVersion: artifact?.modelVersion ?? "market-baseline",
-    generatedAt, predictionContext, status: "ready", confidence: ranked[0].probability >= 0.25 ? "中" : "低", confidenceScore: ranked[0].probability,
-    scenario: ranked[0].probability - ranked[1].probability >= 0.08 ? "本命軸" : "混戦", marks: ranked.slice(0, 5).map((row, index) => ({ mark: marks[index], ...row })),
+    generatedAt, predictionContext, status: "ready", confidence: chiefTop.probability >= 0.25 ? "中" : "低", confidenceScore: chiefTop.probability,
+    scenario: chiefTop.probability - chiefRanking[1].probability >= 0.08 ? "本命軸" : "混戦",
+    marks: chiefRanking.slice(0, 5).map((row, index) => ({ mark: marks[index], ...row })),
+    allHorseProbabilities: chiefRanking,
     forecastPanel: specialistForecasts,
     masterConsensus: { agent: "chief-expectancy-agent", participatingForecasters: specialistForecasts.length,
-      topHorseNumber: ranked[0].horseNumber, topHorseName: ranked[0].horseName },
+      topHorseNumber: chiefTop.horseNumber, topHorseName: chiefTop.horseName,
+      mode: agentRun.consensus?.mode ?? "fallback", marketWeight: agentRun.consensus?.market_weight ?? null },
     topTicket: top ? { betType: top.betType, method: top.method, selection: top.selection, expectedReturn: top.adoptedExpectedReturn,
       chiefDecision: top.chiefDecision } : null,
     agentPredictions: agentRun.predictions,
-    agentSystemStatus: agentRun.status,
+    agentSystemStatus: agentRun.status === "published" ? "published"
+      : specialistForecasts.filter((agent) => agent.status === "available").length >= 3 ? "feature_fallback" : agentRun.status,
     agentSystemQuality: agentRun.dataQuality ?? agentRun.data_quality,
     recommendedBets: agentRun.predictions.flatMap((agent) => agent.recommended_bets.map((bet) => ({ ...bet, agentId: agent.agent_id }))),
     comment: agentRun.status === "published"
       ? `${specialistForecasts.filter((agent) => agent.status === "available").length}人の専門AIを独立評価し、品質ゲート通過済みの発走前情報だけで統合。`
-      : `予想停止: ${(agentRun.dataQuality?.failures ?? agentRun.data_quality?.failures ?? ["入力データ不足"]).join("、")}`,
+      : specialistForecasts.filter((agent) => agent.status === "available").length >= 3
+        ? "単勝オッズ未取得のため、全頭の能力・展開・適性データで5人の暫定予想を作成。"
+        : `予想停止: ${(agentRun.dataQuality?.failures ?? agentRun.data_quality?.failures ?? ["入力データ不足"]).join("、")}`,
     _agentInput: agentInput,
     _agentRun: agentRun,
   };
 }
 
-function buildAgentInput(race, probabilities, names, trainedRows, artifact, generatedAt, allowFixture, raceOdds) {
+function buildAgentInput(race, probabilities, names, trainedRows, artifact, modelValidated, generatedAt, allowFixture, raceOdds) {
   const featureRows = new Map(trainedRows.map((row) => {
     try { return [Number(row.horse_number), JSON.parse(row.features_json ?? "{}")]; }
     catch { return [Number(row.horse_number), {}]; }
@@ -408,7 +434,7 @@ function buildAgentInput(race, probabilities, names, trainedRows, artifact, gene
       horseName: names.get(Number(horseNumber)) ?? `${horseNumber}番`,
       scratchStatus: "active",
       modelProbability: Number(probability),
-      modelConfidence: artifact?.researchProbabilityStatus === "research_pass" ? 0.75 : 0,
+      modelConfidence: modelValidated ? 0.75 : 0,
       sampleAdequacy: Math.min(1, Number(trainedRows.find((row) => Number(row.horse_number) === Number(horseNumber))?.history_starts ?? 0) / 50),
       calibrationError: Number(artifact?.externalTestMetrics?.expectedCalibrationError ?? 1),
       predictionVariance: Number(artifact?.externalTestMetrics?.brierScore ?? 1),
@@ -430,7 +456,7 @@ function buildAgentInput(race, probabilities, names, trainedRows, artifact, gene
     expectedRunnerCount: entries.length,
     historyChronologyValid: true,
     hasTargetFields: false,
-    modelValidationStatus: artifact?.researchProbabilityStatus === "research_pass",
+    modelValidationStatus: modelValidated === true,
     sourceVersions: { liveOdds: raceOdds.map((row) => row.batch_id).filter(Boolean), model: artifact?.modelVersion ?? null },
     entries,
     winOdds,

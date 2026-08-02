@@ -3,7 +3,7 @@ import { buildFinishOrderProbabilityBooks } from "./finish-order-probabilities.m
 export const UNIT_STAKE_YEN=100;
 export const PREDICTION_STATES=Object.freeze(["draft","published","locked","settled","invalidated"]);
 const aliases={stability:["recent5Stability","recent5PlaceRate"],placeRate:["priorPlaceRateSmoothed"],recentPerformance:["priorWinRateSmoothed","recent3PlaceRate"],connections:["jockeyWinRateSmoothed","trainerWinRateSmoothed"],drawStability:["gateWinRateSmoothed"],course:["venueWinRateSmoothed"],distance:["distanceBandWinRateSmoothed"],going:["goingWinRateSmoothed"],marketTrust:["marketProbability"],marketGap:["modelMarketGap"],trouble:["previousTroubleAdjustment","recent3PositionGain"],paceAdvantage:["paceAdvantage","recent3PositionGain"],conditionChange:["conditionChangeUpside"],longshot:["longshotScore"],speed:["speedFigure","fieldRelativeSmoothedWinRate"],closing:["closingSpeed","recent3LateCornerPositionPercentile"],drawChange:["drawChangeUpside"],jockeyChange:["jockeyChangeUpside"],paceFit:["paceFit","frontRunnerRateSmoothed"],styleFit:["runningStyleFit","frontRunnerRateSmoothed"],leaders:["leaderCompositionFit"],drawStyle:["drawStyleFit"],courseStyle:["courseStyleBias"],dayBias:["raceDayTrackBias"],earlySpeed:["earlySpeed"],positionStability:["positionStability","priorAveragePositionGain"],calibratedWin:["calibratedWinProbability"],expectedValue:["bestExpectedValue"],modelConfidence:["modelConfidence"],sampleSize:["sampleAdequacy"],calibrationQuality:["calibrationQuality"],oddsFreshness:["oddsFreshness"],lowVariance:["lowPredictionVariance"],consensus:["otherAgentConcentration"],overbet:["overbetRisk"],disagreement:["agentDisagreement"],favoriteRisk:["favoriteRisk"],alternativeValue:["alternativeValue"],oddsMovement:["oddsMovementValue"],modelDiversity:["modelDiversity"]};
-function define(id,name,voice,types,weights,thresholds){return Object.freeze({id,name,voice,preferredBetTypes:types,weights:Object.freeze(weights),thresholds:Object.freeze(thresholds),version:"1.0.0",learning:Object.freeze({minimumSampleSize:500,maximumUpdateRate:.05,regularization:.1,recentWeightCap:.35})});}
+function define(id,name,voice,types,weights,thresholds){return Object.freeze({id,name,voice,preferredBetTypes:types,weights:Object.freeze(weights),thresholds:Object.freeze(thresholds),version:"1.1.0",learning:Object.freeze({minimumSampleSize:500,maximumUpdateRate:.05,regularization:.1,recentWeightCap:.35})});}
 export const AGENT_DEFINITIONS=Object.freeze([
 define("safety","堅実派 セーフティ","大きな上振れより、崩れにくさを評価します。",["quinella"],{stability:20,placeRate:15,recentPerformance:15,connections:10,drawStability:10,course:10,distance:10,going:5,marketTrust:5},{minimumEv:1.05,minimumConfidence:.65}),
 define("sniper","穴狙い スナイパー","人気はありませんが、市場評価ほど弱くないと見ます。",["win","quinella","trio","trifecta"],{marketGap:20,trouble:15,paceAdvantage:15,conditionChange:10,longshot:10,speed:10,closing:10,drawChange:5,jockeyChange:5},{minimumEv:1.2,minimumConfidence:.5,minimumWinProbability:.06,minimumWinOdds:5}),
@@ -17,7 +17,7 @@ export function brierScore(p,y){same(p,y);return avg(p.map((v,i)=>(Number(v)-Num
 export function multiclassBrierScore(p,w){validWinner(p,w);return p.reduce((s,v,i)=>s+(Number(v)-(i===w?1:0))**2,0);}export function multiclassLogLoss(p,w,e=1e-12){validWinner(p,w);return-Math.log(Math.max(e,Math.min(1,Number(p[w]))));}export function returnOnInvestment(i,p){i=Number(i);p=Number(p);return i>0?{roi:(p-i)/i,recoveryRate:p/i}:{roi:null,recoveryRate:null};}
 export function agentFeatureValue(features,id){for(const key of[id,...(aliases[id]??[])]){const value=finite(features?.[key]);if(value!=null)return clamp(value,0,1);}return null;}
 export function inspectAgentFeatureCoverage(features){const ids=[...new Set(AGENT_DEFINITIONS.flatMap(a=>Object.keys(a.weights)))],missingFeatures=ids.filter(id=>agentFeatureValue(features,id)==null);return{featureCount:ids.length,availableFeatureCount:ids.length-missingFeatures.length,missingFeatures};}
-export function validateRaceInput(input,options={}){const failures=[],warnings=[],active=(input.entries??[]).filter(r=>!["scratched","excluded","cancelled"].includes(r.scratchStatus)),numbers=active.map(r=>Number(r.horseNumber));if(active.length<2)failures.push("出走馬が2頭未満です");if(numbers.some(n=>!Number.isInteger(n)||n<=0))failures.push("馬番が不正です");if(new Set(numbers).size!==numbers.length)failures.push("馬番が重複しています");if(input.expectedRunnerCount!=null&&Number(input.expectedRunnerCount)!==active.length)failures.push("出走馬数が一致しません");if(!input.raceId)failures.push("レースIDがありません");for(const[key,label]of[["predictedAt","予想時刻"],["cutoffAt","締切時刻"]]){if(!input[key])failures.push(`${label}がありません`);else if(!Number.isFinite(Date.parse(input[key])))failures.push(`${label}が不正です`);}if(Date.parse(input.predictedAt)>=Date.parse(input.cutoffAt))failures.push("予想時刻が締切以後です");if(!input.oddsObservedAt||!(input.winOdds??[]).length)failures.push("予想時点オッズがありません");if(input.oddsObservedAt&&Date.parse(input.oddsObservedAt)>=Date.parse(input.cutoffAt))failures.push("締切後オッズが含まれています");if(input.oddsObservedAt&&Date.parse(input.oddsObservedAt)>Date.parse(input.predictedAt))failures.push("予想後に観測したオッズが含まれています");const age=minutes(input.oddsObservedAt,input.predictedAt);if(age!=null&&age>(options.maximumOddsAgeMinutes??10))failures.push(`オッズが古すぎます (${age.toFixed(1)}分)`);const oddsNumbers=(input.winOdds??[]).map(r=>Number(r.horseNumber));if(oddsNumbers.length&&numbers.some(n=>!oddsNumbers.includes(n)))failures.push("全出走馬の単勝オッズが揃っていません");if(input.hasTargetFields===true)failures.push("結果データが予想入力へ混入しています");if(input.modelValidationStatus===false)failures.push("モデル検証成果物がありません");if(input.historyChronologyValid===false)failures.push("過去走の時系列が不正です");const forbidden=forbiddenPaths(input.entries??[]);if(forbidden.length)failures.push(`結果列が予想入力へ混入しています: ${forbidden.slice(0,3).join("、")}`);const missing=active.flatMap(r=>r.missingFeatures??[]),cells=Math.max(1,active.reduce((s,r)=>s+(Number(r.featureCount)>0?Number(r.featureCount):Object.keys(r.features??{}).length+(r.missingFeatures?.length??0)),0)),missingRate=missing.length/cells;if(missingRate>(options.maximumMissingRate??.35))failures.push(`特徴量欠損率が上限を超えています (${(missingRate*100).toFixed(1)}%)`);else if(missing.length)warnings.push(`欠損特徴量 ${missing.length}件`);return{status:failures.length?"fail":warnings.length?"warn":"pass",failures,warnings,missingRate,activeRunnerCount:active.length,forbiddenPaths:forbidden,oddsAgeMinutes:age};}
+export function validateRaceInput(input,options={}){const failures=[],warnings=[],active=(input.entries??[]).filter(r=>!["scratched","excluded","cancelled"].includes(r.scratchStatus)),numbers=active.map(r=>Number(r.horseNumber));if(active.length<2)failures.push("出走馬が2頭未満です");if(numbers.some(n=>!Number.isInteger(n)||n<=0))failures.push("馬番が不正です");if(new Set(numbers).size!==numbers.length)failures.push("馬番が重複しています");if(input.expectedRunnerCount!=null&&Number(input.expectedRunnerCount)!==active.length)failures.push("出走馬数が一致しません");if(!input.raceId)failures.push("レースIDがありません");for(const[key,label]of[["predictedAt","予想時刻"],["cutoffAt","締切時刻"]]){if(!input[key])failures.push(`${label}がありません`);else if(!Number.isFinite(Date.parse(input[key])))failures.push(`${label}が不正です`);}if(Date.parse(input.predictedAt)>=Date.parse(input.cutoffAt))failures.push("予想時刻が締切以後です");if(!input.oddsObservedAt||!(input.winOdds??[]).length)failures.push("予想時点オッズがありません");if(input.oddsObservedAt&&Date.parse(input.oddsObservedAt)>=Date.parse(input.cutoffAt))failures.push("締切後オッズが含まれています");if(input.oddsObservedAt&&Date.parse(input.oddsObservedAt)>Date.parse(input.predictedAt))failures.push("予想後に観測したオッズが含まれています");const age=minutes(input.oddsObservedAt,input.predictedAt);if(age!=null&&age>(options.maximumOddsAgeMinutes??10))failures.push(`オッズが古すぎます (${age.toFixed(1)}分)`);const oddsNumbers=(input.winOdds??[]).map(r=>Number(r.horseNumber));if(oddsNumbers.length&&numbers.some(n=>!oddsNumbers.includes(n)))failures.push("全出走馬の単勝オッズが揃っていません");if(input.hasTargetFields===true)failures.push("結果データが予想入力へ混入しています");if(input.modelValidationStatus===false)warnings.push("能力モデル未採用のため市場基準で統合します");if(input.historyChronologyValid===false)failures.push("過去走の時系列が不正です");const forbidden=forbiddenPaths(input.entries??[]);if(forbidden.length)failures.push(`結果列が予想入力へ混入しています: ${forbidden.slice(0,3).join("、")}`);const missing=active.flatMap(r=>r.missingFeatures??[]),cells=Math.max(1,active.reduce((s,r)=>s+(Number(r.featureCount)>0?Number(r.featureCount):Object.keys(r.features??{}).length+(r.missingFeatures?.length??0)),0)),missingRate=missing.length/cells;if(missingRate>(options.maximumMissingRate??.35))failures.push(`特徴量欠損率が上限を超えています (${(missingRate*100).toFixed(1)}%)`);else if(missing.length)warnings.push(`欠損特徴量 ${missing.length}件`);return{status:failures.length?"fail":warnings.length?"warn":"pass",failures,warnings,missingRate,activeRunnerCount:active.length,forbiddenPaths:forbidden,oddsAgeMinutes:age};}
 
 export function runFiveAgentPrediction(input, options = {}) {
   const dataQuality = validateRaceInput(input, options);
@@ -25,14 +25,15 @@ export function runFiveAgentPrediction(input, options = {}) {
     return { race_id: input.raceId ?? null, status: "blocked", data_quality: dataQuality, predictions: [] };
   }
 
+  const definitions = validateAgentDefinitions(options.agentDefinitions ?? AGENT_DEFINITIONS);
   const market = normalizeWinMarket(input.winOdds);
   const marketByHorse = new Map(market.map((row) => [Number(row.horseNumber), row]));
   const entries = (input.entries ?? [])
     .filter((row) => !["scratched", "excluded", "cancelled"].includes(row.scratchStatus))
     .map((row) => enrichEntry(row, marketByHorse.get(Number(row.horseNumber)), dataQuality));
-  const firstFour = AGENT_DEFINITIONS.slice(0, 4).map((agent) => predictAgent(agent, entries, input, dataQuality, options));
+  const firstFour = definitions.filter((agent) => agent.id !== "contrarian").map((agent) => predictAgent(agent, entries, input, dataQuality, options));
   const contrarianEntries = addConsensusFeatures(entries, firstFour);
-  const contrarian = predictAgent(AGENT_DEFINITIONS[4], contrarianEntries, input, dataQuality, options);
+  const contrarian = predictAgent(definitions.find((agent) => agent.id === "contrarian"), contrarianEntries, input, dataQuality, options);
   const predictions = [...firstFour, contrarian];
 
   return {
@@ -43,8 +44,14 @@ export function runFiveAgentPrediction(input, options = {}) {
     dataQuality,
     data_quality: dataQuality,
     predictions,
-    consensus: summarizeConsensus(predictions),
+    consensus: summarizeConsensus(predictions, entries, input, options),
   };
+}
+
+function validateAgentDefinitions(definitions) {
+  const ids = new Set(definitions.map((row) => row.id));
+  if (definitions.length !== 5 || ids.size !== 5 || !ids.has("contrarian")) throw new Error("5エージェント定義が不正です");
+  return definitions;
 }
 
 function predictAgent(agent, entries, input, dataQuality, options) {
@@ -69,7 +76,7 @@ function predictAgent(agent, entries, input, dataQuality, options) {
     race_id: input.raceId,
     agent_id: agent.id,
     agent_version: agent.version,
-    model_version: input.modelVersion ?? "unversioned",
+    model_version: agent.modelVersion ?? input.modelVersion ?? "unversioned",
     data_snapshot_id: input.dataSnapshotId,
     predicted_at: input.predictedAt,
     odds_observed_at: input.oddsObservedAt,
@@ -110,7 +117,8 @@ function scoreEntry(agent, entry) {
   }
   const rawScore = availableWeight ? weighted / availableWeight : 0;
   contributions.sort((left, right) => right.contribution - left.contribution);
-  return { rawScore, contributions, missingAgentFeatures, agentCoverage: availableWeight / 100 };
+  const totalWeight = Object.values(agent.weights).reduce((sum, value) => sum + Math.max(0, Number(value) || 0), 0);
+  return { rawScore, contributions, missingAgentFeatures, agentCoverage: totalWeight > 0 ? availableWeight / totalWeight : 0 };
 }
 
 function horseOutput(row, probability) {
@@ -248,15 +256,46 @@ function addConsensusFeatures(entries, predictions) {
   });
 }
 
-function summarizeConsensus(predictions) {
+function summarizeConsensus(predictions, entries, input, options) {
   const counts = new Map();
   for (const prediction of predictions) counts.set(prediction.top_pick, (counts.get(prediction.top_pick) ?? 0) + 1);
-  const ranked = [...counts].sort((left, right) => right[1] - left[1]);
+  const votes = [...counts].sort((left, right) => right[1] - left[1]);
+  const reliability = { safety: .26, sniper: .06, pace: .16, analyst: .34, contrarian: .18, ...(options.agentReliability ?? {}) };
+  const useModel = input.modelValidationStatus === true;
+  const requestedMarketWeight = Number(options.chiefMarketWeight);
+  const marketWeight = useModel && Number.isFinite(requestedMarketWeight)
+    ? clamp(requestedMarketWeight, .5, 1)
+    : useModel ? .75 : 1;
+  const specialistWeight = 1 - marketWeight;
+  const reliabilityTotal = predictions.reduce((sum, row) => sum + Math.max(0, Number(reliability[row.agent_id]) || 0), 0) || 1;
+  const probabilityMaps = new Map(predictions.map((prediction) => [prediction.agent_id,
+    new Map(prediction.horses.map((horse) => [horse.horse_number, horse.calibrated_win_probability]))]));
+  const scores = entries.map((entry) => {
+    const marketProbability = Math.max(1e-12, Number(entry.marketProbability));
+    let logScore = marketWeight * Math.log(marketProbability);
+    if (specialistWeight > 0) for (const prediction of predictions) {
+      const agentWeight = Math.max(0, Number(reliability[prediction.agent_id]) || 0) / reliabilityTotal;
+      const probability = Math.max(1e-12, probabilityMaps.get(prediction.agent_id)?.get(entry.horseNumber) ?? marketProbability);
+      logScore += specialistWeight * agentWeight * Math.log(probability);
+    }
+    const probabilities = predictions.map((prediction) => probabilityMaps.get(prediction.agent_id)?.get(entry.horseNumber) ?? 0);
+    const mean = avg(probabilities);
+    return { horse_number: entry.horseNumber, horse_name: entry.horseName, score: Math.exp(logScore),
+      market_probability: marketProbability, votes: counts.get(entry.horseNumber) ?? 0,
+      disagreement: Math.sqrt(avg(probabilities.map((value) => (value - mean) ** 2))) };
+  });
+  const total = scores.reduce((sum, row) => sum + row.score, 0);
+  const ranking = scores.map((row) => ({ ...row, probability: row.score / total }))
+    .sort((left, right) => right.probability - left.probability || left.horse_number - right.horse_number)
+    .map((row, index) => ({ ...row, rank: index + 1 }));
   return {
-    top_pick: ranked[0]?.[0] ?? null,
-    agreement: `${ranked[0]?.[1] ?? 0}/${predictions.length}`,
-    split_opinion: (ranked[0]?.[1] ?? 0) < 3,
-    votes: Object.fromEntries(ranked),
+    top_pick: ranking[0]?.horse_number ?? null,
+    agreement: `${votes[0]?.[1] ?? 0}/${predictions.length}`,
+    split_opinion: (votes[0]?.[1] ?? 0) < 3,
+    votes: Object.fromEntries(votes),
+    mode: marketWeight === 1 ? "market_accuracy_floor" : "validated_reliability_pool",
+    market_weight: marketWeight,
+    ranking,
   };
 }
 

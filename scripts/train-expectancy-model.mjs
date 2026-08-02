@@ -360,10 +360,16 @@ export function evaluate(model, races, temperature) {
   let logLoss = 0;
   let uniformLogLoss = 0;
   let brier = 0;
+  let top1Hits = 0;
+  let top3Hits = 0;
   let maxProbabilitySumError = 0;
   const calibrationRows = [];
   for (const race of races) {
     const probabilities = predictRace(model, race, temperature);
+    const ranked = probabilities.map((probability, index) => ({ probability, index }))
+      .sort((left, right) => right.probability - left.probability);
+    top1Hits += ranked[0]?.index === race.winnerIndex ? 1 : 0;
+    top3Hits += ranked.slice(0, 3).some((row) => row.index === race.winnerIndex) ? 1 : 0;
     logLoss -= Math.log(Math.max(1e-12, probabilities[race.winnerIndex]));
     uniformLogLoss += Math.log(race.rows.length);
     maxProbabilitySumError = Math.max(maxProbabilitySumError, Math.abs(1 - probabilities.reduce((sum, value) => sum + value, 0)));
@@ -390,6 +396,8 @@ export function evaluate(model, races, temperature) {
     logLoss: logLoss / races.length,
     uniformLogLoss: uniformLogLoss / races.length,
     brier: brier / races.length,
+    top1Rate: top1Hits / races.length,
+    top3Rate: top3Hits / races.length,
     ece: bins.reduce((sum, bin) => sum + bin.count * bin.error, 0) / entries,
     maxCalibrationBinError: Math.max(...bins.map((bin) => bin.error)),
     maxProbabilitySumError,

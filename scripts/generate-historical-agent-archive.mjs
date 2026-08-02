@@ -12,7 +12,7 @@ const OUTPUT_DIR = path.join(ROOT, "data", "historical-agent-archive");
 const require = createRequire(import.meta.url);
 const forecastPolicy = require(path.join(ROOT, "forecast-policy.js"));
 const UNIT_STAKE_YEN = 100;
-const VERSION = "historical-agent-replay-v1";
+const VERSION = "historical-agent-replay-v2";
 const AGENT_IDS = ["safety", "sniper", "pace", "analyst", "contrarian"];
 const VENUES = { "01": "札幌", "02": "函館", "03": "福島", "04": "新潟", "05": "東京", "06": "中山", "07": "中京", "08": "京都", "09": "阪神", "10": "小倉" };
 
@@ -27,6 +27,7 @@ try {
     r.surface,r.distance_m,r.going,r.weather,m.display_name meeting_name
     from races r join meetings m on m.meeting_id=r.meeting_id where r.race_id=?`);
   const payoutStatement = db.prepare("select bet_type,selection_key,payout_yen from payouts where race_id=? and bet_type in ('単勝','馬連','3連複')");
+  const oddsStatement = db.prepare("select horse_number,win_odds,time_basis from historical_win_place_odds where race_id=? and win_odds>=1 order by horse_number");
 
   const index = {
     version: VERSION,
@@ -34,7 +35,8 @@ try {
     status: "reference_replay",
     label: "時系列再現・各100円",
     policy: {
-      predictionTiming: "strictly_before_race_start",
+      predictionTiming: "past-performance features are strictly before race start",
+      marketReferenceTiming: "historical_closing_reference; research replay only and excluded from published pre-race audit",
       resultFeaturesUsedForPrediction: false,
       actualPurchase: false,
       ticketTypes: ["単勝1点", "馬連5点", "3連複5頭BOX"],
@@ -44,7 +46,7 @@ try {
       compactAgentSchema: ["markHorseNumbers", "ticketPayouts"],
       compactTotalsSchema: ["points", "payoutYen"],
     },
-    coverage: { databaseRaces: Number(coverage.races), from: coverage.minDate, to: coverage.maxDate, archivedRaces: 0, archivedDays: 0 },
+    coverage: { databaseRaces: Number(coverage.races), from: coverage.minDate, to: coverage.maxDate, archivedRaces: 0, archivedDays: 0, marketReferenceRaces: 0 },
     totals: emptyTotals(),
     months: [],
   };
@@ -56,13 +58,14 @@ try {
 
   const flushRace = () => {
     if (!currentRace?.rows?.length || currentRace.rows.length < 2) return;
-    const record = buildRaceRecord(currentRace, raceStatement, payoutStatement, horseNames);
+    const record = buildRaceRecord(currentRace, raceStatement, payoutStatement, oddsStatement, horseNames);
     if (!record) return;
     const month = record.date.slice(0, 7);
     if (currentMonth && month !== currentMonth) flushMonth();
     currentMonth = month;
     monthRecords.push(record);
     index.coverage.archivedRaces += 1;
+    if (record.marketReference) index.coverage.marketReferenceRaces += 1;
     addTotals(index.totals, record.totals);
     if (index.coverage.archivedRaces % 5000 === 0) console.log(`archive ${index.coverage.archivedRaces}/${coverage.races}`);
   };
@@ -119,11 +122,20 @@ try {
   db.close();
 }
 
-function buildRaceRecord(race, raceStatement, payoutStatement, horseNames) {
+function buildRaceRecord(race, raceStatement, payoutStatement, oddsStatement, horseNames) {
   const meta = raceStatement.get(race.id);
   if (!meta) return null;
   const payoutMap = new Map(payoutStatement.all(race.id).map((row) => [`${row.bet_type}|${canonical(row.selection_key, row.bet_type)}`, Number(row.payout_yen)]));
-  const baseScores = new Map(race.rows.map((row) => [row.horseNumber, specialistScores(row.features)]));
+  const oddsRows = oddsStatement.all(race.id);
+  const inverseTotal = oddsRows.reduce((sum, row) => sum + 1 / Number(row.win_odds), 0);
+  const marketProbabilities = new Map(oddsRows.map((row) => [Number(row.horse_number), inverseTotal > 0 ? (1 / Number(row.win_odds)) / inverseTotal : 0]));
+  const maximumMarket = Math.max(...marketProbabilities.values(), 0);
+  const marketReference = marketProbabilities.size === race.rows.length && maximumMarket > 0;
+  const baseScores = new Map(race.rows.map((row) => {
+    const base = specialistScores(row.features);
+    const market = marketReference ? (marketProbabilities.get(row.horseNumber) ?? 0) / maximumMarket : null;
+    return [row.horseNumber, blendSpecialistScores(base, market)];
+  }));
   const ranked = {};
   for (const agentId of AGENT_IDS.slice(0, 4)) ranked[agentId] = rankRows(race.rows, (row) => baseScores.get(row.horseNumber)[agentId]);
   const topVotes = new Map();
@@ -131,7 +143,7 @@ function buildRaceRecord(race, raceStatement, payoutStatement, horseNames) {
   ranked.contrarian = rankRows(race.rows, (row) => {
     const scores = baseScores.get(row.horseNumber);
     const base = (scores.safety + scores.sniper + scores.pace + scores.analyst) / 4;
-    return base + scores.sniper * 0.25 - (topVotes.get(row.horseNumber) ?? 0) * 0.12;
+    return base * .72 + scores.sniper * .22 - (topVotes.get(row.horseNumber) ?? 0) * .015 + scores.market * .18;
   });
 
   const agents = AGENT_IDS.map((agentId) => {
@@ -157,7 +169,20 @@ function buildRaceRecord(race, raceStatement, payoutStatement, horseNames) {
     .map((row) => ({ finish: row.finishPosition, horseNumber: row.horseNumber, horseName: horseNames.get(row.horseId) ?? row.horseId }));
   return { raceId: race.id, date: meta.race_date, venueCode: meta.venue_code, venueName: VENUES[meta.venue_code] ?? meta.venue_code,
     meetingName: meta.meeting_name, raceNo: Number(meta.race_number), raceName: meta.race_name ?? meta.race_class ?? "レース",
-    surface: meta.surface, distanceM: Number(meta.distance_m), going: meta.going, weather: meta.weather, podium, agents, totals };
+    surface: meta.surface, distanceM: Number(meta.distance_m), going: meta.going, weather: meta.weather,
+    marketReference, marketTimeBasis: marketReference ? oddsRows[0]?.time_basis : null, podium, agents, totals };
+}
+
+function blendSpecialistScores(base, market) {
+  if (!Number.isFinite(market)) return { ...base, market: 0 };
+  const underpriced = clamp(.5 + (base.sniper - market) * .5);
+  return {
+    safety: .62 * market + .38 * base.safety,
+    sniper: .34 * market + .52 * base.sniper + .14 * underpriced,
+    pace: .32 * market + .68 * base.pace,
+    analyst: .68 * market + .32 * base.analyst,
+    market,
+  };
 }
 
 function specialistScores(f) {

@@ -30,7 +30,7 @@
   function sourceMaps(prediction) {
     const panels = prediction.forecastPanel ?? [];
     return {
-      base: rankedMap(prediction.marks ?? [], "probability"),
+      base: rankedMap(prediction.allHorseProbabilities?.length ? prediction.allHorseProbabilities : (prediction.marks ?? []), "probability"),
       ability: panelMap(panels, "agent_ability"),
       pace: panelMap(panels, "agent_pace"),
       data: panelMap(panels, "agent_data"),
@@ -62,6 +62,7 @@
       if (value?.probability) current.probability = value.probability;
       rows.set(key, current);
     };
+    for (const horse of prediction.allHorseProbabilities ?? []) add(horse.horseNumber, horse);
     for (const mark of prediction.marks ?? []) add(mark.horseNumber, mark);
     for (const source of Object.values(sources)) {
       const map = source instanceof Map ? source : source.values;
@@ -81,14 +82,19 @@
   }
 
   function agentScore(agentId, horse, sources) {
-    if (agentId === "safety") return .55 * horse.ability + .25 * horse.base + .15 * horse.support + .05 * horse.data;
-    if (agentId === "analyst") return .60 * horse.data + .20 * horse.base + .15 * horse.ability + .05 * horse.support;
+    if (agentId === "safety") return .45 * horse.base + .35 * horse.ability + .15 * horse.support + .05 * horse.data;
+    if (agentId === "analyst") return sources.data.available
+      ? .45 * horse.data + .35 * horse.base + .15 * horse.ability + .05 * horse.support
+      : .72 * horse.base + .23 * horse.ability + .05 * horse.support;
     if (agentId === "pace") return sources.pace.available
-      ? .70 * horse.pace + .15 * horse.data + .10 * horse.ability + .05 * horse.longshot
-      : .48 * horse.data + .22 * horse.ability + .18 * horse.disagreement + .12 * horse.longshot;
-    if (agentId === "sniper") return .48 * horse.competence * (.60 + .40 * horse.longshot)
-      + .30 * horse.longshot + .22 * horse.disagreement - .10 * horse.base;
-    return .42 * horse.competence + .30 * (1 - horse.support) + .20 * horse.disagreement + .08 * horse.longshot - .18 * horse.base;
+      ? .45 * horse.pace + .32 * horse.base + .15 * horse.ability + .05 * horse.data + .03 * horse.competence * horse.longshot
+      : sources.data.available
+        ? .38 * horse.data + .32 * horse.base + .20 * horse.ability + .10 * horse.disagreement
+        : .75 * horse.ability + .15 * horse.base + .10 * horse.disagreement;
+    if (agentId === "sniper") return .42 * horse.base + .32 * horse.competence + .14 * horse.competence * horse.longshot
+      + .12 * horse.disagreement;
+    return .38 * horse.base + .34 * horse.competence + .16 * horse.disagreement
+      + .12 * horse.competence * horse.longshot - .04 * horse.support;
   }
 
   function valueOf(map, horseNumber) { return Number(map?.get(Number(horseNumber))?.value) || 0; }
