@@ -1,0 +1,196 @@
+{
+  "version": "prediction-hit-rate-audit-v1",
+  "generatedAt": "2026-08-02T23:11:23.746Z",
+  "archiveVersion": "historical-agent-replay-v2",
+  "coverage": {
+    "databaseRaces": 105596,
+    "from": "1996-01-05",
+    "to": "2026-08-02",
+    "archivedRaces": 105596,
+    "archivedDays": 3273,
+    "marketReferenceRaces": 58312,
+    "featureRows": 1473534
+  },
+  "split": {
+    "discovery": "through 2024-12-31",
+    "validation": "2025-01-01 through 2025-12-31",
+    "holdout": "from 2026-01-01"
+  },
+  "v1Baseline": {
+    "safety": {
+      "top1Rate": 0.2255316326,
+      "top3Rate": 0.5071358174
+    },
+    "sniper": {
+      "top1Rate": 0.1608638793,
+      "top3Rate": 0.3930385505
+    },
+    "pace": {
+      "top1Rate": 0.1330123953,
+      "top3Rate": 0.3398942421
+    },
+    "analyst": {
+      "top1Rate": 0.1742921042,
+      "top3Rate": 0.4186251469
+    },
+    "contrarian": {
+      "top1Rate": 0.0630377924,
+      "top3Rate": 0.2198551988
+    }
+  },
+  "metrics": {
+    "all": {
+      "races": 105596,
+      "meanUniqueTopPicks": 2.362883063752415,
+      "agents": {
+        "safety": {
+          "races": 105596,
+          "top1Rate": 0.27996325618394635,
+          "top3Rate": 0.581433008826092
+        },
+        "sniper": {
+          "races": 105596,
+          "top1Rate": 0.2541478843895602,
+          "top3Rate": 0.5353043675896815
+        },
+        "pace": {
+          "races": 105596,
+          "top1Rate": 0.24000909125345657,
+          "top3Rate": 0.5094227054055078
+        },
+        "analyst": {
+          "races": 105596,
+          "top1Rate": 0.25812530777680975,
+          "top3Rate": 0.5453331565589605
+        },
+        "contrarian": {
+          "races": 105596,
+          "top1Rate": 0.22828516231675441,
+          "top3Rate": 0.4985794916474109
+        }
+      }
+    },
+    "discovery": {
+      "races": 100059,
+      "meanUniqueTopPicks": 2.4143355420302024,
+      "agents": {
+        "safety": {
+          "races": 100059,
+          "top1Rate": 0.27750627129993305,
+          "top3Rate": 0.5776092105657662
+        },
+        "sniper": {
+          "races": 100059,
+          "top1Rate": 0.2508320091146224,
+          "top3Rate": 0.5295975374529028
+        },
+        "pace": {
+          "races": 100059,
+          "top1Rate": 0.23612068879361178,
+          "top3Rate": 0.50294326347455
+        },
+        "analyst": {
+          "races": 100059,
+          "top1Rate": 0.2547197153679329,
+          "top3Rate": 0.5400513696918818
+        },
+        "contrarian": {
+          "races": 100059,
+          "top1Rate": 0.22338820096143275,
+          "top3Rate": 0.4912901388180973
+        }
+      }
+    },
+    "validation": {
+      "races": 3455,
+      "meanUniqueTopPicks": 1.4104196816208394,
+      "agents": {
+        "safety": {
+          "races": 3455,
+          "top1Rate": 0.32821997105643996,
+          "top3Rate": 0.6506512301013024
+        },
+        "sniper": {
+          "races": 3455,
+          "top1Rate": 0.32040520984081045,
+          "top3Rate": 0.6460202604920405
+        },
+        "pace": {
+          "races": 3455,
+          "top1Rate": 0.3175108538350217,
+          "top3Rate": 0.629232995658466
+        },
+        "analyst": {
+          "races": 3455,
+          "top1Rate": 0.323589001447178,
+          "top3Rate": 0.6416787264833574
+        },
+        "contrarian": {
+          "races": 3455,
+          "top1Rate": 0.323589001447178,
+          "top3Rate": 0.6295224312590448
+        }
+      }
+    },
+    "holdout": {
+      "races": 2082,
+      "meanUniqueTopPicks": 1.4707012487992315,
+      "agents": {
+        "safety": {
+          "races": 2082,
+          "top1Rate": 0.31796349663784823,
+          "top3Rate": 0.6503362151777138
+        },
+        "sniper": {
+          "races": 2082,
+          "top1Rate": 0.3035542747358309,
+          "top3Rate": 0.6258405379442843
+        },
+        "pace": {
+          "races": 2082,
+          "top1Rate": 0.29827089337175794,
+          "top3Rate": 0.621998078770413
+        },
+        "analyst": {
+          "races": 2082,
+          "top1Rate": 0.31316042267050914,
+          "top3Rate": 0.6392891450528339
+        },
+        "contrarian": {
+          "races": 2082,
+          "top1Rate": 0.30547550432276654,
+          "top3Rate": 0.6316042267050913
+        }
+      }
+    }
+  },
+  "improvements": {
+    "safety": {
+      "top1Points": 5.443162358394635,
+      "top3Points": 7.429719142609192
+    },
+    "sniper": {
+      "top1Points": 9.328400508956019,
+      "top3Points": 14.22658170896815
+    },
+    "pace": {
+      "top1Points": 10.699669595345657,
+      "top3Points": 16.95284633055078
+    },
+    "analyst": {
+      "top1Points": 8.383320357680976,
+      "top3Points": 12.670800965896051
+    },
+    "contrarian": {
+      "top1Points": 16.524736991675443,
+      "top3Points": 27.872429284741084
+    }
+  },
+  "acceptance": {
+    "allAgentsTop1Improved": true,
+    "allAgentsTop3Improved": true,
+    "holdoutHasRaces": true,
+    "archiveComplete": true
+  },
+  "status": "pass"
+}

@@ -15621,11 +15621,11 @@ window.KEIBA_LIVE_RACECARDS = {
   ],
   "raceCount": 36,
   "entryCount": 462,
-  "generatedAt": "2026-08-02T17:16:39.088Z",
+  "generatedAt": "2026-08-02T23:30:16.215Z",
   "resultSync": {
     "status": "complete",
     "settledRaces": 36,
-    "syncedAt": "2026-08-02T17:16:39.088Z",
+    "syncedAt": "2026-08-02T23:30:16.215Z",
     "source": "JRA公式確定結果・払戻"
   }
 };

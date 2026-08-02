@@ -1,6 +1,6 @@
 window.KEIBA_LIVE_REPLAY_AUDIT = {
   "status": "replay_only",
-  "calculatedAt": "2026-08-02T17:16:39.306Z",
+  "calculatedAt": "2026-08-02T23:32:35.457Z",
   "label": "後日再現（本番成績に含めない）",
   "policy": {
     "source": "画面で表示する総合AI指数の買い目とJRA公式払戻の照合",
@@ -44214,7 +44214,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -44351,12 +44351,21 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "safety",
           "status": "available",
-          "topPick": 9,
-          "topPickFinish": 7,
-          "topPickFinishText": "7着",
+          "topPick": 12,
+          "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
+              "horseNumber": 12,
+              "horseName": "ヨドノサファイア",
+              "score": 0.8982422251076273,
+              "probability": 0.09124731430397812,
+              "finish": 6,
+              "finishText": "6着"
+            },
+            {
+              "mark": "○",
               "horseNumber": 9,
               "horseName": "ドゥブルヴェ",
               "score": 0.8500000000000001,
@@ -44365,19 +44374,10 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "finishText": "7着"
             },
             {
-              "mark": "○",
-              "horseNumber": 12,
-              "horseName": "ヨドノサファイア",
-              "score": 0.7981596040354029,
-              "probability": 0.09124731430397812,
-              "finish": 6,
-              "finishText": "6着"
-            },
-            {
               "mark": "▲",
               "horseNumber": 1,
               "horseName": "タガノシルフィー",
-              "score": 0.6941097142716541,
+              "score": 0.7893352899950241,
               "probability": 0.08180691764455698,
               "finish": 2,
               "finishText": "2着"
@@ -44387,33 +44387,33 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 14,
-          "topPickFinish": 9,
-          "topPickFinishText": "9着",
+          "topPick": 9,
+          "topPickFinish": 7,
+          "topPickFinishText": "7着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 14,
-              "horseName": "テリオスリコ",
-              "score": 0.3246122234779193,
-              "probability": 0.07874878535912055,
-              "finish": 9,
-              "finishText": "9着"
+              "horseNumber": 9,
+              "horseName": "ドゥブルヴェ",
+              "score": 0.77,
+              "probability": 0.09150077072881528,
+              "finish": 7,
+              "finishText": "7着"
             },
             {
               "mark": "○",
-              "horseNumber": 13,
-              "horseName": "レーヌペスカ",
-              "score": 0.31091549374648475,
-              "probability": 0.08021612440946442,
-              "finish": 8,
-              "finishText": "8着"
+              "horseNumber": 12,
+              "horseName": "ヨドノサファイア",
+              "score": 0.7296035935823179,
+              "probability": 0.09124731430397812,
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
               "horseNumber": 1,
               "horseName": "タガノシルフィー",
-              "score": 0.2949477742214318,
+              "score": 0.6335866522455422,
               "probability": 0.08180691764455698,
               "finish": 2,
               "finishText": "2着"
@@ -44423,72 +44423,72 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "pace",
           "status": "available",
-          "topPick": 9,
-          "topPickFinish": 7,
-          "topPickFinishText": "7着",
+          "topPick": 12,
+          "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 9,
-              "horseName": "ドゥブルヴェ",
-              "score": 0.265,
-              "probability": 0.09150077072881528,
-              "finish": 7,
-              "finishText": "7着"
-            },
-            {
-              "mark": "○",
               "horseNumber": 12,
               "horseName": "ヨドノサファイア",
-              "score": 0.2585199505044254,
+              "score": 0.872807398139222,
               "probability": 0.09124731430397812,
               "finish": 6,
               "finishText": "6着"
             },
             {
-              "mark": "▲",
+              "mark": "○",
               "horseNumber": 1,
               "horseName": "タガノシルフィー",
-              "score": 0.24551371428395677,
+              "score": 0.7428901959997553,
               "probability": 0.08180691764455698,
               "finish": 2,
               "finishText": "2着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 4,
+              "horseName": "ダノンルミエール",
+              "score": 0.6863639873658046,
+              "probability": 0.0773368963292656,
+              "finish": 13,
+              "finishText": "13着"
             }
           ]
         },
         {
           "agentId": "analyst",
           "status": "available",
-          "topPick": 9,
-          "topPickFinish": 7,
-          "topPickFinishText": "7着",
+          "topPick": 12,
+          "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 9,
-              "horseName": "ドゥブルヴェ",
-              "score": 0.36666666666666664,
-              "probability": 0.09150077072881528,
-              "finish": 7,
-              "finishText": "7着"
-            },
-            {
-              "mark": "○",
               "horseNumber": 12,
               "horseName": "ヨドノサファイア",
-              "score": 0.34398649343215537,
+              "score": 0.9509684948864133,
               "probability": 0.09124731430397812,
               "finish": 6,
               "finishText": "6着"
             },
             {
-              "mark": "▲",
+              "mark": "○",
               "horseNumber": 1,
               "horseName": "タガノシルフィー",
-              "score": 0.2984646666605153,
+              "score": 0.8158465669960712,
               "probability": 0.08180691764455698,
               "finish": 2,
               "finishText": "2着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 13,
+              "horseName": "レーヌペスカ",
+              "score": 0.7485236256608373,
+              "probability": 0.08021612440946442,
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         },
@@ -44503,7 +44503,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 9,
               "horseName": "ドゥブルヴェ",
-              "score": 0.49000000000000005,
+              "score": 0.7466666666666667,
               "probability": 0.09150077072881528,
               "finish": 7,
               "finishText": "7着"
@@ -44512,19 +44512,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 12,
               "horseName": "ヨドノサファイア",
-              "score": 0.4796319208070806,
+              "score": 0.6868155142047417,
               "probability": 0.09124731430397812,
               "finish": 6,
               "finishText": "6着"
             },
             {
               "mark": "▲",
-              "horseNumber": 1,
-              "horseName": "タガノシルフィー",
-              "score": 0.45882194285433087,
-              "probability": 0.08180691764455698,
-              "finish": 2,
-              "finishText": "2着"
+              "horseNumber": 4,
+              "horseName": "ダノンルミエール",
+              "score": 0.6070062449128111,
+              "probability": 0.0773368963292656,
+              "finish": 13,
+              "finishText": "13着"
             }
           ]
         }
@@ -44537,9 +44537,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "9",
+              "selection": "12",
               "ticketKeys": [
-                "9"
+                "12"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -44550,13 +44550,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-12 / 1-9 / 1-12 / 9-13 / 12-13",
+              "selection": "9-12 / 1-12 / 1-9 / 12-13 / 9-13",
               "ticketKeys": [
                 "9-12",
-                "1-9",
                 "1-12",
-                "9-13",
-                "12-13"
+                "1-9",
+                "12-13",
+                "9-13"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -44567,18 +44567,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-9-12-13-14 BOX",
+              "selection": "1-4-9-12-13 BOX",
               "ticketKeys": [
                 "1-9-12",
                 "9-12-13",
-                "9-12-14",
-                "1-9-13",
-                "1-9-14",
-                "9-13-14",
+                "4-9-12",
                 "1-12-13",
-                "1-12-14",
-                "12-13-14",
-                "1-13-14"
+                "1-4-12",
+                "4-12-13",
+                "1-9-13",
+                "1-4-9",
+                "4-9-13",
+                "1-4-13"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -44595,9 +44595,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "14",
+              "selection": "9",
               "ticketKeys": [
-                "14"
+                "9"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -44608,13 +44608,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "13-14 / 1-14 / 1-13 / 12-14 / 12-13",
+              "selection": "9-12 / 1-9 / 4-9 / 1-12 / 4-12",
               "ticketKeys": [
-                "13-14",
-                "1-14",
-                "1-13",
-                "12-14",
-                "12-13"
+                "9-12",
+                "1-9",
+                "4-9",
+                "1-12",
+                "4-12"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -44625,18 +44625,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-9-12-13-14 BOX",
+              "selection": "1-4-9-12-13 BOX",
               "ticketKeys": [
-                "1-13-14",
-                "12-13-14",
-                "9-13-14",
-                "1-12-14",
-                "1-9-14",
-                "9-12-14",
-                "1-12-13",
-                "1-9-13",
+                "1-9-12",
+                "4-9-12",
                 "9-12-13",
-                "1-9-12"
+                "1-4-9",
+                "1-9-13",
+                "4-9-13",
+                "1-4-12",
+                "1-12-13",
+                "4-12-13",
+                "1-4-13"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -44653,9 +44653,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "9",
+              "selection": "12",
               "ticketKeys": [
-                "9"
+                "12"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -44666,13 +44666,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-12 / 1-9 / 1-12 / 9-13 / 12-13",
+              "selection": "1-12 / 4-12 / 12-13 / 1-4 / 1-13",
               "ticketKeys": [
-                "9-12",
-                "1-9",
                 "1-12",
-                "9-13",
-                "12-13"
+                "4-12",
+                "12-13",
+                "1-4",
+                "1-13"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -44683,18 +44683,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-9-12-13-14 BOX",
+              "selection": "1-4-9-12-13 BOX",
               "ticketKeys": [
-                "1-9-12",
-                "9-12-13",
-                "9-12-14",
-                "1-9-13",
-                "1-9-14",
-                "9-13-14",
+                "1-4-12",
                 "1-12-13",
-                "1-12-14",
-                "12-13-14",
-                "1-13-14"
+                "1-9-12",
+                "4-12-13",
+                "4-9-12",
+                "9-12-13",
+                "1-4-13",
+                "1-4-9",
+                "1-9-13",
+                "4-9-13"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -44711,9 +44711,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "9",
+              "selection": "12",
               "ticketKeys": [
-                "9"
+                "12"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -44724,13 +44724,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-12 / 1-9 / 1-12 / 9-13 / 12-13",
+              "selection": "1-12 / 12-13 / 4-12 / 1-13 / 1-4",
               "ticketKeys": [
-                "9-12",
-                "1-9",
                 "1-12",
-                "9-13",
-                "12-13"
+                "12-13",
+                "4-12",
+                "1-13",
+                "1-4"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -44741,18 +44741,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-9-12-13-14 BOX",
+              "selection": "1-4-10-12-13 BOX",
               "ticketKeys": [
-                "1-9-12",
-                "9-12-13",
-                "9-12-14",
-                "1-9-13",
-                "1-9-14",
-                "9-13-14",
                 "1-12-13",
-                "1-12-14",
-                "12-13-14",
-                "1-13-14"
+                "1-4-12",
+                "1-10-12",
+                "4-12-13",
+                "10-12-13",
+                "4-10-12",
+                "1-4-13",
+                "1-10-13",
+                "1-4-10",
+                "4-10-13"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -44782,13 +44782,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-12 / 1-9 / 1-12 / 9-13 / 12-13",
+              "selection": "9-12 / 4-9 / 1-9 / 4-12 / 9-13",
               "ticketKeys": [
                 "9-12",
+                "4-9",
                 "1-9",
-                "1-12",
-                "9-13",
-                "12-13"
+                "4-12",
+                "9-13"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -44799,18 +44799,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-9-12-13-14 BOX",
+              "selection": "1-4-9-12-13 BOX",
               "ticketKeys": [
+                "4-9-12",
                 "1-9-12",
                 "9-12-13",
-                "9-12-14",
+                "1-4-9",
+                "4-9-13",
                 "1-9-13",
-                "1-9-14",
-                "9-13-14",
+                "1-4-12",
+                "4-12-13",
                 "1-12-13",
-                "1-12-14",
-                "12-13-14",
-                "1-13-14"
+                "1-4-13"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -44833,7 +44833,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -44974,7 +44974,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "ノドゥス",
-              "score": 0.8500000000000001,
+              "score": 0.9451592577520243,
               "probability": 0.12915301789319147,
               "finish": 1,
               "finishText": "1着"
@@ -44983,7 +44983,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "ウィールズアップ",
-              "score": 0.7592246219570303,
+              "score": 0.8514832992246777,
               "probability": 0.11912493727236832,
               "finish": 7,
               "finishText": "7着"
@@ -44992,7 +44992,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "サノノキセキ",
-              "score": 0.6895052252390901,
+              "score": 0.7920274904792973,
               "probability": 0.11432655575314177,
               "finish": 3,
               "finishText": "3着"
@@ -45002,36 +45002,36 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 11,
-          "topPickFinish": 9,
-          "topPickFinishText": "9着",
+          "topPick": 7,
+          "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 11,
-              "horseName": "タイセイルミナス",
-              "score": 0.3395527040922717,
-              "probability": 0.091851082286774,
-              "finish": 9,
-              "finishText": "9着"
+              "horseNumber": 7,
+              "horseName": "ノドゥス",
+              "score": 0.7516177813951417,
+              "probability": 0.12915301789319147,
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
-              "horseNumber": 12,
-              "horseName": "キミヘノメロディー",
-              "score": 0.32606663702725713,
-              "probability": 0.09694387887494223,
-              "finish": 12,
-              "finishText": "12着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 4,
               "horseName": "サノノキセキ",
-              "score": 0.2962604425914792,
+              "score": 0.7070362683940326,
               "probability": 0.11432655575314177,
               "finish": 3,
               "finishText": "3着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 10,
+              "horseName": "ウィールズアップ",
+              "score": 0.6813951982247829,
+              "probability": 0.11912493727236832,
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -45046,28 +45046,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "ノドゥス",
-              "score": 0.265,
+              "score": 0.872891843411336,
               "probability": 0.12915301789319147,
               "finish": 1,
               "finishText": "1着"
             },
             {
               "mark": "○",
-              "horseNumber": 10,
-              "horseName": "ウィールズアップ",
-              "score": 0.2536530777446288,
-              "probability": 0.11912493727236832,
-              "finish": 7,
-              "finishText": "7着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 4,
               "horseName": "サノノキセキ",
-              "score": 0.24493815315488623,
+              "score": 0.8164608904620101,
               "probability": 0.11432655575314177,
               "finish": 3,
               "finishText": "3着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 10,
+              "horseName": "ウィールズアップ",
+              "score": 0.7782065092544749,
+              "probability": 0.11912493727236832,
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -45082,28 +45082,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "ノドゥス",
-              "score": 0.36666666666666664,
+              "score": 0.9397666531015518,
               "probability": 0.12915301789319147,
               "finish": 1,
               "finishText": "1着"
             },
             {
               "mark": "○",
-              "horseNumber": 10,
-              "horseName": "ウィールズアップ",
-              "score": 0.3269524387728674,
-              "probability": 0.11912493727236832,
-              "finish": 7,
-              "finishText": "7着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 4,
               "horseName": "サノノキセキ",
-              "score": 0.29645020270876854,
+              "score": 0.8841050699249963,
               "probability": 0.11432655575314177,
               "finish": 3,
               "finishText": "3着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 10,
+              "horseName": "ウィールズアップ",
+              "score": 0.8423042292826852,
+              "probability": 0.11912493727236832,
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -45118,28 +45118,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "ノドゥス",
-              "score": 0.49000000000000005,
+              "score": 0.7088237085268557,
               "probability": 0.12915301789319147,
               "finish": 1,
               "finishText": "1着"
             },
             {
               "mark": "○",
-              "horseNumber": 10,
-              "horseName": "ウィールズアップ",
-              "score": 0.47184492439140613,
-              "probability": 0.11912493727236832,
-              "finish": 7,
-              "finishText": "7着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 4,
               "horseName": "サノノキセキ",
-              "score": 0.45790104504781803,
+              "score": 0.6721184509498392,
               "probability": 0.11432655575314177,
               "finish": 3,
               "finishText": "3着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 10,
+              "horseName": "ウィールズアップ",
+              "score": 0.6382864913671336,
+              "probability": 0.11912493727236832,
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         }
@@ -45165,13 +45165,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "7-10 / 4-7 / 4-10 / 7-12 / 10-12",
+              "selection": "7-10 / 4-7 / 4-10 / 7-11 / 7-12",
               "ticketKeys": [
                 "7-10",
                 "4-7",
                 "4-10",
-                "7-12",
-                "10-12"
+                "7-11",
+                "7-12"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -45185,13 +45185,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "selection": "4-7-10-11-12 BOX",
               "ticketKeys": [
                 "4-7-10",
-                "7-10-12",
                 "7-10-11",
-                "4-7-12",
+                "7-10-12",
                 "4-7-11",
+                "4-7-12",
                 "7-11-12",
-                "4-10-12",
                 "4-10-11",
+                "4-10-12",
                 "10-11-12",
                 "4-11-12"
               ],
@@ -45210,26 +45210,26 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "11",
+              "selection": "7",
               "ticketKeys": [
-                "11"
+                "7"
               ],
               "points": 1,
               "investmentYen": 100,
-              "payoutYen": 0,
-              "netYen": -100,
-              "hit": false
+              "payoutYen": 490,
+              "netYen": 390,
+              "hit": true
             },
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "11-12 / 4-11 / 4-12 / 10-11 / 10-12",
+              "selection": "4-7 / 7-10 / 4-10 / 7-12 / 7-11",
               "ticketKeys": [
-                "11-12",
-                "4-11",
-                "4-12",
-                "10-11",
-                "10-12"
+                "4-7",
+                "7-10",
+                "4-10",
+                "7-12",
+                "7-11"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -45242,16 +45242,16 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "method": "5頭BOX",
               "selection": "4-7-10-11-12 BOX",
               "ticketKeys": [
-                "4-11-12",
-                "10-11-12",
-                "7-11-12",
-                "4-10-11",
-                "4-7-11",
-                "7-10-11",
-                "4-10-12",
+                "4-7-10",
                 "4-7-12",
+                "4-7-11",
                 "7-10-12",
-                "4-7-10"
+                "7-10-11",
+                "7-11-12",
+                "4-10-12",
+                "4-10-11",
+                "4-11-12",
+                "10-11-12"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -45281,13 +45281,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "7-10 / 4-7 / 4-10 / 7-12 / 7-11",
+              "selection": "4-7 / 7-10 / 4-10 / 7-11 / 4-11",
               "ticketKeys": [
-                "7-10",
                 "4-7",
+                "7-10",
                 "4-10",
-                "7-12",
-                "7-11"
+                "7-11",
+                "4-11"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -45298,24 +45298,24 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-7-10-11-12 BOX",
+              "selection": "4-5-7-10-11 BOX",
               "ticketKeys": [
                 "4-7-10",
-                "7-10-12",
-                "7-10-11",
-                "4-7-12",
                 "4-7-11",
-                "7-11-12",
-                "4-10-12",
+                "4-5-7",
+                "7-10-11",
+                "5-7-10",
+                "5-7-11",
                 "4-10-11",
-                "10-11-12",
-                "4-11-12"
+                "4-5-10",
+                "4-5-11",
+                "5-10-11"
               ],
               "points": 10,
               "investmentYen": 1000,
-              "payoutYen": 0,
-              "netYen": -1000,
-              "hit": false
+              "payoutYen": 1220,
+              "netYen": 220,
+              "hit": true
             }
           ]
         },
@@ -45339,13 +45339,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "7-10 / 4-7 / 4-10 / 7-12 / 10-12",
+              "selection": "4-7 / 7-10 / 4-10 / 7-11 / 4-11",
               "ticketKeys": [
-                "7-10",
                 "4-7",
+                "7-10",
                 "4-10",
-                "7-12",
-                "10-12"
+                "7-11",
+                "4-11"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -45356,24 +45356,24 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-7-10-11-12 BOX",
+              "selection": "4-5-7-10-11 BOX",
               "ticketKeys": [
                 "4-7-10",
-                "7-10-12",
-                "7-10-11",
-                "4-7-12",
                 "4-7-11",
-                "7-11-12",
-                "4-10-12",
+                "4-5-7",
+                "7-10-11",
+                "5-7-10",
+                "5-7-11",
                 "4-10-11",
-                "10-11-12",
-                "4-11-12"
+                "4-5-10",
+                "4-5-11",
+                "5-10-11"
               ],
               "points": 10,
               "investmentYen": 1000,
-              "payoutYen": 0,
-              "netYen": -1000,
-              "hit": false
+              "payoutYen": 1220,
+              "netYen": 220,
+              "hit": true
             }
           ]
         },
@@ -45397,10 +45397,10 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "7-10 / 4-7 / 4-10 / 7-12 / 7-11",
+              "selection": "4-7 / 7-10 / 4-10 / 7-12 / 7-11",
               "ticketKeys": [
-                "7-10",
                 "4-7",
+                "7-10",
                 "4-10",
                 "7-12",
                 "7-11"
@@ -45417,15 +45417,15 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "selection": "4-7-10-11-12 BOX",
               "ticketKeys": [
                 "4-7-10",
-                "7-10-12",
-                "7-10-11",
                 "4-7-12",
                 "4-7-11",
+                "7-10-12",
+                "7-10-11",
                 "7-11-12",
                 "4-10-12",
                 "4-10-11",
-                "10-11-12",
-                "4-11-12"
+                "4-11-12",
+                "10-11-12"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -45448,7 +45448,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -45601,7 +45601,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "ビクスバイト",
-              "score": 0.8500000000000001,
+              "score": 0.9500000000000001,
               "probability": 0.08640723873983748,
               "finish": 2,
               "finishText": "2着"
@@ -45610,7 +45610,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 17,
               "horseName": "ルーチェブリラーレ",
-              "score": 0.7268093789850225,
+              "score": 0.8269960140931853,
               "probability": 0.07431178380125635,
               "finish": 3,
               "finishText": "3着"
@@ -45619,7 +45619,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 5,
               "horseName": "ワンダースアン",
-              "score": 0.6129252604751456,
+              "score": 0.7072751846489468,
               "probability": 0.06376276960073504,
               "finish": 15,
               "finishText": "15着"
@@ -45629,33 +45629,33 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 11,
-          "topPickFinish": 18,
-          "topPickFinishText": "18着",
+          "topPick": 4,
+          "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 11,
-              "horseName": "ダンツカレン",
-              "score": 0.3404633545857713,
-              "probability": 0.06054661292979015,
-              "finish": 18,
-              "finishText": "18着"
+              "horseNumber": 4,
+              "horseName": "ビクスバイト",
+              "score": 0.74,
+              "probability": 0.08640723873983748,
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
-              "horseNumber": 10,
-              "horseName": "ワンダーデリエール",
-              "score": 0.3308183903106414,
-              "probability": 0.06099729906791906,
-              "finish": 14,
-              "finishText": "14着"
+              "horseNumber": 17,
+              "horseName": "ルーチェブリラーレ",
+              "score": 0.6750788708406446,
+              "probability": 0.07431178380125635,
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 5,
               "horseName": "ワンダースアン",
-              "score": 0.3162270713832114,
+              "score": 0.5589116801092877,
               "probability": 0.06376276960073504,
               "finish": 15,
               "finishText": "15着"
@@ -45673,7 +45673,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "ビクスバイト",
-              "score": 0.265,
+              "score": 0.8999999999999999,
               "probability": 0.08640723873983748,
               "finish": 2,
               "finishText": "2着"
@@ -45682,7 +45682,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 17,
               "horseName": "ルーチェブリラーレ",
-              "score": 0.24960117237312782,
+              "score": 0.7962503547555492,
               "probability": 0.07431178380125635,
               "finish": 3,
               "finishText": "3着"
@@ -45691,7 +45691,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 5,
               "horseName": "ワンダースアン",
-              "score": 0.2353656575593932,
+              "score": 0.6456687660859799,
               "probability": 0.06376276960073504,
               "finish": 15,
               "finishText": "15着"
@@ -45709,7 +45709,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "ビクスバイト",
-              "score": 0.36666666666666664,
+              "score": 0.9833333333333334,
               "probability": 0.08640723873983748,
               "finish": 2,
               "finishText": "2着"
@@ -45718,7 +45718,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 17,
               "horseName": "ルーチェブリラーレ",
-              "score": 0.312770769972614,
+              "score": 0.8704119176908881,
               "probability": 0.07431178380125635,
               "finish": 3,
               "finishText": "3着"
@@ -45727,7 +45727,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 5,
               "horseName": "ワンダースアン",
-              "score": 0.26294646812454286,
+              "score": 0.7139051203411159,
               "probability": 0.06376276960073504,
               "finish": 15,
               "finishText": "15着"
@@ -45745,7 +45745,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "ビクスバイト",
-              "score": 0.49000000000000005,
+              "score": 0.6933333333333334,
               "probability": 0.08640723873983748,
               "finish": 2,
               "finishText": "2着"
@@ -45754,19 +45754,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 17,
               "horseName": "ルーチェブリラーレ",
-              "score": 0.4653618757970045,
+              "score": 0.6323678097167076,
               "probability": 0.07431178380125635,
               "finish": 3,
               "finishText": "3着"
             },
             {
               "mark": "▲",
-              "horseNumber": 5,
-              "horseName": "ワンダースアン",
-              "score": 0.4425850520950291,
-              "probability": 0.06376276960073504,
-              "finish": 15,
-              "finishText": "15着"
+              "horseNumber": 16,
+              "horseName": "テンダーワーズ",
+              "score": 0.5252692704473602,
+              "probability": 0.059780298927563535,
+              "finish": 9,
+              "finishText": "9着"
             }
           ]
         }
@@ -45792,13 +45792,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-17 / 4-5 / 4-10 / 5-17 / 4-11",
+              "selection": "4-17 / 4-5 / 5-17 / 4-10 / 4-16",
               "ticketKeys": [
                 "4-17",
                 "4-5",
-                "4-10",
                 "5-17",
-                "4-11"
+                "4-10",
+                "4-16"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -45809,18 +45809,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-5-10-11-17 BOX",
+              "selection": "4-5-10-16-17 BOX",
               "ticketKeys": [
                 "4-5-17",
                 "4-10-17",
-                "4-11-17",
+                "4-16-17",
                 "4-5-10",
-                "4-5-11",
-                "4-10-11",
+                "4-5-16",
+                "4-10-16",
                 "5-10-17",
-                "5-11-17",
-                "10-11-17",
-                "5-10-11"
+                "5-16-17",
+                "10-16-17",
+                "5-10-16"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -45837,9 +45837,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "11",
+              "selection": "4",
               "ticketKeys": [
-                "11"
+                "4"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -45850,13 +45850,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "10-11 / 5-11 / 5-10 / 11-17 / 10-17",
+              "selection": "4-17 / 4-5 / 4-16 / 4-10 / 5-17",
               "ticketKeys": [
-                "10-11",
-                "5-11",
-                "5-10",
-                "11-17",
-                "10-17"
+                "4-17",
+                "4-5",
+                "4-16",
+                "4-10",
+                "5-17"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -45867,18 +45867,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-5-10-11-17 BOX",
+              "selection": "4-5-10-16-17 BOX",
               "ticketKeys": [
-                "5-10-11",
-                "10-11-17",
-                "4-10-11",
-                "5-11-17",
-                "4-5-11",
-                "4-11-17",
-                "5-10-17",
-                "4-5-10",
+                "4-5-17",
+                "4-16-17",
                 "4-10-17",
-                "4-5-17"
+                "4-5-16",
+                "4-5-10",
+                "4-10-16",
+                "5-16-17",
+                "5-10-17",
+                "10-16-17",
+                "5-10-16"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -45908,13 +45908,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-17 / 4-5 / 4-10 / 5-17 / 4-11",
+              "selection": "4-17 / 4-5 / 4-16 / 5-17 / 16-17",
               "ticketKeys": [
                 "4-17",
                 "4-5",
-                "4-10",
+                "4-16",
                 "5-17",
-                "4-11"
+                "16-17"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -45925,18 +45925,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-5-10-11-17 BOX",
+              "selection": "2-4-5-16-17 BOX",
               "ticketKeys": [
                 "4-5-17",
-                "4-10-17",
-                "4-11-17",
-                "4-5-10",
-                "4-5-11",
-                "4-10-11",
-                "5-10-17",
-                "5-11-17",
-                "10-11-17",
-                "5-10-11"
+                "4-16-17",
+                "2-4-17",
+                "4-5-16",
+                "2-4-5",
+                "2-4-16",
+                "5-16-17",
+                "2-5-17",
+                "2-16-17",
+                "2-5-16"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -45966,13 +45966,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-17 / 4-5 / 4-10 / 5-17 / 4-11",
+              "selection": "4-17 / 4-5 / 4-16 / 5-17 / 16-17",
               "ticketKeys": [
                 "4-17",
                 "4-5",
-                "4-10",
+                "4-16",
                 "5-17",
-                "4-11"
+                "16-17"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -45983,18 +45983,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-5-10-11-17 BOX",
+              "selection": "2-4-5-16-17 BOX",
               "ticketKeys": [
                 "4-5-17",
-                "4-10-17",
-                "4-11-17",
-                "4-5-10",
-                "4-5-11",
-                "4-10-11",
-                "5-10-17",
-                "5-11-17",
-                "10-11-17",
-                "5-10-11"
+                "4-16-17",
+                "2-4-17",
+                "4-5-16",
+                "2-4-5",
+                "2-4-16",
+                "5-16-17",
+                "2-5-17",
+                "2-16-17",
+                "2-5-16"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -46024,13 +46024,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-17 / 4-5 / 4-10 / 5-17 / 4-11",
+              "selection": "4-17 / 4-16 / 4-5 / 4-10 / 16-17",
               "ticketKeys": [
                 "4-17",
+                "4-16",
                 "4-5",
                 "4-10",
-                "5-17",
-                "4-11"
+                "16-17"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -46041,18 +46041,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-5-10-11-17 BOX",
+              "selection": "4-5-10-16-17 BOX",
               "ticketKeys": [
+                "4-16-17",
                 "4-5-17",
                 "4-10-17",
-                "4-11-17",
+                "4-5-16",
+                "4-10-16",
                 "4-5-10",
-                "4-5-11",
-                "4-10-11",
+                "5-16-17",
+                "10-16-17",
                 "5-10-17",
-                "5-11-17",
-                "10-11-17",
-                "5-10-11"
+                "5-10-16"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -46075,7 +46075,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -46220,7 +46220,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 8,
               "horseName": "エグジスタンス",
-              "score": 0.8500000000000001,
+              "score": 0.9392270963863376,
               "probability": 0.09572807781461988,
               "finish": 1,
               "finishText": "1着"
@@ -46229,7 +46229,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "ショウナンバーボン",
-              "score": 0.7926767588433683,
+              "score": 0.793058549716128,
               "probability": 0.09445356133736713,
               "finish": 2,
               "finishText": "2着"
@@ -46238,7 +46238,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 9,
               "horseName": "ミアエッテ",
-              "score": 0.7398819734908461,
+              "score": 0.7403958278247978,
               "probability": 0.09401269941702953,
               "finish": 12,
               "finishText": "12着"
@@ -46248,33 +46248,33 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 14,
-          "topPickFinish": 14,
-          "topPickFinishText": "14着",
+          "topPick": 8,
+          "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 14,
-              "horseName": "メイショウタダツグ",
-              "score": 0.3255279391761048,
-              "probability": 0.08160022985050332,
-              "finish": 14,
-              "finishText": "14着"
+              "horseNumber": 8,
+              "horseName": "エグジスタンス",
+              "score": 0.7658549686727897,
+              "probability": 0.09572807781461988,
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
-              "horseNumber": 13,
-              "horseName": "アトリ",
-              "score": 0.3083709952020979,
-              "probability": 0.08576765641020033,
-              "finish": 11,
-              "finishText": "11着"
+              "horseNumber": 11,
+              "horseName": "ショウナンバーボン",
+              "score": 0.726648775386067,
+              "probability": 0.09445356133736713,
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 9,
               "horseName": "ミアエッテ",
-              "score": 0.2812070561447973,
+              "score": 0.6852570240344777,
               "probability": 0.09401269941702953,
               "finish": 12,
               "finishText": "12着"
@@ -46292,28 +46292,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 8,
               "horseName": "エグジスタンス",
-              "score": 0.265,
+              "score": 0.8396717397634906,
               "probability": 0.09572807781461988,
               "finish": 1,
               "finishText": "1着"
             },
             {
               "mark": "○",
-              "horseNumber": 11,
-              "horseName": "ショウナンバーボン",
-              "score": 0.25783459485542104,
-              "probability": 0.09445356133736713,
-              "finish": 2,
-              "finishText": "2着"
+              "horseNumber": 14,
+              "horseName": "メイショウタダツグ",
+              "score": 0.7141304865021738,
+              "probability": 0.08160022985050332,
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "▲",
-              "horseNumber": 9,
-              "horseName": "ミアエッテ",
-              "score": 0.2512352466863557,
-              "probability": 0.09401269941702953,
-              "finish": 12,
-              "finishText": "12着"
+              "horseNumber": 10,
+              "horseName": "グローリーバローズ",
+              "score": 0.6709227260190324,
+              "probability": 0.06694749294113288,
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -46328,28 +46328,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 8,
               "horseName": "エグジスタンス",
-              "score": 0.36666666666666664,
+              "score": 0.886377200810372,
               "probability": 0.09572807781461988,
               "finish": 1,
               "finishText": "1着"
             },
             {
               "mark": "○",
-              "horseNumber": 11,
-              "horseName": "ショウナンバーボン",
-              "score": 0.3415877486606403,
-              "probability": 0.09445356133736713,
-              "finish": 2,
-              "finishText": "2着"
+              "horseNumber": 14,
+              "horseName": "メイショウタダツグ",
+              "score": 0.7727933647239719,
+              "probability": 0.08160022985050332,
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "▲",
-              "horseNumber": 9,
-              "horseName": "ミアエッテ",
-              "score": 0.3184900300689118,
-              "probability": 0.09401269941702953,
-              "finish": 12,
-              "finishText": "12着"
+              "horseNumber": 13,
+              "horseName": "アトリ",
+              "score": 0.7305473430872715,
+              "probability": 0.08576765641020033,
+              "finish": 11,
+              "finishText": "11着"
             }
           ]
         },
@@ -46364,7 +46364,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 8,
               "horseName": "エグジスタンス",
-              "score": 0.49000000000000005,
+              "score": 0.727806624897053,
               "probability": 0.09572807781461988,
               "finish": 1,
               "finishText": "1着"
@@ -46373,7 +46373,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "ショウナンバーボン",
-              "score": 0.4785353517686737,
+              "score": 0.7034383814865012,
               "probability": 0.09445356133736713,
               "finish": 2,
               "finishText": "2着"
@@ -46382,7 +46382,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 9,
               "horseName": "ミアエッテ",
-              "score": 0.4679763946981692,
+              "score": 0.6623279489145721,
               "probability": 0.09401269941702953,
               "finish": 12,
               "finishText": "12着"
@@ -46411,13 +46411,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "8-11 / 8-9 / 9-11 / 8-13 / 11-13",
+              "selection": "8-11 / 8-9 / 8-13 / 8-14 / 9-11",
               "ticketKeys": [
                 "8-11",
                 "8-9",
-                "9-11",
                 "8-13",
-                "11-13"
+                "8-14",
+                "9-11"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -46456,54 +46456,54 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "14",
+              "selection": "8",
               "ticketKeys": [
-                "14"
+                "8"
               ],
               "points": 1,
               "investmentYen": 100,
-              "payoutYen": 0,
-              "netYen": -100,
-              "hit": false
+              "payoutYen": 390,
+              "netYen": 290,
+              "hit": true
             },
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "13-14 / 9-14 / 9-13 / 11-14 / 11-13",
+              "selection": "8-11 / 8-9 / 8-10 / 9-11 / 8-14",
               "ticketKeys": [
-                "13-14",
-                "9-14",
-                "9-13",
-                "11-14",
-                "11-13"
+                "8-11",
+                "8-9",
+                "8-10",
+                "9-11",
+                "8-14"
               ],
               "points": 5,
               "investmentYen": 500,
-              "payoutYen": 0,
-              "netYen": -500,
-              "hit": false
+              "payoutYen": 1170,
+              "netYen": 670,
+              "hit": true
             },
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "8-9-11-13-14 BOX",
+              "selection": "8-9-10-11-14 BOX",
               "ticketKeys": [
-                "9-13-14",
-                "11-13-14",
-                "8-13-14",
-                "9-11-14",
-                "8-9-14",
+                "8-9-11",
+                "8-10-11",
                 "8-11-14",
-                "9-11-13",
-                "8-9-13",
-                "8-11-13",
-                "8-9-11"
+                "8-9-10",
+                "8-9-14",
+                "8-10-14",
+                "9-10-11",
+                "9-11-14",
+                "10-11-14",
+                "9-10-14"
               ],
               "points": 10,
               "investmentYen": 1000,
-              "payoutYen": 0,
-              "netYen": -1000,
-              "hit": false
+              "payoutYen": 6680,
+              "netYen": 5680,
+              "hit": true
             }
           ]
         },
@@ -46527,35 +46527,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "8-11 / 8-9 / 9-11 / 8-13 / 11-13",
+              "selection": "8-14 / 8-10 / 8-13 / 2-8 / 10-14",
               "ticketKeys": [
-                "8-11",
-                "8-9",
-                "9-11",
+                "8-14",
+                "8-10",
                 "8-13",
-                "11-13"
+                "2-8",
+                "10-14"
               ],
               "points": 5,
               "investmentYen": 500,
-              "payoutYen": 1170,
-              "netYen": 670,
-              "hit": true
+              "payoutYen": 0,
+              "netYen": -500,
+              "hit": false
             },
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "8-9-11-13-14 BOX",
+              "selection": "2-8-10-13-14 BOX",
               "ticketKeys": [
-                "8-9-11",
-                "8-11-13",
-                "8-11-14",
-                "8-9-13",
-                "8-9-14",
+                "8-10-14",
                 "8-13-14",
-                "9-11-13",
-                "9-11-14",
-                "11-13-14",
-                "9-13-14"
+                "2-8-14",
+                "8-10-13",
+                "2-8-10",
+                "2-8-13",
+                "10-13-14",
+                "2-10-14",
+                "2-13-14",
+                "2-10-13"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -46585,35 +46585,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "8-11 / 8-9 / 9-11 / 8-13 / 11-13",
+              "selection": "8-14 / 8-13 / 8-10 / 13-14 / 2-8",
               "ticketKeys": [
-                "8-11",
-                "8-9",
-                "9-11",
+                "8-14",
                 "8-13",
-                "11-13"
+                "8-10",
+                "13-14",
+                "2-8"
               ],
               "points": 5,
               "investmentYen": 500,
-              "payoutYen": 1170,
-              "netYen": 670,
-              "hit": true
+              "payoutYen": 0,
+              "netYen": -500,
+              "hit": false
             },
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "8-9-11-13-14 BOX",
+              "selection": "2-8-10-13-14 BOX",
               "ticketKeys": [
-                "8-9-11",
-                "8-11-13",
-                "8-11-14",
-                "8-9-13",
-                "8-9-14",
                 "8-13-14",
-                "9-11-13",
-                "9-11-14",
-                "11-13-14",
-                "9-13-14"
+                "8-10-14",
+                "2-8-14",
+                "8-10-13",
+                "2-8-13",
+                "2-8-10",
+                "10-13-14",
+                "2-13-14",
+                "2-10-14",
+                "2-10-13"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -46643,13 +46643,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "8-11 / 8-9 / 9-11 / 8-13 / 11-13",
+              "selection": "8-11 / 8-9 / 9-11 / 8-10 / 10-11",
               "ticketKeys": [
                 "8-11",
                 "8-9",
                 "9-11",
-                "8-13",
-                "11-13"
+                "8-10",
+                "10-11"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -46660,24 +46660,24 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "8-9-11-13-14 BOX",
+              "selection": "8-9-10-11-14 BOX",
               "ticketKeys": [
                 "8-9-11",
-                "8-11-13",
+                "8-10-11",
                 "8-11-14",
-                "8-9-13",
+                "8-9-10",
                 "8-9-14",
-                "8-13-14",
-                "9-11-13",
+                "8-10-14",
+                "9-10-11",
                 "9-11-14",
-                "11-13-14",
-                "9-13-14"
+                "10-11-14",
+                "9-10-14"
               ],
               "points": 10,
               "investmentYen": 1000,
-              "payoutYen": 0,
-              "netYen": -1000,
-              "hit": false
+              "payoutYen": 6680,
+              "netYen": 5680,
+              "hit": true
             }
           ]
         }
@@ -46694,7 +46694,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -46835,7 +46835,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "リーチツモドライチ",
-              "score": 0.8500000000000001,
+              "score": 0.9500000000000001,
               "probability": 0.14939930309671065,
               "finish": 1,
               "finishText": "1着"
@@ -46844,7 +46844,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 12,
               "horseName": "グランシュレーム",
-              "score": 0.7521753212105371,
+              "score": 0.8468094356707504,
               "probability": 0.13577389163376616,
               "finish": 6,
               "finishText": "6着"
@@ -46853,7 +46853,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 11,
               "horseName": "サスケソルトバーン",
-              "score": 0.6448318846726011,
+              "score": 0.6486946634242193,
               "probability": 0.1194136806054981,
               "finish": 8,
               "finishText": "8着"
@@ -46863,33 +46863,33 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 6,
-          "topPickFinish": 3,
-          "topPickFinishText": "3着",
+          "topPick": 5,
+          "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 6,
-              "horseName": "ラインホルト",
-              "score": 0.3461288118129247,
-              "probability": 0.09416234033271474,
-              "finish": 3,
-              "finishText": "3着"
+              "horseNumber": 5,
+              "horseName": "リーチツモドライチ",
+              "score": 0.74,
+              "probability": 0.14939930309671065,
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
-              "horseNumber": 9,
-              "horseName": "イチザサンダー",
-              "score": 0.3340914243634381,
-              "probability": 0.10057830488070481,
-              "finish": 11,
-              "finishText": "11着"
+              "horseNumber": 12,
+              "horseName": "グランシュレーム",
+              "score": 0.66924756413354,
+              "probability": 0.13577389163376616,
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
               "horseNumber": 11,
               "horseName": "サスケソルトバーン",
-              "score": 0.3083356971603125,
+              "score": 0.6108438036767943,
               "probability": 0.1194136806054981,
               "finish": 8,
               "finishText": "8着"
@@ -46907,7 +46907,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "リーチツモドライチ",
-              "score": 0.265,
+              "score": 0.8999999999999999,
               "probability": 0.14939930309671065,
               "finish": 1,
               "finishText": "1着"
@@ -46916,19 +46916,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 12,
               "horseName": "グランシュレーム",
-              "score": 0.2527719151513171,
+              "score": 0.7858120645805284,
               "probability": 0.13577389163376616,
               "finish": 6,
               "finishText": "6着"
             },
             {
               "mark": "▲",
-              "horseNumber": 11,
-              "horseName": "サスケソルトバーン",
-              "score": 0.23935398558407514,
-              "probability": 0.1194136806054981,
-              "finish": 8,
-              "finishText": "8着"
+              "horseNumber": 3,
+              "horseName": "ゼノスフィア",
+              "score": 0.48264089338896293,
+              "probability": 0.0689848426648146,
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -46943,7 +46943,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "リーチツモドライチ",
-              "score": 0.36666666666666664,
+              "score": 0.9833333333333334,
               "probability": 0.14939930309671065,
               "finish": 1,
               "finishText": "1着"
@@ -46952,19 +46952,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 12,
               "horseName": "グランシュレーム",
-              "score": 0.3238683696962766,
+              "score": 0.8588550289881658,
               "probability": 0.13577389163376616,
               "finish": 6,
               "finishText": "6着"
             },
             {
               "mark": "▲",
-              "horseNumber": 11,
-              "horseName": "サスケソルトバーン",
-              "score": 0.27690561621092963,
-              "probability": 0.1194136806054981,
-              "finish": 8,
-              "finishText": "8着"
+              "horseNumber": 3,
+              "horseName": "ゼノスフィア",
+              "score": 0.5214173982644716,
+              "probability": 0.0689848426648146,
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -46979,7 +46979,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "リーチツモドライチ",
-              "score": 0.49000000000000005,
+              "score": 0.6933333333333334,
               "probability": 0.14939930309671065,
               "finish": 1,
               "finishText": "1着"
@@ -46988,7 +46988,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 12,
               "horseName": "グランシュレーム",
-              "score": 0.47043506424210746,
+              "score": 0.6239742492090458,
               "probability": 0.13577389163376616,
               "finish": 6,
               "finishText": "6着"
@@ -46997,7 +46997,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 11,
               "horseName": "サスケソルトバーン",
-              "score": 0.44896637693452024,
+              "score": 0.5889900281660831,
               "probability": 0.1194136806054981,
               "finish": 8,
               "finishText": "8着"
@@ -47071,26 +47071,26 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "6",
+              "selection": "5",
               "ticketKeys": [
-                "6"
+                "5"
               ],
               "points": 1,
               "investmentYen": 100,
-              "payoutYen": 0,
-              "netYen": -100,
-              "hit": false
+              "payoutYen": 530,
+              "netYen": 430,
+              "hit": true
             },
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "6-9 / 6-11 / 9-11 / 6-12 / 9-12",
+              "selection": "5-12 / 5-11 / 11-12 / 5-9 / 2-5",
               "ticketKeys": [
-                "6-9",
-                "6-11",
-                "9-11",
-                "6-12",
-                "9-12"
+                "5-12",
+                "5-11",
+                "11-12",
+                "5-9",
+                "2-5"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -47101,18 +47101,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "5-6-9-11-12 BOX",
+              "selection": "2-5-9-11-12 BOX",
               "ticketKeys": [
-                "6-9-11",
-                "6-9-12",
-                "5-6-9",
-                "6-11-12",
-                "5-6-11",
-                "5-6-12",
-                "9-11-12",
-                "5-9-11",
+                "5-11-12",
                 "5-9-12",
-                "5-11-12"
+                "2-5-12",
+                "5-9-11",
+                "2-5-11",
+                "2-5-9",
+                "9-11-12",
+                "2-11-12",
+                "2-9-12",
+                "2-9-11"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -47142,13 +47142,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-12 / 5-11 / 11-12 / 5-9 / 5-6",
+              "selection": "5-12 / 3-5 / 2-5 / 3-12 / 2-12",
               "ticketKeys": [
                 "5-12",
-                "5-11",
-                "11-12",
-                "5-9",
-                "5-6"
+                "3-5",
+                "2-5",
+                "3-12",
+                "2-12"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -47159,18 +47159,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "5-6-9-11-12 BOX",
+              "selection": "2-3-5-11-12 BOX",
               "ticketKeys": [
+                "3-5-12",
+                "2-5-12",
                 "5-11-12",
-                "5-9-12",
-                "5-6-12",
-                "5-9-11",
-                "5-6-11",
-                "5-6-9",
-                "9-11-12",
-                "6-11-12",
-                "6-9-12",
-                "6-9-11"
+                "2-3-5",
+                "3-5-11",
+                "2-5-11",
+                "2-3-12",
+                "3-11-12",
+                "2-11-12",
+                "2-3-11"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -47200,13 +47200,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-12 / 5-11 / 11-12 / 5-9 / 9-12",
+              "selection": "5-12 / 3-5 / 2-5 / 3-12 / 2-12",
               "ticketKeys": [
                 "5-12",
-                "5-11",
-                "11-12",
-                "5-9",
-                "9-12"
+                "3-5",
+                "2-5",
+                "3-12",
+                "2-12"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -47217,18 +47217,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "5-6-9-11-12 BOX",
+              "selection": "1-2-3-5-12 BOX",
               "ticketKeys": [
-                "5-11-12",
-                "5-9-12",
-                "5-6-12",
-                "5-9-11",
-                "5-6-11",
-                "5-6-9",
-                "9-11-12",
-                "6-11-12",
-                "6-9-12",
-                "6-9-11"
+                "3-5-12",
+                "2-5-12",
+                "1-5-12",
+                "2-3-5",
+                "1-3-5",
+                "1-2-5",
+                "2-3-12",
+                "1-3-12",
+                "1-2-12",
+                "1-2-3"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -47258,13 +47258,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-12 / 5-11 / 11-12 / 5-9 / 5-6",
+              "selection": "5-12 / 5-11 / 11-12 / 2-5 / 5-9",
               "ticketKeys": [
                 "5-12",
                 "5-11",
                 "11-12",
-                "5-9",
-                "5-6"
+                "2-5",
+                "5-9"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -47275,18 +47275,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "5-6-9-11-12 BOX",
+              "selection": "2-5-9-11-12 BOX",
               "ticketKeys": [
                 "5-11-12",
+                "2-5-12",
                 "5-9-12",
-                "5-6-12",
+                "2-5-11",
                 "5-9-11",
-                "5-6-11",
-                "5-6-9",
+                "2-5-9",
+                "2-11-12",
                 "9-11-12",
-                "6-11-12",
-                "6-9-12",
-                "6-9-11"
+                "2-9-12",
+                "2-9-11"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -47309,7 +47309,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -47442,7 +47442,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "ハイウェイワン",
-              "score": 0.8500000000000001,
+              "score": 0.9500000000000001,
               "probability": 0.23601760914218534,
               "finish": 5,
               "finishText": "5着"
@@ -47451,7 +47451,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 8,
               "horseName": "エコログレイス",
-              "score": 0.6420547534943475,
+              "score": 0.7395652395704231,
               "probability": 0.16451096988837696,
               "finish": 6,
               "finishText": "6着"
@@ -47460,7 +47460,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 5,
               "horseName": "オーリエイト",
-              "score": 0.5400153959215822,
+              "score": 0.6259093854868522,
               "probability": 0.14107289736537226,
               "finish": 2,
               "finishText": "2着"
@@ -47470,36 +47470,36 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 2,
-          "topPickFinish": 4,
-          "topPickFinishText": "4着",
+          "topPick": 7,
+          "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 2,
-              "horseName": "アントラヴァースト",
-              "score": 0.3603999061482163,
-              "probability": 0.08494405152205249,
-              "finish": 4,
-              "finishText": "4着"
+              "horseNumber": 7,
+              "horseName": "ハイウェイワン",
+              "score": 0.74,
+              "probability": 0.23601760914218534,
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "○",
-              "horseNumber": 4,
-              "horseName": "ファンビッチャン",
-              "score": 0.34268959107587077,
-              "probability": 0.136249328030044,
-              "finish": 1,
-              "finishText": "1着"
+              "horseNumber": 8,
+              "horseName": "エコログレイス",
+              "score": 0.6370915705910085,
+              "probability": 0.16451096988837696,
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
-              "horseNumber": 5,
-              "horseName": "オーリエイト",
-              "score": 0.3319670131201027,
-              "probability": 0.14107289736537226,
-              "finish": 2,
-              "finishText": "2着"
+              "horseNumber": 1,
+              "horseName": "サンライズエイト",
+              "score": 0.5075734693460014,
+              "probability": 0.07912739266245968,
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -47514,7 +47514,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "ハイウェイワン",
-              "score": 0.265,
+              "score": 0.8999999999999999,
               "probability": 0.23601760914218534,
               "finish": 5,
               "finishText": "5着"
@@ -47523,7 +47523,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 8,
               "horseName": "エコログレイス",
-              "score": 0.23900684418679344,
+              "score": 0.7314490295002846,
               "probability": 0.16451096988837696,
               "finish": 6,
               "finishText": "6着"
@@ -47532,7 +47532,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 5,
               "horseName": "オーリエイト",
-              "score": 0.22625192449019776,
+              "score": 0.5567797678239561,
               "probability": 0.14107289736537226,
               "finish": 2,
               "finishText": "2着"
@@ -47550,7 +47550,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "ハイウェイワン",
-              "score": 0.36666666666666664,
+              "score": 0.9833333333333334,
               "probability": 0.23601760914218534,
               "finish": 5,
               "finishText": "5着"
@@ -47559,7 +47559,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 8,
               "horseName": "エコログレイス",
-              "score": 0.2756906213204437,
+              "score": 0.7983112702882628,
               "probability": 0.16451096988837696,
               "finish": 6,
               "finishText": "6着"
@@ -47568,7 +47568,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 5,
               "horseName": "オーリエイト",
-              "score": 0.23104840238235888,
+              "score": 0.619286140942628,
               "probability": 0.14107289736537226,
               "finish": 2,
               "finishText": "2着"
@@ -47586,7 +47586,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "ハイウェイワン",
-              "score": 0.49000000000000005,
+              "score": 0.6933333333333334,
               "probability": 0.23601760914218534,
               "finish": 5,
               "finishText": "5着"
@@ -47595,19 +47595,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 8,
               "horseName": "エコログレイス",
-              "score": 0.4484109506988696,
+              "score": 0.598681844708838,
               "probability": 0.16451096988837696,
               "finish": 6,
               "finishText": "6着"
             },
             {
               "mark": "▲",
-              "horseNumber": 5,
-              "horseName": "オーリエイト",
-              "score": 0.4280030791843165,
-              "probability": 0.14107289736537226,
-              "finish": 2,
-              "finishText": "2着"
+              "horseNumber": 1,
+              "horseName": "サンライズエイト",
+              "score": 0.4991702260697966,
+              "probability": 0.07912739266245968,
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         }
@@ -47678,9 +47678,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "2",
+              "selection": "7",
               "ticketKeys": [
-                "2"
+                "7"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -47691,41 +47691,41 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "2-4 / 2-5 / 4-5 / 2-8 / 4-8",
+              "selection": "7-8 / 1-7 / 4-7 / 5-7 / 1-8",
               "ticketKeys": [
-                "2-4",
-                "2-5",
-                "4-5",
-                "2-8",
-                "4-8"
+                "7-8",
+                "1-7",
+                "4-7",
+                "5-7",
+                "1-8"
               ],
               "points": 5,
               "investmentYen": 500,
-              "payoutYen": 1390,
-              "netYen": 890,
-              "hit": true
+              "payoutYen": 0,
+              "netYen": -500,
+              "hit": false
             },
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-4-5-7-8 BOX",
+              "selection": "1-4-5-7-8 BOX",
               "ticketKeys": [
-                "2-4-5",
-                "2-4-8",
-                "2-4-7",
-                "2-5-8",
-                "2-5-7",
-                "2-7-8",
-                "4-5-8",
-                "4-5-7",
+                "1-7-8",
                 "4-7-8",
-                "5-7-8"
+                "5-7-8",
+                "1-4-7",
+                "1-5-7",
+                "4-5-7",
+                "1-4-8",
+                "1-5-8",
+                "4-5-8",
+                "1-4-5"
               ],
               "points": 10,
               "investmentYen": 1000,
-              "payoutYen": 0,
-              "netYen": -1000,
-              "hit": false
+              "payoutYen": 1960,
+              "netYen": 960,
+              "hit": true
             }
           ]
         },
@@ -47749,13 +47749,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "7-8 / 5-7 / 4-7 / 5-8 / 2-7",
+              "selection": "7-8 / 5-7 / 4-7 / 1-7 / 5-8",
               "ticketKeys": [
                 "7-8",
                 "5-7",
                 "4-7",
-                "5-8",
-                "2-7"
+                "1-7",
+                "5-8"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -47766,24 +47766,24 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-4-5-7-8 BOX",
+              "selection": "1-4-5-7-8 BOX",
               "ticketKeys": [
                 "5-7-8",
                 "4-7-8",
-                "2-7-8",
+                "1-7-8",
                 "4-5-7",
-                "2-5-7",
-                "2-4-7",
+                "1-5-7",
+                "1-4-7",
                 "4-5-8",
-                "2-5-8",
-                "2-4-8",
-                "2-4-5"
+                "1-5-8",
+                "1-4-8",
+                "1-4-5"
               ],
               "points": 10,
               "investmentYen": 1000,
-              "payoutYen": 0,
-              "netYen": -1000,
-              "hit": false
+              "payoutYen": 1960,
+              "netYen": 960,
+              "hit": true
             }
           ]
         },
@@ -47807,13 +47807,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "7-8 / 5-7 / 4-7 / 5-8 / 4-8",
+              "selection": "7-8 / 5-7 / 4-7 / 1-7 / 5-8",
               "ticketKeys": [
                 "7-8",
                 "5-7",
                 "4-7",
-                "5-8",
-                "4-8"
+                "1-7",
+                "5-8"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -47824,24 +47824,24 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-4-5-7-8 BOX",
+              "selection": "1-4-5-7-8 BOX",
               "ticketKeys": [
                 "5-7-8",
                 "4-7-8",
-                "2-7-8",
+                "1-7-8",
                 "4-5-7",
-                "2-5-7",
-                "2-4-7",
+                "1-5-7",
+                "1-4-7",
                 "4-5-8",
-                "2-5-8",
-                "2-4-8",
-                "2-4-5"
+                "1-5-8",
+                "1-4-8",
+                "1-4-5"
               ],
               "points": 10,
               "investmentYen": 1000,
-              "payoutYen": 0,
-              "netYen": -1000,
-              "hit": false
+              "payoutYen": 1960,
+              "netYen": 960,
+              "hit": true
             }
           ]
         },
@@ -47865,13 +47865,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "7-8 / 5-7 / 4-7 / 5-8 / 2-7",
+              "selection": "7-8 / 1-7 / 4-7 / 5-7 / 1-8",
               "ticketKeys": [
                 "7-8",
-                "5-7",
+                "1-7",
                 "4-7",
-                "5-8",
-                "2-7"
+                "5-7",
+                "1-8"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -47882,24 +47882,24 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-4-5-7-8 BOX",
+              "selection": "1-4-5-7-8 BOX",
               "ticketKeys": [
-                "5-7-8",
+                "1-7-8",
                 "4-7-8",
-                "2-7-8",
+                "5-7-8",
+                "1-4-7",
+                "1-5-7",
                 "4-5-7",
-                "2-5-7",
-                "2-4-7",
+                "1-4-8",
+                "1-5-8",
                 "4-5-8",
-                "2-5-8",
-                "2-4-8",
-                "2-4-5"
+                "1-4-5"
               ],
               "points": 10,
               "investmentYen": 1000,
-              "payoutYen": 0,
-              "netYen": -1000,
-              "hit": false
+              "payoutYen": 1960,
+              "netYen": 960,
+              "hit": true
             }
           ]
         }
@@ -47916,7 +47916,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -48055,69 +48055,33 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 3,
               "horseName": "ワンダーブリッツ",
-              "score": 0.8500000000000001,
+              "score": 0.9444049011905009,
               "probability": 0.12485632627387559,
               "finish": 1,
               "finishText": "1着"
             },
             {
               "mark": "○",
-              "horseNumber": 10,
-              "horseName": "カンフージョン",
-              "score": 0.78282014181634,
-              "probability": 0.12082734271962861,
-              "finish": 11,
-              "finishText": "11着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 8,
               "horseName": "ゴンフィンガー",
-              "score": 0.7046200849706551,
+              "score": 0.8065620735921432,
               "probability": 0.11415231778124954,
               "finish": 2,
               "finishText": "2着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 10,
+              "horseName": "カンフージョン",
+              "score": 0.783551105382363,
+              "probability": 0.12082734271962861,
+              "finish": 11,
+              "finishText": "11着"
             }
           ]
         },
         {
           "agentId": "sniper",
-          "status": "available",
-          "topPick": 7,
-          "topPickFinish": 10,
-          "topPickFinishText": "10着",
-          "marks": [
-            {
-              "mark": "◎",
-              "horseNumber": 7,
-              "horseName": "イントゥゴールデン",
-              "score": 0.3334747209941731,
-              "probability": 0.09694334373741052,
-              "finish": 10,
-              "finishText": "10着"
-            },
-            {
-              "mark": "○",
-              "horseNumber": 1,
-              "horseName": "モズヴイ",
-              "score": 0.3170594290515196,
-              "probability": 0.1033927445312387,
-              "finish": 9,
-              "finishText": "9着"
-            },
-            {
-              "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "ゴンフィンガー",
-              "score": 0.2919037718029692,
-              "probability": 0.11415231778124954,
-              "finish": 2,
-              "finishText": "2着"
-            }
-          ]
-        },
-        {
-          "agentId": "pace",
           "status": "available",
           "topPick": 3,
           "topPickFinish": 1,
@@ -48127,7 +48091,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 3,
               "horseName": "ワンダーブリッツ",
-              "score": 0.265,
+              "score": 0.7534282371427977,
               "probability": 0.12485632627387559,
               "finish": 1,
               "finishText": "1着"
@@ -48136,7 +48100,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "カンフージョン",
-              "score": 0.2566025177270425,
+              "score": 0.7193207210033397,
               "probability": 0.12082734271962861,
               "finish": 11,
               "finishText": "11着"
@@ -48145,7 +48109,43 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "ゴンフィンガー",
-              "score": 0.24682751062133187,
+              "score": 0.7102581923239064,
+              "probability": 0.11415231778124954,
+              "finish": 2,
+              "finishText": "2着"
+            }
+          ]
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "topPick": 1,
+          "topPickFinish": 9,
+          "topPickFinishText": "9着",
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 1,
+              "horseName": "モズヴイ",
+              "score": 0.82671417029304,
+              "probability": 0.1033927445312387,
+              "finish": 9,
+              "finishText": "9着"
+            },
+            {
+              "mark": "○",
+              "horseNumber": 3,
+              "horseName": "ワンダーブリッツ",
+              "score": 0.5144049011905009,
+              "probability": 0.12485632627387559,
+              "finish": 1,
+              "finishText": "1着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 8,
+              "horseName": "ゴンフィンガー",
+              "score": 0.4408733275716409,
               "probability": 0.11415231778124954,
               "finish": 2,
               "finishText": "2着"
@@ -48163,28 +48163,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 3,
               "horseName": "ワンダーブリッツ",
-              "score": 0.36666666666666664,
+              "score": 0.9329774440478418,
               "probability": 0.12485632627387559,
               "finish": 1,
               "finishText": "1着"
             },
             {
               "mark": "○",
-              "horseNumber": 10,
-              "horseName": "カンフージョン",
-              "score": 0.33727547871131536,
-              "probability": 0.12082734271962861,
-              "finish": 11,
-              "finishText": "11着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 8,
               "horseName": "ゴンフィンガー",
-              "score": 0.30306295384132825,
+              "score": 0.8933031672777733,
               "probability": 0.11415231778124954,
               "finish": 2,
               "finishText": "2着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 1,
+              "horseName": "モズヴイ",
+              "score": 0.7431810953000051,
+              "probability": 0.1033927445312387,
+              "finish": 9,
+              "finishText": "9着"
             }
           ]
         },
@@ -48199,7 +48199,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 3,
               "horseName": "ワンダーブリッツ",
-              "score": 0.49000000000000005,
+              "score": 0.7112376495237304,
               "probability": 0.12485632627387559,
               "finish": 1,
               "finishText": "1着"
@@ -48208,7 +48208,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "カンフージョン",
-              "score": 0.47656402836326806,
+              "score": 0.6961666848602067,
               "probability": 0.12082734271962861,
               "finish": 11,
               "finishText": "11着"
@@ -48217,7 +48217,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "ゴンフィンガー",
-              "score": 0.460924016994131,
+              "score": 0.6742730777276994,
               "probability": 0.11415231778124954,
               "finish": 2,
               "finishText": "2着"
@@ -48246,13 +48246,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "3-10 / 3-8 / 8-10 / 1-3 / 1-10",
+              "selection": "3-8 / 3-10 / 1-3 / 8-10 / 1-8",
               "ticketKeys": [
-                "3-10",
                 "3-8",
-                "8-10",
+                "3-10",
                 "1-3",
-                "1-10"
+                "8-10",
+                "1-8"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -48266,15 +48266,15 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "selection": "1-3-7-8-10 BOX",
               "ticketKeys": [
                 "3-8-10",
-                "1-3-10",
-                "3-7-10",
                 "1-3-8",
                 "3-7-8",
+                "1-3-10",
+                "3-7-10",
                 "1-3-7",
                 "1-8-10",
                 "7-8-10",
-                "1-7-10",
-                "1-7-8"
+                "1-7-8",
+                "1-7-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -48286,64 +48286,6 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         },
         {
           "agentId": "sniper",
-          "status": "available",
-          "tickets": [
-            {
-              "betType": "単勝",
-              "method": "1点",
-              "selection": "7",
-              "ticketKeys": [
-                "7"
-              ],
-              "points": 1,
-              "investmentYen": 100,
-              "payoutYen": 0,
-              "netYen": -100,
-              "hit": false
-            },
-            {
-              "betType": "馬連",
-              "method": "期待順5点",
-              "selection": "1-7 / 7-8 / 1-8 / 7-10 / 1-10",
-              "ticketKeys": [
-                "1-7",
-                "7-8",
-                "1-8",
-                "7-10",
-                "1-10"
-              ],
-              "points": 5,
-              "investmentYen": 500,
-              "payoutYen": 0,
-              "netYen": -500,
-              "hit": false
-            },
-            {
-              "betType": "3連複",
-              "method": "5頭BOX",
-              "selection": "1-3-7-8-10 BOX",
-              "ticketKeys": [
-                "1-7-8",
-                "1-7-10",
-                "1-3-7",
-                "7-8-10",
-                "3-7-8",
-                "3-7-10",
-                "1-8-10",
-                "1-3-8",
-                "1-3-10",
-                "3-8-10"
-              ],
-              "points": 10,
-              "investmentYen": 1000,
-              "payoutYen": 0,
-              "netYen": -1000,
-              "hit": false
-            }
-          ]
-        },
-        {
-          "agentId": "pace",
           "status": "available",
           "tickets": [
             {
@@ -48362,12 +48304,12 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "3-10 / 3-8 / 8-10 / 1-3 / 1-10",
+              "selection": "3-10 / 3-8 / 1-3 / 8-10 / 1-10",
               "ticketKeys": [
                 "3-10",
                 "3-8",
-                "8-10",
                 "1-3",
+                "8-10",
                 "1-10"
               ],
               "points": 5,
@@ -48391,6 +48333,64 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
                 "7-8-10",
                 "1-7-10",
                 "1-7-8"
+              ],
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
+            }
+          ]
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "1",
+              "ticketKeys": [
+                "1"
+              ],
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "期待順5点",
+              "selection": "1-3 / 1-8 / 1-10 / 1-7 / 3-8",
+              "ticketKeys": [
+                "1-3",
+                "1-8",
+                "1-10",
+                "1-7",
+                "3-8"
+              ],
+              "points": 5,
+              "investmentYen": 500,
+              "payoutYen": 180,
+              "netYen": -320,
+              "hit": true
+            },
+            {
+              "betType": "3連複",
+              "method": "5頭BOX",
+              "selection": "1-3-7-8-10 BOX",
+              "ticketKeys": [
+                "1-3-8",
+                "1-3-10",
+                "1-3-7",
+                "1-8-10",
+                "1-7-8",
+                "1-7-10",
+                "3-8-10",
+                "3-7-8",
+                "3-7-10",
+                "7-8-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -48420,13 +48420,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "3-10 / 3-8 / 8-10 / 1-3 / 1-10",
+              "selection": "3-8 / 1-3 / 1-8 / 3-5 / 3-10",
               "ticketKeys": [
-                "3-10",
                 "3-8",
-                "8-10",
                 "1-3",
-                "1-10"
+                "1-8",
+                "3-5",
+                "3-10"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -48437,24 +48437,24 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-3-7-8-10 BOX",
+              "selection": "1-3-5-8-10 BOX",
               "ticketKeys": [
-                "3-8-10",
-                "1-3-10",
-                "3-7-10",
                 "1-3-8",
-                "3-7-8",
-                "1-3-7",
+                "3-5-8",
+                "3-8-10",
+                "1-3-5",
+                "1-3-10",
+                "3-5-10",
+                "1-5-8",
                 "1-8-10",
-                "7-8-10",
-                "1-7-10",
-                "1-7-8"
+                "5-8-10",
+                "1-5-10"
               ],
               "points": 10,
               "investmentYen": 1000,
-              "payoutYen": 0,
-              "netYen": -1000,
-              "hit": false
+              "payoutYen": 920,
+              "netYen": -80,
+              "hit": true
             }
           ]
         },
@@ -48529,7 +48529,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -48672,64 +48672,64 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 12,
               "horseName": "コンフィアル",
-              "score": 0.8500000000000001,
+              "score": 0.9372873828482574,
               "probability": 0.13511550477241735,
               "finish": 4,
               "finishText": "4着"
             },
             {
               "mark": "○",
-              "horseNumber": 5,
-              "horseName": "ファーストアライヴ",
-              "score": 0.6681377504831534,
-              "probability": 0.1009566813070592,
-              "finish": 2,
-              "finishText": "2着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 7,
               "horseName": "マイネルリシャール",
-              "score": 0.6169931900868735,
+              "score": 0.705845301197534,
               "probability": 0.1007632165882575,
               "finish": 6,
               "finishText": "6着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 5,
+              "horseName": "ファーストアライヴ",
+              "score": 0.6734699908999195,
+              "probability": 0.1009566813070592,
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 10,
-          "topPickFinish": 13,
-          "topPickFinishText": "13着",
+          "topPick": 12,
+          "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 10,
-              "horseName": "アンドレイア",
-              "score": 0.34673453242124685,
-              "probability": 0.08405446017021176,
-              "finish": 13,
-              "finishText": "13着"
+              "horseNumber": 12,
+              "horseName": "コンフィアル",
+              "score": 0.7705102811641824,
+              "probability": 0.13511550477241735,
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
               "horseNumber": 4,
               "horseName": "ペアレンツハート",
-              "score": 0.33874306164135565,
+              "score": 0.6678699078796458,
               "probability": 0.08423060581754568,
               "finish": 8,
               "finishText": "8着"
             },
             {
               "mark": "▲",
-              "horseNumber": 7,
-              "horseName": "マイネルリシャール",
-              "score": 0.3152549357272205,
-              "probability": 0.1007632165882575,
-              "finish": 6,
-              "finishText": "6着"
+              "horseNumber": 5,
+              "horseName": "ファーストアライヴ",
+              "score": 0.6317284599505271,
+              "probability": 0.1009566813070592,
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -48744,25 +48744,25 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 12,
               "horseName": "コンフィアル",
-              "score": 0.265,
+              "score": 0.8288093439502411,
               "probability": 0.13511550477241735,
               "finish": 4,
               "finishText": "4着"
             },
             {
               "mark": "○",
-              "horseNumber": 5,
-              "horseName": "ファーストアライヴ",
-              "score": 0.24226721881039412,
-              "probability": 0.1009566813070592,
-              "finish": 2,
-              "finishText": "2着"
+              "horseNumber": 4,
+              "horseName": "ペアレンツハート",
+              "score": 0.7200768790447345,
+              "probability": 0.08423060581754568,
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "▲",
               "horseNumber": 7,
               "horseName": "マイネルリシャール",
-              "score": 0.23587414876085916,
+              "score": 0.6315582551583626,
               "probability": 0.1007632165882575,
               "finish": 6,
               "finishText": "6着"
@@ -48780,25 +48780,25 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 12,
               "horseName": "コンフィアル",
-              "score": 0.36666666666666664,
+              "score": 0.8689197789676494,
               "probability": 0.13511550477241735,
               "finish": 4,
               "finishText": "4着"
             },
             {
               "mark": "○",
-              "horseNumber": 5,
-              "horseName": "ファーストアライヴ",
-              "score": 0.2871019325030462,
-              "probability": 0.1009566813070592,
-              "finish": 2,
-              "finishText": "2着"
+              "horseNumber": 4,
+              "horseName": "ペアレンツハート",
+              "score": 0.7698416019677053,
+              "probability": 0.08423060581754568,
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "▲",
               "horseNumber": 7,
               "horseName": "マイネルリシャール",
-              "score": 0.2647261873296738,
+              "score": 0.6914093011480378,
               "probability": 0.1007632165882575,
               "finish": 6,
               "finishText": "6着"
@@ -48816,28 +48816,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 12,
               "horseName": "コンフィアル",
-              "score": 0.49000000000000005,
+              "score": 0.7340137082189099,
               "probability": 0.13511550477241735,
               "finish": 4,
               "finishText": "4着"
             },
             {
               "mark": "○",
-              "horseNumber": 5,
-              "horseName": "ファーストアライヴ",
-              "score": 0.45362755009663064,
-              "probability": 0.1009566813070592,
-              "finish": 2,
-              "finishText": "2着"
+              "horseNumber": 4,
+              "horseName": "ペアレンツハート",
+              "score": 0.6463229618468916,
+              "probability": 0.08423060581754568,
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "▲",
-              "horseNumber": 7,
-              "horseName": "マイネルリシャール",
-              "score": 0.4433986380173748,
-              "probability": 0.1007632165882575,
-              "finish": 6,
-              "finishText": "6着"
+              "horseNumber": 5,
+              "horseName": "ファーストアライヴ",
+              "score": 0.6096641180910125,
+              "probability": 0.1009566813070592,
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         }
@@ -48863,13 +48863,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-12 / 7-12 / 4-12 / 5-7 / 10-12",
+              "selection": "7-12 / 5-12 / 4-12 / 5-7 / 6-12",
               "ticketKeys": [
-                "5-12",
                 "7-12",
+                "5-12",
                 "4-12",
                 "5-7",
-                "10-12"
+                "6-12"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -48880,18 +48880,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-5-7-10-12 BOX",
+              "selection": "4-5-6-7-12 BOX",
               "ticketKeys": [
                 "5-7-12",
-                "4-5-12",
-                "5-10-12",
                 "4-7-12",
-                "7-10-12",
-                "4-10-12",
+                "6-7-12",
+                "4-5-12",
+                "5-6-12",
+                "4-6-12",
                 "4-5-7",
-                "5-7-10",
-                "4-5-10",
-                "4-7-10"
+                "5-6-7",
+                "4-6-7",
+                "4-5-6"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -48908,9 +48908,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "10",
+              "selection": "12",
               "ticketKeys": [
-                "10"
+                "12"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -48921,12 +48921,12 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-10 / 7-10 / 4-7 / 5-10 / 4-5",
+              "selection": "4-12 / 5-12 / 7-12 / 11-12 / 4-5",
               "ticketKeys": [
-                "4-10",
-                "7-10",
-                "4-7",
-                "5-10",
+                "4-12",
+                "5-12",
+                "7-12",
+                "11-12",
                 "4-5"
               ],
               "points": 5,
@@ -48938,18 +48938,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-5-7-10-12 BOX",
+              "selection": "4-5-7-11-12 BOX",
               "ticketKeys": [
-                "4-7-10",
-                "4-5-10",
-                "4-10-12",
-                "5-7-10",
-                "7-10-12",
-                "5-10-12",
-                "4-5-7",
-                "4-7-12",
                 "4-5-12",
-                "5-7-12"
+                "4-7-12",
+                "4-11-12",
+                "5-7-12",
+                "5-11-12",
+                "7-11-12",
+                "4-5-7",
+                "4-5-11",
+                "4-7-11",
+                "5-7-11"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -48979,13 +48979,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-12 / 7-12 / 4-12 / 5-7 / 10-12",
+              "selection": "4-12 / 7-12 / 11-12 / 4-7 / 4-11",
               "ticketKeys": [
-                "5-12",
-                "7-12",
                 "4-12",
-                "5-7",
-                "10-12"
+                "7-12",
+                "11-12",
+                "4-7",
+                "4-11"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -48996,18 +48996,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-5-7-10-12 BOX",
+              "selection": "4-6-7-11-12 BOX",
               "ticketKeys": [
-                "5-7-12",
-                "4-5-12",
-                "5-10-12",
                 "4-7-12",
-                "7-10-12",
-                "4-10-12",
-                "4-5-7",
-                "5-7-10",
-                "4-5-10",
-                "4-7-10"
+                "4-11-12",
+                "4-6-12",
+                "7-11-12",
+                "6-7-12",
+                "6-11-12",
+                "4-7-11",
+                "4-6-7",
+                "4-6-11",
+                "6-7-11"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -49037,13 +49037,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-12 / 7-12 / 4-12 / 5-7 / 10-12",
+              "selection": "4-12 / 7-12 / 4-7 / 11-12 / 4-11",
               "ticketKeys": [
-                "5-12",
-                "7-12",
                 "4-12",
-                "5-7",
-                "10-12"
+                "7-12",
+                "4-7",
+                "11-12",
+                "4-11"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -49054,18 +49054,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-5-7-10-12 BOX",
+              "selection": "4-6-7-11-12 BOX",
               "ticketKeys": [
-                "5-7-12",
-                "4-5-12",
-                "5-10-12",
                 "4-7-12",
-                "7-10-12",
-                "4-10-12",
-                "4-5-7",
-                "5-7-10",
-                "4-5-10",
-                "4-7-10"
+                "4-11-12",
+                "4-6-12",
+                "7-11-12",
+                "6-7-12",
+                "6-11-12",
+                "4-7-11",
+                "4-6-7",
+                "4-6-11",
+                "6-7-11"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -49095,13 +49095,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-12 / 7-12 / 4-12 / 10-12 / 5-7",
+              "selection": "4-12 / 5-12 / 11-12 / 4-5 / 7-12",
               "ticketKeys": [
-                "5-12",
-                "7-12",
                 "4-12",
-                "10-12",
-                "5-7"
+                "5-12",
+                "11-12",
+                "4-5",
+                "7-12"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -49112,18 +49112,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-5-7-10-12 BOX",
+              "selection": "4-5-7-11-12 BOX",
               "ticketKeys": [
-                "5-7-12",
                 "4-5-12",
-                "5-10-12",
+                "4-11-12",
                 "4-7-12",
-                "7-10-12",
-                "4-10-12",
+                "5-11-12",
+                "5-7-12",
+                "7-11-12",
+                "4-5-11",
                 "4-5-7",
-                "5-7-10",
-                "4-5-10",
-                "4-7-10"
+                "4-7-11",
+                "5-7-11"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -49146,7 +49146,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -49283,7 +49283,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "トゥーレジット",
-              "score": 0.8500000000000001,
+              "score": 0.9448579827532303,
               "probability": 0.14321809674997785,
               "finish": 2,
               "finishText": "2着"
@@ -49292,7 +49292,43 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "ベルコート",
-              "score": 0.6956450100145111,
+              "score": 0.7996439530905858,
+              "probability": 0.11458687403193028,
+              "finish": 3,
+              "finishText": "3着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 1,
+              "horseName": "ムーンパッセ",
+              "score": 0.6717998544223289,
+              "probability": 0.11071895585870621,
+              "finish": 7,
+              "finishText": "7着"
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "available",
+          "topPick": 2,
+          "topPickFinish": 2,
+          "topPickFinishText": "2着",
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 2,
+              "horseName": "トゥーレジット",
+              "score": 0.7523408413922473,
+              "probability": 0.14321809674997785,
+              "finish": 2,
+              "finishText": "2着"
+            },
+            {
+              "mark": "○",
+              "horseNumber": 6,
+              "horseName": "ベルコート",
+              "score": 0.7077579358053908,
               "probability": 0.11458687403193028,
               "finish": 3,
               "finishText": "3着"
@@ -49301,43 +49337,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "サウンドファイト",
-              "score": 0.6418202871819592,
-              "probability": 0.11364363886659515,
-              "finish": 8,
-              "finishText": "8着"
-            }
-          ]
-        },
-        {
-          "agentId": "sniper",
-          "status": "available",
-          "topPick": 10,
-          "topPickFinish": 9,
-          "topPickFinishText": "9着",
-          "marks": [
-            {
-              "mark": "◎",
-              "horseNumber": 10,
-              "horseName": "ジーティーマンフク",
-              "score": 0.3391872873792488,
-              "probability": 0.10244739084503957,
-              "finish": 9,
-              "finishText": "9着"
-            },
-            {
-              "mark": "○",
-              "horseNumber": 1,
-              "horseName": "ムーンパッセ",
-              "score": 0.3235551301240489,
-              "probability": 0.11071895585870621,
-              "finish": 7,
-              "finishText": "7着"
-            },
-            {
-              "mark": "▲",
-              "horseNumber": 4,
-              "horseName": "サウンドファイト",
-              "score": 0.3091066530221549,
+              "score": 0.6085914435537169,
               "probability": 0.11364363886659515,
               "finish": 8,
               "finishText": "8着"
@@ -49355,7 +49355,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "トゥーレジット",
-              "score": 0.265,
+              "score": 0.8712047034180895,
               "probability": 0.14321809674997785,
               "finish": 2,
               "finishText": "2着"
@@ -49364,19 +49364,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "ベルコート",
-              "score": 0.24570562625181386,
+              "score": 0.820106185422211,
               "probability": 0.11458687403193028,
               "finish": 3,
               "finishText": "3着"
             },
             {
               "mark": "▲",
-              "horseNumber": 4,
-              "horseName": "サウンドファイト",
-              "score": 0.23897753589774492,
-              "probability": 0.11364363886659515,
-              "finish": 8,
-              "finishText": "8着"
+              "horseNumber": 1,
+              "horseName": "ムーンパッセ",
+              "score": 0.6299778601410376,
+              "probability": 0.11071895585870621,
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -49391,7 +49391,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "トゥーレジット",
-              "score": 0.36666666666666664,
+              "score": 0.9370551781124058,
               "probability": 0.14321809674997785,
               "finish": 2,
               "finishText": "2着"
@@ -49400,19 +49400,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "ベルコート",
-              "score": 0.29913635854801524,
+              "score": 0.888575297339292,
               "probability": 0.11458687403193028,
               "finish": 3,
               "finishText": "3着"
             },
             {
               "mark": "▲",
-              "horseNumber": 4,
-              "horseName": "サウンドファイト",
-              "score": 0.2755880423087738,
-              "probability": 0.11364363886659515,
-              "finish": 8,
-              "finishText": "8着"
+              "horseNumber": 1,
+              "horseName": "ムーンパッセ",
+              "score": 0.6951641318738856,
+              "probability": 0.11071895585870621,
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -49427,7 +49427,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "トゥーレジット",
-              "score": 0.49000000000000005,
+              "score": 0.7097877885229965,
               "probability": 0.14321809674997785,
               "finish": 2,
               "finishText": "2着"
@@ -49436,7 +49436,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "ベルコート",
-              "score": 0.4591290020029023,
+              "score": 0.6722108713217988,
               "probability": 0.11458687403193028,
               "finish": 3,
               "finishText": "3着"
@@ -49445,7 +49445,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "サウンドファイト",
-              "score": 0.44836405743639185,
+              "score": 0.5867870634547147,
               "probability": 0.11364363886659515,
               "finish": 8,
               "finishText": "8着"
@@ -49474,13 +49474,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "2-6 / 2-4 / 1-2 / 4-6 / 2-10",
+              "selection": "2-6 / 1-2 / 2-4 / 2-10 / 1-6",
               "ticketKeys": [
                 "2-6",
-                "2-4",
                 "1-2",
-                "4-6",
-                "2-10"
+                "2-4",
+                "2-10",
+                "1-6"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -49493,15 +49493,15 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "method": "5頭BOX",
               "selection": "1-2-4-6-10 BOX",
               "ticketKeys": [
-                "2-4-6",
                 "1-2-6",
+                "2-4-6",
                 "2-6-10",
                 "1-2-4",
-                "2-4-10",
                 "1-2-10",
+                "2-4-10",
                 "1-4-6",
-                "4-6-10",
                 "1-6-10",
+                "4-6-10",
                 "1-4-10"
               ],
               "points": 10,
@@ -49519,9 +49519,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "10",
+              "selection": "2",
               "ticketKeys": [
-                "10"
+                "2"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -49532,13 +49532,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "1-10 / 4-10 / 1-4 / 6-10 / 1-6",
+              "selection": "2-6 / 2-4 / 4-6 / 1-2 / 2-3",
               "ticketKeys": [
-                "1-10",
-                "4-10",
-                "1-4",
-                "6-10",
-                "1-6"
+                "2-6",
+                "2-4",
+                "4-6",
+                "1-2",
+                "2-3"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -49549,18 +49549,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-2-4-6-10 BOX",
+              "selection": "1-2-3-4-6 BOX",
               "ticketKeys": [
-                "1-4-10",
-                "1-6-10",
-                "1-2-10",
-                "4-6-10",
-                "2-4-10",
-                "2-6-10",
-                "1-4-6",
-                "1-2-4",
+                "2-4-6",
                 "1-2-6",
-                "2-4-6"
+                "2-3-6",
+                "1-2-4",
+                "2-3-4",
+                "1-2-3",
+                "1-4-6",
+                "3-4-6",
+                "1-3-6",
+                "1-3-4"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -49590,12 +49590,12 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "2-6 / 2-4 / 1-2 / 4-6 / 2-10",
+              "selection": "2-6 / 1-2 / 1-6 / 2-3 / 2-10",
               "ticketKeys": [
                 "2-6",
-                "2-4",
                 "1-2",
-                "4-6",
+                "1-6",
+                "2-3",
                 "2-10"
               ],
               "points": 5,
@@ -49607,18 +49607,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-2-4-6-10 BOX",
+              "selection": "1-2-3-6-10 BOX",
               "ticketKeys": [
-                "2-4-6",
                 "1-2-6",
+                "2-3-6",
                 "2-6-10",
-                "1-2-4",
-                "2-4-10",
+                "1-2-3",
                 "1-2-10",
-                "1-4-6",
-                "4-6-10",
+                "2-3-10",
+                "1-3-6",
                 "1-6-10",
-                "1-4-10"
+                "3-6-10",
+                "1-3-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -49648,13 +49648,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "2-6 / 2-4 / 1-2 / 4-6 / 2-10",
+              "selection": "2-6 / 1-2 / 1-6 / 2-10 / 2-3",
               "ticketKeys": [
                 "2-6",
-                "2-4",
                 "1-2",
-                "4-6",
-                "2-10"
+                "1-6",
+                "2-10",
+                "2-3"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -49665,18 +49665,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-2-4-6-10 BOX",
+              "selection": "1-2-3-6-10 BOX",
               "ticketKeys": [
-                "2-4-6",
                 "1-2-6",
                 "2-6-10",
-                "1-2-4",
-                "2-4-10",
+                "2-3-6",
                 "1-2-10",
-                "1-4-6",
-                "4-6-10",
+                "1-2-3",
+                "2-3-10",
                 "1-6-10",
-                "1-4-10"
+                "1-3-6",
+                "3-6-10",
+                "1-3-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -49706,13 +49706,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "2-6 / 2-4 / 1-2 / 2-10 / 4-6",
+              "selection": "2-6 / 2-4 / 4-6 / 2-3 / 1-2",
               "ticketKeys": [
                 "2-6",
                 "2-4",
-                "1-2",
-                "2-10",
-                "4-6"
+                "4-6",
+                "2-3",
+                "1-2"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -49723,18 +49723,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-2-4-6-10 BOX",
+              "selection": "1-2-3-4-6 BOX",
               "ticketKeys": [
                 "2-4-6",
+                "2-3-6",
                 "1-2-6",
-                "2-6-10",
+                "2-3-4",
                 "1-2-4",
-                "2-4-10",
-                "1-2-10",
+                "1-2-3",
+                "3-4-6",
                 "1-4-6",
-                "4-6-10",
-                "1-6-10",
-                "1-4-10"
+                "1-3-6",
+                "1-3-4"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -49757,7 +49757,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -49900,7 +49900,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "グランアルト",
-              "score": 0.8500000000000001,
+              "score": 0.9380916975325895,
               "probability": 0.1199461129039981,
               "finish": 7,
               "finishText": "7着"
@@ -49909,7 +49909,43 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 5,
               "horseName": "クオンタムスター",
-              "score": 0.794545373314641,
+              "score": 0.8947736461744787,
+              "probability": 0.11878018439805649,
+              "finish": 2,
+              "finishText": "2着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 2,
+              "horseName": "ワンダフルデイズ",
+              "score": 0.7191732843888379,
+              "probability": 0.10453535799213097,
+              "finish": 4,
+              "finishText": "4着"
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "available",
+          "topPick": 4,
+          "topPickFinish": 7,
+          "topPickFinishText": "7着",
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 4,
+              "horseName": "グランアルト",
+              "score": 0.7685799259217853,
+              "probability": 0.1199461129039981,
+              "finish": 7,
+              "finishText": "7着"
+            },
+            {
+              "mark": "○",
+              "horseNumber": 5,
+              "horseName": "クオンタムスター",
+              "score": 0.7288308096824123,
               "probability": 0.11878018439805649,
               "finish": 2,
               "finishText": "2着"
@@ -49918,43 +49954,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "ランブリングマン",
-              "score": 0.7128174174769241,
-              "probability": 0.11155390261351368,
-              "finish": 13,
-              "finishText": "13着"
-            }
-          ]
-        },
-        {
-          "agentId": "sniper",
-          "status": "available",
-          "topPick": 9,
-          "topPickFinish": 10,
-          "topPickFinishText": "10着",
-          "marks": [
-            {
-              "mark": "◎",
-              "horseNumber": 9,
-              "horseName": "ニヒトツーゼーア",
-              "score": 0.33642494044152704,
-              "probability": 0.0894422722878596,
-              "finish": 10,
-              "finishText": "10着"
-            },
-            {
-              "mark": "○",
-              "horseNumber": 2,
-              "horseName": "ワンダフルデイズ",
-              "score": 0.31158527690995563,
-              "probability": 0.10453535799213097,
-              "finish": 4,
-              "finishText": "4着"
-            },
-            {
-              "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "ランブリングマン",
-              "score": 0.28948366307445866,
+              "score": 0.6646113391041742,
               "probability": 0.11155390261351368,
               "finish": 13,
               "finishText": "13着"
@@ -49964,72 +49964,72 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "pace",
           "status": "available",
-          "topPick": 4,
-          "topPickFinish": 7,
-          "topPickFinishText": "7着",
+          "topPick": 5,
+          "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 4,
-              "horseName": "グランアルト",
-              "score": 0.265,
-              "probability": 0.1199461129039981,
-              "finish": 7,
-              "finishText": "7着"
-            },
-            {
-              "mark": "○",
               "horseNumber": 5,
               "horseName": "クオンタムスター",
-              "score": 0.25806817166433016,
+              "score": 0.8709515418072831,
               "probability": 0.11878018439805649,
               "finish": 2,
               "finishText": "2着"
             },
             {
+              "mark": "○",
+              "horseNumber": 4,
+              "horseName": "グランアルト",
+              "score": 0.8333135061825011,
+              "probability": 0.1199461129039981,
+              "finish": 7,
+              "finishText": "7着"
+            },
+            {
               "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "ランブリングマン",
-              "score": 0.24785217718461547,
-              "probability": 0.11155390261351368,
-              "finish": 13,
-              "finishText": "13着"
+              "horseNumber": 2,
+              "horseName": "ワンダフルデイズ",
+              "score": 0.6449581307804334,
+              "probability": 0.10453535799213097,
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
         {
           "agentId": "analyst",
           "status": "available",
-          "topPick": 4,
-          "topPickFinish": 7,
-          "topPickFinishText": "7着",
+          "topPick": 5,
+          "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 4,
-              "horseName": "グランアルト",
-              "score": 0.36666666666666664,
-              "probability": 0.1199461129039981,
-              "finish": 7,
-              "finishText": "7着"
-            },
-            {
-              "mark": "○",
               "horseNumber": 5,
               "horseName": "クオンタムスター",
-              "score": 0.3424052674918221,
+              "score": 0.9487720228806288,
               "probability": 0.11878018439805649,
               "finish": 2,
               "finishText": "2着"
             },
             {
+              "mark": "○",
+              "horseNumber": 4,
+              "horseName": "グランアルト",
+              "score": 0.8761586111266387,
+              "probability": 0.1199461129039981,
+              "finish": 7,
+              "finishText": "7着"
+            },
+            {
               "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "ランブリングマン",
-              "score": 0.3066492868128209,
-              "probability": 0.11155390261351368,
-              "finish": 13,
-              "finishText": "13着"
+              "horseNumber": 2,
+              "horseName": "ワンダフルデイズ",
+              "score": 0.7058642929580974,
+              "probability": 0.10453535799213097,
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -50044,7 +50044,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "グランアルト",
-              "score": 0.49000000000000005,
+              "score": 0.731439901229047,
               "probability": 0.1199461129039981,
               "finish": 7,
               "finishText": "7着"
@@ -50053,7 +50053,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 5,
               "horseName": "クオンタムスター",
-              "score": 0.4789090746629282,
+              "score": 0.6862971516903091,
               "probability": 0.11878018439805649,
               "finish": 2,
               "finishText": "2着"
@@ -50062,7 +50062,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "ランブリングマン",
-              "score": 0.4625634834953849,
+              "score": 0.6419438915727093,
               "probability": 0.11155390261351368,
               "finish": 13,
               "finishText": "13着"
@@ -50091,13 +50091,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-5 / 4-8 / 5-8 / 2-4 / 2-5",
+              "selection": "4-5 / 2-4 / 4-8 / 2-5 / 5-8",
               "ticketKeys": [
                 "4-5",
-                "4-8",
-                "5-8",
                 "2-4",
-                "2-5"
+                "4-8",
+                "2-5",
+                "5-8"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -50108,18 +50108,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-4-5-8-9 BOX",
+              "selection": "2-4-5-6-8 BOX",
               "ticketKeys": [
-                "4-5-8",
                 "2-4-5",
-                "4-5-9",
+                "4-5-8",
+                "4-5-6",
                 "2-4-8",
-                "4-8-9",
-                "2-4-9",
+                "2-4-6",
+                "4-6-8",
                 "2-5-8",
-                "5-8-9",
-                "2-5-9",
-                "2-8-9"
+                "2-5-6",
+                "5-6-8",
+                "2-6-8"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -50136,9 +50136,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "9",
+              "selection": "4",
               "ticketKeys": [
-                "9"
+                "4"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -50149,13 +50149,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "2-9 / 8-9 / 2-8 / 5-9 / 2-5",
+              "selection": "4-5 / 4-8 / 5-8 / 2-4 / 4-6",
               "ticketKeys": [
-                "2-9",
-                "8-9",
-                "2-8",
-                "5-9",
-                "2-5"
+                "4-5",
+                "4-8",
+                "5-8",
+                "2-4",
+                "4-6"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -50166,18 +50166,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-4-5-8-9 BOX",
+              "selection": "2-4-5-6-8 BOX",
               "ticketKeys": [
-                "2-8-9",
-                "2-5-9",
-                "2-4-9",
-                "5-8-9",
-                "4-8-9",
-                "4-5-9",
-                "2-5-8",
-                "2-4-8",
+                "4-5-8",
                 "2-4-5",
-                "4-5-8"
+                "4-5-6",
+                "2-4-8",
+                "4-6-8",
+                "2-4-6",
+                "2-5-8",
+                "5-6-8",
+                "2-5-6",
+                "2-6-8"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -50194,9 +50194,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "4",
+              "selection": "5",
               "ticketKeys": [
-                "4"
+                "5"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -50207,13 +50207,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-5 / 4-8 / 5-8 / 2-4 / 2-5",
+              "selection": "4-5 / 2-5 / 2-4 / 5-6 / 4-6",
               "ticketKeys": [
                 "4-5",
-                "4-8",
-                "5-8",
+                "2-5",
                 "2-4",
-                "2-5"
+                "5-6",
+                "4-6"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -50224,18 +50224,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-4-5-8-9 BOX",
+              "selection": "2-4-5-6-8 BOX",
               "ticketKeys": [
-                "4-5-8",
                 "2-4-5",
-                "4-5-9",
-                "2-4-8",
-                "4-8-9",
-                "2-4-9",
+                "4-5-6",
+                "4-5-8",
+                "2-5-6",
                 "2-5-8",
-                "5-8-9",
-                "2-5-9",
-                "2-8-9"
+                "5-6-8",
+                "2-4-6",
+                "2-4-8",
+                "4-6-8",
+                "2-6-8"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -50252,9 +50252,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "4",
+              "selection": "5",
               "ticketKeys": [
-                "4"
+                "5"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -50265,13 +50265,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-5 / 4-8 / 5-8 / 2-4 / 2-5",
+              "selection": "4-5 / 2-5 / 5-6 / 2-4 / 4-6",
               "ticketKeys": [
                 "4-5",
-                "4-8",
-                "5-8",
+                "2-5",
+                "5-6",
                 "2-4",
-                "2-5"
+                "4-6"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -50282,18 +50282,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-4-5-8-9 BOX",
+              "selection": "2-4-5-6-12 BOX",
               "ticketKeys": [
-                "4-5-8",
                 "2-4-5",
-                "4-5-9",
-                "2-4-8",
-                "4-8-9",
-                "2-4-9",
-                "2-5-8",
-                "5-8-9",
-                "2-5-9",
-                "2-8-9"
+                "4-5-6",
+                "4-5-12",
+                "2-5-6",
+                "2-5-12",
+                "5-6-12",
+                "2-4-6",
+                "2-4-12",
+                "4-6-12",
+                "2-6-12"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -50323,13 +50323,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-5 / 4-8 / 5-8 / 2-4 / 2-5",
+              "selection": "4-5 / 4-8 / 5-8 / 4-6 / 2-4",
               "ticketKeys": [
                 "4-5",
                 "4-8",
                 "5-8",
-                "2-4",
-                "2-5"
+                "4-6",
+                "2-4"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -50340,18 +50340,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-4-5-8-9 BOX",
+              "selection": "2-4-5-6-8 BOX",
               "ticketKeys": [
                 "4-5-8",
+                "4-5-6",
                 "2-4-5",
-                "4-5-9",
+                "4-6-8",
                 "2-4-8",
-                "4-8-9",
-                "2-4-9",
+                "2-4-6",
+                "5-6-8",
                 "2-5-8",
-                "5-8-9",
-                "2-5-9",
-                "2-8-9"
+                "2-5-6",
+                "2-6-8"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -50374,7 +50374,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -50521,7 +50521,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 15,
               "horseName": "テルケンレンタッチ",
-              "score": 0.8500000000000001,
+              "score": 0.9337403743327897,
               "probability": 0.11105119210493503,
               "finish": 14,
               "finishText": "14着"
@@ -50530,7 +50530,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "グラムエッジ",
-              "score": 0.7360186091153886,
+              "score": 0.8299866830744402,
               "probability": 0.09747275123296202,
               "finish": 6,
               "finishText": "6着"
@@ -50539,7 +50539,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 14,
               "horseName": "アルティシエル",
-              "score": 0.6508684396169087,
+              "score": 0.6556255699363511,
               "probability": 0.09005150556247214,
               "finish": 15,
               "finishText": "15着"
@@ -50549,36 +50549,36 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 9,
-          "topPickFinish": 1,
-          "topPickFinishText": "1着",
+          "topPick": 15,
+          "topPickFinish": 14,
+          "topPickFinishText": "14着",
           "marks": [
             {
               "mark": "◎",
+              "horseNumber": 15,
+              "horseName": "テルケンレンタッチ",
+              "score": 0.7790231016013047,
+              "probability": 0.11105119210493503,
+              "finish": 14,
+              "finishText": "14着"
+            },
+            {
+              "mark": "○",
               "horseNumber": 9,
               "horseName": "サトノクラシカル",
-              "score": 0.3407355100270786,
+              "score": 0.665615782171894,
               "probability": 0.07746304008641625,
               "finish": 1,
               "finishText": "1着"
             },
             {
-              "mark": "○",
-              "horseNumber": 13,
-              "horseName": "ウォーレーションズ",
-              "score": 0.3250914625986488,
-              "probability": 0.08433486831198356,
-              "finish": 7,
-              "finishText": "7着"
-            },
-            {
               "mark": "▲",
-              "horseNumber": 14,
-              "horseName": "アルティシエル",
-              "score": 0.30677397944339324,
-              "probability": 0.09005150556247214,
-              "finish": 15,
-              "finishText": "15着"
+              "horseNumber": 11,
+              "horseName": "グラムエッジ",
+              "score": 0.6604759883687551,
+              "probability": 0.09747275123296202,
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         },
@@ -50593,7 +50593,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 15,
               "horseName": "テルケンレンタッチ",
-              "score": 0.265,
+              "score": 0.8089460962636223,
               "probability": 0.11105119210493503,
               "finish": 14,
               "finishText": "14着"
@@ -50602,19 +50602,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "グラムエッジ",
-              "score": 0.25075232613942355,
+              "score": 0.7632967483799896,
               "probability": 0.09747275123296202,
               "finish": 6,
               "finishText": "6着"
             },
             {
               "mark": "▲",
-              "horseNumber": 14,
-              "horseName": "アルティシエル",
-              "score": 0.24010855495211356,
-              "probability": 0.09005150556247214,
-              "finish": 15,
-              "finishText": "15着"
+              "horseNumber": 9,
+              "horseName": "サトノクラシカル",
+              "score": 0.7137633363068596,
+              "probability": 0.07746304008641625,
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -50629,7 +50629,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 15,
               "horseName": "テルケンレンタッチ",
-              "score": 0.36666666666666664,
+              "score": 0.8369967023284406,
               "probability": 0.11105119210493503,
               "finish": 14,
               "finishText": "14着"
@@ -50638,19 +50638,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "グラムエッジ",
-              "score": 0.31679980815464914,
+              "score": 0.8314421696827728,
               "probability": 0.09747275123296202,
               "finish": 6,
               "finishText": "6着"
             },
             {
               "mark": "▲",
-              "horseNumber": 14,
-              "horseName": "アルティシエル",
-              "score": 0.2795466089990642,
-              "probability": 0.09005150556247214,
-              "finish": 15,
-              "finishText": "15着"
+              "horseNumber": 9,
+              "horseName": "サトノクラシカル",
+              "score": 0.7622959098625741,
+              "probability": 0.07746304008641625,
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -50665,28 +50665,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 15,
               "horseName": "テルケンレンタッチ",
-              "score": 0.49000000000000005,
+              "score": 0.7453641354684063,
               "probability": 0.11105119210493503,
               "finish": 14,
               "finishText": "14着"
             },
             {
               "mark": "○",
-              "horseNumber": 11,
-              "horseName": "グラムエッジ",
-              "score": 0.4672037218230777,
-              "probability": 0.09747275123296202,
-              "finish": 6,
-              "finishText": "6着"
+              "horseNumber": 9,
+              "horseName": "サトノクラシカル",
+              "score": 0.6449953364944317,
+              "probability": 0.07746304008641625,
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "▲",
-              "horseNumber": 14,
-              "horseName": "アルティシエル",
-              "score": 0.45017368792338175,
-              "probability": 0.09005150556247214,
-              "finish": 15,
-              "finishText": "15着"
+              "horseNumber": 11,
+              "horseName": "グラムエッジ",
+              "score": 0.6163048277774633,
+              "probability": 0.09747275123296202,
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         }
@@ -50712,13 +50712,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "11-15 / 14-15 / 13-15 / 11-14 / 11-13",
+              "selection": "11-15 / 14-15 / 9-15 / 11-14 / 13-15",
               "ticketKeys": [
                 "11-15",
                 "14-15",
-                "13-15",
+                "9-15",
                 "11-14",
-                "11-13"
+                "13-15"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -50732,13 +50732,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "selection": "9-11-13-14-15 BOX",
               "ticketKeys": [
                 "11-14-15",
-                "11-13-15",
                 "9-11-15",
-                "13-14-15",
+                "11-13-15",
                 "9-14-15",
+                "13-14-15",
                 "9-13-15",
-                "11-13-14",
                 "9-11-14",
+                "11-13-14",
                 "9-11-13",
                 "9-13-14"
               ],
@@ -50757,26 +50757,26 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "9",
+              "selection": "15",
               "ticketKeys": [
-                "9"
+                "15"
               ],
               "points": 1,
               "investmentYen": 100,
-              "payoutYen": 260,
-              "netYen": 160,
-              "hit": true
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
             },
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-13 / 9-14 / 13-14 / 9-11 / 11-13",
+              "selection": "9-15 / 11-15 / 14-15 / 8-15 / 9-11",
               "ticketKeys": [
-                "9-13",
-                "9-14",
-                "13-14",
-                "9-11",
-                "11-13"
+                "9-15",
+                "11-15",
+                "14-15",
+                "8-15",
+                "9-11"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -50787,18 +50787,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "9-11-13-14-15 BOX",
+              "selection": "8-9-11-14-15 BOX",
               "ticketKeys": [
-                "9-13-14",
-                "9-11-13",
-                "9-13-15",
-                "9-11-14",
-                "9-14-15",
                 "9-11-15",
-                "11-13-14",
-                "13-14-15",
-                "11-13-15",
-                "11-14-15"
+                "9-14-15",
+                "8-9-15",
+                "11-14-15",
+                "8-11-15",
+                "8-14-15",
+                "9-11-14",
+                "8-9-11",
+                "8-9-14",
+                "8-11-14"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -50828,13 +50828,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "11-15 / 14-15 / 13-15 / 11-14 / 9-15",
+              "selection": "11-15 / 9-15 / 9-11 / 8-15 / 8-11",
               "ticketKeys": [
                 "11-15",
-                "14-15",
-                "13-15",
-                "11-14",
-                "9-15"
+                "9-15",
+                "9-11",
+                "8-15",
+                "8-11"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -50845,24 +50845,24 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "9-11-13-14-15 BOX",
+              "selection": "8-9-10-11-15 BOX",
               "ticketKeys": [
-                "11-14-15",
-                "11-13-15",
                 "9-11-15",
-                "13-14-15",
-                "9-14-15",
-                "9-13-15",
-                "11-13-14",
-                "9-11-14",
-                "9-11-13",
-                "9-13-14"
+                "8-11-15",
+                "10-11-15",
+                "8-9-15",
+                "9-10-15",
+                "8-10-15",
+                "8-9-11",
+                "9-10-11",
+                "8-10-11",
+                "8-9-10"
               ],
               "points": 10,
               "investmentYen": 1000,
-              "payoutYen": 0,
-              "netYen": -1000,
-              "hit": false
+              "payoutYen": 2250,
+              "netYen": 1250,
+              "hit": true
             }
           ]
         },
@@ -50886,13 +50886,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "11-15 / 14-15 / 13-15 / 11-14 / 11-13",
+              "selection": "11-15 / 9-15 / 9-11 / 8-15 / 8-11",
               "ticketKeys": [
                 "11-15",
-                "14-15",
-                "13-15",
-                "11-14",
-                "11-13"
+                "9-15",
+                "9-11",
+                "8-15",
+                "8-11"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -50903,24 +50903,24 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "9-11-13-14-15 BOX",
+              "selection": "8-9-10-11-15 BOX",
               "ticketKeys": [
-                "11-14-15",
-                "11-13-15",
                 "9-11-15",
-                "13-14-15",
-                "9-14-15",
-                "9-13-15",
-                "11-13-14",
-                "9-11-14",
-                "9-11-13",
-                "9-13-14"
+                "8-11-15",
+                "10-11-15",
+                "8-9-15",
+                "9-10-15",
+                "8-10-15",
+                "8-9-11",
+                "9-10-11",
+                "8-10-11",
+                "8-9-10"
               ],
               "points": 10,
               "investmentYen": 1000,
-              "payoutYen": 0,
-              "netYen": -1000,
-              "hit": false
+              "payoutYen": 2250,
+              "netYen": 1250,
+              "hit": true
             }
           ]
         },
@@ -50944,13 +50944,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "11-15 / 14-15 / 13-15 / 11-14 / 9-15",
+              "selection": "9-15 / 11-15 / 14-15 / 8-15 / 9-11",
               "ticketKeys": [
+                "9-15",
                 "11-15",
                 "14-15",
-                "13-15",
-                "11-14",
-                "9-15"
+                "8-15",
+                "9-11"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -50961,18 +50961,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "9-11-13-14-15 BOX",
+              "selection": "8-9-11-14-15 BOX",
               "ticketKeys": [
-                "11-14-15",
-                "11-13-15",
                 "9-11-15",
-                "13-14-15",
                 "9-14-15",
-                "9-13-15",
-                "11-13-14",
+                "8-9-15",
+                "11-14-15",
+                "8-11-15",
+                "8-14-15",
                 "9-11-14",
-                "9-11-13",
-                "9-13-14"
+                "8-9-11",
+                "8-9-14",
+                "8-11-14"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -50995,7 +50995,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -51144,7 +51144,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 11,
               "horseName": "ビービーシナジー",
-              "score": 0.8500000000000001,
+              "score": 0.940524772982526,
               "probability": 0.09504600585459909,
               "finish": 1,
               "finishText": "1着"
@@ -51153,7 +51153,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 13,
               "horseName": "プレデンシア",
-              "score": 0.7048602786215045,
+              "score": 0.8044378100656641,
               "probability": 0.07772940563766913,
               "finish": 5,
               "finishText": "5着"
@@ -51162,7 +51162,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "ザキノフレンズ",
-              "score": 0.6336332605521457,
+              "score": 0.6400462680091117,
               "probability": 0.07392262701968046,
               "finish": 6,
               "finishText": "6着"
@@ -51172,36 +51172,36 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 12,
-          "topPickFinish": 4,
-          "topPickFinishText": "4着",
+          "topPick": 11,
+          "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 12,
-              "horseName": "マクアケ",
-              "score": 0.33828698073714036,
-              "probability": 0.06894660919594298,
-              "finish": 4,
-              "finishText": "4着"
+              "horseNumber": 11,
+              "horseName": "ビービーシナジー",
+              "score": 0.7627405448419375,
+              "probability": 0.09504600585459909,
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
-              "horseNumber": 15,
-              "horseName": "ナムラロダン",
-              "score": 0.3252237555608992,
-              "probability": 0.07206718094267954,
-              "finish": 2,
-              "finishText": "2着"
+              "horseNumber": 13,
+              "horseName": "プレデンシア",
+              "score": 0.6563025365567509,
+              "probability": 0.07772940563766913,
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "ザキノフレンズ",
-              "score": 0.311174991208396,
-              "probability": 0.07392262701968046,
-              "finish": 6,
-              "finishText": "6着"
+              "horseNumber": 2,
+              "horseName": "アステルディーヴァ",
+              "score": 0.6454308032476236,
+              "probability": 0.05979746642831493,
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         },
@@ -51216,7 +51216,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 11,
               "horseName": "ビービーシナジー",
-              "score": 0.265,
+              "score": 0.8469387287021456,
               "probability": 0.09504600585459909,
               "finish": 1,
               "finishText": "1着"
@@ -51225,19 +51225,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 13,
               "horseName": "プレデンシア",
-              "score": 0.24685753482768802,
+              "score": 0.7707781537040848,
               "probability": 0.07772940563766913,
               "finish": 5,
               "finishText": "5着"
             },
             {
               "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "ザキノフレンズ",
-              "score": 0.2379541575690182,
-              "probability": 0.07392262701968046,
-              "finish": 6,
-              "finishText": "6着"
+              "horseNumber": 2,
+              "horseName": "アステルディーヴァ",
+              "score": 0.6517558585250119,
+              "probability": 0.05979746642831493,
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         },
@@ -51252,7 +51252,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 11,
               "horseName": "ビービーシナジー",
-              "score": 0.36666666666666664,
+              "score": 0.8980562901760674,
               "probability": 0.09504600585459909,
               "finish": 1,
               "finishText": "1着"
@@ -51261,19 +51261,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 13,
               "horseName": "プレデンシア",
-              "score": 0.3031680385635748,
+              "score": 0.8437564029512923,
               "probability": 0.07772940563766913,
               "finish": 5,
               "finishText": "5着"
             },
             {
               "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "ザキノフレンズ",
-              "score": 0.2720062181582304,
-              "probability": 0.07392262701968046,
-              "finish": 6,
-              "finishText": "6着"
+              "horseNumber": 2,
+              "horseName": "アステルディーヴァ",
+              "score": 0.6878045934821571,
+              "probability": 0.05979746642831493,
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         },
@@ -51288,28 +51288,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 11,
               "horseName": "ビービーシナジー",
-              "score": 0.49000000000000005,
+              "score": 0.7236540597892501,
               "probability": 0.09504600585459909,
               "finish": 1,
               "finishText": "1着"
             },
             {
               "mark": "○",
-              "horseNumber": 13,
-              "horseName": "プレデンシア",
-              "score": 0.4609720557243009,
-              "probability": 0.07772940563766913,
-              "finish": 5,
-              "finishText": "5着"
+              "horseNumber": 2,
+              "horseName": "アステルディーヴァ",
+              "score": 0.6342275853630981,
+              "probability": 0.05979746642831493,
+              "finish": 8,
+              "finishText": "8着"
             },
             {
               "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "ザキノフレンズ",
-              "score": 0.44672665211042906,
-              "probability": 0.07392262701968046,
-              "finish": 6,
-              "finishText": "6着"
+              "horseNumber": 13,
+              "horseName": "プレデンシア",
+              "score": 0.6135169990961502,
+              "probability": 0.07772940563766913,
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         }
@@ -51335,13 +51335,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "11-13 / 8-11 / 11-15 / 8-13 / 11-12",
+              "selection": "11-13 / 8-11 / 11-12 / 11-15 / 8-13",
               "ticketKeys": [
                 "11-13",
                 "8-11",
+                "11-12",
                 "11-15",
-                "8-13",
-                "11-12"
+                "8-13"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -51355,13 +51355,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "selection": "8-11-12-13-15 BOX",
               "ticketKeys": [
                 "8-11-13",
-                "11-13-15",
                 "11-12-13",
-                "8-11-15",
+                "11-13-15",
                 "8-11-12",
+                "8-11-15",
                 "11-12-15",
-                "8-13-15",
                 "8-12-13",
+                "8-13-15",
                 "12-13-15",
                 "8-12-15"
               ],
@@ -51380,48 +51380,48 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "12",
+              "selection": "11",
               "ticketKeys": [
-                "12"
+                "11"
               ],
               "points": 1,
               "investmentYen": 100,
-              "payoutYen": 0,
-              "netYen": -100,
-              "hit": false
+              "payoutYen": 600,
+              "netYen": 500,
+              "hit": true
             },
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "12-15 / 8-12 / 8-15 / 12-13 / 13-15",
+              "selection": "11-13 / 2-11 / 8-11 / 2-13 / 11-15",
               "ticketKeys": [
-                "12-15",
-                "8-12",
-                "8-15",
-                "12-13",
-                "13-15"
+                "11-13",
+                "2-11",
+                "8-11",
+                "2-13",
+                "11-15"
               ],
               "points": 5,
               "investmentYen": 500,
-              "payoutYen": 0,
-              "netYen": -500,
-              "hit": false
+              "payoutYen": 1670,
+              "netYen": 1170,
+              "hit": true
             },
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "8-11-12-13-15 BOX",
+              "selection": "2-8-11-13-15 BOX",
               "ticketKeys": [
-                "8-12-15",
-                "12-13-15",
-                "11-12-15",
-                "8-12-13",
-                "8-11-12",
-                "11-12-13",
-                "8-13-15",
-                "8-11-15",
+                "2-11-13",
+                "8-11-13",
                 "11-13-15",
-                "8-11-13"
+                "2-8-11",
+                "2-11-15",
+                "8-11-15",
+                "2-8-13",
+                "2-13-15",
+                "8-13-15",
+                "2-8-15"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -51451,35 +51451,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "11-13 / 8-11 / 11-15 / 11-12 / 8-13",
+              "selection": "11-13 / 2-11 / 11-12 / 2-13 / 12-13",
               "ticketKeys": [
                 "11-13",
-                "8-11",
-                "11-15",
+                "2-11",
                 "11-12",
-                "8-13"
+                "2-13",
+                "12-13"
               ],
               "points": 5,
               "investmentYen": 500,
-              "payoutYen": 1670,
-              "netYen": 1170,
-              "hit": true
+              "payoutYen": 0,
+              "netYen": -500,
+              "hit": false
             },
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "8-11-12-13-15 BOX",
+              "selection": "2-4-11-12-13 BOX",
               "ticketKeys": [
-                "8-11-13",
-                "11-13-15",
+                "2-11-13",
                 "11-12-13",
-                "8-11-15",
-                "8-11-12",
-                "11-12-15",
-                "8-13-15",
-                "8-12-13",
-                "12-13-15",
-                "8-12-15"
+                "4-11-13",
+                "2-11-12",
+                "2-4-11",
+                "4-11-12",
+                "2-12-13",
+                "2-4-13",
+                "4-12-13",
+                "2-4-12"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -51509,35 +51509,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "11-13 / 8-11 / 11-15 / 8-13 / 11-12",
+              "selection": "11-13 / 2-11 / 11-12 / 2-13 / 12-13",
               "ticketKeys": [
                 "11-13",
-                "8-11",
-                "11-15",
-                "8-13",
-                "11-12"
+                "2-11",
+                "11-12",
+                "2-13",
+                "12-13"
               ],
               "points": 5,
               "investmentYen": 500,
-              "payoutYen": 1670,
-              "netYen": 1170,
-              "hit": true
+              "payoutYen": 0,
+              "netYen": -500,
+              "hit": false
             },
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "8-11-12-13-15 BOX",
+              "selection": "2-4-11-12-13 BOX",
               "ticketKeys": [
-                "8-11-13",
-                "11-13-15",
+                "2-11-13",
                 "11-12-13",
-                "8-11-15",
-                "8-11-12",
-                "11-12-15",
-                "8-13-15",
-                "8-12-13",
-                "12-13-15",
-                "8-12-15"
+                "4-11-13",
+                "2-11-12",
+                "2-4-11",
+                "4-11-12",
+                "2-12-13",
+                "2-4-13",
+                "4-12-13",
+                "2-4-12"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -51567,13 +51567,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "11-13 / 8-11 / 11-15 / 11-12 / 8-13",
+              "selection": "2-11 / 11-13 / 8-11 / 2-13 / 11-15",
               "ticketKeys": [
+                "2-11",
                 "11-13",
                 "8-11",
-                "11-15",
-                "11-12",
-                "8-13"
+                "2-13",
+                "11-15"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -51584,18 +51584,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "8-11-12-13-15 BOX",
+              "selection": "2-8-11-13-15 BOX",
               "ticketKeys": [
+                "2-11-13",
+                "2-8-11",
+                "2-11-15",
                 "8-11-13",
                 "11-13-15",
-                "11-12-13",
                 "8-11-15",
-                "8-11-12",
-                "11-12-15",
-                "8-13-15",
-                "8-12-13",
-                "12-13-15",
-                "8-12-15"
+                "2-8-13",
+                "2-13-15",
+                "2-8-15",
+                "8-13-15"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -51618,7 +51618,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -51755,7 +51755,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "スワッグウォーク",
-              "score": 0.8500000000000001,
+              "score": 0.9500000000000001,
               "probability": 0.17421679561035475,
               "finish": 4,
               "finishText": "4着"
@@ -51764,7 +51764,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "グラブザクラウン",
-              "score": 0.6723819388124493,
+              "score": 0.7673095165326526,
               "probability": 0.13159463606447563,
               "finish": 9,
               "finishText": "9着"
@@ -51773,7 +51773,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "ボンジュールパリ",
-              "score": 0.6001560720991166,
+              "score": 0.69915296307938,
               "probability": 0.12428226575636885,
               "finish": 10,
               "finishText": "10着"
@@ -51783,36 +51783,36 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 3,
-          "topPickFinish": 3,
-          "topPickFinishText": "3着",
+          "topPick": 4,
+          "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 3,
-              "horseName": "オンザボー",
-              "score": 0.3489194872322917,
-              "probability": 0.10300936415860622,
-              "finish": 3,
-              "finishText": "3着"
+              "horseNumber": 4,
+              "horseName": "スワッグウォーク",
+              "score": 0.74,
+              "probability": 0.17421679561035475,
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
-              "horseNumber": 1,
-              "horseName": "ジューンガレン",
-              "score": 0.33935002265961595,
-              "probability": 0.10741504694124657,
-              "finish": 7,
-              "finishText": "7着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 6,
               "horseName": "ボンジュールパリ",
-              "score": 0.3192140961096531,
+              "score": 0.6323620147677229,
               "probability": 0.12428226575636885,
               "finish": 10,
               "finishText": "10着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 10,
+              "horseName": "グラブザクラウン",
+              "score": 0.6167781261408225,
+              "probability": 0.13159463606447563,
+              "finish": 9,
+              "finishText": "9着"
             }
           ]
         },
@@ -51827,7 +51827,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "スワッグウォーク",
-              "score": 0.265,
+              "score": 0.8999999999999999,
               "probability": 0.17421679561035475,
               "finish": 4,
               "finishText": "4着"
@@ -51836,7 +51836,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "グラブザクラウン",
-              "score": 0.24279774235155616,
+              "score": 0.7199877663312719,
               "probability": 0.13159463606447563,
               "finish": 9,
               "finishText": "9着"
@@ -51845,7 +51845,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "ボンジュールパリ",
-              "score": 0.23376950901238958,
+              "score": 0.7146036331228618,
               "probability": 0.12428226575636885,
               "finish": 10,
               "finishText": "10着"
@@ -51863,7 +51863,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "スワッグウォーク",
-              "score": 0.36666666666666664,
+              "score": 0.9833333333333334,
               "probability": 0.17421679561035475,
               "finish": 4,
               "finishText": "4着"
@@ -51872,7 +51872,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "グラブザクラウン",
-              "score": 0.2889587648971132,
+              "score": 0.7916388050092485,
               "probability": 0.13159463606447563,
               "finish": 9,
               "finishText": "9着"
@@ -51881,7 +51881,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "ボンジュールパリ",
-              "score": 0.25735994821003016,
+              "score": 0.7771113713222195,
               "probability": 0.12428226575636885,
               "finish": 10,
               "finishText": "10着"
@@ -51899,28 +51899,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 4,
               "horseName": "スワッグウォーク",
-              "score": 0.49000000000000005,
+              "score": 0.6933333333333334,
               "probability": 0.17421679561035475,
               "finish": 4,
               "finishText": "4着"
             },
             {
               "mark": "○",
-              "horseNumber": 10,
-              "horseName": "グラブザクラウン",
-              "score": 0.45447638776249,
-              "probability": 0.13159463606447563,
-              "finish": 9,
-              "finishText": "9着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 6,
               "horseName": "ボンジュールパリ",
-              "score": 0.44003121441982335,
+              "score": 0.597660336850252,
               "probability": 0.12428226575636885,
               "finish": 10,
               "finishText": "10着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 10,
+              "horseName": "グラブザクラウン",
+              "score": 0.5727878594550587,
+              "probability": 0.13159463606447563,
+              "finish": 9,
+              "finishText": "9着"
             }
           ]
         }
@@ -51946,13 +51946,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-10 / 4-6 / 1-4 / 6-10 / 3-4",
+              "selection": "4-10 / 4-6 / 6-10 / 3-4 / 1-4",
               "ticketKeys": [
                 "4-10",
                 "4-6",
-                "1-4",
                 "6-10",
-                "3-4"
+                "3-4",
+                "1-4"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -51966,13 +51966,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "selection": "1-3-4-6-10 BOX",
               "ticketKeys": [
                 "4-6-10",
-                "1-4-10",
                 "3-4-10",
-                "1-4-6",
+                "1-4-10",
                 "3-4-6",
+                "1-4-6",
                 "1-3-4",
-                "1-6-10",
                 "3-6-10",
+                "1-6-10",
                 "1-3-10",
                 "1-3-6"
               ],
@@ -51991,9 +51991,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "3",
+              "selection": "4",
               "ticketKeys": [
-                "3"
+                "4"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -52004,13 +52004,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "1-3 / 3-6 / 1-6 / 3-10 / 1-10",
+              "selection": "4-6 / 4-10 / 6-10 / 3-4 / 1-4",
               "ticketKeys": [
-                "1-3",
-                "3-6",
-                "1-6",
-                "3-10",
-                "1-10"
+                "4-6",
+                "4-10",
+                "6-10",
+                "3-4",
+                "1-4"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -52023,16 +52023,16 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "method": "5頭BOX",
               "selection": "1-3-4-6-10 BOX",
               "ticketKeys": [
-                "1-3-6",
-                "1-3-10",
+                "4-6-10",
+                "3-4-6",
+                "1-4-6",
+                "3-4-10",
+                "1-4-10",
                 "1-3-4",
                 "3-6-10",
-                "3-4-6",
-                "3-4-10",
                 "1-6-10",
-                "1-4-6",
-                "1-4-10",
-                "4-6-10"
+                "1-3-6",
+                "1-3-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -52062,13 +52062,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-10 / 4-6 / 1-4 / 6-10 / 3-4",
+              "selection": "4-10 / 4-6 / 6-10 / 3-4 / 3-10",
               "ticketKeys": [
                 "4-10",
                 "4-6",
-                "1-4",
                 "6-10",
-                "3-4"
+                "3-4",
+                "3-10"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -52079,18 +52079,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-3-4-6-10 BOX",
+              "selection": "2-3-4-6-10 BOX",
               "ticketKeys": [
                 "4-6-10",
-                "1-4-10",
                 "3-4-10",
-                "1-4-6",
+                "2-4-10",
                 "3-4-6",
-                "1-3-4",
-                "1-6-10",
+                "2-4-6",
+                "2-3-4",
                 "3-6-10",
-                "1-3-10",
-                "1-3-6"
+                "2-6-10",
+                "2-3-10",
+                "2-3-6"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -52120,13 +52120,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-10 / 4-6 / 1-4 / 6-10 / 3-4",
+              "selection": "4-10 / 4-6 / 6-10 / 3-4 / 3-10",
               "ticketKeys": [
                 "4-10",
                 "4-6",
-                "1-4",
                 "6-10",
-                "3-4"
+                "3-4",
+                "3-10"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -52137,18 +52137,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-3-4-6-10 BOX",
+              "selection": "2-3-4-6-10 BOX",
               "ticketKeys": [
                 "4-6-10",
-                "1-4-10",
                 "3-4-10",
-                "1-4-6",
+                "2-4-10",
                 "3-4-6",
-                "1-3-4",
-                "1-6-10",
+                "2-4-6",
+                "2-3-4",
                 "3-6-10",
-                "1-3-10",
-                "1-3-6"
+                "2-6-10",
+                "2-3-10",
+                "2-3-6"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -52178,13 +52178,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-10 / 4-6 / 1-4 / 6-10 / 3-4",
+              "selection": "4-6 / 4-10 / 3-4 / 6-10 / 1-4",
               "ticketKeys": [
-                "4-10",
                 "4-6",
-                "1-4",
+                "4-10",
+                "3-4",
                 "6-10",
-                "3-4"
+                "1-4"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -52198,15 +52198,15 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "selection": "1-3-4-6-10 BOX",
               "ticketKeys": [
                 "4-6-10",
-                "1-4-10",
-                "3-4-10",
-                "1-4-6",
                 "3-4-6",
+                "1-4-6",
+                "3-4-10",
+                "1-4-10",
                 "1-3-4",
-                "1-6-10",
                 "3-6-10",
-                "1-3-10",
-                "1-3-6"
+                "1-6-10",
+                "1-3-6",
+                "1-3-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -52229,7 +52229,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -52382,7 +52382,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "レッドレガリア",
-              "score": 0.8500000000000001,
+              "score": 0.9500000000000001,
               "probability": 0.12699261590996674,
               "finish": 3,
               "finishText": "3着"
@@ -52391,7 +52391,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 17,
               "horseName": "フキョウワオン",
-              "score": 0.6350290473523497,
+              "score": 0.7285319043506677,
               "probability": 0.08680166248781214,
               "finish": 5,
               "finishText": "5着"
@@ -52400,7 +52400,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 12,
               "horseName": "カルダモン",
-              "score": 0.49522463240759385,
+              "score": 0.506120433640689,
               "probability": 0.06496762301139933,
               "finish": 16,
               "finishText": "16着"
@@ -52410,36 +52410,36 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 16,
-          "topPickFinish": 6,
-          "topPickFinishText": "6着",
+          "topPick": 7,
+          "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 16,
-              "horseName": "プラネタリーアワー",
-              "score": 0.3556896934950496,
-              "probability": 0.06053822636797787,
-              "finish": 6,
-              "finishText": "6着"
+              "horseNumber": 7,
+              "horseName": "レッドレガリア",
+              "score": 0.74,
+              "probability": 0.12699261590996674,
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "○",
-              "horseNumber": 11,
-              "horseName": "ビップマリク",
-              "score": 0.3492133119815042,
-              "probability": 0.062230134257145034,
-              "finish": 10,
-              "finishText": "10着"
+              "horseNumber": 17,
+              "horseName": "フキョウワオン",
+              "score": 0.578589557844614,
+              "probability": 0.08680166248781214,
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
-              "horseNumber": 12,
-              "horseName": "カルダモン",
-              "score": 0.3400549712500162,
-              "probability": 0.06496762301139933,
-              "finish": 16,
-              "finishText": "16着"
+              "horseNumber": 16,
+              "horseName": "プラネタリーアワー",
+              "score": 0.5427977102707788,
+              "probability": 0.06053822636797787,
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         },
@@ -52454,7 +52454,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "レッドレガリア",
-              "score": 0.265,
+              "score": 0.8999999999999999,
               "probability": 0.12699261590996674,
               "finish": 3,
               "finishText": "3着"
@@ -52463,19 +52463,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 17,
               "horseName": "フキョウワオン",
-              "score": 0.2381286309190437,
+              "score": 0.6635277014620102,
               "probability": 0.08680166248781214,
               "finish": 5,
               "finishText": "5着"
             },
             {
               "mark": "▲",
-              "horseNumber": 12,
-              "horseName": "カルダモン",
-              "score": 0.22065307905094922,
-              "probability": 0.06496762301139933,
-              "finish": 16,
-              "finishText": "16着"
+              "horseNumber": 16,
+              "horseName": "プラネタリーアワー",
+              "score": 0.564256644985435,
+              "probability": 0.06053822636797787,
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         },
@@ -52490,7 +52490,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "レッドレガリア",
-              "score": 0.36666666666666664,
+              "score": 0.9833333333333334,
               "probability": 0.12699261590996674,
               "finish": 3,
               "finishText": "3着"
@@ -52499,19 +52499,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 17,
               "horseName": "フキョウワオン",
-              "score": 0.2726168748833196,
+              "score": 0.7299856778532183,
               "probability": 0.08680166248781214,
               "finish": 5,
               "finishText": "5着"
             },
             {
               "mark": "▲",
-              "horseNumber": 12,
-              "horseName": "カルダモン",
-              "score": 0.21145244334498897,
-              "probability": 0.06496762301139933,
-              "finish": 16,
-              "finishText": "16着"
+              "horseNumber": 16,
+              "horseName": "プラネタリーアワー",
+              "score": 0.6075351551963747,
+              "probability": 0.06053822636797787,
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         },
@@ -52526,7 +52526,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "レッドレガリア",
-              "score": 0.49000000000000005,
+              "score": 0.6933333333333334,
               "probability": 0.12699261590996674,
               "finish": 3,
               "finishText": "3着"
@@ -52535,19 +52535,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 17,
               "horseName": "フキョウワオン",
-              "score": 0.44700580947047,
+              "score": 0.5345663273911927,
               "probability": 0.08680166248781214,
               "finish": 5,
               "finishText": "5着"
             },
             {
               "mark": "▲",
-              "horseNumber": 12,
-              "horseName": "カルダモン",
-              "score": 0.41904492648151875,
-              "probability": 0.06496762301139933,
-              "finish": 16,
-              "finishText": "16着"
+              "horseNumber": 16,
+              "horseName": "プラネタリーアワー",
+              "score": 0.5212577588196624,
+              "probability": 0.06053822636797787,
+              "finish": 6,
+              "finishText": "6着"
             }
           ]
         }
@@ -52573,12 +52573,12 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "7-17 / 7-12 / 7-11 / 7-16 / 12-17",
+              "selection": "7-17 / 7-12 / 7-16 / 7-11 / 12-17",
               "ticketKeys": [
                 "7-17",
                 "7-12",
-                "7-11",
                 "7-16",
+                "7-11",
                 "12-17"
               ],
               "points": 5,
@@ -52593,13 +52593,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "selection": "7-11-12-16-17 BOX",
               "ticketKeys": [
                 "7-12-17",
-                "7-11-17",
                 "7-16-17",
-                "7-11-12",
+                "7-11-17",
                 "7-12-16",
+                "7-11-12",
                 "7-11-16",
-                "11-12-17",
                 "12-16-17",
+                "11-12-17",
                 "11-16-17",
                 "11-12-16"
               ],
@@ -52618,9 +52618,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "16",
+              "selection": "7",
               "ticketKeys": [
-                "16"
+                "7"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -52631,13 +52631,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "11-16 / 12-16 / 11-12 / 16-17 / 11-17",
+              "selection": "7-17 / 7-16 / 7-12 / 7-11 / 16-17",
               "ticketKeys": [
-                "11-16",
-                "12-16",
-                "11-12",
-                "16-17",
-                "11-17"
+                "7-17",
+                "7-16",
+                "7-12",
+                "7-11",
+                "16-17"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -52650,16 +52650,16 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "method": "5頭BOX",
               "selection": "7-11-12-16-17 BOX",
               "ticketKeys": [
-                "11-12-16",
-                "11-16-17",
-                "7-11-16",
-                "12-16-17",
-                "7-12-16",
                 "7-16-17",
-                "11-12-17",
-                "7-11-12",
+                "7-12-17",
                 "7-11-17",
-                "7-12-17"
+                "7-12-16",
+                "7-11-16",
+                "7-11-12",
+                "12-16-17",
+                "11-16-17",
+                "11-12-17",
+                "11-12-16"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -52689,13 +52689,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "7-17 / 7-12 / 7-11 / 7-16 / 12-17",
+              "selection": "7-17 / 7-16 / 1-7 / 16-17 / 7-18",
               "ticketKeys": [
                 "7-17",
-                "7-12",
-                "7-11",
                 "7-16",
-                "12-17"
+                "1-7",
+                "16-17",
+                "7-18"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -52706,18 +52706,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "7-11-12-16-17 BOX",
+              "selection": "1-7-16-17-18 BOX",
               "ticketKeys": [
-                "7-12-17",
-                "7-11-17",
                 "7-16-17",
-                "7-11-12",
-                "7-12-16",
-                "7-11-16",
-                "11-12-17",
-                "12-16-17",
-                "11-16-17",
-                "11-12-16"
+                "1-7-17",
+                "7-17-18",
+                "1-7-16",
+                "7-16-18",
+                "1-7-18",
+                "1-16-17",
+                "16-17-18",
+                "1-17-18",
+                "1-16-18"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -52747,13 +52747,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "7-17 / 7-12 / 7-11 / 7-16 / 12-17",
+              "selection": "7-17 / 7-16 / 1-7 / 16-17 / 7-18",
               "ticketKeys": [
                 "7-17",
-                "7-12",
-                "7-11",
                 "7-16",
-                "12-17"
+                "1-7",
+                "16-17",
+                "7-18"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -52764,18 +52764,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "7-11-12-16-17 BOX",
+              "selection": "1-7-16-17-18 BOX",
               "ticketKeys": [
-                "7-12-17",
-                "7-11-17",
                 "7-16-17",
-                "7-11-12",
-                "7-12-16",
-                "7-11-16",
-                "11-12-17",
-                "12-16-17",
-                "11-16-17",
-                "11-12-16"
+                "1-7-17",
+                "7-17-18",
+                "1-7-16",
+                "7-16-18",
+                "1-7-18",
+                "1-16-17",
+                "16-17-18",
+                "1-17-18",
+                "1-16-18"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -52805,13 +52805,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "7-17 / 7-12 / 7-11 / 7-16 / 12-17",
+              "selection": "7-17 / 7-16 / 7-12 / 7-11 / 16-17",
               "ticketKeys": [
                 "7-17",
+                "7-16",
                 "7-12",
                 "7-11",
-                "7-16",
-                "12-17"
+                "16-17"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -52824,15 +52824,15 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "method": "5頭BOX",
               "selection": "7-11-12-16-17 BOX",
               "ticketKeys": [
+                "7-16-17",
                 "7-12-17",
                 "7-11-17",
-                "7-16-17",
-                "7-11-12",
                 "7-12-16",
                 "7-11-16",
-                "11-12-17",
+                "7-11-12",
                 "12-16-17",
                 "11-16-17",
+                "11-12-17",
                 "11-12-16"
               ],
               "points": 10,
@@ -52856,7 +52856,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -52991,7 +52991,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "クイーンズホリデー",
-              "score": 0.8500000000000001,
+              "score": 0.9388635515654971,
               "probability": 0.16561728262141148,
               "finish": 6,
               "finishText": "6着"
@@ -53000,7 +53000,43 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 2,
               "horseName": "デールエルバハリ",
-              "score": 0.7930049973152626,
+              "score": 0.8932270226878639,
+              "probability": 0.16351680873001317,
+              "finish": 3,
+              "finishText": "3着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 3,
+              "horseName": "アンティスマ",
+              "score": 0.6190875000870594,
+              "probability": 0.11271679697836494,
+              "finish": 1,
+              "finishText": "1着"
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "available",
+          "topPick": 7,
+          "topPickFinish": 6,
+          "topPickFinishText": "6着",
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 7,
+              "horseName": "クイーンズホリデー",
+              "score": 0.7667274762428071,
+              "probability": 0.16561728262141148,
+              "finish": 6,
+              "finishText": "6着"
+            },
+            {
+              "mark": "○",
+              "horseNumber": 2,
+              "horseName": "デールエルバハリ",
+              "score": 0.7285248764781606,
               "probability": 0.16351680873001317,
               "finish": 3,
               "finishText": "3着"
@@ -53009,43 +53045,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "シャンドラテ",
-              "score": 0.6000014790853018,
-              "probability": 0.11809833338097654,
-              "finish": 9,
-              "finishText": "9着"
-            }
-          ]
-        },
-        {
-          "agentId": "sniper",
-          "status": "available",
-          "topPick": 6,
-          "topPickFinish": 7,
-          "topPickFinishText": "7着",
-          "marks": [
-            {
-              "mark": "◎",
-              "horseNumber": 6,
-              "horseName": "シャフメラン",
-              "score": 0.34388975025797996,
-              "probability": 0.10919547671040597,
-              "finish": 7,
-              "finishText": "7着"
-            },
-            {
-              "mark": "○",
-              "horseNumber": 3,
-              "horseName": "アンティスマ",
-              "score": 0.3333693221139217,
-              "probability": 0.11271679697836494,
-              "finish": 1,
-              "finishText": "1着"
-            },
-            {
-              "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "シャンドラテ",
-              "score": 0.3192496598097243,
+              "score": 0.574049591940787,
               "probability": 0.11809833338097654,
               "finish": 9,
               "finishText": "9着"
@@ -53055,72 +53055,72 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "pace",
           "status": "available",
-          "topPick": 7,
-          "topPickFinish": 6,
-          "topPickFinishText": "6着",
+          "topPick": 2,
+          "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 7,
-              "horseName": "クイーンズホリデー",
-              "score": 0.265,
-              "probability": 0.16561728262141148,
-              "finish": 6,
-              "finishText": "6着"
-            },
-            {
-              "mark": "○",
               "horseNumber": 2,
               "horseName": "デールエルバハリ",
-              "score": 0.2578756246644078,
+              "score": 0.8701410594112562,
               "probability": 0.16351680873001317,
               "finish": 3,
               "finishText": "3着"
             },
             {
+              "mark": "○",
+              "horseNumber": 7,
+              "horseName": "クイーンズホリデー",
+              "score": 0.8376358887667834,
+              "probability": 0.16561728262141148,
+              "finish": 6,
+              "finishText": "6着"
+            },
+            {
               "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "シャンドラテ",
-              "score": 0.23375018488566268,
-              "probability": 0.11809833338097654,
-              "finish": 9,
-              "finishText": "9着"
+              "horseNumber": 6,
+              "horseName": "シャフメラン",
+              "score": 0.5628916383712755,
+              "probability": 0.10919547671040597,
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
         {
           "agentId": "analyst",
           "status": "available",
-          "topPick": 7,
-          "topPickFinish": 6,
-          "topPickFinishText": "6着",
+          "topPick": 2,
+          "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 7,
-              "horseName": "クイーンズホリデー",
-              "score": 0.36666666666666664,
-              "probability": 0.16561728262141148,
-              "finish": 6,
-              "finishText": "6着"
-            },
-            {
-              "mark": "○",
               "horseNumber": 2,
               "horseName": "デールエルバハリ",
-              "score": 0.34173135299209406,
+              "score": 0.9478066103864873,
               "probability": 0.16351680873001317,
               "finish": 3,
               "finishText": "3着"
             },
             {
+              "mark": "○",
+              "horseNumber": 7,
+              "horseName": "クイーンズホリデー",
+              "score": 0.8831052974228064,
+              "probability": 0.16561728262141148,
+              "finish": 6,
+              "finishText": "6着"
+            },
+            {
               "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "シャンドラテ",
-              "score": 0.25729231376648615,
-              "probability": 0.11809833338097654,
-              "finish": 9,
-              "finishText": "9着"
+              "horseNumber": 6,
+              "horseName": "シャフメラン",
+              "score": 0.6179498077402567,
+              "probability": 0.10919547671040597,
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -53135,7 +53135,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "クイーンズホリデー",
-              "score": 0.49000000000000005,
+              "score": 0.728969968323743,
               "probability": 0.16561728262141148,
               "finish": 6,
               "finishText": "6着"
@@ -53144,7 +53144,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 2,
               "horseName": "デールエルバハリ",
-              "score": 0.47860099946305257,
+              "score": 0.686107460684552,
               "probability": 0.16351680873001317,
               "finish": 3,
               "finishText": "3着"
@@ -53153,7 +53153,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "シャンドラテ",
-              "score": 0.44000029581706035,
+              "score": 0.5528666881588726,
               "probability": 0.11809833338097654,
               "finish": 9,
               "finishText": "9着"
@@ -53182,13 +53182,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "2-7 / 7-8 / 2-8 / 3-7 / 2-3",
+              "selection": "2-7 / 3-7 / 7-8 / 2-3 / 2-8",
               "ticketKeys": [
                 "2-7",
-                "7-8",
-                "2-8",
                 "3-7",
-                "2-3"
+                "7-8",
+                "2-3",
+                "2-8"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -53201,15 +53201,15 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "method": "5頭BOX",
               "selection": "2-3-6-7-8 BOX",
               "ticketKeys": [
-                "2-7-8",
                 "2-3-7",
+                "2-7-8",
                 "2-6-7",
                 "3-7-8",
-                "6-7-8",
                 "3-6-7",
+                "6-7-8",
                 "2-3-8",
-                "2-6-8",
                 "2-3-6",
+                "2-6-8",
                 "3-6-8"
               ],
               "points": 10,
@@ -53227,9 +53227,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "6",
+              "selection": "7",
               "ticketKeys": [
-                "6"
+                "7"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -53240,13 +53240,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "3-6 / 6-8 / 3-8 / 2-6 / 2-3",
+              "selection": "2-7 / 7-8 / 5-7 / 2-8 / 2-5",
               "ticketKeys": [
-                "3-6",
-                "6-8",
-                "3-8",
-                "2-6",
-                "2-3"
+                "2-7",
+                "7-8",
+                "5-7",
+                "2-8",
+                "2-5"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -53257,18 +53257,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-3-6-7-8 BOX",
+              "selection": "2-5-6-7-8 BOX",
               "ticketKeys": [
-                "3-6-8",
-                "2-3-6",
-                "3-6-7",
-                "2-6-8",
-                "6-7-8",
+                "2-7-8",
+                "2-5-7",
                 "2-6-7",
-                "2-3-8",
-                "3-7-8",
-                "2-3-7",
-                "2-7-8"
+                "5-7-8",
+                "6-7-8",
+                "5-6-7",
+                "2-5-8",
+                "2-6-8",
+                "2-5-6",
+                "5-6-8"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -53285,9 +53285,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "7",
+              "selection": "2",
               "ticketKeys": [
-                "7"
+                "2"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -53298,13 +53298,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "2-7 / 7-8 / 2-8 / 3-7 / 2-3",
+              "selection": "2-7 / 2-6 / 2-3 / 6-7 / 2-5",
               "ticketKeys": [
                 "2-7",
-                "7-8",
-                "2-8",
-                "3-7",
-                "2-3"
+                "2-6",
+                "2-3",
+                "6-7",
+                "2-5"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -53315,18 +53315,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-3-6-7-8 BOX",
+              "selection": "2-3-5-6-7 BOX",
               "ticketKeys": [
-                "2-7-8",
-                "2-3-7",
                 "2-6-7",
-                "3-7-8",
-                "6-7-8",
-                "3-6-7",
-                "2-3-8",
-                "2-6-8",
+                "2-3-7",
+                "2-5-7",
                 "2-3-6",
-                "3-6-8"
+                "2-5-6",
+                "2-3-5",
+                "3-6-7",
+                "5-6-7",
+                "3-5-7",
+                "3-5-6"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -53343,9 +53343,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "7",
+              "selection": "2",
               "ticketKeys": [
-                "7"
+                "2"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -53356,13 +53356,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "2-7 / 7-8 / 2-8 / 3-7 / 2-3",
+              "selection": "2-7 / 2-6 / 2-3 / 6-7 / 3-7",
               "ticketKeys": [
                 "2-7",
-                "7-8",
-                "2-8",
-                "3-7",
-                "2-3"
+                "2-6",
+                "2-3",
+                "6-7",
+                "3-7"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -53373,18 +53373,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-3-6-7-8 BOX",
+              "selection": "2-3-5-6-7 BOX",
               "ticketKeys": [
-                "2-7-8",
-                "2-3-7",
                 "2-6-7",
-                "3-7-8",
-                "6-7-8",
-                "3-6-7",
-                "2-3-8",
-                "2-6-8",
+                "2-3-7",
+                "2-5-7",
                 "2-3-6",
-                "3-6-8"
+                "2-5-6",
+                "2-3-5",
+                "3-6-7",
+                "5-6-7",
+                "3-5-7",
+                "3-5-6"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -53414,13 +53414,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "2-7 / 7-8 / 2-8 / 3-7 / 2-3",
+              "selection": "2-7 / 7-8 / 5-7 / 2-8 / 2-5",
               "ticketKeys": [
                 "2-7",
                 "7-8",
+                "5-7",
                 "2-8",
-                "3-7",
-                "2-3"
+                "2-5"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -53431,18 +53431,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-3-6-7-8 BOX",
+              "selection": "2-5-6-7-8 BOX",
               "ticketKeys": [
                 "2-7-8",
-                "2-3-7",
+                "2-5-7",
                 "2-6-7",
-                "3-7-8",
+                "5-7-8",
                 "6-7-8",
-                "3-6-7",
-                "2-3-8",
+                "5-6-7",
+                "2-5-8",
                 "2-6-8",
-                "2-3-6",
-                "3-6-8"
+                "2-5-6",
+                "5-6-8"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -53465,7 +53465,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -53604,7 +53604,43 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "ステラデルークス",
-              "score": 0.8500000000000001,
+              "score": 0.9439520253574716,
+              "probability": 0.1584542609627607,
+              "finish": 8,
+              "finishText": "8着"
+            },
+            {
+              "mark": "○",
+              "horseNumber": 8,
+              "horseName": "タイセイジェイド",
+              "score": 0.7708295047598476,
+              "probability": 0.1366791476835127,
+              "finish": 5,
+              "finishText": "5着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 6,
+              "horseName": "グランセレスト",
+              "score": 0.746331385440314,
+              "probability": 0.14163239414770956,
+              "finish": 10,
+              "finishText": "10着"
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "available",
+          "topPick": 7,
+          "topPickFinish": 8,
+          "topPickFinishText": "8着",
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 7,
+              "horseName": "ステラデルークス",
+              "score": 0.7545151391420682,
               "probability": 0.1584542609627607,
               "finish": 8,
               "finishText": "8着"
@@ -53613,55 +53649,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "グランセレスト",
-              "score": 0.7443956104766261,
+              "score": 0.6902292096192939,
               "probability": 0.14163239414770956,
               "finish": 10,
               "finishText": "10着"
             },
             {
               "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "タイセイジェイド",
-              "score": 0.6777405211799887,
-              "probability": 0.1366791476835127,
-              "finish": 5,
-              "finishText": "5着"
-            }
-          ]
-        },
-        {
-          "agentId": "sniper",
-          "status": "available",
-          "topPick": 11,
-          "topPickFinish": 6,
-          "topPickFinishText": "6着",
-          "marks": [
-            {
-              "mark": "◎",
-              "horseNumber": 11,
-              "horseName": "カフジクロミエ",
-              "score": 0.34832083018503485,
-              "probability": 0.09506239050871516,
-              "finish": 6,
-              "finishText": "6着"
-            },
-            {
-              "mark": "○",
-              "horseNumber": 10,
-              "horseName": "セイントホース",
-              "score": 0.31519052377818524,
-              "probability": 0.13360779929713623,
-              "finish": 1,
-              "finishText": "1着"
-            },
-            {
-              "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "タイセイジェイド",
-              "score": 0.2995566035386017,
-              "probability": 0.1366791476835127,
-              "finish": 5,
-              "finishText": "5着"
+              "horseNumber": 2,
+              "horseName": "アスクガンバーレ",
+              "score": 0.6238014986901784,
+              "probability": 0.06673590484628415,
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -53676,28 +53676,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "ステラデルークス",
-              "score": 0.265,
+              "score": 0.8661313420018407,
               "probability": 0.1584542609627607,
               "finish": 8,
               "finishText": "8着"
             },
             {
               "mark": "○",
-              "horseNumber": 6,
-              "horseName": "グランセレスト",
-              "score": 0.25179945130957826,
-              "probability": 0.14163239414770956,
-              "finish": 10,
-              "finishText": "10着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 8,
               "horseName": "タイセイジェイド",
-              "score": 0.2434675651474986,
+              "score": 0.7198785638596488,
               "probability": 0.1366791476835127,
               "finish": 5,
               "finishText": "5着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 2,
+              "horseName": "アスクガンバーレ",
+              "score": 0.5949789340617183,
+              "probability": 0.06673590484628415,
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -53712,28 +53712,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "ステラデルークス",
-              "score": 0.36666666666666664,
+              "score": 0.9289015615505773,
               "probability": 0.1584542609627607,
               "finish": 8,
               "finishText": "8着"
             },
             {
               "mark": "○",
-              "horseNumber": 6,
-              "horseName": "グランセレスト",
-              "score": 0.32046474625019056,
-              "probability": 0.14163239414770956,
-              "finish": 10,
-              "finishText": "10着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 8,
               "horseName": "タイセイジェイド",
-              "score": 0.2913031446829117,
+              "score": 0.7919939878602704,
               "probability": 0.1366791476835127,
               "finish": 5,
               "finishText": "5着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 2,
+              "horseName": "アスクガンバーレ",
+              "score": 0.6202130167401408,
+              "probability": 0.06673590484628415,
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -53748,7 +53748,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "ステラデルークス",
-              "score": 0.49000000000000005,
+              "score": 0.7126868521894244,
               "probability": 0.1584542609627607,
               "finish": 8,
               "finishText": "8着"
@@ -53757,19 +53757,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "グランセレスト",
-              "score": 0.46887912209532523,
+              "score": 0.6673403990886783,
               "probability": 0.14163239414770956,
               "finish": 10,
               "finishText": "10着"
             },
             {
               "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "タイセイジェイド",
-              "score": 0.4555481042359978,
-              "probability": 0.1366791476835127,
-              "finish": 5,
-              "finishText": "5着"
+              "horseNumber": 2,
+              "horseName": "アスクガンバーレ",
+              "score": 0.6207092700146949,
+              "probability": 0.06673590484628415,
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         }
@@ -53795,13 +53795,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "6-7 / 7-8 / 7-10 / 6-8 / 6-10",
+              "selection": "7-8 / 6-7 / 7-10 / 6-8 / 8-10",
               "ticketKeys": [
-                "6-7",
                 "7-8",
+                "6-7",
                 "7-10",
                 "6-8",
-                "6-10"
+                "8-10"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -53815,15 +53815,15 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "selection": "6-7-8-10-11 BOX",
               "ticketKeys": [
                 "6-7-8",
-                "6-7-10",
-                "6-7-11",
                 "7-8-10",
                 "7-8-11",
+                "6-7-10",
+                "6-7-11",
                 "7-10-11",
                 "6-8-10",
                 "6-8-11",
-                "6-10-11",
-                "8-10-11"
+                "8-10-11",
+                "6-10-11"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -53840,9 +53840,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "11",
+              "selection": "7",
               "ticketKeys": [
-                "11"
+                "7"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -53853,13 +53853,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "10-11 / 8-11 / 6-11 / 8-10 / 6-10",
+              "selection": "6-7 / 2-7 / 7-8 / 7-10 / 2-6",
               "ticketKeys": [
-                "10-11",
-                "8-11",
-                "6-11",
-                "8-10",
-                "6-10"
+                "6-7",
+                "2-7",
+                "7-8",
+                "7-10",
+                "2-6"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -53870,18 +53870,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "6-7-8-10-11 BOX",
+              "selection": "2-6-7-8-10 BOX",
               "ticketKeys": [
-                "8-10-11",
-                "6-10-11",
-                "7-10-11",
-                "6-8-11",
-                "7-8-11",
-                "6-7-11",
-                "6-8-10",
-                "7-8-10",
+                "2-6-7",
+                "6-7-8",
                 "6-7-10",
-                "6-7-8"
+                "2-7-8",
+                "2-7-10",
+                "7-8-10",
+                "2-6-8",
+                "2-6-10",
+                "6-8-10",
+                "2-8-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -53911,13 +53911,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "6-7 / 7-8 / 7-10 / 6-8 / 6-10",
+              "selection": "7-8 / 2-7 / 2-8 / 6-7 / 4-7",
               "ticketKeys": [
-                "6-7",
                 "7-8",
-                "7-10",
-                "6-8",
-                "6-10"
+                "2-7",
+                "2-8",
+                "6-7",
+                "4-7"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -53928,18 +53928,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "6-7-8-10-11 BOX",
+              "selection": "2-4-6-7-8 BOX",
               "ticketKeys": [
+                "2-7-8",
                 "6-7-8",
-                "6-7-10",
-                "6-7-11",
-                "7-8-10",
-                "7-8-11",
-                "7-10-11",
-                "6-8-10",
-                "6-8-11",
-                "6-10-11",
-                "8-10-11"
+                "4-7-8",
+                "2-6-7",
+                "2-4-7",
+                "4-6-7",
+                "2-6-8",
+                "2-4-8",
+                "4-6-8",
+                "2-4-6"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -53969,13 +53969,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "6-7 / 7-8 / 7-10 / 6-8 / 6-10",
+              "selection": "7-8 / 2-7 / 2-8 / 4-7 / 5-7",
               "ticketKeys": [
-                "6-7",
                 "7-8",
-                "7-10",
-                "6-8",
-                "6-10"
+                "2-7",
+                "2-8",
+                "4-7",
+                "5-7"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -53986,18 +53986,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "6-7-8-10-11 BOX",
+              "selection": "2-4-5-7-8 BOX",
               "ticketKeys": [
-                "6-7-8",
-                "6-7-10",
-                "6-7-11",
-                "7-8-10",
-                "7-8-11",
-                "7-10-11",
-                "6-8-10",
-                "6-8-11",
-                "6-10-11",
-                "8-10-11"
+                "2-7-8",
+                "4-7-8",
+                "5-7-8",
+                "2-4-7",
+                "2-5-7",
+                "4-5-7",
+                "2-4-8",
+                "2-5-8",
+                "4-5-8",
+                "2-4-5"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -54027,13 +54027,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "6-7 / 7-8 / 7-10 / 6-8 / 6-10",
+              "selection": "6-7 / 2-7 / 2-6 / 7-8 / 7-10",
               "ticketKeys": [
                 "6-7",
+                "2-7",
+                "2-6",
                 "7-8",
-                "7-10",
-                "6-8",
-                "6-10"
+                "7-10"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -54044,18 +54044,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "6-7-8-10-11 BOX",
+              "selection": "2-6-7-8-10 BOX",
               "ticketKeys": [
+                "2-6-7",
                 "6-7-8",
                 "6-7-10",
-                "6-7-11",
+                "2-7-8",
+                "2-7-10",
                 "7-8-10",
-                "7-8-11",
-                "7-10-11",
+                "2-6-8",
+                "2-6-10",
                 "6-8-10",
-                "6-8-11",
-                "6-10-11",
-                "8-10-11"
+                "2-8-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -54078,7 +54078,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -54225,7 +54225,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 15,
               "horseName": "ロードソルスティス",
-              "score": 0.8500000000000001,
+              "score": 0.9388915061118358,
               "probability": 0.14554946818368192,
               "finish": 14,
               "finishText": "14着"
@@ -54234,7 +54234,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "ヘリオトロープ",
-              "score": 0.6032632311836384,
+              "score": 0.7107054233943685,
               "probability": 0.09059425224882821,
               "finish": 5,
               "finishText": "5着"
@@ -54243,7 +54243,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "マッドゲイル",
-              "score": 0.5164210922274348,
+              "score": 0.6206896810322821,
               "probability": 0.0803939946631527,
               "finish": 7,
               "finishText": "7着"
@@ -54253,33 +54253,33 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 5,
-          "topPickFinish": 3,
-          "topPickFinishText": "3着",
+          "topPick": 15,
+          "topPickFinish": 14,
+          "topPickFinishText": "14着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 5,
-              "horseName": "ナイトスラッガー",
-              "score": 0.3542400401422838,
-              "probability": 0.07343730526177339,
-              "finish": 3,
-              "finishText": "3着"
+              "horseNumber": 15,
+              "horseName": "ロードソルスティス",
+              "score": 0.7666603853315941,
+              "probability": 0.14554946818368192,
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "○",
-              "horseNumber": 9,
-              "horseName": "フクチャントウメイ",
-              "score": 0.346962151114034,
-              "probability": 0.0759852734273136,
-              "finish": 8,
-              "finishText": "8着"
+              "horseNumber": 6,
+              "horseName": "ヘリオトロープ",
+              "score": 0.6881010374787632,
+              "probability": 0.09059425224882821,
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "マッドゲイル",
-              "score": 0.3363775186403535,
+              "score": 0.6248574072979848,
               "probability": 0.0803939946631527,
               "finish": 7,
               "finishText": "7着"
@@ -54297,7 +54297,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 15,
               "horseName": "ロードソルスティス",
-              "score": 0.265,
+              "score": 0.8377924342262807,
               "probability": 0.14554946818368192,
               "finish": 14,
               "finishText": "14着"
@@ -54306,7 +54306,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "ヘリオトロープ",
-              "score": 0.23415790389795482,
+              "score": 0.7725895370030473,
               "probability": 0.09059425224882821,
               "finish": 5,
               "finishText": "5着"
@@ -54315,7 +54315,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "マッドゲイル",
-              "score": 0.22330263652842935,
+              "score": 0.6836645514235091,
               "probability": 0.0803939946631527,
               "finish": 7,
               "finishText": "7着"
@@ -54333,7 +54333,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 15,
               "horseName": "ロードソルスティス",
-              "score": 0.36666666666666664,
+              "score": 0.8833568883398557,
               "probability": 0.14554946818368192,
               "finish": 14,
               "finishText": "14着"
@@ -54342,7 +54342,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "ヘリオトロープ",
-              "score": 0.25871933030950844,
+              "score": 0.8323123637705631,
               "probability": 0.09059425224882821,
               "finish": 5,
               "finishText": "5着"
@@ -54351,7 +54351,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "マッドゲイル",
-              "score": 0.2207258945161694,
+              "score": 0.7376334705665645,
               "probability": 0.0803939946631527,
               "finish": 7,
               "finishText": "7着"
@@ -54369,7 +54369,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 15,
               "horseName": "ロードソルスティス",
-              "score": 0.49000000000000005,
+              "score": 0.7288805137754587,
               "probability": 0.14554946818368192,
               "finish": 14,
               "finishText": "14着"
@@ -54378,7 +54378,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "ヘリオトロープ",
-              "score": 0.4406526462367277,
+              "score": 0.6590890922206687,
               "probability": 0.09059425224882821,
               "finish": 5,
               "finishText": "5着"
@@ -54387,7 +54387,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "マッドゲイル",
-              "score": 0.4232842184454869,
+              "score": 0.5974945302906087,
               "probability": 0.0803939946631527,
               "finish": 7,
               "finishText": "7着"
@@ -54416,13 +54416,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "6-15 / 4-15 / 9-15 / 5-15 / 4-6",
+              "selection": "6-15 / 4-15 / 9-15 / 4-6 / 6-9",
               "ticketKeys": [
                 "6-15",
                 "4-15",
                 "9-15",
-                "5-15",
-                "4-6"
+                "4-6",
+                "6-9"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -54433,18 +54433,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-5-6-9-15 BOX",
+              "selection": "4-6-9-13-15 BOX",
               "ticketKeys": [
                 "4-6-15",
                 "6-9-15",
-                "5-6-15",
+                "6-13-15",
                 "4-9-15",
-                "4-5-15",
-                "5-9-15",
+                "4-13-15",
+                "9-13-15",
                 "4-6-9",
-                "4-5-6",
-                "5-6-9",
-                "4-5-9"
+                "4-6-13",
+                "6-9-13",
+                "4-9-13"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -54461,9 +54461,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "5",
+              "selection": "15",
               "ticketKeys": [
-                "5"
+                "15"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -54474,12 +54474,12 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-9 / 4-5 / 4-9 / 5-6 / 6-9",
+              "selection": "6-15 / 4-15 / 9-15 / 4-6 / 6-9",
               "ticketKeys": [
-                "5-9",
-                "4-5",
-                "4-9",
-                "5-6",
+                "6-15",
+                "4-15",
+                "9-15",
+                "4-6",
                 "6-9"
               ],
               "points": 5,
@@ -54491,18 +54491,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-5-6-9-15 BOX",
+              "selection": "4-6-9-13-15 BOX",
               "ticketKeys": [
-                "4-5-9",
-                "5-6-9",
-                "5-9-15",
-                "4-5-6",
-                "4-5-15",
-                "5-6-15",
-                "4-6-9",
-                "4-9-15",
+                "4-6-15",
                 "6-9-15",
-                "4-6-15"
+                "6-13-15",
+                "4-9-15",
+                "4-13-15",
+                "9-13-15",
+                "4-6-9",
+                "4-6-13",
+                "6-9-13",
+                "4-9-13"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -54532,13 +54532,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "6-15 / 4-15 / 9-15 / 5-15 / 4-6",
+              "selection": "6-15 / 4-15 / 4-6 / 9-15 / 6-9",
               "ticketKeys": [
                 "6-15",
                 "4-15",
+                "4-6",
                 "9-15",
-                "5-15",
-                "4-6"
+                "6-9"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -54549,18 +54549,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-5-6-9-15 BOX",
+              "selection": "4-6-9-13-15 BOX",
               "ticketKeys": [
                 "4-6-15",
                 "6-9-15",
-                "5-6-15",
+                "6-13-15",
                 "4-9-15",
-                "4-5-15",
-                "5-9-15",
+                "4-13-15",
+                "9-13-15",
                 "4-6-9",
-                "4-5-6",
-                "5-6-9",
-                "4-5-9"
+                "4-6-13",
+                "6-9-13",
+                "4-9-13"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -54590,13 +54590,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "6-15 / 4-15 / 9-15 / 5-15 / 4-6",
+              "selection": "6-15 / 4-15 / 4-6 / 9-15 / 6-9",
               "ticketKeys": [
                 "6-15",
                 "4-15",
+                "4-6",
                 "9-15",
-                "5-15",
-                "4-6"
+                "6-9"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -54607,18 +54607,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-5-6-9-15 BOX",
+              "selection": "4-6-9-13-15 BOX",
               "ticketKeys": [
                 "4-6-15",
                 "6-9-15",
-                "5-6-15",
+                "6-13-15",
                 "4-9-15",
-                "4-5-15",
-                "5-9-15",
+                "4-13-15",
+                "9-13-15",
                 "4-6-9",
-                "4-5-6",
-                "5-6-9",
-                "4-5-9"
+                "4-6-13",
+                "6-9-13",
+                "4-9-13"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -54648,13 +54648,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "6-15 / 4-15 / 9-15 / 5-15 / 4-6",
+              "selection": "6-15 / 4-15 / 9-15 / 4-6 / 6-9",
               "ticketKeys": [
                 "6-15",
                 "4-15",
                 "9-15",
-                "5-15",
-                "4-6"
+                "4-6",
+                "6-9"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -54665,18 +54665,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-5-6-9-15 BOX",
+              "selection": "4-6-9-13-15 BOX",
               "ticketKeys": [
                 "4-6-15",
                 "6-9-15",
-                "5-6-15",
+                "6-13-15",
                 "4-9-15",
-                "4-5-15",
-                "5-9-15",
+                "4-13-15",
+                "9-13-15",
                 "4-6-9",
-                "4-5-6",
-                "5-6-9",
-                "4-5-9"
+                "4-6-13",
+                "6-9-13",
+                "4-9-13"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -54699,7 +54699,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -54834,7 +54834,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 6,
               "horseName": "トミーバローズ",
-              "score": 0.8500000000000001,
+              "score": 0.9366723207113011,
               "probability": 0.16954769767271086,
               "finish": 1,
               "finishText": "1着"
@@ -54843,7 +54843,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 4,
               "horseName": "アイニードユー",
-              "score": 0.7963879248797263,
+              "score": 0.8964937435954242,
               "probability": 0.1685003900931066,
               "finish": 2,
               "finishText": "2着"
@@ -54852,7 +54852,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "トライアンフパス",
-              "score": 0.6594165235510538,
+              "score": 0.6623743535559484,
               "probability": 0.14027350205545913,
               "finish": 6,
               "finishText": "6着"
@@ -54862,33 +54862,33 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 1,
-          "topPickFinish": 8,
-          "topPickFinishText": "8着",
+          "topPick": 6,
+          "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 1,
-              "horseName": "スターウェーブ",
-              "score": 0.34939235196785745,
-              "probability": 0.09906656880877694,
-              "finish": 8,
-              "finishText": "8着"
+              "horseNumber": 6,
+              "horseName": "トミーバローズ",
+              "score": 0.7719864302928774,
+              "probability": 0.16954769767271086,
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
-              "horseNumber": 8,
-              "horseName": "タガノアンファン",
-              "score": 0.331874649870534,
-              "probability": 0.11793057133093773,
-              "finish": 4,
-              "finishText": "4着"
+              "horseNumber": 4,
+              "horseName": "アイニードユー",
+              "score": 0.7292413042734202,
+              "probability": 0.1685003900931066,
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "トライアンフパス",
-              "score": 0.30452510260198973,
+              "score": 0.6221031001924787,
               "probability": 0.14027350205545913,
               "finish": 6,
               "finishText": "6着"
@@ -54898,72 +54898,72 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "pace",
           "status": "available",
-          "topPick": 6,
-          "topPickFinish": 1,
-          "topPickFinishText": "1着",
+          "topPick": 4,
+          "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 6,
-              "horseName": "トミーバローズ",
-              "score": 0.265,
-              "probability": 0.16954769767271086,
-              "finish": 1,
-              "finishText": "1着"
-            },
-            {
-              "mark": "○",
               "horseNumber": 4,
               "horseName": "アイニードユー",
-              "score": 0.25829849060996574,
+              "score": 0.8718838944806272,
               "probability": 0.1685003900931066,
               "finish": 2,
               "finishText": "2着"
             },
             {
+              "mark": "○",
+              "horseNumber": 6,
+              "horseName": "トミーバローズ",
+              "score": 0.825364995983286,
+              "probability": 0.16954769767271086,
+              "finish": 1,
+              "finishText": "1着"
+            },
+            {
               "mark": "▲",
-              "horseNumber": 3,
-              "horseName": "トライアンフパス",
-              "score": 0.24117706544388173,
-              "probability": 0.14027350205545913,
-              "finish": 6,
-              "finishText": "6着"
+              "horseNumber": 8,
+              "horseName": "タガノアンファン",
+              "score": 0.6496824228225669,
+              "probability": 0.11793057133093773,
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
         {
           "agentId": "analyst",
           "status": "available",
-          "topPick": 6,
-          "topPickFinish": 1,
-          "topPickFinishText": "1着",
+          "topPick": 4,
+          "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 6,
-              "horseName": "トミーバローズ",
-              "score": 0.36666666666666664,
-              "probability": 0.16954769767271086,
-              "finish": 1,
-              "finishText": "1着"
-            },
-            {
-              "mark": "○",
               "horseNumber": 4,
               "horseName": "アイニードユー",
-              "score": 0.34321138380154687,
+              "score": 0.9498711372613186,
               "probability": 0.1685003900931066,
               "finish": 2,
               "finishText": "2着"
             },
             {
+              "mark": "○",
+              "horseNumber": 6,
+              "horseName": "トミーバローズ",
+              "score": 0.8633842197350432,
+              "probability": 0.16954769767271086,
+              "finish": 1,
+              "finishText": "1着"
+            },
+            {
               "mark": "▲",
-              "horseNumber": 3,
-              "horseName": "トライアンフパス",
-              "score": 0.28328639572025266,
-              "probability": 0.14027350205545913,
-              "finish": 6,
-              "finishText": "6着"
+              "horseNumber": 8,
+              "horseName": "タガノアンファン",
+              "score": 0.7083921354934456,
+              "probability": 0.11793057133093773,
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -54978,7 +54978,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 6,
               "horseName": "トミーバローズ",
-              "score": 0.49000000000000005,
+              "score": 0.7359819070571699,
               "probability": 0.16954769767271086,
               "finish": 1,
               "finishText": "1着"
@@ -54987,7 +54987,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 4,
               "horseName": "アイニードユー",
-              "score": 0.4792775849759453,
+              "score": 0.6865834496732659,
               "probability": 0.1685003900931066,
               "finish": 2,
               "finishText": "2着"
@@ -54996,7 +54996,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "トライアンフパス",
-              "score": 0.45188330471021076,
+              "score": 0.6000335848865068,
               "probability": 0.14027350205545913,
               "finish": 6,
               "finishText": "6着"
@@ -55025,12 +55025,12 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-6 / 3-6 / 3-4 / 6-8 / 4-8",
+              "selection": "4-6 / 3-6 / 6-8 / 3-4 / 4-8",
               "ticketKeys": [
                 "4-6",
                 "3-6",
-                "3-4",
                 "6-8",
+                "3-4",
                 "4-8"
               ],
               "points": 5,
@@ -55070,54 +55070,54 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "1",
+              "selection": "6",
               "ticketKeys": [
-                "1"
+                "6"
               ],
               "points": 1,
               "investmentYen": 100,
-              "payoutYen": 0,
-              "netYen": -100,
-              "hit": false
+              "payoutYen": 140,
+              "netYen": 40,
+              "hit": true
             },
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "1-8 / 1-3 / 3-8 / 1-4 / 4-8",
+              "selection": "4-6 / 3-6 / 3-4 / 6-8 / 5-6",
               "ticketKeys": [
-                "1-8",
-                "1-3",
-                "3-8",
-                "1-4",
-                "4-8"
+                "4-6",
+                "3-6",
+                "3-4",
+                "6-8",
+                "5-6"
               ],
               "points": 5,
               "investmentYen": 500,
-              "payoutYen": 0,
-              "netYen": -500,
-              "hit": false
+              "payoutYen": 230,
+              "netYen": -270,
+              "hit": true
             },
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-3-4-6-8 BOX",
+              "selection": "3-4-5-6-8 BOX",
               "ticketKeys": [
-                "1-3-8",
-                "1-4-8",
-                "1-6-8",
-                "1-3-4",
-                "1-3-6",
-                "1-4-6",
-                "3-4-8",
-                "3-6-8",
+                "3-4-6",
                 "4-6-8",
-                "3-4-6"
+                "4-5-6",
+                "3-6-8",
+                "3-5-6",
+                "5-6-8",
+                "3-4-8",
+                "3-4-5",
+                "4-5-8",
+                "3-5-8"
               ],
               "points": 10,
               "investmentYen": 1000,
-              "payoutYen": 0,
-              "netYen": -1000,
-              "hit": false
+              "payoutYen": 470,
+              "netYen": -530,
+              "hit": true
             }
           ]
         },
@@ -55128,26 +55128,26 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "6",
+              "selection": "4",
               "ticketKeys": [
-                "6"
+                "4"
               ],
               "points": 1,
               "investmentYen": 100,
-              "payoutYen": 140,
-              "netYen": 40,
-              "hit": true
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
             },
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-6 / 3-6 / 3-4 / 6-8 / 4-8",
+              "selection": "4-6 / 4-8 / 6-8 / 4-5 / 5-6",
               "ticketKeys": [
                 "4-6",
-                "3-6",
-                "3-4",
+                "4-8",
                 "6-8",
-                "4-8"
+                "4-5",
+                "5-6"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -55158,24 +55158,24 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-3-4-6-8 BOX",
+              "selection": "1-4-5-6-8 BOX",
               "ticketKeys": [
-                "3-4-6",
                 "4-6-8",
+                "4-5-6",
                 "1-4-6",
-                "3-6-8",
-                "1-3-6",
-                "1-6-8",
-                "3-4-8",
-                "1-3-4",
+                "4-5-8",
                 "1-4-8",
-                "1-3-8"
+                "1-4-5",
+                "5-6-8",
+                "1-6-8",
+                "1-5-6",
+                "1-5-8"
               ],
               "points": 10,
               "investmentYen": 1000,
-              "payoutYen": 0,
-              "netYen": -1000,
-              "hit": false
+              "payoutYen": 470,
+              "netYen": -530,
+              "hit": true
             }
           ]
         },
@@ -55186,26 +55186,26 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "6",
+              "selection": "4",
               "ticketKeys": [
-                "6"
+                "4"
               ],
               "points": 1,
               "investmentYen": 100,
-              "payoutYen": 140,
-              "netYen": 40,
-              "hit": true
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
             },
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-6 / 3-6 / 3-4 / 6-8 / 4-8",
+              "selection": "4-6 / 4-8 / 6-8 / 4-5 / 5-6",
               "ticketKeys": [
                 "4-6",
-                "3-6",
-                "3-4",
+                "4-8",
                 "6-8",
-                "4-8"
+                "4-5",
+                "5-6"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -55216,24 +55216,24 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-3-4-6-8 BOX",
+              "selection": "1-4-5-6-8 BOX",
               "ticketKeys": [
-                "3-4-6",
                 "4-6-8",
+                "4-5-6",
                 "1-4-6",
-                "3-6-8",
-                "1-3-6",
-                "1-6-8",
-                "3-4-8",
-                "1-3-4",
+                "4-5-8",
                 "1-4-8",
-                "1-3-8"
+                "1-4-5",
+                "5-6-8",
+                "1-6-8",
+                "1-5-6",
+                "1-5-8"
               ],
               "points": 10,
               "investmentYen": 1000,
-              "payoutYen": 0,
-              "netYen": -1000,
-              "hit": false
+              "payoutYen": 470,
+              "netYen": -530,
+              "hit": true
             }
           ]
         },
@@ -55257,13 +55257,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-6 / 3-6 / 3-4 / 6-8 / 4-8",
+              "selection": "4-6 / 3-6 / 5-6 / 3-4 / 6-8",
               "ticketKeys": [
                 "4-6",
                 "3-6",
+                "5-6",
                 "3-4",
-                "6-8",
-                "4-8"
+                "6-8"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -55274,24 +55274,24 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-3-4-6-8 BOX",
+              "selection": "3-4-5-6-8 BOX",
               "ticketKeys": [
                 "3-4-6",
+                "4-5-6",
                 "4-6-8",
-                "1-4-6",
+                "3-5-6",
                 "3-6-8",
-                "1-3-6",
-                "1-6-8",
+                "5-6-8",
+                "3-4-5",
                 "3-4-8",
-                "1-3-4",
-                "1-4-8",
-                "1-3-8"
+                "4-5-8",
+                "3-5-8"
               ],
               "points": 10,
               "investmentYen": 1000,
-              "payoutYen": 0,
-              "netYen": -1000,
-              "hit": false
+              "payoutYen": 470,
+              "netYen": -530,
+              "hit": true
             }
           ]
         }
@@ -55308,7 +55308,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -55449,7 +55449,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "ゴールデンボブ",
-              "score": 0.8500000000000001,
+              "score": 0.941971402692424,
               "probability": 0.10530954628352857,
               "finish": 11,
               "finishText": "11着"
@@ -55458,7 +55458,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 1,
               "horseName": "アールグレイ",
-              "score": 0.7637981343937617,
+              "score": 0.8656136616558646,
               "probability": 0.0980590112391116,
               "finish": 6,
               "finishText": "6着"
@@ -55467,7 +55467,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "デルマアサマ",
-              "score": 0.6812181946442204,
+              "score": 0.6846655798254242,
               "probability": 0.09154198267285105,
               "finish": 12,
               "finishText": "12着"
@@ -55477,33 +55477,33 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 11,
-          "topPickFinish": 4,
-          "topPickFinishText": "4着",
+          "topPick": 5,
+          "topPickFinish": 11,
+          "topPickFinishText": "11着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 11,
-              "horseName": "デイズインザサン",
-              "score": 0.33189325154801014,
-              "probability": 0.0834366257011151,
-              "finish": 4,
-              "finishText": "4着"
+              "horseNumber": 5,
+              "horseName": "ゴールデンボブ",
+              "score": 0.7592686335381824,
+              "probability": 0.10530954628352857,
+              "finish": 11,
+              "finishText": "11着"
             },
             {
               "mark": "○",
-              "horseNumber": 2,
-              "horseName": "フクチャンブラック",
-              "score": 0.3142535142323542,
-              "probability": 0.08958215073956154,
-              "finish": 8,
-              "finishText": "8着"
+              "horseNumber": 1,
+              "horseName": "アールグレイ",
+              "score": 0.7221371603888884,
+              "probability": 0.0980590112391116,
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "デルマアサマ",
-              "score": 0.2985908966894494,
+              "score": 0.6406248725553599,
               "probability": 0.09154198267285105,
               "finish": 12,
               "finishText": "12着"
@@ -55513,72 +55513,72 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "pace",
           "status": "available",
-          "topPick": 5,
-          "topPickFinish": 11,
-          "topPickFinishText": "11着",
+          "topPick": 1,
+          "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 5,
-              "horseName": "ゴールデンボブ",
-              "score": 0.265,
-              "probability": 0.10530954628352857,
-              "finish": 11,
-              "finishText": "11着"
-            },
-            {
-              "mark": "○",
               "horseNumber": 1,
               "horseName": "アールグレイ",
-              "score": 0.2542247667992202,
+              "score": 0.8552627426316114,
               "probability": 0.0980590112391116,
               "finish": 6,
               "finishText": "6着"
             },
             {
+              "mark": "○",
+              "horseNumber": 5,
+              "horseName": "ゴールデンボブ",
+              "score": 0.8550398550775742,
+              "probability": 0.10530954628352857,
+              "finish": 11,
+              "finishText": "11着"
+            },
+            {
               "mark": "▲",
-              "horseNumber": 6,
-              "horseName": "デルマアサマ",
-              "score": 0.24390227433052752,
-              "probability": 0.09154198267285105,
-              "finish": 12,
-              "finishText": "12着"
+              "horseNumber": 10,
+              "horseName": "フォーティンブラス",
+              "score": 0.6629756091800552,
+              "probability": 0.08287632666892043,
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
         {
           "agentId": "analyst",
           "status": "available",
-          "topPick": 5,
-          "topPickFinish": 11,
-          "topPickFinishText": "11着",
+          "topPick": 1,
+          "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 5,
-              "horseName": "ゴールデンボブ",
-              "score": 0.36666666666666664,
-              "probability": 0.10530954628352857,
-              "finish": 11,
-              "finishText": "11着"
-            },
-            {
-              "mark": "○",
               "horseNumber": 1,
               "horseName": "アールグレイ",
-              "score": 0.32895335046393737,
+              "score": 0.9302352504417642,
               "probability": 0.0980590112391116,
               "finish": 6,
               "finishText": "6着"
             },
             {
+              "mark": "○",
+              "horseNumber": 5,
+              "horseName": "ゴールデンボブ",
+              "score": 0.9110759575651491,
+              "probability": 0.10530954628352857,
+              "finish": 11,
+              "finishText": "11着"
+            },
+            {
               "mark": "▲",
-              "horseNumber": 6,
-              "horseName": "デルマアサマ",
-              "score": 0.29282462682351307,
-              "probability": 0.09154198267285105,
-              "finish": 12,
-              "finishText": "12着"
+              "horseNumber": 10,
+              "horseName": "フォーティンブラス",
+              "score": 0.7129424051019633,
+              "probability": 0.08287632666892043,
+              "finish": 7,
+              "finishText": "7着"
             }
           ]
         },
@@ -55593,7 +55593,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "ゴールデンボブ",
-              "score": 0.49000000000000005,
+              "score": 0.7190248447175767,
               "probability": 0.10530954628352857,
               "finish": 11,
               "finishText": "11着"
@@ -55602,7 +55602,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 1,
               "horseName": "アールグレイ",
-              "score": 0.4727596268787524,
+              "score": 0.681728144812735,
               "probability": 0.0980590112391116,
               "finish": 6,
               "finishText": "6着"
@@ -55611,7 +55611,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "デルマアサマ",
-              "score": 0.4562436389288442,
+              "score": 0.6183371995824698,
               "probability": 0.09154198267285105,
               "finish": 12,
               "finishText": "12着"
@@ -55640,13 +55640,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "1-5 / 5-6 / 2-5 / 1-6 / 1-2",
+              "selection": "1-5 / 5-6 / 1-6 / 2-5 / 5-10",
               "ticketKeys": [
                 "1-5",
                 "5-6",
-                "2-5",
                 "1-6",
-                "1-2"
+                "2-5",
+                "5-10"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -55657,18 +55657,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-2-5-6-11 BOX",
+              "selection": "1-2-5-6-10 BOX",
               "ticketKeys": [
                 "1-5-6",
                 "1-2-5",
-                "1-5-11",
+                "1-5-10",
                 "2-5-6",
-                "5-6-11",
-                "2-5-11",
+                "5-6-10",
+                "2-5-10",
                 "1-2-6",
-                "1-6-11",
-                "1-2-11",
-                "2-6-11"
+                "1-6-10",
+                "1-2-10",
+                "2-6-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -55685,9 +55685,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "11",
+              "selection": "5",
               "ticketKeys": [
-                "11"
+                "5"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -55698,13 +55698,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "2-11 / 6-11 / 2-6 / 1-11 / 1-2",
+              "selection": "1-5 / 5-6 / 5-10 / 1-6 / 2-5",
               "ticketKeys": [
-                "2-11",
-                "6-11",
-                "2-6",
-                "1-11",
-                "1-2"
+                "1-5",
+                "5-6",
+                "5-10",
+                "1-6",
+                "2-5"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -55715,18 +55715,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-2-5-6-11 BOX",
+              "selection": "1-2-5-6-10 BOX",
               "ticketKeys": [
-                "2-6-11",
-                "1-2-11",
-                "2-5-11",
-                "1-6-11",
-                "5-6-11",
-                "1-5-11",
-                "1-2-6",
-                "2-5-6",
+                "1-5-6",
+                "1-5-10",
                 "1-2-5",
-                "1-5-6"
+                "5-6-10",
+                "2-5-6",
+                "2-5-10",
+                "1-6-10",
+                "1-2-6",
+                "1-2-10",
+                "2-6-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -55743,9 +55743,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "5",
+              "selection": "1",
               "ticketKeys": [
-                "5"
+                "1"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -55756,13 +55756,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "1-5 / 5-6 / 2-5 / 1-6 / 1-2",
+              "selection": "1-5 / 1-10 / 5-10 / 1-9 / 5-9",
               "ticketKeys": [
                 "1-5",
-                "5-6",
-                "2-5",
-                "1-6",
-                "1-2"
+                "1-10",
+                "5-10",
+                "1-9",
+                "5-9"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -55773,18 +55773,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-2-5-6-11 BOX",
+              "selection": "1-5-7-9-10 BOX",
               "ticketKeys": [
-                "1-5-6",
-                "1-2-5",
-                "1-5-11",
-                "2-5-6",
-                "5-6-11",
-                "2-5-11",
-                "1-2-6",
-                "1-6-11",
-                "1-2-11",
-                "2-6-11"
+                "1-5-10",
+                "1-5-9",
+                "1-5-7",
+                "1-9-10",
+                "1-7-10",
+                "1-7-9",
+                "5-9-10",
+                "5-7-10",
+                "5-7-9",
+                "7-9-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -55801,9 +55801,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "5",
+              "selection": "1",
               "ticketKeys": [
-                "5"
+                "1"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -55814,13 +55814,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "1-5 / 5-6 / 2-5 / 1-6 / 1-2",
+              "selection": "1-5 / 1-10 / 5-10 / 1-7 / 1-9",
               "ticketKeys": [
                 "1-5",
-                "5-6",
-                "2-5",
-                "1-6",
-                "1-2"
+                "1-10",
+                "5-10",
+                "1-7",
+                "1-9"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -55831,18 +55831,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-2-5-6-11 BOX",
+              "selection": "1-5-7-9-10 BOX",
               "ticketKeys": [
-                "1-5-6",
-                "1-2-5",
-                "1-5-11",
-                "2-5-6",
-                "5-6-11",
-                "2-5-11",
-                "1-2-6",
-                "1-6-11",
-                "1-2-11",
-                "2-6-11"
+                "1-5-10",
+                "1-5-7",
+                "1-5-9",
+                "1-7-10",
+                "1-9-10",
+                "1-7-9",
+                "5-7-10",
+                "5-9-10",
+                "5-7-9",
+                "7-9-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -55872,13 +55872,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "1-5 / 5-6 / 2-5 / 1-6 / 1-2",
+              "selection": "1-5 / 5-6 / 5-10 / 1-6 / 2-5",
               "ticketKeys": [
                 "1-5",
                 "5-6",
-                "2-5",
+                "5-10",
                 "1-6",
-                "1-2"
+                "2-5"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -55889,18 +55889,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-2-5-6-11 BOX",
+              "selection": "1-2-5-6-10 BOX",
               "ticketKeys": [
                 "1-5-6",
+                "1-5-10",
                 "1-2-5",
-                "1-5-11",
+                "5-6-10",
                 "2-5-6",
-                "5-6-11",
-                "2-5-11",
+                "2-5-10",
+                "1-6-10",
                 "1-2-6",
-                "1-6-11",
-                "1-2-11",
-                "2-6-11"
+                "1-2-10",
+                "2-6-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -55923,7 +55923,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -56074,7 +56074,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 16,
               "horseName": "アメリカンステージ",
-              "score": 0.8500000000000001,
+              "score": 0.9500000000000001,
               "probability": 0.13962366008614782,
               "finish": 5,
               "finishText": "5着"
@@ -56083,7 +56083,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 9,
               "horseName": "カウンターセブン",
-              "score": 0.651201703769491,
+              "score": 0.6570440290220987,
               "probability": 0.09977767302797079,
               "finish": 14,
               "finishText": "14着"
@@ -56092,7 +56092,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "カウスリップ",
-              "score": 0.5401780042914611,
+              "score": 0.629962719338677,
               "probability": 0.0834997830104992,
               "finish": 3,
               "finishText": "3着"
@@ -56102,36 +56102,36 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 17,
-          "topPickFinish": 4,
-          "topPickFinishText": "4着",
+          "topPick": 16,
+          "topPickFinish": 5,
+          "topPickFinishText": "5着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 17,
-              "horseName": "ビッグシーザー",
-              "score": 0.3543917013460963,
-              "probability": 0.07005595325341518,
-              "finish": 4,
-              "finishText": "4着"
+              "horseNumber": 16,
+              "horseName": "アメリカンステージ",
+              "score": 0.74,
+              "probability": 0.13962366008614782,
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "○",
-              "horseNumber": 15,
-              "horseName": "アタリダイキチ",
-              "score": 0.34289680092284663,
-              "probability": 0.08024820210194598,
-              "finish": 16,
-              "finishText": "16着"
+              "horseNumber": 9,
+              "horseName": "カウンターセブン",
+              "score": 0.6181783876816259,
+              "probability": 0.09977767302797079,
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "▲",
-              "horseNumber": 4,
-              "horseName": "カウスリップ",
-              "score": 0.33193545766179816,
-              "probability": 0.0834997830104992,
-              "finish": 3,
-              "finishText": "3着"
+              "horseNumber": 6,
+              "horseName": "ピューロマジック",
+              "score": 0.5463793664510295,
+              "probability": 0.05085361482293683,
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -56146,25 +56146,25 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 16,
               "horseName": "アメリカンステージ",
-              "score": 0.265,
+              "score": 0.8999999999999999,
               "probability": 0.13962366008614782,
               "finish": 5,
               "finishText": "5着"
             },
             {
               "mark": "○",
-              "horseNumber": 9,
-              "horseName": "カウンターセブン",
-              "score": 0.24015021297118638,
-              "probability": 0.09977767302797079,
-              "finish": 14,
-              "finishText": "14着"
+              "horseNumber": 17,
+              "horseName": "ビッグシーザー",
+              "score": 0.5677952415922336,
+              "probability": 0.07005595325341518,
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "カウスリップ",
-              "score": 0.22627225053643266,
+              "score": 0.5636532294219921,
               "probability": 0.0834997830104992,
               "finish": 3,
               "finishText": "3着"
@@ -56182,28 +56182,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 16,
               "horseName": "アメリカンステージ",
-              "score": 0.36666666666666664,
+              "score": 0.9833333333333334,
               "probability": 0.13962366008614782,
               "finish": 5,
               "finishText": "5着"
             },
             {
               "mark": "○",
-              "horseNumber": 9,
-              "horseName": "カウンターセブン",
-              "score": 0.279692412065819,
-              "probability": 0.09977767302797079,
-              "finish": 14,
-              "finishText": "14着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 4,
               "horseName": "カウスリップ",
-              "score": 0.2311195435441809,
+              "score": 0.6272224524615856,
               "probability": 0.0834997830104992,
               "finish": 3,
               "finishText": "3着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 17,
+              "horseName": "ビッグシーザー",
+              "score": 0.6123451921690583,
+              "probability": 0.07005595325341518,
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -56218,7 +56218,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 16,
               "horseName": "アメリカンステージ",
-              "score": 0.49000000000000005,
+              "score": 0.6933333333333334,
               "probability": 0.13962366008614782,
               "finish": 5,
               "finishText": "5着"
@@ -56227,19 +56227,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 9,
               "horseName": "カウンターセブン",
-              "score": 0.4502403407538983,
+              "score": 0.5963309650287506,
               "probability": 0.09977767302797079,
               "finish": 14,
               "finishText": "14着"
             },
             {
               "mark": "▲",
-              "horseNumber": 4,
-              "horseName": "カウスリップ",
-              "score": 0.4280356008582923,
-              "probability": 0.0834997830104992,
-              "finish": 3,
-              "finishText": "3着"
+              "horseNumber": 6,
+              "horseName": "ピューロマジック",
+              "score": 0.5396592339502503,
+              "probability": 0.05085361482293683,
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         }
@@ -56265,13 +56265,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-16 / 4-16 / 15-16 / 4-9 / 16-17",
+              "selection": "9-16 / 4-16 / 16-17 / 15-16 / 4-9",
               "ticketKeys": [
                 "9-16",
                 "4-16",
+                "16-17",
                 "15-16",
-                "4-9",
-                "16-17"
+                "4-9"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -56285,13 +56285,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "selection": "4-9-15-16-17 BOX",
               "ticketKeys": [
                 "4-9-16",
-                "9-15-16",
                 "9-16-17",
-                "4-15-16",
+                "9-15-16",
                 "4-16-17",
+                "4-15-16",
                 "15-16-17",
-                "4-9-15",
                 "4-9-17",
+                "4-9-15",
                 "9-15-17",
                 "4-15-17"
               ],
@@ -56310,9 +56310,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "17",
+              "selection": "16",
               "ticketKeys": [
-                "17"
+                "16"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -56323,13 +56323,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "15-17 / 4-17 / 4-15 / 9-17 / 9-15",
+              "selection": "9-16 / 6-16 / 16-17 / 4-16 / 6-9",
               "ticketKeys": [
-                "15-17",
-                "4-17",
-                "4-15",
-                "9-17",
-                "9-15"
+                "9-16",
+                "6-16",
+                "16-17",
+                "4-16",
+                "6-9"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -56340,18 +56340,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-9-15-16-17 BOX",
+              "selection": "4-6-9-16-17 BOX",
               "ticketKeys": [
-                "4-15-17",
-                "9-15-17",
-                "15-16-17",
-                "4-9-17",
-                "4-16-17",
+                "6-9-16",
                 "9-16-17",
-                "4-9-15",
-                "4-15-16",
-                "9-15-16",
-                "4-9-16"
+                "4-9-16",
+                "6-16-17",
+                "4-6-16",
+                "4-16-17",
+                "6-9-17",
+                "4-6-9",
+                "4-9-17",
+                "4-6-17"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -56381,13 +56381,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-16 / 4-16 / 15-16 / 16-17 / 4-9",
+              "selection": "16-17 / 4-16 / 6-16 / 11-16 / 4-17",
               "ticketKeys": [
-                "9-16",
-                "4-16",
-                "15-16",
                 "16-17",
-                "4-9"
+                "4-16",
+                "6-16",
+                "11-16",
+                "4-17"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -56398,24 +56398,24 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-9-15-16-17 BOX",
+              "selection": "4-6-11-16-17 BOX",
               "ticketKeys": [
-                "4-9-16",
-                "9-15-16",
-                "9-16-17",
-                "4-15-16",
                 "4-16-17",
-                "15-16-17",
-                "4-9-15",
-                "4-9-17",
-                "9-15-17",
-                "4-15-17"
+                "6-16-17",
+                "11-16-17",
+                "4-6-16",
+                "4-11-16",
+                "6-11-16",
+                "4-6-17",
+                "4-11-17",
+                "6-11-17",
+                "4-6-11"
               ],
               "points": 10,
               "investmentYen": 1000,
-              "payoutYen": 0,
-              "netYen": -1000,
-              "hit": false
+              "payoutYen": 92420,
+              "netYen": 91420,
+              "hit": true
             }
           ]
         },
@@ -56439,13 +56439,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-16 / 4-16 / 15-16 / 4-9 / 16-17",
+              "selection": "4-16 / 16-17 / 6-16 / 11-16 / 4-17",
               "ticketKeys": [
-                "9-16",
                 "4-16",
-                "15-16",
-                "4-9",
-                "16-17"
+                "16-17",
+                "6-16",
+                "11-16",
+                "4-17"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -56456,24 +56456,24 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-9-15-16-17 BOX",
+              "selection": "4-6-11-16-17 BOX",
               "ticketKeys": [
-                "4-9-16",
-                "9-15-16",
-                "9-16-17",
-                "4-15-16",
                 "4-16-17",
-                "15-16-17",
-                "4-9-15",
-                "4-9-17",
-                "9-15-17",
-                "4-15-17"
+                "4-6-16",
+                "4-11-16",
+                "6-16-17",
+                "11-16-17",
+                "6-11-16",
+                "4-6-17",
+                "4-11-17",
+                "4-6-11",
+                "6-11-17"
               ],
               "points": 10,
               "investmentYen": 1000,
-              "payoutYen": 0,
-              "netYen": -1000,
-              "hit": false
+              "payoutYen": 92420,
+              "netYen": 91420,
+              "hit": true
             }
           ]
         },
@@ -56497,13 +56497,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-16 / 4-16 / 15-16 / 16-17 / 4-9",
+              "selection": "9-16 / 6-16 / 16-17 / 6-9 / 11-16",
               "ticketKeys": [
                 "9-16",
-                "4-16",
-                "15-16",
+                "6-16",
                 "16-17",
-                "4-9"
+                "6-9",
+                "11-16"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -56514,18 +56514,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-9-15-16-17 BOX",
+              "selection": "6-9-11-16-17 BOX",
               "ticketKeys": [
-                "4-9-16",
-                "9-15-16",
+                "6-9-16",
                 "9-16-17",
-                "4-15-16",
-                "4-16-17",
-                "15-16-17",
-                "4-9-15",
-                "4-9-17",
-                "9-15-17",
-                "4-15-17"
+                "9-11-16",
+                "6-16-17",
+                "6-11-16",
+                "11-16-17",
+                "6-9-17",
+                "6-9-11",
+                "9-11-17",
+                "6-11-17"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -56548,7 +56548,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -56675,12 +56675,21 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "safety",
           "status": "available",
-          "topPick": 5,
-          "topPickFinish": 9,
-          "topPickFinishText": "9着",
+          "topPick": 9,
+          "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
+              "horseNumber": 9,
+              "horseName": "クールミラボー",
+              "score": 0.8620651568909314,
+              "probability": 0.14354915352952882,
+              "finish": 1,
+              "finishText": "1着"
+            },
+            {
+              "mark": "○",
               "horseNumber": 5,
               "horseName": "ソーニーイシュー",
               "score": 0.8500000000000001,
@@ -56689,19 +56698,10 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "finishText": "9着"
             },
             {
-              "mark": "○",
-              "horseNumber": 9,
-              "horseName": "クールミラボー",
-              "score": 0.7734579399072072,
-              "probability": 0.14354915352952882,
-              "finish": 1,
-              "finishText": "1着"
-            },
-            {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "タイトニット",
-              "score": 0.7023134893635209,
+              "score": 0.8040304161157209,
               "probability": 0.13751938651486698,
               "finish": 6,
               "finishText": "6着"
@@ -56711,108 +56711,108 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 7,
-          "topPickFinish": 3,
-          "topPickFinishText": "3着",
+          "topPick": 5,
+          "topPickFinish": 9,
+          "topPickFinishText": "9着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 7,
-              "horseName": "サイモンザナドゥ",
-              "score": 0.33847765556973924,
-              "probability": 0.10932271696649284,
-              "finish": 3,
-              "finishText": "3着"
+              "horseNumber": 5,
+              "horseName": "ソーニーイシュー",
+              "score": 0.77,
+              "probability": 0.15114783787698227,
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "○",
-              "horseNumber": 4,
-              "horseName": "ハビレ",
-              "score": 0.3260761733745765,
-              "probability": 0.11344035863017825,
-              "finish": 4,
-              "finishText": "4着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 3,
               "horseName": "タイトニット",
-              "score": 0.2925774824146684,
+              "score": 0.7098740372719499,
               "probability": 0.13751938651486698,
               "finish": 6,
               "finishText": "6着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 9,
+              "horseName": "クールミラボー",
+              "score": 0.7007108212902627,
+              "probability": 0.14354915352952882,
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
         {
           "agentId": "pace",
           "status": "available",
-          "topPick": 5,
-          "topPickFinish": 9,
-          "topPickFinishText": "9着",
+          "topPick": 3,
+          "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 5,
-              "horseName": "ソーニーイシュー",
-              "score": 0.265,
-              "probability": 0.15114783787698227,
-              "finish": 9,
-              "finishText": "9着"
+              "horseNumber": 3,
+              "horseName": "タイトニット",
+              "score": 0.8229551324164771,
+              "probability": 0.13751938651486698,
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "○",
               "horseNumber": 9,
               "horseName": "クールミラボー",
-              "score": 0.2554322424884009,
+              "score": 0.7723400273494445,
               "probability": 0.14354915352952882,
               "finish": 1,
               "finishText": "1着"
             },
             {
               "mark": "▲",
-              "horseNumber": 3,
-              "horseName": "タイトニット",
-              "score": 0.24653918617044013,
-              "probability": 0.13751938651486698,
-              "finish": 6,
-              "finishText": "6着"
+              "horseNumber": 4,
+              "horseName": "ハビレ",
+              "score": 0.5975068703013332,
+              "probability": 0.11344035863017825,
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
         {
           "agentId": "analyst",
           "status": "available",
-          "topPick": 5,
-          "topPickFinish": 9,
-          "topPickFinishText": "9着",
+          "topPick": 3,
+          "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 5,
-              "horseName": "ソーニーイシュー",
-              "score": 0.36666666666666664,
-              "probability": 0.15114783787698227,
-              "finish": 9,
-              "finishText": "9着"
+              "horseNumber": 3,
+              "horseName": "タイトニット",
+              "score": 0.8917650899364767,
+              "probability": 0.13751938651486698,
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "○",
               "horseNumber": 9,
               "horseName": "クールミラボー",
-              "score": 0.33317951537606977,
+              "score": 0.8247541531092833,
               "probability": 0.14354915352952882,
               "finish": 1,
               "finishText": "1着"
             },
             {
               "mark": "▲",
-              "horseNumber": 3,
-              "horseName": "タイトニット",
-              "score": 0.30205381826320704,
-              "probability": 0.13751938651486698,
-              "finish": 6,
-              "finishText": "6着"
+              "horseNumber": 4,
+              "horseName": "ハビレ",
+              "score": 0.663198927037208,
+              "probability": 0.11344035863017825,
+              "finish": 4,
+              "finishText": "4着"
             }
           ]
         },
@@ -56827,28 +56827,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "ソーニーイシュー",
-              "score": 0.49000000000000005,
+              "score": 0.7466666666666667,
               "probability": 0.15114783787698227,
               "finish": 9,
               "finishText": "9着"
             },
             {
               "mark": "○",
-              "horseNumber": 9,
-              "horseName": "クールミラボー",
-              "score": 0.4746915879814415,
-              "probability": 0.14354915352952882,
-              "finish": 1,
-              "finishText": "1着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 3,
               "horseName": "タイトニット",
-              "score": 0.4604626978727042,
+              "score": 0.6740876387027678,
               "probability": 0.13751938651486698,
               "finish": 6,
               "finishText": "6着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 9,
+              "horseName": "クールミラボー",
+              "score": 0.6604390673747149,
+              "probability": 0.14354915352952882,
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         }
@@ -56861,26 +56861,26 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "5",
+              "selection": "9",
               "ticketKeys": [
-                "5"
+                "9"
               ],
               "points": 1,
               "investmentYen": 100,
-              "payoutYen": 0,
-              "netYen": -100,
-              "hit": false
+              "payoutYen": 450,
+              "netYen": 350,
+              "hit": true
             },
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-9 / 3-5 / 3-9 / 4-5 / 4-9",
+              "selection": "5-9 / 3-9 / 3-5 / 4-9 / 4-5",
               "ticketKeys": [
                 "5-9",
-                "3-5",
                 "3-9",
-                "4-5",
-                "4-9"
+                "3-5",
+                "4-9",
+                "4-5"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -56896,12 +56896,12 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
                 "3-5-9",
                 "4-5-9",
                 "5-7-9",
-                "3-4-5",
-                "3-5-7",
-                "4-5-7",
                 "3-4-9",
                 "3-7-9",
                 "4-7-9",
+                "3-4-5",
+                "3-5-7",
+                "4-5-7",
                 "3-4-7"
               ],
               "points": 10,
@@ -56919,9 +56919,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "7",
+              "selection": "5",
               "ticketKeys": [
-                "7"
+                "5"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -56932,13 +56932,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-7 / 3-7 / 3-4 / 7-9 / 4-9",
+              "selection": "3-5 / 5-9 / 3-9 / 2-5 / 2-3",
               "ticketKeys": [
-                "4-7",
-                "3-7",
-                "3-4",
-                "7-9",
-                "4-9"
+                "3-5",
+                "5-9",
+                "3-9",
+                "2-5",
+                "2-3"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -56949,18 +56949,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "3-4-5-7-9 BOX",
+              "selection": "1-2-3-5-9 BOX",
               "ticketKeys": [
-                "3-4-7",
-                "4-7-9",
-                "4-5-7",
-                "3-7-9",
-                "3-5-7",
-                "5-7-9",
-                "3-4-9",
-                "3-4-5",
-                "4-5-9",
-                "3-5-9"
+                "3-5-9",
+                "2-3-5",
+                "1-3-5",
+                "2-5-9",
+                "1-5-9",
+                "1-2-5",
+                "2-3-9",
+                "1-3-9",
+                "1-2-3",
+                "1-2-9"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -56977,9 +56977,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "5",
+              "selection": "3",
               "ticketKeys": [
-                "5"
+                "3"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -56990,13 +56990,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-9 / 3-5 / 3-9 / 4-5 / 5-7",
+              "selection": "3-9 / 3-4 / 2-3 / 4-9 / 2-9",
               "ticketKeys": [
-                "5-9",
-                "3-5",
                 "3-9",
-                "4-5",
-                "5-7"
+                "3-4",
+                "2-3",
+                "4-9",
+                "2-9"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -57007,18 +57007,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "3-4-5-7-9 BOX",
+              "selection": "2-3-4-5-9 BOX",
               "ticketKeys": [
-                "3-5-9",
-                "4-5-9",
-                "5-7-9",
-                "3-4-5",
-                "3-5-7",
-                "4-5-7",
                 "3-4-9",
-                "3-7-9",
-                "4-7-9",
-                "3-4-7"
+                "2-3-9",
+                "3-5-9",
+                "2-3-4",
+                "3-4-5",
+                "2-3-5",
+                "2-4-9",
+                "4-5-9",
+                "2-5-9",
+                "2-4-5"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -57035,9 +57035,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "5",
+              "selection": "3",
               "ticketKeys": [
-                "5"
+                "3"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -57048,13 +57048,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-9 / 3-5 / 3-9 / 4-5 / 4-9",
+              "selection": "3-9 / 3-4 / 2-3 / 4-9 / 2-9",
               "ticketKeys": [
-                "5-9",
-                "3-5",
                 "3-9",
-                "4-5",
-                "4-9"
+                "3-4",
+                "2-3",
+                "4-9",
+                "2-9"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -57065,18 +57065,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "3-4-5-7-9 BOX",
+              "selection": "1-2-3-4-9 BOX",
               "ticketKeys": [
-                "3-5-9",
-                "4-5-9",
-                "5-7-9",
-                "3-4-5",
-                "3-5-7",
-                "4-5-7",
                 "3-4-9",
-                "3-7-9",
-                "4-7-9",
-                "3-4-7"
+                "2-3-9",
+                "1-3-9",
+                "2-3-4",
+                "1-3-4",
+                "1-2-3",
+                "2-4-9",
+                "1-4-9",
+                "1-2-9",
+                "1-2-4"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -57106,13 +57106,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-9 / 3-5 / 3-9 / 4-5 / 5-7",
+              "selection": "3-5 / 5-9 / 3-9 / 2-5 / 1-5",
               "ticketKeys": [
-                "5-9",
                 "3-5",
+                "5-9",
                 "3-9",
-                "4-5",
-                "5-7"
+                "2-5",
+                "1-5"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -57123,18 +57123,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "3-4-5-7-9 BOX",
+              "selection": "1-2-3-5-9 BOX",
               "ticketKeys": [
                 "3-5-9",
-                "4-5-9",
-                "5-7-9",
-                "3-4-5",
-                "3-5-7",
-                "4-5-7",
-                "3-4-9",
-                "3-7-9",
-                "4-7-9",
-                "3-4-7"
+                "2-3-5",
+                "1-3-5",
+                "2-5-9",
+                "1-5-9",
+                "1-2-5",
+                "2-3-9",
+                "1-3-9",
+                "1-2-3",
+                "1-2-9"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -57157,7 +57157,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -57302,7 +57302,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "サトノワーグナー",
-              "score": 0.8500000000000001,
+              "score": 0.9500000000000001,
               "probability": 0.13352362502007967,
               "finish": 1,
               "finishText": "1着"
@@ -57311,7 +57311,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "ロードクラシコ",
-              "score": 0.7404222350248223,
+              "score": 0.8309804906616604,
               "probability": 0.11832818328917188,
               "finish": 12,
               "finishText": "12着"
@@ -57320,7 +57320,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 13,
               "horseName": "ディーズメンフィス",
-              "score": 0.6519068444198699,
+              "score": 0.751796864099717,
               "probability": 0.10854105805334587,
               "finish": 6,
               "finishText": "6着"
@@ -57330,33 +57330,33 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 14,
-          "topPickFinish": 3,
-          "topPickFinishText": "3着",
+          "topPick": 2,
+          "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 14,
-              "horseName": "ジーティーエスピ",
-              "score": 0.3538605236789671,
-              "probability": 0.0682930017330147,
-              "finish": 3,
-              "finishText": "3着"
+              "horseNumber": 2,
+              "horseName": "サトノワーグナー",
+              "score": 0.74,
+              "probability": 0.13352362502007967,
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
-              "horseNumber": 11,
-              "horseName": "ダブルチャレンジ",
-              "score": 0.3413127344513933,
-              "probability": 0.07929112884317258,
-              "finish": 5,
-              "finishText": "5着"
+              "horseNumber": 6,
+              "horseName": "ロードクラシコ",
+              "score": 0.6704196573568904,
+              "probability": 0.11832818328917188,
+              "finish": 12,
+              "finishText": "12着"
             },
             {
               "mark": "▲",
               "horseNumber": 13,
               "horseName": "ディーズメンフィス",
-              "score": 0.3065031296341414,
+              "score": 0.6601012767463957,
               "probability": 0.10854105805334587,
               "finish": 6,
               "finishText": "6着"
@@ -57374,28 +57374,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "サトノワーグナー",
-              "score": 0.265,
+              "score": 0.8999999999999999,
               "probability": 0.13352362502007967,
               "finish": 1,
               "finishText": "1着"
             },
             {
               "mark": "○",
-              "horseNumber": 6,
-              "horseName": "ロードクラシコ",
-              "score": 0.25130277937810275,
-              "probability": 0.11832818328917188,
-              "finish": 12,
-              "finishText": "12着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 13,
               "horseName": "ディーズメンフィス",
-              "score": 0.24023835555248374,
+              "score": 0.7577910904899022,
               "probability": 0.10854105805334587,
               "finish": 6,
               "finishText": "6着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 6,
+              "horseName": "ロードクラシコ",
+              "score": 0.7506961335043364,
+              "probability": 0.11832818328917188,
+              "finish": 12,
+              "finishText": "12着"
             }
           ]
         },
@@ -57410,28 +57410,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "サトノワーグナー",
-              "score": 0.36666666666666664,
+              "score": 0.9833333333333334,
               "probability": 0.13352362502007967,
               "finish": 1,
               "finishText": "1着"
             },
             {
               "mark": "○",
-              "horseNumber": 6,
-              "horseName": "ロードクラシコ",
-              "score": 0.3187263944900264,
-              "probability": 0.11832818328917188,
-              "finish": 12,
-              "finishText": "12着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 13,
               "horseName": "ディーズメンフィス",
-              "score": 0.2800009111003597,
+              "score": 0.82434431420481,
               "probability": 0.10854105805334587,
               "finish": 6,
               "finishText": "6着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 6,
+              "horseName": "ロードクラシコ",
+              "score": 0.8090751510646775,
+              "probability": 0.11832818328917188,
+              "finish": 12,
+              "finishText": "12着"
             }
           ]
         },
@@ -57446,7 +57446,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 2,
               "horseName": "サトノワーグナー",
-              "score": 0.49000000000000005,
+              "score": 0.6933333333333334,
               "probability": 0.13352362502007967,
               "finish": 1,
               "finishText": "1着"
@@ -57455,7 +57455,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "ロードクラシコ",
-              "score": 0.4680844470049645,
+              "score": 0.6285406585182383,
               "probability": 0.11832818328917188,
               "finish": 12,
               "finishText": "12着"
@@ -57464,7 +57464,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 13,
               "horseName": "ディーズメンフィス",
-              "score": 0.450381368883974,
+              "score": 0.6233229890697357,
               "probability": 0.10854105805334587,
               "finish": 6,
               "finishText": "6着"
@@ -57510,18 +57510,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-6-11-13-14 BOX",
+              "selection": "2-6-10-11-13 BOX",
               "ticketKeys": [
                 "2-6-13",
                 "2-6-11",
-                "2-6-14",
+                "2-6-10",
                 "2-11-13",
-                "2-13-14",
-                "2-11-14",
+                "2-10-13",
+                "2-10-11",
                 "6-11-13",
-                "6-13-14",
-                "6-11-14",
-                "11-13-14"
+                "6-10-13",
+                "6-10-11",
+                "10-11-13"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -57538,48 +57538,48 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "14",
+              "selection": "2",
               "ticketKeys": [
-                "14"
+                "2"
               ],
               "points": 1,
               "investmentYen": 100,
-              "payoutYen": 0,
-              "netYen": -100,
-              "hit": false
+              "payoutYen": 460,
+              "netYen": 360,
+              "hit": true
             },
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "11-14 / 13-14 / 11-13 / 6-14 / 6-11",
+              "selection": "2-6 / 2-13 / 6-13 / 1-2 / 1-6",
               "ticketKeys": [
-                "11-14",
-                "13-14",
-                "11-13",
-                "6-14",
-                "6-11"
+                "2-6",
+                "2-13",
+                "6-13",
+                "1-2",
+                "1-6"
               ],
               "points": 5,
               "investmentYen": 500,
-              "payoutYen": 0,
-              "netYen": -500,
-              "hit": false
+              "payoutYen": 2240,
+              "netYen": 1740,
+              "hit": true
             },
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-6-11-13-14 BOX",
+              "selection": "1-2-6-11-13 BOX",
               "ticketKeys": [
-                "11-13-14",
-                "6-11-14",
-                "2-11-14",
-                "6-13-14",
-                "2-13-14",
-                "2-6-14",
-                "6-11-13",
-                "2-11-13",
+                "2-6-13",
+                "1-2-6",
                 "2-6-11",
-                "2-6-13"
+                "1-2-13",
+                "2-11-13",
+                "1-2-11",
+                "1-6-13",
+                "6-11-13",
+                "1-6-11",
+                "1-11-13"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -57609,35 +57609,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "2-6 / 2-13 / 6-13 / 2-11 / 6-11",
+              "selection": "2-13 / 2-6 / 6-13 / 1-2 / 2-10",
               "ticketKeys": [
-                "2-6",
                 "2-13",
+                "2-6",
                 "6-13",
-                "2-11",
-                "6-11"
+                "1-2",
+                "2-10"
               ],
               "points": 5,
               "investmentYen": 500,
-              "payoutYen": 0,
-              "netYen": -500,
-              "hit": false
+              "payoutYen": 2240,
+              "netYen": 1740,
+              "hit": true
             },
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-6-11-13-14 BOX",
+              "selection": "1-2-6-10-13 BOX",
               "ticketKeys": [
                 "2-6-13",
-                "2-6-11",
-                "2-6-14",
-                "2-11-13",
-                "2-13-14",
-                "2-11-14",
-                "6-11-13",
-                "6-13-14",
-                "6-11-14",
-                "11-13-14"
+                "1-2-13",
+                "2-10-13",
+                "1-2-6",
+                "2-6-10",
+                "1-2-10",
+                "1-6-13",
+                "6-10-13",
+                "1-10-13",
+                "1-6-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -57667,35 +57667,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "2-6 / 2-13 / 6-13 / 2-11 / 6-11",
+              "selection": "2-13 / 2-6 / 6-13 / 1-2 / 2-10",
               "ticketKeys": [
-                "2-6",
                 "2-13",
+                "2-6",
                 "6-13",
-                "2-11",
-                "6-11"
+                "1-2",
+                "2-10"
               ],
               "points": 5,
               "investmentYen": 500,
-              "payoutYen": 0,
-              "netYen": -500,
-              "hit": false
+              "payoutYen": 2240,
+              "netYen": 1740,
+              "hit": true
             },
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-6-11-13-14 BOX",
+              "selection": "1-2-6-10-13 BOX",
               "ticketKeys": [
                 "2-6-13",
-                "2-6-11",
-                "2-6-14",
-                "2-11-13",
-                "2-13-14",
-                "2-11-14",
-                "6-11-13",
-                "6-13-14",
-                "6-11-14",
-                "11-13-14"
+                "1-2-13",
+                "2-10-13",
+                "1-2-6",
+                "2-6-10",
+                "1-2-10",
+                "1-6-13",
+                "6-10-13",
+                "1-10-13",
+                "1-6-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -57725,35 +57725,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "2-6 / 2-13 / 6-13 / 2-11 / 2-14",
+              "selection": "2-6 / 2-13 / 6-13 / 1-2 / 1-6",
               "ticketKeys": [
                 "2-6",
                 "2-13",
                 "6-13",
-                "2-11",
-                "2-14"
+                "1-2",
+                "1-6"
               ],
               "points": 5,
               "investmentYen": 500,
-              "payoutYen": 0,
-              "netYen": -500,
-              "hit": false
+              "payoutYen": 2240,
+              "netYen": 1740,
+              "hit": true
             },
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-6-11-13-14 BOX",
+              "selection": "1-2-6-11-13 BOX",
               "ticketKeys": [
                 "2-6-13",
+                "1-2-6",
                 "2-6-11",
-                "2-6-14",
+                "1-2-13",
                 "2-11-13",
-                "2-13-14",
-                "2-11-14",
+                "1-2-11",
+                "1-6-13",
                 "6-11-13",
-                "6-13-14",
-                "6-11-14",
-                "11-13-14"
+                "1-6-11",
+                "1-11-13"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -57776,7 +57776,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -57921,7 +57921,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 14,
               "horseName": "ノーブルクラウド",
-              "score": 0.8500000000000001,
+              "score": 0.9427116678305678,
               "probability": 0.12024217019567379,
               "finish": 14,
               "finishText": "14着"
@@ -57930,7 +57930,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 12,
               "horseName": "ノーザンタイタン",
-              "score": 0.7075332973486095,
+              "score": 0.7999504626033064,
               "probability": 0.09895313148497575,
               "finish": 9,
               "finishText": "9着"
@@ -57939,7 +57939,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 11,
               "horseName": "ルンベーラ",
-              "score": 0.621363861394558,
+              "score": 0.6271243404805107,
               "probability": 0.09068198801230207,
               "finish": 10,
               "finishText": "10着"
@@ -57949,36 +57949,36 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 5,
-          "topPickFinish": 7,
-          "topPickFinishText": "7着",
+          "topPick": 14,
+          "topPickFinish": 14,
+          "topPickFinishText": "14着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 5,
-              "horseName": "トランスマーレ",
-              "score": 0.3428823444930951,
-              "probability": 0.08078434323569135,
-              "finish": 7,
-              "finishText": "7着"
+              "horseNumber": 14,
+              "horseName": "ノーブルクラウド",
+              "score": 0.7574919972066373,
+              "probability": 0.12024217019567379,
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "○",
-              "horseNumber": 4,
-              "horseName": "ファストフォワード",
-              "score": 0.32778264292362963,
-              "probability": 0.08835679059622843,
-              "finish": 1,
-              "finishText": "1着"
+              "horseNumber": 12,
+              "horseName": "ノーザンタイタン",
+              "score": 0.6410066092057297,
+              "probability": 0.09895313148497575,
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "▲",
-              "horseNumber": 11,
-              "horseName": "ルンベーラ",
-              "score": 0.3141993875071459,
-              "probability": 0.09068198801230207,
-              "finish": 10,
-              "finishText": "10着"
+              "horseNumber": 1,
+              "horseName": "キアラメンテ",
+              "score": 0.6280347298072939,
+              "probability": 0.055536539969152296,
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -57993,7 +57993,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 14,
               "horseName": "ノーブルクラウド",
-              "score": 0.265,
+              "score": 0.8591853398511796,
               "probability": 0.12024217019567379,
               "finish": 14,
               "finishText": "14着"
@@ -58002,19 +58002,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 12,
               "horseName": "ノーザンタイタン",
-              "score": 0.24719166216857621,
+              "score": 0.7274479425006214,
               "probability": 0.09895313148497575,
               "finish": 9,
               "finishText": "9着"
             },
             {
               "mark": "▲",
-              "horseNumber": 11,
-              "horseName": "ルンベーラ",
-              "score": 0.23642048267431973,
-              "probability": 0.09068198801230207,
-              "finish": 10,
-              "finishText": "10着"
+              "horseNumber": 1,
+              "horseName": "キアラメンテ",
+              "score": 0.6060911657441465,
+              "probability": 0.055536539969152296,
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -58029,7 +58029,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 14,
               "horseName": "ノーブルクラウド",
-              "score": 0.36666666666666664,
+              "score": 0.9177383438084433,
               "probability": 0.12024217019567379,
               "finish": 14,
               "finishText": "14着"
@@ -58038,19 +58038,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 12,
               "horseName": "ノーザンタイタン",
-              "score": 0.30433748425668333,
+              "score": 0.7904862127259799,
               "probability": 0.09895313148497575,
               "finish": 9,
               "finishText": "9着"
             },
             {
               "mark": "▲",
-              "horseNumber": 11,
-              "horseName": "ルンベーラ",
-              "score": 0.2666383560267858,
-              "probability": 0.09068198801230207,
-              "finish": 10,
-              "finishText": "10着"
+              "horseNumber": 8,
+              "horseName": "リポサンテ",
+              "score": 0.6345474953214519,
+              "probability": 0.06792396832965726,
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -58065,28 +58065,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 14,
               "horseName": "ノーブルクラウド",
-              "score": 0.49000000000000005,
+              "score": 0.7166559962755165,
               "probability": 0.12024217019567379,
               "finish": 14,
               "finishText": "14着"
             },
             {
               "mark": "○",
-              "horseNumber": 12,
-              "horseName": "ノーザンタイタン",
-              "score": 0.4615066594697219,
-              "probability": 0.09895313148497575,
-              "finish": 9,
-              "finishText": "9着"
+              "horseNumber": 1,
+              "horseName": "キアラメンテ",
+              "score": 0.6233550394628921,
+              "probability": 0.055536539969152296,
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
-              "horseNumber": 11,
-              "horseName": "ルンベーラ",
-              "score": 0.44427277227891165,
-              "probability": 0.09068198801230207,
-              "finish": 10,
-              "finishText": "10着"
+              "horseNumber": 12,
+              "horseName": "ノーザンタイタン",
+              "score": 0.5979050555831081,
+              "probability": 0.09895313148497575,
+              "finish": 9,
+              "finishText": "9着"
             }
           ]
         }
@@ -58157,9 +58157,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "5",
+              "selection": "14",
               "ticketKeys": [
-                "5"
+                "14"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -58170,13 +58170,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-5 / 5-11 / 4-11 / 5-12 / 4-12",
+              "selection": "12-14 / 1-14 / 8-14 / 11-14 / 1-12",
               "ticketKeys": [
-                "4-5",
-                "5-11",
-                "4-11",
-                "5-12",
-                "4-12"
+                "12-14",
+                "1-14",
+                "8-14",
+                "11-14",
+                "1-12"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -58187,18 +58187,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-5-11-12-14 BOX",
+              "selection": "1-8-11-12-14 BOX",
               "ticketKeys": [
-                "4-5-11",
-                "4-5-12",
-                "4-5-14",
-                "5-11-12",
-                "5-11-14",
-                "5-12-14",
-                "4-11-12",
-                "4-11-14",
-                "4-12-14",
-                "11-12-14"
+                "1-12-14",
+                "8-12-14",
+                "11-12-14",
+                "1-8-14",
+                "1-11-14",
+                "8-11-14",
+                "1-8-12",
+                "1-11-12",
+                "8-11-12",
+                "1-8-11"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -58228,13 +58228,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "12-14 / 11-14 / 4-14 / 11-12 / 5-14",
+              "selection": "12-14 / 1-14 / 8-14 / 1-12 / 8-12",
               "ticketKeys": [
                 "12-14",
-                "11-14",
-                "4-14",
-                "11-12",
-                "5-14"
+                "1-14",
+                "8-14",
+                "1-12",
+                "8-12"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -58245,18 +58245,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-5-11-12-14 BOX",
+              "selection": "1-7-8-12-14 BOX",
               "ticketKeys": [
-                "11-12-14",
-                "4-12-14",
-                "5-12-14",
-                "4-11-14",
-                "5-11-14",
-                "4-5-14",
-                "4-11-12",
-                "5-11-12",
-                "4-5-12",
-                "4-5-11"
+                "1-12-14",
+                "8-12-14",
+                "7-12-14",
+                "1-8-14",
+                "1-7-14",
+                "7-8-14",
+                "1-8-12",
+                "1-7-12",
+                "7-8-12",
+                "1-7-8"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -58286,13 +58286,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "12-14 / 11-14 / 4-14 / 11-12 / 5-14",
+              "selection": "12-14 / 8-14 / 1-14 / 8-12 / 1-12",
               "ticketKeys": [
                 "12-14",
-                "11-14",
-                "4-14",
-                "11-12",
-                "5-14"
+                "8-14",
+                "1-14",
+                "8-12",
+                "1-12"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -58303,18 +58303,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-5-11-12-14 BOX",
+              "selection": "1-7-8-12-14 BOX",
               "ticketKeys": [
-                "11-12-14",
-                "4-12-14",
-                "5-12-14",
-                "4-11-14",
-                "5-11-14",
-                "4-5-14",
-                "4-11-12",
-                "5-11-12",
-                "4-5-12",
-                "4-5-11"
+                "8-12-14",
+                "1-12-14",
+                "7-12-14",
+                "1-8-14",
+                "7-8-14",
+                "1-7-14",
+                "1-8-12",
+                "7-8-12",
+                "1-7-12",
+                "1-7-8"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -58344,13 +58344,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "12-14 / 11-14 / 4-14 / 11-12 / 5-14",
+              "selection": "1-14 / 12-14 / 8-14 / 11-14 / 1-12",
               "ticketKeys": [
+                "1-14",
                 "12-14",
+                "8-14",
                 "11-14",
-                "4-14",
-                "11-12",
-                "5-14"
+                "1-12"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -58361,18 +58361,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "4-5-11-12-14 BOX",
+              "selection": "1-8-11-12-14 BOX",
               "ticketKeys": [
+                "1-12-14",
+                "1-8-14",
+                "1-11-14",
+                "8-12-14",
                 "11-12-14",
-                "4-12-14",
-                "5-12-14",
-                "4-11-14",
-                "5-11-14",
-                "4-5-14",
-                "4-11-12",
-                "5-11-12",
-                "4-5-12",
-                "4-5-11"
+                "8-11-14",
+                "1-8-12",
+                "1-11-12",
+                "1-8-11",
+                "8-11-12"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -58395,7 +58395,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -58534,7 +58534,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 11,
               "horseName": "ジャンシ",
-              "score": 0.8500000000000001,
+              "score": 0.9352228801659567,
               "probability": 0.1585732398691699,
               "finish": 4,
               "finishText": "4着"
@@ -58543,127 +58543,127 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 3,
               "horseName": "ルクスレイモンド",
-              "score": 0.7892979161843054,
+              "score": 0.8855769004589563,
               "probability": 0.15543163446905753,
               "finish": 3,
               "finishText": "3着"
             },
             {
               "mark": "▲",
-              "horseNumber": 5,
-              "horseName": "サンマルノヴェル",
-              "score": 0.59003701984218,
-              "probability": 0.11003672173290469,
-              "finish": 1,
-              "finishText": "1着"
+              "horseNumber": 10,
+              "horseName": "カツラノキサノキ",
+              "score": 0.6215317030042349,
+              "probability": 0.10836900832256409,
+              "finish": 10,
+              "finishText": "10着"
             }
           ]
         },
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 7,
-          "topPickFinish": 2,
-          "topPickFinishText": "2着",
+          "topPick": 11,
+          "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 7,
-              "horseName": "シルフズミスチーフ",
-              "score": 0.35181658442794356,
-              "probability": 0.08666582352243672,
-              "finish": 2,
-              "finishText": "2着"
+              "horseNumber": 11,
+              "horseName": "ジャンシ",
+              "score": 0.7754650876017042,
+              "probability": 0.1585732398691699,
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
-              "horseNumber": 10,
-              "horseName": "カツラノキサノキ",
-              "score": 0.3330911692272669,
-              "probability": 0.10836900832256409,
-              "finish": 10,
-              "finishText": "10着"
+              "horseNumber": 3,
+              "horseName": "ルクスレイモンド",
+              "score": 0.6948237078544454,
+              "probability": 0.15543163446905753,
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
-              "horseNumber": 5,
-              "horseName": "サンマルノヴェル",
-              "score": 0.321511707144211,
-              "probability": 0.11003672173290469,
-              "finish": 1,
-              "finishText": "1着"
+              "horseNumber": 7,
+              "horseName": "シルフズミスチーフ",
+              "score": 0.6496866702163125,
+              "probability": 0.08666582352243672,
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
         {
           "agentId": "pace",
           "status": "available",
-          "topPick": 11,
-          "topPickFinish": 4,
-          "topPickFinishText": "4着",
+          "topPick": 3,
+          "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 11,
-              "horseName": "ジャンシ",
-              "score": 0.265,
-              "probability": 0.1585732398691699,
-              "finish": 4,
-              "finishText": "4着"
-            },
-            {
-              "mark": "○",
               "horseNumber": 3,
               "horseName": "ルクスレイモンド",
-              "score": 0.25741223952303816,
+              "score": 0.8304060284115914,
               "probability": 0.15543163446905753,
               "finish": 3,
               "finishText": "3着"
             },
             {
+              "mark": "○",
+              "horseNumber": 11,
+              "horseName": "ジャンシ",
+              "score": 0.8172481289293569,
+              "probability": 0.1585732398691699,
+              "finish": 4,
+              "finishText": "4着"
+            },
+            {
               "mark": "▲",
-              "horseNumber": 5,
-              "horseName": "サンマルノヴェル",
-              "score": 0.2325046274802725,
-              "probability": 0.11003672173290469,
-              "finish": 1,
-              "finishText": "1着"
+              "horseNumber": 7,
+              "horseName": "シルフズミスチーフ",
+              "score": 0.6727248583231547,
+              "probability": 0.08666582352243672,
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
         {
           "agentId": "analyst",
           "status": "available",
-          "topPick": 11,
-          "topPickFinish": 4,
-          "topPickFinishText": "4着",
+          "topPick": 3,
+          "topPickFinish": 3,
+          "topPickFinishText": "3着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 11,
-              "horseName": "ジャンシ",
-              "score": 0.36666666666666664,
-              "probability": 0.1585732398691699,
-              "finish": 4,
-              "finishText": "4着"
-            },
-            {
-              "mark": "○",
               "horseNumber": 3,
               "horseName": "ルクスレイモンド",
-              "score": 0.34010950499730025,
+              "score": 0.9088111088734718,
               "probability": 0.15543163446905753,
               "finish": 3,
               "finishText": "3着"
             },
             {
+              "mark": "○",
+              "horseNumber": 11,
+              "horseName": "ジャンシ",
+              "score": 0.8503392548269428,
+              "probability": 0.1585732398691699,
+              "finish": 4,
+              "finishText": "4着"
+            },
+            {
               "mark": "▲",
-              "horseNumber": 5,
-              "horseName": "サンマルノヴェル",
-              "score": 0.25293286284762045,
-              "probability": 0.11003672173290469,
-              "finish": 1,
-              "finishText": "1着"
+              "horseNumber": 7,
+              "horseName": "シルフズミスチーフ",
+              "score": 0.713498414452805,
+              "probability": 0.08666582352243672,
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -58678,7 +58678,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 11,
               "horseName": "ジャンシ",
-              "score": 0.49000000000000005,
+              "score": 0.7406201168022722,
               "probability": 0.1585732398691699,
               "finish": 4,
               "finishText": "4着"
@@ -58687,19 +58687,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 3,
               "horseName": "ルクスレイモンド",
-              "score": 0.47785958323686106,
+              "score": 0.6485630176800588,
               "probability": 0.15543163446905753,
               "finish": 3,
               "finishText": "3着"
             },
             {
               "mark": "▲",
-              "horseNumber": 5,
-              "horseName": "サンマルノヴェル",
-              "score": 0.43800740396843596,
-              "probability": 0.11003672173290469,
-              "finish": 1,
-              "finishText": "1着"
+              "horseNumber": 7,
+              "horseName": "シルフズミスチーフ",
+              "score": 0.6348808162776772,
+              "probability": 0.08666582352243672,
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         }
@@ -58725,13 +58725,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "3-11 / 5-11 / 3-5 / 10-11 / 3-10",
+              "selection": "3-11 / 10-11 / 5-11 / 3-10 / 3-5",
               "ticketKeys": [
                 "3-11",
-                "5-11",
-                "3-5",
                 "10-11",
-                "3-10"
+                "5-11",
+                "3-10",
+                "3-5"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -58744,15 +58744,15 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "method": "5頭BOX",
               "selection": "3-5-7-10-11 BOX",
               "ticketKeys": [
-                "3-5-11",
                 "3-10-11",
+                "3-5-11",
                 "3-7-11",
                 "5-10-11",
-                "5-7-11",
                 "7-10-11",
+                "5-7-11",
                 "3-5-10",
-                "3-5-7",
                 "3-7-10",
+                "3-5-7",
                 "5-7-10"
               ],
               "points": 10,
@@ -58770,9 +58770,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "7",
+              "selection": "11",
               "ticketKeys": [
-                "7"
+                "11"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -58783,35 +58783,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "7-10 / 5-7 / 5-10 / 3-7 / 3-10",
+              "selection": "3-11 / 7-11 / 3-7 / 5-11 / 3-5",
               "ticketKeys": [
-                "7-10",
-                "5-7",
-                "5-10",
+                "3-11",
+                "7-11",
                 "3-7",
-                "3-10"
+                "5-11",
+                "3-5"
               ],
               "points": 5,
               "investmentYen": 500,
-              "payoutYen": 1320,
-              "netYen": 820,
-              "hit": true
+              "payoutYen": 0,
+              "netYen": -500,
+              "hit": false
             },
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "3-5-7-10-11 BOX",
+              "selection": "2-3-5-7-11 BOX",
               "ticketKeys": [
-                "5-7-10",
-                "3-7-10",
-                "7-10-11",
-                "3-5-7",
-                "5-7-11",
                 "3-7-11",
-                "3-5-10",
-                "5-10-11",
-                "3-10-11",
-                "3-5-11"
+                "3-5-11",
+                "2-3-11",
+                "5-7-11",
+                "2-7-11",
+                "2-5-11",
+                "3-5-7",
+                "2-3-7",
+                "2-3-5",
+                "2-5-7"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -58828,9 +58828,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "11",
+              "selection": "3",
               "ticketKeys": [
-                "11"
+                "3"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -58841,13 +58841,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "3-11 / 5-11 / 3-5 / 10-11 / 3-10",
+              "selection": "3-11 / 3-7 / 7-11 / 3-10 / 10-11",
               "ticketKeys": [
                 "3-11",
-                "5-11",
-                "3-5",
-                "10-11",
-                "3-10"
+                "3-7",
+                "7-11",
+                "3-10",
+                "10-11"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -58858,24 +58858,24 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "3-5-7-10-11 BOX",
+              "selection": "2-3-7-10-11 BOX",
               "ticketKeys": [
-                "3-5-11",
-                "3-10-11",
                 "3-7-11",
-                "5-10-11",
-                "5-7-11",
-                "7-10-11",
-                "3-5-10",
-                "3-5-7",
+                "3-10-11",
+                "2-3-11",
                 "3-7-10",
-                "5-7-10"
+                "2-3-7",
+                "2-3-10",
+                "7-10-11",
+                "2-7-11",
+                "2-10-11",
+                "2-7-10"
               ],
               "points": 10,
               "investmentYen": 1000,
-              "payoutYen": 1450,
-              "netYen": 450,
-              "hit": true
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
             }
           ]
         },
@@ -58886,9 +58886,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "11",
+              "selection": "3",
               "ticketKeys": [
-                "11"
+                "3"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -58899,13 +58899,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "3-11 / 5-11 / 3-5 / 10-11 / 3-10",
+              "selection": "3-11 / 3-7 / 7-11 / 3-10 / 10-11",
               "ticketKeys": [
                 "3-11",
-                "5-11",
-                "3-5",
-                "10-11",
-                "3-10"
+                "3-7",
+                "7-11",
+                "3-10",
+                "10-11"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -58916,24 +58916,24 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "3-5-7-10-11 BOX",
+              "selection": "2-3-7-10-11 BOX",
               "ticketKeys": [
-                "3-5-11",
-                "3-10-11",
                 "3-7-11",
-                "5-10-11",
-                "5-7-11",
-                "7-10-11",
-                "3-5-10",
-                "3-5-7",
+                "3-10-11",
+                "2-3-11",
                 "3-7-10",
-                "5-7-10"
+                "2-3-7",
+                "2-3-10",
+                "7-10-11",
+                "2-7-11",
+                "2-10-11",
+                "2-7-10"
               ],
               "points": 10,
               "investmentYen": 1000,
-              "payoutYen": 1450,
-              "netYen": 450,
-              "hit": true
+              "payoutYen": 0,
+              "netYen": -1000,
+              "hit": false
             }
           ]
         },
@@ -58957,13 +58957,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "3-11 / 5-11 / 3-5 / 10-11 / 3-10",
+              "selection": "3-11 / 7-11 / 3-7 / 5-11 / 2-11",
               "ticketKeys": [
                 "3-11",
+                "7-11",
+                "3-7",
                 "5-11",
-                "3-5",
-                "10-11",
-                "3-10"
+                "2-11"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -58974,18 +58974,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "3-5-7-10-11 BOX",
+              "selection": "2-3-5-7-11 BOX",
               "ticketKeys": [
-                "3-5-11",
-                "3-10-11",
                 "3-7-11",
-                "5-10-11",
+                "3-5-11",
+                "2-3-11",
                 "5-7-11",
-                "7-10-11",
-                "3-5-10",
+                "2-7-11",
+                "2-5-11",
                 "3-5-7",
-                "3-7-10",
-                "5-7-10"
+                "2-3-7",
+                "2-3-5",
+                "2-5-7"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -59008,7 +59008,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -59149,7 +59149,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "パールフロント",
-              "score": 0.8500000000000001,
+              "score": 0.9500000000000001,
               "probability": 0.14550617441787703,
               "finish": 2,
               "finishText": "2着"
@@ -59158,7 +59158,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 12,
               "horseName": "ビーマックス",
-              "score": 0.7364568751939302,
+              "score": 0.8226662089679633,
               "probability": 0.1278374926268736,
               "finish": 4,
               "finishText": "4着"
@@ -59167,7 +59167,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "アイアムイチバン",
-              "score": 0.6222975332969315,
+              "score": 0.6271091088737748,
               "probability": 0.10999638123680872,
               "finish": 1,
               "finishText": "1着"
@@ -59177,33 +59177,33 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 2,
-          "topPickFinish": 5,
-          "topPickFinishText": "5着",
+          "topPick": 5,
+          "topPickFinish": 2,
+          "topPickFinishText": "2着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 2,
-              "horseName": "デアプリームス",
-              "score": 0.34729875948619066,
-              "probability": 0.08939008269291544,
-              "finish": 5,
-              "finishText": "5着"
+              "horseNumber": 5,
+              "horseName": "パールフロント",
+              "score": 0.74,
+              "probability": 0.14550617441787703,
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "○",
-              "horseNumber": 7,
-              "horseName": "ララアヴリル",
-              "score": 0.33781414509967983,
-              "probability": 0.09220724387219406,
-              "finish": 9,
-              "finishText": "9着"
+              "horseNumber": 12,
+              "horseName": "ビーマックス",
+              "score": 0.6769801562373297,
+              "probability": 0.1278374926268736,
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "アイアムイチバン",
-              "score": 0.31397241334436743,
+              "score": 0.592828268180893,
               "probability": 0.10999638123680872,
               "finish": 1,
               "finishText": "1着"
@@ -59221,7 +59221,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "パールフロント",
-              "score": 0.265,
+              "score": 0.8999999999999999,
               "probability": 0.14550617441787703,
               "finish": 2,
               "finishText": "2着"
@@ -59230,19 +59230,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 12,
               "horseName": "ビーマックス",
-              "score": 0.2508071093992413,
+              "score": 0.7234214461539937,
               "probability": 0.1278374926268736,
               "finish": 4,
               "finishText": "4着"
             },
             {
               "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "アイアムイチバン",
-              "score": 0.23653719166211642,
-              "probability": 0.10999638123680872,
-              "finish": 1,
-              "finishText": "1着"
+              "horseNumber": 2,
+              "horseName": "デアプリームス",
+              "score": 0.610712475092528,
+              "probability": 0.08939008269291544,
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -59257,7 +59257,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "パールフロント",
-              "score": 0.36666666666666664,
+              "score": 0.9833333333333334,
               "probability": 0.14550617441787703,
               "finish": 2,
               "finishText": "2着"
@@ -59266,19 +59266,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 12,
               "horseName": "ビーマックス",
-              "score": 0.31699154956401115,
+              "score": 0.7677319784117033,
               "probability": 0.1278374926268736,
               "finish": 4,
               "finishText": "4着"
             },
             {
               "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "アイアムイチバン",
-              "score": 0.26704683748407415,
-              "probability": 0.10999638123680872,
-              "finish": 1,
-              "finishText": "1着"
+              "horseNumber": 2,
+              "horseName": "デアプリームス",
+              "score": 0.6599385770604892,
+              "probability": 0.08939008269291544,
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -59293,7 +59293,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "パールフロント",
-              "score": 0.49000000000000005,
+              "score": 0.6933333333333334,
               "probability": 0.14550617441787703,
               "finish": 2,
               "finishText": "2着"
@@ -59302,7 +59302,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 12,
               "horseName": "ビーマックス",
-              "score": 0.4672913750387861,
+              "score": 0.6383780285337292,
               "probability": 0.1278374926268736,
               "finish": 4,
               "finishText": "4着"
@@ -59311,7 +59311,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "アイアムイチバン",
-              "score": 0.4444595066593862,
+              "score": 0.5713118872526536,
               "probability": 0.10999638123680872,
               "finish": 1,
               "finishText": "1着"
@@ -59340,13 +59340,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-12 / 5-8 / 8-12 / 5-7 / 2-5",
+              "selection": "5-12 / 5-8 / 2-5 / 8-12 / 5-7",
               "ticketKeys": [
                 "5-12",
                 "5-8",
+                "2-5",
                 "8-12",
-                "5-7",
-                "2-5"
+                "5-7"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -59360,13 +59360,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "selection": "2-5-7-8-12 BOX",
               "ticketKeys": [
                 "5-8-12",
-                "5-7-12",
                 "2-5-12",
-                "5-7-8",
+                "5-7-12",
                 "2-5-8",
+                "5-7-8",
                 "2-5-7",
-                "7-8-12",
                 "2-8-12",
+                "7-8-12",
                 "2-7-12",
                 "2-7-8"
               ],
@@ -59385,9 +59385,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "2",
+              "selection": "5",
               "ticketKeys": [
-                "2"
+                "5"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -59398,35 +59398,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "2-7 / 2-8 / 7-8 / 2-12 / 7-12",
+              "selection": "5-12 / 5-8 / 2-5 / 8-12 / 2-12",
               "ticketKeys": [
-                "2-7",
-                "2-8",
-                "7-8",
-                "2-12",
-                "7-12"
+                "5-12",
+                "5-8",
+                "2-5",
+                "8-12",
+                "2-12"
               ],
               "points": 5,
               "investmentYen": 500,
-              "payoutYen": 0,
-              "netYen": -500,
-              "hit": false
+              "payoutYen": 2860,
+              "netYen": 2360,
+              "hit": true
             },
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-5-7-8-12 BOX",
+              "selection": "2-5-8-11-12 BOX",
               "ticketKeys": [
-                "2-7-8",
-                "2-7-12",
-                "2-5-7",
-                "2-8-12",
-                "2-5-8",
+                "5-8-12",
                 "2-5-12",
-                "7-8-12",
-                "5-7-8",
-                "5-7-12",
-                "5-8-12"
+                "5-11-12",
+                "2-5-8",
+                "5-8-11",
+                "2-5-11",
+                "2-8-12",
+                "8-11-12",
+                "2-11-12",
+                "2-8-11"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -59456,35 +59456,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-12 / 5-8 / 8-12 / 5-7 / 2-5",
+              "selection": "5-12 / 2-5 / 5-11 / 2-12 / 3-5",
               "ticketKeys": [
                 "5-12",
-                "5-8",
-                "8-12",
-                "5-7",
-                "2-5"
+                "2-5",
+                "5-11",
+                "2-12",
+                "3-5"
               ],
               "points": 5,
               "investmentYen": 500,
-              "payoutYen": 2860,
-              "netYen": 2360,
-              "hit": true
+              "payoutYen": 0,
+              "netYen": -500,
+              "hit": false
             },
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-5-7-8-12 BOX",
+              "selection": "2-3-5-11-12 BOX",
               "ticketKeys": [
-                "5-8-12",
-                "5-7-12",
                 "2-5-12",
-                "5-7-8",
-                "2-5-8",
-                "2-5-7",
-                "7-8-12",
-                "2-8-12",
-                "2-7-12",
-                "2-7-8"
+                "5-11-12",
+                "3-5-12",
+                "2-5-11",
+                "2-3-5",
+                "3-5-11",
+                "2-11-12",
+                "2-3-12",
+                "3-11-12",
+                "2-3-11"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -59514,35 +59514,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-12 / 5-8 / 8-12 / 5-7 / 2-5",
+              "selection": "5-12 / 2-5 / 5-11 / 3-5 / 2-12",
               "ticketKeys": [
                 "5-12",
-                "5-8",
-                "8-12",
-                "5-7",
-                "2-5"
+                "2-5",
+                "5-11",
+                "3-5",
+                "2-12"
               ],
               "points": 5,
               "investmentYen": 500,
-              "payoutYen": 2860,
-              "netYen": 2360,
-              "hit": true
+              "payoutYen": 0,
+              "netYen": -500,
+              "hit": false
             },
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-5-7-8-12 BOX",
+              "selection": "2-3-5-11-12 BOX",
               "ticketKeys": [
-                "5-8-12",
-                "5-7-12",
                 "2-5-12",
-                "5-7-8",
-                "2-5-8",
-                "2-5-7",
-                "7-8-12",
-                "2-8-12",
-                "2-7-12",
-                "2-7-8"
+                "5-11-12",
+                "3-5-12",
+                "2-5-11",
+                "2-3-5",
+                "3-5-11",
+                "2-11-12",
+                "2-3-12",
+                "3-11-12",
+                "2-3-11"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -59572,13 +59572,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-12 / 5-8 / 8-12 / 5-7 / 2-5",
+              "selection": "5-12 / 5-8 / 2-5 / 8-12 / 2-12",
               "ticketKeys": [
                 "5-12",
                 "5-8",
+                "2-5",
                 "8-12",
-                "5-7",
-                "2-5"
+                "2-12"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -59589,18 +59589,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-5-7-8-12 BOX",
+              "selection": "2-5-8-11-12 BOX",
               "ticketKeys": [
                 "5-8-12",
-                "5-7-12",
                 "2-5-12",
-                "5-7-8",
+                "5-11-12",
                 "2-5-8",
-                "2-5-7",
-                "7-8-12",
+                "5-8-11",
+                "2-5-11",
                 "2-8-12",
-                "2-7-12",
-                "2-7-8"
+                "8-11-12",
+                "2-11-12",
+                "2-8-11"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -59623,7 +59623,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -59770,7 +59770,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 14,
               "horseName": "ベルウッドピース",
-              "score": 0.8500000000000001,
+              "score": 0.944908160785584,
               "probability": 0.13244826167279583,
               "finish": 15,
               "finishText": "15着"
@@ -59779,7 +59779,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "サトノフェンサー",
-              "score": 0.7471781317314655,
+              "score": 0.8407836590632424,
               "probability": 0.11909598220008874,
               "finish": 13,
               "finishText": "13着"
@@ -59788,7 +59788,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "イーグルロック",
-              "score": 0.6083449890822841,
+              "score": 0.6141624009578145,
               "probability": 0.09657133601134549,
               "finish": 14,
               "finishText": "14着"
@@ -59798,36 +59798,36 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 15,
-          "topPickFinish": 8,
-          "topPickFinishText": "8着",
+          "topPick": 14,
+          "topPickFinish": 15,
+          "topPickFinishText": "15着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 15,
-              "horseName": "カシノスパーク",
-              "score": 0.34695427647487515,
-              "probability": 0.08199728437646203,
-              "finish": 8,
-              "finishText": "8着"
+              "horseNumber": 14,
+              "horseName": "ベルウッドピース",
+              "score": 0.7522204141145983,
+              "probability": 0.13244826167279583,
+              "finish": 15,
+              "finishText": "15着"
             },
             {
               "mark": "○",
-              "horseNumber": 12,
-              "horseName": "セントゴーデンス",
-              "score": 0.336383259307595,
-              "probability": 0.08598672877884161,
-              "finish": 5,
-              "finishText": "5着"
+              "horseNumber": 10,
+              "horseName": "サトノフェンサー",
+              "score": 0.6685235970952446,
+              "probability": 0.11909598220008874,
+              "finish": 13,
+              "finishText": "13着"
             },
             {
               "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "イーグルロック",
-              "score": 0.31730976085823964,
-              "probability": 0.09657133601134549,
-              "finish": 14,
-              "finishText": "14着"
+              "horseNumber": 2,
+              "horseName": "ウリズンベー",
+              "score": 0.6327636312631083,
+              "probability": 0.0671966465417604,
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -59842,7 +59842,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 14,
               "horseName": "ベルウッドピース",
-              "score": 0.265,
+              "score": 0.8714857003992705,
               "probability": 0.13244826167279583,
               "finish": 15,
               "finishText": "15着"
@@ -59851,19 +59851,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "サトノフェンサー",
-              "score": 0.25214726646643315,
+              "score": 0.7742354332119974,
               "probability": 0.11909598220008874,
               "finish": 13,
               "finishText": "13着"
             },
             {
               "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "イーグルロック",
-              "score": 0.2347931236352855,
-              "probability": 0.09657133601134549,
-              "finish": 14,
-              "finishText": "14着"
+              "horseNumber": 2,
+              "horseName": "ウリズンベー",
+              "score": 0.6185045320656594,
+              "probability": 0.0671966465417604,
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -59878,7 +59878,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 14,
               "horseName": "ベルウッドピース",
-              "score": 0.36666666666666664,
+              "score": 0.9375067804035897,
               "probability": 0.13244826167279583,
               "finish": 15,
               "finishText": "15着"
@@ -59887,19 +59887,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 10,
               "horseName": "サトノフェンサー",
-              "score": 0.3216820992991828,
+              "score": 0.8429617515228666,
               "probability": 0.11909598220008874,
               "finish": 13,
               "finishText": "13着"
             },
             {
               "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "イーグルロック",
-              "score": 0.2609425993901659,
-              "probability": 0.09657133601134549,
-              "finish": 14,
-              "finishText": "14着"
+              "horseNumber": 2,
+              "horseName": "ウリズンベー",
+              "score": 0.6482196810305468,
+              "probability": 0.0671966465417604,
+              "finish": 3,
+              "finishText": "3着"
             }
           ]
         },
@@ -59914,28 +59914,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 14,
               "horseName": "ベルウッドピース",
-              "score": 0.49000000000000005,
+              "score": 0.7096272188194644,
               "probability": 0.13244826167279583,
               "finish": 15,
               "finishText": "15着"
             },
             {
               "mark": "○",
-              "horseNumber": 10,
-              "horseName": "サトノフェンサー",
-              "score": 0.4694356263462931,
-              "probability": 0.11909598220008874,
-              "finish": 13,
-              "finishText": "13着"
+              "horseNumber": 2,
+              "horseName": "ウリズンベー",
+              "score": 0.6263106028727762,
+              "probability": 0.0671966465417604,
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "イーグルロック",
-              "score": 0.44166899781645685,
-              "probability": 0.09657133601134549,
-              "finish": 14,
-              "finishText": "14着"
+              "horseNumber": 10,
+              "horseName": "サトノフェンサー",
+              "score": 0.6242491010388342,
+              "probability": 0.11909598220008874,
+              "finish": 13,
+              "finishText": "13着"
             }
           ]
         }
@@ -60006,9 +60006,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "15",
+              "selection": "14",
               "ticketKeys": [
-                "15"
+                "14"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -60019,13 +60019,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "12-15 / 8-15 / 8-12 / 10-15 / 10-12",
+              "selection": "10-14 / 2-14 / 8-14 / 2-10 / 8-10",
               "ticketKeys": [
-                "12-15",
-                "8-15",
-                "8-12",
-                "10-15",
-                "10-12"
+                "10-14",
+                "2-14",
+                "8-14",
+                "2-10",
+                "8-10"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -60036,18 +60036,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "8-10-12-14-15 BOX",
+              "selection": "2-8-10-12-14 BOX",
               "ticketKeys": [
-                "8-12-15",
-                "10-12-15",
-                "12-14-15",
-                "8-10-15",
-                "8-14-15",
-                "10-14-15",
-                "8-10-12",
-                "8-12-14",
+                "2-10-14",
+                "8-10-14",
                 "10-12-14",
-                "8-10-14"
+                "2-8-14",
+                "2-12-14",
+                "8-12-14",
+                "2-8-10",
+                "2-10-12",
+                "8-10-12",
+                "2-8-12"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -60077,13 +60077,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "10-14 / 8-14 / 12-14 / 8-10 / 14-15",
+              "selection": "10-14 / 2-14 / 2-10 / 5-14 / 4-14",
               "ticketKeys": [
                 "10-14",
-                "8-14",
-                "12-14",
-                "8-10",
-                "14-15"
+                "2-14",
+                "2-10",
+                "5-14",
+                "4-14"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -60094,18 +60094,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "8-10-12-14-15 BOX",
+              "selection": "2-4-5-10-14 BOX",
               "ticketKeys": [
-                "8-10-14",
-                "10-12-14",
-                "10-14-15",
-                "8-12-14",
-                "8-14-15",
-                "12-14-15",
-                "8-10-12",
-                "8-10-15",
-                "10-12-15",
-                "8-12-15"
+                "2-10-14",
+                "5-10-14",
+                "4-10-14",
+                "2-5-14",
+                "2-4-14",
+                "4-5-14",
+                "2-5-10",
+                "2-4-10",
+                "4-5-10",
+                "2-4-5"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -60135,13 +60135,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "10-14 / 8-14 / 8-10 / 12-14 / 10-12",
+              "selection": "10-14 / 2-14 / 2-10 / 5-14 / 4-14",
               "ticketKeys": [
                 "10-14",
-                "8-14",
-                "8-10",
-                "12-14",
-                "10-12"
+                "2-14",
+                "2-10",
+                "5-14",
+                "4-14"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -60152,18 +60152,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "8-10-12-14-15 BOX",
+              "selection": "2-4-5-10-14 BOX",
               "ticketKeys": [
-                "8-10-14",
-                "10-12-14",
-                "10-14-15",
-                "8-12-14",
-                "8-14-15",
-                "12-14-15",
-                "8-10-12",
-                "8-10-15",
-                "10-12-15",
-                "8-12-15"
+                "2-10-14",
+                "5-10-14",
+                "4-10-14",
+                "2-5-14",
+                "2-4-14",
+                "4-5-14",
+                "2-5-10",
+                "2-4-10",
+                "4-5-10",
+                "2-4-5"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -60193,13 +60193,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "10-14 / 8-14 / 12-14 / 8-10 / 14-15",
+              "selection": "2-14 / 10-14 / 8-14 / 2-10 / 2-8",
               "ticketKeys": [
+                "2-14",
                 "10-14",
                 "8-14",
-                "12-14",
-                "8-10",
-                "14-15"
+                "2-10",
+                "2-8"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -60210,18 +60210,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "8-10-12-14-15 BOX",
+              "selection": "2-8-10-12-14 BOX",
               "ticketKeys": [
+                "2-10-14",
+                "2-8-14",
+                "2-12-14",
                 "8-10-14",
                 "10-12-14",
-                "10-14-15",
                 "8-12-14",
-                "8-14-15",
-                "12-14-15",
-                "8-10-12",
-                "8-10-15",
-                "10-12-15",
-                "8-12-15"
+                "2-8-10",
+                "2-10-12",
+                "2-8-12",
+                "8-10-12"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -60244,7 +60244,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -60381,7 +60381,43 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "テーオーレガシー",
-              "score": 0.8500000000000001,
+              "score": 0.9500000000000001,
+              "probability": 0.13495715428592162,
+              "finish": 4,
+              "finishText": "4着"
+            },
+            {
+              "mark": "○",
+              "horseNumber": 6,
+              "horseName": "セイフウサツキ",
+              "score": 0.7840536938946949,
+              "probability": 0.11888970697547686,
+              "finish": 3,
+              "finishText": "3着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 5,
+              "horseName": "オンクラウドナイン",
+              "score": 0.7812374824582263,
+              "probability": 0.12998977904551703,
+              "finish": 9,
+              "finishText": "9着"
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "available",
+          "topPick": 7,
+          "topPickFinish": 4,
+          "topPickFinishText": "4着",
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 7,
+              "horseName": "テーオーレガシー",
+              "score": 0.74,
               "probability": 0.13495715428592162,
               "finish": 4,
               "finishText": "4着"
@@ -60390,7 +60426,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 5,
               "horseName": "オンクラウドナイン",
-              "score": 0.7804603320166493,
+              "score": 0.7175249842645793,
               "probability": 0.12998977904551703,
               "finish": 9,
               "finishText": "9着"
@@ -60399,43 +60435,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "セイフウサツキ",
-              "score": 0.6872909248891681,
-              "probability": 0.11888970697547686,
-              "finish": 3,
-              "finishText": "3着"
-            }
-          ]
-        },
-        {
-          "agentId": "sniper",
-          "status": "available",
-          "topPick": 2,
-          "topPickFinish": 5,
-          "topPickFinishText": "5着",
-          "marks": [
-            {
-              "mark": "◎",
-              "horseNumber": 2,
-              "horseName": "メイショウヘール",
-              "score": 0.3392066900908831,
-              "probability": 0.09650854872384368,
-              "finish": 5,
-              "finishText": "5着"
-            },
-            {
-              "mark": "○",
-              "horseNumber": 4,
-              "horseName": "ボールドハーテッド",
-              "score": 0.3221926234847724,
-              "probability": 0.10593748415514963,
-              "finish": 1,
-              "finishText": "1着"
-            },
-            {
-              "mark": "▲",
-              "horseNumber": 6,
-              "horseName": "セイフウサツキ",
-              "score": 0.2968871756050894,
+              "score": 0.6527124515378007,
               "probability": 0.11888970697547686,
               "finish": 3,
               "finishText": "3着"
@@ -60453,28 +60453,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "テーオーレガシー",
-              "score": 0.265,
+              "score": 0.8999999999999999,
               "probability": 0.13495715428592162,
               "finish": 4,
               "finishText": "4着"
             },
             {
               "mark": "○",
-              "horseNumber": 5,
-              "horseName": "オンクラウドナイン",
-              "score": 0.2563075415020812,
-              "probability": 0.12998977904551703,
-              "finish": 9,
-              "finishText": "9着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 6,
               "horseName": "セイフウサツキ",
-              "score": 0.24466136561114596,
+              "score": 0.760086374307031,
               "probability": 0.11888970697547686,
               "finish": 3,
               "finishText": "3着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 8,
+              "horseName": "ゴールデンステップ",
+              "score": 0.565769895057096,
+              "probability": 0.09491238106349678,
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
@@ -60489,61 +60489,61 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 7,
               "horseName": "テーオーレガシー",
-              "score": 0.36666666666666664,
+              "score": 0.9833333333333334,
               "probability": 0.13495715428592162,
               "finish": 4,
               "finishText": "4着"
             },
             {
               "mark": "○",
-              "horseNumber": 5,
-              "horseName": "オンクラウドナイン",
-              "score": 0.3362430619239507,
-              "probability": 0.12998977904551703,
-              "finish": 9,
-              "finishText": "9着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 6,
               "horseName": "セイフウサツキ",
-              "score": 0.2954814463056777,
+              "score": 0.8309585084699337,
               "probability": 0.11888970697547686,
               "finish": 3,
               "finishText": "3着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 8,
+              "horseName": "ゴールデンステップ",
+              "score": 0.6160314883866461,
+              "probability": 0.09491238106349678,
+              "finish": 2,
+              "finishText": "2着"
             }
           ]
         },
         {
           "agentId": "contrarian",
           "status": "available",
-          "topPick": 7,
-          "topPickFinish": 4,
-          "topPickFinishText": "4着",
+          "topPick": 5,
+          "topPickFinish": 9,
+          "topPickFinishText": "9着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 7,
-              "horseName": "テーオーレガシー",
-              "score": 0.49000000000000005,
-              "probability": 0.13495715428592162,
-              "finish": 4,
-              "finishText": "4着"
-            },
-            {
-              "mark": "○",
               "horseNumber": 5,
               "horseName": "オンクラウドナイン",
-              "score": 0.4760920664033298,
+              "score": 0.6943833169985493,
               "probability": 0.12998977904551703,
               "finish": 9,
               "finishText": "9着"
             },
             {
+              "mark": "○",
+              "horseNumber": 7,
+              "horseName": "テーオーレガシー",
+              "score": 0.6933333333333334,
+              "probability": 0.13495715428592162,
+              "finish": 4,
+              "finishText": "4着"
+            },
+            {
               "mark": "▲",
               "horseNumber": 6,
               "horseName": "セイフウサツキ",
-              "score": 0.45745818497783364,
+              "score": 0.6115283500818336,
               "probability": 0.11888970697547686,
               "finish": 3,
               "finishText": "3着"
@@ -60572,13 +60572,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-7 / 6-7 / 5-6 / 4-7 / 4-5",
+              "selection": "6-7 / 5-7 / 5-6 / 4-7 / 7-8",
               "ticketKeys": [
-                "5-7",
                 "6-7",
+                "5-7",
                 "5-6",
                 "4-7",
-                "4-5"
+                "7-8"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -60589,87 +60589,29 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-4-5-6-7 BOX",
+              "selection": "4-5-6-7-8 BOX",
               "ticketKeys": [
                 "5-6-7",
-                "4-5-7",
-                "2-5-7",
                 "4-6-7",
-                "2-6-7",
-                "2-4-7",
+                "6-7-8",
+                "4-5-7",
+                "5-7-8",
+                "4-7-8",
                 "4-5-6",
-                "2-5-6",
-                "2-4-5",
-                "2-4-6"
+                "5-6-8",
+                "4-6-8",
+                "4-5-8"
               ],
               "points": 10,
               "investmentYen": 1000,
-              "payoutYen": 0,
-              "netYen": -1000,
-              "hit": false
+              "payoutYen": 590,
+              "netYen": -410,
+              "hit": true
             }
           ]
         },
         {
           "agentId": "sniper",
-          "status": "available",
-          "tickets": [
-            {
-              "betType": "単勝",
-              "method": "1点",
-              "selection": "2",
-              "ticketKeys": [
-                "2"
-              ],
-              "points": 1,
-              "investmentYen": 100,
-              "payoutYen": 0,
-              "netYen": -100,
-              "hit": false
-            },
-            {
-              "betType": "馬連",
-              "method": "期待順5点",
-              "selection": "2-4 / 2-6 / 4-6 / 2-5 / 4-5",
-              "ticketKeys": [
-                "2-4",
-                "2-6",
-                "4-6",
-                "2-5",
-                "4-5"
-              ],
-              "points": 5,
-              "investmentYen": 500,
-              "payoutYen": 0,
-              "netYen": -500,
-              "hit": false
-            },
-            {
-              "betType": "3連複",
-              "method": "5頭BOX",
-              "selection": "2-4-5-6-7 BOX",
-              "ticketKeys": [
-                "2-4-6",
-                "2-4-5",
-                "2-4-7",
-                "2-5-6",
-                "2-6-7",
-                "2-5-7",
-                "4-5-6",
-                "4-6-7",
-                "4-5-7",
-                "5-6-7"
-              ],
-              "points": 10,
-              "investmentYen": 1000,
-              "payoutYen": 0,
-              "netYen": -1000,
-              "hit": false
-            }
-          ]
-        },
-        {
-          "agentId": "pace",
           "status": "available",
           "tickets": [
             {
@@ -60705,18 +60647,76 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-4-5-6-7 BOX",
+              "selection": "4-5-6-7-8 BOX",
               "ticketKeys": [
                 "5-6-7",
                 "4-5-7",
-                "2-5-7",
+                "5-7-8",
                 "4-6-7",
-                "2-6-7",
-                "2-4-7",
+                "6-7-8",
+                "4-7-8",
                 "4-5-6",
-                "2-5-6",
-                "2-4-5",
-                "2-4-6"
+                "5-6-8",
+                "4-5-8",
+                "4-6-8"
+              ],
+              "points": 10,
+              "investmentYen": 1000,
+              "payoutYen": 590,
+              "netYen": -410,
+              "hit": true
+            }
+          ]
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "tickets": [
+            {
+              "betType": "単勝",
+              "method": "1点",
+              "selection": "7",
+              "ticketKeys": [
+                "7"
+              ],
+              "points": 1,
+              "investmentYen": 100,
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
+            },
+            {
+              "betType": "馬連",
+              "method": "期待順5点",
+              "selection": "6-7 / 7-8 / 7-9 / 5-7 / 6-8",
+              "ticketKeys": [
+                "6-7",
+                "7-8",
+                "7-9",
+                "5-7",
+                "6-8"
+              ],
+              "points": 5,
+              "investmentYen": 500,
+              "payoutYen": 0,
+              "netYen": -500,
+              "hit": false
+            },
+            {
+              "betType": "3連複",
+              "method": "5頭BOX",
+              "selection": "5-6-7-8-9 BOX",
+              "ticketKeys": [
+                "6-7-8",
+                "6-7-9",
+                "5-6-7",
+                "7-8-9",
+                "5-7-8",
+                "5-7-9",
+                "6-8-9",
+                "5-6-8",
+                "5-6-9",
+                "5-8-9"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -60746,13 +60746,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-7 / 6-7 / 5-6 / 4-7 / 4-5",
+              "selection": "6-7 / 7-8 / 7-9 / 6-8 / 7-10",
               "ticketKeys": [
-                "5-7",
                 "6-7",
-                "5-6",
-                "4-7",
-                "4-5"
+                "7-8",
+                "7-9",
+                "6-8",
+                "7-10"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -60763,18 +60763,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-4-5-6-7 BOX",
+              "selection": "6-7-8-9-10 BOX",
               "ticketKeys": [
-                "5-6-7",
-                "4-5-7",
-                "2-5-7",
-                "4-6-7",
-                "2-6-7",
-                "2-4-7",
-                "4-5-6",
-                "2-5-6",
-                "2-4-5",
-                "2-4-6"
+                "6-7-8",
+                "6-7-9",
+                "6-7-10",
+                "7-8-9",
+                "7-8-10",
+                "7-9-10",
+                "6-8-9",
+                "6-8-10",
+                "6-9-10",
+                "8-9-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -60791,9 +60791,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "7",
+              "selection": "5",
               "ticketKeys": [
-                "7"
+                "5"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -60804,13 +60804,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-7 / 6-7 / 5-6 / 4-7 / 4-5",
+              "selection": "5-7 / 5-6 / 6-7 / 4-5 / 4-7",
               "ticketKeys": [
                 "5-7",
-                "6-7",
                 "5-6",
-                "4-7",
-                "4-5"
+                "6-7",
+                "4-5",
+                "4-7"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -60821,18 +60821,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "2-4-5-6-7 BOX",
+              "selection": "4-5-6-7-9 BOX",
               "ticketKeys": [
                 "5-6-7",
                 "4-5-7",
-                "2-5-7",
-                "4-6-7",
-                "2-6-7",
-                "2-4-7",
+                "5-7-9",
                 "4-5-6",
-                "2-5-6",
-                "2-4-5",
-                "2-4-6"
+                "5-6-9",
+                "4-5-9",
+                "4-6-7",
+                "6-7-9",
+                "4-7-9",
+                "4-6-9"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -60855,7 +60855,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -60992,7 +60992,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "シーズザスローン",
-              "score": 0.8500000000000001,
+              "score": 0.9500000000000001,
               "probability": 0.17431824220130834,
               "finish": 4,
               "finishText": "4着"
@@ -61001,7 +61001,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "チャーリー",
-              "score": 0.7917992658364444,
+              "score": 0.8777048954835078,
               "probability": 0.171703222456557,
               "finish": 5,
               "finishText": "5着"
@@ -61010,7 +61010,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 10,
               "horseName": "フルールドール",
-              "score": 0.6417811072539212,
+              "score": 0.7361880396438963,
               "probability": 0.13830848727302503,
               "finish": 9,
               "finishText": "9着"
@@ -61020,36 +61020,36 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 9,
-          "topPickFinish": 3,
-          "topPickFinishText": "3着",
+          "topPick": 5,
+          "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 9,
-              "horseName": "アイウィル",
-              "score": 0.35295251587996035,
-              "probability": 0.09194775830668815,
-              "finish": 3,
-              "finishText": "3着"
+              "horseNumber": 5,
+              "horseName": "シーズザスローン",
+              "score": 0.74,
+              "probability": 0.17431824220130834,
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "○",
-              "horseNumber": 8,
-              "horseName": "ヘニーガイスト",
-              "score": 0.3241786239293146,
-              "probability": 0.1338013964665406,
-              "finish": 1,
-              "finishText": "1着"
+              "horseNumber": 6,
+              "horseName": "チャーリー",
+              "score": 0.7216281471997409,
+              "probability": 0.171703222456557,
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
-              "horseNumber": 10,
-              "horseName": "フルールドール",
-              "score": 0.30911664705458897,
-              "probability": 0.13830848727302503,
-              "finish": 9,
-              "finishText": "9着"
+              "horseNumber": 8,
+              "horseName": "ヘニーガイスト",
+              "score": 0.6272874377193313,
+              "probability": 0.1338013964665406,
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -61064,7 +61064,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "シーズザスローン",
-              "score": 0.265,
+              "score": 0.8999999999999999,
               "probability": 0.17431824220130834,
               "finish": 4,
               "finishText": "4着"
@@ -61073,7 +61073,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "チャーリー",
-              "score": 0.25772490822955557,
+              "score": 0.7747780094967706,
               "probability": 0.171703222456557,
               "finish": 5,
               "finishText": "5着"
@@ -61082,7 +61082,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 10,
               "horseName": "フルールドール",
-              "score": 0.23897263840674013,
+              "score": 0.7048659786985595,
               "probability": 0.13830848727302503,
               "finish": 9,
               "finishText": "9着"
@@ -61100,7 +61100,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "シーズザスローン",
-              "score": 0.36666666666666664,
+              "score": 0.9833333333333334,
               "probability": 0.17431824220130834,
               "finish": 4,
               "finishText": "4着"
@@ -61109,7 +61109,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "チャーリー",
-              "score": 0.34120384547011107,
+              "score": 0.8179616481419789,
               "probability": 0.171703222456557,
               "finish": 5,
               "finishText": "5着"
@@ -61118,7 +61118,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 10,
               "horseName": "フルールドール",
-              "score": 0.2755709010902572,
+              "score": 0.7732954320116165,
               "probability": 0.13830848727302503,
               "finish": 9,
               "finishText": "9着"
@@ -61136,7 +61136,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "シーズザスローン",
-              "score": 0.49000000000000005,
+              "score": 0.6933333333333334,
               "probability": 0.17431824220130834,
               "finish": 4,
               "finishText": "4着"
@@ -61145,19 +61145,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "チャーリー",
-              "score": 0.4783598531672889,
+              "score": 0.6836750673299036,
               "probability": 0.171703222456557,
               "finish": 5,
               "finishText": "5着"
             },
             {
               "mark": "▲",
-              "horseNumber": 10,
-              "horseName": "フルールドール",
-              "score": 0.4483562214507843,
-              "probability": 0.13830848727302503,
-              "finish": 9,
-              "finishText": "9着"
+              "horseNumber": 8,
+              "horseName": "ヘニーガイスト",
+              "score": 0.5943666877547144,
+              "probability": 0.1338013964665406,
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         }
@@ -61228,9 +61228,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "9",
+              "selection": "5",
               "ticketKeys": [
-                "9"
+                "5"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -61241,13 +61241,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "8-9 / 9-10 / 8-10 / 6-9 / 5-9",
+              "selection": "5-6 / 5-8 / 6-8 / 5-10 / 6-10",
               "ticketKeys": [
-                "8-9",
-                "9-10",
-                "8-10",
-                "6-9",
-                "5-9"
+                "5-6",
+                "5-8",
+                "6-8",
+                "5-10",
+                "6-10"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -61258,18 +61258,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "5-6-8-9-10 BOX",
+              "selection": "4-5-6-8-10 BOX",
               "ticketKeys": [
-                "8-9-10",
-                "6-8-9",
-                "5-8-9",
-                "6-9-10",
-                "5-9-10",
-                "5-6-9",
-                "6-8-10",
-                "5-8-10",
                 "5-6-8",
-                "5-6-10"
+                "5-6-10",
+                "4-5-6",
+                "5-8-10",
+                "4-5-8",
+                "4-5-10",
+                "6-8-10",
+                "4-6-8",
+                "4-6-10",
+                "4-8-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -61299,12 +61299,12 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-6 / 5-10 / 6-10 / 5-8 / 6-8",
+              "selection": "5-6 / 5-10 / 5-8 / 6-10 / 6-8",
               "ticketKeys": [
                 "5-6",
                 "5-10",
-                "6-10",
                 "5-8",
+                "6-10",
                 "6-8"
               ],
               "points": 5,
@@ -61316,18 +61316,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "5-6-8-9-10 BOX",
+              "selection": "4-5-6-8-10 BOX",
               "ticketKeys": [
                 "5-6-10",
                 "5-6-8",
-                "5-6-9",
+                "4-5-6",
                 "5-8-10",
-                "5-9-10",
-                "5-8-9",
+                "4-5-10",
+                "4-5-8",
                 "6-8-10",
-                "6-9-10",
-                "6-8-9",
-                "8-9-10"
+                "4-6-10",
+                "4-6-8",
+                "4-8-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -61357,12 +61357,12 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-6 / 5-10 / 6-10 / 5-8 / 6-8",
+              "selection": "5-6 / 5-10 / 5-8 / 6-10 / 6-8",
               "ticketKeys": [
                 "5-6",
                 "5-10",
-                "6-10",
                 "5-8",
+                "6-10",
                 "6-8"
               ],
               "points": 5,
@@ -61374,18 +61374,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "5-6-8-9-10 BOX",
+              "selection": "4-5-6-8-10 BOX",
               "ticketKeys": [
                 "5-6-10",
                 "5-6-8",
-                "5-6-9",
+                "4-5-6",
                 "5-8-10",
-                "5-9-10",
-                "5-8-9",
+                "4-5-10",
+                "4-5-8",
                 "6-8-10",
-                "6-9-10",
-                "6-8-9",
-                "8-9-10"
+                "4-6-10",
+                "4-6-8",
+                "4-8-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -61415,13 +61415,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-6 / 5-10 / 6-10 / 5-8 / 6-8",
+              "selection": "5-6 / 5-8 / 6-8 / 5-10 / 6-10",
               "ticketKeys": [
                 "5-6",
-                "5-10",
-                "6-10",
                 "5-8",
-                "6-8"
+                "6-8",
+                "5-10",
+                "6-10"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -61432,18 +61432,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "5-6-8-9-10 BOX",
+              "selection": "4-5-6-8-10 BOX",
               "ticketKeys": [
-                "5-6-10",
                 "5-6-8",
-                "5-6-9",
+                "5-6-10",
+                "4-5-6",
                 "5-8-10",
-                "5-9-10",
-                "5-8-9",
+                "4-5-8",
+                "4-5-10",
                 "6-8-10",
-                "6-9-10",
-                "6-8-9",
-                "8-9-10"
+                "4-6-8",
+                "4-6-10",
+                "4-8-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -61466,7 +61466,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -61611,7 +61611,43 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 11,
               "horseName": "カンレイスター",
-              "score": 0.8500000000000001,
+              "score": 0.9414572391918676,
+              "probability": 0.09358576019723504,
+              "finish": 2,
+              "finishText": "2着"
+            },
+            {
+              "mark": "○",
+              "horseNumber": 10,
+              "horseName": "トモジャオーリー",
+              "score": 0.8204891650350885,
+              "probability": 0.08902088079366385,
+              "finish": 5,
+              "finishText": "5着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 14,
+              "horseName": "ゴールドシャーク",
+              "score": 0.7817602237647528,
+              "probability": 0.0901837376636165,
+              "finish": 14,
+              "finishText": "14着"
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "available",
+          "topPick": 11,
+          "topPickFinish": 2,
+          "topPickFinishText": "2着",
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 11,
+              "horseName": "カンレイスター",
+              "score": 0.7605026259395178,
               "probability": 0.09358576019723504,
               "finish": 2,
               "finishText": "2着"
@@ -61620,7 +61656,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 14,
               "horseName": "ゴールドシャーク",
-              "score": 0.780696999011887,
+              "score": 0.7179810471189062,
               "probability": 0.0901837376636165,
               "finish": 14,
               "finishText": "14着"
@@ -61629,43 +61665,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 10,
               "horseName": "トモジャオーリー",
-              "score": 0.7238357000802871,
-              "probability": 0.08902088079366385,
-              "finish": 5,
-              "finishText": "5着"
-            }
-          ]
-        },
-        {
-          "agentId": "sniper",
-          "status": "available",
-          "topPick": 13,
-          "topPickFinish": 4,
-          "topPickFinishText": "4着",
-          "marks": [
-            {
-              "mark": "◎",
-              "horseNumber": 13,
-              "horseName": "ハヌル",
-              "score": 0.3222216794927902,
-              "probability": 0.08250921040579924,
-              "finish": 4,
-              "finishText": "4着"
-            },
-            {
-              "mark": "○",
-              "horseNumber": 7,
-              "horseName": "フュルスティン",
-              "score": 0.3048474018571451,
-              "probability": 0.08627916149557655,
-              "finish": 9,
-              "finishText": "9着"
-            },
-            {
-              "mark": "▲",
-              "horseNumber": 10,
-              "horseName": "トモジャオーリー",
-              "score": 0.2861672047972215,
+              "score": 0.6701662625791746,
               "probability": 0.08902088079366385,
               "finish": 5,
               "finishText": "5着"
@@ -61683,28 +61683,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 11,
               "horseName": "カンレイスター",
-              "score": 0.265,
+              "score": 0.8521605394744585,
               "probability": 0.09358576019723504,
               "finish": 2,
               "finishText": "2着"
             },
             {
               "mark": "○",
-              "horseNumber": 14,
-              "horseName": "ゴールドシャーク",
-              "score": 0.25633712487648586,
-              "probability": 0.0901837376636165,
-              "finish": 14,
-              "finishText": "14着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 10,
               "horseName": "トモジャオーリー",
-              "score": 0.2492294625100359,
+              "score": 0.7883487877091658,
               "probability": 0.08902088079366385,
               "finish": 5,
               "finishText": "5着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 9,
+              "horseName": "レゲンデ",
+              "score": 0.6810165271532114,
+              "probability": 0.06890946705436418,
+              "finish": 12,
+              "finishText": "12着"
             }
           ]
         },
@@ -61719,28 +61719,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 11,
               "horseName": "カンレイスター",
-              "score": 0.36666666666666664,
+              "score": 0.9064484860601415,
               "probability": 0.09358576019723504,
               "finish": 2,
               "finishText": "2着"
             },
             {
               "mark": "○",
-              "horseNumber": 14,
-              "horseName": "ゴールドシャーク",
-              "score": 0.3363466037343672,
-              "probability": 0.0901837376636165,
-              "finish": 14,
-              "finishText": "14着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 10,
               "horseName": "トモジャオーリー",
-              "score": 0.3114697854517922,
+              "score": 0.8621334086370828,
               "probability": 0.08902088079366385,
               "finish": 5,
               "finishText": "5着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 9,
+              "horseName": "レゲンデ",
+              "score": 0.722638722801442,
+              "probability": 0.06890946705436418,
+              "finish": 12,
+              "finishText": "12着"
             }
           ]
         },
@@ -61755,7 +61755,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 11,
               "horseName": "カンレイスター",
-              "score": 0.49000000000000005,
+              "score": 0.7206701679193571,
               "probability": 0.09358576019723504,
               "finish": 2,
               "finishText": "2着"
@@ -61764,19 +61764,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 14,
               "horseName": "ゴールドシャーク",
-              "score": 0.4761393998023775,
+              "score": 0.6948532971061123,
               "probability": 0.0901837376636165,
               "finish": 14,
               "finishText": "14着"
             },
             {
               "mark": "▲",
-              "horseNumber": 10,
-              "horseName": "トモジャオーリー",
-              "score": 0.46476714001605746,
-              "probability": 0.08902088079366385,
-              "finish": 5,
-              "finishText": "5着"
+              "horseNumber": 9,
+              "horseName": "レゲンデ",
+              "score": 0.6411944112269552,
+              "probability": 0.06890946705436418,
+              "finish": 12,
+              "finishText": "12着"
             }
           ]
         }
@@ -61802,13 +61802,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "11-14 / 10-11 / 10-14 / 7-11 / 7-14",
+              "selection": "10-11 / 11-14 / 10-14 / 7-11 / 11-13",
               "ticketKeys": [
-                "11-14",
                 "10-11",
+                "11-14",
                 "10-14",
                 "7-11",
-                "7-14"
+                "11-13"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -61822,15 +61822,15 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "selection": "7-10-11-13-14 BOX",
               "ticketKeys": [
                 "10-11-14",
-                "7-11-14",
-                "11-13-14",
                 "7-10-11",
                 "10-11-13",
+                "7-11-14",
+                "11-13-14",
                 "7-11-13",
                 "7-10-14",
                 "10-13-14",
-                "7-13-14",
-                "7-10-13"
+                "7-10-13",
+                "7-13-14"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -61847,9 +61847,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "13",
+              "selection": "11",
               "ticketKeys": [
-                "13"
+                "11"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -61860,13 +61860,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "7-13 / 10-13 / 7-10 / 13-14 / 7-14",
+              "selection": "11-14 / 10-11 / 9-11 / 10-14 / 7-11",
               "ticketKeys": [
-                "7-13",
-                "10-13",
-                "7-10",
-                "13-14",
-                "7-14"
+                "11-14",
+                "10-11",
+                "9-11",
+                "10-14",
+                "7-11"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -61877,18 +61877,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "7-10-11-13-14 BOX",
+              "selection": "7-9-10-11-14 BOX",
               "ticketKeys": [
-                "7-10-13",
-                "7-13-14",
-                "7-11-13",
-                "10-13-14",
-                "10-11-13",
-                "11-13-14",
-                "7-10-14",
-                "7-10-11",
+                "10-11-14",
+                "9-11-14",
                 "7-11-14",
-                "10-11-14"
+                "9-10-11",
+                "7-10-11",
+                "7-9-11",
+                "9-10-14",
+                "7-10-14",
+                "7-9-14",
+                "7-9-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -61918,35 +61918,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "11-14 / 10-11 / 10-14 / 7-11 / 7-14",
+              "selection": "10-11 / 9-11 / 9-10 / 2-11 / 4-11",
               "ticketKeys": [
-                "11-14",
                 "10-11",
-                "10-14",
-                "7-11",
-                "7-14"
+                "9-11",
+                "9-10",
+                "2-11",
+                "4-11"
               ],
               "points": 5,
               "investmentYen": 500,
-              "payoutYen": 0,
-              "netYen": -500,
-              "hit": false
+              "payoutYen": 17960,
+              "netYen": 17460,
+              "hit": true
             },
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "7-10-11-13-14 BOX",
+              "selection": "2-4-9-10-11 BOX",
               "ticketKeys": [
-                "10-11-14",
-                "7-11-14",
-                "11-13-14",
-                "7-10-11",
-                "10-11-13",
-                "7-11-13",
-                "7-10-14",
-                "10-13-14",
-                "7-13-14",
-                "7-10-13"
+                "9-10-11",
+                "2-10-11",
+                "4-10-11",
+                "2-9-11",
+                "4-9-11",
+                "2-4-11",
+                "2-9-10",
+                "4-9-10",
+                "2-4-10",
+                "2-4-9"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -61976,35 +61976,35 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "11-14 / 10-11 / 10-14 / 7-11 / 7-14",
+              "selection": "10-11 / 9-11 / 9-10 / 4-11 / 2-11",
               "ticketKeys": [
-                "11-14",
                 "10-11",
-                "10-14",
-                "7-11",
-                "7-14"
+                "9-11",
+                "9-10",
+                "4-11",
+                "2-11"
               ],
               "points": 5,
               "investmentYen": 500,
-              "payoutYen": 0,
-              "netYen": -500,
-              "hit": false
+              "payoutYen": 17960,
+              "netYen": 17460,
+              "hit": true
             },
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "7-10-11-13-14 BOX",
+              "selection": "2-4-9-10-11 BOX",
               "ticketKeys": [
-                "10-11-14",
-                "7-11-14",
-                "11-13-14",
-                "7-10-11",
-                "10-11-13",
-                "7-11-13",
-                "7-10-14",
-                "10-13-14",
-                "7-13-14",
-                "7-10-13"
+                "9-10-11",
+                "4-10-11",
+                "2-10-11",
+                "4-9-11",
+                "2-9-11",
+                "2-4-11",
+                "4-9-10",
+                "2-9-10",
+                "2-4-10",
+                "2-4-9"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -62034,13 +62034,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "11-14 / 10-11 / 7-11 / 10-14 / 7-14",
+              "selection": "11-14 / 9-11 / 10-11 / 9-14 / 10-14",
               "ticketKeys": [
                 "11-14",
+                "9-11",
                 "10-11",
-                "7-11",
-                "10-14",
-                "7-14"
+                "9-14",
+                "10-14"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -62051,18 +62051,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "7-10-11-13-14 BOX",
+              "selection": "7-9-10-11-14 BOX",
               "ticketKeys": [
+                "9-11-14",
                 "10-11-14",
                 "7-11-14",
-                "11-13-14",
+                "9-10-11",
+                "7-9-11",
                 "7-10-11",
-                "10-11-13",
-                "7-11-13",
+                "9-10-14",
+                "7-9-14",
                 "7-10-14",
-                "10-13-14",
-                "7-13-14",
-                "7-10-13"
+                "7-9-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -62085,7 +62085,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -62230,7 +62230,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 9,
               "horseName": "アメリカンイズム",
-              "score": 0.8500000000000001,
+              "score": 0.9500000000000001,
               "probability": 0.1345060427508649,
               "finish": 9,
               "finishText": "9着"
@@ -62239,7 +62239,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "ブームバップビート",
-              "score": 0.7755494951803681,
+              "score": 0.872018595225535,
               "probability": 0.12828500769423162,
               "finish": 3,
               "finishText": "3着"
@@ -62248,7 +62248,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "エクストラプッシュ",
-              "score": 0.6422399894887265,
+              "score": 0.7345767410131941,
               "probability": 0.1068391816999758,
               "finish": 13,
               "finishText": "13着"
@@ -62258,33 +62258,33 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 4,
-          "topPickFinish": 1,
-          "topPickFinishText": "1着",
+          "topPick": 9,
+          "topPickFinish": 9,
+          "topPickFinishText": "9着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 4,
-              "horseName": "スターシップ",
-              "score": 0.3461128528726763,
-              "probability": 0.08480424412223063,
-              "finish": 1,
-              "finishText": "1着"
+              "horseNumber": 9,
+              "horseName": "アメリカンイズム",
+              "score": 0.74,
+              "probability": 0.1345060427508649,
+              "finish": 9,
+              "finishText": "9着"
             },
             {
               "mark": "○",
-              "horseNumber": 13,
-              "horseName": "スナークシャラク",
-              "score": 0.33183947175797707,
-              "probability": 0.09360382276597555,
-              "finish": 6,
-              "finishText": "6着"
+              "horseNumber": 11,
+              "horseName": "ブームバップビート",
+              "score": 0.6839070458509532,
+              "probability": 0.12828500769423162,
+              "finish": 3,
+              "finishText": "3着"
             },
             {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "エクストラプッシュ",
-              "score": 0.30899953740399055,
+              "score": 0.582442909706818,
               "probability": 0.1068391816999758,
               "finish": 13,
               "finishText": "13着"
@@ -62302,7 +62302,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 9,
               "horseName": "アメリカンイズム",
-              "score": 0.265,
+              "score": 0.8999999999999999,
               "probability": 0.1345060427508649,
               "finish": 9,
               "finishText": "9着"
@@ -62311,7 +62311,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "ブームバップビート",
-              "score": 0.255693686897546,
+              "score": 0.8178933048645427,
               "probability": 0.12828500769423162,
               "finish": 3,
               "finishText": "3着"
@@ -62320,7 +62320,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "エクストラプッシュ",
-              "score": 0.23902999868609082,
+              "score": 0.6767836112466671,
               "probability": 0.1068391816999758,
               "finish": 13,
               "finishText": "13着"
@@ -62338,7 +62338,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 9,
               "horseName": "アメリカンイズム",
-              "score": 0.36666666666666664,
+              "score": 0.9833333333333334,
               "probability": 0.1345060427508649,
               "finish": 9,
               "finishText": "9着"
@@ -62347,7 +62347,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "ブームバップビート",
-              "score": 0.33409457080807764,
+              "score": 0.8966277720262593,
               "probability": 0.12828500769423162,
               "finish": 3,
               "finishText": "3着"
@@ -62356,7 +62356,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "エクストラプッシュ",
-              "score": 0.2757716620679845,
+              "score": 0.747174951340005,
               "probability": 0.1068391816999758,
               "finish": 13,
               "finishText": "13着"
@@ -62374,7 +62374,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 9,
               "horseName": "アメリカンイズム",
-              "score": 0.49000000000000005,
+              "score": 0.6933333333333334,
               "probability": 0.1345060427508649,
               "finish": 9,
               "finishText": "9着"
@@ -62383,7 +62383,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 11,
               "horseName": "ブームバップビート",
-              "score": 0.47510989903607365,
+              "score": 0.6374676179159299,
               "probability": 0.12828500769423162,
               "finish": 3,
               "finishText": "3着"
@@ -62392,7 +62392,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 3,
               "horseName": "エクストラプッシュ",
-              "score": 0.4484479978977453,
+              "score": 0.5376855947775869,
               "probability": 0.1068391816999758,
               "finish": 13,
               "finishText": "13着"
@@ -62421,13 +62421,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-11 / 3-9 / 3-11 / 9-13 / 11-13",
+              "selection": "9-11 / 3-9 / 3-11 / 9-13 / 4-9",
               "ticketKeys": [
                 "9-11",
                 "3-9",
                 "3-11",
                 "9-13",
-                "11-13"
+                "4-9"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -62466,25 +62466,25 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "4",
+              "selection": "9",
               "ticketKeys": [
-                "4"
+                "9"
               ],
               "points": 1,
               "investmentYen": 100,
-              "payoutYen": 340,
-              "netYen": 240,
-              "hit": true
+              "payoutYen": 0,
+              "netYen": -100,
+              "hit": false
             },
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-13 / 3-4 / 3-13 / 4-11 / 11-13",
+              "selection": "9-11 / 3-9 / 3-11 / 9-13 / 11-13",
               "ticketKeys": [
-                "4-13",
-                "3-4",
-                "3-13",
-                "4-11",
+                "9-11",
+                "3-9",
+                "3-11",
+                "9-13",
                 "11-13"
               ],
               "points": 5,
@@ -62498,16 +62498,16 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "method": "5頭BOX",
               "selection": "3-4-9-11-13 BOX",
               "ticketKeys": [
-                "3-4-13",
-                "4-11-13",
-                "4-9-13",
-                "3-4-11",
-                "3-4-9",
-                "4-9-11",
-                "3-11-13",
-                "3-9-13",
+                "3-9-11",
                 "9-11-13",
-                "3-9-11"
+                "4-9-11",
+                "3-9-13",
+                "3-4-9",
+                "4-9-13",
+                "3-11-13",
+                "3-4-11",
+                "4-11-13",
+                "3-4-13"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -62537,13 +62537,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-11 / 3-9 / 3-11 / 9-13 / 11-13",
+              "selection": "9-11 / 3-9 / 3-11 / 4-9 / 4-11",
               "ticketKeys": [
                 "9-11",
                 "3-9",
                 "3-11",
-                "9-13",
-                "11-13"
+                "4-9",
+                "4-11"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -62554,18 +62554,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "3-4-9-11-13 BOX",
+              "selection": "3-4-9-11-14 BOX",
               "ticketKeys": [
                 "3-9-11",
-                "9-11-13",
                 "4-9-11",
-                "3-9-13",
+                "9-11-14",
                 "3-4-9",
-                "4-9-13",
-                "3-11-13",
+                "3-9-14",
+                "4-9-14",
                 "3-4-11",
-                "4-11-13",
-                "3-4-13"
+                "3-11-14",
+                "4-11-14",
+                "3-4-14"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -62595,13 +62595,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-11 / 3-9 / 3-11 / 9-13 / 11-13",
+              "selection": "9-11 / 3-9 / 3-11 / 4-9 / 4-11",
               "ticketKeys": [
                 "9-11",
                 "3-9",
                 "3-11",
-                "9-13",
-                "11-13"
+                "4-9",
+                "4-11"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -62612,18 +62612,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "3-4-9-11-13 BOX",
+              "selection": "3-4-9-11-14 BOX",
               "ticketKeys": [
                 "3-9-11",
-                "9-11-13",
                 "4-9-11",
-                "3-9-13",
+                "9-11-14",
                 "3-4-9",
-                "4-9-13",
-                "3-11-13",
+                "3-9-14",
+                "4-9-14",
                 "3-4-11",
-                "4-11-13",
-                "3-4-13"
+                "3-11-14",
+                "4-11-14",
+                "3-4-14"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -62653,12 +62653,12 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-11 / 3-9 / 3-11 / 9-13 / 11-13",
+              "selection": "9-11 / 3-9 / 9-13 / 3-11 / 11-13",
               "ticketKeys": [
                 "9-11",
                 "3-9",
-                "3-11",
                 "9-13",
+                "3-11",
                 "11-13"
               ],
               "points": 5,
@@ -62670,18 +62670,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "3-4-9-11-13 BOX",
+              "selection": "3-9-11-13-14 BOX",
               "ticketKeys": [
                 "3-9-11",
                 "9-11-13",
-                "4-9-11",
+                "9-11-14",
                 "3-9-13",
-                "3-4-9",
-                "4-9-13",
+                "3-9-14",
+                "9-13-14",
                 "3-11-13",
-                "3-4-11",
-                "4-11-13",
-                "3-4-13"
+                "3-11-14",
+                "11-13-14",
+                "3-13-14"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -62704,7 +62704,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -62841,12 +62841,21 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "safety",
           "status": "available",
-          "topPick": 10,
-          "topPickFinish": 14,
-          "topPickFinishText": "14着",
+          "topPick": 9,
+          "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
+              "horseNumber": 9,
+              "horseName": "エリカエクスプレス",
+              "score": 0.884518914524559,
+              "probability": 0.10424885062780356,
+              "finish": 4,
+              "finishText": "4着"
+            },
+            {
+              "mark": "○",
               "horseNumber": 10,
               "horseName": "フェスティバルヒル",
               "score": 0.8500000000000001,
@@ -62855,19 +62864,10 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "finishText": "14着"
             },
             {
-              "mark": "○",
-              "horseNumber": 9,
-              "horseName": "エリカエクスプレス",
-              "score": 0.7837288141751644,
-              "probability": 0.10424885062780356,
-              "finish": 4,
-              "finishText": "4着"
-            },
-            {
               "mark": "▲",
               "horseNumber": 14,
               "horseName": "ヴーレヴー",
-              "score": 0.73174491493169,
+              "score": 0.8232045278668432,
               "probability": 0.10392131593627316,
               "finish": 3,
               "finishText": "3着"
@@ -62877,33 +62877,33 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 2,
-          "topPickFinish": 8,
-          "topPickFinishText": "8着",
+          "topPick": 10,
+          "topPickFinish": 14,
+          "topPickFinishText": "14着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 2,
-              "horseName": "ケリフレッドアスク",
-              "score": 0.34224347555056744,
-              "probability": 0.07308112131804782,
-              "finish": 8,
-              "finishText": "8着"
+              "horseNumber": 10,
+              "horseName": "フェスティバルヒル",
+              "score": 0.77,
+              "probability": 0.10753085481763851,
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "○",
-              "horseNumber": 1,
-              "horseName": "フレミングフープ",
-              "score": 0.33211656849711313,
-              "probability": 0.07453617160198095,
-              "finish": 12,
-              "finishText": "12着"
+              "horseNumber": 9,
+              "horseName": "エリカエクスプレス",
+              "score": 0.7264748712866689,
+              "probability": 0.10424885062780356,
+              "finish": 4,
+              "finishText": "4着"
             },
             {
               "mark": "▲",
               "horseNumber": 14,
               "horseName": "ヴーレヴー",
-              "score": 0.2837416527826038,
+              "score": 0.6542375479998318,
               "probability": 0.10392131593627316,
               "finish": 3,
               "finishText": "3着"
@@ -62913,72 +62913,72 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "pace",
           "status": "available",
-          "topPick": 10,
-          "topPickFinish": 14,
-          "topPickFinishText": "14着",
+          "topPick": 9,
+          "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 10,
-              "horseName": "フェスティバルヒル",
-              "score": 0.265,
-              "probability": 0.10753085481763851,
-              "finish": 14,
-              "finishText": "14着"
-            },
-            {
-              "mark": "○",
               "horseNumber": 9,
               "horseName": "エリカエクスプレス",
-              "score": 0.2567161017718955,
+              "score": 0.8654333703989312,
               "probability": 0.10424885062780356,
               "finish": 4,
               "finishText": "4着"
             },
             {
-              "mark": "▲",
+              "mark": "○",
               "horseNumber": 14,
               "horseName": "ヴーレヴー",
-              "score": 0.25021811436646124,
+              "score": 0.7564048352302253,
               "probability": 0.10392131593627316,
               "finish": 3,
               "finishText": "3着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 2,
+              "horseName": "ケリフレッドアスク",
+              "score": 0.6627812939237084,
+              "probability": 0.07308112131804782,
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         },
         {
           "agentId": "analyst",
           "status": "available",
-          "topPick": 10,
-          "topPickFinish": 14,
-          "topPickFinishText": "14着",
+          "topPick": 9,
+          "topPickFinish": 4,
+          "topPickFinishText": "4着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 10,
-              "horseName": "フェスティバルヒル",
-              "score": 0.36666666666666664,
-              "probability": 0.10753085481763851,
-              "finish": 14,
-              "finishText": "14着"
-            },
-            {
-              "mark": "○",
               "horseNumber": 9,
               "horseName": "エリカエクスプレス",
-              "score": 0.33767302286830103,
+              "score": 0.9422524566282657,
               "probability": 0.10424885062780356,
               "finish": 4,
               "finishText": "4着"
             },
             {
-              "mark": "▲",
+              "mark": "○",
               "horseNumber": 14,
               "horseName": "ヴーレヴー",
-              "score": 0.314930066949281,
+              "score": 0.8251122777048634,
               "probability": 0.10392131593627316,
               "finish": 3,
               "finishText": "3着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 2,
+              "horseName": "ケリフレッドアスク",
+              "score": 0.7133730527668598,
+              "probability": 0.07308112131804782,
+              "finish": 8,
+              "finishText": "8着"
             }
           ]
         },
@@ -62993,7 +62993,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 10,
               "horseName": "フェスティバルヒル",
-              "score": 0.49000000000000005,
+              "score": 0.7466666666666667,
               "probability": 0.10753085481763851,
               "finish": 14,
               "finishText": "14着"
@@ -63002,7 +63002,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 9,
               "horseName": "エリカエクスプレス",
-              "score": 0.47674576283503295,
+              "score": 0.6846882463740771,
               "probability": 0.10424885062780356,
               "finish": 4,
               "finishText": "4着"
@@ -63011,7 +63011,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 14,
               "horseName": "ヴーレヴー",
-              "score": 0.4663489829863381,
+              "score": 0.6097642281494059,
               "probability": 0.10392131593627316,
               "finish": 3,
               "finishText": "3着"
@@ -63027,9 +63027,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "10",
+              "selection": "9",
               "ticketKeys": [
-                "10"
+                "9"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -63040,13 +63040,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-10 / 10-14 / 9-14 / 1-10 / 1-9",
+              "selection": "9-10 / 9-14 / 10-14 / 1-9 / 1-10",
               "ticketKeys": [
                 "9-10",
-                "10-14",
                 "9-14",
-                "1-10",
-                "1-9"
+                "10-14",
+                "1-9",
+                "1-10"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -63062,12 +63062,12 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
                 "9-10-14",
                 "1-9-10",
                 "2-9-10",
-                "1-10-14",
-                "2-10-14",
-                "1-2-10",
                 "1-9-14",
                 "2-9-14",
                 "1-2-9",
+                "1-10-14",
+                "2-10-14",
+                "1-2-10",
                 "1-2-14"
               ],
               "points": 10,
@@ -63085,9 +63085,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "2",
+              "selection": "10",
               "ticketKeys": [
-                "2"
+                "10"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -63098,13 +63098,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "1-2 / 2-14 / 1-14 / 2-9 / 1-9",
+              "selection": "9-10 / 10-14 / 9-14 / 2-10 / 2-9",
               "ticketKeys": [
-                "1-2",
-                "2-14",
-                "1-14",
-                "2-9",
-                "1-9"
+                "9-10",
+                "10-14",
+                "9-14",
+                "2-10",
+                "2-9"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -63117,16 +63117,16 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "method": "5頭BOX",
               "selection": "1-2-9-10-14 BOX",
               "ticketKeys": [
-                "1-2-14",
-                "1-2-9",
+                "9-10-14",
+                "2-9-10",
+                "1-9-10",
+                "2-10-14",
+                "1-10-14",
                 "1-2-10",
                 "2-9-14",
-                "2-10-14",
-                "2-9-10",
                 "1-9-14",
-                "1-10-14",
-                "1-9-10",
-                "9-10-14"
+                "1-2-9",
+                "1-2-14"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -63143,9 +63143,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "10",
+              "selection": "9",
               "ticketKeys": [
-                "10"
+                "9"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -63156,13 +63156,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-10 / 10-14 / 9-14 / 1-10 / 1-9",
+              "selection": "9-14 / 2-9 / 1-9 / 2-14 / 9-10",
               "ticketKeys": [
-                "9-10",
-                "10-14",
                 "9-14",
-                "1-10",
-                "1-9"
+                "2-9",
+                "1-9",
+                "2-14",
+                "9-10"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -63175,16 +63175,16 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "method": "5頭BOX",
               "selection": "1-2-9-10-14 BOX",
               "ticketKeys": [
-                "9-10-14",
-                "1-9-10",
-                "2-9-10",
-                "1-10-14",
-                "2-10-14",
-                "1-2-10",
-                "1-9-14",
                 "2-9-14",
+                "1-9-14",
+                "9-10-14",
                 "1-2-9",
-                "1-2-14"
+                "2-9-10",
+                "1-9-10",
+                "1-2-14",
+                "2-10-14",
+                "1-10-14",
+                "1-2-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -63201,9 +63201,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "10",
+              "selection": "9",
               "ticketKeys": [
-                "10"
+                "9"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -63214,13 +63214,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-10 / 10-14 / 9-14 / 1-10 / 1-9",
+              "selection": "9-14 / 2-9 / 1-9 / 2-14 / 1-14",
               "ticketKeys": [
-                "9-10",
-                "10-14",
                 "9-14",
-                "1-10",
-                "1-9"
+                "2-9",
+                "1-9",
+                "2-14",
+                "1-14"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -63233,16 +63233,16 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "method": "5頭BOX",
               "selection": "1-2-9-10-14 BOX",
               "ticketKeys": [
-                "9-10-14",
-                "1-9-10",
-                "2-9-10",
-                "1-10-14",
-                "2-10-14",
-                "1-2-10",
-                "1-9-14",
                 "2-9-14",
+                "1-9-14",
+                "9-10-14",
                 "1-2-9",
-                "1-2-14"
+                "2-9-10",
+                "1-9-10",
+                "1-2-14",
+                "2-10-14",
+                "1-10-14",
+                "1-2-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -63272,13 +63272,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-10 / 10-14 / 9-14 / 1-10 / 2-10",
+              "selection": "9-10 / 10-14 / 2-10 / 9-14 / 2-9",
               "ticketKeys": [
                 "9-10",
                 "10-14",
+                "2-10",
                 "9-14",
-                "1-10",
-                "2-10"
+                "2-9"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -63292,13 +63292,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "selection": "1-2-9-10-14 BOX",
               "ticketKeys": [
                 "9-10-14",
-                "1-9-10",
                 "2-9-10",
-                "1-10-14",
+                "1-9-10",
                 "2-10-14",
+                "1-10-14",
                 "1-2-10",
-                "1-9-14",
                 "2-9-14",
+                "1-9-14",
                 "1-2-9",
                 "1-2-14"
               ],
@@ -63323,7 +63323,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -63468,7 +63468,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 12,
               "horseName": "ヤマメホープ",
-              "score": 0.8500000000000001,
+              "score": 0.9500000000000001,
               "probability": 0.13713605870800155,
               "finish": 2,
               "finishText": "2着"
@@ -63477,7 +63477,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 9,
               "horseName": "ジーティーホクサイ",
-              "score": 0.6612839016580351,
+              "score": 0.7479050264005679,
               "probability": 0.10065889604937572,
               "finish": 11,
               "finishText": "11着"
@@ -63486,7 +63486,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 8,
               "horseName": "マイネルオラクル",
-              "score": 0.5965051738772614,
+              "score": 0.6904711830588592,
               "probability": 0.09686689209343236,
               "finish": 7,
               "finishText": "7着"
@@ -63496,42 +63496,6 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 5,
-          "topPickFinish": 10,
-          "topPickFinishText": "10着",
-          "marks": [
-            {
-              "mark": "◎",
-              "horseNumber": 5,
-              "horseName": "コスモアミュレット",
-              "score": 0.34868863015717966,
-              "probability": 0.0815456808410228,
-              "finish": 10,
-              "finishText": "10着"
-            },
-            {
-              "mark": "○",
-              "horseNumber": 14,
-              "horseName": "フォンドルレール",
-              "score": 0.33934790611492327,
-              "probability": 0.08455585087664004,
-              "finish": 5,
-              "finishText": "5着"
-            },
-            {
-              "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "マイネルオラクル",
-              "score": 0.3200501458653414,
-              "probability": 0.09686689209343236,
-              "finish": 7,
-              "finishText": "7着"
-            }
-          ]
-        },
-        {
-          "agentId": "pace",
-          "status": "available",
           "topPick": 12,
           "topPickFinish": 2,
           "topPickFinishText": "2着",
@@ -63540,7 +63504,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 12,
               "horseName": "ヤマメホープ",
-              "score": 0.265,
+              "score": 0.74,
               "probability": 0.13713605870800155,
               "finish": 2,
               "finishText": "2着"
@@ -63549,19 +63513,55 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 9,
               "horseName": "ジーティーホクサイ",
-              "score": 0.24141048770725435,
+              "score": 0.6152393815240048,
               "probability": 0.10065889604937572,
               "finish": 11,
               "finishText": "11着"
             },
             {
               "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "マイネルオラクル",
-              "score": 0.23331314673465767,
-              "probability": 0.09686689209343236,
-              "finish": 7,
-              "finishText": "7着"
+              "horseNumber": 10,
+              "horseName": "カムバックトゥミー",
+              "score": 0.5968499945841339,
+              "probability": 0.022218671601147058,
+              "finish": null,
+              "finishText": "中止"
+            }
+          ]
+        },
+        {
+          "agentId": "pace",
+          "status": "available",
+          "topPick": 10,
+          "topPickFinish": null,
+          "topPickFinishText": "中止",
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 10,
+              "horseName": "カムバックトゥミー",
+              "score": 0.5263374851063682,
+              "probability": 0.022218671601147058,
+              "finish": null,
+              "finishText": "中止"
+            },
+            {
+              "mark": "○",
+              "horseNumber": 12,
+              "horseName": "ヤマメホープ",
+              "score": 0.52,
+              "probability": 0.13713605870800155,
+              "finish": 2,
+              "finishText": "2着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 9,
+              "horseName": "ジーティーホクサイ",
+              "score": 0.39810685675906093,
+              "probability": 0.10065889604937572,
+              "finish": 11,
+              "finishText": "11着"
             }
           ]
         },
@@ -63576,28 +63576,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 12,
               "horseName": "ヤマメホープ",
-              "score": 0.36666666666666664,
+              "score": 0.9833333333333334,
               "probability": 0.13713605870800155,
               "finish": 2,
               "finishText": "2着"
             },
             {
               "mark": "○",
-              "horseNumber": 9,
-              "horseName": "ジーティーホクサイ",
-              "score": 0.28410337364205696,
-              "probability": 0.10065889604937572,
-              "finish": 11,
-              "finishText": "11着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 8,
               "horseName": "マイネルオラクル",
-              "score": 0.2557626802379685,
+              "score": 0.7182170240294253,
               "probability": 0.09686689209343236,
               "finish": 7,
               "finishText": "7着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 9,
+              "horseName": "ジーティーホクサイ",
+              "score": 0.697531842092898,
+              "probability": 0.10065889604937572,
+              "finish": 11,
+              "finishText": "11着"
             }
           ]
         },
@@ -63612,28 +63612,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 12,
               "horseName": "ヤマメホープ",
-              "score": 0.49000000000000005,
+              "score": 0.6933333333333334,
               "probability": 0.13713605870800155,
               "finish": 2,
               "finishText": "2着"
             },
             {
               "mark": "○",
-              "horseNumber": 9,
-              "horseName": "ジーティーホクサイ",
-              "score": 0.4522567803316071,
-              "probability": 0.10065889604937572,
-              "finish": 11,
-              "finishText": "11着"
+              "horseNumber": 10,
+              "horseName": "カムバックトゥミー",
+              "score": 0.603864579948417,
+              "probability": 0.022218671601147058,
+              "finish": null,
+              "finishText": "中止"
             },
             {
               "mark": "▲",
-              "horseNumber": 8,
-              "horseName": "マイネルオラクル",
-              "score": 0.43930103477545235,
-              "probability": 0.09686689209343236,
-              "finish": 7,
-              "finishText": "7着"
+              "horseNumber": 9,
+              "horseName": "ジーティーホクサイ",
+              "score": 0.5762553208014626,
+              "probability": 0.10065889604937572,
+              "finish": 11,
+              "finishText": "11着"
             }
           ]
         }
@@ -63659,13 +63659,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-12 / 8-12 / 12-14 / 8-9 / 5-12",
+              "selection": "9-12 / 8-12 / 12-14 / 8-9 / 9-14",
               "ticketKeys": [
                 "9-12",
                 "8-12",
                 "12-14",
                 "8-9",
-                "5-12"
+                "9-14"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -63704,9 +63704,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "5",
+              "selection": "12",
               "ticketKeys": [
-                "5"
+                "12"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -63717,13 +63717,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-14 / 5-8 / 8-14 / 5-9 / 9-14",
+              "selection": "9-12 / 10-12 / 8-12 / 6-12 / 9-10",
               "ticketKeys": [
-                "5-14",
-                "5-8",
-                "8-14",
-                "5-9",
-                "9-14"
+                "9-12",
+                "10-12",
+                "8-12",
+                "6-12",
+                "9-10"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -63734,18 +63734,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "5-8-9-12-14 BOX",
+              "selection": "6-8-9-10-12 BOX",
               "ticketKeys": [
-                "5-8-14",
-                "5-9-14",
-                "5-12-14",
-                "5-8-9",
-                "5-8-12",
-                "5-9-12",
-                "8-9-14",
-                "8-12-14",
-                "9-12-14",
-                "8-9-12"
+                "9-10-12",
+                "8-9-12",
+                "6-9-12",
+                "8-10-12",
+                "6-10-12",
+                "6-8-12",
+                "8-9-10",
+                "6-9-10",
+                "6-8-9",
+                "6-8-10"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -63762,9 +63762,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "12",
+              "selection": "10",
               "ticketKeys": [
-                "12"
+                "10"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -63775,13 +63775,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-12 / 8-12 / 12-14 / 5-12 / 8-9",
+              "selection": "10-12 / 9-10 / 9-12 / 8-10 / 8-12",
               "ticketKeys": [
+                "10-12",
+                "9-10",
                 "9-12",
-                "8-12",
-                "12-14",
-                "5-12",
-                "8-9"
+                "8-10",
+                "8-12"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -63792,18 +63792,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "5-8-9-12-14 BOX",
+              "selection": "8-9-10-12-14 BOX",
               "ticketKeys": [
+                "9-10-12",
+                "8-10-12",
+                "10-12-14",
+                "8-9-10",
+                "9-10-14",
+                "8-10-14",
                 "8-9-12",
                 "9-12-14",
-                "5-9-12",
                 "8-12-14",
-                "5-8-12",
-                "5-12-14",
-                "8-9-14",
-                "5-8-9",
-                "5-9-14",
-                "5-8-14"
+                "8-9-14"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -63833,13 +63833,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-12 / 8-12 / 12-14 / 8-9 / 5-12",
+              "selection": "8-12 / 9-12 / 12-14 / 6-12 / 8-9",
               "ticketKeys": [
-                "9-12",
                 "8-12",
+                "9-12",
                 "12-14",
-                "8-9",
-                "5-12"
+                "6-12",
+                "8-9"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -63850,18 +63850,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "5-8-9-12-14 BOX",
+              "selection": "6-8-9-12-14 BOX",
               "ticketKeys": [
                 "8-9-12",
-                "9-12-14",
-                "5-9-12",
                 "8-12-14",
-                "5-8-12",
-                "5-12-14",
+                "6-8-12",
+                "9-12-14",
+                "6-9-12",
+                "6-12-14",
                 "8-9-14",
-                "5-8-9",
-                "5-9-14",
-                "5-8-14"
+                "6-8-9",
+                "6-8-14",
+                "6-9-14"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -63891,13 +63891,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-12 / 8-12 / 12-14 / 5-12 / 8-9",
+              "selection": "10-12 / 9-12 / 8-12 / 6-12 / 9-10",
               "ticketKeys": [
+                "10-12",
                 "9-12",
                 "8-12",
-                "12-14",
-                "5-12",
-                "8-9"
+                "6-12",
+                "9-10"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -63908,18 +63908,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "5-8-9-12-14 BOX",
+              "selection": "6-8-9-10-12 BOX",
               "ticketKeys": [
+                "9-10-12",
+                "8-10-12",
+                "6-10-12",
                 "8-9-12",
-                "9-12-14",
-                "5-9-12",
-                "8-12-14",
-                "5-8-12",
-                "5-12-14",
-                "8-9-14",
-                "5-8-9",
-                "5-9-14",
-                "5-8-14"
+                "6-9-12",
+                "6-8-12",
+                "8-9-10",
+                "6-9-10",
+                "6-8-10",
+                "6-8-9"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -63942,7 +63942,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -64071,7 +64071,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "バリオス",
-              "score": 0.8500000000000001,
+              "score": 0.9500000000000001,
               "probability": 0.262483021590636,
               "finish": 6,
               "finishText": "6着"
@@ -64080,7 +64080,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 6,
               "horseName": "メイショウナルカミ",
-              "score": 0.6358232950551641,
+              "score": 0.7214112418313217,
               "probability": 0.17981262855202332,
               "finish": 1,
               "finishText": "1着"
@@ -64089,7 +64089,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 5,
               "horseName": "ビップヴォルフ",
-              "score": 0.5717148796394624,
+              "score": 0.6677497908444796,
               "probability": 0.17289296259138287,
               "finish": 3,
               "finishText": "3着"
@@ -64099,24 +64099,24 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 4,
-          "topPickFinish": 4,
-          "topPickFinishText": "4着",
+          "topPick": 1,
+          "topPickFinish": 6,
+          "topPickFinishText": "6着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 4,
-              "horseName": "レッドヴァリアート",
-              "score": 0.35816335942138117,
-              "probability": 0.11081938605551818,
-              "finish": 4,
-              "finishText": "4着"
+              "horseNumber": 1,
+              "horseName": "バリオス",
+              "score": 0.74,
+              "probability": 0.262483021590636,
+              "finish": 6,
+              "finishText": "6着"
             },
             {
               "mark": "○",
               "horseNumber": 3,
               "horseName": "ジュンプリメーロ",
-              "score": 0.3374424039402854,
+              "score": 0.624487649006886,
               "probability": 0.16740387535843582,
               "finish": 5,
               "finishText": "5着"
@@ -64125,7 +64125,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 5,
               "horseName": "ビップヴォルフ",
-              "score": 0.3255155632727806,
+              "score": 0.6063317694889253,
               "probability": 0.17289296259138287,
               "finish": 3,
               "finishText": "3着"
@@ -64143,28 +64143,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "バリオス",
-              "score": 0.265,
+              "score": 0.8999999999999999,
               "probability": 0.262483021590636,
               "finish": 6,
               "finishText": "6着"
             },
             {
               "mark": "○",
-              "horseNumber": 6,
-              "horseName": "メイショウナルカミ",
-              "score": 0.2382279118818955,
-              "probability": 0.17981262855202332,
-              "finish": 1,
-              "finishText": "1着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 5,
               "horseName": "ビップヴォルフ",
-              "score": 0.23021435995493278,
+              "score": 0.6796932327526224,
               "probability": 0.17289296259138287,
               "finish": 3,
               "finishText": "3着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 3,
+              "horseName": "ジュンプリメーロ",
+              "score": 0.6785156185518566,
+              "probability": 0.16740387535843582,
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -64179,28 +64179,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "バリオス",
-              "score": 0.36666666666666664,
+              "score": 0.9833333333333334,
               "probability": 0.262483021590636,
               "finish": 6,
               "finishText": "6着"
             },
             {
               "mark": "○",
-              "horseNumber": 6,
-              "horseName": "メイショウナルカミ",
-              "score": 0.27296435825330095,
-              "probability": 0.17981262855202332,
-              "finish": 1,
-              "finishText": "1着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 5,
               "horseName": "ビップヴォルフ",
-              "score": 0.24491692650893143,
+              "score": 0.7404596161989246,
               "probability": 0.17289296259138287,
               "finish": 3,
               "finishText": "3着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 3,
+              "horseName": "ジュンプリメーロ",
+              "score": 0.7312558152733667,
+              "probability": 0.16740387535843582,
+              "finish": 5,
+              "finishText": "5着"
             }
           ]
         },
@@ -64215,25 +64215,25 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "バリオス",
-              "score": 0.49000000000000005,
+              "score": 0.6933333333333334,
               "probability": 0.262483021590636,
               "finish": 6,
               "finishText": "6着"
             },
             {
               "mark": "○",
-              "horseNumber": 6,
-              "horseName": "メイショウナルカミ",
-              "score": 0.44716465901103286,
-              "probability": 0.17981262855202332,
-              "finish": 1,
-              "finishText": "1着"
+              "horseNumber": 3,
+              "horseName": "ジュンプリメーロ",
+              "score": 0.5980533694230084,
+              "probability": 0.16740387535843582,
+              "finish": 5,
+              "finishText": "5着"
             },
             {
               "mark": "▲",
               "horseNumber": 5,
               "horseName": "ビップヴォルフ",
-              "score": 0.43434297592789245,
+              "score": 0.5717701844451871,
               "probability": 0.17289296259138287,
               "finish": 3,
               "finishText": "3着"
@@ -64307,9 +64307,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "4",
+              "selection": "1",
               "ticketKeys": [
-                "4"
+                "1"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -64320,13 +64320,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "3-4 / 4-5 / 4-6 / 3-5 / 3-6",
+              "selection": "1-3 / 1-5 / 1-6 / 3-5 / 1-4",
               "ticketKeys": [
-                "3-4",
-                "4-5",
-                "4-6",
+                "1-3",
+                "1-5",
+                "1-6",
                 "3-5",
-                "3-6"
+                "1-4"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -64339,16 +64339,16 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "method": "5頭BOX",
               "selection": "1-3-4-5-6 BOX",
               "ticketKeys": [
-                "3-4-5",
-                "3-4-6",
+                "1-3-5",
+                "1-3-6",
                 "1-3-4",
-                "4-5-6",
+                "1-5-6",
                 "1-4-5",
                 "1-4-6",
                 "3-5-6",
-                "1-3-5",
-                "1-3-6",
-                "1-5-6"
+                "3-4-5",
+                "3-4-6",
+                "4-5-6"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -64378,13 +64378,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "1-6 / 1-5 / 1-3 / 5-6 / 1-4",
+              "selection": "1-5 / 1-3 / 1-6 / 1-4 / 3-5",
               "ticketKeys": [
-                "1-6",
                 "1-5",
                 "1-3",
-                "5-6",
-                "1-4"
+                "1-6",
+                "1-4",
+                "3-5"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -64397,16 +64397,16 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "method": "5頭BOX",
               "selection": "1-3-4-5-6 BOX",
               "ticketKeys": [
-                "1-5-6",
-                "1-3-6",
-                "1-4-6",
                 "1-3-5",
+                "1-5-6",
                 "1-4-5",
+                "1-3-6",
                 "1-3-4",
+                "1-4-6",
                 "3-5-6",
+                "3-4-5",
                 "4-5-6",
-                "3-4-6",
-                "3-4-5"
+                "3-4-6"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -64436,13 +64436,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "1-6 / 1-5 / 1-3 / 5-6 / 3-6",
+              "selection": "1-5 / 1-3 / 1-6 / 1-4 / 3-5",
               "ticketKeys": [
-                "1-6",
                 "1-5",
                 "1-3",
-                "5-6",
-                "3-6"
+                "1-6",
+                "1-4",
+                "3-5"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -64455,16 +64455,16 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "method": "5頭BOX",
               "selection": "1-3-4-5-6 BOX",
               "ticketKeys": [
-                "1-5-6",
-                "1-3-6",
-                "1-4-6",
                 "1-3-5",
+                "1-5-6",
                 "1-4-5",
+                "1-3-6",
                 "1-3-4",
+                "1-4-6",
                 "3-5-6",
+                "3-4-5",
                 "4-5-6",
-                "3-4-6",
-                "3-4-5"
+                "3-4-6"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -64494,12 +64494,12 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "1-6 / 1-5 / 1-3 / 5-6 / 1-4",
+              "selection": "1-3 / 1-5 / 1-6 / 3-5 / 1-4",
               "ticketKeys": [
-                "1-6",
-                "1-5",
                 "1-3",
-                "5-6",
+                "1-5",
+                "1-6",
+                "3-5",
                 "1-4"
               ],
               "points": 5,
@@ -64513,16 +64513,16 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "method": "5頭BOX",
               "selection": "1-3-4-5-6 BOX",
               "ticketKeys": [
-                "1-5-6",
-                "1-3-6",
-                "1-4-6",
                 "1-3-5",
-                "1-4-5",
+                "1-3-6",
                 "1-3-4",
+                "1-5-6",
+                "1-4-5",
+                "1-4-6",
                 "3-5-6",
-                "4-5-6",
+                "3-4-5",
                 "3-4-6",
-                "3-4-5"
+                "4-5-6"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -64545,7 +64545,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -64690,7 +64690,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "マテンロウサン",
-              "score": 0.8500000000000001,
+              "score": 0.9500000000000001,
               "probability": 0.13229282161017933,
               "finish": 1,
               "finishText": "1着"
@@ -64699,7 +64699,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 4,
               "horseName": "ホウオウヘッセン",
-              "score": 0.7622159226690688,
+              "score": 0.8477800125221796,
               "probability": 0.12278196569979079,
               "finish": 14,
               "finishText": "14着"
@@ -64708,7 +64708,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 2,
               "horseName": "デンプシー",
-              "score": 0.6483380620468278,
+              "score": 0.7442481170053487,
               "probability": 0.10663260936999472,
               "finish": 2,
               "finishText": "2着"
@@ -64718,33 +64718,33 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 10,
-          "topPickFinish": 6,
-          "topPickFinishText": "6着",
+          "topPick": 5,
+          "topPickFinish": 1,
+          "topPickFinishText": "1着",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 10,
-              "horseName": "ベルビースタローン",
-              "score": 0.3481946754035111,
-              "probability": 0.0796058270677743,
-              "finish": 6,
-              "finishText": "6着"
+              "horseNumber": 5,
+              "horseName": "マテンロウサン",
+              "score": 0.74,
+              "probability": 0.13229282161017933,
+              "finish": 1,
+              "finishText": "1着"
             },
             {
               "mark": "○",
-              "horseNumber": 1,
-              "horseName": "トウカイエルデ",
-              "score": 0.3392147790779921,
-              "probability": 0.08176894800932612,
-              "finish": 8,
-              "finishText": "8着"
+              "horseNumber": 4,
+              "horseName": "ホウオウヘッセン",
+              "score": 0.6996752541214022,
+              "probability": 0.12278196569979079,
+              "finish": 14,
+              "finishText": "14着"
             },
             {
               "mark": "▲",
               "horseNumber": 2,
               "horseName": "デンプシー",
-              "score": 0.3074312752564967,
+              "score": 0.6197193734706904,
               "probability": 0.10663260936999472,
               "finish": 2,
               "finishText": "2着"
@@ -64762,7 +64762,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "マテンロウサン",
-              "score": 0.265,
+              "score": 0.8999999999999999,
               "probability": 0.13229282161017933,
               "finish": 1,
               "finishText": "1着"
@@ -64771,7 +64771,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 4,
               "horseName": "ホウオウヘッセン",
-              "score": 0.2540269903336336,
+              "score": 0.7437955333012112,
               "probability": 0.12278196569979079,
               "finish": 14,
               "finishText": "14着"
@@ -64780,7 +64780,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 2,
               "horseName": "デンプシー",
-              "score": 0.23979225775585344,
+              "score": 0.7160224925799092,
               "probability": 0.10663260936999472,
               "finish": 2,
               "finishText": "2着"
@@ -64798,7 +64798,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "マテンロウサン",
-              "score": 0.36666666666666664,
+              "score": 0.9833333333333334,
               "probability": 0.13229282161017933,
               "finish": 1,
               "finishText": "1着"
@@ -64807,7 +64807,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 4,
               "horseName": "ホウオウヘッセン",
-              "score": 0.32826113283438424,
+              "score": 0.7852968226950331,
               "probability": 0.12278196569979079,
               "finish": 14,
               "finishText": "14着"
@@ -64816,7 +64816,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 2,
               "horseName": "デンプシー",
-              "score": 0.27843956881215376,
+              "score": 0.7847413888897711,
               "probability": 0.10663260936999472,
               "finish": 2,
               "finishText": "2着"
@@ -64834,7 +64834,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 5,
               "horseName": "マテンロウサン",
-              "score": 0.49000000000000005,
+              "score": 0.6933333333333334,
               "probability": 0.13229282161017933,
               "finish": 1,
               "finishText": "1着"
@@ -64843,7 +64843,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 4,
               "horseName": "ホウオウヘッセン",
-              "score": 0.47244318453381384,
+              "score": 0.6619007047391777,
               "probability": 0.12278196569979079,
               "finish": 14,
               "finishText": "14着"
@@ -64852,7 +64852,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 2,
               "horseName": "デンプシー",
-              "score": 0.4496676124093656,
+              "score": 0.5786215816686926,
               "probability": 0.10663260936999472,
               "finish": 2,
               "finishText": "2着"
@@ -64926,48 +64926,48 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "10",
+              "selection": "5",
               "ticketKeys": [
-                "10"
+                "5"
               ],
               "points": 1,
               "investmentYen": 100,
-              "payoutYen": 0,
-              "netYen": -100,
-              "hit": false
+              "payoutYen": 540,
+              "netYen": 440,
+              "hit": true
             },
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "1-10 / 2-10 / 1-2 / 4-10 / 1-4",
+              "selection": "4-5 / 2-5 / 2-4 / 5-12 / 4-12",
               "ticketKeys": [
-                "1-10",
-                "2-10",
-                "1-2",
-                "4-10",
-                "1-4"
+                "4-5",
+                "2-5",
+                "2-4",
+                "5-12",
+                "4-12"
               ],
               "points": 5,
               "investmentYen": 500,
-              "payoutYen": 0,
-              "netYen": -500,
-              "hit": false
+              "payoutYen": 960,
+              "netYen": 460,
+              "hit": true
             },
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-2-4-5-10 BOX",
+              "selection": "1-2-4-5-12 BOX",
               "ticketKeys": [
-                "1-2-10",
-                "1-4-10",
-                "1-5-10",
-                "2-4-10",
-                "2-5-10",
-                "4-5-10",
-                "1-2-4",
-                "1-2-5",
+                "2-4-5",
+                "4-5-12",
                 "1-4-5",
-                "2-4-5"
+                "2-5-12",
+                "1-2-5",
+                "1-5-12",
+                "2-4-12",
+                "1-2-4",
+                "1-4-12",
+                "1-2-12"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -64997,13 +64997,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-5 / 2-5 / 2-4 / 1-5 / 5-10",
+              "selection": "4-5 / 2-5 / 1-5 / 2-4 / 5-12",
               "ticketKeys": [
                 "4-5",
                 "2-5",
-                "2-4",
                 "1-5",
-                "5-10"
+                "2-4",
+                "5-12"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -65014,18 +65014,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-2-4-5-10 BOX",
+              "selection": "1-2-4-5-12 BOX",
               "ticketKeys": [
                 "2-4-5",
                 "1-4-5",
-                "4-5-10",
+                "4-5-12",
                 "1-2-5",
-                "2-5-10",
-                "1-5-10",
+                "2-5-12",
+                "1-5-12",
                 "1-2-4",
-                "2-4-10",
-                "1-4-10",
-                "1-2-10"
+                "2-4-12",
+                "1-4-12",
+                "1-2-12"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -65055,13 +65055,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-5 / 2-5 / 2-4 / 1-5 / 1-4",
+              "selection": "4-5 / 2-5 / 1-5 / 2-4 / 5-12",
               "ticketKeys": [
                 "4-5",
                 "2-5",
-                "2-4",
                 "1-5",
-                "1-4"
+                "2-4",
+                "5-12"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -65072,18 +65072,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-2-4-5-10 BOX",
+              "selection": "1-2-4-5-12 BOX",
               "ticketKeys": [
                 "2-4-5",
                 "1-4-5",
-                "4-5-10",
+                "4-5-12",
                 "1-2-5",
-                "2-5-10",
-                "1-5-10",
+                "2-5-12",
+                "1-5-12",
                 "1-2-4",
-                "2-4-10",
-                "1-4-10",
-                "1-2-10"
+                "2-4-12",
+                "1-4-12",
+                "1-2-12"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -65113,13 +65113,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "4-5 / 2-5 / 2-4 / 1-5 / 5-10",
+              "selection": "4-5 / 2-5 / 5-12 / 2-4 / 4-12",
               "ticketKeys": [
                 "4-5",
                 "2-5",
+                "5-12",
                 "2-4",
-                "1-5",
-                "5-10"
+                "4-12"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -65130,18 +65130,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-2-4-5-10 BOX",
+              "selection": "1-2-4-5-12 BOX",
               "ticketKeys": [
                 "2-4-5",
+                "4-5-12",
                 "1-4-5",
-                "4-5-10",
+                "2-5-12",
                 "1-2-5",
-                "2-5-10",
-                "1-5-10",
+                "1-5-12",
+                "2-4-12",
                 "1-2-4",
-                "2-4-10",
-                "1-4-10",
-                "1-2-10"
+                "1-4-12",
+                "1-2-12"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -65164,7 +65164,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -65317,7 +65317,43 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 18,
               "horseName": "ホウオウパーソンズ",
-              "score": 0.8500000000000001,
+              "score": 0.9500000000000001,
+              "probability": 0.10036380327950459,
+              "finish": 15,
+              "finishText": "15着"
+            },
+            {
+              "mark": "○",
+              "horseNumber": 15,
+              "horseName": "ウインテラジーナ",
+              "score": 0.736413622308696,
+              "probability": 0.07886000931499842,
+              "finish": 3,
+              "finishText": "3着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 9,
+              "horseName": "モントーヤ",
+              "score": 0.7055973511621187,
+              "probability": 0.0812070771272667,
+              "finish": 9,
+              "finishText": "9着"
+            }
+          ]
+        },
+        {
+          "agentId": "sniper",
+          "status": "available",
+          "topPick": 18,
+          "topPickFinish": 15,
+          "topPickFinishText": "15着",
+          "marks": [
+            {
+              "mark": "◎",
+              "horseNumber": 18,
+              "horseName": "ホウオウパーソンズ",
+              "score": 0.74,
               "probability": 0.10036380327950459,
               "finish": 15,
               "finishText": "15着"
@@ -65326,7 +65362,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 9,
               "horseName": "モントーヤ",
-              "score": 0.7003461129046518,
+              "score": 0.6580544633626474,
               "probability": 0.0812070771272667,
               "finish": 9,
               "finishText": "9着"
@@ -65335,43 +65371,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 15,
               "horseName": "ウインテラジーナ",
-              "score": 0.6377856006233407,
-              "probability": 0.07886000931499842,
-              "finish": 3,
-              "finishText": "3着"
-            }
-          ]
-        },
-        {
-          "agentId": "sniper",
-          "status": "available",
-          "topPick": 16,
-          "topPickFinish": 14,
-          "topPickFinishText": "14着",
-          "marks": [
-            {
-              "mark": "◎",
-              "horseNumber": 16,
-              "horseName": "ペルシアーノ",
-              "score": 0.3393083211901822,
-              "probability": 0.07165526353333794,
-              "finish": 14,
-              "finishText": "14着"
-            },
-            {
-              "mark": "○",
-              "horseNumber": 11,
-              "horseName": "ピコバレット",
-              "score": 0.3225313168739364,
-              "probability": 0.07848788298722432,
-              "finish": 8,
-              "finishText": "8着"
-            },
-            {
-              "mark": "▲",
-              "horseNumber": 15,
-              "horseName": "ウインテラジーナ",
-              "score": 0.3101309863722917,
+              "score": 0.6261928125895175,
               "probability": 0.07886000931499842,
               "finish": 3,
               "finishText": "3着"
@@ -65389,28 +65389,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 18,
               "horseName": "ホウオウパーソンズ",
-              "score": 0.265,
+              "score": 0.8999999999999999,
               "probability": 0.10036380327950459,
               "finish": 15,
               "finishText": "15着"
             },
             {
               "mark": "○",
-              "horseNumber": 9,
-              "horseName": "モントーヤ",
-              "score": 0.24629326411308144,
-              "probability": 0.0812070771272667,
-              "finish": 9,
-              "finishText": "9着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 15,
               "horseName": "ウインテラジーナ",
-              "score": 0.23847320007791756,
+              "score": 0.7205123103900617,
               "probability": 0.07886000931499842,
               "finish": 3,
               "finishText": "3着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 13,
+              "horseName": "ノーブルクロンヌ",
+              "score": 0.6383705324361945,
+              "probability": 0.06622393907099362,
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -65425,28 +65425,28 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 18,
               "horseName": "ホウオウパーソンズ",
-              "score": 0.36666666666666664,
+              "score": 0.9833333333333334,
               "probability": 0.10036380327950459,
               "finish": 15,
               "finishText": "15着"
             },
             {
               "mark": "○",
-              "horseNumber": 9,
-              "horseName": "モントーヤ",
-              "score": 0.3011930910624518,
-              "probability": 0.0812070771272667,
-              "finish": 9,
-              "finishText": "9着"
-            },
-            {
-              "mark": "▲",
               "horseNumber": 15,
               "horseName": "ウインテラジーナ",
-              "score": 0.2738228669393782,
+              "score": 0.7878262484157175,
               "probability": 0.07886000931499842,
               "finish": 3,
               "finishText": "3着"
+            },
+            {
+              "mark": "▲",
+              "horseNumber": 13,
+              "horseName": "ノーブルクロンヌ",
+              "score": 0.681094579813691,
+              "probability": 0.06622393907099362,
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         },
@@ -65461,7 +65461,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 18,
               "horseName": "ホウオウパーソンズ",
-              "score": 0.49000000000000005,
+              "score": 0.6933333333333334,
               "probability": 0.10036380327950459,
               "finish": 15,
               "finishText": "15着"
@@ -65470,19 +65470,19 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 9,
               "horseName": "モントーヤ",
-              "score": 0.4600692225809303,
+              "score": 0.635664951277877,
               "probability": 0.0812070771272667,
               "finish": 9,
               "finishText": "9着"
             },
             {
               "mark": "▲",
-              "horseNumber": 15,
-              "horseName": "ウインテラジーナ",
-              "score": 0.4475571201246682,
-              "probability": 0.07886000931499842,
-              "finish": 3,
-              "finishText": "3着"
+              "horseNumber": 13,
+              "horseName": "ノーブルクロンヌ",
+              "score": 0.5968506555430083,
+              "probability": 0.06622393907099362,
+              "finish": 1,
+              "finishText": "1着"
             }
           ]
         }
@@ -65508,13 +65508,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-18 / 15-18 / 11-18 / 9-15 / 16-18",
+              "selection": "15-18 / 9-18 / 16-18 / 11-18 / 9-15",
               "ticketKeys": [
-                "9-18",
                 "15-18",
+                "9-18",
+                "16-18",
                 "11-18",
-                "9-15",
-                "16-18"
+                "9-15"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -65528,15 +65528,15 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "selection": "9-11-15-16-18 BOX",
               "ticketKeys": [
                 "9-15-18",
-                "9-11-18",
-                "9-16-18",
-                "11-15-18",
                 "15-16-18",
+                "11-15-18",
+                "9-16-18",
+                "9-11-18",
                 "11-16-18",
-                "9-11-15",
                 "9-15-16",
-                "9-11-16",
-                "11-15-16"
+                "9-11-15",
+                "11-15-16",
+                "9-11-16"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -65553,9 +65553,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "16",
+              "selection": "18",
               "ticketKeys": [
-                "16"
+                "18"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -65566,13 +65566,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "11-16 / 15-16 / 11-15 / 9-16 / 9-11",
+              "selection": "9-18 / 15-18 / 13-18 / 11-18 / 9-15",
               "ticketKeys": [
-                "11-16",
-                "15-16",
-                "11-15",
-                "9-16",
-                "9-11"
+                "9-18",
+                "15-18",
+                "13-18",
+                "11-18",
+                "9-15"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -65583,18 +65583,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "9-11-15-16-18 BOX",
+              "selection": "9-11-13-15-18 BOX",
               "ticketKeys": [
-                "11-15-16",
-                "9-11-16",
-                "11-16-18",
-                "9-15-16",
-                "15-16-18",
-                "9-16-18",
-                "9-11-15",
-                "11-15-18",
+                "9-15-18",
+                "9-13-18",
                 "9-11-18",
-                "9-15-18"
+                "13-15-18",
+                "11-15-18",
+                "11-13-18",
+                "9-13-15",
+                "9-11-15",
+                "9-11-13",
+                "11-13-15"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -65624,13 +65624,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-18 / 15-18 / 11-18 / 9-15 / 16-18",
+              "selection": "15-18 / 13-18 / 16-18 / 13-15 / 15-16",
               "ticketKeys": [
-                "9-18",
                 "15-18",
-                "11-18",
-                "9-15",
-                "16-18"
+                "13-18",
+                "16-18",
+                "13-15",
+                "15-16"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -65641,18 +65641,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "9-11-15-16-18 BOX",
+              "selection": "2-13-15-16-18 BOX",
               "ticketKeys": [
-                "9-15-18",
-                "9-11-18",
-                "9-16-18",
-                "11-15-18",
+                "13-15-18",
                 "15-16-18",
-                "11-16-18",
-                "9-11-15",
-                "9-15-16",
-                "9-11-16",
-                "11-15-16"
+                "2-15-18",
+                "13-16-18",
+                "2-13-18",
+                "2-16-18",
+                "13-15-16",
+                "2-13-15",
+                "2-15-16",
+                "2-13-16"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -65682,13 +65682,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-18 / 15-18 / 11-18 / 9-15 / 16-18",
+              "selection": "15-18 / 13-18 / 16-18 / 13-15 / 15-16",
               "ticketKeys": [
-                "9-18",
                 "15-18",
-                "11-18",
-                "9-15",
-                "16-18"
+                "13-18",
+                "16-18",
+                "13-15",
+                "15-16"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -65699,18 +65699,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "9-11-15-16-18 BOX",
+              "selection": "2-13-15-16-18 BOX",
               "ticketKeys": [
-                "9-15-18",
-                "9-11-18",
-                "9-16-18",
-                "11-15-18",
+                "13-15-18",
                 "15-16-18",
-                "11-16-18",
-                "9-11-15",
-                "9-15-16",
-                "9-11-16",
-                "11-15-16"
+                "2-15-18",
+                "13-16-18",
+                "2-13-18",
+                "2-16-18",
+                "13-15-16",
+                "2-13-15",
+                "2-15-16",
+                "2-13-16"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -65740,13 +65740,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "9-18 / 15-18 / 11-18 / 9-15 / 16-18",
+              "selection": "9-18 / 13-18 / 15-18 / 9-13 / 11-18",
               "ticketKeys": [
                 "9-18",
+                "13-18",
                 "15-18",
-                "11-18",
-                "9-15",
-                "16-18"
+                "9-13",
+                "11-18"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -65757,18 +65757,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "9-11-15-16-18 BOX",
+              "selection": "9-11-13-15-18 BOX",
               "ticketKeys": [
+                "9-13-18",
                 "9-15-18",
                 "9-11-18",
-                "9-16-18",
+                "13-15-18",
+                "11-13-18",
                 "11-15-18",
-                "15-16-18",
-                "11-16-18",
+                "9-13-15",
+                "9-11-13",
                 "9-11-15",
-                "9-15-16",
-                "9-11-16",
-                "11-15-16"
+                "11-13-15"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -65791,7 +65791,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-02T14:19:17.359Z",
+      "predictionGeneratedAt": "2026-08-02T23:31:24.891Z",
       "marks": [
         {
           "mark": "◎",
@@ -65944,7 +65944,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "ジュピターバローズ",
-              "score": 0.8500000000000001,
+              "score": 0.9500000000000001,
               "probability": 0.10844734386155765,
               "finish": null,
               "finishText": "中止"
@@ -65953,7 +65953,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 18,
               "horseName": "モンシーク",
-              "score": 0.6520126079412574,
+              "score": 0.754135335291045,
               "probability": 0.07766761183035574,
               "finish": 2,
               "finishText": "2着"
@@ -65962,7 +65962,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "カフラー",
-              "score": 0.5609269797304817,
+              "score": 0.6591727517682444,
               "probability": 0.06918251892112981,
               "finish": 17,
               "finishText": "17着"
@@ -65972,33 +65972,33 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
         {
           "agentId": "sniper",
           "status": "available",
-          "topPick": 9,
-          "topPickFinish": 11,
-          "topPickFinishText": "11着",
+          "topPick": 1,
+          "topPickFinish": null,
+          "topPickFinishText": "中止",
           "marks": [
             {
               "mark": "◎",
-              "horseNumber": 9,
-              "horseName": "フィアレスウィル",
-              "score": 0.3511076267285923,
-              "probability": 0.06050919507880892,
-              "finish": 11,
-              "finishText": "11着"
+              "horseNumber": 1,
+              "horseName": "ジュピターバローズ",
+              "score": 0.74,
+              "probability": 0.10844734386155765,
+              "finish": null,
+              "finishText": "中止"
             },
             {
               "mark": "○",
-              "horseNumber": 5,
-              "horseName": "ホウオウスカイハイ",
-              "score": 0.344096661094199,
-              "probability": 0.06070764765260553,
-              "finish": 14,
-              "finishText": "14着"
+              "horseNumber": 18,
+              "horseName": "モンシーク",
+              "score": 0.6488294945740569,
+              "probability": 0.07766761183035574,
+              "finish": 2,
+              "finishText": "2着"
             },
             {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "カフラー",
-              "score": 0.32777878438809455,
+              "score": 0.5705115138467187,
               "probability": 0.06918251892112981,
               "finish": 17,
               "finishText": "17着"
@@ -66016,7 +66016,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "ジュピターバローズ",
-              "score": 0.265,
+              "score": 0.8999999999999999,
               "probability": 0.10844734386155765,
               "finish": null,
               "finishText": "中止"
@@ -66025,7 +66025,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 18,
               "horseName": "モンシーク",
-              "score": 0.24025157599265717,
+              "score": 0.748513860243865,
               "probability": 0.07766761183035574,
               "finish": 2,
               "finishText": "2着"
@@ -66034,7 +66034,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "カフラー",
-              "score": 0.22886587246631018,
+              "score": 0.6447512710076604,
               "probability": 0.06918251892112981,
               "finish": 17,
               "finishText": "17着"
@@ -66052,7 +66052,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "ジュピターバローズ",
-              "score": 0.36666666666666664,
+              "score": 0.9833333333333334,
               "probability": 0.10844734386155765,
               "finish": null,
               "finishText": "中止"
@@ -66061,7 +66061,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 18,
               "horseName": "モンシーク",
-              "score": 0.2800471826409668,
+              "score": 0.8161918255644105,
               "probability": 0.07766761183035574,
               "finish": 2,
               "finishText": "2着"
@@ -66070,7 +66070,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "カフラー",
-              "score": 0.24019722029875235,
+              "score": 0.7071401609556404,
               "probability": 0.06918251892112981,
               "finish": 17,
               "finishText": "17着"
@@ -66088,7 +66088,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "◎",
               "horseNumber": 1,
               "horseName": "ジュピターバローズ",
-              "score": 0.49000000000000005,
+              "score": 0.6933333333333334,
               "probability": 0.10844734386155765,
               "finish": null,
               "finishText": "中止"
@@ -66097,7 +66097,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "○",
               "horseNumber": 18,
               "horseName": "モンシーク",
-              "score": 0.45040252158825156,
+              "score": 0.6104869564441825,
               "probability": 0.07766761183035574,
               "finish": 2,
               "finishText": "2着"
@@ -66106,7 +66106,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
               "mark": "▲",
               "horseNumber": 4,
               "horseName": "カフラー",
-              "score": 0.4321853959460963,
+              "score": 0.5327923761893809,
               "probability": 0.06918251892112981,
               "finish": 17,
               "finishText": "17着"
@@ -66135,12 +66135,12 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "1-18 / 1-4 / 1-5 / 4-18 / 1-9",
+              "selection": "1-18 / 1-4 / 4-18 / 1-5 / 1-9",
               "ticketKeys": [
                 "1-18",
                 "1-4",
-                "1-5",
                 "4-18",
+                "1-5",
                 "1-9"
               ],
               "points": 5,
@@ -66180,9 +66180,9 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "単勝",
               "method": "1点",
-              "selection": "9",
+              "selection": "1",
               "ticketKeys": [
-                "9"
+                "1"
               ],
               "points": 1,
               "investmentYen": 100,
@@ -66193,13 +66193,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "5-9 / 4-9 / 4-5 / 9-18 / 5-18",
+              "selection": "1-18 / 1-4 / 4-18 / 1-12 / 1-5",
               "ticketKeys": [
-                "5-9",
-                "4-9",
-                "4-5",
-                "9-18",
-                "5-18"
+                "1-18",
+                "1-4",
+                "4-18",
+                "1-12",
+                "1-5"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -66210,18 +66210,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-4-5-9-18 BOX",
+              "selection": "1-4-5-12-18 BOX",
               "ticketKeys": [
-                "4-5-9",
-                "5-9-18",
-                "1-5-9",
-                "4-9-18",
-                "1-4-9",
-                "1-9-18",
-                "4-5-18",
-                "1-4-5",
+                "1-4-18",
+                "1-12-18",
                 "1-5-18",
-                "1-4-18"
+                "1-4-12",
+                "1-4-5",
+                "1-5-12",
+                "4-12-18",
+                "4-5-18",
+                "5-12-18",
+                "4-5-12"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -66251,13 +66251,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "1-18 / 1-4 / 1-5 / 1-9 / 4-18",
+              "selection": "1-18 / 1-4 / 4-18 / 1-12 / 1-10",
               "ticketKeys": [
                 "1-18",
                 "1-4",
-                "1-5",
-                "1-9",
-                "4-18"
+                "4-18",
+                "1-12",
+                "1-10"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -66268,18 +66268,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-4-5-9-18 BOX",
+              "selection": "1-4-10-12-18 BOX",
               "ticketKeys": [
                 "1-4-18",
-                "1-5-18",
-                "1-9-18",
-                "1-4-5",
-                "1-4-9",
-                "1-5-9",
-                "4-5-18",
-                "4-9-18",
-                "5-9-18",
-                "4-5-9"
+                "1-12-18",
+                "1-10-18",
+                "1-4-12",
+                "1-4-10",
+                "1-10-12",
+                "4-12-18",
+                "4-10-18",
+                "10-12-18",
+                "4-10-12"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -66309,13 +66309,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "1-18 / 1-4 / 1-5 / 4-18 / 1-9",
+              "selection": "1-18 / 1-4 / 4-18 / 1-12 / 1-10",
               "ticketKeys": [
                 "1-18",
                 "1-4",
-                "1-5",
                 "4-18",
-                "1-9"
+                "1-12",
+                "1-10"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -66326,18 +66326,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-4-5-9-18 BOX",
+              "selection": "1-4-10-12-18 BOX",
               "ticketKeys": [
                 "1-4-18",
-                "1-5-18",
-                "1-9-18",
-                "1-4-5",
-                "1-4-9",
-                "1-5-9",
-                "4-5-18",
-                "4-9-18",
-                "5-9-18",
-                "4-5-9"
+                "1-12-18",
+                "1-10-18",
+                "1-4-12",
+                "1-4-10",
+                "1-10-12",
+                "4-12-18",
+                "4-10-18",
+                "10-12-18",
+                "4-10-12"
               ],
               "points": 10,
               "investmentYen": 1000,
@@ -66367,13 +66367,13 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "馬連",
               "method": "期待順5点",
-              "selection": "1-18 / 1-4 / 1-5 / 1-9 / 4-18",
+              "selection": "1-18 / 1-4 / 4-18 / 1-12 / 1-5",
               "ticketKeys": [
                 "1-18",
                 "1-4",
-                "1-5",
-                "1-9",
-                "4-18"
+                "4-18",
+                "1-12",
+                "1-5"
               ],
               "points": 5,
               "investmentYen": 500,
@@ -66384,18 +66384,18 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
             {
               "betType": "3連複",
               "method": "5頭BOX",
-              "selection": "1-4-5-9-18 BOX",
+              "selection": "1-4-5-12-18 BOX",
               "ticketKeys": [
                 "1-4-18",
+                "1-12-18",
                 "1-5-18",
-                "1-9-18",
+                "1-4-12",
                 "1-4-5",
-                "1-4-9",
-                "1-5-9",
+                "1-5-12",
+                "4-12-18",
                 "4-5-18",
-                "4-9-18",
-                "5-9-18",
-                "4-5-9"
+                "5-12-18",
+                "4-5-12"
               ],
               "points": 10,
               "investmentYen": 1000,
