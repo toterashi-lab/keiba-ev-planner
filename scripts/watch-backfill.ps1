@@ -22,6 +22,19 @@ try {
   $statusJson = & $node --no-warnings "scripts\jra-free-db.mjs" status
   if ($LASTEXITCODE -ne 0) { throw "Database status failed: $LASTEXITCODE" }
   $status = $statusJson | ConvertFrom-Json
+  $rawRepairPending = [int]$status.rawRepair.pending
+  if ($rawRepairPending -gt 0) {
+    $rawRepairWorker = Get-CimInstance Win32_Process | Where-Object {
+      $_.CommandLine -like "*run-core-raw-repair.ps1*"
+    } | Select-Object -First 1
+    if (-not $rawRepairWorker) {
+      Start-Process -FilePath "powershell.exe" -ArgumentList @(
+        "-NoProfile", "-WindowStyle", "Hidden", "-ExecutionPolicy", "Bypass", "-File",
+        (Join-Path $PSScriptRoot "run-core-raw-repair.ps1")
+      ) -WorkingDirectory $root -WindowStyle Hidden
+    }
+    Write-Output ("Core raw archive repair active: pending={0}." -f $rawRepairPending)
+  }
   $pending = [int]$status.jobs.queued + [int]$status.jobs.running + [int]$status.jobs.failed
   if ($pending -le 0) {
     # Keep supervising the next phase instead of waiting for the 15-minute model task.

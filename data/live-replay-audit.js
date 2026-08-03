@@ -1,6 +1,6 @@
 window.KEIBA_LIVE_REPLAY_AUDIT = {
   "status": "replay_only",
-  "calculatedAt": "2026-08-03T10:36:26.036Z",
+  "calculatedAt": "2026-08-03T12:38:03.442Z",
   "label": "後日再現（本番成績に含めない）",
   "policy": {
     "source": "画面で表示する総合AI指数の買い目とJRA公式払戻の照合",

@@ -12,7 +12,7 @@ assert.ok(!html.match(/href="#(?:home|races|results|performance|season)/), "主�
 for (const file of ["races/index.html", "results/index.html", "season/index.html", "agents/index.html", "guides/ai-keiba/index.html", "guides/keiba-index/index.html", "guides/expected-value/index.html", "guides/betting/index.html", "partners/index.html"]) {
   assert.ok(fs.existsSync(file), `${file} が存在すること`);
   const page = fs.readFileSync(file, "utf8");
-  assert.match(page, /<link rel="canonical" href="https:\/\/umayomi-keiba\.vercel\.app\//, `${file} canonical`);
+  assert.match(page, /<link rel="canonical" href="https:\/\/toterashi-lab\.github\.io\/keiba-ev-planner\//, `${file} canonical`);
 }
 const racePages = fs.readdirSync("race", { withFileTypes: true }).filter((entry) => entry.isDirectory());
 const resultPages = fs.readdirSync("result", { withFileTypes: true }).filter((entry) => entry.isDirectory());

@@ -4,7 +4,7 @@ import vm from "node:vm";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const origin = "https://umayomi-keiba.vercel.app";
+const origin = "https://toterashi-lab.github.io/keiba-ev-planner";
 const baseTag = (depth) => `<base id="site-base" href="${"../".repeat(depth)}">`;
 const source = await fs.readFile(path.join(root, "index.html"), "utf8");
 const context = { window: {} };

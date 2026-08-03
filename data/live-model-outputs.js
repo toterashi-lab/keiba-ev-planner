@@ -9158,5 +9158,8 @@ window.KEIBA_LIVE_MODEL_OUTPUTS = {
       "comment": "予想停止: 予想時刻が締切以後です、予想時点オッズがありません、特徴量欠損率が上限を超えています (65.0%)"
     }
   ],
-  "candidates": []
+  "candidates": [],
+  "settledWeekFallback": true,
+  "settledWeekFallbackAt": "2026-08-03T12:38:03.601Z",
+  "settledWeekFallbackReason": "全対象レース確定済みのため保存済み予想を維持"
 };

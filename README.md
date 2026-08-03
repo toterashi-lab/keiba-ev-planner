@@ -38,7 +38,7 @@ node scripts/prediction-hit-rate-audit.mjs
 
 ## 公開サイト
 
-- 本番URL: https://umayomi-keiba.vercel.app/
+- 本番URL: https://toterashi-lab.github.io/keiba-ev-planner/
 - 一般閲覧: ログイン不要
 - PV・訪問者・参照元: Vercel Web Analytics（プロジェクト所有者だけが管理画面で閲覧）
 - SEO: 72レースの予想URL、72レースの結果URL、5人のプロフィールURL、4本の初心者ガイド、スポンサー方針、canonical、OGP、Twitter Card、SportsEvent／Article JSON-LD、`robots.txt`、159 URLの`sitemap.xml`を収録

@@ -8,19 +8,20 @@ const manifest = JSON.parse(fs.readFileSync(new URL("../site.webmanifest", impor
 const vercel = JSON.parse(fs.readFileSync(new URL("../vercel.json", import.meta.url), "utf8"));
 
 for (const required of [
-  'rel="canonical" href="https://umayomi-keiba.vercel.app/"',
-  'property="og:image" content="https://umayomi-keiba.vercel.app/assets/og-umayomi.png"',
+  'rel="canonical" href="https://toterashi-lab.github.io/keiba-ev-planner/"',
+  'property="og:image" content="https://toterashi-lab.github.io/keiba-ev-planner/assets/og-umayomi.png"',
   'name="twitter:card" content="summary_large_image"',
   'type="application/ld+json"',
-  'src="/_vercel/insights/script.js"',
+  'if (!location.hostname.endsWith("github.io"))',
+  '"/_vercel/insights/script.js"',
 ]) assert.ok(html.includes(required), `SEO要素がありません: ${required}`);
 
 assert.ok(robots.includes("Allow: /") && robots.includes("sitemap.xml"));
-assert.ok(sitemap.includes("https://umayomi-keiba.vercel.app/"));
+assert.ok(sitemap.includes("https://toterashi-lab.github.io/keiba-ev-planner/"));
 assert.equal(manifest.lang, "ja");
 assert.equal(manifest.display, "standalone");
 assert.ok(vercel.headers?.some((rule) => rule.source === "/(.*)"));
 assert.ok(fs.statSync(new URL("../assets/og-umayomi.png", import.meta.url)).size > 100_000);
 
-console.log(JSON.stringify({ status: "pass", canonical: "https://umayomi-keiba.vercel.app/",
-  analytics: "enabled", sitemapUrls: 1 }, null, 2));
+console.log(JSON.stringify({ status: "pass", canonical: "https://toterashi-lab.github.io/keiba-ev-planner/",
+  analytics: "conditional-vercel-only", sitemapUrls: sitemap.match(/<url>/g)?.length ?? 0 }, null, 2));

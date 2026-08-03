@@ -50,8 +50,15 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Live expectancy generation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\live-market-ev-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Live expectancy validation failed: $LASTEXITCODE" }
-  & $node --no-warnings "scripts\audit-field-availability.mjs"
-  if ($LASTEXITCODE -ne 0) { throw "Source field availability audit failed: $LASTEXITCODE" }
+  $databaseStatusJson = & $node --no-warnings "scripts\jra-free-db.mjs" status
+  if ($LASTEXITCODE -ne 0) { throw "Database status failed: $LASTEXITCODE" }
+  $databaseStatus = $databaseStatusJson | ConvertFrom-Json
+  if ([int]$databaseStatus.rawRepair.pending -eq 0) {
+    & $node --no-warnings "scripts\audit-field-availability.mjs"
+    if ($LASTEXITCODE -ne 0) { throw "Source field availability audit failed: $LASTEXITCODE" }
+  } else {
+    Write-Warning ("Historical source audit deferred while raw archive repair is active: pendingMonths={0}." -f $databaseStatus.rawRepair.pending)
+  }
   & $node --no-warnings "scripts\prediction-snapshot.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Prediction snapshot persistence failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\export-current-week-racecards.mjs"
@@ -78,11 +85,12 @@ try {
   $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
   git add --all
   git diff --cached --quiet
-  if ($LASTEXITCODE -eq 0) { return }
-  git commit -m ("Update live JRA expectancy {0}" -f (Get-Date -Format "yyyy-MM-dd HH:mm"))
-  if ($LASTEXITCODE -ne 0) { throw "Git commit failed: $LASTEXITCODE" }
-  git push origin main
-  if ($LASTEXITCODE -ne 0) { throw "Git push failed: $LASTEXITCODE" }
+  if ($LASTEXITCODE -ne 0) {
+    git commit -m ("Update live JRA expectancy {0}" -f (Get-Date -Format "yyyy-MM-dd HH:mm"))
+    if ($LASTEXITCODE -ne 0) { throw "Git commit failed: $LASTEXITCODE" }
+    git push origin main
+    if ($LASTEXITCODE -ne 0) { throw "Git push failed: $LASTEXITCODE" }
+  }
 
   git fetch origin main --quiet
   if ($LASTEXITCODE -ne 0) { throw "Git remote verification fetch failed: $LASTEXITCODE" }

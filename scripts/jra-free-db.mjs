@@ -14,6 +14,7 @@ const DB_PATH = path.join(PRIVATE_DIR, "keiba.sqlite");
 const AUDIT_REPORT_PATH = path.join(PRIVATE_DIR, "models", "database-audit.json");
 const LOCK_PATH = path.join(PRIVATE_DIR, "worker.lock");
 const RUN_LOCK_PATH = path.join(PRIVATE_DIR, "backfill-run.lock");
+const RAW_REPAIR_RUN_LOCK_PATH = path.join(PRIVATE_DIR, "raw-repair-run.lock");
 const SYNC_REQUEST_PATH = path.join(PRIVATE_DIR, "current-sync.request");
 const USER_AGENT = "keiba-ev-planner/1.0 (personal research; low-rate official JRA archive fetcher)";
 const PARSER_VERSION = "jra-html-v1";
@@ -61,12 +62,16 @@ try {
     if (!result.pass) process.exitCode = 2;
   } else if (command === "repair-raw") {
     console.log(JSON.stringify(requeueMissingCoreRaw(), null, 2));
+  } else if (command === "run-raw-repair") {
+    await withLock(() => runRawRepairQueue(Number(options.limit ?? 1), Number(options.delay ?? 1200)),
+      RAW_REPAIR_RUN_LOCK_PATH, { recover: false });
+    console.log(JSON.stringify(statusReport(), null, 2));
   } else if (command === "lock-self-check") {
     await lockSelfCheck();
   } else if (command === "status") {
     console.log(JSON.stringify(statusReport(), null, 2));
   } else {
-    throw new Error("Commands: init, ingest-month, run, sync-current, audit, repair-raw, lock-self-check, status");
+    throw new Error("Commands: init, ingest-month, run, sync-current, audit, repair-raw, run-raw-repair, lock-self-check, status");
   }
 } finally {
   db.close();
@@ -103,6 +108,16 @@ function initializeSchema() {
       parser_version text not null,
       fetched_at text not null,
       parsed_at text
+    );
+    create table if not exists raw_repair_jobs (
+      month text primary key,
+      status text not null check(status in ('queued','running','complete','failed')),
+      attempts integer not null default 0,
+      missing_core_raw integer not null default 0,
+      last_error text,
+      started_at text,
+      completed_at text,
+      updated_at text not null
     );
     create table if not exists meetings (
       meeting_id text primary key,
@@ -402,7 +417,7 @@ async function yieldToCurrentSync(requestPath = SYNC_REQUEST_PATH) {
   await sleep(1000);
 }
 
-async function ingestMonth(month, delayMs) {
+async function ingestMonth(month, delayMs, { preserveCompleteStatus = false } = {}) {
   const startedAt = new Date().toISOString();
   activeIngestMonth = month;
   lastHeartbeatAt = 0;
@@ -411,9 +426,11 @@ async function ingestMonth(month, delayMs) {
   const previousStatus = db.prepare("select status from backfill_jobs where month=?").get(month)?.status;
   const backup = previousStatus === "complete" ? createMonthBackup(month) : null;
   if (previousStatus !== "complete") purgeNormalizedMonth(month);
-  db.prepare(`update backfill_jobs set status='running', attempts=attempts+1,
-    started_at=?, completed_at=null, last_error=null, updated_at=? where month=?`)
-    .run(startedAt, startedAt, month);
+  if (!preserveCompleteStatus) {
+    db.prepare(`update backfill_jobs set status='running', attempts=attempts+1,
+      started_at=?, completed_at=null, last_error=null, updated_at=? where month=?`)
+      .run(startedAt, startedAt, month);
+  }
 
   try {
     const search = await loadSearchIndex(delayMs);
@@ -871,33 +888,86 @@ function auditDatabase() {
 
 function requeueMissingCoreRaw() {
   const months = new Set();
+  const missingByMonth = new Map();
   const missingByType = {};
-  for (const row of db.prepare(`select id,request_key,page_type,raw_path from raw_pages
-    where page_type in ('month','meeting','race')`).all()) {
-    if (fs.existsSync(path.join(PRIVATE_DIR, row.raw_path))) continue;
+  const archivedPaths = indexCoreRawArchivePaths();
+  for (const row of db.prepare(`select p.id,p.request_key,p.page_type,p.raw_path,
+      coalesce(substr(m.race_date,1,7),substr(r.race_date,1,7)) linked_month
+    from raw_pages p
+    left join meetings m on p.page_type='meeting' and m.source_page_id=p.id
+    left join races r on p.page_type='race' and r.source_page_id=p.id
+    where p.page_type in ('month','meeting','race')`).all()) {
+    if (archivedPaths.has(normalizeRelativePath(row.raw_path))) continue;
     missingByType[row.page_type] = (missingByType[row.page_type] ?? 0) + 1;
+    let month = row.linked_month;
     if (row.page_type === "month") {
-      const match = row.request_key.match(/^pw01skl10(\d{4})(\d{2})/);
-      if (match) months.add(`${match[1]}-${match[2]}`);
-    } else if (row.page_type === "meeting") {
-      const linked = db.prepare("select substr(race_date,1,7) month from meetings where source_page_id=?").get(row.id);
-      if (linked?.month) months.add(linked.month);
-    } else {
-      const linked = db.prepare("select substr(race_date,1,7) month from races where source_page_id=?").get(row.id);
-      if (linked?.month) months.add(linked.month);
+      const match = row.request_key.match(/^pw01skl(?:00|10)(\d{4})(\d{2})/);
+      if (match) month = `${match[1]}-${match[2]}`;
     }
+    if (!month) continue;
+    months.add(month);
+    missingByMonth.set(month, (missingByMonth.get(month) ?? 0) + 1);
   }
   const now = new Date().toISOString();
-  const update = db.prepare(`update backfill_jobs set status='queued',attempts=0,
-    last_error='Raw archive repair required',updated_at=? where month=? and status='complete'`);
+  const upsert = db.prepare(`insert into raw_repair_jobs(month,status,attempts,missing_core_raw,updated_at)
+    values(?,'queued',0,?,?) on conflict(month) do update set
+      status=case when raw_repair_jobs.status='running' then 'running' else 'queued' end,
+      missing_core_raw=excluded.missing_core_raw,last_error=null,updated_at=excluded.updated_at`);
   let queuedMonths = 0;
   db.exec("begin immediate");
   try {
-    for (const month of [...months].sort()) queuedMonths += Number(update.run(now, month).changes);
+    for (const month of [...months].sort()) queuedMonths += Number(upsert.run(month, missingByMonth.get(month), now).changes);
     db.exec("commit");
   } catch (error) { db.exec("rollback"); throw error; }
   return { status: queuedMonths ? "repair_queued" : "complete", queuedMonths,
-    affectedMonths: months.size, missingCoreRaw: Object.values(missingByType).reduce((sum, count) => sum + count, 0), missingByType };
+    affectedMonths: months.size, missingCoreRaw: Object.values(missingByType).reduce((sum, count) => sum + count, 0),
+    missingByType, firstAffectedMonth: [...months].sort()[0] ?? null,
+    lastAffectedMonth: [...months].sort().at(-1) ?? null };
+}
+
+function indexCoreRawArchivePaths() {
+  const paths = new Set();
+  for (const pageType of ["month", "meeting", "race"]) {
+    const directory = path.join(RAW_DIR, pageType);
+    if (!fs.existsSync(directory)) continue;
+    for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+      if (entry.isFile()) {
+        const absolute = path.join(directory, entry.name);
+        paths.add(normalizeRelativePath(path.relative(PRIVATE_DIR, absolute)));
+      }
+    }
+  }
+  return paths;
+}
+
+async function runRawRepairQueue(limit, delayMs) {
+  const recoveredAt = new Date().toISOString();
+  db.prepare(`update raw_repair_jobs set status='queued',
+    last_error='Previous raw repair worker stopped before completion.',updated_at=? where status='running'`)
+    .run(recoveredAt);
+  const jobs = db.prepare(`select month from raw_repair_jobs
+    where status in ('queued','failed') and attempts<12 order by month desc limit ?`).all(limit);
+  for (const job of jobs) {
+    const startedAt = new Date().toISOString();
+    db.prepare(`update raw_repair_jobs set status='running',attempts=attempts+1,
+      started_at=?,completed_at=null,last_error=null,updated_at=? where month=?`)
+      .run(startedAt, startedAt, job.month);
+    try {
+      await withLock(() => ingestMonth(job.month, delayMs, { preserveCompleteStatus: true }),
+        LOCK_PATH, { waitMs: 30 * 60 * 1000 });
+      const completedAt = new Date().toISOString();
+      db.prepare(`update raw_repair_jobs set status='complete',missing_core_raw=0,
+        completed_at=?,updated_at=? where month=?`).run(completedAt, completedAt, job.month);
+    } catch (error) {
+      const failedAt = new Date().toISOString();
+      db.prepare(`update raw_repair_jobs set status='failed',last_error=?,updated_at=? where month=?`)
+        .run(String(error.stack ?? error).slice(0, 4000), failedAt, job.month);
+    }
+  }
+}
+
+function normalizeRelativePath(value) {
+  return String(value).replaceAll("\\", "/");
 }
 
 function migrateCanonicalHashes() {
@@ -951,7 +1021,9 @@ function statusReport() {
   const estimatedCompletionAt = estimatedHoursRemaining == null ? null
     : new Date(Date.now() + estimatedHoursRemaining * 60 * 60 * 1000).toISOString();
   const runLockOwner = readLockOwner(RUN_LOCK_PATH);
-  const runProcessAlive = Boolean(runLockOwner?.pid && isProcessAlive(runLockOwner.pid));
+  const ingestLockOwner = readLockOwner(LOCK_PATH);
+  const workerLockOwner = runLockOwner?.pid ? runLockOwner : ingestLockOwner;
+  const runProcessAlive = Boolean(workerLockOwner?.pid && isProcessAlive(workerLockOwner.pid));
   const heartbeatAgeSeconds = activeJobs.length
     ? Math.max(0, (Date.now() - new Date(activeJobs[0].updated_at).getTime()) / 1000) : null;
   const workerHealth = classifyWorkerHealth(activeJobs.length, runProcessAlive, heartbeatAgeSeconds);
@@ -961,6 +1033,10 @@ function statusReport() {
     ? Object.fromEntries(db.prepare("select status,count(*) count from historical_odds_jobs group by status")
       .all().map((row) => [row.status, row.count]))
     : {};
+  const rawRepair = Object.fromEntries(db.prepare("select status,count(*) count from raw_repair_jobs group by status")
+    .all().map((row) => [row.status, row.count]));
+  const rawRepairLockOwner = readLockOwner(RAW_REPAIR_RUN_LOCK_PATH);
+  const rawRepairProcessAlive = Boolean(rawRepairLockOwner?.pid && isProcessAlive(rawRepairLockOwner.pid));
   const requiredGates = ["calibration", "walk_forward", "odds_coverage", "odds_freshness", "drawdown"];
   const passedGates = latestModel ? db.prepare(`select gate_name from model_quality_gates
     where model_run_id=? and status='pass'`).all(latestModel.id).map((row) => row.gate_name) : [];
@@ -975,13 +1051,19 @@ function statusReport() {
     estimatedHoursRemaining,
     estimatedCompletionAt,
     workerHealth,
-    workerPid: runProcessAlive ? runLockOwner.pid : null,
+    workerPid: runProcessAlive ? workerLockOwner.pid : null,
     heartbeatAgeSeconds,
     activeJobs,
     failedJobs,
     historicalOdds: {
       ...historicalOdds,
       pending: (historicalOdds.queued ?? 0) + (historicalOdds.running ?? 0) + (historicalOdds.failed ?? 0),
+    },
+    rawRepair: {
+      ...rawRepair,
+      pending: (rawRepair.queued ?? 0) + (rawRepair.running ?? 0) + (rawRepair.failed ?? 0),
+      workerHealth: (rawRepair.running ?? 0) > 0 ? (rawRepairProcessAlive ? "healthy" : "orphaned") : "idle",
+      workerPid: rawRepairProcessAlive ? rawRepairLockOwner.pid : null,
     },
     ...totals,
     earliestComplete,

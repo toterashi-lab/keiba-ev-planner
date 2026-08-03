@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://umayomi-keiba.vercel.app/sitemap.xml
+Sitemap: https://toterashi-lab.github.io/keiba-ev-planner/sitemap.xml

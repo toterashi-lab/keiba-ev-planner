@@ -38,10 +38,14 @@ $node = "$env:USERPROFILE\.cache\codex-runtimes\codex-primary-runtime\dependenci
 & $node scripts\jra-free-odds.mjs capture --dates 2026-07-11,2026-07-12 --delay 1500
 & $node scripts\jra-free-odds.mjs audit
 & $node scripts\jra-free-db.mjs audit
+& $node scripts\jra-free-db.mjs repair-raw
+& $node scripts\jra-free-db.mjs run-raw-repair --limit 1 --delay 1200
 & $node scripts\jra-free-db.mjs status
 ```
 
 DBと原本は`data/jra-free-private/`に保存し、Git管理・公開配信から除外する。
+
+正規化DBが完成済みでも原本gzipが欠けている場合は、`repair-raw`が月次完成状態を変更せずに`raw_repair_jobs`へ欠損月を登録する。`run-core-raw-repair.ps1`は新しい月から1か月ずつ、既存の完成済みスナップショットをSQLite退避表へ保持して再取得し、月次品質ゲート合格後だけ原本修復を確定する。中断時は専用ロックと5分間隔の`KeibaEV-Backfill-Watchdog`が非表示ワーカーを再開する。最新週の公開品質ゲートと過去原本の長期復元は分離し、原本全件監査は修復キュー完了後に自動実行する。
 
 `KeibaEV-JRA-Free-Backfill`はログオン時に未完了月を再開する。`KeibaEV-JRA-Current-Sync`は毎日22時30分に現在月の公式年月ページを再取得し、新しい開催を月次ゲート合格後に置き換える。更新中断時はSQLite内の退避表から前回合格版を復元する。
 

@@ -659,7 +659,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牝3",
           "carriedWeight": 54,
           "jockeyId": "001221",
-          "jockeyName": "舟山 瑠泉",
+          "jockeyName": "△ 舟山 瑠泉",
           "officialTime": "1:49.6",
           "margin": "２",
           "cornerPositions": [
@@ -915,7 +915,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牝3",
           "carriedWeight": 52,
           "jockeyId": "001206",
-          "jockeyName": "小林 美駒",
+          "jockeyName": "▲ 小林 美駒",
           "officialTime": "1:29.6",
           "margin": "アタマ",
           "cornerPositions": [
@@ -1040,7 +1040,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牡3",
           "carriedWeight": 56,
           "jockeyId": "001214",
-          "jockeyName": "☆ 長浜 鴻緒",
+          "jockeyName": "△ 長浜 鴻緒",
           "officialTime": "1:30.9",
           "margin": "３",
           "cornerPositions": [
@@ -1090,7 +1090,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牡3",
           "carriedWeight": 56,
           "jockeyId": "001221",
-          "jockeyName": "舟山 瑠泉",
+          "jockeyName": "△ 舟山 瑠泉",
           "officialTime": "1:31.0",
           "margin": "クビ",
           "cornerPositions": [
@@ -1503,7 +1503,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牡3",
           "carriedWeight": 55,
           "jockeyId": "001190",
-          "jockeyName": "古川 奈穂",
+          "jockeyName": "◇ 古川 奈穂",
           "officialTime": "1:49.4",
           "margin": "１",
           "cornerPositions": [
@@ -1763,7 +1763,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牡6",
           "carriedWeight": 57,
           "jockeyId": "001221",
-          "jockeyName": "舟山 瑠泉",
+          "jockeyName": "△ 舟山 瑠泉",
           "officialTime": "2:40.7",
           "margin": "ハナ",
           "cornerPositions": [
@@ -2153,7 +2153,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牡2",
           "carriedWeight": 54,
           "jockeyId": "001221",
-          "jockeyName": "舟山 瑠泉",
+          "jockeyName": "△ 舟山 瑠泉",
           "officialTime": "1:51.2",
           "margin": "１ 3/4",
           "cornerPositions": [
@@ -2850,7 +2850,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牝3",
           "carriedWeight": 54,
           "jockeyId": "001214",
-          "jockeyName": "☆ 長浜 鴻緒",
+          "jockeyName": "△ 長浜 鴻緒",
           "officialTime": "2:00.7",
           "margin": "",
           "cornerPositions": [
@@ -2954,7 +2954,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牝3",
           "carriedWeight": 52,
           "jockeyId": "001206",
-          "jockeyName": "小林 美駒",
+          "jockeyName": "▲ 小林 美駒",
           "officialTime": "2:01.4",
           "margin": "クビ",
           "cornerPositions": [
@@ -3110,7 +3110,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牡3",
           "carriedWeight": 56,
           "jockeyId": "001221",
-          "jockeyName": "舟山 瑠泉",
+          "jockeyName": "△ 舟山 瑠泉",
           "officialTime": "2:03.6",
           "margin": "８",
           "cornerPositions": [
@@ -3826,7 +3826,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牡5",
           "carriedWeight": 56,
           "jockeyId": "001190",
-          "jockeyName": "古川 奈穂",
+          "jockeyName": "◇ 古川 奈穂",
           "officialTime": "0:59.2",
           "margin": "１",
           "cornerPositions": [
@@ -3874,7 +3874,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牝4",
           "carriedWeight": 55,
           "jockeyId": "001214",
-          "jockeyName": "☆ 長浜 鴻緒",
+          "jockeyName": "△ 長浜 鴻緒",
           "officialTime": "0:59.9",
           "margin": "１／２",
           "cornerPositions": [
@@ -3898,7 +3898,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "せん4",
           "carriedWeight": 55,
           "jockeyId": "001206",
-          "jockeyName": "小林 美駒",
+          "jockeyName": "▲ 小林 美駒",
           "officialTime": "1:00.4",
           "margin": "３",
           "cornerPositions": [
@@ -4254,7 +4254,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牡4",
           "carriedWeight": 58,
           "jockeyId": "001190",
-          "jockeyName": "古川 奈穂",
+          "jockeyName": "◇ 古川 奈穂",
           "officialTime": "1:46.4",
           "margin": "３",
           "cornerPositions": [
@@ -4774,7 +4774,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牝5",
           "carriedWeight": 55,
           "jockeyId": "001221",
-          "jockeyName": "舟山 瑠泉",
+          "jockeyName": "△ 舟山 瑠泉",
           "officialTime": "1:47.8",
           "margin": "３／４",
           "cornerPositions": [
@@ -4954,7 +4954,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牡3",
           "carriedWeight": 56,
           "jockeyId": "001221",
-          "jockeyName": "舟山 瑠泉",
+          "jockeyName": "△ 舟山 瑠泉",
           "officialTime": "1:09.3",
           "margin": "１／２",
           "cornerPositions": [
@@ -5050,7 +5050,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牝4",
           "carriedWeight": 56,
           "jockeyId": "001206",
-          "jockeyName": "小林 美駒",
+          "jockeyName": "▲ 小林 美駒",
           "officialTime": "1:09.6",
           "margin": "クビ",
           "cornerPositions": [
@@ -5610,7 +5610,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牡2",
           "carriedWeight": 53,
           "jockeyId": "001209",
-          "jockeyName": "△ 石神 深道",
+          "jockeyName": "▲ 石神 深道",
           "officialTime": "1:35.6",
           "margin": "１ 1/4",
           "cornerPositions": [
@@ -6370,7 +6370,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牝2",
           "carriedWeight": 53,
           "jockeyId": "001209",
-          "jockeyName": "△ 石神 深道",
+          "jockeyName": "▲ 石神 深道",
           "officialTime": "1:37.4",
           "margin": "１／２",
           "cornerPositions": [
@@ -6418,7 +6418,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牡2",
           "carriedWeight": 53,
           "jockeyId": "001193",
-          "jockeyName": "◇ 今村 聖奈",
+          "jockeyName": "今村 聖奈",
           "officialTime": "1:37.8",
           "margin": "２ 1/2",
           "cornerPositions": [
@@ -7328,7 +7328,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牡3",
           "carriedWeight": 55,
           "jockeyId": "001209",
-          "jockeyName": "△ 石神 深道",
+          "jockeyName": "▲ 石神 深道",
           "officialTime": "1:48.2",
           "margin": "ハナ",
           "cornerPositions": [
@@ -7472,7 +7472,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牝3",
           "carriedWeight": 53,
           "jockeyId": "001193",
-          "jockeyName": "◇ 今村 聖奈",
+          "jockeyName": "今村 聖奈",
           "officialTime": "1:49.1",
           "margin": "２ 1/2",
           "cornerPositions": [
@@ -7702,7 +7702,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牡4",
           "carriedWeight": 58,
           "jockeyId": "001193",
-          "jockeyName": "◇ 今村 聖奈",
+          "jockeyName": "今村 聖奈",
           "officialTime": "1:52.9",
           "margin": "１／２",
           "cornerPositions": [
@@ -8819,7 +8819,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牝5",
           "carriedWeight": 56,
           "jockeyId": "001193",
-          "jockeyName": "◇ 今村 聖奈",
+          "jockeyName": "今村 聖奈",
           "officialTime": "1:46.3",
           "margin": "アタマ",
           "cornerPositions": [
@@ -9201,7 +9201,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牡3",
           "carriedWeight": 53,
           "jockeyId": "001209",
-          "jockeyName": "△ 石神 深道",
+          "jockeyName": "▲ 石神 深道",
           "officialTime": "1:55.3",
           "margin": "クビ",
           "cornerPositions": [
@@ -9253,7 +9253,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "せん3",
           "carriedWeight": 53,
           "jockeyId": "001193",
-          "jockeyName": "◇ 今村 聖奈",
+          "jockeyName": "今村 聖奈",
           "officialTime": "1:56.0",
           "margin": "４",
           "cornerPositions": [
@@ -9953,7 +9953,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牝3",
           "carriedWeight": 53,
           "jockeyId": "001209",
-          "jockeyName": "△ 石神 深道",
+          "jockeyName": "▲ 石神 深道",
           "officialTime": "2:12.5",
           "margin": "",
           "cornerPositions": [
@@ -10685,7 +10685,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牝3",
           "carriedWeight": 53,
           "jockeyId": "001209",
-          "jockeyName": "△ 石神 深道",
+          "jockeyName": "▲ 石神 深道",
           "officialTime": "1:22.3",
           "margin": "１ 3/4",
           "cornerPositions": [
@@ -10757,7 +10757,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牡3",
           "carriedWeight": 55,
           "jockeyId": "001193",
-          "jockeyName": "◇ 今村 聖奈",
+          "jockeyName": "今村 聖奈",
           "officialTime": "1:22.9",
           "margin": "１ 3/4",
           "cornerPositions": [
@@ -11214,7 +11214,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牝3",
           "carriedWeight": 54,
           "jockeyId": "001220",
-          "jockeyName": "☆ 田山 旺佑",
+          "jockeyName": "▲ 田山 旺佑",
           "officialTime": "2:00.9",
           "margin": "１ 3/4",
           "cornerPositions": [
@@ -11344,7 +11344,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牝3",
           "carriedWeight": 53,
           "jockeyId": "001212",
-          "jockeyName": "柴田 裕一郎",
+          "jockeyName": "△ 柴田 裕一郎",
           "officialTime": "2:01.7",
           "margin": "２",
           "cornerPositions": [
@@ -11604,7 +11604,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牡2",
           "carriedWeight": 54,
           "jockeyId": "001220",
-          "jockeyName": "☆ 田山 旺佑",
+          "jockeyName": "▲ 田山 旺佑",
           "officialTime": "2:00.9",
           "margin": "３ 1/2",
           "cornerPositions": [
@@ -12209,7 +12209,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牡3",
           "carriedWeight": 56,
           "jockeyId": "001220",
-          "jockeyName": "☆ 田山 旺佑",
+          "jockeyName": "▲ 田山 旺佑",
           "officialTime": "1:13.0",
           "margin": "クビ",
           "cornerPositions": [
@@ -12401,7 +12401,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牝3",
           "carriedWeight": 53,
           "jockeyId": "001212",
-          "jockeyName": "柴田 裕一郎",
+          "jockeyName": "△ 柴田 裕一郎",
           "officialTime": "1:14.3",
           "margin": "ハナ",
           "cornerPositions": [
@@ -12829,7 +12829,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牝3",
           "carriedWeight": 52,
           "jockeyId": "001220",
-          "jockeyName": "☆ 田山 旺佑",
+          "jockeyName": "▲ 田山 旺佑",
           "officialTime": "1:57.3",
           "margin": "アタマ",
           "cornerPositions": [
@@ -13813,7 +13813,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牝5",
           "carriedWeight": 56,
           "jockeyId": "001212",
-          "jockeyName": "柴田 裕一郎",
+          "jockeyName": "△ 柴田 裕一郎",
           "officialTime": "1:13.3",
           "margin": "３／４",
           "cornerPositions": [
@@ -14526,7 +14526,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牡3",
           "carriedWeight": 54,
           "jockeyId": "001220",
-          "jockeyName": "☆ 田山 旺佑",
+          "jockeyName": "▲ 田山 旺佑",
           "officialTime": "2:02.0",
           "margin": "ハナ",
           "cornerPositions": [
@@ -15254,7 +15254,7 @@ window.KEIBA_LIVE_RACECARDS = {
           "sexAge": "牝3",
           "carriedWeight": 52,
           "jockeyId": "001220",
-          "jockeyName": "☆ 田山 旺佑",
+          "jockeyName": "▲ 田山 旺佑",
           "officialTime": "1:20.2",
           "margin": "クビ",
           "cornerPositions": [
@@ -15621,11 +15621,11 @@ window.KEIBA_LIVE_RACECARDS = {
   ],
   "raceCount": 36,
   "entryCount": 462,
-  "generatedAt": "2026-08-03T10:36:25.644Z",
+  "generatedAt": "2026-08-03T12:38:03.302Z",
   "resultSync": {
     "status": "complete",
     "settledRaces": 36,
-    "syncedAt": "2026-08-03T10:36:25.644Z",
+    "syncedAt": "2026-08-03T12:38:03.302Z",
     "source": "JRA公式確定結果・払戻"
   }
 };
