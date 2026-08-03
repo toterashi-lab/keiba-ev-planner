@@ -1117,7 +1117,7 @@ function characterImageHtml(agentId, stateName = "normal", className = "characte
   const safeState = leagueSystem?.STATES?.includes(stateName) ? stateName : "normal";
   const persona = personaForId(definition.id);
   const src = leagueSystem?.characterImage(definition.id, safeState) || `assets/characters/${definition.id}-${safeState}.webp`;
-  return `<img class="${escapeHtml(className)}" src="/${escapeHtml(src)}" width="320" height="640" loading="${eager ? "eager" : "lazy"}" decoding="async" alt="${escapeHtml(persona.displayName)}の${characterStateLabel(safeState)}姿" />`;
+  return `<img class="${escapeHtml(className)}" src="${SITE_PREFIX}/${escapeHtml(src)}" width="320" height="640" loading="${eager ? "eager" : "lazy"}" decoding="async" alt="${escapeHtml(persona.displayName)}の${characterStateLabel(safeState)}姿" />`;
 }
 function nextRacePreview(result) {
   const rows = (currentEdition.meetings || []).flatMap((meeting) => (meeting.tracks || []).flatMap((track) => (track.races || []).map((race) => ({ meeting, track, race }))));
