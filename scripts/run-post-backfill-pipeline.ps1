@@ -131,8 +131,15 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Core raw archive repair initialization failed: $LASTEXITCODE" }
   $coreRepair = $coreRepairJson | ConvertFrom-Json
   if ([int]$coreRepair.queuedMonths -gt 0) {
-    $task = Get-ScheduledTask -TaskName "KeibaEV-JRA-Free-Backfill" -ErrorAction SilentlyContinue
-    if ($task -and $task.State -ne "Running") { Start-ScheduledTask -TaskName "KeibaEV-JRA-Free-Backfill" }
+    $rawRepairWorker = Get-CimInstance Win32_Process | Where-Object {
+      $_.CommandLine -like "*run-core-raw-repair.ps1*"
+    } | Select-Object -First 1
+    if (-not $rawRepairWorker) {
+      Start-Process -FilePath "powershell.exe" -ArgumentList @(
+        "-NoProfile", "-WindowStyle", "Hidden", "-ExecutionPolicy", "Bypass", "-File",
+        (Join-Path $PSScriptRoot "run-core-raw-repair.ps1")
+      ) -WorkingDirectory $root -WindowStyle Hidden
+    }
     Write-Output ("Core raw archive repair queued: {0} months. Model pipeline is waiting." -f $coreRepair.queuedMonths)
     exit 0
   }
