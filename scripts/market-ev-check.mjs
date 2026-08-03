@@ -1,8 +1,8 @@
 import fs from "node:fs";
 
-const meetings = JSON.parse(fs.readFileSync("data/meet-2026-07-11-2026-07-12.json", "utf8")).meetings;
-const model = JSON.parse(fs.readFileSync("data/model-outputs-2026-07-11-2026-07-12.json", "utf8"));
-const closingOdds = JSON.parse(fs.readFileSync("data/closing-odds-2026-07-11-2026-07-12.json", "utf8"));
+const meetings = JSON.parse(fs.readFileSync("data/reference-archive/2026-07-11_2026-07-12/meet-2026-07-11-2026-07-12.json", "utf8")).meetings;
+const model = JSON.parse(fs.readFileSync("data/reference-archive/2026-07-11_2026-07-12/model-outputs-2026-07-11-2026-07-12.json", "utf8"));
+const closingOdds = JSON.parse(fs.readFileSync("data/reference-archive/2026-07-11_2026-07-12/closing-odds-2026-07-11-2026-07-12.json", "utf8"));
 const pricedHorseCounts = new Map(closingOdds.races.map((race) => [race.raceId,
   race.prices.filter((row) => Number.isInteger(row.horseNumber) && row.win > 0).length]));
 const betTypes = ["単勝", "馬連", "3連複", "3連単"];

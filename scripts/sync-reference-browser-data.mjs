@@ -2,8 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = path.resolve(import.meta.dirname, "..");
-const source = path.join(root, "data", "model-outputs-2026-07-11-2026-07-12.json");
-const destination = path.join(root, "data", "model-outputs-2026-07-11-2026-07-12.js");
+const source = path.join(root, "data", "reference-archive/2026-07-11_2026-07-12/model-outputs-2026-07-11-2026-07-12.json");
+const destination = path.join(root, "data", "reference-archive/2026-07-11_2026-07-12/model-outputs-2026-07-11-2026-07-12.js");
 
 if (!fs.existsSync(source)) throw new Error(`参照モデルJSONがありません: ${source}`);
 const model = JSON.parse(fs.readFileSync(source, "utf8"));

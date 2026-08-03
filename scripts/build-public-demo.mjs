@@ -10,13 +10,13 @@ const sourceDir = path.resolve(import.meta.dirname, "..");
 const outDir = sourceDir;
 const privateDir = resolvePrivateDataDir(sourceDir);
 const dataDir = path.join(outDir, "data");
-const programmeRaw = fs.readFileSync("data/meet-2026-07-11-2026-07-12.json", "utf8");
-const resultsRaw = fs.readFileSync("data/results-2026-07-11-2026-07-12.json", "utf8");
-const resultLinksRaw = fs.readFileSync("data/result-links-2026-07-11-2026-07-12.json", "utf8");
+const programmeRaw = fs.readFileSync("data/reference-archive/2026-07-11_2026-07-12/meet-2026-07-11-2026-07-12.json", "utf8");
+const resultsRaw = fs.readFileSync("data/reference-archive/2026-07-11_2026-07-12/results-2026-07-11-2026-07-12.json", "utf8");
+const resultLinksRaw = fs.readFileSync("data/reference-archive/2026-07-11_2026-07-12/result-links-2026-07-11-2026-07-12.json", "utf8");
 const programmeData = JSON.parse(programmeRaw);
 const resultsData = JSON.parse(resultsRaw);
 const resultLinksData = JSON.parse(resultLinksRaw);
-const modelOutputs = JSON.parse(fs.readFileSync("data/model-outputs-2026-07-11-2026-07-12.json", "utf8"));
+const modelOutputs = JSON.parse(fs.readFileSync("data/reference-archive/2026-07-11_2026-07-12/model-outputs-2026-07-11-2026-07-12.json", "utf8"));
 const payoutPatterns = JSON.parse(fs.readFileSync("data/historical-payout-patterns.json", "utf8"));
 const abilityArtifactPath = [path.join(privateDir, "models", "reference-asof-model.json"),
   path.join(privateDir, "models", "ability-softmax-v1.json")].find((candidate) => fs.existsSync(candidate));
@@ -26,7 +26,7 @@ const liveExport = exportLiveEdition();
 const liveRacecardsText = browserDataText("KEIBA_LIVE_RACECARDS", liveExport.racecards);
 const liveModelOutputsText = browserDataText("KEIBA_LIVE_MODEL_OUTPUTS", liveExport.modelOutputs);
 const featureCoverage = exportFeatureCoverage(databaseExport.status.asOf);
-const quality = JSON.parse(fs.readFileSync("data/quality-report-2026-07-11-2026-07-12.json", "utf8"));
+const quality = JSON.parse(fs.readFileSync("data/reference-archive/2026-07-11_2026-07-12/quality-report-2026-07-11-2026-07-12.json", "utf8"));
 const currentHash = crypto.createHash("sha256").update(programmeRaw + resultsRaw).digest("hex");
 const publicationCore = {
   version: "publication-manifest-v1",
@@ -59,6 +59,7 @@ if (resultLinksData.raceCount !== resultsData.results.length || !sameSet(resultL
 const stageDir = fs.mkdtempSync(path.join(os.tmpdir(), "keiba-public-stage-"));
 const stageDataDir = path.join(stageDir, "data");
 fs.mkdirSync(stageDataDir, { recursive: true });
+fs.mkdirSync(path.join(stageDataDir, "reference-archive", "2026-07-11_2026-07-12"), { recursive: true });
 for (const file of ["AGENTS.md", "index.html", "styles.css", "ticket-engine.js", "app.js"]) copy(file, path.join(stageDir, file));
 fs.mkdirSync(path.join(stageDir, "docs"), { recursive: true });
 fs.mkdirSync(path.join(stageDir, "scripts"), { recursive: true });
@@ -170,14 +171,14 @@ for (const file of [
   "live-ev-ledger-check.mjs",
   "publish-live-web.ps1",
 ]) copy(path.join("scripts", file), path.join(stageDir, "scripts", file));
-writeBrowserData(path.join(stageDataDir, "meet-2026-07-11-2026-07-12.js"), "KEIBA_REFERENCE_MEETINGS", programmeData);
-writeBrowserData(path.join(stageDataDir, "result-links-2026-07-11-2026-07-12.js"), "KEIBA_RESULT_LINKS", resultLinksData);
-writeBrowserData(path.join(stageDataDir, "results-2026-07-11-2026-07-12.js"), "KEIBA_RESULTS", resultsData);
+writeBrowserData(path.join(stageDataDir, "reference-archive/2026-07-11_2026-07-12/meet-2026-07-11-2026-07-12.js"), "KEIBA_REFERENCE_MEETINGS", programmeData);
+writeBrowserData(path.join(stageDataDir, "reference-archive/2026-07-11_2026-07-12/result-links-2026-07-11-2026-07-12.js"), "KEIBA_RESULT_LINKS", resultLinksData);
+writeBrowserData(path.join(stageDataDir, "reference-archive/2026-07-11_2026-07-12/results-2026-07-11-2026-07-12.js"), "KEIBA_RESULTS", resultsData);
 writeBrowserData(path.join(stageDataDir, "database-status.js"), "KEIBA_DATABASE_STATUS", databaseExport.status);
 writeBrowserData(path.join(stageDataDir, "model-feature-coverage.js"), "KEIBA_MODEL_FEATURE_COVERAGE", featureCoverage);
 writeBrowserData(path.join(stageDataDir, "historical-payout-patterns.js"), "KEIBA_HISTORICAL_PAYOUT_PATTERNS", payoutPatterns);
-writeBrowserData(path.join(stageDataDir, "closing-odds-2026-07-11-2026-07-12.js"), "KEIBA_CLOSING_ODDS", databaseExport.odds);
-writeBrowserData(path.join(stageDataDir, "model-outputs-2026-07-11-2026-07-12.js"), "KEIBA_MODEL_OUTPUTS", modelOutputs, 0);
+writeBrowserData(path.join(stageDataDir, "reference-archive/2026-07-11_2026-07-12/closing-odds-2026-07-11-2026-07-12.js"), "KEIBA_CLOSING_ODDS", databaseExport.odds);
+writeBrowserData(path.join(stageDataDir, "reference-archive/2026-07-11_2026-07-12/model-outputs-2026-07-11-2026-07-12.js"), "KEIBA_MODEL_OUTPUTS", modelOutputs, 0);
 fs.writeFileSync(path.join(stageDataDir, "live-racecards.js"), liveRacecardsText, "utf8");
 fs.writeFileSync(path.join(stageDataDir, "live-model-outputs.js"), liveModelOutputsText, "utf8");
 fs.writeFileSync(path.join(stageDataDir, "publication-manifest.json"), `${JSON.stringify(publicationManifest, null, 2)}\n`, "utf8");

@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = path.resolve(import.meta.dirname, "..");
+const archiveDir = path.join(root, "data", "reference-archive", "2026-07-11_2026-07-12");
 const names = [
   "meet-2026-07-11-2026-07-12",
   "results-2026-07-11-2026-07-12",
@@ -12,8 +13,8 @@ const names = [
 
 const written = [];
 for (const name of names) {
-  const source = path.join(root, "data", `${name}.js`);
-  const destination = path.join(root, "data", `${name}.json`);
+  const source = path.join(archiveDir, `${name}.js`);
+  const destination = path.join(archiveDir, `${name}.json`);
   if (!fs.existsSync(source)) throw new Error(`参照データがありません: ${source}`);
   const text = fs.readFileSync(source, "utf8");
   const assignment = text.indexOf("=");

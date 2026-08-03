@@ -68,6 +68,10 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Agent performance export failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\build-live-publication.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Public build failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\update-public-cache-busters.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Public cache refresh failed: $LASTEXITCODE" }
+  & $node --no-warnings "scripts\generate-static-pages.mjs"
+  if ($LASTEXITCODE -ne 0) { throw "Static page generation failed: $LASTEXITCODE" }
   Set-Location $public
   $manifestPath = Join-Path $public "data\publication-manifest.json"
   if (-not (Test-Path -LiteralPath $manifestPath)) { throw "Publication manifest is missing." }

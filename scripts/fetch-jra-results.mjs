@@ -1,8 +1,8 @@
 import fs from "node:fs";
 
 const args = globalThis.process?.argv ?? [];
-const linkPath = args[2] ?? "data/result-links-2026-07-11-2026-07-12.json";
-const outPath = args[3] ?? "data/results-2026-07-11-2026-07-12.json";
+const linkPath = args[2] ?? "data/reference-archive/2026-07-11_2026-07-12/result-links-2026-07-11-2026-07-12.json";
+const outPath = args[3] ?? "data/reference-archive/2026-07-11_2026-07-12/results-2026-07-11-2026-07-12.json";
 const jsPath = outPath.replace(/\.json$/, ".js");
 
 const linkData = JSON.parse(fs.readFileSync(linkPath, "utf8"));

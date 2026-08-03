@@ -4,7 +4,7 @@ import { DatabaseSync } from "node:sqlite";
 import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
-const sourcePath = path.join(root, "data", "closing-odds-2026-07-11-2026-07-12.json");
+const sourcePath = path.join(root, "data", "reference-archive/2026-07-11_2026-07-12/closing-odds-2026-07-11-2026-07-12.json");
 const source = JSON.parse(fs.readFileSync(sourcePath, "utf8"));
 const targetDates = [...(source.targetDates || [])].sort().join(",");
 const db = new DatabaseSync(path.join(resolvePrivateDataDir(root), "keiba.sqlite"));

@@ -2,9 +2,9 @@ import fs from "node:fs";
 import crypto from "node:crypto";
 
 const args = globalThis.process?.argv ?? [];
-const programmePath = args[2] ?? "data/meet-2026-07-11-2026-07-12.json";
-const resultsPath = args[3] ?? "data/results-2026-07-11-2026-07-12.json";
-const outPath = args[4] ?? "data/quality-report-2026-07-11-2026-07-12.json";
+const programmePath = args[2] ?? "data/reference-archive/2026-07-11_2026-07-12/meet-2026-07-11-2026-07-12.json";
+const resultsPath = args[3] ?? "data/reference-archive/2026-07-11_2026-07-12/results-2026-07-11-2026-07-12.json";
+const outPath = args[4] ?? "data/reference-archive/2026-07-11_2026-07-12/quality-report-2026-07-11-2026-07-12.json";
 
 const programmeRaw = fs.readFileSync(programmePath, "utf8");
 const resultsRaw = fs.readFileSync(resultsPath, "utf8");

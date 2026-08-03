@@ -1,6 +1,6 @@
 window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = {
   "status": "research_only",
-  "generatedAt": "2026-08-02T15:00:18.823Z",
+  "generatedAt": "2026-08-03T10:43:57.467Z",
   "source": "JRA official completed race results and payouts",
   "leakagePolicy": {
     "discovery": "race_date < 2020-01-01",

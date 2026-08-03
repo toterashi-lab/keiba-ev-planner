@@ -6,6 +6,7 @@ import { resolvePrivateDataDir } from "./private-data-path.mjs";
 const ROOT = path.resolve(import.meta.dirname, "..");
 const DB_PATH = path.join(resolvePrivateDataDir(ROOT), "keiba.sqlite");
 const OUTPUT_PATH = path.join("data", "historical-payout-patterns.json");
+const BROWSER_OUTPUT_PATH = path.join("data", "historical-payout-patterns.js");
 const VALIDATION_FROM = "2020-01-01";
 const TARGET_CUTOFF = "2026-07-11";
 const MIN_DISCOVERY = 250;
@@ -86,6 +87,7 @@ try {
     patterns: patterns.slice(0, 200),
   };
   fs.writeFileSync(OUTPUT_PATH, `${JSON.stringify(result, null, 2)}\n`, "utf8");
+  fs.writeFileSync(BROWSER_OUTPUT_PATH, `window.KEIBA_HISTORICAL_PAYOUT_PATTERNS = ${JSON.stringify(result, null, 2)};\n`, "utf8");
   console.log(JSON.stringify({
     output: OUTPUT_PATH,
     coverage: result.coverage,

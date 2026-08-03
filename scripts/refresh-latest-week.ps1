@@ -100,6 +100,7 @@ try {
     Invoke-NodeStep "published-result-sync" @("scripts\sync-published-replay-results.mjs")
     Invoke-NodeStep "weekly-result-evaluation" @("scripts\evaluate-live-replay-results.mjs")
     Invoke-NodeStep "weekly-result-validation" @("scripts\live-replay-result-audit-check.mjs")
+    Invoke-NodeStep "public-cache-refresh" @("scripts\update-public-cache-busters.mjs")
     Invoke-NodeStep "static-page-generation" @("scripts\generate-static-pages.mjs")
   } elseif (-not $repositoryWasClean) {
     $steps.Add([ordered]@{ name = "publication"; status = "skipped"; reason = "repository_not_clean_before_refresh" })

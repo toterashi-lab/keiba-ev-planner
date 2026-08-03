@@ -11,7 +11,9 @@ const audit = window.KEIBA_LIVE_REPLAY_AUDIT;
 const records = audit?.records ?? [];
 
 assert.equal(audit?.status, "replay_only");
-assert.ok(records.length >= results.length, "週履歴は今回の確定レースを含む必要があります");
+assert.equal(records.length, results.length, "最新週の照合記録だけを本体へ保持する必要があります");
+const activeDates = new Set(window.KEIBA_LIVE_RACECARDS?.targetDates ?? []);
+assert.ok(records.every((record) => activeDates.has(record.date)), "旧週の照合記録が最新週へ混在しています");
 const recordIds = new Set(records.map((record) => record.raceId));
 assert.ok(results.every((result) => recordIds.has(result.raceId)), "今回の確定レースすべてに照合記録が必要です");
 assert.ok(records.every((record) => record.tickets?.length === 3));

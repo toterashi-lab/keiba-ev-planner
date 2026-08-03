@@ -2,7 +2,7 @@ import fs from "node:fs";
 import crypto from "node:crypto";
 
 const args = globalThis.process?.argv ?? [];
-const resultPath = args[2] ?? "data/results-2026-07-11-2026-07-12.json";
+const resultPath = args[2] ?? "data/reference-archive/2026-07-11_2026-07-12/results-2026-07-11-2026-07-12.json";
 const outPath = args[3] ?? "seeds/2026-07-11-2026-07-12-results.sql";
 const data = JSON.parse(fs.readFileSync(resultPath, "utf8"));
 

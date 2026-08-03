@@ -24,6 +24,15 @@ for (const agent of ["safety", "sniper", "pace", "analyst", "contrarian"]) {
   for (const state of ["normal", "happy", "defeat", "angry", "awakened"]) assert.ok(fs.existsSync(`assets/characters/${agent}-${state}.webp`), `${agent}-${state}画像`);
 }
 const sitemap = fs.readFileSync("sitemap.xml", "utf8");
-for (const entry of racePages) assert.ok(sitemap.includes(`/race/${entry.name}/`), `${entry.name}の予想URLをサイトマップへ保持`);
-for (const entry of resultPages) assert.ok(sitemap.includes(`/result/${entry.name}/`), `${entry.name}の結果URLをサイトマップへ保持`);
-console.log(`static-route-check: PASS (${racePages.length} race archives, 4 guides, partner policy, 25 character states)`);
+for (const [directory, entries] of [["race", racePages], ["result", resultPages]]) {
+  for (const entry of entries) {
+    const page = fs.readFileSync(path.join(directory, entry.name, "index.html"), "utf8");
+    if (page.includes('content="noindex,follow"')) {
+      assert.ok(!sitemap.includes(`/${directory}/${entry.name}/`), `${entry.name}の退避URLをサイトマップへ混ぜない`);
+      assert.match(page, /過去アーカイブへ移動しました/, `${entry.name}の退避案内`);
+    } else {
+      assert.ok(sitemap.includes(`/${directory}/${entry.name}/`), `${entry.name}の最新URLをサイトマップへ保持`);
+    }
+  }
+}
+console.log(`static-route-check: PASS (${racePages.length} race pages, stale pages archived, 4 guides, partner policy, 25 character states)`);

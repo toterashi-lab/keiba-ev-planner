@@ -8,12 +8,13 @@ const origin = "https://umayomi-keiba.vercel.app";
 const source = await fs.readFile(path.join(root, "index.html"), "utf8");
 const context = { window: {} };
 vm.createContext(context);
-for (const file of ["data/meet-2026-07-11-2026-07-12.js", "data/results-2026-07-11-2026-07-12.js", "data/live-racecards.js"]) {
+for (const file of ["data/live-racecards.js"]) {
   vm.runInContext(await fs.readFile(path.join(root, file), "utf8"), context, { filename: file });
 }
-const edition = context.window.KEIBA_LIVE_RACECARDS?.meetings?.length ? context.window.KEIBA_LIVE_RACECARDS : context.window.KEIBA_REFERENCE_MEETINGS;
+const edition = context.window.KEIBA_LIVE_RACECARDS ?? { meetings: [], results: [] };
 const resultIds = new Set((context.window.KEIBA_LIVE_RACECARDS?.results || []).map((row) => row.raceId));
 const pages = [];
+const activeRaceSlugs = new Set();
 
 for (const page of [
   ["races", "全レースのAI競馬予想・競馬指数・買い目", "開催日と競馬場から、5人のAI予想家の競馬指数、単勝、馬連、3連複の買い目を確認できます。"],
@@ -31,6 +32,7 @@ for (const meeting of edition.meetings || []) {
   for (const track of meeting.tracks || []) {
     for (const race of track.races || []) {
       const slug = `${meeting.date}-${String(track.venueCode).padStart(2, "0")}-${String(race.no).padStart(2, "0")}`;
+      activeRaceSlugs.add(slug);
       const baseTitle = `${track.venueName}${race.no}R ${race.name}`;
       const description = `${meeting.date} ${baseTitle}のAI競馬予想。5人のAI予想家による競馬指数、印、単勝・馬連・3連複の買い目と予想根拠を掲載します。`;
       const ld = { "@context": "https://schema.org", "@type": "SportsEvent", name: baseTitle, startDate: `${meeting.date}T${race.start}:00+09:00`, eventStatus: resultIds.has(race.raceId) ? "https://schema.org/EventCompleted" : "https://schema.org/EventScheduled", location: { "@type": "Place", name: `${track.venueName}競馬場` }, organizer: { "@type": "Organization", name: "JRA" } };
@@ -39,6 +41,8 @@ for (const meeting of edition.meetings || []) {
     }
   }
 }
+await archiveStaleRacePages("race", activeRaceSlugs);
+await archiveStaleRacePages("result", activeRaceSlugs);
 
 const guides = [
   { slug: "ai-keiba", title: "AI競馬予想とは", lead: "競馬AIが過去データから勝つ確率を考える仕組みを、専門用語を減らして説明します。", sections: [["AI予想で分かること","AI競馬予想は、過去の着順、競馬場、距離、脚質、騎手などを比べて各馬を評価します。ウマヨミでは5人のAIが別々の見方で予想し、同じ結論と意見の違いを表示します。"],["結果との比べ方","予想時点の印と買い目を残し、確定した着順と払戻を後から照合します。的中率や回収率は過去の結果であり、将来の利益を保証する数字ではありません。"]] },
@@ -49,8 +53,7 @@ const guides = [
 for (const guide of guides) await writeGuide(guide);
 await writePartnerPage();
 
-const archivedRaceRoutes = [...await staticRoutes("race"), ...await staticRoutes("result")];
-const sitemapEntries = [...new Set(["/", ...pages.map((page) => `/${page.path}/`), ...archivedRaceRoutes,
+const sitemapEntries = [...new Set(["/", ...pages.map((page) => `/${page.path}/`),
   ...guides.map((guide) => `/guides/${guide.slug}/`), "/partners/"])];
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapEntries.map((url) => `  <url><loc>${origin}${url}</loc><changefreq>${url === "/" ? "daily" : "weekly"}</changefreq><priority>${url === "/" ? "1.0" : url.startsWith("/race/") ? "0.8" : "0.7"}</priority></url>`).join("\n")}\n</urlset>\n`;
 await fs.writeFile(path.join(root, "sitemap.xml"), sitemap, "utf8");
@@ -101,11 +104,23 @@ async function write(relativePath, html) {
   await fs.mkdir(directory, { recursive: true });
   await fs.writeFile(path.join(directory, "index.html"), html, "utf8");
 }
-async function staticRoutes(directoryName) {
+async function archiveStaleRacePages(directoryName, activeSlugs) {
   const directory = path.join(root, directoryName);
   try {
     const entries = await fs.readdir(directory, { withFileTypes: true });
-    return entries.filter((entry) => entry.isDirectory()).map((entry) => `/${directoryName}/${entry.name}/`);
-  } catch { return []; }
+    for (const entry of entries.filter((candidate) => candidate.isDirectory() && !activeSlugs.has(candidate.name))) {
+      if (!/^\d{4}-\d{2}-\d{2}-[A-Z0-9]+-\d{2}$/.test(entry.name)) continue;
+      const [year, month, day, ...rest] = entry.name.split("-");
+      const raceNo = Number(rest.at(-1));
+      const venue = rest.slice(0, -1).join("-");
+      const label = `${year}年${Number(month)}月${Number(day)}日 ${venue} ${raceNo}R`;
+      const destination = path.resolve(directory, entry.name, "index.html");
+      if (!destination.startsWith(`${path.resolve(directory)}${path.sep}`)) throw new Error(`退避ページの出力先が不正です: ${destination}`);
+      const html = `<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow"><title>${escapeHtml(label)} 過去アーカイブ｜ウマヨミ</title><meta name="description" content="${escapeHtml(label)}は過去結果アーカイブへ移動しました。"><link rel="canonical" href="${origin}/results/"><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/league.css"></head><body><main class="guide-main"><article class="guide-article"><span class="eyebrow">PAST RACE</span><h1>${escapeHtml(label)}</h1><p class="guide-lead">このレースは過去アーカイブへ移動しました。</p><p><a class="league-primary-link" href="/results/">日ごとの予想結果を見る</a></p></article></main></body></html>`;
+      await fs.writeFile(destination, html, "utf8");
+    }
+  } catch (error) {
+    if (error?.code !== "ENOENT") throw error;
+  }
 }
 function escapeHtml(value) { return String(value).replace(/[&<>\"]/g, (character) => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" })[character]); }

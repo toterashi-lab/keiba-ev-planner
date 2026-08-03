@@ -6,10 +6,10 @@ import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const PRIVATE_DIR = resolvePrivateDataDir(ROOT);
-const MODEL_JSON_PATH = path.join("data", "model-outputs-2026-07-11-2026-07-12.json");
-const MODEL_BROWSER_PATH = path.join("data", "model-outputs-2026-07-11-2026-07-12.js");
+const MODEL_JSON_PATH = path.join("data", "reference-archive/2026-07-11_2026-07-12/model-outputs-2026-07-11-2026-07-12.json");
+const MODEL_BROWSER_PATH = path.join("data", "reference-archive/2026-07-11_2026-07-12/model-outputs-2026-07-11-2026-07-12.js");
 const OUTPUT_PATH = path.join(PRIVATE_DIR, "models", "reference-ev-audit.json");
-const PUBLIC_OUTPUT_PATH = path.join(ROOT, "data", "reference-ev-audit.js");
+const PUBLIC_OUTPUT_PATH = path.join(ROOT, "data", "reference-archive/2026-07-11_2026-07-12/reference-ev-audit.js");
 const model = loadModel();
 const db = new DatabaseSync(path.join(PRIVATE_DIR, "keiba.sqlite"), { readOnly: true });
 

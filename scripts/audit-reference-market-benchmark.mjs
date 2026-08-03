@@ -5,7 +5,7 @@ import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const PRIVATE_DIR = resolvePrivateDataDir(ROOT);
-const MODEL_PATH = path.join("data", "model-outputs-2026-07-11-2026-07-12.json");
+const MODEL_PATH = path.join("data", "reference-archive/2026-07-11_2026-07-12/model-outputs-2026-07-11-2026-07-12.json");
 const ABILITY_PATH = path.join(PRIVATE_DIR, "models", "reference-asof-model.json");
 const OUTPUT_PATH = path.join(PRIVATE_DIR, "models", "reference-market-benchmark.json");
 

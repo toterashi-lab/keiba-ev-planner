@@ -1,8 +1,8 @@
 import fs from "node:fs";
 
-const meetings = JSON.parse(fs.readFileSync("data/meet-2026-07-11-2026-07-12.json", "utf8")).meetings;
-const results = JSON.parse(fs.readFileSync("data/results-2026-07-11-2026-07-12.json", "utf8")).results;
-const closingOdds = JSON.parse(fs.readFileSync("data/closing-odds-2026-07-11-2026-07-12.json", "utf8"));
+const meetings = JSON.parse(fs.readFileSync("data/reference-archive/2026-07-11_2026-07-12/meet-2026-07-11-2026-07-12.json", "utf8")).meetings;
+const results = JSON.parse(fs.readFileSync("data/reference-archive/2026-07-11_2026-07-12/results-2026-07-11-2026-07-12.json", "utf8")).results;
+const closingOdds = JSON.parse(fs.readFileSync("data/reference-archive/2026-07-11_2026-07-12/closing-odds-2026-07-11-2026-07-12.json", "utf8"));
 
 {
   const oddsByRace = new Map();

@@ -7,6 +7,8 @@ import { execFileSync } from "node:child_process";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const OUTPUT_PATH = path.join(ROOT, "data", "live-replay-audit.js");
+const ARCHIVE_DIR = path.join(ROOT, "data", "weekly-replay-archive");
+const ARCHIVE_INDEX_PATH = path.join(ARCHIVE_DIR, "index.json");
 const require = createRequire(import.meta.url);
 const policy = require("../forecast-policy.js");
 const agentEngine = require("../agent-forecast-engine.js");
@@ -17,8 +19,12 @@ const predictionsByRaceId = new Map((model.predictions ?? []).map((prediction) =
 const currentRecords = completedResults.map((result) => evaluateResult(result, predictionsByRaceId.get(result.raceId)));
 const recordsByRace = new Map(loadPreviousRecords().map((record) => [record.raceId, record]));
 for (const record of currentRecords) recordsByRace.set(record.raceId, record);
-const records = [...recordsByRace.values()].sort((left, right) => String(left.date).localeCompare(String(right.date))
+const activeDates = new Set((racecards.targetDates ?? []).filter(Boolean));
+if (!activeDates.size) for (const record of currentRecords) activeDates.add(record.date);
+const allRecords = [...recordsByRace.values()].sort((left, right) => String(left.date).localeCompare(String(right.date))
   || Number(left.raceNo) - Number(right.raceNo) || String(left.raceId).localeCompare(String(right.raceId)));
+const records = allRecords.filter((record) => activeDates.has(record.date));
+archiveRecords(allRecords.filter((record) => !activeDates.has(record.date)));
 const summary = summarize(records);
 const output = {
   status: "replay_only",
@@ -54,6 +60,37 @@ function loadInputs() {
     vm.runInNewContext(fs.readFileSync(path.join(ROOT, "data", name), "utf8"), sandbox, { filename: name });
   }
   return { racecards: sandbox.window.KEIBA_LIVE_RACECARDS ?? {}, model: sandbox.window.KEIBA_LIVE_MODEL_OUTPUTS ?? {} };
+}
+
+function archiveRecords(staleRecords) {
+  fs.mkdirSync(ARCHIVE_DIR, { recursive: true });
+  const byDate = new Map();
+  for (const record of staleRecords) {
+    if (!record?.date) continue;
+    if (!byDate.has(record.date)) byDate.set(record.date, []);
+    byDate.get(record.date).push(record);
+  }
+  for (const [date, dateRecords] of byDate) {
+    const archivePath = path.join(ARCHIVE_DIR, `${date}.json`);
+    const existing = readJson(archivePath)?.records ?? [];
+    const merged = new Map(existing.map((record) => [record.raceId, record]));
+    for (const record of dateRecords) merged.set(record.raceId, record);
+    const records = [...merged.values()].sort((left, right) => Number(left.raceNo) - Number(right.raceNo)
+      || String(left.raceId).localeCompare(String(right.raceId)));
+    fs.writeFileSync(archivePath, `${JSON.stringify({ version: "weekly-replay-archive-v1", date,
+      archivedAt: new Date().toISOString(), summary: summarize(records), records }, null, 2)}\n`, "utf8");
+  }
+  const files = fs.readdirSync(ARCHIVE_DIR).filter((name) => /^\d{4}-\d{2}-\d{2}\.json$/.test(name)).sort().reverse();
+  const days = files.map((file) => {
+    const archive = readJson(path.join(ARCHIVE_DIR, file));
+    return { date: archive.date, file, races: archive.records?.length ?? 0, summary: archive.summary ?? summarize([]) };
+  });
+  fs.writeFileSync(ARCHIVE_INDEX_PATH, `${JSON.stringify({ version: "weekly-replay-archive-index-v1",
+    generatedAt: new Date().toISOString(), days }, null, 2)}\n`, "utf8");
+}
+
+function readJson(file) {
+  try { return JSON.parse(fs.readFileSync(file, "utf8")); } catch { return null; }
 }
 
 function loadPreviousRecords() {

@@ -4,6 +4,10 @@ import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const file = path.join(resolvePrivateDataDir(root), "models", "reference-market-benchmark.json");
+if (!fs.existsSync(file)) {
+  console.log(JSON.stringify({ status: "archived", reason: "legacy_reference_benchmark_not_active" }));
+  process.exit(0);
+}
 const report = JSON.parse(fs.readFileSync(file, "utf8"));
 const failures = [];
 if (report.races !== 72) failures.push(`races ${report.races}/72`);

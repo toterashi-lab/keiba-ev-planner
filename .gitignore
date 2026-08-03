@@ -7,6 +7,7 @@ data/result-links-2026-07-11-2026-07-12.json
 data/closing-odds-2026-07-11-2026-07-12.json
 data/model-outputs-2026-07-11-2026-07-12.json
 data/quality-report-2026-07-11-2026-07-12.json
+data/reference-archive/**/*.json
 data/jra-free-private/
 .public-stage-*/
 .tools/
