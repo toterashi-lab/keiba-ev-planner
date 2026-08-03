@@ -1,4 +1,5 @@
 const liveEdition = window.KEIBA_LIVE_RACECARDS ?? { meetings: [], results: [] };
+const SITE_PREFIX = location.hostname.endsWith("github.io") ? "/keiba-ev-planner" : "";
 const referenceMeetings = window.KEIBA_REFERENCE_MEETINGS ?? { meetings: [] };
 const referenceResults = window.KEIBA_RESULTS ?? { results: [] };
 const referenceModel = window.KEIBA_MODEL_OUTPUTS ?? { predictions: [], candidates: [] };
@@ -94,6 +95,16 @@ function renderAll() {
   if (state.route === "results") renderResultsPage();
   renderPerformancePage();
   renderSeasonPage();
+  normalizeSitePaths();
+}
+
+function normalizeSitePaths() {
+  if (!SITE_PREFIX) return;
+  document.querySelectorAll("a[href^='/'], img[src^='/']").forEach((element) => {
+    const attribute = element.tagName === "IMG" ? "src" : "href";
+    const value = element.getAttribute(attribute);
+    if (value && !value.startsWith(`${SITE_PREFIX}/`)) element.setAttribute(attribute, `${SITE_PREFIX}${value}`);
+  });
 }
 
 function renderRoute() {
@@ -1058,7 +1069,8 @@ function markLabel(row, mark) { return row ? `${mark} ${row.horseNumber}番 ${es
 function displayTicket(type, key, row) { const raw = String(key ?? row.selection ?? ""); if (/^\d+(?:-\d+){0,2}$/.test(raw)) return ["3連単"].includes(type) ? raw.replaceAll("-", "→") : raw; return row.method === "1点" ? raw.replace(/\s+[^・]+(?:・|$)/g, "-").replace(/-$/, "") || raw : raw; }
 function addMarkFallback() {}
 function routeContextFromLocation() {
-  const path = decodeURIComponent(location.pathname || "/");
+  const rawPath = decodeURIComponent(location.pathname || "/");
+  const path = SITE_PREFIX && rawPath.startsWith(`${SITE_PREFIX}/`) ? rawPath.slice(SITE_PREFIX.length) : rawPath;
   const raceMatch = path.match(/^\/(race|result)\/(\d{4}-\d{2}-\d{2})-([^/]+)-(\d{1,2})\/?$/);
   if (raceMatch) return { route: "races", detailTab: raceMatch[1] === "result" ? "result" : "prediction", date: raceMatch[2], venueCode: raceMatch[3], raceNo: Number(raceMatch[4]) };
   const agentMatch = path.match(/^\/agents\/([a-z-]+)\/?$/);
@@ -1090,7 +1102,7 @@ function navigateToRace(date, venueCode, raceNo, detailTab = "prediction", repla
   state.route = "races";
   const kind = state.detailTab === "result" ? "result" : "race";
   const slug = leagueSystem?.raceSlug(state.date, state.venueCode, state.raceNo) || `${state.date}-${state.venueCode}-${String(state.raceNo).padStart(2, "0")}`;
-  history[replace ? "replaceState" : "pushState"]({}, "", `/${kind}/${slug}/`);
+  history[replace ? "replaceState" : "pushState"]({}, "", `${SITE_PREFIX}/${kind}/${slug}/`);
   renderAll();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }

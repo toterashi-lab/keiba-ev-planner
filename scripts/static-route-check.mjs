@@ -3,6 +3,8 @@ import fs from "node:fs";
 import path from "node:path";
 
 const html = fs.readFileSync("index.html", "utf8");
+assert.match(html, /id="site-base"/, "GitHub Pagesサブパス用baseが必要");
+assert.match(html, /location\.hostname\.endsWith\("github\.io"\)/, "GitHub Pagesホスト判定が必要");
 for (const route of ["/races/", "/results/", "/season/", "/agents/"]) assert.ok(html.includes(`href="${route}"`), `${route}への内部リンク`);
 assert.ok(!html.match(/href="#(?:home|races|results|performance|season)/), "主要ナビはハッシュに依存しない");
 for (const file of ["races/index.html", "results/index.html", "season/index.html", "agents/index.html", "guides/ai-keiba/index.html", "guides/keiba-index/index.html", "guides/expected-value/index.html", "guides/betting/index.html", "partners/index.html"]) {
