@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
+import { isMainModule } from "./is-main-module.mjs";
 
 export function buildFeatureRows(database, options) {
   const raceTable = options.completeOnly ? "complete_races" : "races";
@@ -65,10 +66,13 @@ export function buildFeatureRows(database, options) {
   for (const queuedRace of timeBucket) emitRace(queuedRace);
   for (const queuedRace of timeBucket) updateRace(queuedRace);
   if (options.includeLive && database.prepare("select count(*) count from sqlite_master where type='table' and name='live_races'").get().count) {
+    const liveRaceColumns = new Set(database.prepare("pragma table_info(live_races)").all().map((row) => row.name));
+    const snapshotContextSql = liveRaceColumns.has("snapshot_context") ? "r.snapshot_context" : "'pre_race'";
     const liveRows = database.prepare(`select r.race_id,r.race_date,r.venue_code,r.race_number,r.race_name,r.race_class,r.surface,r.distance_m,
         r.direction,r.weather,r.going,r.start_time,e.horse_id,e.horse_number,e.gate_number,e.sex_age,e.carried_weight,
         e.body_weight,e.body_weight_delta,e.jockey_id,e.trainer_id,null finish_position,null final_sectional,null corner_positions,null popularity,
-        case when r.observed_at>e.observed_at then r.observed_at else e.observed_at end observed_at
+        case when r.observed_at>e.observed_at then r.observed_at else e.observed_at end observed_at,
+        ${snapshotContextSql} snapshot_context
       from live_races r join live_entries e on e.race_id=r.race_id
       where r.race_date between ? and ? order by r.race_date,r.venue_code,r.race_number,e.horse_number`).all(options.from, options.to);
     for (let start = 0; start < liveRows.length;) {
@@ -77,7 +81,8 @@ export function buildFeatureRows(database, options) {
       const liveRaceRows = liveRows.slice(start, end);
       const fieldPriorRates = liveRaceRows.map((row) => priorProfile(getStats(histories, row.horse_id)));
       for (const row of liveRaceRows) {
-        const featureRow = createFeatureRow(row, histories, jockeys, trainers, fieldPriorRates, true, "live");
+        const replay = row.snapshot_context === "as_of_replay";
+        const featureRow = createFeatureRow(row, histories, jockeys, trainers, fieldPriorRates, !replay, replay ? "replay" : "live");
         if (options.collect !== false) output.push(featureRow);
         options.onRow?.(featureRow);
       }
@@ -200,9 +205,9 @@ function createFeatureRow(row, histories, jockeys, trainers, fieldPriorRates, so
       fieldRelativePriorWinRate: horseRate.win - fieldAverage,
       fieldRelativeSmoothedWinRate: horseSmoothed.win - averageSmoothed(fieldPriorRates),
     },
-    target: dataContext === "live"
-      ? { finishPosition: null, won: null, placed: null }
-      : { finishPosition: row.finish_position, won: row.finish_position === 1 ? 1 : 0, placed: row.finish_position && row.finish_position <= (racePlaceDepth(fieldPriorRates.length)) ? 1 : 0 },
+    target: dataContext === "historical"
+      ? { finishPosition: row.finish_position, won: row.finish_position === 1 ? 1 : 0, placed: row.finish_position && row.finish_position <= (racePlaceDepth(fieldPriorRates.length)) ? 1 : 0 }
+      : { finishPosition: null, won: null, placed: null },
     lineage: { historyCutoffExclusive: raceStartKey(row), lastHistoricalRaceDate: horse.lastDate,
       lastHistoricalRaceTime: horse.lastAsOfTime, targetResultExcludedFromFeatures: true },
   };
@@ -333,7 +338,7 @@ function weatherBand(value) { const text = clean(value); return text?.includes("
 function directionBand(value) { const text = clean(value); return text?.includes("直線") ? "straight" : text?.includes("右") ? "right" : text?.includes("左") ? "left" : "unknown"; }
 function seasonBand(date) { return Math.ceil(Number(String(date).slice(5, 7)) / 3) || 0; }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (isMainModule(import.meta.url)) {
   const options = parseArgs(process.argv.slice(2));
   const database = new DatabaseSync(options.database, { readOnly: true });
   try {

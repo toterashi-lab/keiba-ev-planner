@@ -60,6 +60,8 @@ html[data-theme="dark"] body {
 .lobby-panel { height: 100%; padding: 18px; border: 1px solid #28374a; border-radius: 8px; background: linear-gradient(145deg, #111d2e, #0d1725); box-shadow: 0 18px 40px rgba(0,0,0,.25); }
 .lobby-panel > header, .strategy-meeting > header, .game-metrics > header, .result-drama > header, .reflection-meeting > header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .lobby-panel h2, .strategy-meeting h2, .game-metrics h2, .result-drama h2, .reflection-meeting h2 { margin: 3px 0 0; font-size: 19px; }
+.lobby-reference-badge { display: inline-block; margin-left: 8px; padding: 3px 6px; border: 1px solid #68778b; border-radius: 3px; color: #dce5ef; background: #1b293b; font-size: 9px; vertical-align: middle; }
+.lobby-reference-note { margin: 10px 0 0; color: #aebdd0; font-size: 11px; line-height: 1.6; }
 .lobby-panel > header a, .share-icon-button, .share-result-button { border: 1px solid #3a4a60; padding: 7px 10px; border-radius: 4px; background: #172438; color: #f5f8fc; font-size: 10px; font-weight: 900; text-decoration: none; cursor: pointer; }
 .mini-standings { margin-top: 13px; display: grid; gap: 5px; }
 .mini-standing-row { min-height: 58px; display: grid; grid-template-columns: 30px 44px minmax(0,1fr) 36px 90px; align-items: center; gap: 8px; padding: 5px 9px; border-left: 3px solid var(--agent-color, #fff); background: rgba(255,255,255,.035); color: inherit; text-decoration: none; }

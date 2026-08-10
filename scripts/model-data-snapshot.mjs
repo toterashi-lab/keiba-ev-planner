@@ -77,3 +77,26 @@ export function captureModelImplementationSnapshot(root = process.cwd()) {
   return { version: "model-implementation-snapshot-v1", files,
     fingerprint: crypto.createHash("sha256").update(JSON.stringify(files)).digest("hex") };
 }
+
+export function captureResultFeatureSnapshot(database) {
+  const coverage = database.prepare(`select min(race_date) minDate,max(race_date) maxDate,count(*) races,
+    (select count(*) from complete_race_entries) runners,
+    (select count(*) from complete_race_results) results,
+    count(distinct source_page_id) sourcePages
+    from complete_races`).get();
+  const sourcePageSequence = database.prepare(`select group_concat(source_page_id, ',') value from
+    (select source_page_id from complete_races order by race_id)`).get().value ?? "";
+  const core = { version: "result-feature-data-snapshot-v1", ...coverage, sourcePageSequence };
+  return { version: core.version, minDate: core.minDate, maxDate: core.maxDate, races: core.races,
+    runners: core.runners, results: core.results, sourcePages: core.sourcePages,
+    fingerprint: crypto.createHash("sha256").update(JSON.stringify(core)).digest("hex") };
+}
+
+export function verifyModelImplementationSnapshot(snapshot) {
+  if (snapshot?.version !== "model-implementation-snapshot-v1" || !snapshot.files
+    || typeof snapshot.files !== "object" || Array.isArray(snapshot.files)) return false;
+  const entries = Object.entries(snapshot.files);
+  if (!entries.length || entries.some(([file, hash]) => !file || !/^[a-f0-9]{64}$/.test(hash))) return false;
+  const fingerprint = crypto.createHash("sha256").update(JSON.stringify(snapshot.files)).digest("hex");
+  return fingerprint === snapshot.fingerprint;
+}

@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
+import { isMainModule } from "./is-main-module.mjs";
 import { loadCompatibleModelArtifact } from "../model/model-artifact-compatibility.mjs";
 import { runExpectancyAgentEnsemble } from "../model/expectancy-agent-ensemble.mjs";
 import { EXPECTANCY_ENGINE_VERSION, normalizeMarket, selectProbability } from "../model/expectancy-engine-v2.mjs";
@@ -586,7 +587,7 @@ function byAbilityEv(left, right) {
 }
 function tokyoDate() { return new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(new Date()); }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (isMainModule(import.meta.url)) {
   const result = generateLiveMarketEv({
     allowFixture: process.argv.includes("--allow-fixture"),
     includeBatch: process.argv.includes("--include-batch"),

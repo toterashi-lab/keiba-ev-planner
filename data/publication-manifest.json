@@ -1,15 +1,15 @@
 {
   "version": "publication-manifest-v2",
-  "generatedAt": "2026-08-03T12:38:15.346Z",
-  "databaseRaces": 105596,
+  "generatedAt": "2026-08-10T04:05:35.523Z",
+  "databaseRaces": 105668,
   "completeMonths": 368,
   "expectedMonths": 368,
-  "modelVersion": "recent-ability-v1-2026-08-02-c5d87da030fe",
+  "modelVersion": "recent-ability-v1-2026-08-09-7e9a9d49b9a8",
   "modelCoverageRaces": null,
-  "liveRaceCount": 36,
+  "liveRaceCount": 72,
   "liveCandidateCount": 0,
-  "livePredictionCount": 36,
-  "liveRacecardsSha256": "4ae3c50c5b422209262661c26aed584b37634defa1eaee41def13d5b5bd49c7d",
-  "liveModelOutputsSha256": "4ea93959b1a2c7fc7ed7e17b21aea38db8ec1d755cc62415959daad0f870821e",
-  "manifestId": "ab6d9acf791a4b540c77"
+  "livePredictionCount": 72,
+  "liveRacecardsSha256": "13785b41cc49c2d8204a39b939850794427677007daf57dffedcea1a7e039d1c",
+  "liveModelOutputsSha256": "61bc07d3d9f9afe4e0ec183eb1132284c7d322e6a73f6d57ce750443b6a34032",
+  "manifestId": "54857c28c8f5da7f30bf"
 }

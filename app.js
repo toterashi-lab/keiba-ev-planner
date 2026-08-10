@@ -14,6 +14,8 @@ const savedPerformance = window.KEIBA_AGENT_PERFORMANCE ?? { records: [] };
 const replayAudit = window.KEIBA_LIVE_REPLAY_AUDIT ?? { records: [], summary: null, coverage: {} };
 const leagueSystem = window.UMAYOMI_LEAGUE;
 const leagueSeason = leagueSystem?.derive(replayAudit) ?? { standings: [], drama: null, round: 1, totalRaces: 0 };
+const leagueIsReplayReference = Number(replayAudit.coverage?.replayOnly || 0) > 0
+  && Number(replayAudit.coverage?.preRaceTimestamped || 0) === 0;
 
 const currentEdition = liveEdition.meetings?.length ? liveEdition : referenceMeetings;
 const results = [...(referenceResults.results ?? []), ...(liveEdition.results ?? [])];
@@ -213,10 +215,10 @@ function renderLeagueLobby(meeting) {
   const meta = document.querySelector("#home-season-meta");
   if (meta) meta.innerHTML = `<span><b>SEASON</b><strong>2026</strong></span><span><b>WEEK</b><strong>第${leagueSeason.week + 1}週</strong></span><span><b>RACES</b><strong>${meeting?.tracks?.reduce((sum, track) => sum + track.races.length, 0) || 0}</strong></span>`;
   const standingsRoot = document.querySelector("#home-league-standings");
-  if (standingsRoot) standingsRoot.innerHTML = `<section class="lobby-panel standings-panel"><header><div><span>THIS WEEK</span><h2>最新週のAI結果</h2></div><a href="/season/">週別履歴</a></header><div class="mini-standings">${leagueSeason.standings.map((row) => {
+  if (standingsRoot) standingsRoot.innerHTML = `<section class="lobby-panel standings-panel"><header><div><span>THIS WEEK</span><h2>最新週のAI結果${leagueIsReplayReference ? '<small class="lobby-reference-badge">後日再現・参考</small>' : ""}</h2></div><a href="/season/">週別履歴</a></header><div class="mini-standings">${leagueSeason.standings.map((row) => {
     const persona = agentPersona(AGENTS.find((agent) => agent.id === row.agentId));
     return `<a class="mini-standing-row ${row.agentId}" href="/agents/${row.agentId}/"><b>${row.rank}</b>${characterImageHtml(row.agentId, row.state, "mini-character")}<span><strong>${escapeHtml(persona.displayName)}</strong><small>${escapeHtml(persona.epithet)}</small></span><em class="rank-delta ${row.rankDelta > 0 ? "up" : row.rankDelta < 0 ? "down" : "stay"}">${row.rankDelta > 0 ? `▲${row.rankDelta}` : row.rankDelta < 0 ? `▼${Math.abs(row.rankDelta)}` : "－"}</em><i>${signedYen(row.netYen)}</i></a>`;
-  }).join("")}</div></section>`;
+  }).join("")}</div>${leagueIsReplayReference ? '<p class="lobby-reference-note">レース後に再現した予想です。実運用の成績には含めません。</p>' : ""}</section>`;
   const dramaRoot = document.querySelector("#home-weekly-drama");
   const drama = leagueSeason.drama;
   if (!dramaRoot) return;
@@ -226,7 +228,7 @@ function renderLeagueLobby(meeting) {
   const awakened = leagueSeason.standings.find((row) => row.state === "awakened") || leagueSeason.standings[0];
   const awakenedPersona = personaForId(awakened?.agentId);
   const mvpWon = Number(drama.mvp?.netYen || 0) > 0;
-  dramaRoot.innerHTML = `<section class="lobby-panel weekly-drama"><header><div><span>LATEST WEEK</span><h2>最新週のドラマ</h2></div><button type="button" class="share-icon-button" data-share-latest aria-label="最新週の結果を共有">共有</button></header><div class="drama-cards"><article class="drama-card mvp ${mvpWon ? "won" : "lost"}"><span>MVP</span>${characterImageHtml(drama.mvp?.agentId, mvpWon ? "happy" : "defeat", "drama-character")}<div><strong>${escapeHtml(mvp.displayName)}</strong><small>${signedYen(drama.mvp?.netYen)}</small></div></article><article class="drama-card culprit"><span>戦犯</span>${characterImageHtml(drama.culprit?.agentId, "defeat", "drama-character")}<div><strong>${escapeHtml(culprit.displayName)}</strong><small>${signedYen(drama.culprit?.netYen)}</small></div></article></div><div class="awakening-strip">${characterImageHtml(awakened?.agentId, "awakened", "awakening-character")}<span><b>覚醒中</b><strong>${escapeHtml(awakenedPersona.displayName)}</strong><small>最新週の成績が上向いています</small></span></div></section>`;
+  dramaRoot.innerHTML = `<section class="lobby-panel weekly-drama"><header><div><span>LATEST WEEK</span><h2>最新週のドラマ${leagueIsReplayReference ? '<small class="lobby-reference-badge">参考</small>' : ""}</h2></div><button type="button" class="share-icon-button" data-share-latest aria-label="最新週の結果を共有">共有</button></header><div class="drama-cards"><article class="drama-card mvp ${mvpWon ? "won" : "lost"}"><span>MVP</span>${characterImageHtml(drama.mvp?.agentId, mvpWon ? "happy" : "defeat", "drama-character")}<div><strong>${escapeHtml(mvp.displayName)}</strong><small>${signedYen(drama.mvp?.netYen)}</small></div></article><article class="drama-card culprit"><span>戦犯</span>${characterImageHtml(drama.culprit?.agentId, "defeat", "drama-character")}<div><strong>${escapeHtml(culprit.displayName)}</strong><small>${signedYen(drama.culprit?.netYen)}</small></div></article></div><div class="awakening-strip">${characterImageHtml(awakened?.agentId, "awakened", "awakening-character")}<span><b>覚醒中</b><strong>${escapeHtml(awakenedPersona.displayName)}</strong><small>最新週の成績が上向いています</small></span></div></section>`;
   dramaRoot.querySelector("[data-share-latest]")?.addEventListener("click", () => shareWeeklyResults(leagueSeason.latestWeek));
 }
 

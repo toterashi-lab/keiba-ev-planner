@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { isMainModule } from "./is-main-module.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const ARCHIVE = path.join(ROOT, "data", "historical-agent-archive");
@@ -77,7 +78,7 @@ function periodKey(date) {
   return "holdout";
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (isMainModule(import.meta.url)) {
   const result = auditPredictionHitRate();
   console.log(JSON.stringify({ status: result.status, races: result.metrics.all.races, improvements: result.improvements,
     holdout: result.metrics.holdout }, null, 2));

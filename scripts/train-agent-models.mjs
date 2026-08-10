@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
+import { isMainModule } from "./is-main-module.mjs";
 import { AGENT_DEFINITIONS } from "../model/agent-system.mjs";
 import { buildVersionedArtifact, boundedWeightUpdate, chronologicalSplit, computeAgentWeightGradients, evaluateAgentRaces, evaluateLearningRows, fitBinaryTemperature, LEARNING_POLICY } from "../model/agent-learning.mjs";
 import { initializeAgentSystemSchema, registerAgents } from "./agent-system-store.mjs";
@@ -144,7 +145,7 @@ function hasResults(database) {
   return database.prepare("select count(*) count from sqlite_master where type='view' and name='complete_race_results'").get().count === 1;
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (isMainModule(import.meta.url)) {
   const database = new DatabaseSync(DATABASE_PATH);
   database.exec("pragma foreign_keys=on; pragma busy_timeout=30000;");
   try { console.log(JSON.stringify(trainAgentModels(database), null, 2)); }

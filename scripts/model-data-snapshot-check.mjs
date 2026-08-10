@@ -1,5 +1,5 @@
 import { DatabaseSync } from "node:sqlite";
-import { captureModelDataSnapshot } from "./model-data-snapshot.mjs";
+import { captureModelDataSnapshot, captureModelImplementationSnapshot, captureResultFeatureSnapshot, verifyModelImplementationSnapshot } from "./model-data-snapshot.mjs";
 import { inspectModelFreshness } from "./model-freshness.mjs";
 
 const db = new DatabaseSync(":memory:");
@@ -16,6 +16,12 @@ try {
     insert into complete_payouts values('r1');
   `);
   const initial = captureModelDataSnapshot(db);
+  const resultFeatures = captureResultFeatureSnapshot(db);
+  const capturedImplementation = captureModelImplementationSnapshot();
+  if (!verifyModelImplementationSnapshot(capturedImplementation)
+    || verifyModelImplementationSnapshot({ ...capturedImplementation, fingerprint: "0".repeat(64) })) {
+    throw new Error("Implementation snapshot integrity validation failed");
+  }
   const implementation = { version: "model-implementation-snapshot-v1", fingerprint: "code-a", files: {} };
   const artifact = { modelVersion: "unit", trainingSnapshot: initial, trainingImplementation: implementation };
   if (inspectModelFreshness(db, artifact, implementation).status !== "fresh") {
@@ -28,6 +34,10 @@ try {
   db.exec("insert into unrelated_odds values(1)");
   const unrelated = captureModelDataSnapshot(db);
   if (initial.fingerprint !== unrelated.fingerprint) throw new Error("Unrelated odds changed the model-data fingerprint");
+  const resultArtifact = { modelVersion: "result-only", trainingSnapshot: resultFeatures, trainingImplementation: implementation };
+  if (inspectModelFreshness(db, resultArtifact, implementation).status !== "fresh") {
+    throw new Error("Unrelated odds changed the result-feature fingerprint");
+  }
   db.exec("update complete_races set source_page_id=11 where race_id='r1'");
   const changedSource = captureModelDataSnapshot(db);
   if (initial.fingerprint === changedSource.fingerprint) throw new Error("Changed source page did not change the fingerprint");

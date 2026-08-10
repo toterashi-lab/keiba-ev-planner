@@ -2,12 +2,16 @@ import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
-import { captureModelDataSnapshot, captureModelImplementationSnapshot } from "./model-data-snapshot.mjs";
+import { isMainModule } from "./is-main-module.mjs";
+import { captureModelDataSnapshot, captureModelImplementationSnapshot, captureResultFeatureSnapshot } from "./model-data-snapshot.mjs";
 import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
 export function inspectModelFreshness(database, artifact, currentImplementation = captureModelImplementationSnapshot()) {
-  const current = captureModelDataSnapshot(database);
-  const matches = artifact?.trainingSnapshot?.version === "model-data-snapshot-v1"
+  const snapshotVersion = artifact?.trainingSnapshot?.version;
+  const current = snapshotVersion === "result-feature-data-snapshot-v1"
+    ? captureResultFeatureSnapshot(database)
+    : captureModelDataSnapshot(database);
+  const matches = ["model-data-snapshot-v1", "result-feature-data-snapshot-v1"].includes(snapshotVersion)
     && artifact.trainingSnapshot.fingerprint === current.fingerprint
     && artifact?.trainingImplementation?.version === "model-implementation-snapshot-v1"
     && artifact.trainingImplementation.fingerprint === currentImplementation.fingerprint;
@@ -16,7 +20,7 @@ export function inspectModelFreshness(database, artifact, currentImplementation 
     artifactImplementation: artifact?.trainingImplementation ?? null, currentImplementation };
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (isMainModule(import.meta.url)) {
   const root = path.resolve(import.meta.dirname, "..");
   const privateDir = resolvePrivateDataDir(root);
   const artifactPath = path.join(privateDir, "models", "ability-softmax-v1.json");

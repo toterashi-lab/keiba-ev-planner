@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
+import { isMainModule } from "./is-main-module.mjs";
 import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
@@ -286,7 +287,7 @@ function mulberry32(seed) {
   };
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (isMainModule(import.meta.url)) {
   const report = evaluateLiveEvLedger();
   console.log(JSON.stringify({ status: report.status, storedCandidates: report.storedCandidates,
     evaluatedCandidates: report.evaluatedCandidates, recommendations: report.recommendations, metrics: report.metrics }, null, 2));

@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
+import { isMainModule } from "./is-main-module.mjs";
 import { EXPECTANCY_ENGINE_VERSION, normalizeMarket, selectProbability } from "../model/expectancy-engine-v2.mjs";
 import { runExpectancyAgentEnsemble } from "../model/expectancy-agent-ensemble.mjs";
 import { buildStructuredDefinitions } from "../model/structured-ticket-search.mjs";
@@ -685,7 +686,7 @@ function meetingName(race) {
   return prefix ? `${prefix}${day[race.venue_code]}日` : race.venue_code;
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (isMainModule(import.meta.url)) {
   const result = generateMarketEv();
   console.log(JSON.stringify({ races: Object.keys(result.evaluatedByRace).length, evaluated: result.evaluatedTotal, candidates: result.candidates.length, coverage: result.coverageCounts }, null, 2));
 }

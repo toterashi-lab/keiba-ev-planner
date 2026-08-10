@@ -1,6 +1,7 @@
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
+import { isMainModule } from "./is-main-module.mjs";
 import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
@@ -27,7 +28,7 @@ export function inspectAgentSettlementReadiness(database) {
   };
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (isMainModule(import.meta.url)) {
   const database = new DatabaseSync(DATABASE_PATH, { readOnly: true });
   database.exec("pragma busy_timeout=30000;");
   try { console.log(JSON.stringify(inspectAgentSettlementReadiness(database), null, 2)); }

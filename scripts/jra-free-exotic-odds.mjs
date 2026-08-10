@@ -4,6 +4,7 @@ import path from "node:path";
 import zlib from "node:zlib";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
+import { isMainModule } from "./is-main-module.mjs";
 import { isPreRaceObservation } from "./race-time.mjs";
 import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
@@ -233,4 +234,4 @@ async function main() {
   finally { if (handle !== undefined) fs.closeSync(handle); fs.rmSync(LOCK_PATH, { force: true }); }
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) await main();
+if (isMainModule(import.meta.url)) await main();

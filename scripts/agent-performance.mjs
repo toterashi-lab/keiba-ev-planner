@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
+import { isMainModule } from "./is-main-module.mjs";
 import { initializePredictionSnapshotSchema } from "./prediction-snapshot.mjs";
 import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
@@ -125,7 +126,7 @@ function ticketPayout(database, raceId, ticket) {
 function typeKey(label) { return ({ "単勝": "win", "複勝": "place", "馬連": "quinella", "ワイド": "wide", "馬単": "exacta", "3連複": "trio", "3連単": "trifecta" })[label] ?? label; }
 function canonical(value, betType) { const parts = String(value).match(/\d+/g)?.map(Number) ?? []; if (["馬連", "ワイド", "3連複"].includes(betType)) parts.sort((a, b) => a - b); return parts.join("-"); }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (isMainModule(import.meta.url)) {
   const db = new DatabaseSync(DATABASE_PATH);
   db.exec("pragma foreign_keys=on; pragma busy_timeout=30000;");
   try {

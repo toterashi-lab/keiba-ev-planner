@@ -3,8 +3,9 @@ import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
+import { isMainModule } from "./is-main-module.mjs";
 import { FEATURE_KEYS, fitModel, fitTemperature, evaluate, loadTrainingRaces, predictRace } from "./train-expectancy-model.mjs";
-import { captureModelDataSnapshot, captureModelImplementationSnapshot } from "./model-data-snapshot.mjs";
+import { captureModelImplementationSnapshot, captureResultFeatureSnapshot } from "./model-data-snapshot.mjs";
 import { resolvePrivateDataDir } from "./private-data-path.mjs";
 import { INDEPENDENT_PROBABILITY_ENGINE_VERSION, selectRacewiseCalibrator } from "../model/independent-probability-engine.mjs";
 
@@ -43,7 +44,7 @@ export function trainRecentForecastBaseline(options = {}) {
     const racewiseCalibration = selectRacewiseCalibrator({ fittingRaces: fitting, selectionRaces: selection,
       minimumSamples: 500, predict: (race) => predictRace(model, race, temperature) });
     const aggregate = aggregateMetrics(evaluated);
-    const trainingSnapshot = captureModelDataSnapshot(db);
+    const trainingSnapshot = captureResultFeatureSnapshot(db);
     const trainingImplementation = captureModelImplementationSnapshot(ROOT);
     const versionHash = crypto.createHash("sha256").update(JSON.stringify({ from, to, folds: evaluated.map((fold) => fold.spec), aggregate })).digest("hex").slice(0, 12);
     const artifact = {
@@ -149,4 +150,4 @@ function addMonths(date, count, endOfMonth = false) { const value = new Date(`${
 function addDays(date, count) { const value = new Date(`${date}T00:00:00Z`); value.setUTCDate(value.getUTCDate() + count); return value.toISOString().slice(0, 10); }
 function minDate(left, right) { return left < right ? left : right; }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) trainRecentForecastBaseline();
+if (isMainModule(import.meta.url)) trainRecentForecastBaseline();

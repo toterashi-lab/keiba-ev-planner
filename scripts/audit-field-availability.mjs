@@ -42,8 +42,10 @@ try {
       group by coalesce(nullif(trim(x.finish_text),''),'(blank)')
       order by rows desc, finishText`).all();
     const missing = db.prepare(`select r.race_date raceDate, e.race_id raceId, e.horse_id horseId,
-      x.finish_text finishText, p.raw_path rawPath, p.source_url sourceUrl
+      e.horse_number horseNumber, h.name horseName, x.finish_text finishText,
+      p.raw_path rawPath, p.source_url sourceUrl
       from complete_race_entries e
+      join horses h on h.horse_id=e.horse_id
       join complete_race_results x on x.race_id=e.race_id and x.horse_id=e.horse_id
       join complete_races r on r.race_id=e.race_id
       join raw_pages p on p.id=r.source_page_id
@@ -53,12 +55,17 @@ try {
     const unavailableSourceValues = new Map();
     for (const row of missing) {
       const sourceRows = loadRawRaceRows(row.rawPath, rawRaceCache);
-      const sourceRow = sourceRows.get(row.horseId);
-      const sourceValue = sourceRow ? stripHtml(cell(sourceRow, sourceClass)) : null;
+      const sourceRow = sourceRows.byHorseId.get(row.horseId)
+        ?? sourceRows.byHorseNumber.get(row.horseNumber);
+      const sourceHorseName = sourceRow ? stripHtml(cell(sourceRow, "horse")) : null;
+      const sourceIdentityMatches = sourceRow
+        && normalizeName(sourceHorseName) === normalizeName(row.horseName);
+      const verifiedSourceRow = sourceIdentityMatches ? sourceRow : null;
+      const sourceValue = verifiedSourceRow ? stripHtml(cell(verifiedSourceRow, sourceClass)) : null;
       if (isUsableSourceValue(sourceClass, sourceValue)) {
-        parserMissing.push({ ...row, sourceValue, sourceRowFound: Boolean(sourceRow) });
+        parserMissing.push({ ...row, sourceValue, sourceRowFound: Boolean(verifiedSourceRow) });
       } else {
-        const label = sourceRow ? (sourceValue || "(blank)") : "(source row missing)";
+        const label = verifiedSourceRow ? (sourceValue || "(blank)") : "(source row missing)";
         unavailableSourceValues.set(label, (unavailableSourceValues.get(label) ?? 0) + 1);
       }
     }
@@ -93,14 +100,22 @@ function loadRawRaceRows(relativePath, cache) {
   if (cache.has(relativePath)) return cache.get(relativePath);
   const absolutePath = path.join(PRIVATE_DIR, relativePath);
   const html = zlib.gunzipSync(fs.readFileSync(absolutePath)).toString("utf8");
-  const rows = new Map();
+  const byHorseId = new Map();
+  const byHorseNumber = new Map();
   for (const match of html.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/g)) {
     const row = match[1];
     const horseId = cell(row, "horse").match(/pw01dud([^/'"]+)/)?.[1];
-    if (horseId) rows.set(horseId, row);
+    const horseNumber = Number(stripHtml(cell(row, "num")));
+    if (horseId) byHorseId.set(horseId, row);
+    if (Number.isInteger(horseNumber) && horseNumber > 0) byHorseNumber.set(horseNumber, row);
   }
+  const rows = { byHorseId, byHorseNumber };
   cache.set(relativePath, rows);
   return rows;
+}
+
+function normalizeName(value) {
+  return String(value ?? "").normalize("NFKC").replace(/\s+/g, "").trim();
 }
 
 function cell(row, className) {

@@ -13,5 +13,6 @@ data/jra-free-private/
 .tools/
 .vercel/
 .playwright-cli/
+output/
 .vercel
 .env*

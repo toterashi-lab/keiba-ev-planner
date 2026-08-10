@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { FEATURE_KEYS } from "./train-expectancy-model.mjs";
-import { captureModelImplementationSnapshot } from "./model-data-snapshot.mjs";
+import { verifyModelImplementationSnapshot } from "./model-data-snapshot.mjs";
 import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
@@ -23,11 +23,10 @@ if (artifact.split.trainEnd >= artifact.targetDates[0] || artifact.split.calibra
   || artifact.split.embargoDays < 7) failures.push("time split or embargo");
 if (artifact.counts.targetRaces !== 72 || artifact.counts.predictions !== 946 || artifact.predictions.length !== 946) failures.push("prediction coverage");
 if (artifact.featureTimePolicy.violations !== 0 || artifact.featureTimePolicy.coverage !== 1) failures.push("feature timing");
-const currentImplementation = captureModelImplementationSnapshot();
 if (artifact.featureSelectionSource !== "reference-asof-group-ablation-v1"
   || artifact.featureSelectionSplit?.calibrationEnd >= artifact.targetDates[0]
   || !artifact.featureAblation?.some((group) => group.id === "pace_shape")) failures.push("as-of feature selection");
-if (artifact.trainingImplementation?.fingerprint !== currentImplementation.fingerprint
+if (!verifyModelImplementationSnapshot(artifact.trainingImplementation)
   || artifact.featureKeys?.length !== FEATURE_KEYS.length
   || artifact.featureKeys.some((key, index) => key !== FEATURE_KEYS[index])
   || ![artifact.means, artifact.scales, artifact.weights].every((values) => values?.length === FEATURE_KEYS.length)

@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
+import { isMainModule } from "./is-main-module.mjs";
 import { isPreRaceObservation } from "./race-time.mjs";
 import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
@@ -93,7 +94,7 @@ function adoptedReturn(row) { return Number(row.conservativeExpectedReturn ?? ro
 function group(rows, key) { const map = new Map(); for (const row of rows) { if (!map.has(row[key])) map.set(row[key], []); map.get(row[key]).push(row); } return map; }
 function stableJson(value) { if (Array.isArray(value)) return `[${value.map(stableJson).join(",")}]`; if (value && typeof value === "object") return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${stableJson(value[key])}`).join(",")}}`; return JSON.stringify(value); }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (isMainModule(import.meta.url)) {
   if (!fs.existsSync(INPUT_PATH)) throw new Error("ライブ予想成果物がありません");
   const db = new DatabaseSync(DATABASE_PATH);
   db.exec("pragma foreign_keys=on; pragma busy_timeout=30000;");

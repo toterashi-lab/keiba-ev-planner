@@ -4,6 +4,7 @@ import path from "node:path";
 import zlib from "node:zlib";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
+import { isMainModule } from "./is-main-module.mjs";
 import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
 const ACCESS_URL = "https://www.jra.go.jp/JRADB/accessD.html";
@@ -169,21 +170,23 @@ function initializeSchema(db) {
   addColumnIfMissing(db, "live_races", "direction", "text");
   addColumnIfMissing(db, "live_races", "weather", "text");
   addColumnIfMissing(db, "live_races", "going", "text");
+  addColumnIfMissing(db, "live_races", "snapshot_context", "text not null default 'pre_race'");
 }
 
 function saveRacecard(db, batchId, sourcePageId, race, observedAt) {
   db.exec("begin immediate");
   try {
     db.prepare(`insert into live_races(race_id,batch_id,race_date,venue_code,meeting_number,meeting_day,race_number,
-      meeting_name,race_name,race_class,surface,distance_m,start_time,source_page_id,observed_at,direction,weather,going)
-      values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+      meeting_name,race_name,race_class,surface,distance_m,start_time,source_page_id,observed_at,direction,weather,going,snapshot_context)
+      values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
       on conflict(race_id) do update set batch_id=excluded.batch_id,meeting_name=excluded.meeting_name,race_name=excluded.race_name,
       race_class=excluded.race_class,surface=excluded.surface,distance_m=excluded.distance_m,start_time=excluded.start_time,
       direction=coalesce(excluded.direction,live_races.direction),weather=coalesce(excluded.weather,live_races.weather),
-      going=coalesce(excluded.going,live_races.going),source_page_id=excluded.source_page_id,observed_at=excluded.observed_at`).run(
+      going=coalesce(excluded.going,live_races.going),source_page_id=excluded.source_page_id,observed_at=excluded.observed_at,
+      snapshot_context=excluded.snapshot_context`).run(
         race.raceId, batchId, race.raceDate, race.venueCode, race.meetingNumber, race.meetingDay, race.raceNumber,
         race.meetingName, race.raceName, race.raceClass, race.surface, race.distanceM, race.startTime, sourcePageId, observedAt,
-        race.direction, race.weather, race.going,
+        race.direction, race.weather, race.going, "pre_race",
       );
     db.prepare("delete from live_entries where race_id=?").run(race.raceId);
     const insert = db.prepare(`insert into live_entries values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`);
@@ -248,4 +251,4 @@ async function main() {
   finally { if (handle !== undefined) fs.closeSync(handle); fs.rmSync(LOCK_PATH, { force: true }); }
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) await main();
+if (isMainModule(import.meta.url)) await main();

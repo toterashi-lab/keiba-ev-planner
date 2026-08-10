@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
+import { isMainModule } from "./is-main-module.mjs";
 import { buildFeatureRows } from "./model-feature-pipeline.mjs";
 import { captureModelDataSnapshot, captureModelImplementationSnapshot } from "./model-data-snapshot.mjs";
 import { MODEL_VALIDATION_POLICY } from "../model/validation-policy.mjs";
@@ -845,4 +846,4 @@ function addDays(date, count) { const value = new Date(`${date}T00:00:00Z`); val
 function monthsBetween(left, right) { return (Number(right.slice(0, 4)) - Number(left.slice(0, 4))) * 12 + Number(right.slice(5, 7)) - Number(left.slice(5, 7)); }
 function round(value, digits) { const scale = 10 ** digits; return Math.round(value * scale) / scale; }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) trainExpectancyModel();
+if (isMainModule(import.meta.url)) trainExpectancyModel();

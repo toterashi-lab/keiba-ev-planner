@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
+import { isMainModule } from "./is-main-module.mjs";
 import { settlePrediction } from "./agent-result-settlement.mjs";
 import { appendPredictionStatusEvent, initializeAgentSystemSchema } from "./agent-system-store.mjs";
 import { resolvePrivateDataDir } from "./private-data-path.mjs";
@@ -48,7 +49,7 @@ function tableExists(database, name) {
   return database.prepare("select count(*) count from sqlite_master where type in ('table','view') and name=?").get(name).count === 1;
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (isMainModule(import.meta.url)) {
   const database = new DatabaseSync(DATABASE_PATH);
   database.exec("pragma foreign_keys=on; pragma busy_timeout=30000;");
   try { console.log(JSON.stringify(settlePublishedAgentPredictions(database), null, 2)); }

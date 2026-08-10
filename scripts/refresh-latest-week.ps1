@@ -91,6 +91,11 @@ try {
       Invoke-NodeStep "live-prediction" @("--max-old-space-size=8192", "scripts\predict-live-racecards.mjs")
       Invoke-NodeStep "live-expectancy" @("scripts\generate-live-market-ev.mjs")
       Invoke-NodeStep "prediction-snapshot" @("scripts\prediction-snapshot.mjs")
+    } else {
+      Invoke-NodeStep "latest-settled-week-materialization" @("scripts\materialize-latest-settled-week.mjs")
+      Invoke-NodeStep "settled-week-replay-prediction" @("--max-old-space-size=8192", "scripts\predict-live-racecards.mjs", "--include-batch")
+      Invoke-NodeStep "settled-week-replay-expectancy" @("scripts\generate-live-market-ev.mjs", "--include-batch")
+      Invoke-NodeStep "settled-week-snapshot-audit" @("scripts\prediction-snapshot.mjs")
     }
   }
 

@@ -3,6 +3,7 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
+import { isMainModule } from "./is-main-module.mjs";
 import { inspectBackfillReadiness } from "./backfill-readiness.mjs";
 import { captureModelDataSnapshot, captureModelImplementationSnapshot } from "./model-data-snapshot.mjs";
 import { isPreRaceObservation } from "./race-time.mjs";
@@ -27,7 +28,7 @@ const BET_TYPES = ["単勝", "複勝", "馬連", "ワイド", "馬単", "3連複
 const STRUCTURED_TYPES = ["馬連", "ワイド", "馬単", "3連複", "3連単"];
 const REQUIRED_AUTOMATION_TASKS = ["KeibaEV-JRA-Free-Backfill", "KeibaEV-PostBackfill-Model", "KeibaEV-JRA-Current-Sync",
   "KeibaEV-JRA-Live-Racecards", "KeibaEV-JRA-Live-Odds", "KeibaEV-JRA-Live-Odds-Offset", "KeibaEV-Web-Publish"];
-if (import.meta.url === pathToFileURL(process.argv[1]).href) runAudit();
+if (isMainModule(import.meta.url)) runAudit();
 
 function runAudit() {
   const requireComplete = process.argv.includes("--require-complete");

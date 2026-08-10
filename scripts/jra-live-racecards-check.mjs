@@ -34,8 +34,11 @@ try {
   }
   const dates = [...new Set(races.map((race) => race.race_date))];
   const featureRows = buildFeatureRows(db, { from: dates[0], to: dates.at(-1), completeOnly: true, includeLive: true, emitHistorical: false });
-  if (featureRows.length !== entries.length || featureRows.some((row) => row.dataContext !== "live" || !row.sourceTimingVerified || row.target.won !== null)) {
+  const replay = batch.source === "JRA official results replay";
+  if (featureRows.length !== entries.length || featureRows.some((row) => row.dataContext !== (replay ? "replay" : "live")
+    || row.sourceTimingVerified === replay || row.target.won !== null)) {
     throw new Error("ライブ特徴量の件数・時刻・目的変数分離が不正です");
   }
-  console.log(JSON.stringify({ status: "pass", batchId: batch.id, races: races.length, entries: entries.length, comparableRaces, featureRows: featureRows.length, resultLeakage: "pass" }, null, 2));
+  console.log(JSON.stringify({ status: "pass", batchId: batch.id, races: races.length, entries: entries.length,
+    comparableRaces, featureRows: featureRows.length, snapshotContext: replay ? "as_of_replay" : "pre_race", resultLeakage: "pass" }, null, 2));
 } finally { db.close(); }
