@@ -1,6 +1,6 @@
 window.KEIBA_LIVE_REPLAY_AUDIT = {
   "status": "replay_only",
-  "calculatedAt": "2026-08-10T04:05:27.541Z",
+  "calculatedAt": "2026-08-10T11:36:16.830Z",
   "label": "後日再現（本番成績に含めない）",
   "policy": {
     "source": "画面で表示する総合AI指数の買い目とJRA公式払戻の照合",
@@ -37,7 +37,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -656,7 +656,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -1273,7 +1273,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -1882,7 +1882,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -2499,7 +2499,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -3110,7 +3110,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -3715,7 +3715,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -4334,7 +4334,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -4949,7 +4949,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -5572,7 +5572,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -6191,7 +6191,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -6812,7 +6812,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -7435,7 +7435,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -8050,7 +8050,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -8671,7 +8671,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -9278,7 +9278,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -9901,7 +9901,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -10512,7 +10512,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -11125,7 +11125,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -11740,7 +11740,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -12363,7 +12363,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -12970,7 +12970,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -13593,7 +13593,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -14202,7 +14202,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -14817,7 +14817,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -15436,7 +15436,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -16057,7 +16057,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -16668,7 +16668,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -17275,7 +17275,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -17892,7 +17892,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -18515,7 +18515,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -19128,7 +19128,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -19755,7 +19755,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -20370,7 +20370,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -20987,7 +20987,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -21610,7 +21610,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -22237,7 +22237,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -22852,7 +22852,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -23475,7 +23475,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -24098,7 +24098,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -24713,7 +24713,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -25326,7 +25326,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -25935,7 +25935,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -26546,7 +26546,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -27167,7 +27167,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -27774,7 +27774,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -28393,7 +28393,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -29014,7 +29014,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -29637,7 +29637,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -30254,7 +30254,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -30875,7 +30875,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -31498,7 +31498,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -32117,7 +32117,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -32734,7 +32734,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -33339,7 +33339,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -33962,7 +33962,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -34577,7 +34577,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -35204,7 +35204,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -35823,7 +35823,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -36448,7 +36448,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -37061,7 +37061,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -37684,7 +37684,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -38305,7 +38305,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -38922,7 +38922,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -39541,7 +39541,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -40146,7 +40146,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -40769,7 +40769,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -41392,7 +41392,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -42019,7 +42019,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -42646,7 +42646,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -43253,7 +43253,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",
@@ -43880,7 +43880,7 @@ window.KEIBA_LIVE_REPLAY_AUDIT = {
       "predictionContext": "as_of_replay",
       "sourceClassification": "as_of_replay",
       "eligibleForActualPerformance": false,
-      "predictionGeneratedAt": "2026-08-10T02:46:59.964Z",
+      "predictionGeneratedAt": "2026-08-10T04:04:24.634Z",
       "marks": [
         {
           "mark": "◎",

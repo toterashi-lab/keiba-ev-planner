@@ -1,6 +1,6 @@
 {
   "version": "publication-manifest-v2",
-  "generatedAt": "2026-08-10T04:05:35.523Z",
+  "generatedAt": "2026-08-10T11:36:26.064Z",
   "databaseRaces": 105668,
   "completeMonths": 368,
   "expectedMonths": 368,
@@ -9,7 +9,7 @@
   "liveRaceCount": 72,
   "liveCandidateCount": 0,
   "livePredictionCount": 72,
-  "liveRacecardsSha256": "13785b41cc49c2d8204a39b939850794427677007daf57dffedcea1a7e039d1c",
-  "liveModelOutputsSha256": "61bc07d3d9f9afe4e0ec183eb1132284c7d322e6a73f6d57ce750443b6a34032",
-  "manifestId": "54857c28c8f5da7f30bf"
+  "liveRacecardsSha256": "2e060f6318f5119933548817ee7fa5296582e0c799fba6deff055f27d9a77c77",
+  "liveModelOutputsSha256": "ae3c5cea8f820aea9a238140742a1587eadd7f262ec7e7fe34316b015a14028a",
+  "manifestId": "3cbd882c74ad1cb70327"
 }
