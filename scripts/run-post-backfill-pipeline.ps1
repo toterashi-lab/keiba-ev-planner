@@ -9,6 +9,16 @@ $node = Get-Command node -ErrorAction SilentlyContinue | Select-Object -ExpandPr
 if (-not $node) { $node = Join-Path $env:USERPROFILE ".cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe" }
 if (-not (Test-Path $node)) { throw "Node.js runtime was not found." }
 
+function Test-LivePidLock([string]$Path) {
+  if (-not (Test-Path -LiteralPath $Path)) { return $false }
+  try { $owner = Get-Content -LiteralPath $Path -Raw | ConvertFrom-Json } catch { return $false }
+  if (-not $owner.pid -or -not $owner.startedAt) { return $false }
+  $process = Get-Process -Id ([int]$owner.pid) -ErrorAction SilentlyContinue
+  if (-not $process) { return $false }
+  try { $startedAt = [DateTime]::Parse([string]$owner.startedAt).ToUniversalTime() } catch { return $false }
+  return [Math]::Abs(($process.StartTime.ToUniversalTime() - $startedAt).TotalSeconds) -lt 2
+}
+
 New-Item -ItemType Directory -Force -Path $logDir | Out-Null
 $lock = $null
 $lockOwner = [ordered]@{
@@ -94,7 +104,11 @@ try {
   $oddsStatus = $oddsStatusJson | ConvertFrom-Json
   if ([int]$oddsStatus.pendingRaces -gt 0) {
     $oddsRunLock = Join-Path $privateDir "historical-odds-run.lock"
-    if (-not (Test-Path -LiteralPath $oddsRunLock)) {
+    $oddsWorkerActive = Test-LivePidLock $oddsRunLock
+    if (-not $oddsWorkerActive -and (Test-Path -LiteralPath $oddsRunLock)) {
+      Remove-Item -LiteralPath $oddsRunLock -Force
+    }
+    if (-not $oddsWorkerActive) {
       Start-Process -FilePath "powershell.exe" -ArgumentList @(
         "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
         (Join-Path $PSScriptRoot "run-historical-win-place-odds-backfill.ps1")

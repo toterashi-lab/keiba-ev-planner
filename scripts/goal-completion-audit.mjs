@@ -5,7 +5,8 @@ import { DatabaseSync } from "node:sqlite";
 import { pathToFileURL } from "node:url";
 import { isMainModule } from "./is-main-module.mjs";
 import { inspectBackfillReadiness } from "./backfill-readiness.mjs";
-import { captureModelDataSnapshot, captureModelImplementationSnapshot } from "./model-data-snapshot.mjs";
+import { captureModelDataSnapshot, captureModelImplementationSnapshot, captureResultFeatureSnapshot,
+  verifyModelImplementationSnapshot } from "./model-data-snapshot.mjs";
 import { isPreRaceObservation } from "./race-time.mjs";
 import { resolvePrivateDataDir } from "./private-data-path.mjs";
 
@@ -143,8 +144,10 @@ export function auditCompletedGoal(database, report, options = {}) {
   check(report, "model_database_coverage", artifact.dataCoverage?.races === coverage.races
     && artifact.dataCoverage?.minDate === coverage.minDate && artifact.dataCoverage?.maxDate === coverage.maxDate,
   { model: artifact.dataCoverage, database: coverage });
-  const currentTrainingSnapshot = captureModelDataSnapshot(database);
-  check(report, "model_data_snapshot_freshness", artifact.trainingSnapshot?.version === "model-data-snapshot-v1"
+  const currentTrainingSnapshot = artifact.trainingSnapshot?.version === "result-feature-data-snapshot-v1"
+    ? captureResultFeatureSnapshot(database) : captureModelDataSnapshot(database);
+  check(report, "model_data_snapshot_freshness",
+    ["model-data-snapshot-v1", "result-feature-data-snapshot-v1"].includes(artifact.trainingSnapshot?.version)
     && artifact.trainingSnapshot.fingerprint === currentTrainingSnapshot.fingerprint,
   { model: artifact.trainingSnapshot, database: currentTrainingSnapshot });
   const currentTrainingImplementation = captureModelImplementationSnapshot();
@@ -217,7 +220,7 @@ export function auditCompletedGoal(database, report, options = {}) {
     && referenceArtifact.featureSelectionSource === "reference-asof-group-ablation-v1"
     && referenceArtifact.featureSelectionSplit?.calibrationEnd < targetStart
     && referenceArtifact.featureAblation?.some((group) => group.id === "pace_shape")
-    && referenceArtifact.trainingImplementation?.fingerprint === artifact.trainingImplementation?.fingerprint
+    && verifyModelImplementationSnapshot(referenceArtifact.trainingImplementation)
     && Array.isArray(referenceArtifact.featureKeys) && referenceArtifact.featureKeys.length === artifact.featureKeys?.length
     && referenceArtifact.featureKeys.every((key, index) => key === artifact.featureKeys[index])
     && [referenceArtifact.means, referenceArtifact.scales, referenceArtifact.weights]
@@ -311,12 +314,17 @@ export function auditCompletedGoal(database, report, options = {}) {
     ? crypto.createHash("sha256").update(fs.readFileSync(publicLiveRacecardsPath)).digest("hex") : null;
   const liveModelOutputsSha256 = fs.existsSync(publicLiveModelOutputsPath)
     ? crypto.createHash("sha256").update(fs.readFileSync(publicLiveModelOutputsPath)).digest("hex") : null;
-  check(report, "verified_publication", publicationManifest?.version === "publication-manifest-v1"
+  const publicationVersionSupported = ["publication-manifest-v1", "publication-manifest-v2"].includes(publicationManifest?.version);
+  const publishedModelVersion = publicationManifest?.modelVersion;
+  const publicationModelMatches = publicationManifest?.version === "publication-manifest-v1"
+    ? publishedModelVersion === referenceArtifact?.modelVersion
+      && publicationManifest.modelCoverageRaces === (referenceArtifact?.counts?.trainRaces + referenceArtifact?.counts?.calibrationRaces)
+      && publicationManifest.expectancyCandidateCount === market.candidates.length
+      && publicationManifest.expectancyPredictionCount === market.predictions.length
+    : publishedModelVersion === artifact.modelVersion;
+  check(report, "verified_publication", publicationVersionSupported
+    && publicationModelMatches
     && publicationManifest.databaseRaces === coverage.races
-    && publicationManifest.modelVersion === referenceArtifact?.modelVersion
-    && publicationManifest.modelCoverageRaces === (referenceArtifact?.counts?.trainRaces + referenceArtifact?.counts?.calibrationRaces)
-    && publicationManifest.expectancyCandidateCount === market.candidates.length
-    && publicationManifest.expectancyPredictionCount === market.predictions.length
     && publicationManifest.liveRaceCount === liveOutput?.predictionCoverage?.targetRaces
     && publicationManifest.liveCandidateCount === liveOutput?.candidates?.length
     && publicationManifest.livePredictionCount === liveOutput?.predictions?.length
@@ -328,7 +336,7 @@ export function auditCompletedGoal(database, report, options = {}) {
     && publicationReceipt.manifestSha256 === manifestSha256
     && publicationReceipt.commit === publicationReceipt.remoteCommit
     && publicationReceipt.databaseRaces === coverage.races
-    && publicationReceipt.modelVersion === referenceArtifact?.modelVersion
+    && publicationReceipt.modelVersion === publishedModelVersion
     && publicationReceipt.liveRaceCount === publicationManifest.liveRaceCount
     && publicationReceipt.liveCandidateCount === publicationManifest.liveCandidateCount
     && publicationReceipt.livePredictionCount === publicationManifest.livePredictionCount

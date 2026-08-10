@@ -2,8 +2,21 @@ param([string]$OutputPath)
 
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
-$privateDir = Join-Path $root "data\jra-free-private"
+$privateDir = if ($env:KEIBA_PRIVATE_DIR) { $env:KEIBA_PRIVATE_DIR } else { Join-Path (Split-Path $root -Parent) "data\jra-free-private" }
 if (-not $OutputPath) { $OutputPath = Join-Path $privateDir "models\automation-audit.json" }
+
+function Test-ScheduledScriptAction([string]$Arguments, [string]$ExpectedScript) {
+  if ($Arguments.IndexOf($ExpectedScript, [StringComparison]::OrdinalIgnoreCase) -ge 0) { return $true }
+  if (-not (Test-Path -LiteralPath $ExpectedScript)) { return $false }
+  $expectedName = [IO.Path]::GetFileName($ExpectedScript)
+  $expectedHash = (Get-FileHash -LiteralPath $ExpectedScript -Algorithm SHA256).Hash
+  foreach ($match in [regex]::Matches($Arguments, '"([^\"]+\.ps1)"')) {
+    $candidate = $match.Groups[1].Value
+    if ([IO.Path]::GetFileName($candidate) -ine $expectedName -or -not (Test-Path -LiteralPath $candidate)) { continue }
+    if ((Get-FileHash -LiteralPath $candidate -Algorithm SHA256).Hash -eq $expectedHash) { return $true }
+  }
+  return $false
+}
 
 $specs = @(
   @{ Name = "KeibaEV-JRA-Free-Backfill"; Script = "scripts\run-jra-free-backfill.ps1" },
@@ -27,7 +40,7 @@ $tasks = foreach ($spec in $specs) {
   $info = $task | Get-ScheduledTaskInfo
   $arguments = [string]$task.Actions.Arguments
   $enabled = $task.State -ne "Disabled" -and $task.Settings.Enabled
-  $actionMatches = $arguments.IndexOf($expectedScript, [StringComparison]::OrdinalIgnoreCase) -ge 0
+  $actionMatches = Test-ScheduledScriptAction $arguments $expectedScript
   $headless = [IO.Path]::GetFileName([string]$task.Actions.Execute) -ieq "wscript.exe"
   $triggerCount = @($task.Triggers).Count
   $minimumTriggers = if ($spec.MinTriggers) { [int]$spec.MinTriggers } else { 1 }
