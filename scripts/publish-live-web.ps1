@@ -1,3 +1,7 @@
+param(
+  [switch]$ReusePassedFieldAudit
+)
+
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
 $public = $root
@@ -53,7 +57,14 @@ try {
   $databaseStatusJson = & $node --no-warnings "scripts\jra-free-db.mjs" status --quick true
   if ($LASTEXITCODE -ne 0) { throw "Database status failed: $LASTEXITCODE" }
   $databaseStatus = $databaseStatusJson | ConvertFrom-Json
-  if ([int]$databaseStatus.rawRepair.pending -eq 0) {
+  $fieldAuditPath = Join-Path $privateDir "models\field-availability-audit.json"
+  if ($ReusePassedFieldAudit) {
+    if ([int]$databaseStatus.rawRepair.pending -ne 0) { throw "Field audit cannot be reused while raw archive repair is active." }
+    if (-not (Test-Path -LiteralPath $fieldAuditPath)) { throw "Reusable field audit is missing." }
+    $fieldAudit = Get-Content -LiteralPath $fieldAuditPath -Raw | ConvertFrom-Json
+    if (-not $fieldAudit.pass) { throw "Reusable field audit did not pass." }
+    Write-Output ("Reused passed field audit: checkedAt={0}, completeRunners={1}" -f $fieldAudit.checkedAt, $fieldAudit.completeRunners)
+  } elseif ([int]$databaseStatus.rawRepair.pending -eq 0) {
     & $node --no-warnings "scripts\audit-field-availability.mjs"
     if ($LASTEXITCODE -ne 0) { throw "Source field availability audit failed: $LASTEXITCODE" }
   } else {
