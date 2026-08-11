@@ -20,8 +20,8 @@ const TEST_MONTHS = 2;
 const EMBARGO_DAYS = 7;
 
 export function trainRecentForecastBaseline(options = {}) {
-  const db = new DatabaseSync(options.databasePath ?? DATABASE_PATH);
-  db.exec("PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=30000;");
+  const db = new DatabaseSync(options.databasePath ?? DATABASE_PATH, { readOnly: true });
+  db.exec("PRAGMA query_only=ON; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=30000;");
   try {
     const coverage = db.prepare("select min(race_date) minDate,max(race_date) maxDate,count(*) races from complete_races").get();
     if (!coverage.maxDate) throw new Error("確定済みレースがありません");
