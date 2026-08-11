@@ -14,7 +14,11 @@ db.exec("PRAGMA busy_timeout=30000;");
 db.exec("BEGIN");
 
 try {
-  const rawRaceCache = new Map();
+  const rawRaceCache = {
+    rows: new Map(),
+    verified: new Set(),
+    maxEntries: 256,
+  };
   const fields = [
     {
       field: "body_weight",
@@ -84,7 +88,7 @@ try {
     checkedAt: new Date().toISOString(),
     pass: fields.every((field) => field.parserMissingRows === 0),
     completeRunners: db.prepare("select count(*) rows from complete_race_entries").get().rows,
-    rawRacePagesVerified: rawRaceCache.size,
+    rawRacePagesVerified: rawRaceCache.verified.size,
     fields,
   };
   db.exec("COMMIT");
@@ -97,7 +101,12 @@ try {
 }
 
 function loadRawRaceRows(relativePath, cache) {
-  if (cache.has(relativePath)) return cache.get(relativePath);
+  if (cache.rows.has(relativePath)) {
+    const cached = cache.rows.get(relativePath);
+    cache.rows.delete(relativePath);
+    cache.rows.set(relativePath, cached);
+    return cached;
+  }
   const absolutePath = path.join(PRIVATE_DIR, relativePath);
   const html = zlib.gunzipSync(fs.readFileSync(absolutePath)).toString("utf8");
   const byHorseId = new Map();
@@ -110,7 +119,11 @@ function loadRawRaceRows(relativePath, cache) {
     if (Number.isInteger(horseNumber) && horseNumber > 0) byHorseNumber.set(horseNumber, row);
   }
   const rows = { byHorseId, byHorseNumber };
-  cache.set(relativePath, rows);
+  cache.verified.add(relativePath);
+  cache.rows.set(relativePath, rows);
+  while (cache.rows.size > cache.maxEntries) {
+    cache.rows.delete(cache.rows.keys().next().value);
+  }
   return rows;
 }
 
