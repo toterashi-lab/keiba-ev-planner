@@ -1085,6 +1085,8 @@ function quickStatusReport() {
     .all().map((row) => [row.status, row.count]));
   const historicalOdds = Object.fromEntries(db.prepare("select status,count(*) count from historical_odds_jobs group by status")
     .all().map((row) => [row.status, row.count]));
+  const rawRepair = Object.fromEntries(db.prepare("select status,count(*) count from raw_repair_jobs group by status")
+    .all().map((row) => [row.status, row.count]));
   const totalJobs = Object.values(jobs).reduce((sum, count) => sum + count, 0);
   const remainingMonths = (jobs.queued ?? 0) + (jobs.running ?? 0) + (jobs.failed ?? 0);
   return {
@@ -1097,6 +1099,10 @@ function quickStatusReport() {
     historicalOdds: {
       ...historicalOdds,
       pending: (historicalOdds.queued ?? 0) + (historicalOdds.running ?? 0) + (historicalOdds.failed ?? 0),
+    },
+    rawRepair: {
+      ...rawRepair,
+      pending: (rawRepair.queued ?? 0) + (rawRepair.running ?? 0) + (rawRepair.failed ?? 0),
     },
   };
 }

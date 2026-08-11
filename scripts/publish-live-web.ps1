@@ -50,7 +50,7 @@ try {
   if ($LASTEXITCODE -ne 0) { throw "Live expectancy generation failed: $LASTEXITCODE" }
   & $node --no-warnings "scripts\live-market-ev-check.mjs"
   if ($LASTEXITCODE -ne 0) { throw "Live expectancy validation failed: $LASTEXITCODE" }
-  $databaseStatusJson = & $node --no-warnings "scripts\jra-free-db.mjs" status
+  $databaseStatusJson = & $node --no-warnings "scripts\jra-free-db.mjs" status --quick true
   if ($LASTEXITCODE -ne 0) { throw "Database status failed: $LASTEXITCODE" }
   $databaseStatus = $databaseStatusJson | ConvertFrom-Json
   if ([int]$databaseStatus.rawRepair.pending -eq 0) {
