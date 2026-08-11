@@ -61,7 +61,7 @@ try {
   if ($ReusePassedFieldAudit) {
     if ([int]$databaseStatus.rawRepair.pending -ne 0) { throw "Field audit cannot be reused while raw archive repair is active." }
     if (-not (Test-Path -LiteralPath $fieldAuditPath)) { throw "Reusable field audit is missing." }
-    $fieldAudit = Get-Content -LiteralPath $fieldAuditPath -Raw | ConvertFrom-Json
+    $fieldAudit = Get-Content -LiteralPath $fieldAuditPath -Raw -Encoding UTF8 | ConvertFrom-Json
     if (-not $fieldAudit.pass) { throw "Reusable field audit did not pass." }
     Write-Output ("Reused passed field audit: checkedAt={0}, completeRunners={1}" -f $fieldAudit.checkedAt, $fieldAudit.completeRunners)
   } elseif ([int]$databaseStatus.rawRepair.pending -eq 0) {
