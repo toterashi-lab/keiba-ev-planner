@@ -18,9 +18,14 @@ const USER_AGENT = "keiba-ev-planner/1.0 (personal research; low-rate official J
 
 const command = process.argv[2] ?? "status";
 const options = parseArgs(process.argv.slice(3));
-const db = new DatabaseSync(DB_PATH);
-db.exec("PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=30000;");
-initializeSchema();
+const readOnlyCommand = command === "status";
+const db = new DatabaseSync(DB_PATH, { readOnly: readOnlyCommand });
+if (readOnlyCommand) {
+  db.exec("PRAGMA query_only=ON; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=30000;");
+} else {
+  db.exec("PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=30000;");
+  initializeSchema();
+}
 fs.mkdirSync(RAW_DIR, { recursive: true });
 
 try {
@@ -244,22 +249,18 @@ function parseWinPlace(html) {
 }
 
 function status() {
-  seedJobs();
+  if (!readOnlyCommand) seedJobs();
   const jobs = Object.fromEntries(db.prepare("select status,count(*) count from historical_odds_jobs group by status")
     .all().map((row) => [row.status, row.count]));
-  const totals = db.prepare(`select count(*) prices,count(distinct race_id) races,
-    sum(case when win_odds is not null then 1 else 0 end) winPrices,
-    sum(case when place_odds_low is not null and place_odds_high is not null then 1 else 0 end) placePrices
-    from historical_win_place_odds`).get();
+  const totals = db.prepare(`select coalesce(sum(runner_count),0) prices,count(*) races,
+    coalesce(sum(win_price_count),0) winPrices,coalesce(sum(place_price_count),0) placePrices
+    from historical_odds_jobs where status='complete'`).get();
   const coverage = db.prepare(`select
+    sum(case when j.status='complete' and j.runner_count=j.win_price_count then 1 else 0 end) completeWinRaces,
     sum(case when j.status='complete' and j.runner_count=j.win_price_count
-      and (select count(*) from historical_win_place_odds o where o.race_id=j.race_id)=j.runner_count then 1 else 0 end) completeWinRaces,
-    sum(case when j.status='complete' and j.runner_count=j.win_price_count and j.runner_count=j.place_price_count
-      and (select count(*) from historical_win_place_odds o where o.race_id=j.race_id
-        and o.win_odds is not null and o.place_odds_low is not null and o.place_odds_high is not null)=j.runner_count then 1 else 0 end) completeWinPlaceRaces,
+      and j.runner_count=j.place_price_count then 1 else 0 end) completeWinPlaceRaces,
     sum(case when j.status='complete' and j.request_key like 'kaggle:%' and j.runner_count=j.win_price_count
-      and j.place_price_count=0 and not exists(select 1 from historical_win_place_odds o
-        where o.race_id=j.race_id and (o.win_odds is null or o.place_odds_low is not null or o.place_odds_high is not null)) then 1 else 0 end) auditedWinOnlyRaces
+      and j.place_price_count=0 then 1 else 0 end) auditedWinOnlyRaces
     from historical_odds_jobs j`).get();
   const total = Object.values(jobs).reduce((sum, value) => sum + value, 0);
   return {

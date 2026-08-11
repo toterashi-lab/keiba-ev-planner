@@ -26,9 +26,14 @@ let activeIngestMonth = null;
 let lastHeartbeatAt = 0;
 fs.mkdirSync(RAW_DIR, { recursive: true });
 
-const db = new DatabaseSync(DB_PATH);
-db.exec("PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000;");
-initializeSchema();
+const readOnlyCommand = command === "status";
+const db = new DatabaseSync(DB_PATH, { readOnly: readOnlyCommand });
+if (readOnlyCommand) {
+  db.exec("PRAGMA query_only=ON; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=30000;");
+} else {
+  db.exec("PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000;");
+  initializeSchema();
+}
 
 try {
   if (command === "init") {
@@ -69,7 +74,7 @@ try {
   } else if (command === "lock-self-check") {
     await lockSelfCheck();
   } else if (command === "status") {
-    console.log(JSON.stringify(statusReport(), null, 2));
+    console.log(JSON.stringify(options.quick === true || options.quick === "true" ? quickStatusReport() : statusReport(), null, 2));
   } else {
     throw new Error("Commands: init, ingest-month, run, sync-current, audit, repair-raw, run-raw-repair, lock-self-check, status");
   }
@@ -1072,6 +1077,27 @@ function statusReport() {
     evBacktestReason: evBacktestReady
       ? "All required model and market gates passed."
       : "Calibration, walk-forward, odds coverage/freshness, and drawdown gates have not all passed.",
+  };
+}
+
+function quickStatusReport() {
+  const jobs = Object.fromEntries(db.prepare("select status,count(*) count from backfill_jobs group by status")
+    .all().map((row) => [row.status, row.count]));
+  const historicalOdds = Object.fromEntries(db.prepare("select status,count(*) count from historical_odds_jobs group by status")
+    .all().map((row) => [row.status, row.count]));
+  const totalJobs = Object.values(jobs).reduce((sum, count) => sum + count, 0);
+  const remainingMonths = (jobs.queued ?? 0) + (jobs.running ?? 0) + (jobs.failed ?? 0);
+  return {
+    database: DB_PATH,
+    parserVersion: PARSER_VERSION,
+    mode: "quick",
+    jobs,
+    progressPercent: totalJobs ? ((jobs.complete ?? 0) / totalJobs) * 100 : 0,
+    remainingMonths,
+    historicalOdds: {
+      ...historicalOdds,
+      pending: (historicalOdds.queued ?? 0) + (historicalOdds.running ?? 0) + (historicalOdds.failed ?? 0),
+    },
   };
 }
 

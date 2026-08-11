@@ -1,6 +1,7 @@
 param(
   [int]$DelayMs = 1500,
   [int]$WaitMs = 120000,
+  [switch]$SkipCurrentSync,
   [switch]$SkipPublish,
   [switch]$DryRun
 )
@@ -77,8 +78,12 @@ try {
   Start-Transcript -Path $logPath | Out-Null
   $repositoryWasClean = -not [bool]((& git status --porcelain) -join "")
 
-  Invoke-NodeStep "current-results-sync" @("scripts\jra-free-db.mjs", "sync-current", "--refresh", "--delay", "$DelayMs", "--wait", "$WaitMs")
-  Invoke-NodeStep "database-status" @("scripts\jra-free-db.mjs", "status")
+  if ($SkipCurrentSync) {
+    $steps.Add([ordered]@{ name = "current-results-sync"; status = "skipped"; reason = "resume_after_completed_sync" })
+  } else {
+    Invoke-NodeStep "current-results-sync" @("scripts\jra-free-db.mjs", "sync-current", "--refresh", "--delay", "$DelayMs", "--wait", "$WaitMs")
+  }
+  Invoke-NodeStep "database-status" @("scripts\jra-free-db.mjs", "status", "--quick", "true")
   Invoke-NodeStep "official-racecard-capture" @("scripts\jra-live-racecards.mjs", "capture", "--future-only", "true", "--delay", "$DelayMs")
 
   if (-not $DryRun) {
