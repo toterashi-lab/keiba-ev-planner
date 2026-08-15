@@ -1,7 +1,33 @@
 {
   "version": "weekly-replay-archive-index-v1",
-  "generatedAt": "2026-08-13T01:21:37.118Z",
+  "generatedAt": "2026-08-15T05:15:28.135Z",
   "days": [
+    {
+      "date": "2026-08-09",
+      "file": "2026-08-09.json",
+      "races": 36,
+      "summary": {
+        "races": 36,
+        "hits": 14,
+        "investmentYen": 57600,
+        "payoutYen": 33930,
+        "netYen": -23670,
+        "recoveryRate": 0.5890625
+      }
+    },
+    {
+      "date": "2026-08-08",
+      "file": "2026-08-08.json",
+      "races": 36,
+      "summary": {
+        "races": 36,
+        "hits": 36,
+        "investmentYen": 57600,
+        "payoutYen": 512610,
+        "netYen": 455010,
+        "recoveryRate": 8.899479166666667
+      }
+    },
     {
       "date": "2026-08-02",
       "file": "2026-08-02.json",

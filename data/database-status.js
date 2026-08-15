@@ -1,5 +1,5 @@
 window.KEIBA_DATABASE_STATUS = {
-  "asOf": "2026-08-13T01:21:46.063Z",
+  "asOf": "2026-08-15T05:15:37.829Z",
   "completeMonths": 368,
   "runningMonths": 0,
   "queuedMonths": 0,
@@ -11,7 +11,7 @@ window.KEIBA_DATABASE_STATUS = {
   "races": 105668,
   "runners": 1474491,
   "payouts": 1139215,
-  "rawPages": 193386,
+  "rawPages": 207664,
   "oddsSnapshots": 195898,
   "earliestComplete": "1996-01",
   "latestComplete": "2026-08",
